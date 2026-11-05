@@ -2,54 +2,92 @@
 % Please edit documentation in R/plotting.R
 \name{plot.skyscapeR.horizon}
 \alias{plot.skyscapeR.horizon}
-\title{Plot horizon data}
+\title{Plot a site horizon and celestial targets}
 \usage{
 \method{plot}{skyscapeR.horizon}(
   x,
-  show.az = FALSE,
-  xlim,
-  ylim,
+  show.az = (!missing(xrange) || !missing(xlim)),
+  xrange,
+  yrange,
   obj,
-  refraction = FALSE,
   col.ground = "darkgreen",
   col.sky,
-  ...
+  use.image = TRUE,
+  ...,
+  show.skyline = NULL,
+  sky = NULL,
+  xlim,
+  ylim,
+  fastLoad = FALSE
 )
 }
 \arguments{
 \item{x}{Object of \emph{skyscapeR.horizon} format.}
 
-\item{show.az}{(Optional) Boolean that controls whether to display azimuth values or cardinal
-directions. Defaults to FALSE.}
+\item{show.az}{Logical that controls whether to display azimuth values or cardinal
+directions. Defaults to TRUE when xrange is supplied.}
 
-\item{xlim}{(Optional) Azimuth rage for plotting.}
+\item{xrange}{Azimuth range for plotting.}
 
-\item{ylim}{(Optional) Altitude rage for plotting.}
+\item{yrange}{Altitude range for plotting. By default one degree of altitude occupies the same distance as one degree of azimuth on the device.}
 
-\item{obj}{(Optional) A \emph{skyscapeR.object} object created with \code{\link{sky.objects}}
+\item{obj}{A \emph{skyscapeR.object} from \code{\link{skyObject}}, or
+a list of these objects. Each group retains its own epochs and styles
 for displaying the paths of celestial objects.}
 
-\item{refraction}{(Optional) Boolean switch controlling whether to take refraction into account
-when displaying the paths of celestial objects.}
+\item{col.ground}{Color of the ground. Defaults to \emph{darkgreen}.}
 
-\item{col.ground}{(Optional) Color of the ground. Defaults to \emph{darkgreen}.}
+\item{col.sky}{Earlier name for a solid sky colour. Prefer sky.}
 
-\item{col.sky}{(Optional) Color of the sky. Defaults to \emph{white}.}
+\item{use.image}{Use an attached external panorama PNG when available. Default TRUE.
+Missing or changed files warn and fall back to the numerical silhouette.}
 
 \item{...}{Additional arguments to be passed to \emph{plot}.}
+
+\item{show.skyline}{Draw the numerical skyline. By default the line appears only without a panorama PNG.}
+
+\item{sky}{A colour string or a background from \code{\link{sketchSky}} or \code{\link{stellariumSky}}.}
+
+\item{xlim}{Earlier name for xrange.}
+
+\item{ylim}{Earlier name for yrange.}
+
+\item{fastLoad}{Use a sampled PNG for quick plots. New photographic imports store a preview. For older horizons the first preview loads the image. The numerical skyline and celestial tracks retain their precision.}
+}
+\value{
+Draws the horizon and returns the session atmosphere invisibly in a list.
 }
 \description{
-This function creates a plot of horizon data.
+Inspect the terrain along a site's horizon and compare it with the apparent paths of
+candidate celestial targets.
+}
+\details{
+A track meeting the horizon identifies a possible rise or set direction for that
+declination. The horizontal axis is true bearing and the vertical axis is angular
+altitude. The function fills the terrain below the stored profile and can overlay
+diurnal tracks computed for the observing location. Refraction affects those tracks.
+Rescaling the display or changing its colours does not change the underlying horizon. Add lines or polygons in azimuth and altitude immediately after plotting. Set \code{par(mfrow=c(2,1))} before plotting to stack two horizons.
+
+For a two-year epoch range, draw tracks for the stored minimum and maximum
+declinations, using the session refraction setting for both tracks. Line
+styles are taken from the target object; older objects without them use
+solid lines of width 1.
+
+A horizon with an attached DEM, PeakFinder or photographic PNG displays the image by default. Add show.skyline = TRUE to inspect its numerical profile, or use.image = FALSE to draw the silhouette alone. With xrange supplied, azimuth labels default to degrees. A partial photograph initially opens on its recorded sector. An image-backed horizon or a supplied sky uses a 2:1 plot box. Copy the PNG with the saved horizon and use relinkHor() after moving it. With automatic altitude limits, a 30-degree azimuth sector shows 15 degrees of altitude.
 }
 \examples{
-# Plot a horizon retrieved from HeyWhatsThat:
-hor <- downloadHWT('HIFVTBGK')
+# Plot a bundled Maltese horizon:
+hor <- malta_horizons[[1]]
 plot(hor)
 
 # Add the paths of the solstices and equinoxes sun in the year 1999 BC:
-tt <- sky.objects('solar extremes', epoch=-2000, col='blue')
+tt <- skyObject('solar extremes', epoch=-2000, col='blue')
 plot(hor, obj=tt)
+# Compare the bounding tracks across a range of years:
+hor <- createHor(c(0,360), c(2,2), loc=c(35,-8,25))
+targets <- skyObject('solar extremes', epoch=c("4001 BC", "2001 BC"), col='red')
+plot(hor, obj=targets)
 }
 \seealso{
-\code{\link{downloadHWT}}, \code{\link{sky.objects}}
+\code{\link{downloadHWT}}, \code{\link{skyObject}}
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/mechanics.R
 \name{parallax.corr}
 \alias{parallax.corr}
-\title{Corrected parallax for a given location and object altitude}
+\title{Estimate the parallax correction to declination}
 \usage{
 parallax.corr(parallax, loc, altitude = 0)
 }
@@ -11,13 +11,32 @@ parallax.corr(parallax, loc, altitude = 0)
 
 \item{loc}{This can be either the latitude of the location, or a \emph{skyscapeR.horizon} object.}
 
-\item{altitude}{(Optional) Altitude of the celestial object.. Defaults to 0 degrees.}
+\item{altitude}{Altitude of the celestial object. Defaults to 0 degrees.}
+}
+\value{
+Numeric declination correction in degrees. The sign depends on latitude.
 }
 \description{
-Given the average parallax, this function corrects this value for a given latitude of the observer
-and for the altitude of the celestial object.
+Estimate how the observer's position on Earth shifts a solar or lunar target declination
+relative to its geocentric value.
+}
+\details{
+The limiting-declination functions subtract this approximate correction from their
+geocentric target. The correction in degrees is the supplied parallax multiplied by the
+cosine of altitude and sine of latitude, with the angular arguments evaluated in
+degrees. The sign therefore reverses between hemispheres. This scalar approximation is
+distinct from computing an instantaneous topocentric ephemeris.
+
+Ruggles gives an archaeological example of applying mean lunar parallax in a
+declination calculator.
 }
 \examples{
 # Parallax correction for the moon, as seen from latitude 50ºN and at 0º altitude
 parallax.corr(0.952, 50, 0)
+}
+\references{
+Ruggles, C. L. N. Basic declination calculator. \url{https://web.cliveruggles.com/tools/declination-calculator}.
+}
+\seealso{
+\code{\link{skyObject}}, \code{\link{jS}}, \code{\link{dS}}, \code{\link{eq}}, \code{\link{nmnLX}}, \code{\link{smnLX}}, \code{\link{nMjLX}}, \code{\link{sMjLX}}, \code{\link{obliquity}}
 }

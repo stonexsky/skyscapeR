@@ -2,21 +2,21 @@
 % Please edit documentation in R/plotting.R
 \name{plotBars}
 \alias{plotBars}
-\title{Bar plot of orientations (declination)}
+\title{Plot orientation intervals in declination}
 \usage{
 plotBars(
   val,
   unc,
   names,
   unit = "Declination",
-  col = "blue",
-  shade = TRUE,
-  mark = TRUE,
-  sort = FALSE,
+  obj,
+  show.obj.label = TRUE,
   xrange,
   yrange,
-  obj,
-  show.obj.label = TRUE
+  sort = FALSE,
+  shade = TRUE,
+  mark = TRUE,
+  col = "blue"
 )
 }
 \arguments{
@@ -24,33 +24,49 @@ plotBars(
 
 \item{unc}{Single value or array of measurement uncertainty}
 
-\item{names}{(Optional) Array of names of measurements in \emph{val}}
+\item{names}{Array of names of measurements in \emph{val}}
 
 \item{unit}{(Optional). Either 'Declination' or 'Azimuth'. Defaults to 'Declination'.}
 
-\item{col}{(Optional) Color to plot measurements in. Defaults to \emph{blue}.}
-
-\item{shade}{(Optional) Boolean to control whether to shade a polygon of measurements. Defaults
-to \emph{TRUE}}
-
-\item{mark}{(Optional) Boolean to control whether to mark the declination value. Defaults to
-\emph{TRUE}}
-
-\item{sort}{(Optional) Boolean to control whether to sort the measurements by their declination
-value. Defaults to \emph{FALSE}}
-
-\item{xrange}{(Optional) Array of limits for x-axis.}
-
-\item{yrange}{(Optional) Array of limits for y-axis.}
-
-\item{obj}{(Optional) A \emph{skyscapeR.object} object created with \code{\link{sky.objects}}
+\item{obj}{A \emph{skyscapeR.object} from \code{\link{skyObject}}, or
+a list of these objects. Each group retains its own epochs and styles
 for displaying the declination values of celestial objects.}
 
-\item{show.obj.label}{(Optional) Boolean to control whether to label the celestial objects in
+\item{show.obj.label}{Logical to control whether to label the celestial objects in
 the polar plot. Defaults to \emph{TRUE}.}
+
+\item{xrange}{Array of limits for x-axis.}
+
+\item{yrange}{Array of limits for y-axis.}
+
+\item{sort}{Logical to control whether to sort the measurements by their declination
+value. Defaults to \emph{FALSE}}
+
+\item{shade}{Logical to control whether to shade a polygon of measurements. Defaults
+to \emph{TRUE}}
+
+\item{mark}{Logical to control whether to mark the declination value. Defaults to
+\emph{TRUE}}
+
+\item{col}{Color to plot measurements in. Defaults to \emph{blue}.}
+}
+\value{
+Draws orientation measurements and their uncertainties on the active graphics device.
 }
 \description{
-Bar plot of orientations (declination)
+Compare central orientations and their angular uncertainties across observations,
+optionally against celestial target ranges.
+}
+\details{
+A row represents one measurement. Its horizontal bar spans the supplied value minus and
+plus its uncertainty, and an optional mark shows the centre. A scalar uncertainty is
+reused for all rows. Sorting rearranges measurements, labels and widths together.
+Celestial overlays use the declination axis. The widths reflect the supplied
+uncertainties and acquire a probability interpretation only from the measurement model.
+
+For a two-year epoch range, celestial targets are displayed as bands
+covering their stored minimum and maximum declinations across the full plot
+height. Single-year targets are displayed as lines.
 }
 \examples{
 # Plot some declination data:
@@ -58,9 +74,12 @@ decs <- c(10, 12, -5, 4)
 plotBars(decs, unc=5)
 
 # To visualize this data against the common solar and lunar targets:
-tt <- sky.objects(c('solar extremes','lunar extremes'), epoch=-2000, lty=c(2,3))
+tt <- skyObject(c('solar extremes','lunar extremes'), epoch=-2000, lty=c(2,3))
 plotBars(decs, unc=5, obj=tt)
+# Display a year-range target band:
+targets <- skyObject('solar extremes', epoch=c("4001 BC", "2001 BC"), col='red')
+plotBars(c(-24,-23,23,24), unc=0.5, obj=targets)
 }
 \seealso{
-\code{\link{sky.objects}}
+\code{\link{skyObject}}
 }

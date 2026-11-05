@@ -2,36 +2,65 @@
 % Please edit documentation in R/plotting.R
 \name{plot.skyscapeR.sigTest}
 \alias{plot.skyscapeR.sigTest}
-\title{Plot significance test of orientations}
+\title{Plot an orientation significance test}
 \usage{
 \method{plot}{skyscapeR.sigTest}(
   x,
-  xlim,
+  xrange,
   title = NULL,
   col = "blue",
   show.pval = TRUE,
   show.local = FALSE,
-  pal = brewer.pal(5, "PRGn")[c(1, 5)],
-  ...
+  pal = c("#7B3294", "#008837"),
+  ...,
+  obj = NULL,
+  xlim
 )
 }
 \arguments{
 \item{x}{A \emph{skyscapeR.sigTest} object created with \code{\link{randomTest}}}
 
-\item{xlim}{(Optional) Range of x-axis to plot.}
+\item{xrange}{Range of x-axis to plot.}
 
-\item{title}{(Optional) Title to add to the plot.}
+\item{title}{Title to add to the plot.}
 
-\item{col}{(Optional) Color of summed probability density. Defaults to blue.}
+\item{col}{Color of summed probability density. Defaults to blue.}
 
-\item{show.pval}{(Optional) Boolean to control whether to print the global p-value. Default is TRUE.}
+\item{show.pval}{Logical to control whether to print the global p-value. Default is TRUE.}
 
-\item{show.local}{(Optional) Boolean to control whether to show local regions of significance. Default is FALSE}
+\item{show.local}{Show local regions and their significance symbols. An open circle marks p-values above 0.1. Default is FALSE}
 
-\item{pal}{(Optional) Color palette for local regions of significance. Default is brewer.pal(5, 'PRGn')}
+\item{pal}{Two colours used to mark local regions. The default uses the first and fifth colours of the PRGn palette.}
 
 \item{...}{Additional arguments to be passed to \emph{plot}.}
+
+\item{obj}{A skyObject or list of target groups for a density or significance plot. Declination plots show single epochs as lines and epoch ranges as bands. Azimuth plots use each group's site latitude to mark rising and setting boundary bearings at a geometric level horizon.}
+
+\item{xlim}{Earlier name for xrange.}
+}
+\value{
+Draws the empirical density and pointwise comparison envelope. Optional annotations display the global p-value and local regions.
 }
 \description{
-Plot significance test of orientations
+Locate the orientations at which the observed summed density departs from the simulated
+comparison envelope. New tests use an envelope pooled from the observation and simulations.
+}
+\details{
+The observed curve and envelope use the azimuth or declination grid stored in the test
+result. The two-tailed display shades between its lower and upper pointwise bounds; the
+one-tailed display shades up to the upper bound from zero. Optional annotations show the
+stored global p-value and the local intervals, coloured by deficit or excess and
+labelled by p-value symbols. The plot reads the fitted result without repeating the
+simulations. New local values use maximum-cluster adjustment under the complete null;
+cluster endpoints remain descriptive, not confidence limits. Legacy fits retain their
+original unadjusted values. Interpret local regions alongside the whole-curve test.
+}
+\examples{
+az <- az.pdf(az = c(85, 95, 112), unc = 3, verbose = FALSE)
+set.seed(42)
+fit <- randomTest(az, nsims = 10, ncores = 1, .res = 2, verbose = FALSE)
+plot(fit)
+}
+\seealso{
+\code{\link{randomTest}}, \code{\link{modelTest}}, \code{\link{print.skyscapeR.sigTest}}
 }

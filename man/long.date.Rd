@@ -2,17 +2,30 @@
 % Please edit documentation in R/dates.R
 \name{long.date}
 \alias{long.date}
-\title{Converts day-month in 'MM-DD' format to a more readable format}
+\title{Format a month and day as a calendar label}
 \usage{
 long.date(date)
 }
 \arguments{
 \item{date}{date in 'MM-DD' format}
 }
+\value{
+Character month-and-day labels such as "21 Jun", derived from the supplied month and day.
+}
 \description{
-Converts day-month in 'MM-DD' format to a more readable format
+Format a month and day for reporting recurring solar or stellar events within a year.
+}
+\details{
+A season or event table may need a day/month label without an epoch. The first two
+characters are the month number and characters four and five the day number; the
+separator occupies position three. The month is looked up in R's English month
+abbreviations. This formatting step does not validate a calendar date or convert between
+calendars.
 }
 \examples{
 long.date('01-01')
 long.date('08-23')
+}
+\seealso{
+\code{\link{time2jd}}, \code{\link{jd2time}}, \code{\link{timestring}}, \code{\link{BC.AD}}
 }

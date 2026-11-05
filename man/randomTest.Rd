@@ -2,57 +2,116 @@
 % Please edit documentation in R/statistics.R
 \name{randomTest}
 \alias{randomTest}
-\title{Significance test against the null hypothesis of random orientation}
+\title{Test orientations against the null hypothesis of random azimuths}
 \usage{
 randomTest(
   pdf,
-  .res = 0.1,
+  az,
+  hor,
   nsims = 1000,
   conf = 0.95,
   tails = 2,
   normalise = F,
-  ncores = parallel::detectCores() - 1,
-  verbose = T,
-  hor,
-  refraction,
-  atm,
-  temp
+  .res = 0.1,
+  ncores = NULL,
+  verbose = T
 )
 }
 \arguments{
 \item{pdf}{A \emph{skyscapeR.pdf} object created with either \code{\link{az.pdf}} or \code{\link{coordtrans}}}
 
-\item{.res}{(Optional) Resolution with which to output probability distribution(s). Default is 0.1 degrees.}
+\item{az}{Original azimuth \emph{skyscapeR.pdf}; required only when \code{pdf}
+contains declination distributions. Must match its distribution count and
+order. Do not supply this argument when \code{pdf} already contains azimuths.}
 
-\item{nsims}{(Optional) Number of simulations to run. Default is 1000.}
+\item{hor}{For azimuth input, optionally supply one shared \emph{skyscapeR.horizon}
+to test in declination. For declination input, required: the original shared
+horizon or an ordered list matching the distributions in \code{pdf}.}
 
-\item{conf}{(Optional) Confidence envelope (in percentage) of the null model to calculate. Default is .95}
+\item{nsims}{Number of simulations, at least two. Default is 1000.}
 
-\item{tails}{(Optional) Whether to calculate 1-tailed p-value (greater than) or 2-tailed p-value (smaller than or greater than).
-Default is 2.}
+\item{conf}{Confidence level as a fraction. For example, 0.95 requests a 95 percent envelope.}
 
-\item{normalise}{(Optional) Boolean to control whether to normalize SPDs. Default is FALSE}
+\item{tails}{1 for upper excesses, 2 for excesses and deficits (default).}
 
-\item{ncores}{(Optional) Number of CPU cores to use. Default is the number of available cores minus 1.}
+\item{normalise}{Logical to control whether to normalize SPDs. Default is FALSE}
 
-\item{verbose}{(Optional) Boolean to control whether or not to display text. Default is TRUE.}
+\item{.res}{Resolution with which to output probability distribution(s). Default is 0.1 degrees.}
 
-\item{hor}{(Optional) A single \emph{skyscapeR.horizon} object created with \code{\link{createHor}} or \code{\link{downloadHWT}}.
-This and the following arguments are only needed if \emph{pdf} contains only azimuths. If provided, the
-code will assume that all azimuthal measurements are for the same site with horizon given in \emph{hor} and
-that the user want to run the significance test in declination. Coordinate transformation will therefore be done automatically.}
+\item{ncores}{Worker count. By default use half the detected available logical cores, rounded down with a minimum of one. Set ncores=1 for serial execution. The simulation count and memory batch size can further limit workers. Verbose output reports the effective count.}
 
-\item{refraction}{(Optional) Whether atmospheric refraction is to be taken into account.
-If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.}
-
-\item{atm}{(Optional) Atmospheric pressure for refraction calculation.
-If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.}
-
-\item{temp}{(Optional) Atmospheric temperature for refraction calculation.
-If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.}
+\item{verbose}{Logical. Display progress or informational messages. Default \code{TRUE}.}
+}
+\value{
+A \emph{skyscapeR.sigTest} list containing metadata (test settings,
+global and local p-values) and data (empirical SPD and null confidence envelope).
+No original PDFs or horizon objects are attached.
 }
 \description{
-Significance test against the null hypothesis of random orientation
+Use a Monte Carlo significance test to assess whether the measured orientations of a group of structures are compatible with
+uniformly random azimuths, taking their uncertainties and, for a declination comparison,
+their horizons into account.
+}
+\details{
+Following Silva (2020), the test combines the observed measurement densities into a summed probability density (SPD).
+For each simulated dataset, the function draws one azimuth per measurement with replacement
+from the uniform grid from 0 to 360 degrees at the source azimuth spacing. It applies the
+source density family and measurement uncertainties and constructs a comparable SPD.
+For a declination test, random azimuths are transformed using the site geometry; the
+resulting null distribution in declination depends on latitude and horizon.
+
+A new transformation takes its atmosphere from \code{\link{skyscapeR.vars}}. A saved declination PDF supplies its original settings. The fit records these in metadata$atmosphere for declination tests.
+
+\strong{Input coordinates.} With azimuth input alone, all curves are compared in azimuth. With azimuth input and one
+shared horizon, the function sums the azimuth densities before transforming the SPD.
+With a transformed declination PDF, supply its original \code{az} and \code{hor} in measurement
+order. Simulated measurements are then transformed individually before summation, using the
+stored refraction and atmosphere settings. Newer PDFs store the
+transformation grid spacings; older PDFs use the legacy defaults. The comparison grid uses
+\code{.res}. The two transformation routes can give different results.
+If \code{normalise=TRUE}, each final curve has unit trapezoidal area. Each parallel worker
+receives its own copy of the required horizons.
+
+\strong{Scoring the curves.} At each angle, the observed summed density and all simulated summed densities jointly define a pointwise envelope at confidence
+level \code{conf}. An upper-tail test scores excesses; a two-tailed test also scores deficits,
+using equal tail probabilities for the bounds. For every curve, each departure beyond a bound
+is divided by the standard deviation of all B+1 curves at that angle. Ties at a bound contribute zero.
+The global statistic sums the departure magnitudes across the grid. A small global p-value
+means that few simulated datasets depart from the envelope as much as the observed dataset.
+
+\strong{Interpreting local intervals.} Local results identify contiguous clusters of departures on the stored linear grid.
+At least two consecutive points must cross the same bound and span at least 0.5 degrees,
+inclusive. The same selection and width filter apply to every simulated curve. Each
+observed cluster's summed departure magnitude is compared with the largest qualifying
+cluster in each simulation (zero if none), across both signs in a two-tailed test.
+The inclusive rank gives a maximum-cluster adjusted p-value. Under the complete specified
+null and exchangeable curves this controls the probability of reporting any cluster as
+significant, accounting for the interval search. It is not strong error control for
+arbitrary mixtures of true and false local nulls, and does not establish that every
+angle inside a cluster is significant or that its endpoints are confidence limits.
+Azimuth clusters spanning north are split at the stored 0/360 boundary in every curve.
+The filter does not change the global test. The maximum-cluster principle is adapted
+from Maris and Oostenveld (2007); cluster interpretation follows Sassenhagen and Draschkow
+(2019).
+
+If all B+1 curves agree at an angle, its standard deviation is zero and it contributes zero.
+When only the simulations agree, a differing observation remains in the pooled calculation
+and can contribute to the score. Such points are also listed in
+\code{result$data$constant.departures} with coordinate \code{x} (degrees), \code{observed}
+and \code{simulated} densities and \code{direction} (above or below), for either tail setting.
+
+\strong{Monte Carlo ranks.} Global and local Monte Carlo p-values use \eqn{(b+1)/(B+1)}, where \eqn{B} is the number of
+simulations and \eqn{b} counts simulated scores at least as large as the observed score,
+including ties (North, Curtis and Sham, 2002). The minimum is \eqn{1/(B+1)}; all ties give 1.
+The observation enters the pooled bounds, mean and standard deviation once. The envelope
+describes each grid point separately. The rank test assumes that observed and simulated
+curves are exchangeable under the specified null (Dufour, 2006). Apply the same
+uncertainty and transformation procedures to both. If you estimate the null model
+from these observations, account for that fitting when interpreting the test.
+
+\strong{Running simulations.} With a fixed seed, sampling in the calling session gives the same result for different worker
+counts. For grids larger than 16 MiB, allow about eight bytes of temporary
+disk space per simulation per grid point. Temporary files are removed on return or error.
 }
 \examples{
 \dontrun{
@@ -62,13 +121,25 @@ st1 <- randomTest(Az, nsims=1000)
 plot(st1)
 
 # significance test for declination
-hor <- createHor(az=c(0,360), alt=c(0,0), loc=c(35,-8,25)) # flat horizon with 0 degrees of altitude
+hor <- createHor(az=c(0,360), alt=c(0,0), loc=c(35,-8,25)) # flat horizon
 Dec <- coordtrans(Az, hor)
-st2 <- randomTest(Dec, nsims=1000)
+st2 <- randomTest(Dec, az=Az, hor=hor, nsims=1000)
 plot(st2)
 }
 }
 \references{
-Silva, F (2020) A probabilistic framework and significance test for the analysis of structural orientations
- in skyscape archaeology \emph{Journal of Archaeological Science} 118, 105138. <doi:10.1016/j.jas.2020.105138>
+Silva, F. (2020). A probabilistic framework and significance test for the analysis of structural orientations in skyscape archaeology. \emph{Journal of Archaeological Science}, 118, 105138. \doi{10.1016/j.jas.2020.105138}.
+
+Silva, F. and Lomsdalen, T. (2025). ‘No easy way from the earth to the stars’: a new statistical approach to the orientation of the Maltese temples. \emph{Archaeological and Anthropological Sciences}, 17, 96. \doi{10.1007/s12520-025-02208-4}.
+
+Maris, E. and Oostenveld, R. (2007). Nonparametric statistical testing of EEG- and MEG-data. \emph{Journal of Neuroscience Methods}. \doi{10.1016/j.jneumeth.2007.03.024}.
+
+Sassenhagen, J. and Draschkow, D. (2019). Cluster-based permutation tests of MEG/EEG data do not establish significance of effect latency or location. \emph{Psychophysiology}. \doi{10.1111/psyp.13335}.
+
+Dufour, J.-M. (2006). Monte Carlo tests with nuisance parameters: A general approach to finite-sample inference and nonstandard asymptotics. \emph{Journal of Econometrics}, 133, 443-477. \doi{10.1016/j.jeconom.2005.06.007}.
+
+North, B. V., Curtis, D. and Sham, P. C. (2002). A note on the calculation of empirical P values from Monte Carlo procedures. \emph{American Journal of Human Genetics}, 71, 439-441. \doi{10.1086/341527}.
+}
+\seealso{
+\code{\link{az.pdf}}, \code{\link{coordtrans}}, \code{\link{spd}}, \code{\link{hpdi}}, \code{\link{modelTest}}
 }

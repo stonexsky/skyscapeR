@@ -2,29 +2,40 @@
 % Please edit documentation in R/mechanics.R
 \name{moonphase}
 \alias{moonphase}
-\title{Computes the phase of the moon}
+\title{Calculate the illuminated fraction of the Moon}
 \usage{
 moonphase(time, timezone, calendar)
 }
 \arguments{
-\item{time}{Either a string containing the date and time in the format "YYYY-MM-DD HH:MM:SS"
-(see \code{\link{timestring}}), or a numeric containing the julian date (see \code{\link{time2jd}}).}
+\item{time}{One or more UT Julian dates, or local date-time strings in the form YYYY/MM/DD HH:MM:SS.}
 
-\item{timezone}{(Optional) Timezone of input either as a known acronym (e.g. "GMT", "CET") or
-a string with continent followed by country capital (e.g. "Europe/London"). See
-\link{timezones} for details. Only needed if \emph{time} is a string. Defaults to system timezone.}
+\item{timezone}{Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See \code{\link{time2jd}} for named zones and offsets.}
 
-\item{calendar}{(Optional) Calendar used in parameter \emph{time}. G for gregorian and J for julian.
-Only needed if \emph{time} is a string. Defaults to Gregorian.}
+\item{calendar}{Calendar for civil dates. Use \code{"G"} for Gregorian or \code{"J"} for Julian.}
+}
+\value{
+Numeric illuminated fraction of the lunar disc, one value per input time. At full illumination the fraction is 1.
 }
 \description{
-This function calculates the moon phase, in percentage of full. It is a wrapper
-for function \code{\link[swephR]{swe_pheno_ut}} of package \emph{swephR}.
+Determine how much of the lunar disc is illuminated at the time of an observation or
+proposed lunar event.
+}
+\details{
+Lunar illumination can be used to screen events for a nearly full Moon. The routine
+converts calendar input to UT Julian dates when needed and obtains the illuminated
+fraction from the lunar phenomena calculation in Swiss Ephemeris. Values near zero
+indicate a nearly new Moon and values near one a nearly full Moon; the fraction alone
+cannot distinguish waxing from waning.
+
+Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
 \examples{
-# Moonphase at noon GMT on Christmas day 2018:
-moonphase('2018/12/25 12:00:00', 'GMT')
+if (requireNamespace("swephRdata", quietly = TRUE)) {
+  # Moonphase at noon GMT on Christmas day 2018:
+  moonphase('2018/12/25 12:00:00', 'GMT')
+}
 }
 \seealso{
-\code{\link[swephR]{swe_pheno_ut}}
+\code{\link[swephR]{swe_pheno_ut}}, \code{\link{EFM}}
 }

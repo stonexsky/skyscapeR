@@ -2,38 +2,47 @@
 % Please edit documentation in R/mechanics.R
 \name{orbit}
 \alias{orbit}
-\title{Calculate visible path of celestial object at given location}
+\title{Trace the path of a celestial body at a site}
 \usage{
-orbit(dec, loc, res = 0.25, refraction, atm, temp)
+orbit(dec, loc, refraction, atm, temp, res = 0.25)
 }
 \arguments{
 \item{dec}{Declination of object.}
 
-\item{loc}{Location, either a \emph{skyscapeR.object} or a vector
+\item{loc}{Location, either a \emph{skyscapeR.horizon} or a vector
 containing the latitude and longitude of location, in this order.}
 
+\item{refraction}{Logical. Apply atmospheric refraction. Defaults to the session setting in \code{\link{skyscapeR.vars}}.}
+
+\item{atm}{Atmospheric pressure in mbar. Defaults to the session setting in \code{\link{skyscapeR.vars}}.}
+
+\item{temp}{Air temperature in degrees Celsius. Defaults to the session setting in \code{\link{skyscapeR.vars}}.}
+
 \item{res}{The resolution (in degrees of RA) with which to calculate the path.}
-
-\item{refraction}{(Optional) Whether atmospheric refraction is to be taken into account.
-If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.}
-
-\item{atm}{(Optional) Atmospheric pressure for refraction calculation.
-If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.}
-
-\item{temp}{(Optional) Atmospheric temperature for refraction calculation.
-If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.}
+}
+\value{
+A skyscapeR.orbit list with az and alt vectors in degrees, ordered by azimuth, plus the input declination (dec) and location (georef). The sampled track retains altitudes above -20 degrees.
 }
 \description{
-This function calculates the visible path of a celestial
-object from any location on earth. It outputs a \emph{skyscapeR.orbit}
-object, which includes AZ and ALT information.
+Trace the daily path of a fixed declination across the sky as seen from a site.
+}
+\details{
+Latitude and declination determine where a diurnal track can meet the terrain. The
+function sweeps equatorial right ascension through 360 degrees at the requested angular
+step and converts each position to horizontal coordinates with the selected refraction
+and atmosphere settings. It retains altitudes above -20 degrees and sorts the points by
+azimuth. A horizon object supplies the location; the stored track itself includes no
+test of terrain obstruction or event times.
 }
 \examples{
-# Visible path of sun on june solstice on year 3999 BC from London:
+# Visible path of sun on june solstice on year 4001 BC from London:
 sun.dec <- jS(-4000)
 london.lat <- 51.5074 #N
 london.lon <- -0.1278 #W
 loc <- c( london.lat, london.lon, 0 )
 path <- orbit(sun.dec, loc)
 plot(path$az, path$alt, ylim=c(0,90), type='l', xlab='AZ', ylab='ALT', col='red', lwd=2)
+}
+\seealso{
+\code{\link{plotAzimuth}}, \code{\link{plotBars}}, \code{\link{sketchSky}}, \code{\link{planisphere}}
 }

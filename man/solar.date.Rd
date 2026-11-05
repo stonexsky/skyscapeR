@@ -2,25 +2,49 @@
 % Please edit documentation in R/mechanics.R
 \name{solar.date}
 \alias{solar.date}
-\title{Solar Date}
+\title{Find dates when the Sun reaches a specified declination}
 \usage{
 solar.date(dec, year, calendar, verbose = TRUE)
 }
 \arguments{
-\item{dec}{Single value or array of declination values.}
+\item{dec}{One or more declinations in degrees.}
 
-\item{year}{Year for which to do calculations.}
+\item{year}{Year for which to do calculations. Historical labels such as \code{"3700 BC"} are accepted by \code{\link{astroYear}}.}
 
-\item{calendar}{(Optional) Calendar used for output. G for gregorian and J for julian. Defaults to Gregorian.}
+\item{calendar}{Calendar for sampling and output. G for Gregorian or J for Julian. Defaults to the package calendar, initially Gregorian.}
 
-\item{verbose}{(Optional) Boolean to control whether or not to display text. Default is TRUE.}
+\item{verbose}{Logical. Display progress or informational messages. Default \code{TRUE}.}
+}
+\value{
+A character matrix with one column per reachable input, in input order. The rows
+are Dec, Date1 and Date2, with Date3 added if three passages fall in one civil
+year. Dates are chronological day/month labels. Unused date cells are missing.
+The function stops if all requested declinations are unreachable.
 }
 \description{
-Returns the calendar date when the sun has the same declination as the input declination.
+Estimate the dates on which the Sun could attain a declination indicated by a structure
+in a selected year.
+}
+\details{
+The Sun can pass the same declination on either side of a solstice. The search
+covers the selected civil year from midnight UT, including its first instant and
+excluding the start of the next year. Daily geocentric apparent solar declinations
+bracket the annual turning points. The function refines each extremum against the
+ephemeris and solves separately on either side, then reports the civil day of each
+crossing. A tangency gives one date. Two crossings can share a calendar day.
+The calculation uses no terrain or solar limb model.
+
+Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
 \examples{
-solar.date(-23, 2018)
-solar.date(-12, 1200, calendar='G')
-solar.date(-12, 1200, calendar='J')
-solar.date(14, -2000)
+if (requireNamespace("swephRdata", quietly = TRUE)) {
+  solar.date(-23, 2018)
+  solar.date(-12, 1200, calendar='G')
+  solar.date(-12, 1200, calendar='J')
+  solar.date(14, -2000)
+}
+}
+\seealso{
+\code{\link{spatial.equinox}}, \code{\link{zenith}}, \code{\link{antizenith}}, \code{\link{findTargets}}, \code{\link{EFM}}, \code{\link{planet.extremes}}
 }

@@ -2,13 +2,30 @@
 % Please edit documentation in R/misc.R
 \name{pval2stars}
 \alias{pval2stars}
-\title{Converts p-value into symbol}
+\title{Format a p-value as a significance symbol}
 \usage{
 pval2stars(p.value)
 }
 \arguments{
 \item{p.value}{p-value}
 }
+\value{
+A character vector of significance symbols: ***, **, *, + or an open circle, using cut points 0.001, 0.01, 0.05 and 0.1.
+}
 \description{
-Converts p-value into symbol
+Annotate a significance-test result with the conventional symbol for its p-value range.
+}
+\details{
+Use a symbol for compact plot labels while retaining the numeric p-value for
+interpretation. The cut points are 0.001, 0.01, 0.05 and 0.1, with symbols ***, **, *, +
+and an open circle in order of increasing p. An equality belongs to the interval ending at that cut
+point. For legacy strings beginning with a less-than sign and space, the function
+classifies the printed bound. It does not calculate a test or adjust for multiple
+comparisons.
+}
+\examples{
+pval2stars(c(0.0005, 0.008, 0.03, 0.08, 0.2))
+}
+\seealso{
+\code{\link{print.skyscapeR.sigTest}}, \code{\link{plot.skyscapeR.sigTest}}
 }

@@ -4,23 +4,46 @@
 \alias{planet.extremes}
 \title{Extreme declinations for five visible planets}
 \usage{
-planet.extremes(obj, epoch, loc = NULL)
+planet.extremes(obj, year, loc = NULL, epoch)
 }
 \arguments{
-\item{obj}{The name of the planet.}
+\item{obj}{Planet name, with this capitalisation: Mercury, Venus, Mars, Jupiter or Saturn.}
 
-\item{epoch}{Epoch for which to do calculations.}
+\item{year}{Year for which to do calculations. Historical labels such as \code{"3700 BC"} are accepted by \code{\link{astroYear}}.}
 
-\item{loc}{(Optional) This can be either a \emph{skyscapeR.horizon} object, or a vector with the
+\item{loc}{This can be either a \emph{skyscapeR.horizon} object, or a vector with the
 latitude, longitude and elevation of the site, in this order.}
+
+\item{epoch}{Earlier argument name for \code{year}, retained for existing scripts.}
+}
+\value{
+A list containing planet, min.dec and max.dec. The two declinations are extrema of daily samples and are expressed in degrees.
 }
 \description{
-This function calculates the maximum and minimum declinations of the five visible planets
-for a given epoch. This is done by calculating the declination for one entire orbital period centred
-around the epoch.
+Estimate the most northerly and southerly declinations reached by a visible planet near
+an archaeological epoch.
+}
+\details{
+An epoch alone does not specify the planet's position in its cycle. The search extends
+three quarters of the package's planet-specific period on either side of the epoch,
+rounds the limiting years, and samples at daily intervals from noon UT on 1 January of
+the start year to the corresponding date in the end year. Each sample uses body.position
+and the requested site if supplied. The returned extrema are the range of these samples;
+finer extrema can fall between sampled instants.
+
+Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
 \examples{
-planet.extremes('Jupiter', 2023)
-
-planet.extremes('Venus', -4000)
+\dontrun{
+# Searches across multiple planetary cycles; may take more than five seconds.
+if (requireNamespace("swephRdata", quietly = TRUE)) {
+  planet.extremes('Jupiter', 2023)
+  
+  planet.extremes('Venus', "4001 BC")
+}
+}
+}
+\seealso{
+\code{\link{spatial.equinox}}, \code{\link{zenith}}, \code{\link{antizenith}}, \code{\link{solar.date}}, \code{\link{findTargets}}, \code{\link{EFM}}
 }

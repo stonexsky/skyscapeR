@@ -2,7 +2,7 @@
 % Please edit documentation in R/plotting.R
 \name{plot.skyscapeR.starphases}
 \alias{plot.skyscapeR.starphases}
-\title{Plot stellar phase and seasonality}
+\title{Plot seasonal stellar visibility}
 \usage{
 \method{plot}{skyscapeR.starphases}(
   x,
@@ -16,38 +16,51 @@
 )
 }
 \arguments{
-\item{x}{Object of \emph{skyscapeR.starphases} format.}
+\item{x}{A star phase result.}
 
-\item{y}{(Optional) A second object of \emph{skyscapeR.starphases} format or
+\item{y}{A second object of \emph{skyscapeR.starphases} format or
 a list of \emph{skyscapeR.starphases} objects for plotting (see Examples).}
 
-\item{show.labels}{(Optional) Logical. If `TRUE`, labels will be shown in the plot. Default is `FALSE`.}
+\item{show.labels}{Logical. Mark annual events on a single-star strip. Defaults to TRUE.}
 
-\item{show.legend}{(Optional) Only used when plotting seasonality of multiple
+\item{show.legend}{Show a legend for seasons present among the plotted
 stars (see example below). Default is TRUE.}
 
-\item{show.grid}{(Optional) Boolean to control whether to show a grid of months.
+\item{show.grid}{Logical to control whether to show a grid of months.
 Default is FALSE}
 
-\item{sort.by}{(Optional) Character. Defines how data should be sorted before plotting. Options: `"time"`, `"azimuth"`.}
+\item{sort.by}{For multiple stars, sort by apparent magnitude ("mag"), rising ("rise") or setting ("set").}
 
-\item{pal}{(Optional) Colour palette for displaying phases/seasons.}
+\item{pal}{Colour palette for displaying phases/seasons.}
 
 \item{...}{Additional arguments to be passed to \emph{plot}.}
 }
+\value{
+Draws a seasonal visibility diagram on the active graphics device, using the phase classifications in the input object.
+}
 \description{
-This function creates a plot of stellar seasonality and phases/events.
+Compare the seasonal visibility of one or more stars at the modelled site and epoch. Each row shows the stellar name, designation and epoch. To compare one star across epochs, compute a phase object for each year and pass the second object to plot as its second argument.
+}
+\details{
+Read each colour as a daily model classification: visible rising and setting, rising
+only, setting only, visible without a qualifying near-horizon passage, or invisible. The
+function plots the stored phase sequence on a 365-day scale and can label seasons or
+display a legend. Supplying a second object or a list compares sequences in rows;
+optional sorting uses the stored apparent magnitude or seasonal onset. Changing the
+display does not recalculate the visibility thresholds. Use \code{plot(first, list(second, third))} to compare results.
 }
 \examples{
-# Plot the seasonality of Aldebaran for 3999 BCE:
-s1 <- star.phases('Aldebaran',-4000, c(35,-8, 200))
-plot(s1)
-# Plot seasonality of several stars
-s2 <- star.phases('Alnilam',-4000, c(35,-8, 200))
-s3 <- star.phases('Elnath',-4000, c(35,-8, 200))
-plot(s1, s2)
-plot(s1, list(s2,s3))
-plot(s1, show.legend=FALSE, show.grid=TRUE)
+if (requireNamespace("swephRdata", quietly = TRUE)) {
+  # Plot the seasonality of Aldebaran for 4001 BCE:
+  s1 <- star.phases('Aldebaran',-4000, c(35,-8, 200))
+  plot(s1)
+  # Plot seasonality of several stars
+  s2 <- star.phases('Alnilam',-4000, c(35,-8, 200))
+  s3 <- star.phases('Elnath',-4000, c(35,-8, 200))
+  plot(s1, s2)
+  plot(s1, list(s2,s3))
+  plot(s1, show.legend=FALSE, show.grid=TRUE)
+}
 }
 \seealso{
 \code{\link{star.phases}}

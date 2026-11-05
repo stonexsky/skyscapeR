@@ -2,62 +2,97 @@
 % Please edit documentation in R/events.R
 \name{EFM}
 \alias{EFM}
-\title{Equinoctial Full Moons}
+\title{Find equinoctial full moonrises and moonsets}
 \usage{
 EFM(
-  season = "spring",
-  rise = T,
   year,
   loc,
+  season = "spring",
+  rise = TRUE,
   min.phase = 0.99,
+  timezone,
+  calendar,
   refraction,
   atm,
-  temp,
-  timezone,
-  calendar
+  temp
 )
 }
 \arguments{
-\item{season}{(Optional) Either 'spring' or 'autumn'. Default is 'spring.}
-
-\item{rise}{(Optional) Boolean to choose whether to calculate Equinoctial Full
-Moon rises or sets. Defaults to \emph{TRUE}.}
-
-\item{year}{Epoch(s) for which to do calculations. Can be either a single value (the year),
+\item{year}{Astronomical year or years. Can be either a single value (the year), Historical labels such as \code{"3700 BC"} are accepted by \code{\link{astroYear}}.
 two values (range of years), or a vector of years.}
 
 \item{loc}{This can be either a \emph{skyscapeR.horizon} object, or a vector with the
 latitude, longitude and elevation of the site, in this order.}
 
-\item{min.phase}{(Optional) Minimum lunar phase (between 0 and 1) for which a
-moon is considered to be full. Defaults to 0.99.}
+\item{season}{Either 'spring' or 'autumn'. Default is 'spring'.}
 
-\item{refraction}{(Optional) Boolean for whether or not atmospheric refraction should be taken into account.
+\item{rise}{Logical to choose whether to calculate Equinoctial Full
+Moon rises or sets. Defaults to \emph{TRUE}.}
+
+\item{min.phase}{Minimum illuminated fraction of the Moon, from 0 to 1. The default 0.99 means 99 percent illumination.}
+
+\item{timezone}{Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See \code{\link{time2jd}} for named zones and offsets.}
+
+\item{calendar}{Calendar for civil dates. Use \code{"G"} for Gregorian or \code{"J"} for Julian.}
+
+\item{refraction}{Logical for whether or not atmospheric refraction should be taken into account.
 Defaults to \emph{TRUE}.}
 
-\item{atm}{(Optional) Atmospheric pressure (in mbar). Only needed if \emph{refraction} is set to \emph{TRUE}.
-Default is 1013.25 mbar.}
+\item{atm}{Atmospheric pressure in mbar. Defaults to the session setting in \code{\link{skyscapeR.vars}}.}
 
-\item{temp}{(Optional) Atmospheric temperature (in Celsius). Only needed if \emph{refraction} is set to \emph{TRUE}.
-Default is 15 degrees.}
-
-\item{timezone}{(Optional) Timezone for output of rising and setting time either as a known acronym
-(e.g. "GMT", "CET") or a string with continent followed by country capital (e.g. "Europe/London"). See
-\link{timezones} for details. Defaults to system timezone.}
-
-\item{calendar}{(Optional) Calendar used to output dates. G for gregorian and J for julian. Defaults to \emph{Gregorian}.}
+\item{temp}{Atmospheric temperature (in Celsius). Only needed if \emph{refraction} is set to \emph{TRUE}.
+Default is 15 degrees Celsius.}
+}
+\value{
+A list with an Event label and Moon and Sun data frames. Each row gives year, date, time, azimuth and declination for the selected rising or setting event. Angles are in degrees.
 }
 \description{
-This function calculates the date, rise/set times, azimuth and declination
-for sun and moon on the days of the Spring Full Moon (SFM) and Autumn Full
-Moon (AFM), for a given year and location.
+Identify the near-full Moon whose rising or setting position crosses that of the Sun
+around the spring or autumn equinox.
+}
+\details{
+Silva and Pimenta (2012) identify the crossover by the first near-full
+Moon on the seasonal side of the Sun. Spring and autumn refer to the March
+and September equinoxes. At spring moonrise the lunar azimuth must exceed
+the solar azimuth, and at spring moonset it must be smaller. Autumn reverses
+both inequalities. Bearings are topocentric, clockwise from north.
+
+The search runs chronologically from 60 days before to 65 days after the
+astronomical equinox. It pairs the first lunar and solar centre crossings
+of the requested direction on the same local civil date. A coordinate vector
+specifies a level horizon. A horizon object supplies the horizon for both
+bodies. Illumination is tested at the lunar event itself. A date qualifies
+as soon as the illumination and strict bearing conditions both hold. A
+lower illumination threshold can select an earlier lunation. If no date
+qualifies the function reports the year and event and stops.
+
+Dates and clock times use the supplied timezone and calendar. Changing
+the timezone can change which events share a civil date. Declinations use
+the package coordinate setting (topocentric by default). For comparison
+with Figure 3 of Silva and Pimenta, request geocentric declinations with
+\code{skyscapeR.vars(dec="geo")}. Event selection uses topocentric bearings
+in either output frame.
+
+At the site used in Figure 3 (40 degrees N, 0 degrees E, 400 m),
+the spring moonset declination peak differs from the published figure.
+
+Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
 \examples{
-# Spring Full Moon from a location in Portugal in the year 2018
-EFM(year=2018, loc=c(35,-8,100))
-
-# Autumn Full Moons over a 3 year period
-\dontrun{
-EFM(season='autumn', year=c(2018,2020), loc=c(35,-8,100))
+if (requireNamespace("swephRdata", quietly = TRUE)) {
+  # Spring Full Moon at latitude 35 degrees north in the year 2018
+  EFM(year=2018, loc=c(35,-8,100))
+  
+  # Autumn Full Moons over a 3 year period
+  \dontrun{
+  EFM(season='autumn', year=c(2018,2020), loc=c(35,-8,100))
+  }
 }
+}
+\references{
+Silva, F. and Pimenta, F. (2012). The Crossover of the Sun and the Moon. Journal for the History of Astronomy 43. \doi{10.1177/002182861204300204}.
+}
+\seealso{
+\code{\link{CC}}, \code{\link{spatial.equinox}}, \code{\link{zenith}}, \code{\link{antizenith}}, \code{\link{solar.date}}, \code{\link{findTargets}}, \code{\link{planet.extremes}}
 }

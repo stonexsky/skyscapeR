@@ -2,21 +2,31 @@
 % Please edit documentation in R/mechanics.R
 \name{obliquity}
 \alias{obliquity}
-\title{Computes obliquity of the ecliptic}
+\title{Calculate the obliquity of the ecliptic}
 \usage{
 obliquity(year = skyscapeR.env$cur.year)
 }
 \arguments{
-\item{year}{Year for which to calculate the obliquity.
+\item{year}{Year for which to calculate the obliquity. Historical labels such as \code{"3700 BC"} are accepted by \code{\link{astroYear}}.
 Defaults to present year as given by \emph{Sys.Date}}
 }
+\value{
+Numeric obliquity of the ecliptic in degrees, one value per astronomical year.
+}
 \description{
-This function calculates the obliquity for a given epoch. It is a
-wrapper for function \code{\link[swephR]{swe_calc_ut}} of package \emph{swephR}.
+Estimate the tilt of the ecliptic at a proposed epoch to set solar and lunar declination
+limits.
+}
+\details{
+The tilt changes over archaeological timescales. For each supplied astronomical year the
+calculation uses Gregorian 1 January at noon UT, requests the obliquity/nutation record
+from Swiss Ephemeris and returns its first element, the true obliquity in degrees. An
+annual value is a reference for limiting declinations rather than a search for the
+instant of solstice.
 }
 \examples{
-#' # Obliquity for year 3999 BC:
-obliquity(-4000)
+# Obliquity for year 4001 BC:
+obliquity("4001 BC")
 }
 \references{
 Laskar, J. et al. (2004), A long-term numerical
@@ -24,5 +34,5 @@ solution for the insolation quantities of the Earth, \emph{Astron.
  Astroph.}, 428, 261-285, doi:10.1051/0004-6361:20041335.
 }
 \seealso{
-\code{\link[swephR]{swe_calc_ut}}
+\code{\link[swephR]{swe_calc_ut}}, \code{\link{jS}}, \code{\link{dS}}
 }

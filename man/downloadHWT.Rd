@@ -2,7 +2,7 @@
 % Please edit documentation in R/horizon.R
 \name{downloadHWT}
 \alias{downloadHWT}
-\title{Download horizon data from \emph{HeyWhatsThat}}
+\title{Download a horizon from a HeyWhatsThat panorama}
 \usage{
 downloadHWT(HWTID)
 }
@@ -10,20 +10,32 @@ downloadHWT(HWTID)
 \item{HWTID}{This is the 8 character ID attributed by
 \emph{HeyWhatsThat.com}}
 }
+\value{
+A skyscapeR.horizon list containing site metadata and horizon samples. The data columns az, alt and alt.unc are in degrees. Retrieval requires access to the HeyWhatsThat service.
+}
 \description{
-This function downloads previously created horizon data
-from \emph{HeyWhatsThat}, given its ID, and saves it as
-a \emph{skyscapeR.horizon} object.
+Recover an existing terrain-derived horizon for use in site-specific orientation
+calculations.
+}
+\details{
+A panorama describes the horizon seen from a particular observer location. The
+optional httr2 package retrieves site metadata and 0.125-degree horizon bins over
+HTTPS. Site elevation above sea level is reported in metres, converting feet
+when necessary. Validated profiles are cached by panorama identifier for the R
+session. Read-only downloads allow up to three attempts for transient HTTP
+failures, with a 30-second limit per request. For each bin, the distance and
+angular altitude determine a height difference. The mean angular change for
+height offsets of plus and minus 9.73 metres estimates altitude uncertainty.
 }
 \examples{
 \dontrun{
-# Retrieve horizon data for \href{https://www.heywhatsthat.com/?view=HIFVTBGK}{Liverpool Cathedral}:
+# Retrieve the Liverpool Cathedral horizon by its panorama ID.
 hor <- downloadHWT('HIFVTBGK')
 }
 }
 \references{
-\href{http://heywhatsthat.com/}{HeyWhatsThat.com}
+\href{https://www.heywhatsthat.com/}{HeyWhatsThat.com}
 }
 \seealso{
-\code{\link{createHWT}}
+\code{\link{importPeakFinder}}, \code{\link{createHWT}}
 }

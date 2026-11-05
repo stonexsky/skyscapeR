@@ -1,0 +1,119 @@
+Bundled data provenance and notices
+
+Stellar catalogue (ephemeris/sefstars.txt.xz)
+Stored with lossless xz compression; expanded into session-temporary storage
+for Swiss Ephemeris. No stellar values are altered.
+Compiled by Fabio Silva. On 4 November 2026 the maintainer confirmed that
+this is his own compilation of NASA data retrieved through SIMBAD.
+This is not represented as a copy of the standard Swiss Ephemeris catalogue.
+SIMBAD is operated by CDS, Strasbourg; NASA is the maintainer-reported
+upstream data source. The precise upstream catalogue identifiers and retrieval
+date are unknown to the maintainer. No blanket NASA ownership claim is made for
+all records available through SIMBAD.
+
+Constellation line endpoints (constellations dataset)
+Credit: Stellarium's team, Western sky culture, Stellarium 0.22.2.
+Source: https://github.com/Stellarium/stellarium/blob/v0.22.2/skycultures/western/constellationship.fab
+Licence declaration: https://github.com/Stellarium/stellarium/blob/v0.22.2/skycultures/western/info.ini
+The upstream declaration is: CC BY-SA 4.0 International Public License + Free Art License.
+https://creativecommons.org/licenses/by-sa/4.0/
+https://artlibre.org/licence/lal/en/
+The 88 endpoint lists are unchanged; they have been repackaged as an R data
+frame with constellation labels. The upstream terms are retained for these
+line data and their adaptation, separately from the package's GPL code.
+No Stellarium constellation artwork is bundled.
+
+Malta data
+Fabio Silva and Tore Lomsdalen (2025). 'No easy way from the earth to the
+stars': a new statistical approach to the orientation of the Maltese temples.
+Archaeological and Anthropological Sciences 17, 96.
+https://doi.org/10.1007/s12520-025-02208-4
+The publication is CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
+It reports that all study datasets are available as supplementary information.
+The entrance measurements have been reformatted for R. The bundled horizon
+profiles are derived research data, not a redistribution of the underlying
+raw elevation raster. The maintainer confirmed permission for the bundled
+Malta datasets on 4 November 2026. That confirmation is recorded separately
+from the paper's licence, which does not automatically license third-party
+material excluded by a credit line. Existing dataset documentation retains
+survey and horizon-generation provenance. Lossless compression does not
+change the values or precision of these datasets.
+
+Chinese constellation figures (chinese and chinese_mansions sets)
+Source: Stellarium 0.22.2, skycultures/chinese.
+https://github.com/Stellarium/stellarium/tree/v0.22.2/skycultures/chinese
+Licence declaration: info.ini, CC BY-SA 4.0 International Public License.
+https://creativecommons.org/licenses/by-sa/4.0/
+Credit: Karrie Berglund (Digitalis Education Solutions, Inc.), Sun Shuwei,
+and Stellarium contributors. Upstream also acknowledges Liu Chunbin's
+catalogue collation and Hong Kong Space Museum's English-Chinese glossary.
+Historical sources include Yi Shitong (1981), Chinese and Western Contrast
+Star Chart and Catalogue 1950.0; imperial Yixiang kaocheng catalogues;
+and Pan Nai, The History of Stellar Observation in China.
+Adaptation: all 318 line-file records and their English/pinyin labels are
+repackaged as an R data frame, identifiers prefixed CHN. The 28 lunar-mansion
+asterisms are also extracted and ordered Horn to Chariot as a separate set.
+Endpoints are unchanged, including six empty records and single-star figures.
+No artwork, sector boundaries, or upstream stellar position catalogue is included.
+These adapted data retain CC BY-SA 4.0, separately from the package GPL code.
+
+Stellar supplement retrieved 4 November 2026
+Contains information from the SIMBAD database, CDS, Strasbourg, France,
+available under the Open Database License (ODbL) 1.0:
+https://simbad.cfa.harvard.edu/simbad/
+https://opendatacommons.org/licenses/odbl/1-0/
+Acknowledgement: This work uses the SIMBAD database operated at CDS,
+Strasbourg, France. Reference: Wenger et al. (2000), A&AS 143, 9.
+https://doi.org/10.1051/aas:2000332
+The SIMBAD-derived supplement and its field-reference table retain ODbL 1.0.
+The machine-readable supplement, source queries, extraction and conversion
+script are supplied in the working source (data-raw/simbad-2026-11-04);
+the field-reference table is also installed in ephemeris/.
+Additional Johnson V magnitudes: ESA (1997), The Hipparcos and Tycho
+Catalogues, ESA SP-1200; CDS/VizieR I/239/hip_main (Vmag).
+https://cdsarc.cds.unistra.fr/viz-bin/cat/I/239
+VizieR acknowledgement: this work uses the VizieR catalogue access tool,
+CDS, Strasbourg, France (DOI: 10.26093/cds/vizier).
+These additions were retrieved directly from SIMBAD and VizieR, not NASA.
+The supplement adds 59 stellar records and identifies existing 39 Com A as
+HIP 63948 without changing that record's numeric values. Other original
+catalogue records are unchanged. SIMBAD ICRS coordinates are at epoch J2000;
+proper motion in RA includes cos(dec), in mas/year; declination motion is in
+mas/year, parallax in mas, radial velocity in km/s. Angles are converted to
+sexagesimal only. Hipparcos Vmag is used where SIMBAD has no V magnitude;
+Hipparcos J1991.25 positions are NOT copied as J2000 coordinates.
+HIP 108797 uses SIMBAD's Hipparcos-2007 measurement-table PM/parallax values
+(2007A&A...474..653V), matching the coordinate reference. Five unavailable
+radial velocities use explicitly documented zero placeholders, not measured
+values: HIP 4714, 51734, 72181, 79634 and 114164. Per-record references,
+retrieval date and assumptions are in star-supplement-2026-11-04.csv.
+No star position or magnitude was guessed. Missing spectral types remain ~.
+
+Star-name lookup (star.names)
+Stellar proper names: International Astronomical Union Working Group on Star
+Names, IAU Catalog of Star Names.
+https://exopla.net/star-names/modern-iau-star-names/
+The 304-entry lookup also contains non-stellar object names. It is distinct
+from the astrometric catalogue. The maintainer confirms that he manually transcribed the stellar names
+from an IAU table. The exact table version, extraction date and a separate
+licence declaration for that compilation are not recorded locally.
+
+Schematic Milky Way outline (extdata/milky-way.csv)
+Adapted from diffuse stellar light in Deep Star Maps 2020.
+https://svs.gsfc.nasa.gov/4851/
+Credit: NASA/Goddard Space Flight Center Scientific Visualization Studio;
+ESA/Gaia/DPAC. This is an illustrative outline, not the source image or a
+prediction of visibility. It does not reconstruct the Galaxy's evolution.
+
+Colour schemes
+The existing ColorBrewer-COPYING file retains the ColorBrewer licence and
+credits Cynthia Brewer, Mark Harrower and The Pennsylvania State University.
+
+Cluster angular diameters in extdata/cluster-sizes.csv are adapted from OpenNGC
+by Mattia Verga and contributors (NGC.csv and addendum.csv).
+https://github.com/mattiaverga/OpenNGC
+This subset is licensed under CC BY-SA 4.0:
+https://creativecommons.org/licenses/by-sa/4.0/
+Names were matched to sefstars identifiers. Missing minor diameters use the
+published major diameter. Integrated magnitudes and positions come from the
+active stellar catalogue, not the diameter table.

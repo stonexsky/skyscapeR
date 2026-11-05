@@ -2,40 +2,62 @@
 % Please edit documentation in R/horizon.R
 \name{createHWT}
 \alias{createHWT}
-\title{Create and download horizon data from \emph{HeyWhatsThat}}
+\title{Request a HeyWhatsThat panorama and retrieve its horizon}
 \usage{
-createHWT(lat, lon, elevation = 1.6, name, src = "skyscapeR", verbose = T)
+createHWT(
+  lat,
+  lon,
+  name,
+  elevation = 1.6,
+  src = "skyscapeR",
+  max.wait = 600,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{lat}{The latitude of the location.}
 
 \item{lon}{The longitude of the location.}
 
-\item{elevation}{(Optional) The elevation of the observer above
+\item{name}{Name assigned to the returned horizon profile.}
+
+\item{elevation}{The elevation of the observer above
 ground level in meters. Default is 1.6 meters (eye level).}
 
-\item{name}{(Optional) Name for horizon.}
-
-\item{src}{(Optional) Request source ID for \emph{HeyWhatsThat}. Default is
+\item{src}{Request source ID for \emph{HeyWhatsThat}. Default is
 'skyscapeR'. Only change this if you have been given a source ID by the
 creator of \emph{HeyWhatsThat}.}
 
-\item{verbose}{(Optional) Boolean switch to control output. Default is \emph{TRUE}.}
+\item{max.wait}{Maximum seconds to wait for panorama readiness after submission. Default 600.}
+
+\item{verbose}{Logical switch to control output. Default is \emph{TRUE}.}
+}
+\value{
+A skyscapeR.horizon object for the requested panorama, as returned by \code{\link{downloadHWT}}. This function submits a remote request and waits for the calculated profile.
 }
 \description{
-This function send a data request to \emph{HeyWhatsThat}, for the
-creation of a horizon profile for a give Lat/Lon and elevation. It
- then downloads the data and saves it as a \emph{skyscapeR.horizon}
-  object.
+Request a terrain-derived horizon for an observing site when comparing orientations with
+possible rising or setting directions.
+}
+\details{
+A digital horizon supplies estimated angular obstruction around the site. The
+optional httr2 package submits one HTTPS request for a panorama. Once the
+service returns its identifier, the function waits two minutes before the first readiness check, then polls at intervals
+of up to 15 seconds. The polling deadline defaults to 600 seconds. If the wait
+expires, use the identifier with downloadHWT once the panorama is ready.
+Individual requests have a timeout of at most 30 seconds. The initial submission
+and final download are separate from the polling time allowance. Once ready,
+the profile is downloaded and assigned the supplied name. Terrain-derived
+profiles need field verification where vegetation or structures affect visibility.
 }
 \examples{
 \dontrun{
 # Create and retrieve horizon data for the London Mithraeum:
-hor <- createHWT(lat=ten(51,30,45), lon=ten(0,5,26.1), name='London Mithraeum')
+hor <- createHWT(lat=ten(51,30,45), lon=ten("-0:5:26.1"), name='London Mithraeum')
 }
 }
 \references{
-\href{http://heywhatsthat.com/}{HeyWhatsThat.com}
+\href{https://www.heywhatsthat.com/}{HeyWhatsThat.com}
 }
 \seealso{
 \code{\link{downloadHWT}}

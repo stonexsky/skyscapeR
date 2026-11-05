@@ -2,15 +2,25 @@
 % Please edit documentation in R/dates.R
 \name{BC.AD}
 \alias{BC.AD}
-\title{Converts year number (epoch) to calendar year}
+\title{Convert an astronomical year to a BC or AD label}
 \usage{
 BC.AD(year)
 }
 \arguments{
-\item{year}{year number}
+\item{year}{Numeric astronomical year or vector of years. Year zero is 1 BC. Historical labels such as \code{"3700 BC"} are accepted by \code{\link{astroYear}}.}
+}
+\value{
+Character labels for astronomical years. Year 0 is 1 BC and year -1 is 2 BC.
 }
 \description{
-Converts year number (epoch) to calendar year
+Label an astronomical year in historical BC or AD notation when reporting an epoch.
+}
+\details{
+Astronomical dating includes a year zero, whereas historical BC and AD labels run
+directly from 1 BC to AD 1. Positive years retain their number and receive AD. For zero
+or a negative year, subtract the astronomical year from one and append BC. The
+conversion works element by element and changes only the label, not the calendar or
+instant.
 }
 \examples{
 BC.AD(100)
@@ -18,4 +28,7 @@ BC.AD(0)
 BC.AD(-1)
 BC.AD(-99)
 BC.AD(-100)
+}
+\seealso{
+\code{\link{time2jd}}, \code{\link{jd2time}}, \code{\link{timestring}}, \code{\link{long.date}}
 }

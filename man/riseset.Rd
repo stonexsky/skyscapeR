@@ -2,17 +2,16 @@
 % Please edit documentation in R/mechanics.R
 \name{riseset}
 \alias{riseset}
-\title{Computes the rising and setting azimuth, declination and time of a Solar System object
-for a given location and day}
+\title{Find rising and setting times and bearings at a site}
 \usage{
 riseset(
-  obj = "sun",
+  loc,
   date,
   jd,
+  obj = "sun",
   alt = 0,
-  loc,
-  calendar,
   timezone,
+  calendar,
   dec,
   refraction,
   atm,
@@ -21,63 +20,97 @@ riseset(
 )
 }
 \arguments{
-\item{obj}{(Optional) String containing name of the solar system body of interest. Can be
-any of the planets (inc. Pluto), the Moon, the Sun or the Ecliptic. Defaults to 'sun'.}
+\item{loc}{Location, either a \emph{skyscapeR.horizon} or a vector
+containing the latitude, longitude and elevation of location, in this order.}
 
 \item{date}{Either a string containing the date in the format "YYYY/MM/DD"
 (see \code{\link{timestring}}), or a numeric containing the julian date (see \code{\link{time2jd}}).
 Can also be a single year ("YYYY") or a month ("YYYY/MM") to calculate risings and settings for every day in the
 year or month, respectively. Not necessary if \emph{jd} is given.}
 
-\item{jd}{(Optional) A numeric containing the julian date (see \code{\link{time2jd}}) for which to
+\item{jd}{A numeric containing the julian date (see \code{\link{time2jd}}) for which to
 calculate rising and settings. Only needed if \emph{date} is not given.}
 
-\item{alt}{(Optional) The altitude of the horizon to consider. Defaults to zero degrees.}
+\item{obj}{Solar System body, Western star name or fixed-star catalogue identifier (including M 45). Defaults to 'sun'.}
 
-\item{loc}{Location, either a \emph{skyscapeR.object} or a vector
-containing the latitude, longitude and elevation of location, in this order.}
+\item{alt}{The altitude of the horizon to consider. Defaults to zero degrees.}
 
-\item{calendar}{(Optional) Calendar used in parameter \emph{date}. G for gregorian and J for julian.
-If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.}
+\item{timezone}{Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See \code{\link{time2jd}} for named zones and offsets.}
 
-\item{timezone}{(Optional) Timezone for output of rising and setting time either as a known acronym
-(e.g. "GMT", "CET") or a string with continent followed by country capital (e.g. "Europe/London"). See
-\link{timezones} for details. If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.}
+\item{calendar}{Calendar for civil dates. Use \code{"G"} for Gregorian or \code{"J"} for Julian.}
 
-\item{dec}{(Optional) Output declination: \emph{geo} for the geocentric, or \emph{topo} for the topocentric
+\item{dec}{Output declination: \emph{geo} for the geocentric, or \emph{topo} for the topocentric
 frame of reference. If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.}
 
-\item{refraction}{(Optional) Whether atmospheric refraction is to be taken into account.
-If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.}
+\item{refraction}{Logical. Apply atmospheric refraction. Defaults to the session setting in \code{\link{skyscapeR.vars}}.}
 
-\item{atm}{(Optional) Atmospheric pressure for refraction calculation.
-If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.}
+\item{atm}{Atmospheric pressure in mbar. Defaults to the session setting in \code{\link{skyscapeR.vars}}.}
 
-\item{temp}{(Optional) Atmospheric temperature for refraction calculation.
-If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.#'}
+\item{temp}{Air temperature in degrees Celsius. Defaults to the session setting in \code{\link{skyscapeR.vars}}.}
 
-\item{verbose}{(Optional) Boolean to control whether or not to display text. Default is TRUE.}
+\item{verbose}{Logical. Display progress or informational messages. Default \code{TRUE}.}
+}
+\value{
+A list containing object, rise and set; rise/set are data frames
+with date, time, azimuth and declination columns. Missing events have NA fields.
 }
 \description{
-Computes the rising and setting azimuth, declination and time of a Solar System object
-for a given location and day
+Find when and where a star or Solar System body first rises above or sets below the horizon at
+an observing site.
+}
+\details{
+The event is a crossing of the local horizon by the body's centre. A raised ridge can
+delay the first visible rise and an uneven horizon can give several appearances or
+disappearances. Choose the horizon model, atmosphere, calendar and time convention to
+match the observation.
+
+Events refer to the centre of the disc. For a Solar System body with a coordinate vector, alt is
+one constant horizon altitude and the Swiss Ephemeris rise/set solver is used.
+For stars, the daily track is evaluated against the supplied constant altitude or site skyline. With a horizon object, its profile is linearly interpolated in azimuth and
+compared with the body's topocentric altitude; do not supply alt as well.
+Refraction TRUE uses apparent altitude; FALSE uses geometric altitude. The
+constant-altitude solver likewise disables refraction only when FALSE.
+For a profile, search the 48 hours after each requested local midnight and
+return the first upward and first downward crossing separately. They need
+not enclose one continuous visibility interval or occur on the requested day.
+Missing crossings return NA fields. A one-minute base grid, quarter-step samples,
+azimuth turning points and recursively subdivided rapid azimuth motion bracket visits
+to the profile's corners. Each smooth segment is also searched for an interior altitude
+extremum, so short emergence/reoccultation pairs need not straddle time samples.
+A pure tangency without a sign change is not a rise or set. Horizon altitudes at
+0 and 360 degrees must agree. Root tolerance is 0.01 seconds; interior optimization
+uses relative seconds to avoid precision loss from large Julian dates.
+These settings are not a physical accuracy guarantee: finite precision, unresolved
+terrain and near-zenith azimuth singularities limit numerical completeness. The dec argument
+controls returned declination, not the topocentric event search.
+
+The Swiss Ephemeris manual documents the fixed-altitude rise/set calculation.
+
+Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
 \examples{
-# Rising and setting of the sun on june solstice 2018, from the location of London
-riseset('sun', '2018/06/21', loc=c(51.5, 0.11, 100))
-
-# Rising ans setting of the moon on june solstice 2018, using a horizon profile
-hor <- downloadHWT('HIFVTBGK') # Liverpool cathedral
-riseset('moon', '2018/06/21', loc=hor)
-
-# Rising and setting of the sun throughout February 1999, from the location of London
-riseset('sun', '1999/02', loc=c(51.5, 0.11, 100))
-
-\dontrun{
-# Rising and setting of the sun throughout 3001 BC, from the location of London
-riseset('sun', -3000, loc=c(51.5, 0.11, 100))
+if (requireNamespace("swephRdata", quietly = TRUE)) {
+  # Rising and setting of the sun on june solstice 2018, from the location of London
+  riseset(obj='sun', date='2018/06/21', loc=c(51.5, 0.11, 100))
+  
+  \dontrun{
+  # Horizon searches and multi-date calculations can exceed five seconds.
+  # Rising and setting of the moon on june solstice 2018, using a horizon profile
+  hor <- malta_horizons[[1]]
+  riseset(obj='moon', date='2018/06/21', loc=hor)
+  
+  # Rising and setting of the sun throughout February 1999, from the location of London
+  riseset(obj='sun', date='1999/02', loc=c(51.5, 0.11, 100))
+  
+  # Rising and setting of the sun throughout 3001 BC, from the location of London
+  riseset(obj='sun', date=-3000, loc=c(51.5, 0.11, 100))
+  }
 }
+}
+\references{
+Astrodienst. Swiss Ephemeris programmer's manual. \url{https://www.astro.com/swisseph/swephprg.htm}.
 }
 \seealso{
-\code{\link[swephR]{swe_calc_ut}}, \code{\link[swephR]{swe_azalt}}
+\code{\link[swephR]{swe_calc_ut}}, \code{\link[swephR]{swe_azalt}}, \code{\link{body.position}}, \code{\link{star.phases}}
 }

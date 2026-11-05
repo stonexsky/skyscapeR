@@ -2,37 +2,48 @@
 % Please edit documentation in R/statistics.R
 \name{az.pdf}
 \alias{az.pdf}
-\title{Convert discrete azimuth measurements into probability distributions}
+\title{Represent measured azimuths as probability densities}
 \usage{
 az.pdf(
-  pdf = "normal",
   az,
   unc,
+  pdf = "normal",
   name,
-  verbose = T,
+  .res = 0.01,
   .cutoff = 1e-05,
-  .res = 0.01
+  verbose = T
 )
 }
 \arguments{
-\item{pdf}{(Optional) String describing the probability distribution to be used. At the
-moment only \emph{normal} and \emph{uniform} are supported. Default is \emph{normal}}
+\item{az}{True bearings in degrees clockwise from north, one per observation.}
 
-\item{az}{An array of azimuths}
+\item{unc}{Angular uncertainty in degrees, one value shared across observations or one per azimuth. For a normal distribution this is the standard deviation. For a uniform distribution it is the half-width on either side of the measurement.}
 
-\item{unc}{Azimuth uncertainties as either an array of the same length as \emph{az} or a single
-value to be applied to all measurements}
+\item{pdf}{Uncertainty distribution. Choose \code{"normal"} (default) or \code{"uniform"}.}
 
-\item{name}{(Optional) An array of names to identify each measurement}
+\item{name}{Optional labels in the same order as the measurements.}
 
-\item{verbose}{(Optional) Boolean to control whether or not to display text. Default is TRUE.}
+\item{.res}{Spacing of the output bearing grid in degrees. Default 0.01.}
 
-\item{.cutoff}{(Optional) Value of probability distribution(s) at which point it will be cutoff to save on memory. Default is 1e-5}
+\item{.cutoff}{Minimum density retained on the output grid. Default \code{1e-5}.}
 
-\item{.res}{(Optional) Azimuth resolution with which to output probability distribution(s). Default is 0.01 degrees.}
+\item{verbose}{Logical. Display progress or informational messages. Default \code{TRUE}.}
+}
+\value{
+A skyscapeR.pdf list. The data component contains one data frame per measurement, in input order, with azimuth x in degrees and density y. The metadata record the measurements, names, uncertainties, distribution type and numerical settings.
 }
 \description{
-Convert discrete azimuth measurements into probability distributions
+Represent uncertainty in a measured orientation before comparing it with other bearings
+or transforming it to declination.
+}
+\details{
+A field bearing defines a centre and an angular uncertainty. Model the uncertainty as a
+normal density with the supplied standard deviation, or as a uniform density over the
+centre plus or minus the supplied half-width. A scalar uncertainty is reused for each
+measurement. The function samples from -90 to 450 degrees, folds the overlapping tails
+across north and retains density values at or above the cutoff. Use a spacing compatible
+with a full turn on the grid. The input measurements remain separate and truncated tails
+are not renormalised. The supported families are normal and uniform.
 }
 \examples{
 test <- az.pdf(az=c(87,93,90,110), unc=3)
@@ -40,5 +51,8 @@ plot(test)
 }
 \references{
 Silva, F (2020) A probabilistic framework and significance test for the analysis of structural orientations
- in skyscape archaeology \emph{Journal of Archaeological Science} 118, 105138. <doi:10.1016/j.jas.2020.105138>
+ in skyscape archaeology \emph{Journal of Archaeological Science} 118, 105138. \doi{10.1016/j.jas.2020.105138}
+}
+\seealso{
+\code{\link{coordtrans}}, \code{\link{spd}}, \code{\link{hpdi}}, \code{\link{randomTest}}, \code{\link{dec.pdf}}, \code{\link{modelTest}}
 }

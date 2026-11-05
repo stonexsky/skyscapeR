@@ -2,28 +2,51 @@
 % Please edit documentation in R/stars.R
 \name{star}
 \alias{star}
-\title{Create \emph{skyscapeR.star} object}
+\title{Calculate a fixed star's coordinates for an epoch}
 \usage{
 star(string, year = skyscapeR.env$cur.year)
 }
 \arguments{
 \item{string}{This can be either the traditional name for the star or its Bayer designation.}
 
-\item{year}{Year for which to calculate the coordinates.
+\item{year}{Year for which to calculate the coordinates. Historical labels such as \code{"3700 BC"} are accepted by \code{\link{astroYear}}.
 Defaults to current year.}
 }
+\value{
+A skyscapeR.star list with name, Bayer designation, apparent magnitude (app.mag) and a coord data frame. Each row contains year, right ascension (RA) and declination (Dec), both angles in degrees.
+}
 \description{
-This function retrieves information for a given star
-and saves it in the \emph{skyscapeR.star} format ready to be
-used by other skyscapeR package function.
+Find a catalogue object's equatorial position at an archaeological epoch and its
+apparent magnitude for a sky or visibility model.
+}
+\details{
+A historical comparison requires a stellar coordinate for the epoch under study. The
+function resolves a Western common name through star.names or accepts a catalogue
+identifier and checks it against Swiss Ephemeris. It evaluates equatorial coordinates at
+noon UT on 1 January of each supplied astronomical year in the Gregorian calendar. The
+magnitude is a catalogue value. These outputs can feed horizon transformations or
+visibility estimates, which additionally require observer and atmosphere information.
+
+The Swiss Ephemeris manual documents fixed-star positions and catalogue magnitudes.
+
+Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
 \examples{
-# Retrieve data for Aldebaran:
-Aldeb <- star('Aldebaran')
+# M45 and M 45 identify the Pleiades.
+if (requireNamespace("swephRdata", quietly=TRUE)) star("M45", -4300)
 
-# Retrieve data for Aldebaran on 2999 BC:
-ss <- star('Aldebaran', -3000)
+if (requireNamespace("swephRdata", quietly = TRUE)) {
+  # Retrieve data for Aldebaran:
+  Aldeb <- star('Aldebaran')
+  
+  # Retrieve data for Aldebaran on 3001 BC:
+  ss <- star('Aldebaran', -3000)
+}
+}
+\references{
+Astrodienst. Swiss Ephemeris programmer's manual. \url{https://www.astro.com/swisseph/swephprg.htm}.
 }
 \seealso{
-\code{\link[swephR]{swe_fixstar2_ut}}, \code{\link[swephR]{swe_fixstar2_mag}}
+\code{\link[swephR]{swe_fixstar2_ut}}, \code{\link[swephR]{swe_fixstar2_mag}}, \code{\link{star.names}}, \code{\link{star.phases}}
 }

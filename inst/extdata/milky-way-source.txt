@@ -1,0 +1,4 @@
+Milky Way outline derived from NASA Scientific Visualization Studio, Deep Star Maps 2020, by Ernie Wright. Credit: NASA/Goddard Space Flight Center Scientific Visualization Studio; ESA/Gaia/DPAC.
+https://svs.gsfc.nasa.gov/4851/
+Source: celestial-coordinate milkyway_2020_4k_print.jpg (bright foreground omitted).
+Sampled at 1 degree of Galactic longitude and 0.25 degree of latitude. The smoothed outer envelope uses 55% of the local intensity range above the tenth percentile. A single connected dark lane near longitude 40 degrees is retained and the smoothed mask is traced at half height. These are illustrative boundaries.

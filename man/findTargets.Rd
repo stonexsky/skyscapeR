@@ -6,42 +6,75 @@
 \usage{
 findTargets(
   decrange,
-  timerange,
-  max.mag = 2.5,
+  year,
   loc = FALSE,
+  max.mag = 2.5,
   dates = FALSE,
-  calendar = skyscapeR.env$calendar
+  calendar = skyscapeR.env$calendar,
+  timerange
 )
 }
 \arguments{
 \item{decrange}{Range of declination to consider.}
 
-\item{timerange}{Temporal range to consider}
+\item{year}{Temporal range to consider. Historical labels such as \code{"3700 BC"} are accepted by \code{\link{astroYear}}.}
 
-\item{max.mag}{(Optional) Maximum magnitude of stars to consider. Defaults to 2.5}
+\item{loc}{FALSE for geocentric declinations, a vector of latitude, longitude and elevation, or a skyscapeR.horizon to also evaluate the local horizon.}
 
-\item{loc}{Location, either a \emph{skyscapeR.object} or a vector
-containing the latitude, longitude and elevation of location, in this order. Defaults
-to FALSE, thus checking only geocentric declination.}
+\item{max.mag}{Maximum magnitude of stars to consider. Defaults to 2.5}
 
-\item{dates}{(Optional) Whether to display time period when identified celestial targets
+\item{dates}{Whether to display time period when identified celestial targets
 occur within declination range. Default is FALSE.}
 
-\item{calendar}{(Optional) Calendar used in parameter \emph{time}. G for gregorian and J for julian.
-If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.}
+\item{calendar}{Calendar for civil dates. Use \code{"G"} for Gregorian or \code{"J"} for Julian.}
+
+\item{timerange}{Earlier argument name for \code{year}, retained for existing scripts.}
+}
+\value{
+A list of candidate solar, lunar and stellar matches. The tables give target names and declination limits in degrees. Stellar matches also carry catalogue identifiers and visual magnitudes. Set dates to TRUE to request stellar date ranges. A category with no matches may be absent.
 }
 \description{
-Find celestial targets within declination and time ranges
+Screen solar, lunar and stellar candidates whose declinations overlap a measured
+orientation range during a proposed period of use.
+}
+\details{
+The search tests overlap in declination. Solar and lunar limiting declinations are
+sampled across the years of the interval. Site coordinates enable zenith targets
+and a horizon enables the spatial equinox. The named equinoxes and solstices use
+geocentric apparent solar longitudes of 0, 90, 180 and 270 degrees. Dates are UT
+civil days in the requested calendar. Different dates for the first and last year
+appear in endpoint order separated by a slash. Intermediate years can differ.
+The sunrise/set date ranges also use the two endpoint years.
+For each star passing the catalogue magnitude cut, the search computes its
+declination at noon UT on 1 January Gregorian of every astronomical year,
+including both endpoints. It tests overlap before rounding and linearly
+interpolates between annual samples to estimate entry and exit. Separate
+passages are reported separately, with boundaries rounded to the nearest year.
+Shorter variations within a sampling year are unresolved. Magnitude describes
+catalogue brightness and does not model atmospheric visibility.
+
+Silva and Lomsdalen (2025, table 5) give an example of stellar target screening for the Maltese temples.
+
+Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
 \examples{
-\dontrun{
-findTargets(c(-25,-17.5), c(-2500,-1750))
-
-# if a location is given then the zenith and anti-zenith sun will also be looked at:
-findTargets(c(3,12), c(-2500,-1750), loc=c(8.6, 7.3, 200))
-
-# if a horizon profile is given then the spatial equinox will also be looked at:
-hor <- downloadHWT('J657KVEV')
-findTargets(c(-7,2), c(-2500,-1750), loc=hor)
+if (requireNamespace("swephRdata", quietly = TRUE)) {
+  \dontrun{
+  findTargets(c(-25,-17.5), c(-2500,-1750))
+  
+  # if a location is given then the zenith and anti-zenith sun will also be looked at:
+  findTargets(c(3,12), c(-2500,-1750), loc=c(8.6, 7.3, 200))
+  
+  # if a horizon profile is given then the spatial equinox will also be looked at:
+  hor <- malta_horizons[[1]]
+  findTargets(c(-7,2), c(-2500,-1750), loc=hor)
+  }
 }
+}
+\references{
+Silva, F. and Lomsdalen, T. (2025). 'No easy way from the earth to the stars': a new statistical approach to the orientation of the Maltese temples. Archaeological and Anthropological Sciences 17, 96. \doi{10.1007/s12520-025-02208-4}.
+}
+\seealso{
+\code{\link{spatial.equinox}}, \code{\link{zenith}}, \code{\link{antizenith}}, \code{\link{solar.date}}, \code{\link{EFM}}, \code{\link{planet.extremes}}
 }

@@ -2,52 +2,103 @@
 % Please edit documentation in R/statistics.R
 \name{coordtrans}
 \alias{coordtrans}
-\title{Coordinate-transform azimuth prob distributions into declination prob distributions}
+\title{Transform azimuth densities into declination densities}
 \usage{
 coordtrans(
   pdf,
   hor,
   xrange,
-  refraction,
-  atm,
-  temp,
-  verbose = T,
   .res = 0.1,
-  .prec = 0.1
+  .prec = 0.1,
+  .output.res = 0.01,
+  verbose = TRUE
 )
 }
 \arguments{
 \item{pdf}{A \emph{skyscapeR.pdf} object created with \code{\link{az.pdf}} or a \emph{skyscapeR.spd} object created with \code{\link{spd}}}
 
-\item{hor}{A \emph{skyscapeR.horizon} object created with \code{\link{createHor}} or \code{\link{downloadHWT}}}
+\item{hor}{A shared \code{skyscapeR.horizon} or, for individual azimuth PDFs, a list of horizons in measurement order.}
 
-\item{xrange}{(Optional) Array of values (min and max) for SPD when transforming a \emph{skyscapeR.spd} object.}
+\item{xrange}{Array of values (min and max) for SPD when transforming a \emph{skyscapeR.spd} object.}
 
-\item{refraction}{(Optional) Whether atmospheric refraction is to be taken into account.
-If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.}
+\item{.res}{Spacing of the declination calculation grid, in degrees. Default 0.1.}
 
-\item{atm}{(Optional) Atmospheric pressure for refraction calculation.
-If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.}
+\item{.prec}{Azimuth integration spacing, in degrees. Default 0.1.
+Previously ignored; smaller values increase integration work. Must not exceed 540.}
 
-\item{temp}{(Optional) Atmospheric temperature for refraction calculation.
-If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.}
+\item{.output.res}{Spacing of the returned declination grid, in degrees.
+Default 0.01. Coarser spacing reduces output size. All spacings must be
+positive finite scalars, and the returned grid must contain at least two points.}
 
-\item{verbose}{(Optional) Boolean to control whether or not to display text. Default is TRUE.}
-
-\item{.res}{(Optional) Declination resolution with which to output probability distribution(s). Default is 0.1 degrees.}
-
-\item{.prec}{(Optional) Precision setting for coordinate transformations. Default is 0.1.}
+\item{verbose}{Logical. Display progress or informational messages. Default \code{TRUE}.}
+}
+\value{
+A \code{skyscapeR.pdf} object for PDF input, or a \code{skyscapeR.spd}
+object for SPD input. Both contain \code{metadata} and \code{data}. PDF data
+are a list of data frames with declination \code{x} and density \code{y};
+SPD data are a single such data frame. Metadata include the coordinate type,
+transformation settings, format version and descriptive source labels.
 }
 \description{
-Coordinate-transform azimuth prob distributions into declination prob distributions
+Estimate which declinations a measured bearing could indicate after allowing for
+uncertainty in both direction and horizon altitude.
+}
+\details{
+A sightline has a distribution of possible bearings, and each bearing samples a
+potentially different part of the horizon. For every sampled bearing the function
+interpolates horizon altitude and uncertainty, maps an altitude range to declination and
+approximates the conditional declination distribution by a Gaussian. It weights that
+distribution by the azimuth density and integrates the product by the trapezoidal rule.
+A shared horizon can serve several observations, or a supplied list can represent their
+individual sites.
+
+Density values are calculated at declination spacing \code{.res}, then
+linearly interpolated onto a grid with spacing \code{.output.res}. The upper
+calculation bound is evaluated explicitly if the step does not land on it,
+avoiding extrapolation at the tail. Linear interpolation preserves
+nonnegative calculated densities and avoids cubic-spline overshoot.
+Individual PDF outputs retain their existing area normalisation; SPD outputs
+retain their existing unnormalised transformation behaviour. Coarse
+calculation spacing can still miss narrow peaks; interpolation does not
+replace a resolution-convergence check. Azimuth integration uses a separate
+grid from -90 to 450 degrees with step \code{.prec}. For a distribution split across north, integration uses contiguous bearings around zero at the same spacing. The output grid starts
+at the lower bound and ends at the last full step within the upper bound.
+Refine the calculation grid to check that narrow features are resolved.
+Set atmospheric refraction, pressure and temperature with \code{\link{skyscapeR.vars}} before transforming. The values used are recorded in the returned PDF or SPD.
+All three spacings are stored in \code{metadata$param}.
+
+The Gaussian uncertainty approximation uses the midpoint of declinations
+obtained at horizon altitude plus/minus four altitude standard deviations,
+with standard deviation equal to the absolute endpoint separation divided
+by eight. Reversed bounds are supported. Horizon uncertainties must be
+finite and nonnegative, and the profile must cover all input azimuths.
+Zero transformed widths (including zero altitude uncertainty or coincident
+endpoint declinations) are unsupported and produce an error. Do not add
+arbitrary uncertainty to bypass it: these cases need a different treatment.
+Nonfinite transformed bounds/densities and PDF outputs with no positive
+finite area also error. Positive but very narrow widths still require
+convergence checks; no minimum uncertainty is imposed.
+
+\strong{Keeping the inputs.} Save the original azimuth distributions and horizons
+in measurement order if you plan to draw the transformation curves or run a
+declination test. The result stores the numerical distributions and settings.
+The names in \code{metadata$source.labels} describe the inputs but cannot
+reconstruct them. See \code{\link{plot.skyscapeR.pdf}} and \code{\link{randomTest}}.
 }
 \examples{
 Az <- az.pdf(az=c(87,93,90,110), unc=3)
-hor <- createHor(az=c(0,360), alt=c(0,0), loc=c(35,-8,25)) # flat horizon with 0 degrees of altitude
+hor <- createHor(az=c(0,360), alt=c(0,0), loc=c(35,-8,25)) # flat horizon
 Dec <- coordtrans(Az, hor)
-plot(Dec)
+head(Dec$data[[1]])
+Dec$metadata$source.labels
+# Reduce stored output size without changing the calculation spacing:
+Dec.coarse <- coordtrans(Az, hor, .output.res=0.1)
+Dec.coarse$metadata$param
 }
 \references{
 Silva, F (2020) A probabilistic framework and significance test for the analysis of structural orientations
- in skyscape archaeology \emph{Journal of Archaeological Science} 118, 105138. <doi:10.1016/j.jas.2020.105138>
+ in skyscape archaeology \emph{Journal of Archaeological Science} 118, 105138. \doi{10.1016/j.jas.2020.105138}
+}
+\seealso{
+\code{\link{az.pdf}}, \code{\link{spd}}, \code{\link{hpdi}}, \code{\link{randomTest}}, \code{\link{dec.pdf}}, \code{\link{modelTest}}
 }

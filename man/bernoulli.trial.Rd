@@ -2,31 +2,50 @@
 % Please edit documentation in R/statistics.R
 \name{bernoulli.trial}
 \alias{bernoulli.trial}
-\title{Execute a (series of) Bernoulli trial(s)}
+\title{Calculate binomial probabilities for aligned structures}
 \usage{
 bernoulli.trial(n, p, r, type = "tail")
 }
 \arguments{
-\item{n}{Total number of structures}
+\item{n}{Total number of structures: a single finite nonnegative integer.}
 
-\item{p}{Probability of target (e.g. ratio of azimuths)}
+\item{p}{Target probability: a single finite number between 0 and 1.}
 
-\item{r}{Number of structures orientated towards target (hits)}
+\item{r}{Number of hits: a single finite integer between 0 and n.}
 
-\item{type}{(Optional) Type of probability to output. Possibilities are: (a) \emph{single}
-in which case the result of a single Bernoulli trial is reported; or (b) \emph{tail} in
-which case it calculates Bernoulli trials for all hit values between 1 and (r-1) and then
-outputs 1 minus the calculated probability. The latter is effectively a p-value. Default is \emph{tail}}
+\item{type}{Either \code{"single"} for exactly r hits or \code{"tail"}
+for at least r hits (the default).}
+}
+\value{
+A numeric probability between 0 and 1.
 }
 \description{
-This function allows one to calculate the probability of having r structures
-out of n, orientated towards a target with probability p.
+Assess how often a specified number of independent structures would face a target by
+chance, given the chance for one structure.
+}
+\details{
+Define a hit and the per-structure chance of a hit before counting the orientations. A
+single-count probability answers how often exactly that count arises; the upper tail
+answers how often a count at least that large arises.
+
+The binomial model assumes independent structures with the same
+target probability \code{p}. The upper-tail probability is a one-sided
+p-value under this model. Calculations use \code{stats::dbinom} and
+\code{stats::pbinom}, avoiding factorial overflow and subtraction from 1.
+At least zero hits has probability 1. With zero structures, zero hits has
+probability 1 for either type. Inputs are scalar; invalid inputs error.
 }
 \examples{
-# probability of having at least 10 out of 30 structures
-# aligned to targets covering 20\% of the horizon
+# At least 10 out of 30 structures, with targets covering 20\% of the horizon:
 bernoulli.trial(30, 0.2, 10)
+# Exactly 10 hits:
+bernoulli.trial(30, 0.2, 10, type="single")
+bernoulli.trial(30, 0.2, 0) # Always 1
+bernoulli.trial(1000, 0.2, 250) # No factorial overflow
 }
 \references{
 Ruggles, C (1999) \emph{Astronomy in Prehistoric Britain and Ireland}. Yale University Press.
+}
+\seealso{
+\code{\link{randomTest}}, \code{\link{modelTest}}
 }

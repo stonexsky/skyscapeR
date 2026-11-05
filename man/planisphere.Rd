@@ -2,44 +2,73 @@
 % Please edit documentation in R/planetarium.R
 \name{planisphere}
 \alias{planisphere}
-\title{Create a planisphere view of the sky for a given epoch and location}
+\title{Draw a planisphere for a site and epoch}
 \usage{
 planisphere(
-  epoch,
+  year,
   lat,
   max.mag = 6,
   show.ecliptic = TRUE,
   col.ecliptic = "orange",
   show.equator = TRUE,
   col.equator = "red",
-  star.col = "black"
+  star.col = "black",
+  epoch,
+  show.milky.way = TRUE,
+  show.galactic.equator = FALSE
 )
 }
 \arguments{
-\item{epoch}{Numerical.The epoch (year) for which the planisphere is calculated.}
+\item{year}{The epoch (year) for which the planisphere is calculated. Historical labels such as \code{"3700 BC"} are accepted by \code{\link{astroYear}}.}
 
 \item{lat}{Numerical.Latitude of the observer in degrees.}
 
 \item{max.mag}{Numerical.Maximum magnitude of stars to be displayed (default: 6).}
 
-\item{show.ecliptic}{Optional.Whether to display the ecliptic (TRUE or FALSE).}
+\item{show.ecliptic}{Whether to display the ecliptic (TRUE or FALSE).}
 
-\item{col.ecliptic}{Character.Colour of the ecliptic line (default: "orange").}
+\item{col.ecliptic}{Colour of the ecliptic line (default: "orange").}
 
-\item{show.equator}{Optional.Whether to display the celestial equator (True or False).}
+\item{show.equator}{Whether to display the celestial equator (TRUE or FALSE).}
 
-\item{col.equator}{Character.Colour of the celestial equator (default: "red").}
+\item{col.equator}{Colour of the celestial equator (default: "red").}
 
-\item{star.col}{Character.Colour of the stars (default: "black").}
+\item{star.col}{Colour of the stars (default: "black").}
+
+\item{epoch}{Earlier argument name for \code{year}, retained for existing scripts.}
+
+\item{show.milky.way}{Draw the Milky Way behind the stars (default TRUE). Set to FALSE for a chart without the band.}
+
+\item{show.galactic.equator}{Draw the Galactic equator as a dash-dot line. Default FALSE.}
 }
 \value{
 A polar plot of the visible sky, showing stars, the celestial equator,
         and the ecliptic for the specified epoch and location.
 }
 \description{
-This function generates a planisphere, which is a circular star chart
-that represents the visible sky for a given epoch and observer's latitude.
+Map the stars that can enter a site's sky at a chosen epoch, with the celestial equator
+and ecliptic as optional references.
+}
+\details{
+The default star layer draws individual Pleiades members and omits integrated clusters and other nonstellar entries. The full catalogue remains available for target searches and phase calculations.
+The chart compares the accessible part of the celestial sphere with a catalogue sky at
+the chosen year. Catalogue stars are filtered by magnitude and by the implemented
+declination cutoff of latitude minus 90 degrees. Right ascension sets polar angle and 90
+degrees minus declination sets radius. Magnitude controls symbol size, and hour labels
+are separated by 15 degrees. The optional ecliptic uses daily solar positions over a
+year. The cutoff is a north-polar construction; the plot is not an instantaneous view
+through a site's measured horizon. The Milky Way is filled with translucent grey behind the stars. Its outline retains the main dark rift and follows the diffuse stellar light in NASA’s Deep Star Maps 2020 (NASA/Goddard Space Flight Center Scientific Visualization Studio, ESA/Gaia/DPAC). It is a fixed sky map rotated to the requested epoch with Swiss Ephemeris precession and nutation. Its width is illustrative. It does not predict visibility or reconstruct the Galaxy’s internal evolution.
+
+Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
 \examples{
-planisphere(2023, lat=50, max.mag=6, show.ecliptic=TRUE, show.equator=TRUE)
+\dontrun{
+if (requireNamespace("swephRdata", quietly = TRUE)) {
+  planisphere(2023, lat=50, max.mag=6, show.milky.way=FALSE, show.galactic.equator=TRUE)
+}
+}
+}
+\seealso{
+\code{\link{plotAzimuth}}, \code{\link{plotBars}}, \code{\link{orbit}}, \code{\link{sketchSky}}
 }

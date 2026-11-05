@@ -2,44 +2,120 @@
 % Please edit documentation in R/statistics.R
 \name{modelTest}
 \alias{modelTest}
-\title{Significance test against a null model}
+\title{Test orientations against a specified null model}
 \usage{
 modelTest(
   pdf,
   model,
+  unc = NULL,
   nsims = 1000,
   conf = 0.95,
   tails = 2,
-  normalise = F,
-  ncores = parallel::detectCores() - 1,
-  save.sim = F,
-  verbose = T,
-  .res = 0.1
+  normalise = FALSE,
+  .res = 0.01,
+  ncores = NULL,
+  verbose = TRUE
 )
 }
 \arguments{
-\item{pdf}{A \emph{skyscapeR.pdf} object created with either \code{\link{az.pdf}} or \code{\link{coordtrans}}}
+\item{pdf}{Empirical skyscapeR.pdf from \code{\link{az.pdf}}, \code{\link{dec.pdf}} or \code{\link{coordtrans}}. Its coordinate selects the simulation path.}
 
-\item{model}{A \emph{data.frame} or list of \emph{data.frames} with equal number to the empirical observations.
-See example for structure}
+\item{model}{One shared data frame or an ordered list with one table per observation. The first column contains candidate coordinates in degrees and the second contains nonnegative discrete sampling weights, with at least one positive weight. On equally spaced grids, density heights can serve as weights.}
 
-\item{nsims}{(Optional) Number of simulations to run. Default is 1000.}
+\item{unc}{Positive standard deviation (normal) or half-width (uniform), in degrees of the tested coordinate. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.}
 
-\item{conf}{(Optional) Confidence envelope (in percentage) of the null model to calculate. Default is .95}
+\item{nsims}{Number of simulations, at least two. Default is 1000.}
 
-\item{tails}{(Optional) Whether to calculate 1-tailed p-value (greater than) or 2-tailed p-value (smaller than or greater than).
-Default is 2.}
+\item{conf}{Confidence level as a fraction.}
 
-\item{normalise}{(Optional) Boolean to control whether to normalize SPDs. Default is FALSE}
+\item{tails}{1 for upper excesses, 2 for excesses and deficits.}
 
-\item{ncores}{(Optional) Number of CPU cores to use. Default is the number of available cores minus 1.}
+\item{normalise}{Scale each summed density to unit area before comparison.}
 
-\item{save.sim}{(Optional) Logical. If `TRUE`, saves simulated values for further analysis. Cannot be used with `ncores > 1`. Default is `FALSE`.}
+\item{.res}{Spacing of the empirical and simulated comparison grids in degrees. Default 0.01.}
 
-\item{verbose}{(Optional) Boolean to control whether or not to display text. Default is TRUE.}
+\item{ncores}{Worker count. By default use half the detected available logical cores, rounded down with a minimum of one. Set ncores=1 for serial execution. The simulation count and memory batch size can further limit workers. Verbose output reports the effective count.}
 
-\item{.res}{(Optional) Resolution with which to output probability distribution(s). Default is 0.1 degrees.}
+\item{verbose}{Display simulation progress.}
+}
+\value{
+A skyscapeR.sigTest list with settings and global/local results in metadata, empirical density and null envelope in data.
 }
 \description{
-Significance test against a null model
+Use a Monte Carlo significance test to assess whether the measured orientations of a group of structures are compatible with a
+specified null model in azimuth or declination. The model can be shared across sites or
+specific to each site.
+}
+\details{
+A proposed topographical or astronomical explanation can predict some orientations more
+frequently than others. Testing that explanation requires simulating its predicted
+distribution at the sites under study.
+
+Silva and Lomsdalen (2025) extended the random-orientation framework of Silva (2020)
+to test specific hypotheses about temple orientations in Malta, including topographical and
+astronomical explanations. Here the hypothesis specifies the relative probability of each
+candidate orientation. A small global p-value is evidence against that particular model.
+
+The input PDF determines the coordinate of the test. Express the model coordinates and
+uncertainties in that same coordinate. Each simulation draws one centre per observation
+according to the weights in its model table. The function constructs an azimuth or declination
+density around each centre and sums these densities on the same comparison grid as the
+observed SPD. The observed measurement curves are used as supplied.
+
+\strong{Measurement uncertainty.} Direct measurement PDFs use their stored normal or uniform family and uncertainties.
+For declinations from \code{\link{coordtrans}}, omit \code{unc} to use each observation's own density as a template.
+A model draw represents the expected mean declination for that observation. The function calculates the
+density-weighted mean of its piecewise-linear curve and adds (draw minus mean) to every declination.
+For example, a curve with mean -17.6 degrees shifts by -4.4 degrees for a draw of -22 degrees.
+The shift preserves the curve's width, asymmetry and peaks before interpolation onto the comparison grid.
+It requires only the stored declination curve and assumes its shape applies at the modelled mean.
+A positive-weight candidate that would shift density beyond -90 or +90 degrees raises an error.
+An explicit \code{unc} selects a normal density around each simulated centre for transformed input.
+With \code{normalise=TRUE}, each final SPD has unit area.
+
+\strong{Reading the result.} The global p-value compares the departure of the entire
+observed curve with departures under the specified model. Local results use the largest
+qualifying cluster per simulation to adjust for searching the grid. Boundaries describe
+where departures were observed. The envelope is pointwise. Both tests use inclusive
+Monte Carlo ranks, with minimum p-value 1/(nsims + 1).
+See \code{\link{randomTest}} for the shared scoring rules, width threshold, treatment
+of ties and zero variance, and assumptions behind the adjustment. When a model was
+fitted to the same observations, its fitting procedure must be accounted for separately.
+
+\strong{Running simulations.} With a fixed seed, sampling in the calling session gives the same result for different worker
+counts. For grids larger than 16 MiB, allow about eight bytes of temporary
+disk space per simulation per grid point. Temporary files are removed on return or error.
+}
+\examples{
+d <- dec.pdf(dec = c(-18, 12), unc = c(0.8, 1.4))
+m <- list(data.frame(x = -20:-16, w = 1), data.frame(x = 10:14, w = 1))
+set.seed(42)
+fit <- modelTest(d, m, nsims = 10, .res = 0.5,
+                 verbose = FALSE)
+print(fit)
+\dontrun{
+set.seed(42)
+fit <- modelTest(d, m, nsims = 5000, ncores = 2)
+# For transformed observations, model coordinates specify mean declinations.
+Az <- az.pdf(az = c(87, 110), unc = 2)
+hor <- createHor(az = c(0, 360), alt = c(0, 0), alt.unc = 0.1, loc = c(35, -8))
+Dec <- coordtrans(Az, hor)
+fit <- modelTest(Dec, data.frame(x = c(-22, 18), w = c(1, 1)))
+}
+}
+\references{
+Silva, F. (2020). A probabilistic framework and significance test for the analysis of structural orientations in skyscape archaeology. \emph{Journal of Archaeological Science}, 118, 105138. \doi{10.1016/j.jas.2020.105138}.
+
+Silva, F. and Lomsdalen, T. (2025). ‘No easy way from the earth to the stars’: a new statistical approach to the orientation of the Maltese temples. \emph{Archaeological and Anthropological Sciences}, 17, 96. \doi{10.1007/s12520-025-02208-4}.
+
+Maris, E. and Oostenveld, R. (2007). Nonparametric statistical testing of EEG- and MEG-data. \emph{Journal of Neuroscience Methods}. \doi{10.1016/j.jneumeth.2007.03.024}.
+
+Sassenhagen, J. and Draschkow, D. (2019). Cluster-based permutation tests of MEG/EEG data do not establish significance of effect latency or location. \emph{Psychophysiology}. \doi{10.1111/psyp.13335}.
+
+Dufour, J.-M. (2006). Monte Carlo tests with nuisance parameters: A general approach to finite-sample inference and nonstandard asymptotics. \emph{Journal of Econometrics}, 133, 443-477. \doi{10.1016/j.jeconom.2005.06.007}.
+
+North, B. V., Curtis, D. and Sham, P. C. (2002). A note on the calculation of empirical P values from Monte Carlo procedures. \emph{American Journal of Human Genetics}, 71, 439-441. \doi{10.1086/341527}.
+}
+\seealso{
+\code{\link{az.pdf}}, \code{\link{dec.pdf}}, \code{\link{coordtrans}}, \code{\link{spd}}, \code{\link{randomTest}}, \code{\link{plot.skyscapeR.sigTest}}
 }

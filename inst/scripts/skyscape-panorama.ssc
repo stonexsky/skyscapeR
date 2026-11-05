@@ -1,0 +1,55 @@
+// South at the centre, north at the seam, zenith at the top.
+var loc=core.getObserverLocationInfo(), jd=core.getJDay(), rate=core.getTimeRate();
+var proj=core.getProjectionMode(), fov=StelMovementMgr.getCurrentFov();
+var az=core.getViewAzimuthAngle(), alt=core.getViewAltitudeAngle(), mount=core.getMountMode();
+var flipH=core.getFlipHorz(), flipV=core.getFlipVert(), tracking=StelMovementMgr.getFlagTracking();
+var dx=StelMovementMgr.viewportHorizontalOffsetTarget, dy=StelMovementMgr.viewportVerticalOffsetTarget;
+function getCardinals() {
+  if (typeof LandscapeMgr.getFlagCardinalPoints === "function") return LandscapeMgr.getFlagCardinalPoints();
+  return LandscapeMgr.getFlagCardinalsPoints();
+}
+function setCardinals(value) {
+  if (typeof LandscapeMgr.setFlagCardinalPoints === "function") LandscapeMgr.setFlagCardinalPoints(value);
+  else LandscapeMgr.setFlagCardinalsPoints(value);
+}
+var captureCompass = {
+  getMarks: function() {
+    if (typeof SpecialMarkersMgr !== "undefined" && typeof SpecialMarkersMgr.getFlagCompassMarks === "function")
+      return SpecialMarkersMgr.getFlagCompassMarks();
+    return typeof CompassMarks !== "undefined" && CompassMarks.getCompassMarks();
+  },
+  setMarks: function(value) {
+    if (typeof SpecialMarkersMgr !== "undefined" && typeof SpecialMarkersMgr.setFlagCompassMarks === "function")
+      SpecialMarkersMgr.setFlagCompassMarks(value);
+    else if (typeof CompassMarks !== "undefined") CompassMarks.setCompassMarks(value);
+    else if (value) throw "Enable the Compass Marks plugin in Stellarium.";
+  }
+};
+@SAVE@
+try {
+  core.setTimeRate(0);
+  core.setObserverLocation(@LON@,@LAT@,@ELEV@,0,"skyscapeR","Earth");
+  core.setJDay(@JD@);
+  @APPLY@
+  core.setGuiVisible(false);
+  core.setFlipHorz(false); core.setFlipVert(false);
+  StelMovementMgr.setFlagTracking(false);
+  core.setMountMode("azimuthal");
+  core.setProjectionMode("ProjectionCylinderFill");
+  for (var attempt=0; attempt<20 && core.getProjectionMode() !== "ProjectionCylinderFill"; attempt++) core.wait(.1);
+  if (core.getProjectionMode() !== "ProjectionCylinderFill") throw "Cylinder Fill unavailable";
+  StelMovementMgr.moveViewport(0,0,0);
+  StelMovementMgr.zoomTo(180,0);
+  StelMovementMgr.lookSouth(true);
+  core.wait(2);
+  core.screenshot("@PREFIX@",false,"",true,"png");
+  core.wait(.5);
+} finally {
+  @RESTORE@
+  core.setObserverLocation(loc.longitude,loc.latitude,loc.altitude,0,loc.name,loc.planet);
+  core.setJDay(jd); core.setProjectionMode(proj); core.setMountMode(mount);
+  core.setFlipHorz(flipH); core.setFlipVert(flipV);
+  core.moveToAltAzi(alt,az,0); StelMovementMgr.zoomTo(fov,0);
+  StelMovementMgr.moveViewport(dx,dy,0);
+  StelMovementMgr.setFlagTracking(tracking); core.setTimeRate(rate); core.setGuiVisible(true);
+}

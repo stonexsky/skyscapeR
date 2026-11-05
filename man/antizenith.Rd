@@ -2,7 +2,7 @@
 % Please edit documentation in R/events.R
 \name{antizenith}
 \alias{antizenith}
-\title{Declination of the anti-zenith sun for a given location}
+\title{Estimate solar declination at the anti-zenith}
 \usage{
 antizenith(loc, parallax = 0.00224, altitude = 0)
 }
@@ -10,24 +10,34 @@ antizenith(loc, parallax = 0.00224, altitude = 0)
 \item{loc}{This can be either the latitude of the
 location, or a \emph{skyscapeR.horizon} object.}
 
-\item{parallax}{(Optional) Average parallax value for the sun.
-Defaults to 0.00224.}
+\item{parallax}{Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.}
 
-\item{altitude}{(Optional) Altitude of the sun. Defaults to 0 degrees.}
+\item{altitude}{Altitude of the sun. Defaults to 0 degrees.}
+}
+\value{
+Solar declination in degrees with the requested parallax correction, or NULL when the latitude falls outside the solstitial limits used by the function.
 }
 \description{
-This function returns the declination of the sun
-when it is at the anti-zenith for a given location with
-corrected average parallax. If this phenomena does
-not occur at given location (i.e. if location is
-outside the tropical band) the function returns a
-\emph{NULL} value.
+Determine the solar declination associated with the point directly beneath an observer,
+where the Sun can attain that declination.
+}
+\details{
+The direction opposite the zenith corresponds geometrically to minus the site latitude.
+The function checks the site against the default-epoch solstitial latitude band,
+then subtracts the approximate solar parallax correction from the negative latitude. It
+returns NULL outside that band. This is a target declination for comparison with
+orientations, not an observable solar transit below ground.
 }
 \examples{
 # Anti-zenith sun declination for Mexico City:
 antizenith(19.419)
 
-# There is no anti-zenith sun phenomena in London:
+# The same location supplied as a horizon object:
+hor <- createHor(c(0,90,180,270,360), c(0,2,1,3,0),
+                 loc=c(19.419,-99.133,2240))
+antizenith(hor)
+
+# There is no anti-zenith solar phenomenon in London:
 antizenith(51.507)
 }
 \seealso{

@@ -2,24 +2,41 @@
 % Please edit documentation in R/events.R
 \name{spatial.equinox}
 \alias{spatial.equinox}
-\title{Azimuth and declination of the spatial equinox for a given location}
+\title{Estimate the spatial equinox from a site horizon}
 \usage{
 spatial.equinox(hor, parallax = 0.00224)
 }
 \arguments{
 \item{hor}{This should be a \emph{skyscapeR.horizon} object.}
 
-\item{parallax}{(Optional) Average parallax value for the sun.
-Defaults to 0.00224.}
+\item{parallax}{Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.}
+}
+\value{
+A list containing azimuth and declination. Each contains rise and set values in degrees for the supplied horizon.
 }
 \description{
-Azimuth and declination of the spatial equinox for a given location
+Find the directions halfway between the two solstitial sunrise bearings and between the
+two solstitial sunset bearings on a particular horizon.
+}
+\details{
+A spatial midpoint is defined by the local terrain and need not coincide with the
+astronomical equinox. The calculation uses the solstitial declinations for epoch
+2000, generates unrefracted tracks, linearly interpolates the difference from the
+horizon and seeks one eastern and one western root for each track. It averages each pair
+of bearings, converts the midpoints to declinations at the horizon and applies the
+specified parallax correction. Both bracketing sectors must contain suitable crossings.
+
+Ruggles (1997) distinguishes the spatial midpoint of the solstitial horizon
+bearings from the midpoint in time between the solstices.
 }
 \examples{
 \dontrun{
 hor <- createHWT(34.174051531543405, 110.81299818694872, name='Xipo, Lingbao')
 spatial.equinox(hor)
 }
+}
+\references{
+Ruggles, C. L. N. (1997). Whose Equinox? Journal for the History of Astronomy 28, S45-S96. \doi{10.1177/002182869702802205}.
 }
 \seealso{
 \code{\link{jS}}, \code{\link{dS}}, \code{\link{eq}},

@@ -2,23 +2,36 @@
 % Please edit documentation in R/horizon.R
 \name{hor2min.dec}
 \alias{hor2min.dec}
-\title{Retrieves minimum declination for a given horizon}
+\title{Find the southern declination limit of a horizon}
 \usage{
 hor2min.dec(hor, alt = 0, range = 25)
 }
 \arguments{
 \item{hor}{Either a \emph{skyscapeR.horizon} object or the latitude of the place.}
 
-\item{alt}{(Optional) Altitude of the horizon at southernmost point. Only necessary if no
+\item{alt}{Altitude of the horizon at southernmost point. Only necessary if no
 \emph{skyscapeR.horizon} object is provided. Default is 0.}
 
-\item{range}{(Optional) Range of azimuths to check for maximum declination. Default is 25
+\item{range}{Range of azimuths to check for minimum declination. Default is 25
 degrees either side of South}
 }
+\value{
+One numeric value in degrees, the smallest declination sampled across the specified azimuth range around south.
+}
 \description{
-Retrieves minimum declination for a given horizon
+Estimate the smallest declination indicated by the horizon near true south.
+}
+\details{
+Terrain relief can shift the limiting sightline away from the meridian. The function
+samples bearings at 0.01-degree spacing within the specified half-width around 180
+degrees. It calls az2dec at each bearing with the stored horizon, or with the supplied
+latitude and constant altitude, then returns the minimum sampled declination. A limited
+search sector may miss a more extreme sightline elsewhere.
 }
 \examples{
-hor <- downloadHWT('HIFVTBGK')
+hor <- malta_horizons[[1]]
 hor2min.dec(hor)
+}
+\seealso{
+\code{\link{createHor}}, \code{\link{downloadHWT}}, \code{\link{createHWT}}, \code{\link{exportHor}}, \code{\link{hor2alt}}, \code{\link{hor2max.dec}}
 }

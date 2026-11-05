@@ -2,7 +2,7 @@
 % Please edit documentation in R/horizon.R
 \name{hor2alt}
 \alias{hor2alt}
-\title{Retrieves horizon altitude for a given azimuth from a given horizon profile}
+\title{Interpolate horizon altitude at a bearing}
 \usage{
 hor2alt(hor, az, return.unc = F)
 }
@@ -11,16 +11,33 @@ hor2alt(hor, az, return.unc = F)
 
 \item{az}{Array of azimuth(s) for which to retrieve horizon altitude(s).}
 
-\item{return.unc}{(Optional) Boolean switch control where to output altitude uncertainty.
+\item{return.unc}{Logical controlling whether to return altitude uncertainty.
 Default is \emph{FALSE}.}
 }
+\value{
+With \code{return.unc = FALSE}, a numeric vector of altitudes.
+With \code{return.unc = TRUE} and one azimuth, an unnamed numeric vector
+containing altitude followed by uncertainty. With multiple azimuths, a
+numeric matrix with columns \code{alt} and \code{alt.unc}, one row per
+input azimuth in the supplied order. Values are rounded to two decimal places.
+}
 \description{
-This function retrieves the horizon altitude for a given azimuth from
-a previously created \emph{skyscapeR.horizon} object via spline interpolation.
+Estimate the altitude of the local horizon, and optionally its uncertainty, at one or
+more true bearings.
+}
+\details{
+A measured axis rarely falls exactly on a stored horizon sample. Separate cubic splines
+interpolate altitude and its recorded uncertainty as functions of azimuth, and results
+are rounded to two decimal places. Supply bearings within the profile coverage; a spline
+beyond the measured range is an extrapolation. Distinguish this lookup from the linear
+interpolation used inside coordtrans.
 }
 \examples{
-hor <- downloadHWT('HIFVTBGK')
+hor <- createHor(c(0,90,180,270,360), c(0,5,3,1,0),
+                 alt.unc=c(0.1,0.2,0.3,0.2,0.1), loc=c(40,-8,100))
 hor2alt(hor, 90)
+hor2alt(hor, 90, return.unc=TRUE)
+hor2alt(hor, c(90,180,270), return.unc=TRUE)
 }
 \seealso{
 \code{\link{createHor}}, \code{\link{downloadHWT}}

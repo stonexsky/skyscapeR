@@ -2,23 +2,36 @@
 % Please edit documentation in R/horizon.R
 \name{hor2max.dec}
 \alias{hor2max.dec}
-\title{Retrieves maximum declination for a given horizon}
+\title{Find the northern declination limit of a horizon}
 \usage{
 hor2max.dec(hor, alt = 0, range = 25)
 }
 \arguments{
 \item{hor}{Either a \emph{skyscapeR.horizon} object or the latitude of the place.}
 
-\item{alt}{(Optional) Altitude of the horizon at northernmost point. Only necessary if no
+\item{alt}{Altitude of the horizon at northernmost point. Only necessary if no
 \emph{skyscapeR.horizon} object is provided. Default is 0.}
 
-\item{range}{(Optional) Range of azimuths to check for maximum declination. Default is 25
+\item{range}{Range of azimuths to check for minimum declination. Default is 25
 degrees either side of North.}
 }
+\value{
+One numeric value in degrees, the largest declination sampled across the specified azimuth range around north.
+}
 \description{
-Retrieves maximum declination for a given horizon
+Estimate the largest declination indicated by the horizon near true north.
+}
+\details{
+Terrain relief can shift the limiting sightline away from the meridian. The function
+samples bearings at 0.01-degree spacing within the specified half-width around 0
+degrees. It calls az2dec at each bearing with the stored horizon, or with the supplied
+latitude and constant altitude, then returns the maximum sampled declination. A limited
+search sector may miss a more extreme sightline elsewhere.
 }
 \examples{
-hor <- downloadHWT('HIFVTBGK')
+hor <- malta_horizons[[1]]
 hor2max.dec(hor)
+}
+\seealso{
+\code{\link{createHor}}, \code{\link{downloadHWT}}, \code{\link{createHWT}}, \code{\link{exportHor}}, \code{\link{hor2alt}}, \code{\link{hor2min.dec}}
 }

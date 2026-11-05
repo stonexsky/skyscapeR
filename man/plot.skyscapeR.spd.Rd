@@ -2,25 +2,59 @@
 % Please edit documentation in R/plotting.R
 \name{plot.skyscapeR.spd}
 \alias{plot.skyscapeR.spd}
-\title{Plot orientation summed probability density}
+\title{Plot a summed orientation density}
 \usage{
-\method{plot}{skyscapeR.spd}(x, xlim, ylim, title = NULL, col = "blue", shading = TRUE, ...)
+\method{plot}{skyscapeR.spd}(
+  x,
+  xrange,
+  yrange,
+  title = NULL,
+  col = "blue",
+  shading = TRUE,
+  ...,
+  obj = NULL,
+  xlim,
+  ylim
+)
 }
 \arguments{
 \item{x}{A \emph{skyscapeR.spd} object created with \code{\link{spd}}}
 
-\item{xlim}{(Optional) Range of x-axis to plot.}
+\item{xrange}{Range of x-axis to plot.}
 
-\item{ylim}{(Optional) Range of y-axis to plot.}
+\item{yrange}{Range of y-axis to plot.}
 
-\item{title}{(Optional) Title to add to the plot.}
+\item{title}{Title to add to the plot.}
 
-\item{col}{(Optional) Color of summed probability density. Defaults to blue.}
+\item{col}{Color of summed probability density. Defaults to blue.}
 
-\item{shading}{(Optional) Boolean to control whether to color the entire distribution. Defaults to TRUE}
+\item{shading}{Logical to control whether to color the entire distribution. Defaults to TRUE}
 
 \item{...}{Additional arguments to be passed to \emph{plot}.}
+
+\item{obj}{A skyObject or list of target groups for a density or significance plot. Declination plots show single epochs as lines and epoch ranges as bands. Azimuth plots use each group's site latitude to mark rising and setting boundary bearings at a geometric level horizon.}
+
+\item{xlim}{Earlier name for xrange.}
+
+\item{ylim}{Earlier name for yrange.}
+}
+\value{
+Draws the summed density against its angular coordinate on the active graphics device.
 }
 \description{
-Plot orientation summed probability density
+Visualise concentrations of orientation density across a group of structures.
+}
+\details{
+A peak can arise where several uncertain sightlines coincide. The horizontal axis uses
+the summed curve's stored coordinate and the vertical axis its density. Optional shading
+fills the area beneath the curve; changing colours or axis limits does not renormalise
+it. Whether its integral is one depends on the normalisation used when creating the
+object. Assess departures from a specified null using a significance test.
+}
+\examples{
+az <- az.pdf(az = c(85, 92), unc = 2, verbose = FALSE)
+plot(spd(az))
+}
+\seealso{
+\code{\link{spd}}, \code{\link{plot.skyscapeR.pdf}}
 }

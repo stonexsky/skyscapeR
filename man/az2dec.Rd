@@ -2,7 +2,7 @@
 % Please edit documentation in R/mechanics.R
 \name{az2dec}
 \alias{az2dec}
-\title{Calculates declination from azimuth and altitude measurements}
+\title{Convert azimuth and altitude to declination}
 \usage{
 az2dec(
   az,
@@ -14,30 +14,36 @@ az2dec(
 )
 }
 \arguments{
-\item{az}{Azimuth(s) for which to calculate declination(s). See examples below.}
+\item{az}{True bearing or vector of bearings in degrees clockwise from north.}
 
-\item{loc}{Location, can be either a \emph{skyscapeR.horizon} object or, alternatively,
-an array of latitude values.}
+\item{loc}{One latitude or one per bearing (degrees north), a site matrix with one row per bearing
+(latitude, longitude and optional elevation), a shared horizon or a list of horizons in measurement order.}
 
-\item{alt}{(Optional) Altitude of orientation. If left empty and a \emph{skyscapeR.horizon}
-is provided then this is will automatically retrieved from the horizon data via \code{\link{hor2alt}}}
+\item{alt}{Horizon altitude in degrees, shared or one per bearing. Omit when supplying
+horizons to interpolate altitude at each bearing with \code{\link{hor2alt}}.}
 
-\item{refraction}{(Optional) Whether atmospheric refraction is to be taken into account.
-If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.}
+\item{refraction}{Logical. Apply atmospheric refraction. Defaults to the session setting in \code{\link{skyscapeR.vars}}.}
 
-\item{atm}{(Optional) Atmospheric pressure for refraction calculation.
-If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.}
+\item{atm}{Atmospheric pressure in mbar. Defaults to the session setting in \code{\link{skyscapeR.vars}}.}
 
-\item{temp}{(Optional) Atmospheric temperature for refraction calculation.
-If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.}
+\item{temp}{Air temperature in degrees Celsius. Defaults to the session setting in \code{\link{skyscapeR.vars}}.}
+}
+\value{
+Numeric declination in degrees for the supplied azimuth and altitude values.
 }
 \description{
-This function calculates the declination corresponding to an
-orientation , i.e. an azimuth. The altitude can either be given
- or, alternatively, if a \emph{skyscapeR.horizon} object is provided,
- the corresponding horizon altitude will be automatically retrieved.
-This function is a wrapper for function \code{\link[swephR]{swe_azalt_rev}}
-of package \emph{swephR}.
+Find the celestial declination corresponding to a terrestrial sightline at a known
+latitude and horizon altitude.
+}
+\details{
+The same true bearing can indicate different declinations when the observer or horizon
+changes. Supply angular altitude directly or interpolate it from one shared horizon or
+one horizon per observation. Numeric latitude inputs imply zero longitude and elevation;
+a location matrix can include both. When refraction is enabled, the function adjusts the
+input altitude using pressure, temperature and elevation, then calls the inverse Swiss
+Ephemeris horizontal transformation. Bearings are clockwise from north; the routine
+shifts them to the engine convention and rounds the returned declinations using the
+input bearing representation.
 }
 \examples{
 dec <- az2dec(az=92, loc=35, alt=2)

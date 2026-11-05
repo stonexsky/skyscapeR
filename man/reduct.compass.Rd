@@ -2,35 +2,58 @@
 % Please edit documentation in R/data-reduction.R
 \name{reduct.compass}
 \alias{reduct.compass}
-\title{Data reduction for compass measurements}
+\title{Reduce magnetic compass bearings to true bearings}
 \usage{
 reduct.compass(loc, mag.az, date, magdec, alt, name, ID, HWT.ID)
 }
 \arguments{
-\item{loc}{Location, either a \emph{skyscapeR.object} or a vector
+\item{loc}{Location, either a \emph{skyscapeR.horizon} or a vector
 containing the latitude, longitude and elevation of location, in this order.}
 
 \item{mag.az}{Array of magnetic azimuth measurements.}
 
-\item{date}{(Optional) Date of measurements as a string in the format: 'YYYY/MM/DD'.
-Only necessary if \emph{magdec} is not given.}
+\item{date}{Date of measurements as a string in the format: 'YYYY/MM/DD'.
+Only necessary if \emph{magdec} is not given. When omitted, the output
+Date column contains missing values (NA).}
 
-\item{magdec}{(Optional) Magnetic declination, if known.}
+\item{magdec}{Magnetic declination, if known.}
 
-\item{alt}{(Optional) Altitude, necessary for automatic declination calculation.
+\item{alt}{Altitude, necessary for automatic declination calculation.
 If missing and \emph{loc} is a \emph{skyscapeR.horizon} object then the altitude
 will be automatically read from the horizon profile.}
 
-\item{name}{(Optional) Names or labels to identify each measurement.}
+\item{name}{Names or labels to identify each measurement.}
 
-\item{ID}{(Optional) IDs or codes to identify each measurement.}
+\item{ID}{IDs or codes to identify each measurement.}
 
-\item{HWT.ID}{(Optional) HeyWhatsThat IDs relating to a previously generated
+\item{HWT.ID}{HeyWhatsThat IDs relating to a previously generated
 horizon profile for measurement.}
 }
+\value{
+A data frame with one row per measurement, including location,
+magnetic azimuth, date, magnetic declination and true azimuth. Altitude and
+celestial declination are included when altitudes are supplied or a horizon
+is available. Optional identification columns are retained.
+}
 \description{
-This function calculates the true azimuth of a structure measured with
-a compass.
+Recover true bearings from magnetic compass observations and, where horizon altitude is
+known, estimate the indicated declinations.
+}
+\details{
+Magnetic north differs from true north at the time and place of survey. Add the supplied
+magnetic declination to each magnetic bearing, or calculate it from the survey
+coordinates and date with mag.dec. Corrected bearings are rounded using the input
+bearing representation. With an explicit altitude or a measured horizon, the corrected
+bearing also enters the conversion to declination.
+
+Supply either a measurement date or a known magnetic declination.
+If both are given, the supplied magnetic declination is used and the date is
+retained in the output. Explicit altitude values take precedence over a
+horizon profile. Otherwise, each measurement's corrected true azimuth is
+used to retrieve its horizon altitude; the same altitude is reported and
+used to calculate celestial declination. Supply one site and date for the whole
+survey or one location row and/or date per bearing, in measurement order.
+A supplied correction can likewise be shared or paired with each bearing.
 }
 \examples{
 loc <- c(35,-7, 100)
@@ -41,8 +64,15 @@ data <- reduct.compass(loc, mag.az, "2016/04/02")
 data <- reduct.compass(loc, mag.az, "2016/04/02", alt=c(1,2,0))
 
 # Alternatively, the altitude can be automatically retrieved from a horizon profile:
-hor <- downloadHWT('HIFVTBGK')
+hor <- malta_horizons[[1]]
 data <- reduct.compass(hor, mag.az, "2016/04/02")
+
+# Known magnetic declination: no measurement date is required.
+reduct.compass(c(35,-7,100), c(89.5,105,109.5), magdec=-2, alt=c(1,2,0))
+
+# A varying horizon supplies an altitude for each corrected azimuth.
+hor <- createHor(c(0,90,180,270,360), c(0,2,6,1,0), loc=c(35,-7,100))
+reduct.compass(hor, c(89.5,105,109.5), magdec=-2)
 }
 \seealso{
 \code{\link{mag.dec}}, \code{\link{az2dec}}, \code{\link{hor2alt}}

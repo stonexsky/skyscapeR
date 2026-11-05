@@ -3,23 +3,31 @@
 \docType{data}
 \name{malta_entrances}
 \alias{malta_entrances}
-\title{Maltese Temples entrance data}
+\title{Entrance bearings of Maltese temples}
 \format{
-A data frame with 32 rows and 6 variables:
- \describe{
-   \item{Name}{Structure name}
-   \item{Latitude}{Latitude of structure}
-   \item{Longitude}{Longitude of strutuce}
-   \item{Az L}{Leftmost azimuth of entrance}
-   \item{Az R}{Rightmost azimuth of entrance}
-   \item{Phase}{Chronological phase of structure}
-   }
+A tibble (also a data frame) with 32 rows and six columns.
+\describe{
+  \item{Name}{Structure name.}
+  \item{Latitude}{Site latitude in degrees north.}
+  \item{Longitude}{Site longitude in degrees east.}
+  \item{Az L}{Azimuth of the left edge of the entrance, in degrees.}
+  \item{Az R}{Azimuth of the right edge of the entrance, in degrees.}
+  \item{Phase}{Archaeological phase assigned to the structure.}
+}
 }
 \usage{
 data(malta_entrances)
 }
 \description{
-Azimuthal data from Tore Lomsdalen's fieldwork on the prehistoric Maltese Temples.
+Compare the directions and angular widths of entrance corridors at the prehistoric
+Maltese temples.
+}
+\details{
+The left and right bearings delimit the field of view from a structure. Preserve their
+order around north when deriving a centre and width, and specify how that sector is
+represented as a density. Latitude, longitude and phase support site-specific
+transformation and grouping. The companion horizon profiles provide the horizon
+altitudes used to translate bearings into possible declinations.
 }
 \examples{
 data(malta_entrances)
@@ -29,6 +37,9 @@ plotAzimuth(mid_az)
 \references{
 Lomsdalen, T. (2021). \emph{Viewscapes and Cosmology in the Prehistoric Temples of Malta}. PhD Dissertation - University of Malta.
 
-Silva, F. and Lomsdalen, T. (2025). ‘No easy way from the earth to the stars’: a new statistical approach to the orientation of the Maltese Temples. \emph{Archaeological and Anthropological Sciences}  <doi:10.1007/s12520-025-02208-4>
+Silva, F. and Lomsdalen, T. (2025). ‘No easy way from the earth to the stars’: a new statistical approach to the orientation of the Maltese Temples. \emph{Archaeological and Anthropological Sciences}  \doi{10.1007/s12520-025-02208-4}
+}
+\seealso{
+\code{\link{malta_horizons}}
 }
 \keyword{datasets}

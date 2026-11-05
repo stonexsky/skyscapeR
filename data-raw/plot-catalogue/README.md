@@ -1,0 +1,7 @@
+# Catalogue review for the sky's background stars
+
+Reviewed 5 November 2026. The supplied sefstars file contains 15,742 data records. The background layer excludes 22 integrated deep-sky identifiers, two Galactic reference positions and 81 historical SN identifiers. The source catalogue is retained for explicit target calculations. The corresponding selector is .plot_star_catalogue() in R/ephemeris.R. Use the filtered catalogue for HIP line-endpoint resolution as well. HIP 17702 belongs to the plotted star eta Tau, which shares coordinates and a HIP cross-reference with the integrated M 45 target.
+
+Exact identifiers matter. M Vel and M Cen are stars. NGC 1912 5 62 is a member entry rather than the whole NGC object. A missing spectral type is common among stellar records, while M 45 carries the spectral class of its representative star.
+
+For this review we compared identifiers with SIMBAD TAP basic, ident, allfluxes and otypedef on the CfA mirror. Used bright objects with Johnson V below 9 and HIP cross-references. For otherwise ambiguous identifiers checked nearby objects within 0.002 degrees; all 40 last-pass cases had a matching stellar object within 1.2 arcseconds. HD/HIP stellar designations were also used where a direct typed match was unavailable. Runtime plotting uses only the local catalogue. Review the selector if the compilation is expanded. Existing SIMBAD credits and terms are in inst/COPYRIGHTS.

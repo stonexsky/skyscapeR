@@ -2,31 +2,68 @@
 % Please edit documentation in R/dates.R
 \name{time2jd}
 \alias{time2jd}
-\title{Converts date and time (in any timezone) to Julian date}
+\title{Convert local calendar date and time to a UT Julian date}
 \usage{
 time2jd(time, timezone, calendar, verbose = F)
 }
 \arguments{
-\item{time}{String containing the date and time in the format "YYYY/MM/DD HH:MM:SS". BCE dates
-should use negative sign. Use \code{\link{timestring}} if needed.}
+\item{time}{Character vector in YYYY/MM/DD format, optionally followed by HH:MM or HH:MM:SS. Fractional seconds are accepted. Omitted clock time means midnight.}
 
-\item{timezone}{(Optional) Timezone of input either as a known acronym (e.g. "GMT", "CET") or
-a string with continent followed by country capital (e.g. "Europe/London"). See
-\code{\link{timezones}} for details. Default is the system timezone}
+\item{timezone}{Timezone name or fixed offset; defaults to the value in \code{skyscapeR.vars()}. See Details.}
 
-\item{calendar}{(Optional) Calendar used in parameter \emph{time}. G for gregorian and J for julian.
-Defaults to \emph{Gregorian}.}
+\item{calendar}{Calendar: G or Gregorian, J or Julian. Defaults to the package calendar setting, initially Gregorian.}
 
-\item{verbose}{(Optional) Controls whether messages should be displayed. Default is \emph{FALSE}.}
+\item{verbose}{Logical; display a conversion message. Default is FALSE.}
+}
+\value{
+A numeric vector of UT Julian dates, in the same order as time.
 }
 \description{
-Converts date and time (in any timezone) to Julian date
+Place a dated field observation or historical event on the continuous UT Julian-date
+scale used in ephemeris calculations.
+}
+\details{
+Civil dates require both a calendar and a time convention to specify an instant. The
+function parses each supplied date and time, verifies that the calendar date exists by
+converting it to a Julian date and back, then applies the chosen offset or civil
+timezone to obtain UT. A date without a time uses local midnight. Astronomical year
+numbering includes year zero. An era label can also precede the month, for example
+\code{"3700 BCE/06/21"}.
+
+Fixed offsets may be numeric hours east of UTC (for example 5.5), or
+strings such as \code{"UTC+05:30"}, \code{"UTC-02"} or \code{"GMT+01"}.
+Offsets must lie between -14 and +14 hours. UTC, GMT and the empty string
+mean zero offset; an empty string does not select the system timezone.
+
+Named zones listed by \code{OlsonNames()}, such as \code{"Europe/London"},
+use the installed timezone database for the actual Gregorian date, not a
+surrogate year. They are supported only for Gregorian years 1900-9999.
+Earlier dates require UTC or a fixed offset. For ancient-date workflows,
+set \code{skyscapeR.vars(timezone="UTC")} or provide timezone explicitly.
+The package's initial timezone remains Europe/London. Database versions
+may differ across systems; fixed offsets provide reproducible conversions.
+
+Gregorian and Julian calendars are proleptic: no automatic calendar reform
+is applied. Astronomical year numbering is used: 0 is 1 BCE, -1 is 2 BCE.
+Fixed-offset input dates support years from -100000 to 100000.
+A timezone offset represents civil clock time, not local solar time.
+These functions apply clock offsets to a UT Julian day; they do not apply
+leap-second, UTC-to-UT1 or TT corrections. Leap-second input is rejected.
+
+Ambiguous and nonexistent local times at clock transitions are rejected.
+For an ambiguous time, specify a fixed offset to identify the intended instant.
+Calendar dates and clock components are validated before conversion.
 }
 \examples{
-# Julian date at noon GMT on Christmas day 2018
-time2jd('2018/12/25 12:00:00', 'GMT')
+time2jd("2000/01/01 12:00:00", "UTC") # 2451545
+# A positive offset crosses into the preceding UTC year:
+jd <- time2jd("2020/01/01 00:30:00", "UTC+02")
+jd2time(jd, "UTC") # 2019/12/31 22:30:00
+# Ancient Julian-calendar date, with an explicit fixed offset:
+time2jd("-4000/06/21 06:00:00", "UTC+02", calendar="J")
+# A modern date uses that year's timezone rules:
+time2jd("2007/03/15 12:00:00", "America/New_York")
 }
 \seealso{
-\code{\link[swephR]{swe_julday}}, \code{\link{as.POSIXlt}}, \code{\link{timezones}},
-\code{\link{timestring}}
+\code{\link{jd2time}}, \code{\link{timestring}}, \code{\link{BC.AD}}, \code{\link{skyscapeR.vars}}
 }

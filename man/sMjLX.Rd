@@ -2,7 +2,7 @@
 % Please edit documentation in R/events.R
 \name{sMjLX}
 \alias{sMjLX}
-\title{Declination of southern major Lunar Extreme for a given year}
+\title{Estimate southern major lunar standstill declination}
 \usage{
 sMjLX(
   year = skyscapeR.env$cur.year,
@@ -13,25 +13,33 @@ sMjLX(
 )
 }
 \arguments{
-\item{year}{Year for which to calculate the declination.
-Defaults to present year as given by \emph{Sys.Date}.}
+\item{year}{Astronomical year. The default is the current year in the package settings. Historical labels such as \code{"3700 BC"} are accepted by \code{\link{astroYear}}.}
 
-\item{loc}{(Optional) This can be either the latitude of the
-location, or a \emph{skyscapeR.horizon} object. If missing or \emph{FALSE},
-function will output geocentric declination.}
+\item{loc}{Latitude in degrees north or a \code{skyscapeR.horizon} object. Omit this argument or use \code{FALSE} for geocentric declination.}
 
-\item{parallax}{(Optional) Average parallax value for the moon
-Defaults to 0.952.}
+\item{parallax}{Mean horizontal parallax in degrees. The default is 0.952 degrees for the Moon.}
 
-\item{altitude}{(Optional) Altitude of the sun. Defaults to 0 degrees.}
+\item{altitude}{Altitude of the Moon. Defaults to 0 degrees.}
 
-\item{verbose}{(Optional) Boolean to control output of warnings and messages.
+\item{verbose}{Logical to control output of warnings and messages.
 Defaults to TRUE.}
 }
+\value{
+Numeric declination in degrees. With loc = FALSE the result is geocentric. Supplying a location applies the parallax correction for the chosen altitude.
+}
 \description{
-This function calculates the declination of the southern
-major Lunar Extreme for a given year, based upon
-obliquity estimation and corrected average parallax.
+Estimate the southern declination limit of a major lunar standstill for comparison with
+a proposed alignment.
+}
+\details{
+A major standstill defines a limiting lunar declination at the epoch of interest. The
+model uses the obliquity plus a fixed 5.145 + 0.145 degrees, then applies the negative
+sign for the southern limit. With a location it subtracts the parallax correction for
+latitude and altitude. The default lunar parallax is 0.952 degrees. This approximation
+defines a target limit; it does not search a time series for an actual lunar event.
+
+Sprajc (2016) describes the limits set by obliquity and the mean lunar
+inclination. This package also includes the fixed 0.145-degree term above.
 }
 \examples{
 # Southern major Lunar Extreme geocentric declination for year 2501 BC:
@@ -39,6 +47,9 @@ sMjLX(-2500)
 
 # Topocentric declination for same year and latitude of 50 degrees N:
 sMjLX(-2500, loc=50)
+}
+\references{
+\enc{Šprajc}{Sprajc}, I. (2016). Lunar alignments in Mesoamerican architecture. Anthropological Notebooks 22(3), 61-85.
 }
 \seealso{
 \code{\link{nmnLX}}, \code{\link{smnLX}}, \code{\link{nMjLX}},

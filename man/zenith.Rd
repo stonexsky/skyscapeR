@@ -2,7 +2,7 @@
 % Please edit documentation in R/events.R
 \name{zenith}
 \alias{zenith}
-\title{Declination of the zenith sun for a given location}
+\title{Estimate solar declination at the zenith}
 \usage{
 zenith(loc, parallax = 0.00224, altitude = 0)
 }
@@ -10,18 +10,23 @@ zenith(loc, parallax = 0.00224, altitude = 0)
 \item{loc}{This can be either the latitude of the
 location, or a \emph{skyscapeR.horizon} object.}
 
-\item{parallax}{(Optional) Average parallax value for the sun.
-Defaults to 0.00224.}
+\item{parallax}{Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.}
 
-\item{altitude}{(Optional) Altitude of the sun. Defaults to 0 degrees.}
+\item{altitude}{Altitude of the sun. Defaults to 0 degrees.}
+}
+\value{
+Solar declination in degrees with the requested parallax correction, or NULL when the latitude falls outside the solstitial limits used by the function.
 }
 \description{
-This function returns the declination of the sun
-when it is at the zenith for a given location with
-corrected average parallax. If this phenomena does
-not occur at given location (i.e. if location is
-outside the tropical band) the function returns a
-\emph{NULL} value.
+Determine the solar declination associated with an overhead passage at the observer's
+latitude, where such a passage is possible.
+}
+\details{
+The geometric zenith has declination equal to the site latitude. The function
+first checks the latitude against its June and December solar limits at the default
+epoch. Within those limits it subtracts the supplied approximate solar parallax
+correction from the latitude. It returns NULL outside the permitted band. This supplies
+a declination criterion rather than the dates of the passages.
 }
 \examples{
 # Zenith sun declination for Mexico City:

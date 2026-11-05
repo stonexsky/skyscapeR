@@ -2,12 +2,12 @@
 % Please edit documentation in R/dates.R
 \name{timestring}
 \alias{timestring}
-\title{Converts date and time numeric values to a single string}
+\title{Assemble a timestamp from calendar and clock fields}
 \usage{
 timestring(year, month, day, hour = 12, minute = 0, second = 0)
 }
 \arguments{
-\item{year}{Year}
+\item{year}{Year. Historical labels such as \code{"3700 BC"} are accepted by \code{\link{astroYear}}.}
 
 \item{month}{Month}
 
@@ -19,9 +19,23 @@ timestring(year, month, day, hour = 12, minute = 0, second = 0)
 
 \item{second}{Second}
 }
+\value{
+A character date-time string in the slash-separated format accepted by \code{\link{time2jd}}.
+}
 \description{
-Converts date and time numeric values to a single string
+Assemble separately recorded date and clock fields into the timestamp used by the
+package's ephemeris routines.
+}
+\details{
+Survey records often store year, month, day and clock time separately. This formatter
+pads the month, day and clock components to two characters and joins them as
+year/month/day and hours:minutes:seconds. Omitted time is noon. Formatting alone does
+not supply a timezone or check that the date exists; use time2jd to validate and convert
+it.
 }
 \examples{
 timestring(2018, 12, 25, 2, 34)
+}
+\seealso{
+\code{\link{time2jd}}, \code{\link{jd2time}}, \code{\link{BC.AD}}, \code{\link{long.date}}
 }

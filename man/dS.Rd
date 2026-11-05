@@ -2,7 +2,7 @@
 % Please edit documentation in R/events.R
 \name{dS}
 \alias{dS}
-\title{Declination of December Solstice for a given year}
+\title{Estimate solar declination at the December solstice}
 \usage{
 dS(
   year = skyscapeR.env$cur.year,
@@ -13,25 +13,30 @@ dS(
 )
 }
 \arguments{
-\item{year}{Year for which to calculate the declination.
-Defaults to present year as given by \emph{Sys.Date}.}
+\item{year}{Astronomical year. The default is the current year in the package settings. Historical labels such as \code{"3700 BC"} are accepted by \code{\link{astroYear}}.}
 
-\item{loc}{(Optional) This can be either the latitude of the
-location, or a \emph{skyscapeR.horizon} object. If missing or \emph{FALSE},
-function will output geocentric declination.}
+\item{loc}{Latitude in degrees north or a \code{skyscapeR.horizon} object. Omit this argument or use \code{FALSE} for geocentric declination.}
 
-\item{parallax}{(Optional) Average parallax value for the sun.
-Defaults to 0.00224.}
+\item{parallax}{Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.}
 
-\item{altitude}{(Optional) Altitude of the sun. Defaults to 0 degrees.}
+\item{altitude}{Altitude of the sun. Defaults to 0 degrees.}
 
-\item{verbose}{(Optional) Boolean to control output of warnings and messages.
+\item{verbose}{Logical to control output of warnings and messages.
 Defaults to TRUE.}
 }
+\value{
+Numeric declination in degrees. With loc = FALSE the result is geocentric. Supplying a location applies the parallax correction for the chosen altitude.
+}
 \description{
-This function calculates the declination of the sun
-at December Solstice for a given year, based upon
-obliquity estimation and corrected average parallax.
+Estimate the limiting solar declination at the December solstice for comparison with a
+structural sightline.
+}
+\details{
+The December solstice is represented by the negative obliquity of the ecliptic for the
+requested epoch. The result is geocentric when no site is supplied. With a site, the
+function subtracts the approximate parallax correction using latitude and target
+altitude. This obliquity-based target does not determine a solstice time or a sunrise or
+sunset bearing.
 }
 \examples{
 # December Solstice geocentric declination for year 4001 BC:

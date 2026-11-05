@@ -2,28 +2,40 @@
 % Please edit documentation in R/misc.R
 \name{mag.dec}
 \alias{mag.dec}
-\title{Estimates magnetic declination (difference between true and magnetic
-north) based on IGRF 12th gen model}
+\title{Estimate magnetic declination at a site}
 \usage{
 mag.dec(loc, date)
 }
 \arguments{
-\item{loc}{Location, can be either a \emph{skyscapeR.horizon} object or, alternatively,
-a latitude.}
+\item{loc}{Latitude and longitude in degrees as a vector, matrix or data frame with one row per site, or a horizon object. An optional third column gives elevation.}
 
-\item{date}{Date for which to calculate magnetic declination in the format: 'YYYY/MM/DD'}
+\item{date}{One or more survey dates as Date objects or YYYY/MM/DD strings.}
+}
+\value{
+Numeric magnetic declination in degrees. Use it as the correction added to a magnetic bearing in \code{\link{reduct.compass}}.
 }
 \description{
-This function estimates the magnetic declination at a given location
-and moment in time, using the \emph{12th generation International
-Geomagnetic Reference Field (IGRF)} model. This function is a wrapper
-for function \code{\link[oce]{magneticField}} of package \emph{oce}.
+Estimate the correction between magnetic north and true north for the location and date
+of a field survey.
+}
+\details{
+Compass reduction depends on when and where the reading was taken. The function
+evaluates IGRF-14 through oce at sea level and returns east-positive declination.
+Supply a single site for several dates, a single date for several sites, or
+one date per site. Results follow input order. Other size combinations raise
+an error. The calendar date is converted to a decimal year using the actual
+length of that year at midnight UTC. Supported dates run from 1 January 1900
+through 1 January 2030 inclusive. Site elevation is ignored by this model call.
 }
 \examples{
 # Magnetic Declination for London on April 1st 2016:
 loc <- c( 51.5074, -0.1278 )
 mag.dec( loc, "2016/04/01" )
+mag.dec(c(40, -8), c("2010/01/01", "2026/01/01"))
+}
+\references{
+Kelley, D. and Richards, C. oce: magneticField. \url{https://dankelley.github.io/oce/reference/magneticField.html}.
 }
 \seealso{
-\code{\link[oce]{magneticField}}
+\code{\link[oce]{magneticField}}, \code{\link{reduct.compass}}
 }

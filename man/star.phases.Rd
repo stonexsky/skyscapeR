@@ -2,92 +2,142 @@
 % Please edit documentation in R/stars.R
 \name{star.phases}
 \alias{star.phases}
-\title{Calculate the seasons and phase type of a star}
+\title{Model seasonal changes in stellar visibility}
 \usage{
 star.phases(
   star,
   year,
   loc,
   alt.hor = 0,
-  k = 0.2,
-  limit = 6,
   alt.rs = 10,
-  res = 1/24/6,
+  solar.alt = NULL,
+  k = skyscapeR.vars()$k,
+  limit = 6,
   refraction,
   atm,
-  temp
+  temp,
+  res = 1/24/6
 )
 }
 \arguments{
 \item{star}{Either the star name or a \emph{skyscapeR.star} object.}
 
-\item{year}{The year of interest.}
+\item{year}{The year of interest. Historical labels such as \code{"3700 BC"} are accepted by \code{\link{astroYear}}.}
 
-\item{loc}{Location, either a \emph{skyscapeR.object} or a vector
-containing the latitude and longitude of location, in this order.}
+\item{loc}{Location, either a \emph{skyscapeR.horizon} or a vector
+containing the latitude, longitude and elevation of location, in this order.}
 
-\item{alt.hor}{(Optional) The altitude of the horizon to consider.
+\item{alt.hor}{The altitude of the horizon to consider.
 Defaults to zero degrees.}
 
-\item{k}{(Optional) Extinction coefficient (see Schaefer 1989).
-Defaults to 0.2, corresponding to a poor night on mountain top
-or best night at a dry sea level site.}
-
-\item{limit}{(Optional) The maximum magnitude of a star that can be
-visible with the naked eye. Defaults to 6.}
-
-\item{alt.rs}{(Optional) The maximum altitude of a star's first or last
+\item{alt.rs}{The maximum altitude of a star's first or last
 visibility for it to still be considered to be as rising or setting.
 Defaults to ten degrees.}
 
-\item{res}{(Optional) Resolution of calculation. The smaller this
-figure the slower the computation. Defaults to 1/24/6, i.e. every 10 minutes.}
+\item{solar.alt}{Solar altitude threshold in degrees. NULL uses
+-6 for a horizon, or alt.hor - 6 for coordinate input.}
 
-\item{refraction}{(Optional) Whether atmospheric refraction is to be taken into account.
-If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.}
+\item{k}{Visual extinction in magnitudes per airmass (Schaefer 1986, p. S33). The package adopts 0.2 as a clear-sky baseline. Extinction varies with site and atmospheric conditions (Schaefer 1986, 1993). Defaults to the session value from skyscapeR.vars().
+Defaults to 0.2, corresponding to a poor night on mountain top
+or best night at a dry sea level site.}
 
-\item{atm}{(Optional) Atmospheric pressure for refraction calculation.
-If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.}
+\item{limit}{The maximum magnitude of a star that can be
+visible with the naked eye. Defaults to 6.}
 
-\item{temp}{(Optional) Atmospheric temperature for refraction calculation.
-If not given the value set by \code{\link{skyscapeR.vars}} will be used instead.}
+\item{refraction}{Logical. Apply atmospheric refraction. Defaults to the session setting in \code{\link{skyscapeR.vars}}.}
+
+\item{atm}{Atmospheric pressure in mbar. Defaults to the session setting in \code{\link{skyscapeR.vars}}.}
+
+\item{temp}{Air temperature in degrees Celsius. Defaults to the session setting in \code{\link{skyscapeR.vars}}.}
+
+\item{res}{Spacing of solar altitude samples in days, greater than zero and at
+most one. Default 1/144 day (ten minutes). Terrain crossings are refined separately.}
+}
+\value{
+A skyscapeR.starphases list. The data table gives each model day and its phase code: I for invisible, V for visible without a classified rise or set, R for rising, S for setting and RS for both. Metadata include the star, year, observer coordinates, phase type, season and event tables, refraction setting and solar altitude threshold. The logical \code{metadata$horizon} records whether a horizon object was supplied. Event rows include solar.longitude in degrees on the synthetic cycle. The date.julian column gives the representative local Julian calendar date at the supplied longitude. Pass this date to \code{\link{riseset}} with \code{calendar = "J"} to time the skyline crossing. For a dawn sketch, advance from that crossing until the star clears the terrain while the sky is still dark enough. The phase date alone does not specify a visible instant.
 }
 \description{
-This function calculates the seasons (Rising, Setting, etc.)
-and phase types (Arising and Lying Hidden, Curtailed Passage) of a
-star for a given location and epoch. This functions uses the
-\emph{arcus visionis} approximation of Purrington (1988) and
-the atmospheric extinction approximation of Schaefer (1989). For
-the nomenclature used, and description of star phase types, see Brady (2015).
+Estimate the seasons in which a star's rising or setting could be visible in twilight at
+an archaeological site.
+}
+\details{
+Seasonal visibility depends on solar depression, stellar altitude, apparent magnitude
+and atmospheric extinction as well as terrain. The model holds the star's position fixed
+for the chosen year and samples a 365-day solar cycle with uniformly spaced ecliptic
+longitudes. It requires a star-Sun altitude separation of 2.1 times the catalogue
+magnitude plus 10 degrees, and compares extinction-adjusted magnitude with the limiting
+magnitude. A positive-duration overlap of visibility conditions determines the daily
+code. The stellar altitude trend within a visible interval below alt.rs determines
+rising or setting. Terrain reappearance of a descending star therefore contributes
+a setting phase. Disjoint runs are reported as separate seasons on the circular
+model year, including runs spanning the December-solstice reference.
+
+Both constant and varying horizons are evaluated on all 365 model days. A horizon
+object supplies the coordinates and piecewise-linear horizon. The profile must
+cover all bearings and close at north. Use alt.hor only with coordinate input.
+A fixed-coordinate stellar track is shared across model days. The terrain search
+uses the same corners, azimuth reversals, interior extrema and 0.01-second root
+tolerance as \code{\link{riseset}}, collecting all crossings during the model day.
+Visible windows can lie wholly between minute samples. A touch without clearance
+contributes no visible duration. Source terrain resolution and numerical tolerances
+limit the shortest resolvable window.
+
+Refraction selects apparent or geometric altitudes for both Sun and star.
+A stellar horizon affects obstruction at the star's azimuth. The solar darkness
+test uses altitude relative to the astronomical horizon, with default solar.alt
+of -6 for a profile and alt.hor - 6 for coordinates. Supply the same solar.alt
+to compare a constant profile and a raised scalar horizon. Extinction, the
+star-Sun separation and alt.rs use stellar altitude above the astronomical horizon.
+Solar altitude is interpolated between res samples. Stellar visibility margins
+are interpolated on a grid containing minute samples, solar samples, terrain
+crossings and stellar altitude extrema. Decrease res to assess borderline dates.
+Any positive-duration opportunity in this threshold model qualifies. Actual
+naked-eye detection over a very short interval depends on observing conditions.
+The synthetic solar year, solstice calendar mapping and circumpolar exclusions
+are conventions inherited from the phase model.
+
+Purrington (1988, p. S74, equation 1 and Fig. 2) fitted the altitude-difference
+rule to empirical data down to about magnitude 3. It describes rising at dawn and
+setting at dusk on the same side of the sky as the Sun. Purrington discusses a
+smaller separation for opposite-horizon events (p. S75). This function applies
+the same threshold at every relative azimuth. Schaefer (1987, section 4)
+examines how sky brightness and observing conditions affect heliacal visibility.
+Brady (2015) gives the archaeological context for the phase terminology.
+
+Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
 \examples{
-ss1 <- star.phases('Aldebaran',-4000, c(35,-8,200))
-
-# One can then look at the star's phase type:
-ss1$metadata$type
-
-# Date range of seasons:
-ss1$metadata$seasons
-
-# Date range of phase-type events:
-ss1$metadata$events
-
-# And plot them:
-plot(ss1)
-
-# You can play with the parameters and see how predictions change:
-ss1 <- star.phases('Aldebaran',-4000, c(35,-8,200), alt.hor=2, alt.rs=5)
-plot(ss1)
+if (requireNamespace("swephRdata", quietly = TRUE)) {
+  ss1 <- star.phases('Aldebaran',-4000, c(35,-8,200))
+  
+  # One can then look at the star's phase type:
+  ss1$metadata$type
+  
+  # Date range of seasons:
+  ss1$metadata$seasons
+  
+  # Date range of phase-type events:
+  ss1$metadata$events
+  
+  # And plot them:
+  plot(ss1)
+  
+  # You can play with the parameters and see how predictions change:
+  ss1 <- star.phases('Aldebaran',-4000, c(35,-8,200), alt.hor=2, alt.rs=5)
+  plot(ss1)
+}
 }
 \references{
-Purrington, Robert D. (1988) Heliacal Rising and Setting:
-Quantitative Aspects, \emph{Journal for the History of Astronomy
-(Archaeoastronomy Supplement 12)} 19, S72-S84. Available online at
-[SAO/NASA ADS Astronomy Abstract Service](http://adsabs.harvard.edu/abs/1988JHAS...19...72P)
+Purrington, R. D. (1988). Heliacal Rising and Setting: Quantitative Aspects. Journal for the History of Astronomy 19, S72-S84. \url{https://articles.adsabs.harvard.edu/pdf/1988JHAS...19...72P}.
 
-Brady, Bernadette (2015) Star Phases: the Naked-eye Astronomy of the Old Kingdom
-Pyramid Texts. In F Silva and N Campion (eds) \emph{Skyscapes: The Role and Importance of
-the Sky in Archaeology}. Oxford: Oxbow Books, pp. 76-86.
+Schaefer, B. E. (1986). Atmospheric Extinction Effects on Stellar Alignments. Journal for the History of Astronomy 17, S32-S42. \doi{10.1177/002182868601701003}.
+
+Schaefer, B. E. (1993). Astronomy and the Limits of Vision. Vistas in Astronomy 36, 311-361. \doi{10.1016/0083-6656(93)90113-X}.
+
+Schaefer, B. E. (1987). Heliacal Rise Phenomena. Journal for the History of Astronomy 18, S19-S33. \doi{10.1177/002182868701801103}.
+
+Brady, B. (2015). Star Phases: the Naked-eye Astronomy of the Old Kingdom Pyramid Texts. In F. Silva and N. Campion (eds), Skyscapes: The Role and Importance of the Sky in Archaeology. Oxbow Books, pp. 76-86.
 }
 \seealso{
 \code{\link{plot.skyscapeR.starphases}}

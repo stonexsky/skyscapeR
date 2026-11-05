@@ -2,38 +2,67 @@
 % Please edit documentation in R/statistics.R
 \name{spd}
 \alias{spd}
-\title{Summed probability density (SPD)}
+\title{Sum orientation probability densities}
 \usage{
-spd(pdf, normalise = F, xrange, .cutoff = 1e-05, .res = 0.01)
+spd(pdf, xrange, normalise = F, .res = 0.01, .cutoff = 1e-05)
 }
 \arguments{
 \item{pdf}{A \emph{skyscapeR.pdf} object created with either \code{\link{az.pdf}} or \code{\link{coordtrans}}}
 
-\item{normalise}{(Optional) Boolean to control whether to normalize the SPD. Default is FALSE}
-
-\item{xrange}{(Optional) Array of values (min and max) for SPD if different from range of \emph{pdf}. If given,
+\item{xrange}{Array of values (min and max) for SPD if different from range of \emph{pdf}. If given,
 it overrides \emph{.cutoff}}
 
-\item{.cutoff}{(Optional) Value of SPD at which point it will be cutoff to save on memory. Default is 1e-5}
+\item{normalise}{If TRUE, scale the returned density to unit area using
+trapezoidal integration. Default FALSE leaves the summed density unnormalised.}
 
-\item{.res}{(Optional) Resolution with which to output SPD. Default is 0.01 degrees.}
+\item{.res}{Resolution with which to output SPD. Default is 0.01 degrees.}
+
+\item{.cutoff}{When the range is chosen automatically, set summed densities below this threshold to zero. Default \code{1e-5}.}
+}
+\value{
+A \code{skyscapeR.spd} list with \code{metadata} and a \code{data}
+data frame containing coordinate \code{x} (degrees) and density \code{y}.
+Normalised densities have units of inverse degrees.
 }
 \description{
-Summed probability density (SPD)
+Combine uncertain orientations to show where a group of structures concentrates in
+azimuth or declination.
+}
+\details{
+A summed probability density gives each input measurement one density curve. The
+function linearly interpolates these curves onto one angular grid, assigns zero outside
+each curve's sampled support and adds their heights point by point. With an
+automatically chosen range it zeroes summed heights below the cutoff. With an explicit
+range it retains the calculated heights across that range.
+
+Normalisation takes place after interpolation and any cutoff, over
+the returned grid. An explicit restricted \code{xrange} therefore normalises
+the retained portion only. Zero-area, nonfinite or negative densities and
+grids with fewer than two points cannot be normalised and produce an error.
+Earlier versions divided by the sum of sampled heights. Normalised outputs
+now have a different scale; on a regular grid with zero endpoint densities,
+new heights equal old heights divided by \code{.res}. Existing saved objects
+are not converted. Changing resolution can still affect interpolation and
+truncation accuracy, but the returned trapezoidal area is one.
 }
 \examples{
 # SPD of azimuths
 Az <- az.pdf(az=c(87,93,90,110), unc=3)
 s1 <- spd(Az)
 plot(s1)
+s.norm <- spd(Az, normalise=TRUE)
+with(s.norm$data, sum(diff(x) * (head(y,-1) + tail(y,-1))/2)) # 1
 
 # SPD of declinations
-hor <- createHor(az=c(0,360), alt=c(0,0), loc=c(35,-8,25)) # flat horizon with 0 degrees of altitude
+hor <- createHor(az=c(0,360), alt=c(0,0), loc=c(35,-8,25)) # flat horizon
 Dec <- coordtrans(Az, hor)
 s2 <- spd(Dec)
 plot(s2)
 }
 \references{
 Silva, F (2020) A probabilistic framework and significance test for the analysis of structural orientations
- in skyscape archaeology \emph{Journal of Archaeological Science} 118, 105138. <doi:10.1016/j.jas.2020.105138>
+ in skyscape archaeology \emph{Journal of Archaeological Science} 118, 105138. \doi{10.1016/j.jas.2020.105138}
+}
+\seealso{
+\code{\link{az.pdf}}, \code{\link{coordtrans}}, \code{\link{hpdi}}, \code{\link{randomTest}}, \code{\link{dec.pdf}}, \code{\link{modelTest}}, \code{\link{plot.skyscapeR.spd}}
 }

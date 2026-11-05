@@ -2,29 +2,64 @@
 % Please edit documentation in R/dates.R
 \name{jd2time}
 \alias{jd2time}
-\title{Converts Julian date and time (in any timezone) to julian date}
+\title{Convert a UT Julian date to local calendar date and time}
 \usage{
 jd2time(jd, timezone, calendar, verbose = F)
 }
 \arguments{
-\item{jd}{Julian date in numeric format}
+\item{jd}{Finite numeric vector of UT Julian dates.}
 
-\item{timezone}{(Optional) Desired timezone for output either as a known acronym (e.g. "GMT", "CET") or
-a string with continent followed by country capital (e.g. "Europe/London"). See
-\code{\link{timezones}} for details. Default is system timezone.}
+\item{timezone}{Timezone name or fixed offset; defaults to the value in \code{skyscapeR.vars()}. See Details.}
 
-\item{calendar}{(Optional) Calendar used in parameter \emph{time}. G for gregorian and J for julian.
-Only needed if \emph{time} is a string. Defaults to \emph{Gregorian}.}
+\item{calendar}{Output calendar: G or Gregorian, J or Julian. Defaults to the package calendar setting, initially Gregorian.}
 
-\item{verbose}{(Optional) Controls whether messages should be displayed. Default is \emph{FALSE}.}
+\item{verbose}{Logical; display a conversion message. Default is FALSE.}
+}
+\value{
+A character vector in YYYY/MM/DD HH:MM:SS format. Years are signed as needed and are not padded to four digits.
 }
 \description{
-Converts Julian date and time (in any timezone) to julian date
+Express an ephemeris instant as a calendar date and clock time suitable for comparison
+with an observation or historical record.
+}
+\details{
+An instant is specified by its UT Julian date. To label it consistently, choose the
+calendar and the offset or civil timezone appropriate to the record. The conversion
+rounds to the nearest second, applies the offset at the rounded instant, handles day
+rollover and converts the day number with Swiss Ephemeris.
+
+Fixed offsets may be numeric hours east of UTC (for example 5.5), or
+strings such as \code{"UTC+05:30"}, \code{"UTC-02"} or \code{"GMT+01"}.
+Offsets must lie between -14 and +14 hours. UTC, GMT and the empty string
+mean zero offset; an empty string does not select the system timezone.
+
+Named zones listed by \code{OlsonNames()}, such as \code{"Europe/London"},
+use the installed timezone database for the actual Gregorian date, not a
+surrogate year. They are supported only for Gregorian years 1900-9999.
+Earlier dates require UTC or a fixed offset. For ancient-date workflows,
+set \code{skyscapeR.vars(timezone="UTC")} or provide timezone explicitly.
+The package's initial timezone remains Europe/London. Database versions
+may differ across systems; fixed offsets provide reproducible conversions.
+
+Gregorian and Julian calendars are proleptic: no automatic calendar reform
+is applied. Astronomical year numbering is used: 0 is 1 BCE, -1 is 2 BCE.
+Fixed-offset input dates support years from -100000 to 100000.
+A timezone offset represents civil clock time, not local solar time.
+These functions apply clock offsets to a UT Julian day; they do not apply
+leap-second, UTC-to-UT1 or TT corrections. Leap-second input is rejected.
+
+Output is rounded to the nearest whole second, including date rollover.
+The result does not contain a timezone or UTC offset. During a repeated
+local hour, two distinct instants can have identical output strings; retain
+the original Julian date or use a fixed offset for an unambiguous round trip.
 }
 \examples{
-jd <- time2jd('2018/12/25 12:00:00', 'GMT') # Julian date at noon GMT on Christmas day 2018
-jd2time(jd, 'CET') # converts julian date to Central European timezone
+jd <- time2jd("2019/12/31 23:30:00", "UTC")
+jd2time(jd, "UTC+02") # 2020/01/01 01:30:00
+jd2time(jd, "Europe/Paris")
+jd <- time2jd("-1/12/31 23:30:00", "UTC", calendar="J")
+jd2time(jd, "UTC+02", calendar="J") # 0/01/01 01:30:00
 }
 \seealso{
-\code{\link[swephR]{swe_julday}}, \code{\link{as.POSIXlt}}, \code{\link{timezones}}
+\code{\link{time2jd}}, \code{\link{timestring}}, \code{\link{skyscapeR.vars}}
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/plotting.R
 \name{print.skyscapeR.sigTest}
 \alias{print.skyscapeR.sigTest}
-\title{Prints significance test results}
+\title{Print global and local significance results}
 \usage{
 \method{print}{skyscapeR.sigTest}(x, ...)
 }
@@ -11,9 +11,27 @@
 
 \item{...}{Additional arguments to be passed to \emph{print}.}
 }
+\value{
+Prints the test summary and global and local results to the console.
+}
 \description{
-This function prints the results of \code{\link{randomTest}}.
+Report how strongly the observed orientation distribution departs from the fitted null
+model, overall and within local angular intervals.
+}
+\details{
+Start with the stored global Monte Carlo result, then examine the direction, limits and
+local p-value of each reported interval. The summary gives the tail setting, confidence
+level and number of simulations. It counts unequal observations at constant null density
+separately and reports when there are no local regions. The method formats a saved
+result on the console without recomputing it. Read interval coordinates in the units and
+coordinate system of the fitted test.
+}
+\examples{
+az <- az.pdf(az = c(85, 95, 112), unc = 3, verbose = FALSE)
+set.seed(42)
+fit <- randomTest(az, nsims = 10, ncores = 1, .res = 2, verbose = FALSE)
+print(fit)
 }
 \seealso{
-\code{\link{randomTest}}
+\code{\link{randomTest}}, \code{\link{modelTest}}, \code{\link{plot.skyscapeR.sigTest}}
 }

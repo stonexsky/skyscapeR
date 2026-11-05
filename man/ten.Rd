@@ -2,20 +2,40 @@
 % Please edit documentation in R/misc.R
 \name{ten}
 \alias{ten}
-\title{Converts degree measurements in deg-min-sec (º ' ") format into decimal-point degree format.}
+\title{Convert degrees, arcminutes and arcseconds to decimal degrees}
 \usage{
 ten(dd, mm = 0, ss = 0)
 }
 \arguments{
-\item{dd}{Degree}
+\item{dd}{Degrees as a finite numeric scalar, or a single character string
+containing an angle, for example \code{"-8:30:00"}.}
 
-\item{mm}{(Optional) Arcminutes}
+\item{mm}{Arcminutes as a finite numeric scalar. Defaults to zero.}
 
-\item{ss}{(Optional) Arcseconds}
+\item{ss}{Arcseconds as a finite numeric scalar. Defaults to zero.}
+}
+\value{
+A numeric scalar giving the angle in signed decimal degrees.
 }
 \description{
-Converts degree measurements in deg-min-sec (º ' ") format into decimal-point degree format.
+Convert a signed field angle in degrees, minutes and seconds to decimal degrees for
+coordinate and orientation calculations.
+}
+\details{
+The sign applies to the whole angle. The magnitude is the sum of absolute degrees,
+minutes divided by 60 and seconds divided by 3600. With numeric components the first
+nonzero component sets the sign and later components must be nonnegative. A string may
+contain one to three colon- or space-separated components and an optional leading sign.
+A string such as "-0:30" preserves the negative sign even when degrees are zero.
 }
 \examples{
-deg <- ten(24, 52, 16)
+ten(24, 52, 16)
+ten(-8, 30, 0)     # -8.5 degrees
+ten(0, -30, 0)     # -0.5 degrees
+ten(0, 0, -30)     # -1/120 degrees
+ten("-8:30:00")    # -8.5 degrees
+ten("-0:30:00")    # Preserve the minus sign when degrees are zero
+}
+\seealso{
+\code{\link{reduct.compass}}, \code{\link{reduct.theodolite}}, \code{\link{mag.dec}}, \code{\link{sunAz}}, \code{\link{az2dec}}
 }

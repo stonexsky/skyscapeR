@@ -2,35 +2,43 @@
 % Please edit documentation in R/events.R
 \name{eq}
 \alias{eq}
-\title{Declination of the sun at the Equinox}
+\title{Estimate solar declination at an equinox}
 \usage{
 eq(loc = FALSE, parallax = 0.00224, altitude = 0, verbose = TRUE)
 }
 \arguments{
-\item{loc}{(Optional) This can be either the latitude of the
-location, or a \emph{skyscapeR.horizon} object. If missing or \emph{FALSE},
-function will output geocentric declination.}
+\item{loc}{Latitude in degrees north or a \code{skyscapeR.horizon} object. Omit this argument or use \code{FALSE} for geocentric declination.}
 
-\item{parallax}{(Optional) Average parallax value for the sun.
-Defaults to 0.00224.}
+\item{parallax}{Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.}
 
-\item{altitude}{(Optional) Altitude of the sun. Defaults to 0 degrees.}
+\item{altitude}{Altitude of the sun. Defaults to 0 degrees.}
 
-\item{verbose}{(Optional) Boolean to control output of warnings and messages.
-Defaults to TRUE.}
+\item{verbose}{Logical to control output of warnings and messages.
+Defaults to TRUE. This affects messages only, not the calculated declination.}
+}
+\value{
+Numeric declination in degrees. With loc = FALSE the result is geocentric. Supplying a location applies the parallax correction for the chosen altitude.
 }
 \description{
-This function calculates the declination of the sun
-at the astronomical equinox with corrected average parallax.
+Estimate the solar declination associated with the astronomical equinox, optionally
+applying a site-dependent parallax correction.
+}
+\details{
+The geometric reference at an equinox is the celestial equator, with geocentric
+declination zero. Supplying a location subtracts the package's approximate parallax
+correction for the latitude and specified altitude. The result is a declination target
+in degrees; no equinox date, event time or horizon crossing is calculated.
 }
 \examples{
 # Equinoctial geocentric declination:
 eq()
 
-# Topocentric declination for same year and latitude of 50 degrees N:
+# The same geocentric result without a message:
+eq(verbose=FALSE)
+
+# Topocentric declination at latitude 50 degrees N:
 eq(loc=50)
 }
 \seealso{
-\code{\link{obliquity}}, \code{\link{jS}}, \code{\link{eq}},
-\code{\link{zenith}}, \code{\link{antizenith}}, \code{\link{spatial.equinox}}, \code{\link{parallax.corr}}
+\code{\link{obliquity}}, \code{\link{jS}}, \code{\link{zenith}}, \code{\link{antizenith}}, \code{\link{spatial.equinox}}, \code{\link{parallax.corr}}, \code{\link{dS}}
 }

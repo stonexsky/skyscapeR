@@ -8,28 +8,74 @@
   x,
   index,
   hdr = 0.954,
-  show.az = TRUE,
-  xlim,
-  col = MESS::col.alpha("blue", 0.5),
-  ...
+  show.az,
+  xrange,
+  col = "#0000FF80",
+  ...,
+  az,
+  hor,
+  xlim
 )
 }
 \arguments{
 \item{x}{A \emph{skyscapeR.pdf} object created with either \code{\link{az.pdf}} or \code{\link{coordtrans}}}
 
-\item{index}{(Optional) A value to indicate which distribution to plot, when only one is desired.}
+\item{index}{A value to indicate which distribution to plot, when only one is desired.}
 
-\item{hdr}{(Optional) High density region to highlight. Defaults to 0.954}
+\item{hdr}{High density region to highlight. Defaults to 0.954}
 
-\item{show.az}{(Optional) Whether to show the azimuth and transformation curve (horizon) when
-displaying declination distributions. Defaults to TRUE.}
+\item{show.az}{Deprecated and ignored, with a warning when supplied. Provide both
+\code{az} and \code{hor} for the combined panels, or omit both for distributions alone.}
 
-\item{xlim}{(Optional) Range of x-axis to plot.}
+\item{xrange}{Range of x-axis to plot.}
 
-\item{col}{(Optional) Color of high density region to highlight. Defaults to blue with 0.5 alpha.}
+\item{col}{Color of high density region to highlight. Defaults to blue with 0.5 alpha.}
 
 \item{...}{Additional arguments to be passed to \emph{plot}.}
+
+\item{az}{Original azimuth \emph{skyscapeR.pdf}, in the same order and with
+the same number of distributions as \code{x}. Supply together with \code{hor}
+to show combined panels for a single declination distribution.}
+
+\item{hor}{Original horizon object, or a list of horizons in the same order
+and with the same length as the distributions in \code{x}. Supply with \code{az}.}
+
+\item{xlim}{Earlier name for xrange.}
+}
+\value{
+Draws the selected probability distributions and requested intervals on the active graphics device.
 }
 \description{
-Plot orientation probability distributions
+Compare the uncertainty distributions of individual orientations or examine how a single
+sightline was transformed to declination.
+}
+\details{
+Individual curves reveal whether measurements overlap or have disjoint high-density
+regions. In the stacked view, each selected density is scaled by its own peak for
+display and its highest-density regions are shaded using hpdi. Heights across different
+rows therefore do not measure relative probability mass. Use the linked panels for one
+transformed observation to inspect how its source azimuth distribution and horizon
+produce the declination distribution. Its annotation gives the measurement name
+and the highest-density declination interval or intervals containing the requested
+probability mass, labelled as the confidence range.
+
+With neither source input supplied, plot the distributions alone. With both
+\code{az} and \code{hor}, show the information, azimuth, transformation and
+declination panels. A single \code{index} is required for combined panels.
+Supplying only one source input is an error, as is supplying source inputs
+for an azimuth distribution. Source inputs must be named explicitly.
+
+Supply the original sources in measurement order. Counts and structure are checked,
+but the function cannot verify their identity. The transformation curve uses the
+refraction, pressure and temperature recorded with the result.
+}
+\examples{
+Az <- az.pdf(az=c(87,93), unc=3, verbose=FALSE)
+hor <- createHor(c(0,360), c(2,2), loc=c(35,-8,25))
+Dec <- coordtrans(Az, hor, verbose=FALSE)
+plot(Dec)
+plot(Dec, index=1, az=Az, hor=hor)
+}
+\seealso{
+\code{\link{az.pdf}}, \code{\link{dec.pdf}}, \code{\link{coordtrans}}, \code{\link{hpdi}}
 }
