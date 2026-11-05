@@ -23,7 +23,7 @@ install.packages("swephRdata", repos = "https://rstub.r-universe.dev", type = "s
 
 ## Start with your observations
 
-The [worked vignette](vignettes/skyscapeR.Rmd) starts with an Excel field survey. It follows compass and theodolite readings through reduction, declination and candidate selection, then uses Maltese temple entrances for single-site reconstruction and a multi-site significance test.
+The [worked vignette](https://stonexsky.github.io/skyscapeR/) starts with an Excel field survey. It follows compass and theodolite readings through reduction, declination and candidate selection, then uses Maltese temple entrances for single-site reconstruction and a multi-site significance test.
 
 For a short example using three true bearings, a level horizon and an illustrative site at 35° N, 8° W:
 
