@@ -1,1 +1,0 @@
-SELECT p.* FROM mesPM AS p JOIN ident AS i ON i.oidref=p.oidref WHERE i.id='HIP 108797'

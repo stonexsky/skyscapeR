@@ -1,1 +1,0 @@
-SELECT i.id,v.* FROM ident AS i JOIN mesVelocities AS v ON i.oidref=v.oidref WHERE i.id IN ('HIP 114164','HIP 4714','HIP 51734','HIP 72181','HIP 79634')
