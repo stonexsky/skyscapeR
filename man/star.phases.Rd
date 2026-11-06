@@ -52,7 +52,7 @@ visible with the naked eye. Defaults to 6.}
 most one. Default 1/144 day (ten minutes). Terrain crossings are refined separately.}
 }
 \value{
-A skyscapeR.starphases list. The data table gives each model day and its phase code: I for invisible, V for visible without a classified rise or set, R for rising, S for setting and RS for both. Metadata include the star, year, observer coordinates, phase type, season and event tables, refraction setting and solar altitude threshold. The logical \code{metadata$horizon} records whether a horizon object was supplied. Event rows include solar.longitude in degrees on the synthetic cycle. The date.julian column gives the representative local Julian calendar date at the supplied longitude. Pass this date to \code{\link{riseset}} with \code{calendar = "J"} to time the skyline crossing. For a dawn sketch, advance from that crossing until the star clears the terrain while the sky is still dark enough. The phase date alone does not specify a visible instant.
+A skyscapeR.starphases list. The data table gives each model day and its phase code: I for invisible, V for visible without a classified rise or set, R for rising, S for setting and RS for both. Metadata include the star, year, observer coordinates, phase type, season and event tables, refraction setting and solar altitude threshold. The logical \code{metadata$horizon} records whether a horizon object was supplied. The separate \code{metadata$horizon.status} reports \code{"always above"}, \code{"always below"} or \code{"crosses"} relative to the supplied skyline. Event rows include solar.longitude in degrees on the synthetic cycle. The date.julian column gives the representative local Julian calendar date at the supplied longitude. Pass this date to \code{\link{riseset}} with \code{calendar = "J"} to time the skyline crossing. For a dawn sketch, advance from that crossing until the star clears the terrain while the sky is still dark enough. The phase date alone does not specify a visible instant.
 }
 \description{
 Estimate the seasons in which a star's rising or setting could be visible in twilight at
@@ -91,7 +91,7 @@ are interpolated on a grid containing minute samples, solar samples, terrain
 crossings and stellar altitude extrema. Decrease res to assess borderline dates.
 Any positive-duration opportunity in this threshold model qualifies. Actual
 naked-eye detection over a very short interval depends on observing conditions.
-The synthetic solar year, solstice calendar mapping and circumpolar exclusions
+The synthetic solar year and solstice calendar mapping
 are conventions inherited from the phase model.
 
 Purrington (1988, p. S74, equation 1 and Fig. 2) fitted the altitude-difference
@@ -105,8 +105,8 @@ Brady (2015) gives the archaeological context for the phase terminology.
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
-
 \section{Extinction and model scope}{
+
 The implementation uses Rozenberg's airmass approximation,
 \eqn{X(h)=1/(\sin h+0.025\exp(-11\sin h))}, multiplying it by \code{k}
 and adding the result to the fixed catalogue magnitude. Here \code{h} is the
@@ -123,14 +123,34 @@ one target; cluster size, surface brightness and resolution into individual
 stars do not enter this calculation. It does not predict when each Pleiad is
 individually visible.
 
-The initial always-above/below checks are simplified declination screens rather
-than terrain-aware season classifications. In particular, the inherited
-southern-latitude screen is not symmetric with the northern one. Treat
-circumpolar or near-circumpolar results cautiously and inspect the actual track
-before interpreting a rejection or phase classification.
+Horizon status is determined from positive-duration clearance intervals along
+the same stellar track used for the phase calculation, with the supplied
+skyline and refraction setting. The same calculation applies in both
+hemispheres. A track with no clearance returns an ordinary all-I result,
+rather than raising an error. An always-clear track still undergoes the
+extinction and solar-darkness tests; never setting does not imply visibility.
+A star that never sets below a level horizontal can cross a raised ridge.
+Isolated tangencies do not count as intervals of clearance or obstruction.
+Numerical resolution and the supplied terrain profile limit this status.
+
+The separate metadata$horizon.status field is "always above", "always below"
+or "crosses", relative to the supplied skyline. Phase codes R and S describe
+the rising or descending part of a visible track below alt.rs; they do not
+require a physical skyline crossing that day. An always-clear star may thus
+have seasonal R/S codes. The type "circumpolar" is retained for an all-V
+result only when the track is always above the skyline; other all-V results
+are labelled "visible throughout cycle". Use horizon.status, not type, to
+distinguish clearance from seasonal visibility.
 }
 
 \section{Dates and a subsequent sky sketch}{
+
+Events follow adjacent-sample transitions around the closed cycle, including
+the December-solstice boundary. Entering and leaving I mark acronycal setting
+and heliacal rising; entering and leaving V mark acronycal rising and heliacal
+setting. A season continuing across the boundary creates no event there.
+Constant phase sequences have no transition events.
+
 The 365 model samples are equally spaced in solar longitude, not in elapsed
 civil time. Printed seasonal labels are anchored to the December solstice.
 \code{metadata$events$date.julian} instead solves for the event solar longitude
@@ -149,10 +169,38 @@ promised at the first threshold crossing.
 
 A supplied \code{skyscapeR.star} is used as given. Recompute it for the requested
 year; the phase function does not update an existing object's coordinates.
-The returned metadata retain \code{k}, atmosphere and threshold information,
-but not every input (notably \code{limit}, \code{alt.rs} and \code{res}).
-Save the original call and horizon with the result for reproducibility.
 }
+
+\section{Reproducing a saved result}{
+
+Metadata retain the resolved star, year, observer coordinates, extinction,
+atmospheric settings and solar-altitude threshold, together with \code{limit},
+\code{alt.rs}, \code{res} and \code{alt.hor}. The latter is NA when a terrain
+profile replaces the constant horizon. \code{metadata$horizon.profile} contains
+the numerical \code{az}/\code{alt} table used, or NULL for a constant horizon.
+Landscape images and DEMs are not copied into the result. Existing logical
+\code{horizon} and \code{skyline} fields are retained.
+
+\code{metadata$provenance$packages} records the loaded skyscapeR and swephR
+versions; an unavailable version is NA, for example when sourcing functions
+outside a package namespace. Version strings do not uniquely identify
+development builds. Retain the original script, code revision and ephemeris
+files as well: the saved metadata do not identify or archive those files.
+Earlier saved results do not acquire these fields automatically.
+}
+
+\section{Provenance}{
+
+Structured results carry a \code{provenance} attribute. Read it with
+\code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+This attribute adds no list entries or table columns. Ordinary subsetting or
+transformations may discard attributes; save the original result for reference.
+It does not identify ephemeris files, catalogue revisions or a development
+commit. Retain those and the analysis script separately for exact reproduction.
+The same record remains available in \code{metadata$provenance}.
+}
+
 \examples{
 \dontrun{
 if (requireNamespace("swephRdata", quietly = TRUE)) {

@@ -13,7 +13,8 @@ importConstellations(file, set = "custom")
 }
 \value{
 A data frame with the same columns as \code{\link{constellations}}, accepted by
-the \code{display$constellations} setting of \code{\link{sketchSky}}. Subset rows to select individual figures.
+the \code{display$constellations} setting of \code{\link{sketchSky}} or the
+\code{constellations} argument of \code{\link{planisphere}}. Subset rows to select individual figures.
 }
 \description{
 Read custom line connections for use in a sky sketch.

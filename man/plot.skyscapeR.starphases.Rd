@@ -12,7 +12,8 @@
   show.grid = FALSE,
   sort.by,
   pal,
-  ...
+  ...,
+  layout = c("auto", "linear", "circular")
 )
 }
 \arguments{
@@ -21,7 +22,7 @@
 \item{y}{A second object of \emph{skyscapeR.starphases} format or
 a list of \emph{skyscapeR.starphases} objects for plotting (see Examples).}
 
-\item{show.labels}{Logical. Mark annual events on a single-star strip. Defaults to TRUE.}
+\item{show.labels}{Logical. Mark annual events for a single result in either layout. Defaults to TRUE.}
 
 \item{show.legend}{Show a legend for seasons present among the plotted
 stars (see example below). Default is TRUE.}
@@ -40,23 +41,29 @@ ColorBrewer Accent colours and grey. Supply all five even when only some
 seasons occur.}
 
 \item{...}{Additional arguments to be passed to \emph{plot}.}
+
+\item{layout}{Plot layout: \code{"auto"} (default) uses a circle for one result and
+linear strips for multiple results. Choose \code{"linear"} or \code{"circular"}
+explicitly to override this. Multiple circular results use concentric rings,
+numbered from the outside inward. Supply this argument by name.}
 }
 \value{
 Draws on the active graphics device and returns NULL invisibly.
 }
 \description{
-Compare the seasonal visibility of one or more stars at the modelled site and epoch. Each row shows the stellar name, designation and epoch. To compare one star across epochs, compute a phase object for each year and pass the second object to plot as its second argument.
+Compare the seasonal visibility of one or more stars at the modelled site and epoch. Each result shows the stellar name, designation and epoch. To compare one star across epochs, compute a phase object for each year and pass the second object to plot as its second argument.
 }
 \details{
 Read each colour as a daily model classification: visible rising and setting, rising
 only, setting only, visible without a qualifying near-horizon passage, or invisible. The
 function plots the stored phase sequence on a 365-day scale and can label seasons or
-display a legend. Supplying a second object or a list compares sequences in rows;
+display a legend. A single result defaults to a circular view, advancing clockwise
+from December solstice. Supplying a second object or a list defaults to rows;
 optional sorting uses the stored apparent magnitude or seasonal onset. Changing the
 display does not recalculate the visibility thresholds. Use \code{plot(first, list(second, third))} to compare results.
 }
-
 \section{Seasonal axis and comparison}{
+
 The axis is a 365-sample synthetic solar-longitude cycle anchored at December
 solstice. Equinoxes and solstices mark quarter-cycle positions. The optional
 monthly grid divides this cycle into twelve equal parts; it is not a sequence
@@ -64,25 +71,29 @@ of calendar-month boundaries. For event dates use the underlying result's
 \code{metadata$events$date.julian}, as described in \code{\link{star.phases}}.
 
 Objects may represent different stars, epochs, sites or model assumptions.
-Only star identity and epoch are printed beside each row. Hold the site,
+Only star identity and epoch are included in the plot labels. Hold the site,
 extinction and other inputs fixed for a controlled epoch comparison, or
 state their differences in the figure caption. Names on the supplied list can
 override the displayed star names. The legend contains only the union of
 season classes present in the plotted objects.
 
-Single and multiple results share the same strip layout. Single-object event
-annotations use the first and last samples of the V and I classes. When a
-class has multiple separated runs or wraps across the cycle boundary, these
-labels do not enumerate every transition. Inspect the stored seasons and
-event tables, or set \code{show.labels = FALSE} for such cases. Labels wrap
-and shrink to fit; very crowded comparisons still require a larger device.
+Event annotations use transitions between adjacent samples, including the last
+and first samples of the cycle. A season continuing through December solstice
+has no event at that boundary. Entry into and exit from I mark acronycal
+setting and heliacal rising; entry into and exit from V mark acronycal rising
+and heliacal setting. Constant classifications have no transition labels.
+Event labels are shown only for a single result. Both layouts use the same
+sequence and colours; the circular layout makes the cycle boundary explicit.
+Labels wrap and shrink to fit; crowded comparisons need a larger device.
 }
+
 \examples{
 \dontrun{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
   # Plot the seasonality of Aldebaran for 4001 BCE:
   s1 <- star.phases('Aldebaran',-4000, c(35,-8, 200))
-  plot(s1)
+  plot(s1) # circular by default
+  plot(s1, layout="linear")
   # Plot seasonality of several stars
   s2 <- star.phases('Alnilam',-4000, c(35,-8, 200))
   s3 <- star.phases('Elnath',-4000, c(35,-8, 200))

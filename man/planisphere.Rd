@@ -15,15 +15,17 @@ planisphere(
   star.col = "black",
   epoch,
   show.milky.way = TRUE,
-  show.galactic.equator = FALSE
+  show.galactic.equator = FALSE,
+  constellations = NULL,
+  col.constellations = "grey45"
 )
 }
 \arguments{
 \item{year}{The epoch (year) for which the planisphere is calculated. Historical labels such as \code{"3700 BC"} are accepted by \code{\link{astroYear}}.}
 
-\item{lat}{Numerical.Latitude of the observer in degrees.}
+\item{lat}{Observer latitude in degrees north, between -90 and 90.}
 
-\item{max.mag}{Numerical.Maximum magnitude of stars to be displayed (default: 6).}
+\item{max.mag}{Faintest catalogue magnitude drawn as a star symbol (default 6). This does not filter constellation line endpoints.}
 
 \item{show.ecliptic}{Whether to display the ecliptic (TRUE or FALSE).}
 
@@ -33,13 +35,20 @@ planisphere(
 
 \item{col.equator}{Colour of the celestial equator (default: "red").}
 
-\item{star.col}{Colour of the stars (default: "black").}
+\item{star.col}{Colour of the star symbols (default black).}
 
 \item{epoch}{Earlier argument name for \code{year}, retained for existing scripts.}
 
 \item{show.milky.way}{Draw the Milky Way behind the stars (default TRUE). Set to FALSE for a chart without the band.}
 
 \item{show.galactic.equator}{Draw the Galactic equator as a dash-dot line. Default FALSE.}
+
+\item{constellations}{Optional constellation selection: a bundled set such as
+\code{"modern"}, \code{"chinese"} or \code{"chinese_mansions"}, figure names
+or identifiers, or a table from \code{\link{importConstellations}}.
+The default \code{NULL} draws no constellation lines.}
+
+\item{col.constellations}{Colour of the constellation lines (default grey45).}
 }
 \value{
 A polar plot of the visible sky, showing stars, the celestial equator,
@@ -54,40 +63,64 @@ The default star layer draws individual Pleiades members and omits integrated cl
 
 The chart compares the accessible part of the celestial sphere with a catalogue sky at
 the chosen year. Catalogue stars are filtered by magnitude and by the implemented
-declination cutoff of latitude minus 90 degrees. Right ascension sets polar angle and 90
-degrees minus declination sets radius. Magnitude controls symbol size, and hour labels
+declinations that rise above a level geometric horizon. Northern latitudes use
+the north celestial pole; southern latitudes use the south celestial pole.
+Polar distance sets radius, and right ascension sets angle with opposite
+handedness for the two poles. Magnitude controls symbol size, and hour labels
 are separated by 15 degrees. The optional ecliptic uses daily solar positions over a
-year. The cutoff is a north-polar construction; the plot is not an instantaneous view
+year, using geocentric coordinates without atmospheric refraction. The plot is
+not an instantaneous view
 through a site's measured horizon. The Milky Way is filled with translucent grey behind the stars. Its outline retains the main dark rift and follows the diffuse stellar light in NASA’s Deep Star Maps 2020 (NASA/Goddard Space Flight Center Scientific Visualization Studio, ESA/Gaia/DPAC). It is a fixed sky map rotated to the requested epoch with Swiss Ephemeris precession and nutation. Its width is illustrative. It does not predict visibility or reconstruct the Galaxy’s internal evolution.
 
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
+\section{Constellation patterns}{
+
+Constellation segments follow the shorter great-circle arc between catalogue
+endpoints at the requested epoch. They use the same polar projection as the
+stars and are clipped to the chart's accessible sky. Faint endpoints remain
+available for line drawing even when no star symbol is shown. Missing catalogue
+endpoints generate a warning and their segments are omitted. These are line
+figures; repeated endpoints mark single-star figures with small rings. They
+are not constellation boundaries or lunar-mansion sectors. See
+\code{\link{constellations}} for sources, licences and historical limitations.
+}
 
 \section{Projection and visibility limits}{
-The current projection and declination cutoff are centred on the north
-celestial pole. A negative latitude does not switch to a south-polar
-construction; do not use this chart as a complete southern-sky visibility map.
+
+This is a polar azimuthal equidistant chart. For latitude at or above zero,
+radius is 90 minus declination and right ascension increases clockwise from
+the top. For negative latitude, radius is 90 plus declination and right
+ascension increases anticlockwise. The chart radius is 180 minus absolute
+latitude; a non-round cutoff is retained exactly. All layers use this same
+projection. At the equator the north-polar convention is used.
+
+Stars are included when their upper culmination is strictly above a level
+geometric horizon; stars that only touch it are excluded. This is potential
+annual access to that part of the sky, not visibility at any particular time.
 There is no date/time of night, local terrain, atmospheric extinction,
 moonlight or twilight detection model. Magnitudes are fixed catalogue values,
 and point size is a graphical brightness indicator. For a particular site and
 instant use \code{\link{sketchSky}} with a georeferenced horizon.
 }
+
 \examples{
 \dontrun{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
   planisphere(2023, lat=50, max.mag=6, show.milky.way=FALSE, show.galactic.equator=TRUE)
+  planisphere(2023, lat=-35, max.mag=6)
+  planisphere(2023, lat=40, max.mag=3, constellations="chinese_mansions")
 }
 }
 }
-\seealso{
-\code{\link{plotAzimuth}}, \code{\link{plotBars}}, \code{\link{orbit}}, \code{\link{sketchSky}}
-}
-
 \references{
 NASA/Goddard Space Flight Center Scientific Visualization Studio (2020).
 Deep Star Maps 2020. \url{https://svs.gsfc.nasa.gov/4851/}.
 
 Astrodienst. Swiss Ephemeris programmer's manual.
 \url{https://www.astro.com/swisseph/swephprg.htm}.
+}
+\seealso{
+\code{\link{plotAzimuth}}, \code{\link{plotBars}}, \code{\link{orbit}}, \code{\link{sketchSky}}
 }

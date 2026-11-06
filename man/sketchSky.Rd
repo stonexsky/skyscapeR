@@ -81,8 +81,8 @@ Replotting the object changes framing without recalculating the instant. Use
 require Swiss Ephemeris files covering the epoch; see
 \code{\link{skyscapeR-package}} for installation.
 }
-
 \section{Positions, atmosphere and symbol sizes}{
+
 Swiss Ephemeris supplies apparent topocentric stellar and planetary positions,
 solar and lunar angular diameters, and lunar phase. Atmospheric refraction is
 separate from astronomical apparent-place corrections. Refraction, pressure and
@@ -109,6 +109,7 @@ fields and high altitudes introduce projection distortion.
 }
 
 \section{Constellations}{
+
 Use \code{display = list(constellations = "Orion")} to select and enable line
 figures. \code{"modern"} selects all 88 Western figures, \code{"chinese"} the
 full Chinese set, and \code{"chinese_mansions"} the 28 lunar-mansion figures.
@@ -126,6 +127,7 @@ figures; their visibility is not an observing prediction.
 }
 
 \section{Stellar extinction and twilight visibility}{
+
 Natural style adds \eqn{k X(h)} to magnitude, using Rozenberg's approximation
 \eqn{X(h) = 1 / (\sin h + 0.025 \exp(-11 \sin h))}, with angles converted
 from degrees. This is the extinction-airmass expression discussed by Krisciunas
@@ -154,6 +156,7 @@ the local brightness calculation without this stellar adaptation adjustment.
 }
 
 \section{Solar and lunar sky brightness}{
+
 Solar zenith brightness is interpolated logarithmically between representative
 values at solar altitudes -18, -12, -6, -0.833, 15 and 90 degrees: respectively
 60, 240, 100000, 3000000, 300000000 and 1000000000 nanolamberts. The scale is
@@ -178,6 +181,7 @@ changes to the calculated astronomical instant.
 }
 
 \section{Unresolved clusters}{
+
 In natural style with stars enabled, 17 catalogue-matched open and globular
 clusters can contribute a soft patch. Angular diameters come from OpenNGC;
 missing minor diameters use the major diameter. An equal-area circle has radius
@@ -201,6 +205,7 @@ size table receive a patch; it is not a complete deep-sky renderer.
 }
 
 \section{Milky Way and reference guides}{
+
 The schematic Milky Way outline is adapted from NASA's Deep Star Maps 2020,
 credited to NASA/Goddard Scientific Visualization Studio and ESA/Gaia/DPAC.
 Its fixed shape is rotated to the observing epoch; stellar evolution and the
@@ -218,6 +223,16 @@ are geometric and the zenith is labelled at the centre of the plot width.
 }
 
 \section{Interpretation and limitations}{
+
+Twilight thresholds and unresolved-cluster glow are display approximations,
+not a universally calibrated naked-eye detection model. Agreement in selected
+comparisons with Stellarium or \code{\link{star.phases}} does not establish
+agreement across other objects, sites, epochs or atmospheric conditions.
+Neither the presence nor absence of a cluster patch establishes its first
+or last detection date, and its opacity is not measured surface brightness.
+Report the visibility assumptions separately when interpreting a proposed
+observation.
+
 A sketch is a visualisation, not a test of naked-eye detectability. There is no
 observer-specific acuity, adaptation history, light-pollution map, cloud model,
 wavelength-dependent extinction, or variable-star brightness model. Very low
@@ -239,6 +254,18 @@ and ephemeris versions, civil calendar/timezone, and atmosphere settings.
 Recalculation with \code{skyStep} reads the session refraction, pressure and
 temperature again; keep these fixed when comparing time steps.
 }
+
+\section{Provenance}{
+
+Structured results carry a \code{provenance} attribute. Read it with
+\code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+This attribute adds no list entries or table columns. Ordinary subsetting or
+transformations may discard attributes; save the original result for reference.
+It does not identify ephemeris files, catalogue revisions or a development
+commit. Retain those and the analysis script separately for exact reproduction.
+}
+
 \examples{
 \dontrun{
 hor <- malta_horizons[[1]]

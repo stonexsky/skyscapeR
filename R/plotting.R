@@ -839,11 +839,12 @@ plot.skyscapeR.sigTest <- function(x, xrange, title=NULL, col='blue', show.pval=
 
 
 #' Plot seasonal stellar visibility
-#' @description Compare the seasonal visibility of one or more stars at the modelled site and epoch. Each row shows the stellar name, designation and epoch. To compare one star across epochs, compute a phase object for each year and pass the second object to plot as its second argument.
+#' @description Compare the seasonal visibility of one or more stars at the modelled site and epoch. Each result shows the stellar name, designation and epoch. To compare one star across epochs, compute a phase object for each year and pass the second object to plot as its second argument.
 #' @details Read each colour as a daily model classification: visible rising and setting, rising
 #' only, setting only, visible without a qualifying near-horizon passage, or invisible. The
 #' function plots the stored phase sequence on a 365-day scale and can label seasons or
-#' display a legend. Supplying a second object or a list compares sequences in rows;
+#' display a legend. A single result defaults to a circular view, advancing clockwise
+#' from December solstice. Supplying a second object or a list defaults to rows;
 #' optional sorting uses the stored apparent magnitude or seasonal onset. Changing the
 #' display does not recalculate the visibility thresholds. Use \code{plot(first, list(second, third))} to compare results.
 #' @return Draws on the active graphics device and returns NULL invisibly.
@@ -859,7 +860,11 @@ plot.skyscapeR.sigTest <- function(x, xrange, title=NULL, col='blue', show.pval=
 #' ColorBrewer Accent colours and grey. Supply all five even when only some
 #' seasons occur.
 #' @param ... Additional arguments to be passed to \emph{plot}.
-#' @param show.labels Logical. Mark annual events on a single-star strip. Defaults to TRUE.
+#' @param show.labels Logical. Mark annual events for a single result in either layout. Defaults to TRUE.
+#' @param layout Plot layout: \code{"auto"} (default) uses a circle for one result and
+#' linear strips for multiple results. Choose \code{"linear"} or \code{"circular"}
+#' explicitly to override this. Multiple circular results use concentric rings,
+#' numbered from the outside inward. Supply this argument by name.
 #' @param sort.by Optional ordering by catalogue magnitude (\code{"mag"}), first R-only
 #' sample (\code{"rise"}) or first S-only sample (\code{"set"}) on the stored
 #' cycle. This is not sorting by the dated heliacal event. Missing classes are
@@ -872,7 +877,8 @@ plot.skyscapeR.sigTest <- function(x, xrange, title=NULL, col='blue', show.pval=
 #' if (requireNamespace("swephRdata", quietly = TRUE)) {
 #'   # Plot the seasonality of Aldebaran for 4001 BCE:
 #'   s1 <- star.phases('Aldebaran',-4000, c(35,-8, 200))
-#'   plot(s1)
+#'   plot(s1) # circular by default
+#'   plot(s1, layout="linear")
 #'   # Plot seasonality of several stars
 #'   s2 <- star.phases('Alnilam',-4000, c(35,-8, 200))
 #'   s3 <- star.phases('Elnath',-4000, c(35,-8, 200))
@@ -889,19 +895,22 @@ plot.skyscapeR.sigTest <- function(x, xrange, title=NULL, col='blue', show.pval=
 #' \code{metadata$events$date.julian}, as described in \code{\link{star.phases}}.
 #'
 #' Objects may represent different stars, epochs, sites or model assumptions.
-#' Only star identity and epoch are printed beside each row. Hold the site,
+#' Only star identity and epoch are included in the plot labels. Hold the site,
 #' extinction and other inputs fixed for a controlled epoch comparison, or
 #' state their differences in the figure caption. Names on the supplied list can
 #' override the displayed star names. The legend contains only the union of
 #' season classes present in the plotted objects.
 #'
-#' Single and multiple results share the same strip layout. Single-object event
-#' annotations use the first and last samples of the V and I classes. When a
-#' class has multiple separated runs or wraps across the cycle boundary, these
-#' labels do not enumerate every transition. Inspect the stored seasons and
-#' event tables, or set \code{show.labels = FALSE} for such cases. Labels wrap
-#' and shrink to fit; very crowded comparisons still require a larger device.
-plot.skyscapeR.starphases = function(x, y, show.labels=TRUE, show.legend=TRUE, show.grid=FALSE, sort.by, pal, ...) {
+#' Event annotations use transitions between adjacent samples, including the last
+#' and first samples of the cycle. A season continuing through December solstice
+#' has no event at that boundary. Entry into and exit from I mark acronycal
+#' setting and heliacal rising; entry into and exit from V mark acronycal rising
+#' and heliacal setting. Constant classifications have no transition labels.
+#' Event labels are shown only for a single result. Both layouts use the same
+#' sequence and colours; the circular layout makes the cycle boundary explicit.
+#' Labels wrap and shrink to fit; crowded comparisons need a larger device.
+plot.skyscapeR.starphases = function(x, y, show.labels=TRUE, show.legend=TRUE, show.grid=FALSE, sort.by, pal, ..., layout = c("auto", "linear", "circular")) {
+  layout <- match.arg(layout)
   if (missing(pal)) {
     # First four ColorBrewer Accent colours, followed by the invisibility grey.
     pal <- c('#7FC97F','#BEAED4','#FDC086','#FFFF99','#e0e0e0')
@@ -924,6 +933,10 @@ plot.skyscapeR.starphases = function(x, y, show.labels=TRUE, show.legend=TRUE, s
     x <- x[order(key, na.last=TRUE)]
   }
   n <- length(x)
+  if (layout == "auto") layout <- if (n == 1L) "circular" else "linear"
+  if (length(pal) != 5L) stop("Supply five season colours in pal.")
+  if (layout == "circular")
+    return(.plot_phase_circle(x, show.labels, show.legend, show.grid, pal, ...))
   labels <- vapply(x, function(z) {
     label <- z$metadata$star$name
     if (nzchar(label)) label else z$metadata$star$Bayer
@@ -968,7 +981,7 @@ plot.skyscapeR.starphases = function(x, y, show.labels=TRUE, show.legend=TRUE, s
   show.legend <- show.legend && length(legend.labels)>0L
   legend.width <- max(.01,strwidth(legend.labels,units="inches"))
   legend.size <- min(.75,width*.27/max(legend.width,.01))
-  right <- if (show.legend && !narrow) legend.width*legend.size+.35 else .40
+  right <- if (show.legend && !narrow) legend.width*legend.size+.65 else .40
   below <- narrow && show.legend
   if (below) legend.size <- min(.75,(width/2-.35)/legend.width)
   par(mai=c(if (below) 1.05 else .62,name.width*label.size+.15,.32,right),
@@ -1044,25 +1057,19 @@ plot.skyscapeR.starphases = function(x, y, show.labels=TRUE, show.legend=TRUE, s
   x <- x[[1]]
   event.size <- min(.8,min(.95,height)/max(strwidth(events,units="inches"))*.92)
   event.gap <- graphics::xinch(.04)
-  if (show.labels & (x$metadata$type == 'curtailed passage' | x$metadata$type == 'arising and lying hidden' | x$metadata$type == 'dual phase')) {
-    ind <- which(x$data$phase == code[4])
-    if (length(ind) > 0) {
-      lines(rep(min(ind)-1,2), c(0,1), lty=2, lwd=1.5, col='black')
-      text(min(ind)-1-event.gap,0.5, events[1], cex=event.size, font=1, srt=90 ,adj=c(.5,0))
-
-      lines(rep(max(ind)+1,2), c(0,1), lty=2, lwd=1.5, col='black')
-      text(max(ind)+1+event.gap,0.5, events[2], cex=event.size, font=1, srt=90 ,adj=c(.5,1))
-    }
-
-    ind <- which(x$data$phase == code[5])
-    if (length(ind) > 0) {
-      lines(rep(min(ind)-1,2), c(0,1), lty=2, lwd=1.5, col='black')
-      text(min(ind)-1-event.gap,0.5, events[3], cex=event.size, font=1, srt=90 ,adj=c(.5,0))
-
-      lines(rep(max(ind)+1,2), c(0,1), lty=2, lwd=1.5, col='black')
-      text(max(ind)+1+event.gap,0.5, events[4], cex=event.size, font=1, srt=90 ,adj=c(.5,1))
+  if (show.labels) {
+    transitions <- .phase_transitions(x$data$phase, x$data$day)
+    for (i in seq_len(nrow(transitions))) {
+      at <- transitions$index[i] - .5
+      lines(rep(at,2),c(0,1),lty=2,lwd=1.5)
+      # Labels stay inside the plot at the cycle seam.
+      right <- at < 183
+      text(at + if (right) event.gap else -event.gap, .5,
+           transitions$event[i], cex=event.size, srt=90,
+           adj=c(.5,if (right) 1 else 0))
     }
   }
+  invisible(NULL)
 }
 
 
@@ -1133,4 +1140,107 @@ print.skyscapeR.sigTest <- function (x, ...) {
       }
     }
   }
+}
+
+# Circular seasonal display; the same transitions feed linear annotations.
+.plot_phase_circle <- function(objects, show.labels, show.legend, show.grid, pal, ...) {
+  old <- graphics::par(c("mai","xpd"))
+  on.exit(graphics::par(old),add=TRUE)
+  graphics::par(mai=c(if(show.legend) .85 else .15,.15,.2,.15),xpd=FALSE)
+  args <- utils::modifyList(list(x=NA_real_,y=NA_real_,xlim=c(-2.15,2.15),
+    ylim=c(-1.4,1.4),asp=1,axes=FALSE,xlab="",ylab="",xaxs="i",yaxs="i"),list(...))
+  do.call(graphics::plot,args)
+  codes <- c("RS","R","S","V","I")
+  seasons <- c("Rise and Set","Rise Only","Set Only","Curtailed Passage","Arising and Lying Hidden")
+  xy <- function(day,r) {
+    a <- 2*pi*day/365
+    cbind(x=r*sin(a),y=r*cos(a))
+  }
+  n <- length(objects)
+  edges <- seq(1,.53,length.out=n+1L)
+  for (j in seq_len(n)) {
+    phase <- as.character(objects[[j]]$data$phase)
+    starts <- c(1L,which(diff(match(phase,codes))!=0)+1L)
+    ends <- c(starts[-1L]-1L,length(phase))
+    outer <- edges[j]-.008
+    inner <- edges[j+1L]+.008
+    for (k in seq_along(starts)) {
+      a <- seq(starts[k]-1,ends[k],length.out=max(3,ends[k]-starts[k]+2))
+      points <- rbind(xy(a,outer),xy(rev(a),inner))
+      graphics::polygon(points,col=pal[match(phase[starts[k]],codes)],border=NA)
+    }
+    for (r in c(inner,outer)) graphics::lines(xy(seq(0,365,length.out=721),r),col="grey35",lwd=.6)
+  }
+  divisions <- if (show.grid) seq(0,365,length.out=13)[-13] else c(0,365/4,365/2,365*3/4)
+  for (d in divisions) {
+    p <- xy(d,c(.53,1.025))
+    graphics::lines(p,lty=if(d %% (365/4)==0) 1 else 3,col="grey55",lwd=.6)
+  }
+  graphics::text(0,1.15,"December\nSolstice",cex=.75)
+  graphics::text(0,-1.15,"June\nSolstice",cex=.75)
+  graphics::text(1.10,0,"March Equinox",srt=270,cex=.75)
+  graphics::text(-1.10,0,"September Equinox",srt=90,cex=.75)
+  arc <- xy(seq(12,34,length.out=30),1.10)
+  graphics::lines(arc,col="grey40")
+  graphics::arrows(arc[29,1],arc[29,2],arc[30,1],arc[30,2],length=.07,col="grey40")
+
+  # Centre labels retain identity, designation and epoch. For explicit multi-ring
+  # comparisons, ring numbers count from the outside in.
+  text.lines <- character(); bold <- logical()
+  for (j in seq_len(n)) {
+    z <- objects[[j]]
+    label <- z$metadata$star$name
+    if (!nzchar(label)) label <- z$metadata$star$Bayer
+    if (!is.null(names(objects)) && nzchar(names(objects)[j])) label <- names(objects)[j]
+    if(n>1) label <- paste0(j,". ",label)
+    parts <- strwrap(label,width=18)
+    if(!length(parts)) parts <- label
+    designation <- z$metadata$star$Bayer
+    if (identical(designation,label)) designation <- ""
+    epoch <- as.character(BC.AD(z$metadata$year))
+    extra <- c(designation,epoch); extra <- extra[nzchar(extra)]
+    text.lines <- c(text.lines,parts,extra)
+    bold <- c(bold,rep(TRUE,length(parts)),rep(FALSE,length(extra)))
+  }
+  size <- min(.9, .70/max(graphics::strheight(paste(text.lines,collapse="\n")),.01),
+              .85/max(graphics::strwidth(text.lines,font=ifelse(bold,2,1)),.01))
+  spacing <- graphics::strheight("Mg", cex=size) * 1.6
+  y <- (rev(seq_along(text.lines)) - (length(text.lines)+1)/2) * spacing
+  graphics::text(0,y,text.lines,cex=size,font=ifelse(bold,2,1))
+  if(n>1) graphics::text(0,-.43,"Rings: outside to inside",cex=.55)
+
+  if(show.labels && n==1L) {
+    ev <- .phase_transitions(objects[[1]]$data$phase,objects[[1]]$data$day)
+    if(nrow(ev)) {
+      p <- xy(ev$index-1,1.015)
+      right <- p[,1]>=0
+      label.y <- p[,2]*1.15
+      # Separate nearby annotations on each side without changing their markers.
+      for(side in c(FALSE,TRUE)) {
+        ix <- which(right==side)
+        ix <- ix[order(label.y[ix])]
+        if(length(ix)>1L) {
+          for(k in 2:length(ix)) label.y[ix[k]] <- max(label.y[ix[k]],label.y[ix[k-1]]+.20)
+          if(max(label.y[ix])>1.18) label.y[ix] <- label.y[ix]-(max(label.y[ix])-1.18)
+        }
+      }
+      size <- min(.72,.65/max(graphics::strwidth(gsub(" ","\n",ev$event)),.01))
+      for(i in seq_len(nrow(ev))) {
+        sign <- if(right[i]) 1 else -1
+        marker <- xy(ev$index[i]-1,c(.53,1.015))
+        graphics::lines(marker,lty=2,lwd=1)
+        graphics::lines(c(p[i,1],sign*1.35,sign*1.42),c(p[i,2],label.y[i],label.y[i]),col="grey35",lwd=.7)
+        graphics::text(sign*1.46,label.y[i],sub(" ","\n",ev$event[i]),adj=c(if(right[i])0 else 1,.5),cex=size)
+      }
+    }
+  }
+  if(show.legend) {
+    present <- codes %in% unlist(lapply(objects,function(z) z$data$phase),use.names=FALSE)
+    usr <- graphics::par("usr")
+    size <- min(.75,graphics::par("fin")[1]/8)
+    graphics::legend(mean(usr[1:2]),usr[3]-graphics::yinch(.12),
+      legend=seasons[present],fill=pal[present],ncol=2,xjust=.5,yjust=1,
+      cex=size,xpd=NA,bty="n")
+  }
+  invisible(NULL)
 }

@@ -76,6 +76,14 @@ events <- function(name) {
 #' that numeric value to \code{skyObject}. Even that fixed-declination track is
 #' an approximation to a moving body's full daily orbit. Refraction and the
 #' plotted site's coordinates are applied when drawing the horizon track.
+#' @section Provenance:
+#' Structured results carry a \code{provenance} attribute. Read it with
+#' \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+#' skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+#' This attribute adds no list entries or table columns. Ordinary subsetting or
+#' transformations may discard attributes; save the original result for reference.
+#' It does not identify ephemeris files, catalogue revisions or a development
+#' commit. Retain those and the analysis script separately for exact reproduction.
 skyObject = function(names, year, loc=FALSE, col = 'red', lty = 1, lwd = 1, epoch) {
   if (!missing(epoch)) {
     if (!missing(year)) stop("Supply year only once.",call.=FALSE)
@@ -182,7 +190,7 @@ skyObject = function(names, year, loc=FALSE, col = 'red', lty = 1, lwd = 1, epoc
   object$lty <- tt.lty
   object$lwd <- tt.lwd
   class(object) <- "skyscapeR.object"
-  return(object)
+  return(.with_astronomy_provenance(object))
 }
 
 
@@ -381,61 +389,143 @@ antizenith = function(loc, parallax = 0.00224, altitude = 0) {
 #' @description Find the directions halfway between the two solstitial sunrise bearings and between the
 #' two solstitial sunset bearings on a particular horizon.
 #' @details A spatial midpoint is defined by the local terrain and need not coincide with the
-#' astronomical equinox. The calculation uses the solstitial declinations for epoch
-#' 2000, generates unrefracted tracks, linearly interpolates the difference from the
-#' horizon and seeks one eastern and one western root for each track. It averages each pair
-#' of bearings, converts the midpoints to declinations at the horizon and applies the
-#' specified parallax correction. Both bracketing sectors must contain suitable crossings.
+#' astronomical equinox. The function uses the positive and negative obliquity at
+#' the requested year as the geocentric solstitial declinations. Each fixed track
+#' is followed through one rotation from lower culmination to lower culmination.
+#' Horizontal solar parallax is applied to geometric altitude before atmospheric
+#' refraction. The terrain is interpolated linearly in azimuth.
+#'
+#' On the rising half of each track, the first emergence is selected; on the
+#' setting half, the final disappearance is selected. The circular midpoint of
+#' the two solstitial bearings is then found separately for sunrise and sunset.
+#' At each midpoint, refraction and horizontal parallax are inverted to recover
+#' the geocentric declination. Atmospheric settings are identical in both stages.
 #'
 #' Ruggles (1997) distinguishes the spatial midpoint of the solstitial horizon
 #' bearings from the midpoint in time between the solstices.
-#' @return A list containing azimuth and declination. Each contains rise and set values in degrees for the supplied horizon.
-#' @param hor This should be a \emph{skyscapeR.horizon} object.
+#' @return A list containing azimuth and declination. Each contains rise and set
+#' values in degrees for the supplied horizon. Declinations are geocentric.
+#' An undefined side returns NA for both values, with a warning; the other side
+#' is retained when defined.
+#' @param hor A \emph{skyscapeR.horizon} with finite, increasing azimuths covering
+#' 0 to 360 degrees and matching endpoint altitudes.
 #' @param parallax Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.
+#' @param year One astronomical year, defaulting to the package's current-year
+#' setting. Historical labels such as \code{"3250 BC"} are accepted.
+#' @param refraction Whether to apply atmospheric refraction. Defaults to the
+#' package setting, normally TRUE.
+#' @param atm Atmospheric pressure in hPa. Defaults to the package setting.
+#' Zero requests an estimate from site elevation.
+#' @param temp Air temperature in degrees Celsius. Defaults to the package setting.
 #' @export
 #' @references Ruggles, C. L. N. (1997). Whose Equinox? Journal for the History of Astronomy 28, S45-S96. \doi{10.1177/002182869702802205}.
 #' @seealso \code{\link{jS}}, \code{\link{dS}}, \code{\link{eq}},
-#' \code{\link{zenith}}, \code{\link{antizenith}}, \code{\link{parallax.corr}}
+#' \code{\link{zenith}}, \code{\link{antizenith}}, \code{\link{findTargets}}
 #' @examples
 #' \dontrun{
 #' hor <- createHWT(34.174051531543405, 110.81299818694872, name='Xipo, Lingbao')
-#' spatial.equinox(hor)
+#' spatial.equinox(hor, year="3250 BC")
 #' }
-#' @section Fixed epoch and crossing limitations:
-#' Both the eastern and western horizons are used, and sunrise and sunset
-#' midpoints are returned separately. There is currently no epoch argument:
-#' the solstitial references use year 2000, even if the result is later compared
-#' with an archaeological period. This is a spatial midpoint construction, not
-#' a calculation of the Sun's rising or setting at the astronomical equinox.
+#' @section Crossing conventions and limitations:
+#' Both rising and setting tracks are considered in either hemisphere. The
+#' search uses the terrain-aware crossing machinery also used by
+#' \code{\link{riseset}}, including terrain vertices and interior extrema.
+#' Tangencies without a change of visibility are excluded. Multiple terrain
+#' crossings are resolved using the first-emergence/final-disappearance rule;
+#' this need not be the locally preferred observational definition of sunrise
+#' or sunset. Inspect complex skylines before interpretation.
 #'
-#' The solstitial intersections use unrefracted tracks; the final conversion with
-#' \code{\link{az2dec}} uses the session atmosphere. Record that setting. One
-#' root is sought in each half-horizon, rather than enumerating all terrain
-#' crossings as \code{\link{riseset}} does. Multiple emergence events, tangencies
-#' and polar sites can invalidate the bracketing assumptions. Inspect the tracks
-#' on the horizon before interpreting a returned midpoint.
-spatial.equinox = function(hor, parallax = 0.00224) {
-  if (!is(hor,'skyscapeR.horizon')) stop('Full horizon profile required for spatial equinox calculation.')
-
-  # Repeated bearings use the same mean as approxfun's default, explicitly.
-  obj <- skyObject('solar extremes', 2000, loc=hor)
-  rise <- c(); set <- c();
-  for (i in 1:2) {
-    orb <- orbit(obj$decs[i], obj$loc, refraction=FALSE)
-    forb <- approxfun(orb$az, orb$alt, yleft=-9999, yright=-9999, ties=mean)
-    riset <- approxfun(hor$data$az,forb(hor$data$az)-hor$data$alt, yleft=-9999, yright=-9999, ties=mean)
-    rise[i] <- uniroot(riset, interval=c(0, 180))$root
-    set[i] <- uniroot(riset, interval=c(180, 360))$root
+#' If either solstitial track lacks the required crossing, the corresponding
+#' midpoint is undefined. This includes polar non-rising/non-setting cases and
+#' complete terrain obstruction. Exactly opposite bearings have no unique
+#' circular midpoint and also return NA.
+#'
+#' These are fixed-declination solar-centre tracks, not a dated solar ephemeris
+#' or upper-limb calculation. The mean horizontal parallax is fixed, and the
+#' refraction model cannot represent local atmospheric anomalies. Results are
+#' limited by horizon resolution and atmospheric assumptions. Solar semidiameter
+#' is not included. The result is a spatial midpoint, not the Sun's rising or
+#' setting at the astronomical equinox.
+#' @section Provenance:
+#' Structured results carry a \code{provenance} attribute. Read it with
+#' \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+#' skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+#' This attribute adds no list entries or table columns. Ordinary subsetting or
+#' transformations may discard attributes; save the original result for reference.
+#' It does not identify ephemeris files, catalogue revisions or a development
+#' commit. Retain those and the analysis script separately for exact reproduction.
+spatial.equinox = function(hor, parallax = 0.00224,
+                          year = skyscapeR.env$cur.year,
+                          refraction = skyscapeR.env$refraction,
+                          atm = skyscapeR.env$atm, temp = skyscapeR.env$temp) {
+  if (!inherits(hor,'skyscapeR.horizon'))
+    stop('Full horizon profile required for spatial equinox calculation.')
+  if (is.character(year)) year <- astroYear(year)
+  if (!is.numeric(year) || length(year)!=1L || !is.finite(year))
+    stop('year must specify one finite astronomical year.')
+  if (length(parallax)!=1L || !is.finite(parallax) || parallax<0 || parallax>=90)
+    stop('parallax must be a finite angle from 0 to less than 90 degrees.')
+  if (!is.logical(refraction) || length(refraction)!=1L || is.na(refraction))
+    stop('refraction must be TRUE or FALSE.')
+  if (length(atm)!=1L || !is.finite(atm) || atm<0 ||
+      length(temp)!=1L || !is.finite(temp) || temp<= -273.15)
+    stop('Supply finite atmospheric settings with nonnegative pressure.')
+  loc <- as.numeric(hor$metadata$georef)
+  if(length(loc)!=3L || any(!is.finite(loc)) || abs(loc[1])>90)
+    stop('Horizon georeference must contain latitude, longitude and elevation.')
+  horizon <- .horizon_profile(hor$data$az,hor$data$alt)
+  pressure <- if(atm==0) 1013.25*(1-.0065*loc[3]/288)^5.255 else atm
+  jd <- 2451545
+  meridian <- swephR::swe_sidtime(jd)*15+loc[2]
+  limits <- c(-1,1)*obliquity(year)
+  bearings <- matrix(NA_real_,2,2,dimnames=list(NULL,c('rise','set')))
+  for(i in seq_along(limits)) {
+    # One rotation from lower culmination to the next, with noon at t=0.5.
+    # Horizontal solar parallax is applied before refraction.
+    position <- function(t) {
+      ra <- meridian+180-360*t
+      p <- swephR::swe_azalt(jd,1L,c(loc[2],loc[1],loc[3]),pressure,temp,
+                              c(ra,limits[i],1))$xaz
+      h <- p[2]*pi/180
+      altitude <- atan2(sin(h)-sin(parallax*pi/180),cos(h))*180/pi
+      if(refraction) altitude <- swephR::swe_refrac_extended(
+        altitude,loc[3],pressure,temp,.0065,0L)$return
+      c((p[1]+180)%%360,altitude)
+    }
+    roots <- .horizon_crossings(position,0,hor$data$az,hor$data$alt,
+                               .duration=1,.all=TRUE,horizon=horizon)
+    if(length(roots)) {
+      clearance <- function(t) {p<-position(t);p[2]-horizon(p[1])}
+      direction <- vapply(roots,function(t)
+        sign(clearance(t+1e-7)-clearance(t-1e-7)),numeric(1))
+      # Ignore touches and retain crossings in the corresponding half-cycle.
+      rising <- roots[direction>0 & roots<=.5]
+      setting <- roots[direction<0 & roots>=.5]
+      if(length(rising)) bearings[i,1] <- position(min(rising))[1]
+      if(length(setting)) bearings[i,2] <- position(max(setting))[1]
+    }
   }
-  out <- c()
-  out$azimuth <- c()
-  out$azimuth$rise <- mean(rise)
-  out$azimuth$set <- mean(set)
-  out$declination <- c()
-  out$declination$rise <- az2dec(mean(rise), loc=hor) - parallax.corr(parallax, hor, hor2alt(hor, mean(rise)))
-  out$declination$set <- az2dec(mean(set), loc=hor) - parallax.corr(parallax, hor, hor2alt(hor, mean(set)))
-
-  return(out)
+  midpoint <- function(x) {
+    if(anyNA(x)) return(NA_real_)
+    delta <- (x[2]-x[1]+180)%%360-180
+    if(abs(abs(delta)-180)<1e-8) return(NA_real_)
+    (x[1]+delta/2)%%360
+  }
+  az <- apply(bearings,2,midpoint)
+  declination <- vapply(az,function(a) {
+    if(is.na(a)) return(NA_real_)
+    altitude <- horizon(a)
+    if(refraction) altitude <- swephR::swe_refrac_extended(
+      altitude,loc[3],pressure,temp,.0065,1L)$return
+    # Invert horizontal parallax to recover the geocentric direction.
+    altitude <- altitude+asin(sin(parallax*pi/180)*cos(altitude*pi/180))*180/pi
+    swephR::swe_azalt_rev(jd,1L,c(loc[2],loc[1],loc[3]),
+                        c(a-180,altitude))$xout[2]
+  },numeric(1))
+  if(anyNA(az)) warning('Spatial equinox undefined for ',
+    paste(names(az)[is.na(az)],collapse=' and '),
+    ': both solstitial crossings and an unambiguous midpoint are required.',call.=FALSE)
+  .with_astronomy_provenance(list(azimuth=as.list(az),declination=as.list(declination)))
 }
 
 #' Estimate northern minor lunar standstill declination
@@ -626,8 +716,12 @@ sMjLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, alt
 #' \code{skyscapeR.vars(dec="geo")}. Event selection uses topocentric bearings
 #' in either output frame.
 #'
-#' At the site used in Figure 3 (40 degrees N, 0 degrees E, 400 m),
-#' the spring moonset declination peak differs from the published figure.
+#' Development validation has identified a limitation in moonset pairing:
+#' the current same-date rule compares a morning moonset with the following
+#' evening's sunset, whereas the original simulation data support the previous
+#' evening. This can change the selected event. Treat moonset results as
+#' provisional pending that correction. Comparisons with the original 40-degree
+#' N series also show offsets whose cause has not yet been established.
 #'
 #' Astronomical positions require Swiss Ephemeris files covering the epoch. We
 #' recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
@@ -667,6 +761,14 @@ sMjLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, alt
 #' The reported difference from the published spring-moonset distribution remains
 #' an unresolved validation issue; numerical precision does not establish agreement
 #' with that figure. Preserve all inputs when comparing series.
+#' @section Provenance:
+#' Structured results carry a \code{provenance} attribute. Read it with
+#' \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+#' skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+#' This attribute adds no list entries or table columns. Ordinary subsetting or
+#' transformations may discard attributes; save the original result for reference.
+#' It does not identify ephemeris files, catalogue revisions or a development
+#' commit. Retain those and the analysis script separately for exact reproduction.
 EFM <- function(year, loc, season='spring', rise=TRUE, min.phase=.99, timezone, calendar,
                 refraction, atm, temp) {
   if (is.character(year)) year <- astroYear(year)
@@ -735,7 +837,7 @@ EFM <- function(year, loc, season='spring', rise=TRUE, min.phase=.99, timezone, 
     if (is.null(moons[[k]])) stop("No qualifying ",season," full Moon ",
                                   if (rise) "rise" else "set"," for year ",year[k],".")
   }
-  list(Event=paste(season,"full moon"),Moon=do.call(rbind,moons),Sun=do.call(rbind,suns))
+  .with_astronomy_provenance(list(Event=paste(season,"full moon"),Moon=do.call(rbind,moons),Sun=do.call(rbind,suns)))
 }
 
 # First instant of the local date, including dates whose clocks change at midnight.
@@ -786,6 +888,14 @@ EFM <- function(year, loc, season='spring', rise=TRUE, min.phase=.99, timezone, 
 #'   planet.extremes('Venus', "4001 BC")
 #' }
 #' }
+#' @section Provenance:
+#' Structured results carry a \code{provenance} attribute. Read it with
+#' \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+#' skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+#' This attribute adds no list entries or table columns. Ordinary subsetting or
+#' transformations may discard attributes; save the original result for reference.
+#' It does not identify ephemeris files, catalogue revisions or a development
+#' commit. Retain those and the analysis script separately for exact reproduction.
 planet.extremes <- function(obj, year, loc = NULL, epoch) {
   if (!missing(epoch)) {
     if (!missing(year)) stop("Supply year only once.",call.=FALSE)
@@ -805,5 +915,5 @@ planet.extremes <- function(obj, year, loc = NULL, epoch) {
   out$planet <- obj
   out$min.dec <- min(dec)
   out$max.dec <- max(dec)
-  return(out)
+  return(.with_astronomy_provenance(out))
 }

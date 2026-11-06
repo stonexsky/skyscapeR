@@ -34,6 +34,17 @@ and atmosphere settings. It retains altitudes above -20 degrees and sorts the po
 azimuth. A horizon object supplies the location; the stored track itself includes no
 test of terrain obstruction or event times.
 }
+\section{Provenance}{
+
+Structured results carry a \code{provenance} attribute. Read it with
+\code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+This attribute adds no list entries or table columns. Ordinary subsetting or
+transformations may discard attributes; save the original result for reference.
+It does not identify ephemeris files, catalogue revisions or a development
+commit. Retain those and the analysis script separately for exact reproduction.
+}
+
 \examples{
 # Visible path of sun on june solstice on year 4001 BC from London:
 sun.dec <- jS(-4000)

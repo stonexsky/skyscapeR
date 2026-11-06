@@ -164,6 +164,15 @@
 #' equator dotted; these reference curves use geometric altitude. Pole markers
 #' are geometric and the zenith is labelled at the centre of the plot width.
 #' @section Interpretation and limitations:
+#' Twilight thresholds and unresolved-cluster glow are display approximations,
+#' not a universally calibrated naked-eye detection model. Agreement in selected
+#' comparisons with Stellarium or \code{\link{star.phases}} does not establish
+#' agreement across other objects, sites, epochs or atmospheric conditions.
+#' Neither the presence nor absence of a cluster patch establishes its first
+#' or last detection date, and its opacity is not measured surface brightness.
+#' Report the visibility assumptions separately when interpreting a proposed
+#' observation.
+#'
 #' A sketch is a visualisation, not a test of naked-eye detectability. There is no
 #' observer-specific acuity, adaptation history, light-pollution map, cloud model,
 #' wavelength-dependent extinction, or variable-star brightness model. Very low
@@ -235,6 +244,14 @@
 #' plot(hor, sky = mono, xrange = sector)
 #' }
 #' @export
+#' @section Provenance:
+#' Structured results carry a \code{provenance} attribute. Read it with
+#' \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+#' skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+#' This attribute adds no list entries or table columns. Ordinary subsetting or
+#' transformations may discard attributes; save the original result for reference.
+#' It does not identify ephemeris files, catalogue revisions or a development
+#' commit. Retain those and the analysis script separately for exact reproduction.
 sketchSky <- function(hor, jd=NULL, time=NULL, timezone, calendar,
                       display=list(), style=c("natural","publication-colour","publication-mono"), max.mag=6, k=skyscapeR.vars()$k) {
   style <- match.arg(style)
@@ -401,11 +418,11 @@ sketchSky <- function(hor, jd=NULL, time=NULL, timezone, calendar,
       }))
     }
   }
-  structure(list(clusters=clusters,light=light,planet.opacity=planet.opacity,star.opacity=opacity,milky.way.visibility=visibility,guides=guides,diameters=diameters,planet.size=planet.size,star.colours=star.colours,
+  .with_astronomy_provenance(structure(list(clusters=clusters,light=light,planet.opacity=planet.opacity,star.opacity=opacity,milky.way.visibility=visibility,guides=guides,diameters=diameters,planet.size=planet.size,star.colours=star.colours,
                  background=background, settings=list(calendar=calendar,max.mag=max.mag,k=k),
                  jd=jd,loc=loc,display=c(as.list(flags),list(constellations=selection)),style=style,day=style=="natural" && flags["sun"] && solar[2]>0,twilight=twilight,atmosphere=atmosphere,
                  lunar=lunar,stars=coords[match(stars,ids),,drop=FALSE],edges=edges,coords=coords,bodies=bodies),
-            class=c("skyscapeR.sketch","skyscapeR.sky"))
+            class=c("skyscapeR.sketch","skyscapeR.sky")))
 }
 
 .sketch_pheno <- function(jd,id,loc) {

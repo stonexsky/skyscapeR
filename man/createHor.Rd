@@ -222,8 +222,8 @@ Save the external PNG alongside the RDS. If you move them, use \code{\link{relin
 to reconnect the image. A rendering failure returns the numerical horizon with a warning.
 Plotting also falls back to the numerical horizon if the image is missing or has changed.
 }
-
 \section{Accuracy, uncertainty and reproducibility}{
+
 The numerical skyline is a maximum over sampled terrain, not an accuracy
 certificate for the DEM. Horizontal and vertical datum differences, observer
 height, missing raster values, vegetation and buildings can exceed the sampling
@@ -244,6 +244,7 @@ Save the DEM provenance, observer location and datum, constructor arguments,
 feature objects, returned horizon and external PNG. Rebuilding from the same
 source is distinct from merely replotting the saved horizon.
 }
+
 \examples{
 \dontrun{
 observer <- terra::vect("observer.gpkg") # one point with a CRS

@@ -31,7 +31,9 @@
 #' after a December crossover, for both event types, with bearings clockwise from
 #' north. The starting conjunction is two lunations before the last conjunction
 #' at or before the solstice (the beginning of the lunation containing it).
-#' This makes the paper's two-synodic-month starting rule explicit. From there,
+#' This can start nearly three synodic months before the solstice; it is not
+#' equivalent to starting at the first conjunction after solstice minus two
+#' synodic months. From there,
 #' successive lunations are searched for the first eligible crescent with the
 #' required strict ordering; exact equality does not qualify. The preceding
 #' eligible difference is retained for inspection but is not an additional
@@ -50,7 +52,12 @@
 #' Swiss Ephemeris supplies apparent astronomical positions (light-time and
 #' aberration corrections), with atmospheric refraction controlled separately.
 #' Returned declinations are geocentric and without atmospheric refraction, as in
-#' Figure 4 of the paper. Individual event dates can differ from the published ranges, which use Alcyone ephemerides.
+#' Figure 4 of the paper. Individual event selections do not yet reproduce every original simulation.
+#' The starting-window convention and differences in the 40-degree N series
+#' remain under validation. Agreement of a smoothed distribution does not imply
+#' agreement of every year's selected crescent. Inspect the returned dates,
+#' visibility margins and azimuth differences before interpreting a particular
+#' event; the cause of all discrepancies is not established.
 #' Years use astronomical numbering (0 is 1 BCE). Two ascending year endpoints
 #' expand inclusively; longer vectors are evaluated as supplied. The year labels
 #' the Gregorian year of the solstice, so a selected observation may occur in an
@@ -100,6 +107,14 @@
 #'   CC(year=-2999, loc=c(40, 0, 400), timezone="UTC")
 #'   }
 #' }
+#' @section Provenance:
+#' Structured results carry a \code{provenance} attribute. Read it with
+#' \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+#' skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+#' This attribute adds no list entries or table columns. Ordinary subsetting or
+#' transformations may discard attributes; save the original result for reference.
+#' It does not identify ephemeris files, catalogue revisions or a development
+#' commit. Retain those and the analysis script separately for exact reproduction.
 CC <- function(year, loc, season="winter", crescent="first", simulation="SIM1",
                timezone=skyscapeR.env$timezone, calendar=skyscapeR.env$calendar,
                refraction=skyscapeR.env$refraction, atm=skyscapeR.env$atm, temp=skyscapeR.env$temp) {
@@ -167,14 +182,14 @@ CC <- function(year, loc, season="winter", crescent="first", simulation="SIM1",
     if (status!="ok") warning(sprintf("CC %s %s %s: %s (%d eligible reversals).",
                            season,crescent,year[k],status,length(candidates)),call.=FALSE)
   }
-  list(Event=paste(season,crescent,"crescent crossover"),
+  .with_astronomy_provenance(list(Event=paste(season,crescent,"crescent crossover"),
        Moon=do.call(rbind,lapply(rows, `[[`, "Moon")),
        Sun=do.call(rbind,lapply(rows, `[[`, "Sun")),
        diagnostics=do.call(rbind,lapply(rows, `[[`, "diagnostics")),
        settings=list(season=season,crescent=crescent,simulation=simulation,
                      refraction=refraction,atm=atm,temp=temp,timezone=timezone,
                      calendar=calendar,declination="geocentric",limb="centre",
-                     visibility="Caldwell-Laney at sunset/sunrise",georef=geo))
+                     visibility="Caldwell-Laney at sunset/sunrise",georef=geo)))
 }
 
 .cc_wrap <- function(x) (x+180) %% 360 - 180

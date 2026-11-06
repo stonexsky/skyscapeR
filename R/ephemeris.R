@@ -179,3 +179,17 @@
     stop(attr(result,"condition"))
   result
 }
+
+# Shared provenance format for structured astronomical results.
+# Record loaded namespaces, not a potentially different installed copy.
+.astronomy_provenance <- function() {
+  version <- function(package) tryCatch(
+    as.character(getNamespaceVersion(package)),
+    error=function(e) NA_character_)
+  list(packages=c(skyscapeR=version("skyscapeR"), swephR=version("swephR")))
+}
+
+.with_astronomy_provenance <- function(result) {
+  attr(result, "provenance") <- .astronomy_provenance()
+  result
+}

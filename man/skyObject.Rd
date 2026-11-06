@@ -53,8 +53,8 @@ are recomputed merely by combining objects. The output class remains
 skyscapeR.object, so previously saved objects remain usable.
 sky.objects is a silent compatibility alias for skyObject.
 }
-
 \section{A reference track is not a dated orbit}{
+
 Each target represents a declination or declination range. A plotted track
 holds that declination fixed while hour angle varies. It does not follow the
 changing declination of a moving Solar System body through a particular day.
@@ -69,6 +69,18 @@ that numeric value to \code{skyObject}. Even that fixed-declination track is
 an approximation to a moving body's full daily orbit. Refraction and the
 plotted site's coordinates are applied when drawing the horizon track.
 }
+
+\section{Provenance}{
+
+Structured results carry a \code{provenance} attribute. Read it with
+\code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+This attribute adds no list entries or table columns. Ordinary subsetting or
+transformations may discard attributes; save the original result for reference.
+It does not identify ephemeris files, catalogue revisions or a development
+commit. Retain those and the analysis script separately for exact reproduction.
+}
+
 \examples{
 # Create an object with solar targets for epoch range 4001-2001 BC:
 tt <- skyObject('solar extremes', c("4001 BC", "2001 BC"))

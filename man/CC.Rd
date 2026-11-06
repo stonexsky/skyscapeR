@@ -87,7 +87,9 @@ signed difference Moon minus Sun is negative after a June crossover and positive
 after a December crossover, for both event types, with bearings clockwise from
 north. The starting conjunction is two lunations before the last conjunction
 at or before the solstice (the beginning of the lunation containing it).
-This makes the paper's two-synodic-month starting rule explicit. From there,
+This can start nearly three synodic months before the solstice; it is not
+equivalent to starting at the first conjunction after solstice minus two
+synodic months. From there,
 successive lunations are searched for the first eligible crescent with the
 required strict ordering; exact equality does not qualify. The preceding
 eligible difference is retained for inspection but is not an additional
@@ -106,7 +108,12 @@ centre-disc convention of \code{riseset}, including for the Sun.
 Swiss Ephemeris supplies apparent astronomical positions (light-time and
 aberration corrections), with atmospheric refraction controlled separately.
 Returned declinations are geocentric and without atmospheric refraction, as in
-Figure 4 of the paper. Individual event dates can differ from the published ranges, which use Alcyone ephemerides.
+Figure 4 of the paper. Individual event selections do not yet reproduce every original simulation.
+The starting-window convention and differences in the 40-degree N series
+remain under validation. Agreement of a smoothed distribution does not imply
+agreement of every year's selected crescent. Inspect the returned dates,
+visibility margins and azimuth differences before interpreting a particular
+event; the cause of all discrepancies is not established.
 Years use astronomical numbering (0 is 1 BCE). Two ascending year endpoints
 expand inclusively; longer vectors are evaluated as supplied. The year labels
 the Gregorian year of the solstice, so a selected observation may occur in an
@@ -116,6 +123,17 @@ No PNG or copy of the input horizon is stored in the output.
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
+\section{Provenance}{
+
+Structured results carry a \code{provenance} attribute. Read it with
+\code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+This attribute adds no list entries or table columns. Ordinary subsetting or
+transformations may discard attributes; save the original result for reference.
+It does not identify ephemeris files, catalogue revisions or a development
+commit. Retain those and the analysis script separately for exact reproduction.
+}
+
 \examples{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
   CC(year=2026, loc=c(40, 0, 400), timezone="UTC")

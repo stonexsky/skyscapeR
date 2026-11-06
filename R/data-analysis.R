@@ -60,6 +60,21 @@
 #' local declination band, candidate screening is exploratory; the significance
 #' of that band does not identify its cause. Physical plausibility and independent
 #' archaeological evidence are separate parts of the interpretation.
+#' @section Spatial equinox epochs:
+#' When a horizon is supplied, the spatial equinox is evaluated at both endpoints
+#' of the requested year range (once for a single year), with the current atmospheric
+#' settings. The candidate interval spans the finite sunrise and sunset declinations
+#' at those endpoints. This is an endpoint envelope, not an exhaustive search for
+#' intermediate changes of terrain crossing over very long periods. Undefined
+#' crossings generate warnings; if all are undefined, the candidate is omitted.
+#' @section Provenance:
+#' Structured results carry a \code{provenance} attribute. Read it with
+#' \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+#' skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+#' This attribute adds no list entries or table columns. Ordinary subsetting or
+#' transformations may discard attributes; save the original result for reference.
+#' It does not identify ephemeris files, catalogue revisions or a development
+#' commit. Retain those and the analysis script separately for exact reproduction.
 findTargets <- function(decrange, year, loc=FALSE, max.mag=2.5, dates=FALSE,
                         calendar=skyscapeR.env$calendar, timerange) {
   if (!missing(timerange)) {
@@ -79,8 +94,13 @@ findTargets <- function(decrange, year, loc=FALSE, max.mag=2.5, dates=FALSE,
   targets$solar[2,] <- c('december solstice', range(dS(seq(min(year), max(year),1), loc, verbose=FALSE)), labels[4], NA)
   targets$solar[3,] <- c('astronomical equinox', 0, 0, labels[1], labels[3])
   if (class(loc)[1] == 'skyscapeR.horizon') {
-    aux <- solar.date(sort(as.numeric(spatial.equinox(loc)$declination)), mean(year), calendar, verbose=F)
-    targets$solar[4,] <- c('spatial equinox', as.numeric(aux[1,]), paste(aux[2,1],'/',aux[2,2]), paste(aux[3,2],'/',aux[3,1]))
+    spatial <- unlist(lapply(unique(range(years)), function(y)
+      spatial.equinox(loc, year=y)$declination), use.names=FALSE)
+    spatial <- spatial[is.finite(spatial)]
+    if(length(spatial)) {
+      aux <- solar.date(range(spatial), mean(year), calendar, verbose=FALSE)
+      targets$solar[4,] <- c('spatial equinox', as.numeric(aux[1,]), paste(aux[2,1],'/',aux[2,2]), paste(aux[3,2],'/',aux[3,1]))
+    }
   }
   if(class(loc)[1] != 'logical') {
     if (!is.null(zenith(loc))) {
@@ -190,5 +210,5 @@ findTargets <- function(decrange, year, loc=FALSE, max.mag=2.5, dates=FALSE,
   ## for "security" reasons
   if (dates==FALSE) targets$stellar$daterange <- NULL
 
-  return(targets)
+  return(.with_astronomy_provenance(targets))
 }

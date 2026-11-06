@@ -4,15 +4,37 @@
 \alias{spatial.equinox}
 \title{Estimate the spatial equinox from a site horizon}
 \usage{
-spatial.equinox(hor, parallax = 0.00224)
+spatial.equinox(
+  hor,
+  parallax = 0.00224,
+  year = skyscapeR.env$cur.year,
+  refraction = skyscapeR.env$refraction,
+  atm = skyscapeR.env$atm,
+  temp = skyscapeR.env$temp
+)
 }
 \arguments{
-\item{hor}{This should be a \emph{skyscapeR.horizon} object.}
+\item{hor}{A \emph{skyscapeR.horizon} with finite, increasing azimuths covering
+0 to 360 degrees and matching endpoint altitudes.}
 
 \item{parallax}{Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.}
+
+\item{year}{One astronomical year, defaulting to the package's current-year
+setting. Historical labels such as \code{"3250 BC"} are accepted.}
+
+\item{refraction}{Whether to apply atmospheric refraction. Defaults to the
+package setting, normally TRUE.}
+
+\item{atm}{Atmospheric pressure in hPa. Defaults to the package setting.
+Zero requests an estimate from site elevation.}
+
+\item{temp}{Air temperature in degrees Celsius. Defaults to the package setting.}
 }
 \value{
-A list containing azimuth and declination. Each contains rise and set values in degrees for the supplied horizon.
+A list containing azimuth and declination. Each contains rise and set
+values in degrees for the supplied horizon. Declinations are geocentric.
+An undefined side returns NA for both values, with a warning; the other side
+is retained when defined.
 }
 \description{
 Find the directions halfway between the two solstitial sunrise bearings and between the
@@ -20,34 +42,59 @@ two solstitial sunset bearings on a particular horizon.
 }
 \details{
 A spatial midpoint is defined by the local terrain and need not coincide with the
-astronomical equinox. The calculation uses the solstitial declinations for epoch
-2000, generates unrefracted tracks, linearly interpolates the difference from the
-horizon and seeks one eastern and one western root for each track. It averages each pair
-of bearings, converts the midpoints to declinations at the horizon and applies the
-specified parallax correction. Both bracketing sectors must contain suitable crossings.
+astronomical equinox. The function uses the positive and negative obliquity at
+the requested year as the geocentric solstitial declinations. Each fixed track
+is followed through one rotation from lower culmination to lower culmination.
+Horizontal solar parallax is applied to geometric altitude before atmospheric
+refraction. The terrain is interpolated linearly in azimuth.
+
+On the rising half of each track, the first emergence is selected; on the
+setting half, the final disappearance is selected. The circular midpoint of
+the two solstitial bearings is then found separately for sunrise and sunset.
+At each midpoint, refraction and horizontal parallax are inverted to recover
+the geocentric declination. Atmospheric settings are identical in both stages.
 
 Ruggles (1997) distinguishes the spatial midpoint of the solstitial horizon
 bearings from the midpoint in time between the solstices.
 }
+\section{Crossing conventions and limitations}{
 
-\section{Fixed epoch and crossing limitations}{
-Both the eastern and western horizons are used, and sunrise and sunset
-midpoints are returned separately. There is currently no epoch argument:
-the solstitial references use year 2000, even if the result is later compared
-with an archaeological period. This is a spatial midpoint construction, not
-a calculation of the Sun's rising or setting at the astronomical equinox.
+Both rising and setting tracks are considered in either hemisphere. The
+search uses the terrain-aware crossing machinery also used by
+\code{\link{riseset}}, including terrain vertices and interior extrema.
+Tangencies without a change of visibility are excluded. Multiple terrain
+crossings are resolved using the first-emergence/final-disappearance rule;
+this need not be the locally preferred observational definition of sunrise
+or sunset. Inspect complex skylines before interpretation.
 
-The solstitial intersections use unrefracted tracks; the final conversion with
-\code{\link{az2dec}} uses the session atmosphere. Record that setting. One
-root is sought in each half-horizon, rather than enumerating all terrain
-crossings as \code{\link{riseset}} does. Multiple emergence events, tangencies
-and polar sites can invalidate the bracketing assumptions. Inspect the tracks
-on the horizon before interpreting a returned midpoint.
+If either solstitial track lacks the required crossing, the corresponding
+midpoint is undefined. This includes polar non-rising/non-setting cases and
+complete terrain obstruction. Exactly opposite bearings have no unique
+circular midpoint and also return NA.
+
+These are fixed-declination solar-centre tracks, not a dated solar ephemeris
+or upper-limb calculation. The mean horizontal parallax is fixed, and the
+refraction model cannot represent local atmospheric anomalies. Results are
+limited by horizon resolution and atmospheric assumptions. Solar semidiameter
+is not included. The result is a spatial midpoint, not the Sun's rising or
+setting at the astronomical equinox.
 }
+
+\section{Provenance}{
+
+Structured results carry a \code{provenance} attribute. Read it with
+\code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+This attribute adds no list entries or table columns. Ordinary subsetting or
+transformations may discard attributes; save the original result for reference.
+It does not identify ephemeris files, catalogue revisions or a development
+commit. Retain those and the analysis script separately for exact reproduction.
+}
+
 \examples{
 \dontrun{
 hor <- createHWT(34.174051531543405, 110.81299818694872, name='Xipo, Lingbao')
-spatial.equinox(hor)
+spatial.equinox(hor, year="3250 BC")
 }
 }
 \references{
@@ -55,5 +102,5 @@ Ruggles, C. L. N. (1997). Whose Equinox? Journal for the History of Astronomy 28
 }
 \seealso{
 \code{\link{jS}}, \code{\link{dS}}, \code{\link{eq}},
-\code{\link{zenith}}, \code{\link{antizenith}}, \code{\link{parallax.corr}}
+\code{\link{zenith}}, \code{\link{antizenith}}, \code{\link{findTargets}}
 }

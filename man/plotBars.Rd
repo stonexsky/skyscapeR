@@ -67,8 +67,8 @@ For a two-year epoch range, celestial targets are displayed as bands
 covering their stored minimum and maximum declinations across the full plot
 height. Single-year targets are displayed as lines.
 }
-
 \section{Coordinates and interpretation}{
+
 \code{unit} labels the measurement axis; it does not transform azimuths into
 declinations. Celestial overlay values are declinations. Use them with
 declination measurements, or convert measurements first using the appropriate
@@ -76,6 +76,7 @@ site and horizon. Bars show the supplied symmetric angular bounds, not fitted
 confidence intervals. Use \code{\link{az.pdf}}, \code{\link{coordtrans}} and
 \code{\link{spd}} when the full measurement distributions are needed.
 }
+
 \examples{
 # Plot some declination data:
 decs <- c(10, 12, -5, 4)
@@ -84,7 +85,6 @@ plotBars(decs, unc=5)
 # To visualize this data against the common solar and lunar targets:
 tt <- skyObject(c('solar extremes','lunar extremes'), epoch=-2000, lty=c(2,3))
 plotBars(decs, unc=5, obj=tt)
-
 # Display a year-range target band:
 targets <- skyObject('solar extremes', epoch=c("4001 BC", "2001 BC"), col='red')
 plotBars(c(-24,-23,23,24), unc=0.5, obj=targets)

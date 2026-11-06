@@ -3,7 +3,8 @@
 #' @param file Path to a Stellarium legacy constellationship.fab text file.
 #' @param set Label for this collection, default "custom".
 #' @return A data frame with the same columns as \code{\link{constellations}}, accepted by
-#' the \code{display$constellations} setting of \code{\link{sketchSky}}. Subset rows to select individual figures.
+#' the \code{display$constellations} setting of \code{\link{sketchSky}} or the
+#' \code{constellations} argument of \code{\link{planisphere}}. Subset rows to select individual figures.
 #' @details Each non-comment line contains a unique figure identifier, the number
 #' of segments, then two Hipparcos numbers per segment. Endpoints describe
 #' separate pairs, not one continuous polygon. Blank lines and comments beginning

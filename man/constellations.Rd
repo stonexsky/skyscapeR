@@ -23,7 +23,7 @@ Identify the line segments used to represent Western and Chinese constellations 
 reconstruction of the sky.
 }
 \details{
-The segment list supplies a drawing convention for overlaying figures on a sky sketch.
+The segment list supplies a drawing convention for overlaying figures on a sky sketch or planisphere.
 Within a row, read successive pairs of Hipparcos identifiers as separate lines.
 Identifiers are endpoints, not a polygon to join sequentially or a boundary on the
 celestial sphere. Epoch and observer location enter when the stars are plotted.

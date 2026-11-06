@@ -71,14 +71,18 @@ with Figure 3 of Silva and Pimenta, request geocentric declinations with
 \code{skyscapeR.vars(dec="geo")}. Event selection uses topocentric bearings
 in either output frame.
 
-At the site used in Figure 3 (40 degrees N, 0 degrees E, 400 m),
-the spring moonset declination peak differs from the published figure.
+Development validation has identified a limitation in moonset pairing:
+the current same-date rule compares a morning moonset with the following
+evening's sunset, whereas the original simulation data support the previous
+evening. This can change the selected event. Treat moonset results as
+provisional pending that correction. Comparisons with the original 40-degree
+N series also show offsets whose cause has not yet been established.
 
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
-
 \section{Scope of the event model}{
+
 The illumination fraction is a selection criterion, not a naked-eye detection
 model. The calculation does not include weather, sky brightness or extinction.
 It uses centre crossings rather than the first appearance of the upper limb.
@@ -88,6 +92,18 @@ The reported difference from the published spring-moonset distribution remains
 an unresolved validation issue; numerical precision does not establish agreement
 with that figure. Preserve all inputs when comparing series.
 }
+
+\section{Provenance}{
+
+Structured results carry a \code{provenance} attribute. Read it with
+\code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+This attribute adds no list entries or table columns. Ordinary subsetting or
+transformations may discard attributes; save the original result for reference.
+It does not identify ephemeris files, catalogue revisions or a development
+commit. Retain those and the analysis script separately for exact reproduction.
+}
+
 \examples{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
   # Spring Full Moon at latitude 35 degrees north in the year 2018

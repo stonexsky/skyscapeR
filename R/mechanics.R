@@ -223,6 +223,14 @@ body.position.vec <- Vectorize(body.position.unvec, 'time', SIMPLIFY = FALSE)
 #'   body.position(obj='sun', time='2018/12/25 12:00:00', timezone='UTC',
 #'   loc=hor, refraction=FALSE)$horizontal
 #' }
+#' @section Provenance:
+#' Structured results carry a \code{provenance} attribute. Read it with
+#' \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+#' skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+#' This attribute adds no list entries or table columns. Ordinary subsetting or
+#' transformations may discard attributes; save the original result for reference.
+#' It does not identify ephemeris files, catalogue revisions or a development
+#' commit. Retain those and the analysis script separately for exact reproduction.
 body.position <- function(time, obj='sun', loc=NULL, timezone, calendar, dec, refraction, atm, temp, verbose=T) {
   if (missing(timezone)) { timezone <- skyscapeR.env$timezone }
   if (missing(calendar)) { calendar <- skyscapeR.env$calendar }
@@ -232,13 +240,13 @@ body.position <- function(time, obj='sun', loc=NULL, timezone, calendar, dec, re
   if (missing(temp)) { temp <- skyscapeR.env$temp }
 
   if (length(time)==1) {
-    return(body.position.unvec(obj, time, timezone, calendar, dec, loc, refraction, atm, temp, verbose))
+    return(.with_astronomy_provenance(body.position.unvec(obj, time, timezone, calendar, dec, loc, refraction, atm, temp, verbose)))
   } else {
     aux <- body.position.vec(obj, time, timezone, calendar, dec, loc, refraction, atm, temp, verbose)
     out <- c()
     out$equatorial <- as.data.frame(matrix(unlist(lapply(aux,'[[', 'equatorial')), ncol=2, byrow=TRUE)); names(out$equatorial) <- names(aux[[1]]$equatorial)
     if (!is.null(loc)) { out$horizontal <- as.data.frame(matrix(unlist(lapply(aux,'[[', 'horizontal')), ncol=2, byrow=T)); names(out$horizontal) <- names(aux[[1]]$horizontal) }
-    return(out)
+    return(.with_astronomy_provenance(out))
   }
 }
 
@@ -374,6 +382,14 @@ moonphase <- function(time, timezone, calendar) {
 #' models can dominate it. Saved output contains formatted civil times rather
 #' than a complete record of the input atmosphere and horizon. Preserve the
 #' original call and convert date/time back with matching calendar and timezone.
+#' @section Provenance:
+#' Structured results carry a \code{provenance} attribute. Read it with
+#' \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+#' skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+#' This attribute adds no list entries or table columns. Ordinary subsetting or
+#' transformations may discard attributes; save the original result for reference.
+#' It does not identify ephemeris files, catalogue revisions or a development
+#' commit. Retain those and the analysis script separately for exact reproduction.
 riseset <- function(loc, date, jd, obj = 'sun', alt=0, timezone, calendar, dec, refraction, atm,
                     temp, verbose=TRUE) {
   if (missing(timezone)) { timezone <- skyscapeR.env$timezone }
@@ -494,7 +510,7 @@ riseset <- function(loc, date, jd, obj = 'sun', alt=0, timezone, calendar, dec, 
 
   out$rise = rises
   out$set = sets
-  return(out)
+  return(.with_astronomy_provenance(out))
 }
 
 
@@ -527,6 +543,14 @@ riseset <- function(loc, date, jd, obj = 'sun', alt=0, timezone, calendar, dec, 
 #' loc <- c( london.lat, london.lon, 0 )
 #' path <- orbit(sun.dec, loc)
 #' plot(path$az, path$alt, ylim=c(0,90), type='l', xlab='AZ', ylab='ALT', col='red', lwd=2)
+#' @section Provenance:
+#' Structured results carry a \code{provenance} attribute. Read it with
+#' \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+#' skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+#' This attribute adds no list entries or table columns. Ordinary subsetting or
+#' transformations may discard attributes; save the original result for reference.
+#' It does not identify ephemeris files, catalogue revisions or a development
+#' commit. Retain those and the analysis script separately for exact reproduction.
 orbit = function(dec, loc, refraction, atm, temp, res=0.25) {
   if (missing(refraction)) { refraction <- skyscapeR.env$refraction }
   if (missing(atm)) { atm <- skyscapeR.env$atm }
@@ -557,7 +581,7 @@ orbit = function(dec, loc, refraction, atm, temp, res=0.25) {
   orbit$dec <- dec
   orbit$georef <- loc
   class(orbit) <- "skyscapeR.orbit"
-  return(orbit)
+  return(.with_astronomy_provenance(orbit))
 }
 
 
@@ -591,6 +615,16 @@ orbit = function(dec, loc, refraction, atm, temp, res=0.25) {
 #' if (requireNamespace("swephRdata", quietly = TRUE)) {
 #'   sunAz(c(52,-3,100), '2017-10-04 12:32:14', 'Europe/London')
 #' }
+#' @section Provenance:
+#' Structured results carry a \code{provenance} attribute. Read it with
+#' \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+#' skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+#' This attribute adds no list entries or table columns. Ordinary subsetting or
+#' transformations may discard attributes; save the original result for reference.
+#' It does not identify ephemeris files, catalogue revisions or a development
+#' commit. Retain those and the analysis script separately for exact reproduction.
+#' Only the table returned with \code{alt = TRUE} carries this attribute;
+#' the default numeric output is unchanged.
 sunAz = function(loc, time, timezone, limb, alt=FALSE) {
   if (missing(timezone)) { timezone <- skyscapeR.env$timezone }
 
@@ -619,7 +653,7 @@ sunAz = function(loc, time, timezone, limb, alt=FALSE) {
   }
   if (alt) {
     df <- data.frame(az = az, alt = at)
-    return(df)
+    return(.with_astronomy_provenance(df))
   } else {
     return(az)
   }
@@ -657,6 +691,14 @@ sunAz = function(loc, time, timezone, limb, alt=FALSE) {
 #'   solar.date(-12, 1200, calendar='J')
 #'   solar.date(14, -2000)
 #' }
+#' @section Provenance:
+#' Structured results carry a \code{provenance} attribute. Read it with
+#' \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+#' skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+#' This attribute adds no list entries or table columns. Ordinary subsetting or
+#' transformations may discard attributes; save the original result for reference.
+#' It does not identify ephemeris files, catalogue revisions or a development
+#' commit. Retain those and the analysis script separately for exact reproduction.
 solar.date <- function(dec, year, calendar, verbose=TRUE){
   if (is.character(year)) year <- astroYear(year)
   checkYear(year)
@@ -698,7 +740,7 @@ solar.date <- function(dec, year, calendar, verbose=TRUE){
   for (i in seq_along(roots)) {
     out[1L+seq_along(roots[[i]]),i] <- .solar_day(start+roots[[i]], cal)
   }
-  out
+  .with_astronomy_provenance(out)
 }
 
 .solar_coordinate <- function(jd, flags, column) {

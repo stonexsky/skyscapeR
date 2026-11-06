@@ -58,8 +58,8 @@ Silva and Lomsdalen (2025, table 5) give an example of stellar target screening 
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
-
 \section{Candidate selection and visibility}{
+
 A match is a declination overlap, not evidence that a celestial object was
 visible, deliberately observed or associated with the archaeological feature.
 The magnitude filter uses fixed catalogue values; it includes integrated
@@ -73,6 +73,28 @@ local declination band, candidate screening is exploratory; the significance
 of that band does not identify its cause. Physical plausibility and independent
 archaeological evidence are separate parts of the interpretation.
 }
+
+\section{Spatial equinox epochs}{
+
+When a horizon is supplied, the spatial equinox is evaluated at both endpoints
+of the requested year range (once for a single year), with the current atmospheric
+settings. The candidate interval spans the finite sunrise and sunset declinations
+at those endpoints. This is an endpoint envelope, not an exhaustive search for
+intermediate changes of terrain crossing over very long periods. Undefined
+crossings generate warnings; if all are undefined, the candidate is omitted.
+}
+
+\section{Provenance}{
+
+Structured results carry a \code{provenance} attribute. Read it with
+\code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+This attribute adds no list entries or table columns. Ordinary subsetting or
+transformations may discard attributes; save the original result for reference.
+It does not identify ephemeris files, catalogue revisions or a development
+commit. Retain those and the analysis script separately for exact reproduction.
+}
+
 \examples{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
   \dontrun{

@@ -81,7 +81,7 @@ This table compares the public v1.2.0 package with 2.0. To migrate a positional 
 | `modelTest()` | `pdf, model, nsims, conf, tails, normalise, ncores, save.sim, verbose, .res` | `pdf, model, unc, nsims, conf, tails, normalise, .res, ncores, verbose` |
 | `orbit()` | `dec, loc, res, refraction, atm, temp` | `dec, loc, refraction, atm, temp, res` |
 | `planet.extremes()` | `obj, epoch, loc` | `obj, year, loc, epoch` |
-| `planisphere()` | `epoch, lat, max.mag, show.ecliptic, col.ecliptic, show.equator, col.equator, star.col` | `year, lat, max.mag, show.ecliptic, col.ecliptic, show.equator, col.equator, star.col, epoch, show.milky.way, show.galactic.equator` |
+| `planisphere()` | `epoch, lat, max.mag, show.ecliptic, col.ecliptic, show.equator, col.equator, star.col` | `year, lat, max.mag, show.ecliptic, col.ecliptic, show.equator, col.equator, star.col, epoch, show.milky.way, show.galactic.equator, constellations, col.constellations` |
 | `plot.skyscapeR.horizon()` | `x, show.az, xlim, ylim, obj, refraction, col.ground, col.sky, ...` | `x, show.az, xrange, yrange, obj, col.ground, col.sky, use.image, ..., show.skyline, sky, xlim, ylim, fastLoad` |
 | `plot.skyscapeR.pdf()` | `x, index, hdr, show.az, xlim, col, ...` | `x, index, hdr, show.az, xrange, col, ..., az, hor` |
 | `plot.skyscapeR.sigTest()` | `x, xlim, title, col, show.pval, show.local, pal, ...` | `x, xrange, title, col, show.pval, show.local, pal, ..., obj` |
@@ -100,6 +100,15 @@ Use `xrange` and `yrange` for package plots. Existing `xlim` and `ylim` calls to
 For example, replace `randomTest(pdf, 0.5)` with `randomTest(pdf, .res = 0.5)`. Remove explicit atmosphere arguments to `randomTest()`, `coordtrans()` and horizon plots. Set session conditions with `skyscapeR.vars()` for a fresh transformation, or regenerate the observed declination PDF with the intended conditions. `modelTest()` no longer accepts the developer diagnostic `save.sim` or adds `data$simulated` to new fits.
 
 ### Field measurements, dates and astronomical targets
+
+`star.phases()` now checks the stellar track against the supplied skyline in
+both hemispheres, including the selected refraction setting. Recalculate
+southern, circumpolar and raised-horizon cases affected by the earlier
+latitude-only screening. Inspect `result$metadata$horizon.status` for
+`"always above"`, `"always below"` or `"crosses"`. This describes skyline
+clearance, independently of seasonal visibility. Completely obstructed stars
+return an all-invisible result, and non-setting stars can undergo the seasonal
+calculation instead of raising an error.
 
 | If your analysis used… | What to check or rerun |
 |---|---|
@@ -143,9 +152,31 @@ For a HeyWhatsThat horizon, rebuild declination PDFs for north-crossing bearings
 
 | Output | Migration action |
 |---|---|
-| Compass, horizon and target-overlay figures | Redraw `plotAzimuth()` to align the cardinal spokes and labels. Recreate year-range targets with `sky.objects()` and redraw `plotBars()` and horizon plots to show both declination bounds or tracks. Regenerate `planisphere()` to update the right-ascension hour labels. Recreate former `sky.sketch()` figures with `sketchSky()` to apply the observation epoch to stars and constellations, especially with numeric Julian dates or BCE dates, and for catalogue magnitude selections that formerly dropped qualifying stars. |
+| Compass, horizon and target-overlay figures | Redraw `plotAzimuth()` to align the cardinal spokes and labels. Recreate year-range targets with `sky.objects()` and redraw `plotBars()` and horizon plots to show both declination bounds or tracks. Regenerate `planisphere()` to update the right-ascension hour labels and the southern-hemisphere projection. Negative latitudes now use the south celestial pole, with all sky layers transformed consistently and the exact latitude-dependent cutoff retained. Recreate former `sky.sketch()` figures with `sketchSky()` to apply the observation epoch to stars and constellations, especially with numeric Julian dates or BCE dates, and for catalogue magnitude selections that formerly dropped qualifying stars. |
 | PDF and test plots or printed tables | Use `plot(dec)` for densities alone; for transformation panels use `plot(dec, index = i, az = az, hor = hor)`. Replace the old PDF plotting switch `show.az` with these named inputs. Print or plot a newly computed significance fit for updated statistics. Empty local tables now print correctly and azimuth intervals are labelled in azimuth. |
 | Removed datasets | `RugglesCKR` and `RugglesRSC` are no longer distributed. Scripts using them must import a separately obtained, appropriately authorised copy, or use their own observations. |
 | Stellarium landscapes | To rebuild a landscape use `path <- exportHor(hor, name = "My-site")`. The return is the archive path. Choose a fresh name or move the previous ZIP before rerunning. Reimport the archive to update the landscape. |
 
 The switch to built-in plotting colours and the dependency cleanup do not, by themselves, require rerunning scientific analyses. The numerical changes above and the input choices in the help pages are the relevant comparisons.
+
+### Seasonal visibility plots
+
+`plot(phases)` now defaults to a circular view for a single `star.phases()` result.
+Use `plot(phases, layout = "linear")` to retain the strip view. Comparisons such
+as `plot(first, list(second, third))` remain linear by default; an explicit
+`layout = "circular"` draws concentric rings. Both views show the same seasonal
+classifications and retain the star name, designation and epoch.
+
+For spatial-equinox analyses, pass the archaeological epoch explicitly, for
+example `spatial.equinox(hor, year = "3250 BC")`. The former fixed year 2000 and
+mixed refraction treatment have been removed. Recalculate earlier results;
+`findTargets()` now passes the endpoints of its requested period automatically.
+
+### Recording astronomical calculations
+
+Structured astronomical results carry loaded package versions in
+`attr(result, "provenance")$packages`. Save the original object to retain this
+record; subsetting and transformations may drop it. Plain numeric outputs remain
+unchanged. Also retain your script, development revision and ephemeris files:
+package version numbers alone do not fully identify a calculation. For Stellarium
+captures, record the external application's version and settings separately.

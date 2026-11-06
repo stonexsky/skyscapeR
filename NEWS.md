@@ -3,7 +3,51 @@
 This development version is being tested ahead of the 2.0 release. For detailed
 migration instructions and positional-argument changes, see the README.
 
+## Vignette and help
+
+* Other tools now have separate subsections for sky styles, constellation
+  patterns, the Milky Way, twilight and Stellarium captures. The planisphere
+  example also shows the Chinese lunar mansions.
+* `planisphere()` accepts bundled constellation sets, selected figures and
+  imported line tables through `constellations`, with `col.constellations`
+  controlling their colour. Lines follow spherical arcs and are clipped to the
+  accessible sky; faint endpoints are retained independently of `max.mag`.
+* Help clarifies methods, defaults, return values and limitations of the revised
+  astronomical and plotting functions. The vignette uses named `CC()` arguments.
+* EFM moonset pairing and some CC event selections remain under investigation.
+  Their help pages now describe these known limitations; this update does not
+  change either calculation to incorporate the experimental corrections.
+
 ## Changes requiring attention
+
+* Structured astronomical results now carry a `provenance` attribute recording
+  loaded skyscapeR and swephR versions. Access it with `attr(result, "provenance")`.
+  List entries, table columns and numeric-vector return types are unchanged.
+  Preserve original results, since downstream transformations may drop attributes.
+
+* `star.phases()` results now retain the remaining visibility settings, the
+  numerical horizon profile and loaded package versions. Existing fields and
+  phase calculations are unchanged; older saved objects lack the added record.
+
+* `planisphere()` now uses a south-polar projection at negative latitudes,
+  with consistent star selection, RA labels, ecliptic and Milky Way layers.
+  The exact latitude-dependent outer radius is retained. The ecliptic now uses
+  geocentric coordinates without local refraction. Regenerate affected charts.
+* `sketchSky()` help explicitly distinguishes cluster and twilight rendering
+  from calibrated naked-eye detection. The approved rendering is unchanged.
+
+* `spatial.equinox()` now accepts an epoch and consistent atmospheric settings.
+  It selects first emergence and final disappearance from terrain crossings,
+  inverts refraction and solar parallax consistently, and reports undefined
+  crossings as `NA` with a warning. Existing two-argument calls remain valid.
+  `findTargets()` uses the requested period endpoints for this candidate.
+  Recalculate spatial-equinox candidates and downstream interpretations.
+
+* Single `star.phases()` results now plot as a circular seasonal cycle by default.
+  Comparisons retain linear strips; use `layout = "linear"` for the previous
+  single-result view or `layout = "circular"` for concentric comparisons.
+  Event labels respect seasons crossing December solstice, and the event table
+  correctly names entry into and exit from the curtailed-passage season.
 
 * Replace `sky.sketch()` with `sketchSky()` followed by a horizon `plot()`.
   Choose constellation figures through `display$constellations`.
@@ -66,6 +110,13 @@ migration instructions and positional-argument changes, see the README.
   support celestial overlays. Empty local-result tables print cleanly.
 
 ## Astronomical positions, dates and events
+
+* `star.phases()` now determines horizon clearance from the stellar track and
+  supplied skyline with the selected refraction setting in both hemispheres.
+  `metadata$horizon.status` separates always-above, always-below and crossing
+  tracks from seasonal visibility. Completely obstructed tracks return an
+  all-invisible result; non-setting tracks are no longer rejected. Recalculate
+  affected southern, circumpolar and raised-horizon cases.
 
 * `time2jd()` and `jd2time()` handle date rollover, actual-year timezone rules,
   fixed offsets and whole-second rounding. Ambiguous daylight-saving times are

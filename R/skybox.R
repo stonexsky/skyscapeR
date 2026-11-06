@@ -41,12 +41,28 @@
 #' The external application and a working local Remote Control connection are
 #' required for every new capture, but not for replotting a saved raster.
 #'
+#' @section Atmospheric settings when using skyStep:
 #' For a sketch, \code{skyStep} retains calendar, \code{max.mag}, \code{k}, style
 #' and display selections. Refraction, pressure and temperature are read again
 #' from \code{\link{skyscapeR.vars}}; the previous object's atmosphere is not
-#' restored automatically. Keep these settings fixed for a time-only comparison.
+#' restored automatically. Changing these session settings between the original
+#' sketch and a step changes the atmosphere as well as the time. Keep them fixed
+#' for a time-only comparison, including when resuming a saved sketch in another
+#' R session. This behaviour is intentional. Stellarium captures instead use
+#' the external application's atmospheric settings.
 #' Each call draws immediately and returns the new object invisibly. Save it with
 #' \code{sky <- skyStep(hor, sky, minutes = 10)} before taking the next step.
+#' @section Provenance:
+#' Structured results carry a \code{provenance} attribute. Read it with
+#' \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+#' skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+#' This attribute adds no list entries or table columns. Ordinary subsetting or
+#' transformations may discard attributes; save the original result for reference.
+#' It does not identify ephemeris files, catalogue revisions or a development
+#' commit. Retain those and the analysis script separately for exact reproduction.
+#' For Stellarium captures, these are the R package versions, not the external
+#' Stellarium engine version. Record that version and its settings separately.
+#' A stepped sky carries the package versions from the new calculation or capture.
 stellariumSky <- function(hor, jd=NULL, screenshot.dir=getOption("skyscapeR.screenshot.dir",
     "~/Pictures/Stellarium"), port=8090L, timeout=60, time=NULL, timezone, calendar,
     display=c(landscape=FALSE, fog=FALSE), width=NULL) {
@@ -112,9 +128,9 @@ stellariumSky <- function(hor, jd=NULL, screenshot.dir=getOption("skyscapeR.scre
   if (!is.null(width) && !all(dim(image)==c(width/2,width)))
     stop(sprintf("Requested %d x %d pixels, but Stellarium saved %d x %d. Try a smaller width. PNG: %s",
       width,width/2,ncol(image),nrow(image),files))
-  structure(list(image=image, files=files, jd=jd, loc=loc,
+  .with_astronomy_provenance(structure(list(image=image, files=files, jd=jd, loc=loc,
     settings=list(screenshot.dir=dir, port=port, timeout=timeout, display=display, width=width)),
-    class="skyscapeR.sky")
+    class="skyscapeR.sky"))
 }
 
 #' @rdname stellariumSky

@@ -1,3 +1,21 @@
+# Actual transitions on the closed model-year cycle. Day keeps the existing
+# convention: last day before entry, first day after exit from I or V.
+.phase_transitions <- function(phase, day=seq_along(phase)-1L) {
+  n <- length(phase)
+  previous <- c(n,seq_len(n-1L))
+  rows <- which(phase != phase[previous])
+  out <- data.frame(index=integer(), day=numeric(), event=character())
+  enter <- c(I="acronycal setting", V="acronycal rising")
+  leave <- c(I="heliacal rising", V="heliacal setting")
+  for (i in rows) {
+    if (phase[previous[i]] %in% names(leave))
+      out <- rbind(out,data.frame(index=i,day=day[i],event=unname(leave[phase[previous[i]]])))
+    if (phase[i] %in% names(enter))
+      out <- rbind(out,data.frame(index=i,day=day[previous[i]],event=unname(enter[phase[i]])))
+  }
+  out
+}
+
 #' Calculate a fixed star's coordinates for an epoch
 #' @description Find a catalogue object's equatorial position at an archaeological epoch and its
 #' apparent magnitude for a sky or visibility model.
@@ -31,6 +49,14 @@
 #'   # Retrieve data for Aldebaran on 3001 BC:
 #'   ss <- star('Aldebaran', -3000)
 #' }
+#' @section Provenance:
+#' Structured results carry a \code{provenance} attribute. Read it with
+#' \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+#' skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+#' This attribute adds no list entries or table columns. Ordinary subsetting or
+#' transformations may discard attributes; save the original result for reference.
+#' It does not identify ephemeris files, catalogue revisions or a development
+#' commit. Retain those and the analysis script separately for exact reproduction.
 star <- function(string, year=skyscapeR.env$cur.year) {
   if (is.character(year)) year <- astroYear(year)
   star.names <- skyscapeR::star.names
@@ -64,7 +90,7 @@ star <- function(string, year=skyscapeR.env$cur.year) {
   star$coord <- aux
   class(star) <- "skyscapeR.star"
 
-  return(star)
+  return(.with_astronomy_provenance(star))
 }
 
 
@@ -183,10 +209,16 @@ ff <- function(x, loc, atm, temp, pos) { return(swephR::swe_azalt(x, 1, c(loc[2]
 calc.phase <- function(year, day, sun.coord, star, loc, arcus_visionis, alt.hor, k, limit, alt.rs, res, refraction, atm, temp, pb, pbi, horizon=NULL, solar.alt=alt.hor-6) {
   jd0 <- time2jd('2000/01/01 00:00:00',timezone='UTC',calendar='G')
   track <- .phase_track(jd0,star,loc,alt.hor,k,limit,res,refraction,atm,temp,horizon)
+  horizon.status <- if (!any(track$open)) "always below" else
+    if (all(track$open)) "always above" else "crosses"
+  # Geometric clearance and visual detectability are separate properties.
+  # Return an ordinary invisible sequence for a completely obstructed track.
+  if (horizon.status == "always below")
+    return(structure(rep("I", length(day)), horizon.status=horizon.status))
   low <- .phase_segments(track,alt.rs)
   any.altitude <- .phase_segments(track)
   component <- if(refraction) 3L else 2L
-  vapply(seq_along(day),function(i) {
+  phase <- vapply(seq_along(day),function(i) {
     cache <- rep(NA_real_,length(track$solar.grid))
     coord <- sun.coord[day[i],]
     visible <- function(segments) {
@@ -203,6 +235,7 @@ calc.phase <- function(year, day, sun.coord, star, loc, arcus_visionis, alt.hor,
     if(rise && set) "RS" else if(rise) "R" else if(set) "S" else
       if(any(seen) || any(visible(any.altitude))) "V" else "I"
   },character(1))
+  structure(phase, horizon.status=horizon.status)
 }
 
 #' Model seasonal changes in stellar visibility
@@ -240,7 +273,7 @@ calc.phase <- function(year, day, sun.coord, star, loc, arcus_visionis, alt.hor,
 #' crossings and stellar altitude extrema. Decrease res to assess borderline dates.
 #' Any positive-duration opportunity in this threshold model qualifies. Actual
 #' naked-eye detection over a very short interval depends on observing conditions.
-#' The synthetic solar year, solstice calendar mapping and circumpolar exclusions
+#' The synthetic solar year and solstice calendar mapping
 #' are conventions inherited from the phase model.
 #'
 #' Purrington (1988, p. S74, equation 1 and Fig. 2) fitted the altitude-difference
@@ -253,7 +286,7 @@ calc.phase <- function(year, day, sun.coord, star, loc, arcus_visionis, alt.hor,
 #'
 #' Astronomical positions require Swiss Ephemeris files covering the epoch. We
 #' recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
-#' @return A skyscapeR.starphases list. The data table gives each model day and its phase code: I for invisible, V for visible without a classified rise or set, R for rising, S for setting and RS for both. Metadata include the star, year, observer coordinates, phase type, season and event tables, refraction setting and solar altitude threshold. The logical \code{metadata$horizon} records whether a horizon object was supplied. Event rows include solar.longitude in degrees on the synthetic cycle. The date.julian column gives the representative local Julian calendar date at the supplied longitude. Pass this date to \code{\link{riseset}} with \code{calendar = "J"} to time the skyline crossing. For a dawn sketch, advance from that crossing until the star clears the terrain while the sky is still dark enough. The phase date alone does not specify a visible instant.
+#' @return A skyscapeR.starphases list. The data table gives each model day and its phase code: I for invisible, V for visible without a classified rise or set, R for rising, S for setting and RS for both. Metadata include the star, year, observer coordinates, phase type, season and event tables, refraction setting and solar altitude threshold. The logical \code{metadata$horizon} records whether a horizon object was supplied. The separate \code{metadata$horizon.status} reports \code{"always above"}, \code{"always below"} or \code{"crosses"} relative to the supplied skyline. Event rows include solar.longitude in degrees on the synthetic cycle. The date.julian column gives the representative local Julian calendar date at the supplied longitude. Pass this date to \code{\link{riseset}} with \code{calendar = "J"} to time the skyline crossing. For a dawn sketch, advance from that crossing until the star clears the terrain while the sky is still dark enough. The phase date alone does not specify a visible instant.
 #' @param star Either the star name or a \emph{skyscapeR.star} object.
 #' @param year The year of interest. Historical labels such as \code{"3700 BC"} are accepted by \code{\link{astroYear}}.
 #' @param loc Location, either a \emph{skyscapeR.horizon} or a vector
@@ -319,12 +352,31 @@ calc.phase <- function(year, day, sun.coord, star, loc, arcus_visionis, alt.hor,
 #' stars do not enter this calculation. It does not predict when each Pleiad is
 #' individually visible.
 #'
-#' The initial always-above/below checks are simplified declination screens rather
-#' than terrain-aware season classifications. In particular, the inherited
-#' southern-latitude screen is not symmetric with the northern one. Treat
-#' circumpolar or near-circumpolar results cautiously and inspect the actual track
-#' before interpreting a rejection or phase classification.
+#' Horizon status is determined from positive-duration clearance intervals along
+#' the same stellar track used for the phase calculation, with the supplied
+#' skyline and refraction setting. The same calculation applies in both
+#' hemispheres. A track with no clearance returns an ordinary all-I result,
+#' rather than raising an error. An always-clear track still undergoes the
+#' extinction and solar-darkness tests; never setting does not imply visibility.
+#' A star that never sets below a level horizontal can cross a raised ridge.
+#' Isolated tangencies do not count as intervals of clearance or obstruction.
+#' Numerical resolution and the supplied terrain profile limit this status.
+#'
+#' The separate metadata$horizon.status field is "always above", "always below"
+#' or "crosses", relative to the supplied skyline. Phase codes R and S describe
+#' the rising or descending part of a visible track below alt.rs; they do not
+#' require a physical skyline crossing that day. An always-clear star may thus
+#' have seasonal R/S codes. The type "circumpolar" is retained for an all-V
+#' result only when the track is always above the skyline; other all-V results
+#' are labelled "visible throughout cycle". Use horizon.status, not type, to
+#' distinguish clearance from seasonal visibility.
 #' @section Dates and a subsequent sky sketch:
+#' Events follow adjacent-sample transitions around the closed cycle, including
+#' the December-solstice boundary. Entering and leaving I mark acronycal setting
+#' and heliacal rising; entering and leaving V mark acronycal rising and heliacal
+#' setting. A season continuing across the boundary creates no event there.
+#' Constant phase sequences have no transition events.
+#'
 #' The 365 model samples are equally spaced in solar longitude, not in elapsed
 #' civil time. Printed seasonal labels are anchored to the December solstice.
 #' \code{metadata$events$date.julian} instead solves for the event solar longitude
@@ -343,12 +395,33 @@ calc.phase <- function(year, day, sun.coord, star, loc, arcus_visionis, alt.hor,
 #'
 #' A supplied \code{skyscapeR.star} is used as given. Recompute it for the requested
 #' year; the phase function does not update an existing object's coordinates.
-#' The returned metadata retain \code{k}, atmosphere and threshold information,
-#' but not every input (notably \code{limit}, \code{alt.rs} and \code{res}).
-#' Save the original call and horizon with the result for reproducibility.
+#' @section Reproducing a saved result:
+#' Metadata retain the resolved star, year, observer coordinates, extinction,
+#' atmospheric settings and solar-altitude threshold, together with \code{limit},
+#' \code{alt.rs}, \code{res} and \code{alt.hor}. The latter is NA when a terrain
+#' profile replaces the constant horizon. \code{metadata$horizon.profile} contains
+#' the numerical \code{az}/\code{alt} table used, or NULL for a constant horizon.
+#' Landscape images and DEMs are not copied into the result. Existing logical
+#' \code{horizon} and \code{skyline} fields are retained.
+#'
+#' \code{metadata$provenance$packages} records the loaded skyscapeR and swephR
+#' versions; an unavailable version is NA, for example when sourcing functions
+#' outside a package namespace. Version strings do not uniquely identify
+#' development builds. Retain the original script, code revision and ephemeris
+#' files as well: the saved metadata do not identify or archive those files.
+#' Earlier saved results do not acquire these fields automatically.
 #' @references Krisciunas, K. and Schaefer, B. E. (1991). A model of the brightness
 #' of moonlight. PASP 103, 1033-1039 (equation 14 for extinction airmass).
 #' \doi{10.1086/132921}.
+#' @section Provenance:
+#' Structured results carry a \code{provenance} attribute. Read it with
+#' \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+#' skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+#' This attribute adds no list entries or table columns. Ordinary subsetting or
+#' transformations may discard attributes; save the original result for reference.
+#' It does not identify ephemeris files, catalogue revisions or a development
+#' commit. Retain those and the analysis script separately for exact reproduction.
+#' The same record remains available in \code{metadata$provenance}.
 star.phases <- function(star, year, loc, alt.hor = 0, alt.rs = 10, solar.alt=NULL, k = skyscapeR.vars()$k, limit =
                         6, refraction, atm, temp, res = 1/24/6) {
   if (is.character(year)) year <- astroYear(year)
@@ -382,16 +455,6 @@ star.phases <- function(star, year, loc, alt.hor = 0, alt.rs = 10, solar.alt=NUL
   if (!is(star, 'skyscapeR.star')) { star <- star(star, year) }
   arcus_visionis <- 2.1*star$app.mag + 10
 
-  # check if circumpolar or always invisible
-  if (lat>=0) {
-    if (star$coord$Dec < -(90-lat+alt.hor)) stop('Star is always below the horizon at this location and epoch.')
-    if (star$coord$Dec >= (90-lat+alt.hor)) stop('Star is always above the horizon at this location and epoch.')
-  }
-  if (lat<0) {
-    if (star$coord$Dec > (90-lat)) stop('Star is always below the horizon at this location and epoch.')
-    if (star$coord$Dec <= -(90-lat)) stop('Star is always above the horizon at this location and epoch.')
-  }
-
   # pre-calculations of solar position
   ob <- obliquity(year)
   ll <- seq(0,359.9,0.1)
@@ -413,6 +476,8 @@ star.phases <- function(star, year, loc, alt.hor = 0, alt.rs = 10, solar.alt=NUL
   }
   phase <- calc.phase(year,seq_len(365),sun.pos,star,loc,arcus_visionis,
     alt.hor,k,limit,alt.rs,res,refraction,atm,temp,pb,0,horizon=horizon,solar.alt=solar.alt)
+    horizon.status <- attr(phase, "horizon.status")
+    phase <- as.vector(phase)
     # find december solstice date and pin calendar to it
     days <- seq(1,365)-which.min(dd)
     days[days<0] <- days[days<0]+365
@@ -423,7 +488,7 @@ star.phases <- function(star, year, loc, alt.hor = 0, alt.rs = 10, solar.alt=NUL
     type <- 'unclassified'
     uu <- unique(phase)
     if (length(uu)==1) {
-      if (uu=='V') { type <- 'circumpolar'}
+      if (uu=='V') { type <- if (horizon.status == 'always above') 'circumpolar' else 'visible throughout cycle' }
       if (uu=='I') { type <- 'invisible' }
     } else {
       if ('V' %in% uu) { type <- 'curtailed passage' }
@@ -441,9 +506,8 @@ star.phases <- function(star, year, loc, alt.hor = 0, alt.rs = 10, solar.alt=NUL
                 I="arising and lying hidden",V="curtailed passage")
     seasons <- data.frame(season=unname(labels[phase[starts]]),
                           begin=days[starts],end=days[ends],length=following-starts)
-    transition <- which(phase[starts] %in% c("I","V") & seasons$length<365)
-    events <- data.frame(event=rep(c("acronycal setting","heliacal rising"),each=length(transition)),
-      day=c(seasons$begin[transition]-1,seasons$end[transition]+1)%%365)
+    transitions <- .phase_transitions(phase, days)
+    events <- transitions[,c("event","day"),drop=FALSE]
     events <- events[order(events$day),,drop=FALSE]
     rownames(events) <- NULL
     seasons$begin <- dd.to.DD(seasons$begin, char=TRUE, WS=TRUE)
@@ -468,9 +532,17 @@ star.phases <- function(star, year, loc, alt.hor = 0, alt.rs = 10, solar.alt=NUL
     out$metadata$seasons <- seasons
     out$metadata$k <- k
     out$metadata$horizon <- !is.null(horizon)
+    out$metadata$horizon.status <- horizon.status
+    out$metadata$limit <- limit
+    out$metadata$alt.rs <- alt.rs
+    out$metadata$res <- res
+    out$metadata$alt.hor <- if (is.null(horizon)) alt.hor else NA_real_
+    out$metadata["horizon.profile"] <- list(if (is.null(horizon)) NULL else
+      data.frame(az=as.numeric(az), alt=as.numeric(heights)))
+    out$metadata$provenance <- .astronomy_provenance()
     out$data <- data.frame(day = days, phase = phase)
     class(out) <- 'skyscapeR.starphases'
-    return(out)
+    return(.with_astronomy_provenance(out))
 }
 
 

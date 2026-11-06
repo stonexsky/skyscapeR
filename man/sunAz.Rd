@@ -39,6 +39,19 @@ or plus 16 arcminutes in azimuth. Optional altitude is the geometric centre alti
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
+\section{Provenance}{
+
+Structured results carry a \code{provenance} attribute. Read it with
+\code{attr(result, "provenance")}; its \code{packages} entry records the loaded
+skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+This attribute adds no list entries or table columns. Ordinary subsetting or
+transformations may discard attributes; save the original result for reference.
+It does not identify ephemeris files, catalogue revisions or a development
+commit. Retain those and the analysis script separately for exact reproduction.
+Only the table returned with \code{alt = TRUE} carries this attribute;
+the default numeric output is unchanged.
+}
+
 \examples{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
   sunAz(c(52,-3,100), '2017-10-04 12:32:14', 'Europe/London')
