@@ -52,6 +52,27 @@ Choose controls according to what you know:
 }
 The picker samples the overview. Choose Zoom and click two corners to display the selected region at native pixel detail, then choose Add control point. Full-turn plots cut the calibrated view at north. In scripted controls use \code{NA_real_} for each unknown angle. Levelling adjusts the near-horizon band. If an altitude shift takes image rows beyond the poles, only whole rows within the physical altitude range are kept. A one-point adjustment records the calibrated bounds and uses the original PNG. Keep it with the saved object. A tilt adjustment writes a levelled PNG in the working directory. Use a panorama with nominally linear angular axes and transparent sky above terrain in every column. A partial panorama supports altitude lookup within its photographed sector. Stellarium export requires a full turn.
 }
+
+\section{Extraction method and limitations}{
+Sky detection uses the PNG alpha channel. In each image column the first pixel
+whose opacity reaches \code{alpha.threshold} defines the terrain edge. The
+function does not segment an ordinary opaque photograph by sky colour. Remove
+the sky to transparency beforehand and retain sky above terrain in every column.
+Trees, buildings and mask errors become part of the extracted skyline.
+
+Calibration uses linear angular axes, origin shifts and, where supported by
+the controls, fitted scale or sinusoidal near-horizon tilt corrections.
+This is not a general camera/lens model or a full spherical photogrammetric
+adjustment. Wide-angle distortion, stitched-image parallax and inaccurate
+control measurements are not removed automatically. The supplied
+\code{alt.unc} is an assumed error, not an uncertainty estimated from the fit.
+Inspect independent field controls after calibration.
+
+A partial panorama only supplies the photographed sector; it is unsuitable for
+functions requiring a closed full horizon. Supplying only latitude and longitude
+leaves observer elevation unknown. Add a finite measured elevation before
+using functions, such as \code{\link{sketchSky}}, that require it.
+}
 \examples{
 \dontrun{
 # Known bearing at pixel (1240, 380) in a level, cropped panorama

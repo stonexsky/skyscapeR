@@ -2,26 +2,32 @@ Package: skyscapeR
 Type: Package
 Title: Data Analysis and Visualization for Skyscape Archaeology
 Version: 2.0
-Date: 2026-11-01
-Authors@R: c(person("Fabio", "Silva", email = "fsilva@stonexsky.com", role = c("aut", "cre")), person("Billy", "Finnimore", email = "billy.finnimore@hotmail.co.uk", role = c("ctb")), person("Victor", "Reijs", role = "ctb"), person("Rita", "Gautschy", role = "ctb"))
+Authors@R: c(
+    person("Fabio", "Silva", email = "fsilva@stonexsky.com",
+           role = c("aut", "cre")),
+    person("Billy", "Finnimore", email = "billy.finnimore@hotmail.co.uk",
+           role = "ctb"),
+    person("Victor", "Reijs", role = "ctb"),
+    person("Rita", "Gautschy", role = "ctb"))
 Maintainer: Fabio Silva <fsilva@stonexsky.com>
 Description: Investigate how archaeological sites and structures relate to
     the landscape and sky. Reduce field measurements, reconstruct local
-    horizons and archaeological features, and propagate measurement uncertainty
-    into distributions of astronomical declination. Explore celestial positions,
-    visibility and seasonal events at modern and prehistoric epochs, visualise
-    sightlines, and compare orientation distributions with random or specified
-    null models (Silva 2020 <doi:10.1016/j.jas.2020.105138>,
+    horizons from surveys and elevation models, and propagate measurement
+    uncertainty into distributions of astronomical declination. Explore celestial
+    positions, visibility and seasonal events at modern and prehistoric epochs,
+    visualise the sky above a site horizon, and compare orientation distributions
+    with random or specified null models (Silva 2020 <doi:10.1016/j.jas.2020.105138>,
     Silva and Lomsdalen 2025 <doi:10.1007/s12520-025-02208-4>).
-URL: https://github.com/stonexsky/skyscapeR
+URL: https://github.com/stonexsky/skyscapeR,
+    https://stonexsky.github.io/skyscapeR/
 BugReports: https://github.com/stonexsky/skyscapeR/issues
 Depends: R (>= 4.1), swephR
 Imports: parallel, methods, oce (>= 1.8-4), utils, tools, stats,
         graphics, grDevices, plotrix, zoo
 Additional_repositories: https://rstub.r-universe.dev
 License: GPL (>= 2)
-Copyright: See inst/COPYRIGHTS for bundled data attribution and licence
-        notices.
+Copyright: See inst/COPYRIGHTS (COPYRIGHTS in the installed package)
+    for bundled data attribution and licence notices.
 Encoding: UTF-8
 LazyData: true
 LazyDataCompression: xz

@@ -35,6 +35,19 @@
 #'   planisphere(2023, lat=50, max.mag=6, show.milky.way=FALSE, show.galactic.equator=TRUE)
 #' }
 #' }
+#' @references NASA/Goddard Space Flight Center Scientific Visualization Studio (2020).
+#' Deep Star Maps 2020. \url{https://svs.gsfc.nasa.gov/4851/}.
+#'
+#' Astrodienst. Swiss Ephemeris programmer's manual.
+#' \url{https://www.astro.com/swisseph/swephprg.htm}.
+#' @section Projection and visibility limits:
+#' The current projection and declination cutoff are centred on the north
+#' celestial pole. A negative latitude does not switch to a south-polar
+#' construction; do not use this chart as a complete southern-sky visibility map.
+#' There is no date/time of night, local terrain, atmospheric extinction,
+#' moonlight or twilight detection model. Magnitudes are fixed catalogue values,
+#' and point size is a graphical brightness indicator. For a particular site and
+#' instant use \code{\link{sketchSky}} with a georeferenced horizon.
 planisphere <- function(year, lat, max.mag=6, show.ecliptic=TRUE, col.ecliptic='orange', show.equator=TRUE, col.equator='red', star.col='black', epoch, show.milky.way=TRUE, show.galactic.equator=FALSE) {
   if (!missing(epoch)) {
     if (!missing(year)) stop("Supply year only once.",call.=FALSE)

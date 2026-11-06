@@ -53,6 +53,22 @@ are recomputed merely by combining objects. The output class remains
 skyscapeR.object, so previously saved objects remain usable.
 sky.objects is a silent compatibility alias for skyObject.
 }
+
+\section{A reference track is not a dated orbit}{
+Each target represents a declination or declination range. A plotted track
+holds that declination fixed while hour angle varies. It does not follow the
+changing declination of a moving Solar System body through a particular day.
+In particular, \code{skyObject("Equinox", year)} is an equinox reference;
+the Sun at sunrise or sunset on the equinox date need not lie at the same
+declination as at the equinox instant. A small offset from a solar disc in
+\code{\link{sketchSky}} can therefore be expected.
+
+To compare with a particular instant, obtain its declination with
+\code{\link{body.position}} using the intended coordinate frame, and pass
+that numeric value to \code{skyObject}. Even that fixed-declination track is
+an approximation to a moving body's full daily orbit. Refraction and the
+plotted site's coordinates are applied when drawing the horizon track.
+}
 \examples{
 # Create an object with solar targets for epoch range 4001-2001 BC:
 tt <- skyObject('solar extremes', c("4001 BC", "2001 BC"))

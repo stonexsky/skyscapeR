@@ -720,6 +720,20 @@ randomTest_unc <- function(pdf, az, hor, nsims=1000, conf=.95, tails=2, normalis
 #' st2 <- randomTest(Dec, az=Az, hor=hor, nsims=1000)
 #' plot(st2)
 #' }
+#' @section Study design and numerical checks:
+#' The simulated null describes independently sampled orientations with the
+#' specified site geometry and measurement model. It does not automatically model
+#' shared construction episodes, correlated measurement errors, geographical
+#' clustering or selection of sites after inspecting their orientations. Such
+#' structure needs a justified sampling model or separate sensitivity analysis.
+#'
+#' The pointwise envelope is not a simultaneous confidence band. A significant
+#' global result rejects the specified random-orientation model; it does not
+#' identify a celestial target. Refine the comparison grid and increase
+#' \code{nsims} to assess borderline results, preserving the seed and inputs.
+#' More simulations improve Monte Carlo resolution, not the validity of the
+#' archaeological sampling design. Repeated searches over alternative subsets or
+#' models are not included in the within-fit local-cluster adjustment.
 randomTest <- compiler::cmpfun(randomTest_unc, options=list(enableJIT = 3))
 
 
@@ -887,6 +901,19 @@ modelTest_unc <- function(pdf, model, unc=NULL, nsims=1000, conf=.95, tails=2, n
 #' Dec <- coordtrans(Az, hor)
 #' fit <- modelTest(Dec, data.frame(x = c(-22, 18), w = c(1, 1)))
 #' }
+#' @section Model weights and interpretation:
+#' Weights are discrete sampling probabilities up to proportionality. If a
+#' continuous model is evaluated on an uneven coordinate grid, density heights
+#' alone do not represent probability mass; construct weights that account for
+#' the bin widths before calling the function. Put site-specific model tables in
+#' the same order as the observed measurements.
+#'
+#' A large p-value does not prove the proposed explanation or measure its
+#' probability. The test asks whether the specified model is incompatible with
+#' the observed departure statistic. Alternative models can remain compatible.
+#' The simulations do not automatically represent dependence between sites,
+#' selection after viewing the data, or uncertainty in fitted model parameters.
+#' See \code{\link{randomTest}} for study-design and Monte Carlo limitations.
 modelTest <- compiler::cmpfun(modelTest_unc, options=list(enableJIT = 3))
 
 

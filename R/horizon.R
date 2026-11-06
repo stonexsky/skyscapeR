@@ -153,6 +153,26 @@
 #' plot(terrain)
 #' exportStellarium(terrain, name="Survey site")
 #' }
+#' @section Accuracy, uncertainty and reproducibility:
+#' The numerical skyline is a maximum over sampled terrain, not an accuracy
+#' certificate for the DEM. Horizontal and vertical datum differences, observer
+#' height, missing raster values, vegetation and buildings can exceed the sampling
+#' error. DEM elevations and a supplied observer ground elevation must use a
+#' compatible vertical datum. No geoid conversion or vertical-datum correction is
+#' performed automatically. Refine the angular and distance sampling and expand
+#' the radius until the relevant sightlines are stable. Compare with surveyed
+#' bearings and altitudes where available.
+#'
+#' \code{alt.unc} is supplied by the user and is not estimated from DEM resolution,
+#' control residuals or atmospheric variability. Smoothing a measured profile can
+#' remove narrow notches or peaks. Adaptive panorama sampling and illustrative
+#' lighting concern the image; they do not increase numerical horizon precision.
+#' The terrestrial refraction approximation assumes the supplied atmosphere and
+#' cannot reproduce all near-ground gradients or mirage conditions.
+#'
+#' Save the DEM provenance, observer location and datum, constructor arguments,
+#' feature objects, returned horizon and external PNG. Rebuilding from the same
+#' source is distinct from merely replotting the saved horizon.
 createHor <- function(az, alt, loc, dem=NULL, loc.crs=NULL, name='', alt.unc=0.5, smooth=F,
                       .scale=1000, eye.height=1.6, max.distance=10000, az.step=.25,
                       distance.step=NULL, features=NULL, curvature=TRUE, refraction.k=NULL,

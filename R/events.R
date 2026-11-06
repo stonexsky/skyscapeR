@@ -62,6 +62,20 @@ events <- function(name) {
 #' groups <- list(skyObject(12, "2001 BC", col="blue"),
 #'                skyObject("solar extremes", c("4001 BC", "2001 BC"), col="orange"))
 #' plotBars(c(-24,12,24), unc=1, obj=groups)
+#' @section A reference track is not a dated orbit:
+#' Each target represents a declination or declination range. A plotted track
+#' holds that declination fixed while hour angle varies. It does not follow the
+#' changing declination of a moving Solar System body through a particular day.
+#' In particular, \code{skyObject("Equinox", year)} is an equinox reference;
+#' the Sun at sunrise or sunset on the equinox date need not lie at the same
+#' declination as at the equinox instant. A small offset from a solar disc in
+#' \code{\link{sketchSky}} can therefore be expected.
+#'
+#' To compare with a particular instant, obtain its declination with
+#' \code{\link{body.position}} using the intended coordinate frame, and pass
+#' that numeric value to \code{skyObject}. Even that fixed-declination track is
+#' an approximation to a moving body's full daily orbit. Refraction and the
+#' plotted site's coordinates are applied when drawing the horizon track.
 skyObject = function(names, year, loc=FALSE, col = 'red', lty = 1, lwd = 1, epoch) {
   if (!missing(epoch)) {
     if (!missing(year)) stop("Supply year only once.",call.=FALSE)
@@ -387,6 +401,19 @@ antizenith = function(loc, parallax = 0.00224, altitude = 0) {
 #' hor <- createHWT(34.174051531543405, 110.81299818694872, name='Xipo, Lingbao')
 #' spatial.equinox(hor)
 #' }
+#' @section Fixed epoch and crossing limitations:
+#' Both the eastern and western horizons are used, and sunrise and sunset
+#' midpoints are returned separately. There is currently no epoch argument:
+#' the solstitial references use year 2000, even if the result is later compared
+#' with an archaeological period. This is a spatial midpoint construction, not
+#' a calculation of the Sun's rising or setting at the astronomical equinox.
+#'
+#' The solstitial intersections use unrefracted tracks; the final conversion with
+#' \code{\link{az2dec}} uses the session atmosphere. Record that setting. One
+#' root is sought in each half-horizon, rather than enumerating all terrain
+#' crossings as \code{\link{riseset}} does. Multiple emergence events, tangencies
+#' and polar sites can invalidate the bracketing assumptions. Inspect the tracks
+#' on the horizon before interpreting a returned midpoint.
 spatial.equinox = function(hor, parallax = 0.00224) {
   if (!is(hor,'skyscapeR.horizon')) stop('Full horizon profile required for spatial equinox calculation.')
 
@@ -615,11 +642,9 @@ sMjLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, alt
 #' @param loc This can be either a \emph{skyscapeR.horizon} object, or a vector with the
 #' latitude, longitude and elevation of the site, in this order.
 #' @param min.phase Minimum illuminated fraction of the Moon, from 0 to 1. The default 0.99 means 99 percent illumination.
-#' @param refraction Logical for whether or not atmospheric refraction should be taken into account.
-#' Defaults to \emph{TRUE}.
+#' @param refraction Logical. Apply atmospheric refraction. Defaults to the session setting in \code{\link{skyscapeR.vars}}.
 #' @param atm Atmospheric pressure in mbar. Defaults to the session setting in \code{\link{skyscapeR.vars}}.
-#' @param temp Atmospheric temperature (in Celsius). Only needed if \emph{refraction} is set to \emph{TRUE}.
-#' Default is 15 degrees Celsius.
+#' @param temp Air temperature in degrees Celsius. Defaults to the session setting in \code{\link{skyscapeR.vars}}.
 #' @param calendar Calendar for civil dates. Use \code{"G"} for Gregorian or \code{"J"} for Julian.
 #' @param timezone Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See \code{\link{time2jd}} for named zones and offsets.
 #' @export
@@ -633,6 +658,15 @@ sMjLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, alt
 #'   EFM(season='autumn', year=c(2018,2020), loc=c(35,-8,100))
 #'   }
 #' }
+#' @section Scope of the event model:
+#' The illumination fraction is a selection criterion, not a naked-eye detection
+#' model. The calculation does not include weather, sky brightness or extinction.
+#' It uses centre crossings rather than the first appearance of the upper limb.
+#' Only the first qualifying event is returned, so changes in illumination
+#' threshold, civil-day convention or horizon can change the selected lunation.
+#' The reported difference from the published spring-moonset distribution remains
+#' an unresolved validation issue; numerical precision does not establish agreement
+#' with that figure. Preserve all inputs when comparing series.
 EFM <- function(year, loc, season='spring', rise=TRUE, min.phase=.99, timezone, calendar,
                 refraction, atm, temp) {
   if (is.character(year)) year <- astroYear(year)

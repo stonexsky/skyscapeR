@@ -35,13 +35,11 @@ Moon rises or sets. Defaults to \emph{TRUE}.}
 
 \item{calendar}{Calendar for civil dates. Use \code{"G"} for Gregorian or \code{"J"} for Julian.}
 
-\item{refraction}{Logical for whether or not atmospheric refraction should be taken into account.
-Defaults to \emph{TRUE}.}
+\item{refraction}{Logical. Apply atmospheric refraction. Defaults to the session setting in \code{\link{skyscapeR.vars}}.}
 
 \item{atm}{Atmospheric pressure in mbar. Defaults to the session setting in \code{\link{skyscapeR.vars}}.}
 
-\item{temp}{Atmospheric temperature (in Celsius). Only needed if \emph{refraction} is set to \emph{TRUE}.
-Default is 15 degrees Celsius.}
+\item{temp}{Air temperature in degrees Celsius. Defaults to the session setting in \code{\link{skyscapeR.vars}}.}
 }
 \value{
 A list with an Event label and Moon and Sun data frames. Each row gives year, date, time, azimuth and declination for the selected rising or setting event. Angles are in degrees.
@@ -78,6 +76,17 @@ the spring moonset declination peak differs from the published figure.
 
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
+}
+
+\section{Scope of the event model}{
+The illumination fraction is a selection criterion, not a naked-eye detection
+model. The calculation does not include weather, sky brightness or extinction.
+It uses centre crossings rather than the first appearance of the upper limb.
+Only the first qualifying event is returned, so changes in illumination
+threshold, civil-day convention or horizon can change the selected lunation.
+The reported difference from the published spring-moonset distribution remains
+an unresolved validation issue; numerical precision does not establish agreement
+with that figure. Preserve all inputs when comparing series.
 }
 \examples{
 if (requireNamespace("swephRdata", quietly = TRUE)) {

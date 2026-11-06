@@ -58,6 +58,21 @@ Silva and Lomsdalen (2025, table 5) give an example of stellar target screening 
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
+
+\section{Candidate selection and visibility}{
+A match is a declination overlap, not evidence that a celestial object was
+visible, deliberately observed or associated with the archaeological feature.
+The magnitude filter uses fixed catalogue values; it includes integrated
+magnitudes for non-stellar entries such as M45. It does not predict naked-eye
+visibility through extinction or twilight, or resolve the members of a cluster.
+
+Choose the dating interval and measurement uncertainty from the archaeological
+and survey evidence. Then examine candidate stars with \code{\link{star.phases}},
+\code{\link{riseset}} and \code{\link{sketchSky}}. For a statistically selected
+local declination band, candidate screening is exploratory; the significance
+of that band does not identify its cause. Physical plausibility and independent
+archaeological evidence are separate parts of the interpretation.
+}
 \examples{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
   \dontrun{
@@ -76,5 +91,5 @@ if (requireNamespace("swephRdata", quietly = TRUE)) {
 Silva, F. and Lomsdalen, T. (2025). 'No easy way from the earth to the stars': a new statistical approach to the orientation of the Maltese temples. Archaeological and Anthropological Sciences 17, 96. \doi{10.1007/s12520-025-02208-4}.
 }
 \seealso{
-\code{\link{spatial.equinox}}, \code{\link{zenith}}, \code{\link{antizenith}}, \code{\link{solar.date}}, \code{\link{EFM}}, \code{\link{planet.extremes}}
+\code{\link{star.phases}}, \code{\link{riseset}}, \code{\link{sketchSky}}, \code{\link{spatial.equinox}}, \code{\link{solar.date}}, \code{\link{EFM}}, \code{\link{planet.extremes}}
 }

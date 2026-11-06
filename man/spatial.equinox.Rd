@@ -29,6 +29,21 @@ specified parallax correction. Both bracketing sectors must contain suitable cro
 Ruggles (1997) distinguishes the spatial midpoint of the solstitial horizon
 bearings from the midpoint in time between the solstices.
 }
+
+\section{Fixed epoch and crossing limitations}{
+Both the eastern and western horizons are used, and sunrise and sunset
+midpoints are returned separately. There is currently no epoch argument:
+the solstitial references use year 2000, even if the result is later compared
+with an archaeological period. This is a spatial midpoint construction, not
+a calculation of the Sun's rising or setting at the astronomical equinox.
+
+The solstitial intersections use unrefracted tracks; the final conversion with
+\code{\link{az2dec}} uses the session atmosphere. Record that setting. One
+root is sought in each half-horizon, rather than enumerating all terrain
+crossings as \code{\link{riseset}} does. Multiple emergence events, tangencies
+and polar sites can invalidate the bracketing assumptions. Inspect the tracks
+on the horizon before interpreting a returned midpoint.
+}
 \examples{
 \dontrun{
 hor <- createHWT(34.174051531543405, 110.81299818694872, name='Xipo, Lingbao')

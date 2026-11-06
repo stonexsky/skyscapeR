@@ -261,8 +261,6 @@ calc.phase <- function(year, day, sun.coord, star, loc, arcus_visionis, alt.hor,
 #' @param alt.hor The altitude of the horizon to consider.
 #' Defaults to zero degrees.
 #' @param k Visual extinction in magnitudes per airmass (Schaefer 1986, p. S33). The package adopts 0.2 as a clear-sky baseline. Extinction varies with site and atmospheric conditions (Schaefer 1986, 1993). Defaults to the session value from skyscapeR.vars().
-#' Defaults to 0.2, corresponding to a poor night on mountain top
-#' or best night at a dry sea level site.
 #' @param limit The maximum magnitude of a star that can be
 #' visible with the naked eye. Defaults to 6.
 #' @param alt.rs The maximum altitude of a star's first or last
@@ -281,8 +279,9 @@ calc.phase <- function(year, day, sun.coord, star, loc, arcus_visionis, alt.hor,
 #' @references Schaefer, B. E. (1993). Astronomy and the Limits of Vision. Vistas in Astronomy 36, 311-361. \doi{10.1016/0083-6656(93)90113-X}.
 #' @references Schaefer, B. E. (1987). Heliacal Rise Phenomena. Journal for the History of Astronomy 18, S19-S33. \doi{10.1177/002182868701801103}.
 #' @references Brady, B. (2015). Star Phases: the Naked-eye Astronomy of the Old Kingdom Pyramid Texts. In F. Silva and N. Campion (eds), Skyscapes: The Role and Importance of the Sky in Archaeology. Oxbow Books, pp. 76-86.
-#' @seealso \code{\link{plot.skyscapeR.starphases}}
+#' @seealso \code{\link{plot.skyscapeR.starphases}}, \code{\link{riseset}}, \code{\link{sketchSky}}, \code{\link{skyStep}}, \code{\link{star}}
 #' @examples
+#' \dontrun{
 #' if (requireNamespace("swephRdata", quietly = TRUE)) {
 #'   ss1 <- star.phases('Aldebaran',-4000, c(35,-8,200))
 #'   
@@ -302,6 +301,54 @@ calc.phase <- function(year, day, sun.coord, star, loc, arcus_visionis, alt.hor,
 #'   ss1 <- star.phases('Aldebaran',-4000, c(35,-8,200), alt.hor=2, alt.rs=5)
 #'   plot(ss1)
 #' }
+#' }
+#' @section Extinction and model scope:
+#' The implementation uses Rozenberg's airmass approximation,
+#' \eqn{X(h)=1/(\sin h+0.025\exp(-11\sin h))}, multiplying it by \code{k}
+#' and adding the result to the fixed catalogue magnitude. Here \code{h} is the
+#' stellar altitude selected by \code{refraction}, above the astronomical
+#' horizontal. This is distinct from the height above a ridge. The star-Sun
+#' altitude-separation rule uses the catalogue magnitude before extinction.
+#'
+#' The model does not calculate scattered moonlight, artificial light pollution,
+#' weather, an observer's adaptation history, or variable-star light curves.
+#' The same separation threshold is used at all relative azimuths. It is therefore
+#' a screening model for seasonal opportunities, not a probability of detection.
+#' Supplying an integrated cluster entry such as M45 treats its total magnitude as
+#' one target; cluster size, surface brightness and resolution into individual
+#' stars do not enter this calculation. It does not predict when each Pleiad is
+#' individually visible.
+#'
+#' The initial always-above/below checks are simplified declination screens rather
+#' than terrain-aware season classifications. In particular, the inherited
+#' southern-latitude screen is not symmetric with the northern one. Treat
+#' circumpolar or near-circumpolar results cautiously and inspect the actual track
+#' before interpreting a rejection or phase classification.
+#' @section Dates and a subsequent sky sketch:
+#' The 365 model samples are equally spaced in solar longitude, not in elapsed
+#' civil time. Printed seasonal labels are anchored to the December solstice.
+#' \code{metadata$events$date.julian} instead solves for the event solar longitude
+#' in the requested year and converts it to a local mean-solar Julian-calendar
+#' date using longitude. It is a representative date, not an exact detection
+#' instant, and can differ from the synthetic \code{day} label.
+#'
+#' Pass the representative date to \code{\link{riseset}} with
+#' \code{calendar = "J"} and an explicit timezone. With UTC or a fixed offset,
+#' inspect neighbouring dates when local mean-solar and civil days differ.
+#' The returned rise is a skyline crossing. Follow it by a short time sequence
+#' with \code{\link{sketchSky}} and \code{\link{skyStep}} to inspect terrain
+#' clearance. The sketch uses a sky-brightness-dependent display threshold;
+#' it does not implement this function's phase criterion. Agreement is not
+#' promised at the first threshold crossing.
+#'
+#' A supplied \code{skyscapeR.star} is used as given. Recompute it for the requested
+#' year; the phase function does not update an existing object's coordinates.
+#' The returned metadata retain \code{k}, atmosphere and threshold information,
+#' but not every input (notably \code{limit}, \code{alt.rs} and \code{res}).
+#' Save the original call and horizon with the result for reproducibility.
+#' @references Krisciunas, K. and Schaefer, B. E. (1991). A model of the brightness
+#' of moonlight. PASP 103, 1033-1039 (equation 14 for extinction airmass).
+#' \doi{10.1086/132921}.
 star.phases <- function(star, year, loc, alt.hor = 0, alt.rs = 10, solar.alt=NULL, k = skyscapeR.vars()$k, limit =
                         6, refraction, atm, temp, res = 1/24/6) {
   if (is.character(year)) year <- astroYear(year)

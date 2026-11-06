@@ -360,6 +360,20 @@ moonphase <- function(time, timezone, calendar) {
 #'   riseset(obj='sun', date=-3000, loc=c(51.5, 0.11, 100))
 #'   }
 #' }
+#' @section Crossing is not first visibility:
+#' The result supplies geometry and time. It applies neither atmospheric extinction
+#' nor a twilight detection threshold and does not test whether the star can be
+#' seen. A centre exactly at the skyline can remain obscured in a plot or too faint
+#' to detect. Use \code{\link{star.phases}} to select a candidate season, then
+#' inspect moments after the crossing with \code{\link{sketchSky}} and
+#' \code{\link{skyStep}}. The extra time needed for clearance depends on track
+#' slope, latitude and terrain; a universal minute offset is inappropriate.
+#'
+#' A numerical root tolerance describes the solver, not observational timing
+#' accuracy. Uncertain terrain height, refraction and ancient Earth-rotation
+#' models can dominate it. Saved output contains formatted civil times rather
+#' than a complete record of the input atmosphere and horizon. Preserve the
+#' original call and convert date/time back with matching calendar and timezone.
 riseset <- function(loc, date, jd, obj = 'sun', alt=0, timezone, calendar, dec, refraction, atm,
                     temp, verbose=TRUE) {
   if (missing(timezone)) { timezone <- skyscapeR.env$timezone }

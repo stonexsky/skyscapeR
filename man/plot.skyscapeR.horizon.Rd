@@ -75,6 +75,22 @@ solid lines of width 1.
 
 A horizon with an attached DEM, PeakFinder or photographic PNG displays the image by default. Add show.skyline = TRUE to inspect its numerical profile, or use.image = FALSE to draw the silhouette alone. With xrange supplied, azimuth labels default to degrees. A partial photograph initially opens on its recorded sector. An image-backed horizon or a supplied sky uses a 2:1 plot box. Copy the PNG with the saved horizon and use relinkHor() after moving it. With automatic altitude limits, a 30-degree azimuth sector shows 15 degrees of altitude.
 }
+
+\section{Layers and coordinate consistency}{
+A reusable sky is calculated for its own stored location and instant. Pair it
+with the horizon used to create it; drawing a saved sky does not recalculate
+its positions for another observer. Celestial reference tracks from
+\code{\link{skyObject}} use the plotted horizon's location and session
+atmosphere. Keep that atmosphere consistent with the stored sketch when
+comparing a track with a disc or point symbol.
+
+The foreground masks sky layers geometrically. It does not make the sky object
+an extinction or visibility calculation through the terrain. Image calibration
+and numerical skyline agreement remain the responsibility of the horizon
+source. Azimuth-altitude plotting is a cylindrical display, with increasing
+horizontal distortion towards the zenith. Retain consistent ranges when
+comparing styles, epochs or constellation traditions.
+}
 \examples{
 # Plot a bundled Maltese horizon:
 hor <- malta_horizons[[1]]
@@ -83,6 +99,7 @@ plot(hor)
 # Add the paths of the solstices and equinoxes sun in the year 1999 BC:
 tt <- skyObject('solar extremes', epoch=-2000, col='blue')
 plot(hor, obj=tt)
+
 # Compare the bounding tracks across a range of years:
 hor <- createHor(c(0,360), c(2,2), loc=c(35,-8,25))
 targets <- skyObject('solar extremes', epoch=c("4001 BC", "2001 BC"), col='red')

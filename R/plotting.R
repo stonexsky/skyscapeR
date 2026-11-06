@@ -122,8 +122,7 @@ plotAzimuth = function(az, obj, show.obj.labels=TRUE, col='blue', lty=1, lwd=1.5
 #' @param obj A \emph{skyscapeR.object} from \code{\link{skyObject}}, or
 #' a list of these objects. Each group retains its own epochs and styles
 #' for displaying the declination values of celestial objects.
-#' @param show.obj.label Logical to control whether to label the celestial objects in
-#' the polar plot. Defaults to \emph{TRUE}.
+#' @param show.obj.label Logical. Label celestial overlays on the declination plot. Defaults to TRUE.
 #' @export
 #' @import utils stats graphics
 #' @seealso \code{\link{skyObject}}
@@ -139,6 +138,13 @@ plotAzimuth = function(az, obj, show.obj.labels=TRUE, col='blue', lty=1, lwd=1.5
 #' # Display a year-range target band:
 #' targets <- skyObject('solar extremes', epoch=c("4001 BC", "2001 BC"), col='red')
 #' plotBars(c(-24,-23,23,24), unc=0.5, obj=targets)
+#' @section Coordinates and interpretation:
+#' \code{unit} labels the measurement axis; it does not transform azimuths into
+#' declinations. Celestial overlay values are declinations. Use them with
+#' declination measurements, or convert measurements first using the appropriate
+#' site and horizon. Bars show the supplied symmetric angular bounds, not fitted
+#' confidence intervals. Use \code{\link{az.pdf}}, \code{\link{coordtrans}} and
+#' \code{\link{spd}} when the full measurement distributions are needed.
 plotBars <- function(val, unc, names, unit='Declination', obj, show.obj.label=TRUE, xrange, yrange,
                      sort=FALSE, shade=TRUE, mark=TRUE, col='blue') {
   groups <- if (missing(obj)) list() else .sky_groups(obj)
@@ -243,6 +249,20 @@ plotBars <- function(val, unc, names, unit='Declination', obj, show.obj.label=TR
 #' hor <- createHor(c(0,360), c(2,2), loc=c(35,-8,25))
 #' targets <- skyObject('solar extremes', epoch=c("4001 BC", "2001 BC"), col='red')
 #' plot(hor, obj=targets)
+#' @section Layers and coordinate consistency:
+#' A reusable sky is calculated for its own stored location and instant. Pair it
+#' with the horizon used to create it; drawing a saved sky does not recalculate
+#' its positions for another observer. Celestial reference tracks from
+#' \code{\link{skyObject}} use the plotted horizon's location and session
+#' atmosphere. Keep that atmosphere consistent with the stored sketch when
+#' comparing a track with a disc or point symbol.
+#'
+#' The foreground masks sky layers geometrically. It does not make the sky object
+#' an extinction or visibility calculation through the terrain. Image calibration
+#' and numerical skyline agreement remain the responsibility of the horizon
+#' source. Azimuth-altitude plotting is a cylindrical display, with increasing
+#' horizontal distortion towards the zenith. Retain consistent ranges when
+#' comparing styles, epochs or constellation traditions.
 plot.skyscapeR.horizon <- function(x, show.az=(!missing(xrange) || !missing(xlim)), xrange, yrange, obj, col.ground='darkgreen', col.sky, use.image=TRUE, ..., show.skyline=NULL, sky=NULL, xlim, ylim, fastLoad=FALSE) {
   if (!missing(xlim)) {
     if (!missing(xrange)) stop("Supply only one of xrange and xlim.")
@@ -826,7 +846,7 @@ plot.skyscapeR.sigTest <- function(x, xrange, title=NULL, col='blue', show.pval=
 #' display a legend. Supplying a second object or a list compares sequences in rows;
 #' optional sorting uses the stored apparent magnitude or seasonal onset. Changing the
 #' display does not recalculate the visibility thresholds. Use \code{plot(first, list(second, third))} to compare results.
-#' @return Draws a seasonal visibility diagram on the active graphics device, using the phase classifications in the input object.
+#' @return Draws on the active graphics device and returns NULL invisibly.
 #' @param x A star phase result.
 #' @param y A second object of \emph{skyscapeR.starphases} format or
 #' a list of \emph{skyscapeR.starphases} objects for plotting (see Examples).
@@ -834,14 +854,21 @@ plot.skyscapeR.sigTest <- function(x, xrange, title=NULL, col='blue', show.pval=
 #' Default is FALSE
 #' @param show.legend Show a legend for seasons present among the plotted
 #' stars (see example below). Default is TRUE.
-#' @param pal Colour palette for displaying phases/seasons.
+#' @param pal Five colours in the order RS (rise and set), R (rise only), S (set only),
+#' V (curtailed passage) and I (arising and lying hidden). The default uses four
+#' ColorBrewer Accent colours and grey. Supply all five even when only some
+#' seasons occur.
 #' @param ... Additional arguments to be passed to \emph{plot}.
 #' @param show.labels Logical. Mark annual events on a single-star strip. Defaults to TRUE.
-#' @param sort.by For multiple stars, sort by apparent magnitude ("mag"), rising ("rise") or setting ("set").
+#' @param sort.by Optional ordering by catalogue magnitude (\code{"mag"}), first R-only
+#' sample (\code{"rise"}) or first S-only sample (\code{"set"}) on the stored
+#' cycle. This is not sorting by the dated heliacal event. Missing classes are
+#' placed last; omission retains input order.
 #' @rdname plot.skyscapeR.starphases
 #' @export
 #' @seealso \code{\link{star.phases}}
 #' @examples
+#' \dontrun{
 #' if (requireNamespace("swephRdata", quietly = TRUE)) {
 #'   # Plot the seasonality of Aldebaran for 4001 BCE:
 #'   s1 <- star.phases('Aldebaran',-4000, c(35,-8, 200))
@@ -853,6 +880,27 @@ plot.skyscapeR.sigTest <- function(x, xrange, title=NULL, col='blue', show.pval=
 #'   plot(s1, list(s2,s3))
 #'   plot(s1, show.legend=FALSE, show.grid=TRUE)
 #' }
+#' }
+#' @section Seasonal axis and comparison:
+#' The axis is a 365-sample synthetic solar-longitude cycle anchored at December
+#' solstice. Equinoxes and solstices mark quarter-cycle positions. The optional
+#' monthly grid divides this cycle into twelve equal parts; it is not a sequence
+#' of calendar-month boundaries. For event dates use the underlying result's
+#' \code{metadata$events$date.julian}, as described in \code{\link{star.phases}}.
+#'
+#' Objects may represent different stars, epochs, sites or model assumptions.
+#' Only star identity and epoch are printed beside each row. Hold the site,
+#' extinction and other inputs fixed for a controlled epoch comparison, or
+#' state their differences in the figure caption. Names on the supplied list can
+#' override the displayed star names. The legend contains only the union of
+#' season classes present in the plotted objects.
+#'
+#' Single and multiple results share the same strip layout. Single-object event
+#' annotations use the first and last samples of the V and I classes. When a
+#' class has multiple separated runs or wraps across the cycle boundary, these
+#' labels do not enumerate every transition. Inspect the stored seasons and
+#' event tables, or set \code{show.labels = FALSE} for such cases. Labels wrap
+#' and shrink to fit; very crowded comparisons still require a larger device.
 plot.skyscapeR.starphases = function(x, y, show.labels=TRUE, show.legend=TRUE, show.grid=FALSE, sort.by, pal, ...) {
   if (missing(pal)) {
     # First four ColorBrewer Accent colours, followed by the invisibility grey.

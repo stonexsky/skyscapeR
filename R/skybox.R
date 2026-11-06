@@ -33,6 +33,20 @@
 #' }
 #' @seealso \code{\link{time2jd}}, \code{\link{plot.skyscapeR.horizon}}
 #' @export
+#' @section Reproducibility and stepping:
+#' A Stellarium capture reflects the installed Stellarium version, its catalogues,
+#' selected sky culture and current settings for switches not explicitly supplied.
+#' It is an external rendered image, not the package's twilight or extinction
+#' model. Record those settings when comparing it with \code{\link{sketchSky}}.
+#' The external application and a working local Remote Control connection are
+#' required for every new capture, but not for replotting a saved raster.
+#'
+#' For a sketch, \code{skyStep} retains calendar, \code{max.mag}, \code{k}, style
+#' and display selections. Refraction, pressure and temperature are read again
+#' from \code{\link{skyscapeR.vars}}; the previous object's atmosphere is not
+#' restored automatically. Keep these settings fixed for a time-only comparison.
+#' Each call draws immediately and returns the new object invisibly. Save it with
+#' \code{sky <- skyStep(hor, sky, minutes = 10)} before taking the next step.
 stellariumSky <- function(hor, jd=NULL, screenshot.dir=getOption("skyscapeR.screenshot.dir",
     "~/Pictures/Stellarium"), port=8090L, timeout=60, time=NULL, timezone, calendar,
     display=c(landscape=FALSE, fog=FALSE), width=NULL) {

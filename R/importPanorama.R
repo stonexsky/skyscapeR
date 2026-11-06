@@ -29,6 +29,25 @@
 #' }
 #' @seealso \code{\link{hor2alt}}, \code{\link{exportPanorama}}
 #' @export
+#' @section Extraction method and limitations:
+#' Sky detection uses the PNG alpha channel. In each image column the first pixel
+#' whose opacity reaches \code{alpha.threshold} defines the terrain edge. The
+#' function does not segment an ordinary opaque photograph by sky colour. Remove
+#' the sky to transparency beforehand and retain sky above terrain in every column.
+#' Trees, buildings and mask errors become part of the extracted skyline.
+#'
+#' Calibration uses linear angular axes, origin shifts and, where supported by
+#' the controls, fitted scale or sinusoidal near-horizon tilt corrections.
+#' This is not a general camera/lens model or a full spherical photogrammetric
+#' adjustment. Wide-angle distortion, stitched-image parallax and inaccurate
+#' control measurements are not removed automatically. The supplied
+#' \code{alt.unc} is an assumed error, not an uncertainty estimated from the fit.
+#' Inspect independent field controls after calibration.
+#'
+#' A partial panorama only supplies the photographed sector; it is unsuitable for
+#' functions requiring a closed full horizon. Supplying only latitude and longitude
+#' leaves observer elevation unknown. Add a finite measured elevation before
+#' using functions, such as \code{\link{sketchSky}}, that require it.
 importPanorama <- function(file, loc, az.lim=c(0,360), alt.lim=c(-90,90),
                            name=tools::file_path_sans_ext(basename(file)), calibrate=FALSE,
                            points=NULL, alpha.threshold=0.5, alt.unc=0.5) {

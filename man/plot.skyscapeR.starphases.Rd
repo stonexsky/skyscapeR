@@ -29,14 +29,20 @@ stars (see example below). Default is TRUE.}
 \item{show.grid}{Logical to control whether to show a grid of months.
 Default is FALSE}
 
-\item{sort.by}{For multiple stars, sort by apparent magnitude ("mag"), rising ("rise") or setting ("set").}
+\item{sort.by}{Optional ordering by catalogue magnitude (\code{"mag"}), first R-only
+sample (\code{"rise"}) or first S-only sample (\code{"set"}) on the stored
+cycle. This is not sorting by the dated heliacal event. Missing classes are
+placed last; omission retains input order.}
 
-\item{pal}{Colour palette for displaying phases/seasons.}
+\item{pal}{Five colours in the order RS (rise and set), R (rise only), S (set only),
+V (curtailed passage) and I (arising and lying hidden). The default uses four
+ColorBrewer Accent colours and grey. Supply all five even when only some
+seasons occur.}
 
 \item{...}{Additional arguments to be passed to \emph{plot}.}
 }
 \value{
-Draws a seasonal visibility diagram on the active graphics device, using the phase classifications in the input object.
+Draws on the active graphics device and returns NULL invisibly.
 }
 \description{
 Compare the seasonal visibility of one or more stars at the modelled site and epoch. Each row shows the stellar name, designation and epoch. To compare one star across epochs, compute a phase object for each year and pass the second object to plot as its second argument.
@@ -49,7 +55,30 @@ display a legend. Supplying a second object or a list compares sequences in rows
 optional sorting uses the stored apparent magnitude or seasonal onset. Changing the
 display does not recalculate the visibility thresholds. Use \code{plot(first, list(second, third))} to compare results.
 }
+
+\section{Seasonal axis and comparison}{
+The axis is a 365-sample synthetic solar-longitude cycle anchored at December
+solstice. Equinoxes and solstices mark quarter-cycle positions. The optional
+monthly grid divides this cycle into twelve equal parts; it is not a sequence
+of calendar-month boundaries. For event dates use the underlying result's
+\code{metadata$events$date.julian}, as described in \code{\link{star.phases}}.
+
+Objects may represent different stars, epochs, sites or model assumptions.
+Only star identity and epoch are printed beside each row. Hold the site,
+extinction and other inputs fixed for a controlled epoch comparison, or
+state their differences in the figure caption. Names on the supplied list can
+override the displayed star names. The legend contains only the union of
+season classes present in the plotted objects.
+
+Single and multiple results share the same strip layout. Single-object event
+annotations use the first and last samples of the V and I classes. When a
+class has multiple separated runs or wraps across the cycle boundary, these
+labels do not enumerate every transition. Inspect the stored seasons and
+event tables, or set \code{show.labels = FALSE} for such cases. Labels wrap
+and shrink to fit; very crowded comparisons still require a larger device.
+}
 \examples{
+\dontrun{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
   # Plot the seasonality of Aldebaran for 4001 BCE:
   s1 <- star.phases('Aldebaran',-4000, c(35,-8, 200))
@@ -60,6 +89,7 @@ if (requireNamespace("swephRdata", quietly = TRUE)) {
   plot(s1, s2)
   plot(s1, list(s2,s3))
   plot(s1, show.legend=FALSE, show.grid=TRUE)
+}
 }
 }
 \seealso{

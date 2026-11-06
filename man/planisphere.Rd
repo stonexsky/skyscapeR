@@ -51,6 +51,7 @@ and ecliptic as optional references.
 }
 \details{
 The default star layer draws individual Pleiades members and omits integrated clusters and other nonstellar entries. The full catalogue remains available for target searches and phase calculations.
+
 The chart compares the accessible part of the celestial sphere with a catalogue sky at
 the chosen year. Catalogue stars are filtered by magnitude and by the implemented
 declination cutoff of latitude minus 90 degrees. Right ascension sets polar angle and 90
@@ -62,6 +63,16 @@ through a site's measured horizon. The Milky Way is filled with translucent grey
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
+
+\section{Projection and visibility limits}{
+The current projection and declination cutoff are centred on the north
+celestial pole. A negative latitude does not switch to a south-polar
+construction; do not use this chart as a complete southern-sky visibility map.
+There is no date/time of night, local terrain, atmospheric extinction,
+moonlight or twilight detection model. Magnitudes are fixed catalogue values,
+and point size is a graphical brightness indicator. For a particular site and
+instant use \code{\link{sketchSky}} with a georeferenced horizon.
+}
 \examples{
 \dontrun{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
@@ -71,4 +82,12 @@ if (requireNamespace("swephRdata", quietly = TRUE)) {
 }
 \seealso{
 \code{\link{plotAzimuth}}, \code{\link{plotBars}}, \code{\link{orbit}}, \code{\link{sketchSky}}
+}
+
+\references{
+NASA/Goddard Space Flight Center Scientific Visualization Studio (2020).
+Deep Star Maps 2020. \url{https://svs.gsfc.nasa.gov/4851/}.
+
+Astrodienst. Swiss Ephemeris programmer's manual.
+\url{https://www.astro.com/swisseph/swephprg.htm}.
 }

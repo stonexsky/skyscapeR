@@ -24,9 +24,9 @@ riseset(
 containing the latitude, longitude and elevation of location, in this order.}
 
 \item{date}{Either a string containing the date in the format "YYYY/MM/DD"
-(see \code{\link{timestring}}), or a numeric containing the julian date (see \code{\link{time2jd}}).
-Can also be a single year ("YYYY") or a month ("YYYY/MM") to calculate risings and settings for every day in the
-year or month, respectively. Not necessary if \emph{jd} is given.}
+ (see \code{\link{timestring}}), or a numeric containing the julian date (see \code{\link{time2jd}}).
+ Can also be a single year ("YYYY") or a month ("YYYY/MM") to calculate risings and settings for every day in the
+ year or month, respectively. Not necessary if \emph{jd} is given.}
 
 \item{jd}{A numeric containing the julian date (see \code{\link{time2jd}}) for which to
 calculate rising and settings. Only needed if \emph{date} is not given.}
@@ -88,6 +88,22 @@ The Swiss Ephemeris manual documents the fixed-altitude rise/set calculation.
 
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
+}
+
+\section{Crossing is not first visibility}{
+The result supplies geometry and time. It applies neither atmospheric extinction
+nor a twilight detection threshold and does not test whether the star can be
+seen. A centre exactly at the skyline can remain obscured in a plot or too faint
+to detect. Use \code{\link{star.phases}} to select a candidate season, then
+inspect moments after the crossing with \code{\link{sketchSky}} and
+\code{\link{skyStep}}. The extra time needed for clearance depends on track
+slope, latitude and terrain; a universal minute offset is inappropriate.
+
+A numerical root tolerance describes the solver, not observational timing
+accuracy. Uncertain terrain height, refraction and ancient Earth-rotation
+models can dominate it. Saved output contains formatted civil times rather
+than a complete record of the input atmosphere and horizon. Preserve the
+original call and convert date/time back with matching calendar and timezone.
 }
 \examples{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
