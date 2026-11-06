@@ -1,0 +1,513 @@
+---
+title: "skyscapeR: from field measurements to skyscape analysis"
+author: "Fabio Silva"
+output:
+  rmarkdown::html_vignette:
+    math_method: null
+    toc: true
+    toc_depth: 2
+vignette: >
+  %\VignetteIndexEntry{skyscapeR: from field measurements to skyscape analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+spreadsheet_examples <- requireNamespace("readxl", quietly = TRUE)
+astronomy_examples <- requireNamespace("swephRdata", quietly = TRUE)
+knitr::opts_chunk$set(error = FALSE, collapse = TRUE, comment = "#>",
+                      fig.width = 7, fig.height = 4,
+                      out.width = "100%", fig.align = "center")
+```
+
+
+This workflow starts with a measured axis at each site. Its **azimuth** is its bearing clockwise from north. The **horizon altitude** is the vertical angle to the skyline in that direction. Together with the site latitude these determine **declination**, the angular distance north or south of the celestial equator. We first calculate it from field measurements, then investigate one Maltese doorway and finally compare a group of entrances.
+
+For help with any package function and its parameters, type `?` followed by its name in the R console, for example `?az2dec`.
+
+# 1. Data input {#bring-your-own-field-data}
+
+## Import your observations
+
+Give each site one row in your spreadsheet. Record one compass bearing along the axis, looking outwards, and the horizon altitude in the same direction. For the two illustrative sites used here, the worksheet is called `Compass`. Replace the path below with the path on your computer.
+
+```{r own-file, eval=FALSE}
+library(skyscapeR)
+survey <- readxl::read_excel("/Users/yourname/Research/field-survey.xlsx", sheet = "Compass")
+```
+
+```{r load-example, include=FALSE}
+library(skyscapeR)
+if (spreadsheet_examples) survey <- readxl::read_excel(system.file("extdata", "field-survey.xlsx", package="skyscapeR"), sheet="Compass")
+```
+
+```{r show-survey, eval=spreadsheet_examples}
+survey
+```
+
+Use `id` for the site name and `survey_date` for the date of the observation. Enter latitude and longitude in decimal degrees (south and west negative), site elevation in metres, and bearing and horizon altitude in degrees. Keep the measured bearing in its original column.
+
+## Reduce compass readings to true azimuth
+
+The package uses the International Geomagnetic Reference Field (IGRF-14), evaluated by oce for the site coordinates and survey date. Magnetic north changes with place and time. Use the date the compass was read. `reduct.compass()` adds the local magnetic declination to each bearing. Passing the locations and dates in worksheet order keeps each correction with its observation.
+
+```{r reduce-survey, eval=spreadsheet_examples, message=FALSE}
+locations <- as.matrix(survey[c("latitude", "longitude", "elevation_m")])
+compass <- reduct.compass(loc = locations, mag.az = survey$mag_az_deg,
+                          date = as.Date(survey$survey_date), ID = survey$id)
+compass[c("ID", "Magnetic.Azimuth", "Mag.Dec", "True.Azimuth")]
+```
+
+`Mag.Dec` is the correction between magnetic and true north, in degrees east. For a manual reduction, calculate magnetic declination with `mag.dec(locations, as.Date(survey$survey_date))`, then add it to the magnetic bearing and wrap the result with `%% 360`. Alternatively pass an independently known correction as `magdec` to `reduct.compass()`. If your spreadsheet already records true azimuths, use that column directly in the next step.
+
+## Reduce a theodolite survey with a solar sight
+
+For field instructions on the sun-sight method, see the survey appendix in Clive Ruggles (1999), *Astronomy in Prehistoric Britain and Ireland*. A theodolite’s horizontal circle can have an arbitrary zero. In this alternative to the compass workflow, the surveyor recorded the circle reading to the Sun's right limb and the local time of that sight. `reduct.theodolite()` uses the predicted azimuth of that limb to orient every structural reading made with the same circle setting. `ten()` converts the recorded degrees, minutes and seconds to decimal degrees.
+
+The solar sight and later celestial examples need Swiss Ephemeris files covering the observation date. For optimum use of skyscapeR, install `swephRdata` before starting the solar example, then restart R. If you already keep the files locally, set `SE_EPHE_PATH` before loading skyscapeR.
+
+```r
+install.packages("swephRdata", repos = "https://rstub.r-universe.dev", type = "source")
+```
+
+```{r solar-sight, eval=astronomy_examples, message=FALSE}
+library(skyscapeR)
+site_location <- c(51.18, -1.83, 105)
+theo <- reduct.theodolite(loc = site_location, az = c(298.40, 302.35),
+                          date = "2016/02/20", time = "11:07:17",
+                          tz = "Europe/London", az.sun = ten(327, 29, 50),
+                          limb = "right")
+theo$Altitude <- c(2, 5)  # Horizon altitudes measured along the two sightlines
+theo[c("Uncorrected.Azimuth", "Sun.Az", "True.Azimuth", "Altitude")]
+```
+
+`Sun.Az` is the calculated solar reference bearing. To calculate it separately, use `sunAz()`.
+
+## Convert each sightline to celestial declination
+
+Carry each true azimuth forward with the latitude of the site and the measured altitude of the horizon along that sightline. For the compass sites the altitude is in the original worksheet.
+
+```{r compass-decs, eval=spreadsheet_examples}
+survey$true_az_deg <- compass$True.Azimuth %% 360
+survey$dec_deg <- az2dec(survey$true_az_deg, loc = survey$latitude,
+                         alt = survey$horizon_alt_deg)
+survey[c("id", "true_az_deg", "horizon_alt_deg", "dec_deg")]
+```
+
+For the theodolite sightlines the reduced bearings and skyline heights are already together in `theo`.
+
+```{r theo-decs, eval=astronomy_examples}
+theo$Declination <- az2dec(theo$True.Azimuth, loc = theo$Latitude, alt = theo$Altitude)
+theo[c("True.Azimuth", "Altitude", "Declination")]
+```
+
+## Which targets fit the measurement?
+
+Search within 2° of the first site's declination over a 200-year interval, from 3400 to 3200 BCE. Inspect the stellar candidates returned for that measurement.
+
+```{r own-targets, eval=spreadsheet_examples && astronomy_examples}
+candidates <- findTargets(survey$dec_deg[1] + c(-2, 2), c("3400 BC", "3200 BC"))
+candidates$stellar
+```
+
+# 2. Single site analysis {#one}
+
+## Going deeper into skyscape analysis at Mnajdra South
+
+What celestial objects could be seen through the doorway of Mnajdra South? Start with its position and the true bearings of its two edges, surveyed by Tore Lomsdalen and published by [Silva and Lomsdalen (2025)](https://doi.org/10.1007/s12520-025-02208-4).
+
+```{r entrance}
+door <- malta_entrances[1, ]
+door[, c("Name", "Latitude", "Longitude", "Az L", "Az R")]
+edges <- c(door[["Az L"]], door[["Az R"]])
+door_frame <- c(edges[1], mean(edges), edges[2])
+```
+
+## Importing site horizons
+
+If you surveyed the horizon in situ, import your observations as pairs of true azimuth and angular altitude in degrees. Supply the location of the instrument, including elevation in metres. These examples illustrate alternatives using your own files.
+
+```{r surveyed, eval=FALSE}
+profile <- read.csv("/Users/yourname/Research/surveyed-horizon.csv")
+survey_location <- c(51.18, -1.83, 105)  # latitude, longitude, elevation in metres
+surveyed <- createHor(az = profile$azimuth, alt = profile$altitude,
+                      loc = survey_location)
+plot(surveyed)
+```
+
+With a panoramic photograph, `importPanorama()` detects the skyline at the boundary between the transparent sky and the foreground. Use measured bearings and altitudes of identifiable landmarks to calibrate the image.
+
+```{r photo, eval=FALSE}
+photo <- importPanorama("doorway-east.png", loc = survey_location,
+                        az.lim = c(75, 115), alt.lim = c(-5, 10), calibrate = TRUE)
+plot(photo, show.skyline = TRUE)
+```
+
+A digital terrain model offers another way to reconstruct the horizon. **HeyWhatsThat** can generate a profile online from the site's coordinates. Here the observer stands 1.6 m above the ground.
+
+```{r hwt, eval=FALSE}
+hwt <- createHWT(lat = door$Latitude, lon = door$Longitude,
+                 elevation = 1.6, name = "Mnajdra South")
+```
+
+Alternatively, export a **Horizon for Stellarium** ZIP from PeakFinder and read it with `importPeakFinder()`. A silhouettes SVG exported from the same viewpoint adds foreground ridge detail.
+
+```{r peakfinder, eval=FALSE}
+pf <- importPeakFinder("landscape.zip", svg = "panorama.svg")
+```
+
+A local elevation raster gives control over the resolution, search distance and observer height. A finer DEM can resolve ridges smoothed away in a coarser one, provided it covers the terrain out to the visible skyline. With `terra` and `png` installed, `createHor()` can also render the terrain panorama.
+
+```{r local-dem, eval=FALSE}
+terrain <- createHor(dem = "survey-dem.tif", loc = c(door$Latitude, door$Longitude),
+                     eye.height = 1.6, max.distance = 10000, image.dir = tempdir())
+plot(terrain)
+```
+
+You can send any of these horizons to Stellarium with `exportStellarium()`. For Mnajdra South a horizon generated from a **5 m DEM** is already available with the published data. Its row index matches the entrance table. Read the skyline heights at the doorway edges and convert them to declinations.
+
+```{r door-horizon}
+hor <- malta_horizons[[1]]
+hor2alt(hor, edges)
+plot(hor, xrange = c(75, 115))
+abline(v = door_frame, col = "firebrick", lty = c(1, 2, 1))
+door_dec <- az2dec(edges, loc = hor)
+```
+
+## Which objects fit the doorway?
+
+Screen the entrance across the Ġgantija phase, 3400–3100 BCE. Read both the solar and stellar candidates before selecting one to investigate.
+
+```{r door-targets, eval=astronomy_examples}
+period <- c("3400 BC", "3100 BC")
+targets <- findTargets(range(door_dec), period)
+targets$solar
+targets$stellar
+```
+
+## Equinoctial sunrise
+
+Zero declination falls within the opening. For a worked year near the middle of the phase, the spring equinox falls on 17 April 3250 BCE in the proleptic Julian calendar. Find when the Sun’s centre crosses the terrain skyline. Compare its track at the sunrise declination (solid orange) with the equinox reference (dotted blue).
+
+```{r equinox, eval=astronomy_examples}
+year <- "3250 BC"
+sun <- riseset(hor, date = "3250 BC/04/17", obj = "sun",
+               calendar = "J", timezone = "UTC")$rise
+sun
+sky <- sketchSky(hor, time = paste(sun$date, sun$time), calendar = "J", timezone = "UTC")
+equinox <- skyObject("Equinox", year = year, loc = hor, col = "steelblue", lty = 3)
+sunrise_track <- skyObject(sun$declination, year = year, loc = hor, col = "orange")
+plot(hor, sky = sky, obj = list(equinox, sunrise_track), xrange = c(85, 105))
+abline(v = door_frame, col = "firebrick", lty = c(1, 2, 1))
+```
+
+At local sunrise (05:25 UT), the Sun still has declination −0.172°. It reaches the equinox later that day, around 16:06 UT. At the rising bearing the equinox reference therefore passes 0.28° above the disc centre. The orange track through the centre uses the declination at sunrise. Compare the rising bearing with the two edges and the centre. These correspond to different claims about what someone standing inside the temple could observe.
+
+## The heliacal rising of the Pleiades
+
+[Ventura, Foderà Serio and Hoskin (1993), *Possible Tally Stones at Mnajdra, Malta*](https://www.um.edu.mt/library/oar/handle/123456789/12032), proposed the rising Pleiades as a candidate for this temple. Select the cluster, catalogue entry `M 45`, from the shortlist. First model its seasons of visibility, then extract the Julian date of heliacal rising.
+
+```{r phase-strip, eval=astronomy_examples, fig.height=7}
+phases <- star.phases("M 45", year, hor)
+plot(phases)
+events <- phases$metadata$events
+hr_date <- events$date.julian[events$event == "heliacal rising"]
+hr_date
+```
+
+Use the heliacal rising date from `star.phases()` in `riseset()` to find the instant the centre crosses the local skyline. Allow five minutes for it to climb into the opening. The phases use the cluster's combined magnitude. The natural sketch represents unresolved cluster light as a faint patch. As its member stars become distinguishable they appear at their own positions and the patch fades.
+
+```{r cluster-rise, eval=astronomy_examples}
+rise <- riseset(hor, date = hr_date, obj = "M 45", calendar = "J", timezone = "UTC")$rise
+rise
+rise_jd <- time2jd(paste(rise$date, rise$time), timezone = "UTC", calendar = "J")
+sky <- sketchSky(hor, jd = rise_jd + 5 / 1440)
+plot(hor, sky = sky, xrange = c(85, 105))
+abline(v = door_frame, col = "firebrick", lty = c(1, 2, 1))
+```
+
+On 26 April 3250 BCE the cluster centre rises at 04:02:52 UT. Five minutes later the group is about 1° above the ridge, near the doorway centre. None of the five brightest members clears the display threshold during the following 45 minutes. The phase calculation treats the cluster’s combined light (magnitude 1.60) as a single source. Its predicted date is therefore an estimate for the group. How readily the eye can pick out the cluster against dawn twilight also depends on how that light is spread across the sky. To compare like with like, repeat it for Alcyone, magnitude 2.87. Its heliacal rising falls on 2 May. At 1° above the ridge Alcyone is still too faint in the sketch. Sixteen minutes after rising it appears at 97.31°, 3.4° above the ridge and inside the doorway.
+
+```{r alcyone-dawn, eval=astronomy_examples}
+alcyone <- star.phases("Alcyone", year, hor)
+events <- alcyone$metadata$events
+date <- events$date.julian[events$event == "heliacal rising"]
+alcyone_rise <- riseset(hor, date = date, obj = "Alcyone", calendar = "J", timezone = "UTC")$rise
+jd <- time2jd(paste(alcyone_rise$date, alcyone_rise$time), timezone = "UTC", calendar = "J")
+sky <- sketchSky(hor, jd = jd + 16 / 1440)
+plot(hor, sky = sky, xrange = c(85, 105), yrange = c(0, 11))
+abline(v = door_frame, col = "firebrick", lty = c(1, 2, 1))
+```
+
+### Watch the cluster rise later in the season
+
+Return 60 days after heliacal rising and calculate the new rising time. The two solid lines mark the edges of the doorway.
+
+```{r later-rise, eval=astronomy_examples}
+later <- riseset(hor, jd = rise_jd + 60, obj = "M 45", calendar = "J", timezone = "UTC")$rise
+sky <- sketchSky(hor, time = paste(later$date, later$time), calendar = "J", timezone = "UTC")
+sector <- c(85, 105)
+plot(hor, sky = sky, xrange = sector, yrange = c(0, 11))
+abline(v = door_frame, col = "firebrick", lty = c(1, 2, 1))
+```
+
+Advance the same view by ten minutes to see the individual members clearing the ridge.
+
+```{r later-step, eval=astronomy_examples}
+sky <- skyStep(hor, sky, minutes = 10, xrange = sector, yrange = c(0, 11))
+abline(v = door_frame, col = "firebrick", lty = c(1, 2, 1))
+```
+
+# 3. Multiple site analysis {#group}
+
+## Start with the Ġgantija entrance bearings
+
+Select the Ġgantija phase in both datasets with the same row indices. First look at the central directions on a compass with `plotAzimuth()`. Then compare the full width of each opening with `plotBars()`. The bar extends from the measured left edge to the right edge.
+
+```{r group-bearings, fig.height=7}
+rows <- which(malta_entrances$Phase == "Ggantija")
+sites <- malta_entrances[rows, ]
+profiles <- malta_horizons[rows]
+width <- (sites[["Az R"]] - sites[["Az L"]]) %% 360
+centre <- (sites[["Az L"]] + width / 2) %% 360
+plotAzimuth(centre)
+```
+
+```{r group-opening-widths}
+plotBars(centre, unc = width / 2, names = sites$Name, unit = "Azimuth")
+```
+
+## Give each opening a distribution
+
+For the method and its treatment of uncertainty, see [Silva (2020)](https://doi.org/10.1016/j.jas.2020.105138). Here each bearing inside an opening is equally likely. Its half-width sets the uncertainty of a uniform distribution. Convert each entrance across its own skyline, then sum the declination distributions.
+
+```{r group-decs}
+bearings <- az.pdf(pdf = "uniform", az = centre, unc = width / 2, name = sites$Name)
+decs <- coordtrans(bearings, profiles)
+plot(spd(decs))
+```
+
+## Test random orientations
+
+Would random bearings at these same sites produce concentrations as strong as the observed ones? Keep the measured widths and site profiles in the test. The following call reproduces the 500 simulations used here.
+
+```{r random-null, eval=FALSE}
+set.seed(42)
+fit <- randomTest(decs, az = bearings, hor = profiles, nsims = 500)
+```
+
+The result is bundled so that building the vignette does not repeat the simulation.
+
+```{r random-result}
+fit <- readRDS(system.file("extdata", "ggantija-random-500.rds", package = "skyscapeR"))
+plot(fit, show.local = TRUE)
+fit$metadata$local.pval
+```
+
+The global p-value is 0.004. The strongest local excess lies between −33.7° and −28.6° declination (local p = 0.004). 
+
+## Exploring celestial candidates
+
+That peak warrants looking for possible celestial explanations. Search the locally significant interval across the dates of the Ġgantija phase.
+
+```{r peak-targets, eval=astronomy_examples}
+bands <- fit$metadata$local.pval
+peak <- subset(bands, type == "+" & p.value < 0.05)
+candidates <- findTargets(c(peak$start, peak$end), period)
+candidates$stellar
+```
+
+Several stars fit. For the archaeological and astronomical arguments for investigating Gacrux, see [Silva and Lomsdalen (2025)](https://doi.org/10.1007/s12520-025-02208-4). Overlay its declination range on the same test.
+
+```{r gacrux, eval=astronomy_examples}
+gacrux <- skyObject("Gacrux", year = period)
+plot(fit, obj = gacrux, show.local = TRUE)
+```
+
+Take Skorba West, one entrance in that band. Use its own horizon to find Gacrux's heliacal rising date and crossing time. The vertical lines mark the two sides of this entrance.
+
+```{r gacrux-rise, eval=astronomy_examples}
+i <- which(sites$Name == "Skorba West")
+site_hor <- profiles[[i]]
+opening <- c(sites[["Az L"]][i], sites[["Az R"]][i])
+g_phases <- star.phases("Gacrux", year, site_hor)
+g_events <- g_phases$metadata$events
+g_date <- g_events$date.julian[g_events$event == "heliacal rising"]
+g_rise <- riseset(site_hor, date = g_date, obj = "Gacrux",
+                  calendar = "J", timezone = "UTC")$rise
+g_rise
+g_jd <- time2jd(paste(g_rise$date, g_rise$time), timezone = "UTC", calendar = "J")
+sky <- sketchSky(site_hor, jd = g_jd + 20 / 1440)
+plot(site_hor, sky = sky, xrange = c(122, 144), yrange = c(-1, 10))
+abline(v = c(opening[1], mean(opening), opening[2]), col = "firebrick", lty = c(1, 2, 1))
+```
+
+Gacrux crosses the ridge at 129.93° at 03:52:50 UT on 12 October 3250 BCE. The sketch shows it twenty minutes later at 132.99°, roughly 2.4° above the ridge and still inside the 128.55°–138.07° opening.
+
+To test a particular explanation, `modelTest()` accepts an expected distribution, including a separate one for each site. Silva and Lomsdalen compared the orientations with expectations based on slope aspect, shelter from prevailing winds and exposure to winter sunlight. Each hypothesis gives a different set of expected directions against which to judge the observed concentration.
+
+# 4. Other tools
+
+## Compare the three sky styles {#capture-sky}
+
+Look east from Mnajdra South on the evening of 21 December 2026. Keep the time, horizon and field of view fixed. In the natural view, look for the stars you can still pick out close to the skyline. The two publication styles show the stellar pattern on a white background. Colour retains the stellar tints, while monochrome is suitable for a black-and-white figure.
+
+```{r sky-styles, eval=astronomy_examples, fig.show="hold", fig.cap=c("Natural", "Publication colour", "Publication monochrome")}
+sector <- c(0, 180)
+heights <- c(-5, 85)
+when <- "2026/12/21 20:00"
+
+natural <- sketchSky(hor, time = when, timezone = "UTC", style = "natural")
+plot(hor, sky = natural, xrange = sector, yrange = heights)
+
+colour <- sketchSky(hor, time = when, timezone = "UTC", style = "publication-colour")
+plot(hor, sky = colour, xrange = sector, yrange = heights)
+
+mono <- sketchSky(hor, time = when, timezone = "UTC", style = "publication-mono")
+plot(hor, sky = mono, xrange = sector, yrange = heights)
+```
+
+## Compare constellation patterns
+
+Use the publication colour style for both views. First draw the modern Western constellations over the eastern half of the sky.
+
+```{r western-sky, eval=astronomy_examples, fig.cap="Modern Western constellations above the eastern horizon at Mnajdra South."}
+sky <- sketchSky(hor, time = when, timezone = "UTC", style = "publication-colour",
+                 display = list(constellations = "modern"))
+plot(hor, sky = sky, xrange = sector, yrange = heights)
+```
+
+Now draw the asterisms of the 28 Chinese lunar mansions over the same stars. Look for the same bright stars in both panels and follow the different lines that connect them.
+
+```{r chinese-constellations, eval=astronomy_examples, fig.cap="Chinese lunar-mansion asterisms visible in the same eastern sky."}
+sky <- sketchSky(hor, time = when, timezone = "UTC", style = "publication-colour",
+                 display = list(constellations = "chinese_mansions"))
+plot(hor, sky = sky, xrange = sector, yrange = heights)
+```
+
+To select just two modern figures, use `constellations = c("Orion", "Taurus")`.
+
+Select an individual figure with its stable identifier, such as `"CHN009"`
+for Horn. Use `subset(constellations, set == "chinese_mansions")` to browse
+the names and identifiers. See `?constellations` for sources, licences,
+historical context and stellar-data limitations.
+
+To draw your own constellation lines, import a Stellarium **legacy**
+`constellationship.fab` file. Each row contains a figure ID, the segment count,
+and two Hipparcos numbers per segment. This is the legacy text format, not
+Stellarium's newer JSON sky-culture format. See the [Stellarium User Guide](https://stellarium.org/guide/),
+“Adding Sky Cultures” in older editions, for the line-file guidelines.
+
+```{r custom-constellations, eval=FALSE}
+my_figures <- importConstellations("my-constellationship.fab")
+# Subset rows here if only some figures should be drawn.
+sky <- sketchSky(hor, time = "2026/12/21 20:00", timezone = "UTC",
+                 display = list(constellations = my_figures))
+plot(hor, sky = sky, xrange = sector)
+abline(v = door_frame, col = "firebrick", lty = c(1, 2, 1))
+```
+
+The imported object stays in your script and can be saved with `saveRDS()`.
+It does not change the bundled constellation sets. `skyStep()` retains the
+custom selection. This imports line connections only; the endpoint stars must
+exist in the package's stellar catalogue. It does not configure an external
+Stellarium installation. Credit the source and respect its sky-culture licence.
+
+## Explore the Milky Way and reference circles
+
+The Milky Way appears with the stars by default. Its band follows diffuse stellar light, with atmospheric extinction dimming it towards the horizon. Use `display = list(milky.way = FALSE)` to hide it. Add `galactic.equator = TRUE` to the display list for its central reference circle, or `ecliptic = TRUE` and `equator = TRUE` for other reference paths. In a planisphere, the corresponding Milky Way switches are `show.milky.way` and `show.galactic.equator`.
+
+## Compare twilight in opposite directions
+
+The natural sky changes with the Sun's position. Compare the sunset direction with the opposite horizon at the same instant. Hiding the Moon isolates the solar contribution in this illustration.
+
+```{r mnajdra-twilight, eval=astronomy_examples, fig.cap=c("Civil twilight towards sunset at Mnajdra South on 1 February 2025, 16:40 UTC.", "The Belt of Venus above the opposite horizon at the same instant.")}
+dusk <- sketchSky(hor, time = "2025/02/01 16:40", timezone = "UTC",
+                  style = "natural", display = list(moon = FALSE))
+plot(hor, sky = dusk, xrange = c(211, 291), yrange = c(-3, 37))
+plot(hor, sky = dusk, xrange = c(31, 111), yrange = c(-3, 37))
+abline(v = door_frame, col = "firebrick", lty = c(1, 2, 1))
+```
+
+## Capture a sky from Stellarium
+
+For a rendered background, enable Remote Control in Stellarium Desktop and follow the screenshot setup in `?stellariumSky`. A 4096-pixel capture is a starting point. Use a sketch when zooming beyond the available image detail.
+
+```r
+sky <- stellariumSky(hor, time = "2026/12/21 20:00", timezone = "UTC",
+                    width = 4096, display = list(atmosphere = TRUE, cardinals = FALSE))
+plot(hor, sky = sky, xrange = sector)
+abline(v = door_frame, col = "firebrick", lty = c(1, 2, 1))
+sky <- skyStep(hor, sky, minutes = -0.5, xrange = sector)
+abline(v = door_frame, col = "firebrick", lty = c(1, 2, 1))
+```
+
+With either sky, assign each step to continue from the displayed time and repeat `xrange` to retain the sector. A sketch keeps its constellation selection. Stellarium takes a new screenshot. Redraw the doorway edges and centre after each step. Record the calendar and time zone alongside an archaeological reconstruction.
+
+
+## Equinoctial full Moons and solstitial crescent crossovers
+
+[Silva and Pimenta (2012)](https://doi.org/10.1177/002182861204300204) explore how the rising and setting positions of the Sun and Moon cross over. Two functions let us explore these events.
+
+Which near-full Moon first meets the spring crossover condition? Inspect the paired lunar and solar observations returned by `EFM()`.
+
+```{r efm, eval=astronomy_examples}
+full_moon <- EFM(year = 2026, loc = c(40, 0, 400), season = "spring", timezone = "UTC")
+full_moon$Moon
+full_moon$Sun
+```
+
+For the winter first-crescent crossover, compare the setting positions and inspect the visibility diagnostics.
+
+```{r cc, eval=astronomy_examples}
+crescent <- CC(year = 2026, loc = c(40, 0, 400), season = "winter", crescent = "first",
+               timezone = "UTC", simulation = "SIM1")
+crescent$Moon
+crescent$diagnostics[, c("status", "visibility.margin", "day.offset")]
+```
+
+## A planisphere for the site's latitude
+
+Place the bright stellar candidates in the wider sky for the same epoch. The Galactic equator provides a reference for the orientation of the Milky Way.
+
+```{r planisphere, eval=astronomy_examples, fig.height=7}
+planisphere(year, lat = door$Latitude, max.mag = 3, show.galactic.equator = TRUE)
+```
+
+Add the Chinese lunar-mansion asterisms to the same chart. The lines connect catalogue stars even when an endpoint is fainter than the magnitude limit; only the part within the site's accessible sky is drawn. This shows their arrangement across the celestial sphere, rather than their visibility at a particular time of night.
+
+```{r planisphere-mansions, eval=astronomy_examples, fig.height=7, fig.cap="Chinese lunar-mansion asterisms on the planisphere for Mnajdra South's latitude and the chosen epoch."}
+planisphere(year, lat = door$Latitude, max.mag = 3,
+            show.galactic.equator = TRUE, constellations = "chinese_mansions")
+```
+
+## Other questions about the sky
+
+| What would you like to do? | Functions |
+|---|---|
+| Reduce compass and theodolite observations, or check a solar sight? | `reduct.compass()`, `mag.dec()`, `reduct.theodolite()`, `sunAz()`, `ten()` |
+| Build, retrieve or import a skyline and find its height at a bearing? | `createHor()`, `createHWT()`, `downloadHWT()`, `importPeakFinder()`, `importPanorama()`, `hor2alt()` |
+| Add a reconstructed feature, choose terrain colours, move a panorama or export a landscape? | `horFeature()`, `demPalettes()`, `relinkHor()`, `exportPanorama()`, `exportHor()`, `exportStellarium()` |
+| Compare bearings and turn an opening or individual measurement into declination? | `plotAzimuth()`, `plotBars()`, `az2dec()`, `az.pdf()`, `dec.pdf()`, `coordtrans()` |
+| Summarise the group and test an orientation hypothesis? | `spd()`, `hpdi()`, `randomTest()`, `modelTest()`, `pval2stars()`, `bernoulli.trial()` |
+| Screen possible targets, retrieve a star, estimate its seasons or draw target bands? | `findTargets()`, `star()`, `star.phases()`, `skyObject()`, `sky.objects()` |
+| Calculate a position, trace a daily path or time a skyline crossing? | `body.position()`, `orbit()`, `riseset()` |
+| Sketch or capture a view, advance time, chart the sky or import a constellation? | `sketchSky()`, `stellariumSky()`, `skyStep()`, `planisphere()`, `importConstellations()` |
+| Explore equinoxes, solstices, overhead passages and their calendar dates? | `eq()`, `spatial.equinox()`, `jS()`, `dS()`, `obliquity()`, `solar.date()`, `zenith()`, `antizenith()` |
+| Find limiting declinations for this horizon, the Moon or the planets? | `hor2max.dec()`, `hor2min.dec()`, `nMjLX()`, `sMjLX()`, `nmnLX()`, `smnLX()`, `parallax.corr()`, `planet.extremes()` |
+| Investigate lunar phases, equinoctial full Moons and solstitial crescent crossovers? | `moonphase()`, `EFM()`, `CC()` |
+| Convert epochs, date labels or Julian days, or inspect session settings? | `astroYear()`, `BC.AD()`, `long.date()`, `timestring()`, `time2jd()`, `jd2time()`, `skyscapeR.vars()` |
+
+# References
+
+Ruggles, C. L. N. (1999). *Astronomy in Prehistoric Britain and Ireland*. Yale University Press.
+
+Silva, F. (2020). A probabilistic framework and significance test for the analysis of structural orientations in skyscape archaeology. *Journal of Archaeological Science*, 118, 105138. [DOI](https://doi.org/10.1016/j.jas.2020.105138)
+
+Silva, F. and Lomsdalen, T. (2025). ‘No easy way from the earth to the stars’: a new statistical approach to the orientation of the Maltese temples. *Archaeological and Anthropological Sciences*, 17, 96. [DOI](https://doi.org/10.1007/s12520-025-02208-4)
+
+Silva, F. and Pimenta, F. (2012). The crossover of the Sun and the Moon. *Journal for the History of Astronomy*, 43(2), 191–208. [DOI](https://doi.org/10.1177/002182861204300204)
+
+Ventura, F., Foderà Serio, G. and Hoskin, M. (1993). Possible tally stones at Mnajdra, Malta. *Journal for the History of Astronomy*, 24(3), 171–183. [University of Malta](https://www.um.edu.mt/library/oar/handle/123456789/12032)
+
+Stellarium Development Team. *Stellarium User Guide*. [Guide](https://stellarium.org/guide/)
