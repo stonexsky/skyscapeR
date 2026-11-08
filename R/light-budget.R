@@ -25,12 +25,12 @@
 
 # Fixed-angular quadrature. The same sky samples are integrated into the
 # requested field, including at the north seam or across the zenith.
-.light_samples <- function(az,alt,radius,flux,kind,fraction=1,angle=0,step=.03) {
+.light_samples <- function(az,alt,radius,flux,kind,fraction=1,angle=0,step=.03,cluster.power=3) {
   n <- max(64,min(65536,ceiling(4*(radius/step)^2)))
   q <- (seq_len(n)-.5)/n
   phi <- seq_len(n)*(pi*(3-sqrt(5)))
-  # Cluster profile proportional to (1-r^2/R^2)^3. Disc samples are uniform in projected area.
-  r <- radius*switch(kind,cluster=sqrt(1-(1-q)^.25),moon=sqrt(q))
+  # Cluster profile proportional to (1-r^2/R^2)^cluster.power. Disc samples are uniform in projected area.
+  r <- radius*switch(kind,cluster=sqrt(1-(1-q)^(1/(cluster.power+1))),moon=sqrt(q))
   x <- r*cos(phi)
   y <- r*sin(phi)
   if (kind=="moon") {
@@ -49,7 +49,7 @@
 
 # Linear raster before display compression. Each cell contains average surface
 # brightness; multiplying by its solid angle recovers integrated source flux.
-.shared_radiance <- function(sky,box,nx,ny,colour=FALSE) {
+.shared_radiance <- function(sky,box,nx,ny,colour=FALSE,point.block=1L) {
   dx <- diff(box[1:2])/nx
   dy <- diff(box[3:4])/ny
   top <- box[4]-(seq_len(ny)-1)*dy
@@ -80,7 +80,7 @@
   }
   budget <- sky$light.budget
   moon <- sky$bodies$moon
-  add <- function(az,alt,radius,flux,kind,fraction=1,angle=0,col="white") {
+  add <- function(az,alt,radius,flux,kind,fraction=1,angle=0,col="white",cluster.power=3) {
     if (!is.finite(az+alt+flux+radius) || flux<=0 || alt+radius<box[3] ||
         alt-radius>box[4] || alt+radius<0 || fraction<=0) return()
     if (!is.null(moon) && kind %in% c("star","planet") &&
@@ -90,12 +90,24 @@
       # Bilinear deposition in sampling pixels. A star has no resolved limb.
       # Reflect an adjacent centre across a pole if the stencil straddles it.
       delta.az <- ((az-mean(box[1:2])+180)%%360)-180
-      xx <- (diff(box[1:2])/2+delta.az)/dx-.5
-      yy <- (box[4]-alt)/dy-.5
+      px <- dx*point.block
+      py <- dy*point.block
+      xx <- (diff(box[1:2])/2+delta.az)/px-.5
+      yy <- (box[4]-alt)/py-.5
       grid <- expand.grid(x=floor(xx)+0:1,y=floor(yy)+0:1)
       w <- (1-abs(grid$x-xx))*(1-abs(grid$y-yy))
-      h <- box[4]-(grid$y+.5)*dy
-      a <- box[1]+(grid$x+.5)*dx
+      h <- box[4]-(grid$y+.5)*py
+      a <- box[1]+(grid$x+.5)*px
+      if (point.block>1L) {
+        # Subdivide each display sample at constant surface brightness. A high-DPI
+        # export then preserves the apparent size and flux of unresolved stars.
+        offsets <- seq_len(point.block)-(point.block+1)/2
+        sub <- expand.grid(x=offsets,y=offsets,i=seq_along(w))
+        h <- h[sub$i]+sub$y*dy
+        a <- a[sub$i]+sub$x*dx
+        area <- abs(cos(h*rad))
+        w <- w[sub$i]*area/stats::ave(area,sub$i,FUN=sum)
+      }
       pole <- abs(h)>90
       a[pole] <- a[pole]+180
       h[pole] <- sign(h[pole])*(180-abs(h[pole]))
@@ -126,7 +138,7 @@
         up <- (sin(hh)*cos(alt*rad)-cos(hh)*sin(alt*rad)*cos(da))/rad
         rr <- (east^2+up^2)/radius^2
         profile <- switch(kind,
-          cluster=4*pmax(0,1-rr)^3,
+          cluster=(cluster.power+1)*pmax(0,1-rr)^cluster.power,
           moon={
             x <- east*cos(angle)+up*sin(angle)
             y <- -east*sin(angle)+up*cos(angle)
@@ -148,7 +160,7 @@
       }
       return()
     }
-    rays[[length(rays)+1L]] <<- cbind(.light_samples(az,alt,radius,flux,kind,fraction,angle,step),weights[1],weights[2])
+    rays[[length(rays)+1L]] <<- cbind(.light_samples(az,alt,radius,flux,kind,fraction,angle,step,cluster.power),weights[1],weights[2])
   }
   for(i in seq_len(NROW(sky$stars))) {
     col <- if (length(sky$star.colours)) sky$star.colours[i] else "white"
@@ -156,7 +168,8 @@
   }
   for(i in seq_len(NROW(sky$clusters))) {
     cl <- sky$clusters[i,]
-    add(cl$az,cl$alt,cl$radius,cl$residual.flux,"cluster")
+    add(cl$az,cl$alt,cl$radius,cl$residual.flux,"cluster",
+        cluster.power=if (cl$identifier=="M 45") 1 else 3)
   }
   for (id in names(budget$bodies)) {
     p <- sky$bodies[[id]]
@@ -210,8 +223,11 @@
 }
 
 .draw_shared_light <- function(sky,box) {
-  size <- pmin(c(1600,1000),pmax(96,ceiling(graphics::par("pin")*120)))
-  field <- .shared_radiance(sky,box,size[1],size[2],colour=TRUE)
+  dpi <- grDevices::dev.size("px")/grDevices::dev.size("in")
+  block <- max(1L,min(3L,round(min(dpi)/120)))
+  base <- pmin(floor(c(2400,1500)/block),pmax(96,ceiling(graphics::par("pin")*120)))
+  size <- base*block
+  field <- .shared_radiance(sky,box,size[1],size[2],colour=TRUE,point.block=block)
   pixels <- .shared_pixels(field,sky)
   graphics::rasterImage(pixels,box[1],box[3],box[2],box[4],interpolate=FALSE)
 }

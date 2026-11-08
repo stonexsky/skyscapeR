@@ -36,7 +36,7 @@ Suggests: swephRdata, terra (>= 1.7-65), xml2, png, httr2 (>= 1.0.0),
 VignetteBuilder: knitr
 Config/roxygen2/version: 8.1.0
 NeedsCompilation: no
-Packaged: 2026-11-07 21:43:19 UTC; root
+Packaged: 2026-11-08 15:15:24 UTC; root
 Author: Fabio Silva [aut, cre],
   Billy Finnimore [ctb],
   Victor Reijs [ctb],

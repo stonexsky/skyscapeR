@@ -178,7 +178,7 @@ identifies each ring by star or epoch. `layout = "linear"` selects strips.
 Both layouts divide the solar-longitude cycle into twelve months from December
 solstice. Set `show.grid = FALSE` to hide the month lines. On a single ring,
 the star, epoch and site appear in the centre. The seasonal labels and two-line event names sit outside the rim.
-On linear comparisons a single seasonal scale sits directly below the last strip.
+When one star is compared across epochs, its name, Bayer designation and shared site sit inside the rings, with a year beside each layer. On linear comparisons a single seasonal scale sits directly below the last strip.
 Each strip identifies the star, the epoch, or both when both vary.
 On a single strip, heliacal and acronycal risings are labelled above the strip
 and settings below it. Plots made from older phase objects can use their stored

@@ -85,8 +85,8 @@ has no event at that boundary. Entry into and exit from I mark acronycal
 setting and heliacal rising; entry into and exit from V mark acronycal rising
 and heliacal setting. Constant classifications have no transition labels.
 A single ring labels each event by name on two lines just outside the rim.
-Its short leader meets the ring at the event's model day. A single ring shows the star, epoch and site in its centre
-and labels the solstices and equinoxes outside its rim. Both layouts mark the event's model day,
+Its short leader meets the ring at the event's model day. A single ring shows the star, epoch and site in its centre. Rings for one star at several epochs show the star, designation and shared site in the centre, with a year for each ring. The circular layout
+labels the solstices and equinoxes outside its rim. Both layouts mark the event's model day,
 the last sample before entry into I or V, or the first after exit.
 The linear seasonal scale sits immediately below the lowest strip. Each quarter
 label aligns with its solstice or equinox across every row. Rising-event labels

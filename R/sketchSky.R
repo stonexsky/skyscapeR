@@ -121,7 +121,7 @@
 #' \code{star.opacity} retains an earlier symbol-opacity diagnostic; natural
 #' sketches draw from \code{light.budget}. \code{bodies}, \code{diameters},
 #' \code{planet.size} and \code{lunar} describe selected Solar System bodies.
-#' \code{clusters} holds supported cluster footprints and opacity when applicable;
+#' \code{clusters} holds supported cluster footprints and opacity when applicable. The natural view uses the integrated Pleiades magnitude as the light budget within its projected footprint. When the plotted stars exceed that budget, their fluxes are scaled together to preserve their relative brightness. Any residual light uses a broad, tapered profile;
 #' \code{guides}, \code{light}, \code{background} and twilight fields support drawing.
 #' Components can be empty when a layer is disabled. No image file is written.
 #' @references Patat, F., Ugolnikov, O. S. and Postylyakov, O. V. (2006).
@@ -338,7 +338,16 @@ sketchSky <- function(hor, jd=NULL, time=NULL, timezone, calendar,
     for (i in which(is.finite(integrated) & (shared | integrated > 0))) {
       distance <- .cluster_distance(clusters$az[i],clusters$alt[i],points[,1],points[,2])
       inside <- which(distance <= clusters$radius[i] & is.finite(distance))
-      if (shared) clusters$residual.flux[i] <- max(0, clusters$total.flux[i] - sum(star.flux[stars[inside]],na.rm=TRUE))
+      if (shared) {
+        members <- stars[inside]
+        drawn <- sum(star.flux[members],na.rm=TRUE)
+        if (clusters$identifier[i]=="M 45" && drawn>clusters$total.flux[i]) {
+          # Treat the catalogue aperture magnitude as the total light in this view.
+          star.flux[members] <- star.flux[members] * clusters$total.flux[i]/drawn
+          drawn <- clusters$total.flux[i]
+        }
+        clusters$residual.flux[i] <- max(0,clusters$total.flux[i]-drawn)
+      }
       # Fade the patch as point symbols account for the light in its footprint.
       # This is a projected-light estimate, not a membership assignment.
       fraction <- sum(opacity[stars[inside]] *

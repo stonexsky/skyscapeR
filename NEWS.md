@@ -5,6 +5,8 @@ migration instructions and positional-argument changes, see the README.
 
 ## Sky visualisation
 
+* Natural sketches keep the drawn Pleiades within their integrated light budget and use a broader residual glow. Higher-resolution raster devices receive a finer sky field.
+
 * `sketchSky()` returns a reusable sky for `plot(hor, sky = sky)`. Natural
   sketches combine stars, planets, lunar and cluster light, the Milky Way and
   atmospheric light on a common visual brightness scale. Twilight depends on
@@ -24,6 +26,8 @@ migration instructions and positional-argument changes, see the README.
   `skyStep()` advances or reverses the viewing time.
 
 ## Analytical plots
+
+* Comparisons of one star across epochs place its name, designation and shared location inside the rings and label each ring by year. The vignette illustrates the epoch comparison with Aldebaran and identifies the Moon and Pleiades in its natural-style example. It uses 300-dpi figures, smaller compass plots, two illustrated Milky Way views and fifth-morning examples of heliacal rising.
 
 * `plotAzimuth()` supports spokes and rim ticks. Target lines can lie inside
   or outside the circle; their two-line labels sit outside the rim.

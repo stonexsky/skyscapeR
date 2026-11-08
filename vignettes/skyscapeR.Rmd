@@ -24,7 +24,7 @@ covers_years <- function(years) {
 astronomy_examples <- covers_years(c(-3399L, -3099L, 2016L, 2026L))
 epoch_examples <- astronomy_examples && covers_years(c(-3999L, -1999L))
 knitr::opts_chunk$set(error = FALSE, collapse = TRUE, comment = "#>",
-                      fig.width = 7, fig.height = 4,
+                      fig.width = 7, fig.height = 4, dpi = 300, fig.retina = 1,
                       out.width = "100%", fig.align = "center")
 ```
 
@@ -229,28 +229,38 @@ The centre identifies the star, epoch and site. Read the solstice and equinox la
 plot(phases, layout = "linear")
 ```
 
-Use the heliacal rising date from `star.phases()` in `riseset()` to find the instant the centre crosses the local skyline. Allow five minutes for it to climb into the opening. The natural sketch draws catalogue stars at their positions and assigns the remaining cluster light to a diffuse patch.
+Allow roughly a week around the predicted heliacal rising when looking for the first visible morning. The daily phase calculation and the twilight sketch estimate visibility differently. See `?star.phases` for the comparison behind this rule of thumb. For the illustration, move five calendar days beyond the prediction, calculate that morning’s skyline crossing, then allow five minutes for the cluster to climb into the opening. The five-day offset selects an illustrative morning. The predicted event date remains the one printed above. The label points to the cluster centre. The natural sketch draws catalogue stars at their positions and assigns the remaining cluster light to a diffuse patch.
 
 ```{r cluster-rise, eval=astronomy_examples}
-rise <- riseset(hor, date = hr_date, obj = "M 45", calendar = "J", timezone = "UTC")$rise
+predicted_jd <- time2jd(hr_date, calendar = "J", timezone = "UTC")
+rise <- riseset(hor, jd = predicted_jd + 5, obj = "M 45", calendar = "J", timezone = "UTC")$rise
 rise
 rise_jd <- time2jd(paste(rise$date, rise$time), timezone = "UTC", calendar = "J")
 sky <- sketchSky(hor, jd = rise_jd + 5 / 1440)
 plot(hor, sky = sky, xrange = c(85, 105))
 abline(v = door_frame, col = "firebrick", lty = c(1, 2, 1))
+target <- as.numeric(sky$clusters[sky$clusters$identifier == "M 45", c("az", "alt")])
+segments(target[1] + 0.18, target[2] + 0.14,
+         target[1] + 0.70, target[2] + 0.58, col = "grey85", lwd = 0.7)
+text(target[1] + 0.75, target[2] + 0.60, "Pleiades", adj = c(0, 0), col = "grey85", cex = 0.78)
 ```
 
-On 26 April 3250 BCE the cluster centre crosses the ridge at 04:02:52 UT. Five minutes later it stands about 1° above the ridge, near the centre of the doorway. The phase calculation uses the Pleiades’ combined magnitude of 1.60. To examine an individual star, repeat the calculation for Alcyone (magnitude 2.87). On its phase date, 2 May, the view sixteen minutes after rising places Alcyone inside the doorway at azimuth 97.31° and altitude 3.4°.
+The illustrated morning is 1 May 3250 BCE. Look near azimuth 95.7° and altitude 4.9°, just above the skyline. At that instant the Sun is 10.9° below the horizon, compared with 8.6° at the equivalent point on the predicted morning. The solid lines bracket the doorway and the dashed line marks its centre. The phase calculation uses the Pleiades’ combined magnitude of 1.60. To examine an individual star, repeat the calculation for Alcyone (magnitude 2.87). Use the same five-day offset from Alcyone’s own prediction and view it sixteen minutes after its skyline crossing.
 
 ```{r alcyone-dawn, eval=astronomy_examples}
 alcyone <- star.phases("Alcyone", year, hor)
 events <- alcyone$metadata$events
 date <- events$date.julian[events$event == "heliacal rising"]
-alcyone_rise <- riseset(hor, date = date, obj = "Alcyone", calendar = "J", timezone = "UTC")$rise
+alcyone_day <- time2jd(date, calendar = "J", timezone = "UTC")
+alcyone_rise <- riseset(hor, jd = alcyone_day + 5, obj = "Alcyone", calendar = "J", timezone = "UTC")$rise
 jd <- time2jd(paste(alcyone_rise$date, alcyone_rise$time), timezone = "UTC", calendar = "J")
 sky <- sketchSky(hor, jd = jd + 16 / 1440)
 plot(hor, sky = sky, xrange = c(85, 105), yrange = c(0, 11))
 abline(v = door_frame, col = "firebrick", lty = c(1, 2, 1))
+target <- as.numeric(sky$stars["eta Tau", c("az", "alt")])
+segments(target[1] + 0.18, target[2] + 0.14,
+         target[1] + 0.70, target[2] + 0.58, col = "grey85", lwd = 0.7)
+text(target[1] + 0.75, target[2] + 0.60, "Alcyone", adj = c(0, 0), col = "grey85", cex = 0.78)
 ```
 
 ### Watch the cluster rise later in the season
@@ -258,7 +268,7 @@ abline(v = door_frame, col = "firebrick", lty = c(1, 2, 1))
 Return 60 days after heliacal rising and calculate the new rising time. The two solid lines mark the edges of the doorway.
 
 ```{r later-rise, eval=astronomy_examples}
-later <- riseset(hor, jd = rise_jd + 60, obj = "M 45", calendar = "J", timezone = "UTC")$rise
+later <- riseset(hor, jd = predicted_jd + 60, obj = "M 45", calendar = "J", timezone = "UTC")$rise
 sky <- sketchSky(hor, time = paste(later$date, later$time), calendar = "J", timezone = "UTC")
 sector <- c(85, 105)
 plot(hor, sky = sky, xrange = sector, yrange = c(0, 11))
@@ -278,7 +288,7 @@ abline(v = door_frame, col = "firebrick", lty = c(1, 2, 1))
 
 Select the Ġgantija phase in both datasets with the same row indices. First look at the central directions on a compass with `plotAzimuth()`. Then compare the full width of each opening with `plotBars()`. The bar extends from the measured left edge to the right edge.
 
-```{r group-bearings, fig.height=7}
+```{r group-bearings, fig.width=5.75, fig.height=5.75, out.width="82%"}
 rows <- which(malta_entrances$Phase == "Ggantija")
 sites <- malta_entrances[rows, ]
 profiles <- malta_horizons[rows]
@@ -289,7 +299,7 @@ plotAzimuth(centre)
 
 For a level-horizon comparison, place the solstice lines outside the compass at the Mnajdra South latitude. The two-line labels identify the target and the event. Each label stays outside even if you choose `obj.position = "inside"` for the lines.
 
-```{r compass-targets, eval=astronomy_examples, fig.height=7}
+```{r compass-targets, eval=astronomy_examples, fig.width=5.75, fig.height=5.75, out.width="82%"}
 solstices <- skyObject("solar extremes", year = year, loc = hor)
 plotAzimuth(centre, obj = solstices, marks = "rim", obj.position = "outside")
 ```
@@ -360,16 +370,21 @@ opening <- c(sites[["Az L"]][i], sites[["Az R"]][i])
 g_phases <- star.phases("Gacrux", year, site_hor)
 g_events <- g_phases$metadata$events
 g_date <- g_events$date.julian[g_events$event == "heliacal rising"]
-g_rise <- riseset(site_hor, date = g_date, obj = "Gacrux",
+g_day <- time2jd(g_date, calendar = "J", timezone = "UTC")
+g_rise <- riseset(site_hor, jd = g_day + 5, obj = "Gacrux",
                   calendar = "J", timezone = "UTC")$rise
 g_rise
 g_jd <- time2jd(paste(g_rise$date, g_rise$time), timezone = "UTC", calendar = "J")
 sky <- sketchSky(site_hor, jd = g_jd + 20 / 1440)
 plot(site_hor, sky = sky, xrange = c(122, 144), yrange = c(-1, 10))
 abline(v = c(opening[1], mean(opening), opening[2]), col = "firebrick", lty = c(1, 2, 1))
+target <- as.numeric(sky$stars["gam Cru", c("az", "alt")])
+segments(target[1] + 0.18, target[2] + 0.14,
+         target[1] + 0.70, target[2] + 0.58, col = "grey85", lwd = 0.7)
+text(target[1] + 0.75, target[2] + 0.60, "Gacrux", adj = c(0, 0), col = "grey85", cex = 0.78)
 ```
 
-Gacrux crosses the ridge at 129.93° at 03:52:50 UT on 12 October 3250 BCE. The sketch shows it twenty minutes later at 132.99°, roughly 2.4° above the ridge and still inside the 128.55°–138.07° opening.
+Here too the sketch uses the fifth morning after the predicted date, 17 October 3250 BCE. Look twenty minutes after the crossing, between the measured doorway edges at 128.55° and 138.07°.
 
 To test a particular explanation, `modelTest()` accepts an expected distribution, including a separate one for each site. Silva and Lomsdalen compared the orientations with expectations based on slope aspect, shelter from prevailing winds and exposure to winter sunlight. Each hypothesis gives a different set of expected directions against which to judge the observed concentration.
 
@@ -377,26 +392,34 @@ To test a particular explanation, `modelTest()` accepts an expected distribution
 
 ## Compare the three sky styles {#capture-sky}
 
-Look east from Mnajdra South on the evening of 21 December 2026. Keep the time, horizon and field of view fixed. In the natural view, look for the stars you can still pick out close to the skyline. The two publication styles show the stellar pattern on a white background. Colour retains the stellar tints, while monochrome is suitable for a black-and-white figure.
+Look high in the southeast from Mnajdra South at 20:00 UTC on 21 December 2026. Keep the time, horizon and field of view fixed. The Moon is 93% illuminated. Look just below and left of it for the Pleiades. At the Moon’s altitude of 76°, one degree of azimuth spans only about a quarter of a degree on the sky. This close view uses matching horizontal and vertical angular scales near the Moon so its gibbous outline is visible. The two publication styles show the stellar pattern on a white background. Colour retains the stellar tints, while monochrome is suitable for a black-and-white figure.
 
 ```{r sky-styles, eval=astronomy_examples, fig.show="hold", fig.cap=c("Natural", "Publication colour", "Publication monochrome")}
-sector <- c(0, 180)
-heights <- c(-5, 85)
+moon_sector <- c(119, 157)
+moon_heights <- c(72.7, 77.4)
 when <- "2026/12/21 20:00"
 
 natural <- sketchSky(hor, time = when, timezone = "UTC", style = "natural")
-plot(hor, sky = natural, xrange = sector, yrange = heights)
+plot(hor, sky = natural, xrange = moon_sector, yrange = moon_heights)
+cluster <- subset(natural$clusters, identifier == "M 45")
+moon <- natural$bodies$moon
+segments(cluster$az - 4, cluster$alt - 0.62, cluster$az - 1.7, cluster$alt - 0.28,
+         col = "grey70", lwd = 0.7)
+text(cluster$az - 4, cluster$alt - 0.62, "Pleiades", pos = 2, col = "grey85", cex = 0.8)
+segments(moon[1] + 1.35, moon[2] + 0.22, moon[1] + 3.4, moon[2] + 0.58,
+         col = "grey70", lwd = 0.7)
+text(moon[1] + 3.4, moon[2] + 0.58, "Moon", pos = 4, col = "grey85", cex = 0.8)
 
 colour <- sketchSky(hor, time = when, timezone = "UTC", style = "publication-colour")
-plot(hor, sky = colour, xrange = sector, yrange = heights)
+plot(hor, sky = colour, xrange = moon_sector, yrange = moon_heights)
 
 mono <- sketchSky(hor, time = when, timezone = "UTC", style = "publication-mono")
-plot(hor, sky = mono, xrange = sector, yrange = heights)
+plot(hor, sky = mono, xrange = moon_sector, yrange = moon_heights)
 ```
 
 ## Compare stellar seasons
 
-Keep the Mnajdra South skyline and visibility settings fixed. The three rings show Aldebaran at 4000, 3250 and 2000 BCE, from the outside inward. A leader connects each epoch to its own ring. The monthly divisions run across all three rings from December solstice, so you can follow changes in the start and duration of each season.
+Keep the Mnajdra South skyline and visibility settings fixed. The centre identifies Aldebaran, its Bayer designation and the site. The three rings show the star at 4000, 3250 and 2000 BCE, from the outside inward. A leader connects each epoch to its own ring. The monthly divisions run across all three rings from December solstice, so you can follow changes in the start and duration of each season.
 
 ```{r compare-epochs, eval=epoch_examples, fig.height=7}
 ald <- lapply(c("4000 BC", "3250 BC", "2000 BC"),
@@ -404,34 +427,15 @@ ald <- lapply(c("4000 BC", "3250 BC", "2000 BC"),
 plot(ald[[1]], ald[-1])
 ```
 
-Switch to aligned strips to follow a boundary from one epoch to the next. Read the shared solstice and equinox labels immediately below the lowest strip. The left and right ends both mark December solstice.
-
-```{r epoch-strips, eval=epoch_examples}
-plot(ald[[1]], ald[-1], layout = "linear")
-```
-
-For a comparison at one epoch, keep 3250 BCE and change the star. The heading gives the shared epoch and each strip identifies a star.
-
-```{r star-strips, eval=astronomy_examples}
-stars <- lapply(c("Aldebaran", "M 45", "Gacrux"),
-                function(s) star.phases(s, year, hor))
-plot(stars[[1]], stars[-1], layout = "linear")
-```
-
-To compare the same two stars at two epochs, group the rows by star. Each label now includes its epoch. Omit `layout = "linear"` in any of these comparisons to draw concentric rings in the same order, from the outside inward.
-
-```{r star-epoch-strips, eval=epoch_examples}
-gacrux <- lapply(c("4000 BC", "2000 BC"),
-                 function(y) star.phases("Gacrux", y, hor))
-pair <- c(ald[c(1, 3)], gacrux)
-plot(pair[[1]], pair[-1], layout = "linear")
-```
+Use `layout = "linear"` in the same call to compare the seasons as aligned strips. See `?plot.skyscapeR.starphases` for comparisons involving several stars.
 
 ## Compare constellation patterns
 
 Use the publication colour style for both views. First draw the modern Western constellations over the eastern half of the sky.
 
 ```{r western-sky, eval=astronomy_examples, fig.cap="Modern Western constellations above the eastern horizon at Mnajdra South."}
+sector <- c(0, 180)
+heights <- c(-5, 85)
 sky <- sketchSky(hor, time = when, timezone = "UTC", style = "publication-colour",
                  display = list(constellations = "modern"))
 plot(hor, sky = sky, xrange = sector, yrange = heights)
@@ -477,16 +481,20 @@ Stellarium installation. Credit the source and respect its sky-culture licence.
 
 The Milky Way appears with the stars by default. Dark lanes and two brighter layers trace its structure; in a natural view, extinction dims the band towards the horizon. Use `display = list(milky.way = FALSE)` to hide the band, or `galactic.equator = TRUE` in the display list to add its reference circle. The planisphere uses `show.milky.way` and `show.galactic.equator`.
 
-## Compare twilight in opposite directions
+Look south from Mnajdra South on a July night. The first figure shows the natural band with the Moon hidden. Use the same place, time and field of view in the second figure to identify the Galactic equator, ecliptic and celestial equator against the band.
 
-Compare the sky towards sunset and above the opposite horizon at the same instant. Hiding the Moon isolates the solar contribution. Both views use the same calibrated twilight model.
+```{r milky-way-natural, eval=astronomy_examples, fig.cap="The summer Milky Way above the southern horizon at Mnajdra South, 15 July 2026 at 23:00 UTC."}
+mw_time <- "2026/07/15 23:00"
+mw <- sketchSky(hor, time = mw_time, timezone = "UTC",
+                display = list(moon = FALSE))
+plot(hor, sky = mw, xrange = c(115, 235), yrange = c(-2, 65))
+```
 
-```{r mnajdra-twilight, eval=astronomy_examples, fig.cap=c("Civil twilight towards sunset at Mnajdra South on 1 February 2025, 16:40 UTC.", "The Belt of Venus above the opposite horizon at the same instant.")}
-dusk <- sketchSky(hor, time = "2025/02/01 16:40", timezone = "UTC",
-                  style = "natural", display = list(moon = FALSE))
-plot(hor, sky = dusk, xrange = c(211, 291), yrange = c(-3, 37))
-plot(hor, sky = dusk, xrange = c(31, 111), yrange = c(-3, 37))
-abline(v = door_frame, col = "firebrick", lty = c(1, 2, 1))
+```{r milky-way-guides, eval=astronomy_examples, fig.cap="The same field in publication colour. The Galactic equator is dot-dashed, the ecliptic dashed and the celestial equator dotted."}
+guides <- sketchSky(hor, time = mw_time, timezone = "UTC",
+                    style = "publication-colour", display = list(moon = FALSE,
+                    galactic.equator = TRUE, equator = TRUE, ecliptic = TRUE))
+plot(hor, sky = guides, xrange = c(115, 235), yrange = c(-2, 65))
 ```
 
 ## Capture a sky from Stellarium

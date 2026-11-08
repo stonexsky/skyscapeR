@@ -1018,8 +1018,8 @@ plot.skyscapeR.sigTest <- function(x, xrange, title=NULL, col=NULL, show.pval=TR
 #' setting and heliacal rising; entry into and exit from V mark acronycal rising
 #' and heliacal setting. Constant classifications have no transition labels.
 #' A single ring labels each event by name on two lines just outside the rim.
-#' Its short leader meets the ring at the event's model day. A single ring shows the star, epoch and site in its centre
-#' and labels the solstices and equinoxes outside its rim. Both layouts mark the event's model day,
+#' Its short leader meets the ring at the event's model day. A single ring shows the star, epoch and site in its centre. Rings for one star at several epochs show the star, designation and shared site in the centre, with a year for each ring. The circular layout
+#' labels the solstices and equinoxes outside its rim. Both layouts mark the event's model day,
 #' the last sample before entry into I or V, or the first after exit.
 #' The linear seasonal scale sits immediately below the lowest strip. Each quarter
 #' label aligns with its solstice or equinox across every row. Rising-event labels
@@ -1078,7 +1078,8 @@ plot.skyscapeR.starphases <- function(x, y, show.labels=TRUE, show.legend=TRUE, 
   if (same.star && !same.year && any(use)) row[use] <- paste(names0[use],years[use],sep="  ")
   if (!same.site) row <- paste(row,sites,sep="  ")
   heading <- c(if (same.star) original[1], if(same.site) sites[1], if(same.year) years[1])
-  list(rows=unname(row),centre=c(original[1],years[1],sites[1]),heading=paste(heading[nzchar(heading)],collapse="  |  "))
+  list(rows=unname(row),epoch.comparison=same.star && !same.year,
+       centre=c(original[1],if (same.year) years[1],if (same.site) sites[1]),heading=paste(heading[nzchar(heading)],collapse="  |  "))
 }
 
 .phase_runs <- function(z) {
@@ -1139,7 +1140,7 @@ plot.skyscapeR.starphases <- function(x, y, show.labels=TRUE, show.legend=TRUE, 
                      asp=1,axes=FALSE,xlab="",ylab="",xaxs="i",yaxs="i"),list(...))
   if (bare) args[c("main","sub","xlab","ylab")] <- list("","","","")
   do.call(plot.default,args)
-  if (multi && show.legend && is.null(args$main) && nzchar(info$heading))
+  if (multi && !info$epoch.comparison && show.legend && is.null(args$main) && nzchar(info$heading))
     mtext(info$heading,side=3,line=.32,cex=min(.9,par("pin")[1]/max(.01,strwidth(info$heading,units="inches",font=2))),font=2)
   runs <- lapply(objects,.phase_runs)
   edges <- seq(1,.49,length.out=n+1L); pad <- min(.006,.12*abs(diff(edges)[1]))
@@ -1155,7 +1156,7 @@ plot.skyscapeR.starphases <- function(x, y, show.labels=TRUE, show.legend=TRUE, 
   angles <- .phase_month_edges[months+1L] * 360/365
   a <- .polar_xy(angles,tail(edges,1)); b <- .polar_xy(angles,edges[1])
   segments(a[,1],a[,2],b[,1],b[,2],col="white",lwd=ifelse(months%%3==0,1.4,.9))
-  if (!multi && show.legend) {
+  if ((!multi || info$epoch.comparison) && show.legend) {
     caption <- info$centre[nzchar(info$centre)]
     if (length(caption)) {
       fonts <- 1L+(caption==info$centre[1])
