@@ -56,8 +56,12 @@ the solar azimuth, and at spring moonset it must be smaller. Autumn reverses
 both inequalities. Bearings are topocentric, clockwise from north.
 
 The search runs chronologically from 60 days before to 65 days after the
-astronomical equinox. It pairs the first lunar and solar centre crossings
-of the requested direction on the same local civil date. A coordinate vector
+astronomical equinox. Moonrise is paired with the first sunrise on the same
+local civil date. Moonset is paired with the most recent sunset before it,
+considering the first solar centre crossing on the current and preceding
+local civil dates. A candidate without such a sunset is skipped. Local-day
+boundaries account for timezone changes, including daylight saving time.
+A coordinate vector
 specifies a level horizon. A horizon object supplies the horizon for both
 bodies. Illumination is tested at the lunar event itself. A date qualifies
 as soon as the illumination and strict bearing conditions both hold. A
@@ -70,17 +74,30 @@ the package coordinate setting (topocentric by default). For comparison
 with Figure 3 of Silva and Pimenta, request geocentric declinations with
 \code{skyscapeR.vars(dec="geo")}. Event selection uses topocentric bearings
 in either output frame.
+}
+\section{Comparison with the original simulations}{
 
-Development validation has identified a limitation in moonset pairing:
-the current same-date rule compares a morning moonset with the following
-evening's sunset, whereas the original simulation data support the previous
-evening. This can change the selected event. Treat moonset results as
-provisional pending that correction. Comparisons with the original 40-degree
-N series also show offsets whose cause has not yet been established.
+With the corrected preceding-sunset pairing, 2,562 of 2,568 moonsets in
+the supplied 1620--2047 series at latitudes 0, 60 N and 60 S agree within
+0.02 degrees in lunar declination. The comparison uses a level horizon,
+longitude 0, elevation 400 m, UTC, Gregorian dates, geocentric declinations,
+refraction, pressure 1013.25 mbar, temperature 15 degrees Celsius and the
+default illumination threshold. Five remaining cases lie just above the
+0.99 illumination boundary; one lies about 0.002 degrees beyond the azimuth
+crossover boundary. The original series selects the following morning in
+each case. Thresholds have not been tuned to reproduce those selections.
+
+The original 40-degree N series retains systematic coordinate differences.
+Diagnostic comparisons suggest a different coordinate-conversion or timing
+convention, but the original settings have not been established. Agreement
+with these simulation tables is not independent observational validation.
+The paper does not specify all atmospheric settings; the values above describe
+this comparison, not confirmed settings of the original simulations.
 
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
+
 \section{Scope of the event model}{
 
 The illumination fraction is a selection criterion, not a naked-eye detection
@@ -88,9 +105,9 @@ model. The calculation does not include weather, sky brightness or extinction.
 It uses centre crossings rather than the first appearance of the upper limb.
 Only the first qualifying event is returned, so changes in illumination
 threshold, civil-day convention or horizon can change the selected lunation.
-The reported difference from the published spring-moonset distribution remains
-an unresolved validation issue; numerical precision does not establish agreement
-with that figure. Preserve all inputs when comparing series.
+Remaining differences from the original simulations are described above.
+Numerical precision does not establish agreement with a published distribution.
+Preserve all inputs when comparing series.
 }
 
 \section{Provenance}{

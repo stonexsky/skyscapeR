@@ -9,15 +9,17 @@ planisphere(
   lat,
   max.mag = 6,
   show.ecliptic = TRUE,
-  col.ecliptic = "orange",
+  col.ecliptic = "#A9542E",
   show.equator = TRUE,
-  col.equator = "red",
-  star.col = "black",
+  col.equator = "#597575",
+  star.col = "#23383A",
   epoch,
   show.milky.way = TRUE,
   show.galactic.equator = FALSE,
   constellations = NULL,
-  col.constellations = "grey45"
+  col.constellations = "#638582",
+  show.legend = TRUE,
+  style = "publication-colour"
 )
 }
 \arguments{
@@ -29,13 +31,13 @@ planisphere(
 
 \item{show.ecliptic}{Whether to display the ecliptic (TRUE or FALSE).}
 
-\item{col.ecliptic}{Colour of the ecliptic line (default: "orange").}
+\item{col.ecliptic}{Colour of the ecliptic line (default ochre).}
 
 \item{show.equator}{Whether to display the celestial equator (TRUE or FALSE).}
 
-\item{col.equator}{Colour of the celestial equator (default: "red").}
+\item{col.equator}{Colour of the celestial equator (default muted grey-green).}
 
-\item{star.col}{Colour of the star symbols (default black).}
+\item{star.col}{Colour of the star symbols (default dark grey-green).}
 
 \item{epoch}{Earlier argument name for \code{year}, retained for existing scripts.}
 
@@ -48,11 +50,16 @@ planisphere(
 or identifiers, or a table from \code{\link{importConstellations}}.
 The default \code{NULL} draws no constellation lines.}
 
-\item{col.constellations}{Colour of the constellation lines (default grey45).}
+\item{col.constellations}{Colour of the constellation lines (default muted teal).}
+
+\item{show.legend}{Show chart pole, latitude, epoch, magnitude limit and the enabled layer key.
+FALSE centres the bare chart, keeping its data and right-ascension ticks.}
+
+\item{style}{Analytical display style, either \code{"publication-colour"} (default) or
+\code{"publication-mono"}. Monochrome uses grayscale and preserves line styles.}
 }
 \value{
-A polar plot of the visible sky, showing stars, the celestial equator,
-        and the ecliptic for the specified epoch and location.
+Draws the polar chart on the active graphics device and invisibly returns the saved xpd, mar and pty graphics settings.
 }
 \description{
 Map the stars that can enter a site's sky at a chosen epoch, with the celestial equator
@@ -67,10 +74,10 @@ declinations that rise above a level geometric horizon. Northern latitudes use
 the north celestial pole; southern latitudes use the south celestial pole.
 Polar distance sets radius, and right ascension sets angle with opposite
 handedness for the two poles. Magnitude controls symbol size, and hour labels
-are separated by 15 degrees. The optional ecliptic uses daily solar positions over a
+are placed every three hours. The optional ecliptic uses daily solar positions over a
 year, using geocentric coordinates without atmospheric refraction. The plot is
 not an instantaneous view
-through a site's measured horizon. The Milky Way is filled with translucent grey behind the stars. Its outline retains the main dark rift and follows the diffuse stellar light in NASA’s Deep Star Maps 2020 (NASA/Goddard Space Flight Center Scientific Visualization Studio, ESA/Gaia/DPAC). It is a fixed sky map rotated to the requested epoch with Swiss Ephemeris precession and nutation. Its width is illustrative. It does not predict visibility or reconstruct the Galaxy’s internal evolution.
+through a site's measured horizon. The Milky Way uses the same diffuse-light tracing as sketchSky(), with dark cutouts and two brighter tiers referenced to the whole-band mean. Source: NASA/Goddard SVS and ESA/Gaia/DPAC, Deep Star Maps 2020. It is a fixed sky map rotated to the requested epoch with Swiss Ephemeris precession and nutation. Its width is illustrative. It does not predict visibility or reconstruct the Galaxy’s internal evolution.
 
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.

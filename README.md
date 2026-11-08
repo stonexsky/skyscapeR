@@ -1,10 +1,8 @@
 # skyscapeR
 
-**Development release ahead of version 2.0.** We are still testing the package and fixing bugs before the public release. Please [report any problems](https://github.com/stonexsky/skyscapeR/issues) with the code that reproduces them.
+skyscapeR is an R package for studying the orientations of archaeological structures. Combine measured bearings, their uncertainties and local skylines to calculate declination distributions. Explore the sky above a site at a chosen epoch, or test whether orientations across sites fit a proposed explanation.
 
-skyscapeR is an R package for analysing the orientations of archaeological structures. It takes measured bearings and their uncertainties, combines them with site locations and horizon profiles, and expresses the results as declination distributions. You can compare the observed orientations with random orientations or with a model of your own.
-
-Upgrading from an earlier release? [Check which analyses and figures to rerun](#migrating-from-skyscaper-12-to-20).
+Version 2.0 is in development. [Report an issue with a reproducible example](https://github.com/stonexsky/skyscapeR/issues) or [read the migration guide](#migrating-from-skyscaper-12-to-20) before rerunning an earlier analysis.
 
 ## Install the development version
 
@@ -25,7 +23,7 @@ install.packages("swephRdata", repos = "https://rstub.r-universe.dev", type = "s
 
 The [worked vignette](https://stonexsky.github.io/skyscapeR/) starts with an Excel field survey. It follows compass and theodolite readings through reduction, declination and candidate selection, then uses Maltese temple entrances for single-site reconstruction and a multi-site significance test.
 
-For a short example using three true bearings, a level horizon and an illustrative site at 35° N, 8° W:
+This example converts three true bearings to a declination distribution for a level horizon at 35° N, 8° W.
 
 ```r
 library(skyscapeR)
@@ -35,14 +33,14 @@ dec <- coordtrans(az, hor)
 plot(spd(dec))
 ```
 
-For the illustrated vignette in RStudio, install `knitr`, `rmarkdown` and `readxl`, then repeat the GitHub installation with `build_vignettes = TRUE, force = TRUE`. Open it with `vignette("skyscapeR", package = "skyscapeR")`. Use `?skyscapeR` for a guide to the help pages.
+To install the illustrated vignette locally, install `knitr`, `rmarkdown` and `readxl`, then repeat the GitHub installation with `build_vignettes = TRUE, force = TRUE`. Open it with `vignette("skyscapeR", package = "skyscapeR")`. Use `?skyscapeR` for a guide to the help pages.
 
 ## Explore a site or compare sites
 
 | Question | Where to start |
 |---|---|
-| What could rise or set in an opening? | Use `az2dec()` and `findTargets()` to screen candidates. For stars, use `star.phases()` for the season and `riseset()` for the skyline crossing on the selected date. |
-| What would the view look like? | Use `sketchSky()` with the site's horizon and time, then `plot(hor, sky = sky)`. Choose natural, publication colour or monochrome views, and use `skyStep()` to advance time. |
+| What could rise or set in an opening? | Use `az2dec()` and `findTargets()` to screen candidates. For stars, use the calendar date from `star.phases()` with `riseset()` to find when the star crosses the skyline. |
+| What would the view look like? | Use `sky <- sketchSky(hor, jd = jd)` and `plot(hor, sky = sky)` for a natural view with twilight, moonlight and extinction. Use `skyStep()` to advance time, or select a publication style for a schematic view. |
 | How do constellation traditions compare? | In `sketchSky()`, pass `display = list(constellations = "modern")`, `"chinese"` or `"chinese_mansions"` as the constellation selection. For your own line figures, use `importConstellations()` with a Stellarium legacy line file. See `?constellations` for sources and identifiers. |
 | Do multiple sites share an orientation pattern? | Start with `plotAzimuth()` and `plotBars()`. Combine declination distributions with `spd()`, then use `randomTest()` or compare a specified hypothesis with `modelTest()`. |
 
@@ -51,6 +49,8 @@ For changes by version, see [NEWS](NEWS.md). For bundled dataset credits and ter
 ## Migrating from skyscapeR 1.2 to 2.0
 
 Start at the **earliest affected step** below and rerun everything that used its output. For example, if a west longitude changed sign, repeat the field reduction before rebuilding the declination curves. If only a compass grid was drawn incorrectly, redraw the figure from the existing bearings. Keep the old results alongside the rerun and record the original inputs, package and ephemeris versions, calendar, timezone, refraction settings, uncertainty model, grid spacings and simulation seed.
+
+If you used the experimental 2.0.9001–2.0.9003 builds, omit `light.model` from `sketchSky()` calls. Natural sketches now use the calibrated renderer automatically.
 
 ### Removed functions and deprecated interfaces
 
@@ -159,13 +159,42 @@ For a HeyWhatsThat horizon, rebuild declination PDFs for north-crossing bearings
 
 The switch to built-in plotting colours and the dependency cleanup do not, by themselves, require rerunning scientific analyses. The numerical changes above and the input choices in the help pages are the relevant comparisons.
 
-### Seasonal visibility plots
+### Plotting in 2.0
 
-`plot(phases)` now defaults to a circular view for a single `star.phases()` result.
-Use `plot(phases, layout = "linear")` to retain the strip view. Comparisons such
-as `plot(first, list(second, third))` remain linear by default; an explicit
-`layout = "circular"` draws concentric rings. Both views show the same seasonal
-classifications and retain the star name, designation and epoch.
+The analytical plots use a common publication palette. Select
+`style = "publication-mono"` for grayscale figures. `plot(hor, sky = sky)` uses
+the sketch's style for the numerical foreground. A linked panorama keeps its source colours.
+
+`plotAzimuth(centre, obj = targets, marks = "rim", obj.position = "outside")`
+draws short reference lines beyond the measured bearings. With either inside or
+outside lines, the two-line target labels always sit outside the circle. The
+second line identifies rise or set. Use `show.obj.labels = FALSE` for
+unlabelled references. On a compass, phase circle or planisphere,
+`show.legend = FALSE` also suppresses titles and callouts, leaving the
+circular data and coordinate scale.
+
+`plot(first, list(second, third))` uses concentric rings by default. A leader
+identifies each ring by star or epoch. `layout = "linear"` selects strips.
+Both layouts divide the solar-longitude cycle into twelve months from December
+solstice. Set `show.grid = FALSE` to hide the month lines. On a single ring,
+the star, epoch and site appear in the centre. The seasonal labels and two-line event names sit outside the rim.
+On linear comparisons a single seasonal scale sits directly below the last strip.
+Each strip identifies the star, the epoch, or both when both vary.
+On a single strip, heliacal and acronycal risings are labelled above the strip
+and settings below it. Plots made from older phase objects can use their stored
+coordinates for the site label.
+
+`plot(fit, show.local = TRUE)` places excesses and deficits in separate rows
+under the observed curve and full pointwise envelope. The stars and `+`
+encode local p-value tiers. The open circle denotes a local p-value above 0.10.
+`show.legend` controls the keys, and `show.pval` controls the numeric global
+result. Use `print(fit)` for the exact stored values. Older unadjusted fits
+are identified in the lower panel.
+
+`plotBars()` uses a line and centre point for each measured span. Use
+`geometry = "bar"` for rectangles. Supplying `shade` explicitly also selects
+rectangles by default. In linked PDF plots, the readout lists every component
+of the selected highest-density region.
 
 For spatial-equinox analyses, pass the archaeological epoch explicitly, for
 example `spatial.equinox(hor, year = "3250 BC")`. The former fixed year 2000 and

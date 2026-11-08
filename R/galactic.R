@@ -1,7 +1,7 @@
 # Use two non-collinear directions as a basis for the Swiss Ephemeris
 # frame rotation. Both frames are evaluated at the SAME instant, so the
 # catalogue stars' proper motions do not impart motion to the diffuse band.
-.galactic_paths <- function(jd, outline, equator) {
+.galactic_frame <- function(jd) {
   normalise <- function(x) x / sqrt(sum(x^2))
   basis <- function(j2000) {
     direction <- function(id) {
@@ -22,7 +22,10 @@
   axes <- rbind(c(-.0548755604,-.8734370902,-.4838350155),
                 c( .4941094279,-.4448296300, .7469822445),
                 c(-.8676661490,-.1980763734, .4559837762))
-  transform <- axes %*% basis(TRUE) %*% t(basis(FALSE))
+  axes %*% basis(TRUE) %*% t(basis(FALSE))
+}
+
+.galactic_paths <- function(jd, outline, equator, transform=.galactic_frame(jd)) {
   path <- function(l,b) {
     l <- l*pi/180
     b <- b*pi/180
@@ -122,4 +125,88 @@
       paint(grDevices::adjustcolor("grey55",alpha.f=.35*visibility*transmission))
     }
   }
+}
+
+# Grid is indexed [Galactic longitude, latitude], centred on quarter degrees.
+# 0 outside, 1 ordinary band, 2 dark cutout, 3 bright, 4 brightest.
+.milky_way_grid <- local({
+  grid <- NULL
+  function() {
+    if (is.null(grid))
+      grid <<- readRDS(system.file("extdata","milky-way-layers.rds",
+                                  package="skyscapeR",mustWork=TRUE))
+    grid
+  }
+})
+
+.galactic_classes <- function(x,y,z,rotation) {
+  component <- function(i) x*rotation[1,i]+y*rotation[2,i]+z*rotation[3,i]
+  gx <- component(1L); gy <- component(2L); gz <- component(3L)
+  longitude <- atan2(gy,gx)*180/pi
+  latitude <- atan2(gz,sqrt(gx^2+gy^2))*180/pi
+  col <- floor((longitude+180)*4+.5) %% 1440
+  row <- floor((latitude+60)*4+.5)
+  keep <- is.finite(row) & row>=0 & row<481
+  result <- integer(length(row))
+  result[keep] <- as.integer(.milky_way_grid()[1+col[keep]+1440*row[keep]])
+  result
+}
+
+# Rows are local east, north and zenith in the Galactic frame.
+.galactic_local_frame <- function(jd,loc,frame) {
+  local.axes <- rbind(c(90,0),c(0,0),c(0,90))
+  eq <- t(apply(local.axes,1L,function(axis) {
+    pos <- swephR::swe_azalt_rev(jd,1L,loc[c(2,1,3)],
+                                  c((axis[1]+180)%%360,axis[2]))$xout*pi/180
+    c(cos(pos[2])*cos(pos[1]),cos(pos[2])*sin(pos[1]),sin(pos[2]))
+  }))
+  eq %*% t(frame)
+}
+
+.draw_galactic_layers <- function(rotation,visibility=1,k=0,atmosphere=NULL,
+                                  pole=NULL,outer=NULL,paper=FALSE) {
+  if (visibility<=0) return(invisible(NULL))
+  box <- graphics::par("usr")
+  size <- pmin(c(1600,1000),pmax(128,ceiling(graphics::par("pin")*130)))
+  centres <- function(a,b,n) a+(seq_len(n)-.5)*(b-a)/n
+  cx <- centres(box[1],box[2],size[1]); cy <- centres(box[4],box[3],size[2])
+  # Pixel order: top row first in each column for R's raster matrix.
+  x <- rep(cx,each=size[2]); y <- rep(cy,size[1])
+  if (is.null(pole)) {
+    alt <- cy
+    alt <- .geometric_altitude(alt,atmosphere)
+    h <- rep(alt,size[1])*pi/180; az <- x*pi/180
+    ids <- .galactic_classes(cos(h)*sin(az),cos(h)*cos(az),sin(h),rotation)
+    ids[y < -90 | y > 90] <- 0L
+    attenuation <- if(k>0) rep(.band_transmission(alt,k),size[1]) else 1
+  } else {
+    r <- sqrt(x*x+y*y)
+    dec <- pole*(90-r)*pi/180
+    ra <- pole*atan2(x,y)
+    ids <- .galactic_classes(cos(dec)*cos(ra),cos(dec)*sin(ra),sin(dec),rotation)
+    ids[r>outer] <- 0L
+    attenuation <- 1
+  }
+  opacity <- c(0,.19,0,.33,.50)[ids+1L]*visibility*attenuation
+  shade <- if(paper) .27 else .88
+  pixels <- grDevices::rgb(shade,shade,shade,pmin(1,opacity))
+  graphics::rasterImage(matrix(pixels,nrow=size[2]),box[1],box[3],box[2],box[4],
+                        interpolate=FALSE)
+}
+
+.geometric_altitude <- function(alt,atmosphere) {
+    if (isTRUE(atmosphere$refraction)) {
+      # Swiss assumes standard pressure when swe_azalt receives zero.
+      # Project a meridian of geometric heights and invert its apparent heights.
+      h <- seq(-1,90,by=.05)
+      apparent <- vapply(h,function(v) {
+        eq <- swephR::swe_azalt_rev(atmosphere$jd,1L,atmosphere$geopos,c(0,v))$xout
+        swephR::swe_azalt(atmosphere$jd,1L,atmosphere$geopos,atmosphere$atm,
+                          atmosphere$temp,eq)$xaz[3L]
+      },numeric(1))
+      use <- apparent>=0
+      hi <- alt>=0 & alt<=90
+      alt[hi] <- stats::approx(apparent[use],h[use],alt[hi],rule=2)$y
+    }
+  alt
 }

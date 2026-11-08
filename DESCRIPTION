@@ -1,7 +1,7 @@
 Package: skyscapeR
 Type: Package
 Title: Data Analysis and Visualization for Skyscape Archaeology
-Version: 2.0
+Version: 2.0.9004
 Authors@R: c(
     person("Fabio", "Silva", email = "fsilva@stonexsky.com",
            role = c("aut", "cre")),
@@ -19,15 +19,15 @@ Description: Investigate how archaeological sites and structures relate to
     with random or specified null models (Silva 2020 <doi:10.1016/j.jas.2020.105138>,
     Silva and Lomsdalen 2025 <doi:10.1007/s12520-025-02208-4>).
 URL: https://github.com/stonexsky/skyscapeR,
-    https://stonexsky.github.io/skyscapeR/
+        https://stonexsky.github.io/skyscapeR/
 BugReports: https://github.com/stonexsky/skyscapeR/issues
 Depends: R (>= 4.1), swephR
 Imports: parallel, methods, oce (>= 1.8-4), utils, tools, stats,
-        graphics, grDevices, plotrix, zoo
+        graphics, grDevices, zoo
 Additional_repositories: https://rstub.r-universe.dev
 License: GPL (>= 2)
 Copyright: See inst/COPYRIGHTS (COPYRIGHTS in the installed package)
-    for bundled data attribution and licence notices.
+        for bundled data attribution and licence notices.
 Encoding: UTF-8
 LazyData: true
 LazyDataCompression: xz
@@ -36,3 +36,8 @@ Suggests: swephRdata, terra (>= 1.7-65), xml2, png, httr2 (>= 1.0.0),
 VignetteBuilder: knitr
 Config/roxygen2/version: 8.1.0
 NeedsCompilation: no
+Packaged: 2026-11-07 21:43:19 UTC; root
+Author: Fabio Silva [aut, cre],
+  Billy Finnimore [ctb],
+  Victor Reijs [ctb],
+  Rita Gautschy [ctb]

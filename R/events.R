@@ -40,7 +40,7 @@ events <- function(name) {
 #' @param loc This can be either a vector with the latitude and longitude of the
 #' location, or a \emph{skyscapeR.horizon} object.
 #' @param col The color for plotting, and differentiating these objects.
-#' Defaults to red for all objects.
+#' Defaults to ochre for all objects.
 #' @param lty Line type (see \code{\link{par}}) used for differentiation.
 #' Used for single-year tracks and year-range boundaries.
 #' @param lwd Line width (see \code{\link{par}}) used for differentiation.
@@ -84,7 +84,7 @@ events <- function(name) {
 #' transformations may discard attributes; save the original result for reference.
 #' It does not identify ephemeris files, catalogue revisions or a development
 #' commit. Retain those and the analysis script separately for exact reproduction.
-skyObject = function(names, year, loc=FALSE, col = 'red', lty = 1, lwd = 1, epoch) {
+skyObject = function(names, year, loc=FALSE, col = '#A9542E', lty = 1, lwd = 1, epoch) {
   if (!missing(epoch)) {
     if (!missing(year)) stop("Supply year only once.",call.=FALSE)
     year <- epoch
@@ -701,8 +701,12 @@ sMjLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, alt
 #' both inequalities. Bearings are topocentric, clockwise from north.
 #'
 #' The search runs chronologically from 60 days before to 65 days after the
-#' astronomical equinox. It pairs the first lunar and solar centre crossings
-#' of the requested direction on the same local civil date. A coordinate vector
+#' astronomical equinox. Moonrise is paired with the first sunrise on the same
+#' local civil date. Moonset is paired with the most recent sunset before it,
+#' considering the first solar centre crossing on the current and preceding
+#' local civil dates. A candidate without such a sunset is skipped. Local-day
+#' boundaries account for timezone changes, including daylight saving time.
+#' A coordinate vector
 #' specifies a level horizon. A horizon object supplies the horizon for both
 #' bodies. Illumination is tested at the lunar event itself. A date qualifies
 #' as soon as the illumination and strict bearing conditions both hold. A
@@ -716,12 +720,23 @@ sMjLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, alt
 #' \code{skyscapeR.vars(dec="geo")}. Event selection uses topocentric bearings
 #' in either output frame.
 #'
-#' Development validation has identified a limitation in moonset pairing:
-#' the current same-date rule compares a morning moonset with the following
-#' evening's sunset, whereas the original simulation data support the previous
-#' evening. This can change the selected event. Treat moonset results as
-#' provisional pending that correction. Comparisons with the original 40-degree
-#' N series also show offsets whose cause has not yet been established.
+#' @section Comparison with the original simulations:
+#' With the corrected preceding-sunset pairing, 2,562 of 2,568 moonsets in
+#' the supplied 1620--2047 series at latitudes 0, 60 N and 60 S agree within
+#' 0.02 degrees in lunar declination. The comparison uses a level horizon,
+#' longitude 0, elevation 400 m, UTC, Gregorian dates, geocentric declinations,
+#' refraction, pressure 1013.25 mbar, temperature 15 degrees Celsius and the
+#' default illumination threshold. Five remaining cases lie just above the
+#' 0.99 illumination boundary; one lies about 0.002 degrees beyond the azimuth
+#' crossover boundary. The original series selects the following morning in
+#' each case. Thresholds have not been tuned to reproduce those selections.
+#'
+#' The original 40-degree N series retains systematic coordinate differences.
+#' Diagnostic comparisons suggest a different coordinate-conversion or timing
+#' convention, but the original settings have not been established. Agreement
+#' with these simulation tables is not independent observational validation.
+#' The paper does not specify all atmospheric settings; the values above describe
+#' this comparison, not confirmed settings of the original simulations.
 #'
 #' Astronomical positions require Swiss Ephemeris files covering the epoch. We
 #' recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
@@ -758,9 +773,9 @@ sMjLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, alt
 #' It uses centre crossings rather than the first appearance of the upper limb.
 #' Only the first qualifying event is returned, so changes in illumination
 #' threshold, civil-day convention or horizon can change the selected lunation.
-#' The reported difference from the published spring-moonset distribution remains
-#' an unresolved validation issue; numerical precision does not establish agreement
-#' with that figure. Preserve all inputs when comparing series.
+#' Remaining differences from the original simulations are described above.
+#' Numerical precision does not establish agreement with a published distribution.
+#' Preserve all inputs when comparing series.
 #' @section Provenance:
 #' Structured results carry a \code{provenance} attribute. Read it with
 #' \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
@@ -813,7 +828,7 @@ EFM <- function(year, loc, season='spring', rise=TRUE, min.phase=.99, timezone, 
     local.days <- floor(equinox)+(-62:67)-.5
     midnights <- if (!is.null(zone$offset)) local.days-zone$offset/86400 else
       vapply(local.days,.efm_midnight,numeric(1),zone=zone$zone)
-    for (i in seq_len(length(midnights)-1L)) {
+    for (i in 2L:(length(midnights)-1L)) {
       day <- midnights[i]; end <- midnights[i+1L]
       if (end<=day) next
       # A civil day spans at most one lunar illumination extremum. Bound its
@@ -825,8 +840,19 @@ EFM <- function(year, loc, season='spring', rise=TRUE, min.phase=.99, timezone, 
       moon <- event(day,1L)
       if (!is.finite(moon) || moon<day || moon>=end || moon<equinox-60 || moon>equinox+65) next
       if (moonphase(moon)<min.phase) next
-      sun <- event(day,0L)
-      if (!is.finite(sun) || sun<day || sun>=end) next
+      if (rise) {
+        sun <- event(day,0L)
+        if (!is.finite(sun) || sun<day || sun>=end) next
+      } else {
+        # Use actual local-day boundaries, including 23/25-hour DST days.
+        # Consider today's sunset too, in case it precedes this moonset.
+        starts <- c(midnights[i-1L],day)
+        stops <- c(day,end)
+        sunsets <- vapply(starts,event,numeric(1),body=0L)
+        valid <- is.finite(sunsets) & sunsets>=starts & sunsets<stops & sunsets<moon
+        if (!any(valid)) next
+        sun <- max(sunsets[valid])
+      }
       moon.az <- .cc_position(moon,1L,geo,refraction,atm,temp)$az
       sun.az <- .cc_position(sun,0L,geo,refraction,atm,temp)$az
       if (target*(moon.az-sun.az)<=0) next

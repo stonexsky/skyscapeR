@@ -47,8 +47,7 @@ mono uses black and white. Neither publication style predicts visibility.}
 \item{max.mag}{Finite catalogue magnitude cutoff, default 6. Applied before
 extinction to star symbols and the integrated magnitudes of supported clusters.
 It does not limit constellation endpoints, the Sun, Moon or planets. Raising
-this value cannot supply stars absent from the catalogue or overcome the
-symbol-size cutoff described below.}
+the cutoff includes additional stars only where the catalogue supplies them.}
 
 \item{k}{Non-negative visual extinction coefficient in magnitudes per airmass
 for natural style. Defaults to \code{\link{skyscapeR.vars}()$k}, initially 0.2.
@@ -61,7 +60,8 @@ An object of classes \code{skyscapeR.sketch} and \code{skyscapeR.sky}.
 It stores \code{jd}, \code{loc}, \code{style}, \code{display}, \code{settings}
 (calendar, magnitude cutoff and extinction), and \code{atmosphere}.
 \code{stars} and \code{coords} contain azimuth, altitude and symbol size;
-\code{star.opacity} records display opacity. \code{bodies}, \code{diameters},
+\code{star.opacity} retains an earlier symbol-opacity diagnostic; natural
+sketches draw from \code{light.budget}. \code{bodies}, \code{diameters},
 \code{planet.size} and \code{lunar} describe selected Solar System bodies.
 \code{clusters} holds supported cluster footprints and opacity when applicable;
 \code{guides}, \code{light}, \code{background} and twilight fields support drawing.
@@ -81,31 +81,27 @@ Replotting the object changes framing without recalculating the instant. Use
 require Swiss Ephemeris files covering the epoch; see
 \code{\link{skyscapeR-package}} for installation.
 }
-\section{Positions, atmosphere and symbol sizes}{
+\section{Reading a natural sketch}{
 
-Swiss Ephemeris supplies apparent topocentric stellar and planetary positions,
-solar and lunar angular diameters, and lunar phase. Atmospheric refraction is
-separate from astronomical apparent-place corrections. Refraction, pressure and
-temperature come from \code{\link{skyscapeR.vars}} when the sketch is calculated;
-the object records these settings. Azimuth increases clockwise from true north.
+The sky is calculated for the specified instant. Stars, clusters, planets and
+the Moon contribute light on a common visual (V-band) magnitude scale.
+Diffuse Milky Way light and atmospheric background are measured per unit
+sky area. Their light is added before brightness is compressed for display.
+To inspect the values underlying a view, use \code{\link{skyRadiance}}.
 
-Star symbols use fixed catalogue visual magnitudes and spectral-class colours.
-There is no variable-star light curve or time-dependent cluster magnitude.
-Selected combined-system entries avoid duplicate symbols for Dubhe and Zeta
-Herculis; other catalogue components can remain distinct. Non-stellar catalogue
-entries are omitted from the point-star layer but remain available to
-\code{\link{findTargets}} and \code{\link{star.phases}}.
+Stars remain unresolved as the field is enlarged. Mercury, Venus, Mars,
+Jupiter, Saturn and the Moon use apparent disc sizes and illuminated
+fractions from Swiss Ephemeris. A close view can therefore show the phase
+of Venus. Star colours follow catalogue spectral classes; the diffuse band
+has a neutral tint. Colour and projection influence the screen appearance.
+Publication styles use magnitude-scaled star and planet symbols on white.
 
-Stellar and planetary point sizes use the package display mapping
-\code{cex = 4.45 - 1.57 * log(m + 10)}, where \code{m} is the catalogue or
-planetary magnitude in publication styles and the extinction-adjusted magnitude
-in natural style. Magnitudes greater than 7 have zero size. Symbols are graphical
-markers, not angular stellar diameters or calibrated retinal images. The five
-planets are Mercury, Venus, Mars, Jupiter and Saturn; their magnitudes are
-calculated for the instant. The Sun and Moon use angular disc diameters rather
-than this point-size mapping. The illuminated lunar limb faces the Sun even
-when the Sun is hidden. Discs are drawn in azimuth-altitude coordinates, so wide
-fields and high altitudes introduce projection distortion.
+Azimuth increases clockwise from true north. Refraction, pressure and
+temperature come from \code{\link{skyscapeR.vars}} when the sky is calculated.
+The Sun and Moon switches control their contributions to sky illumination as
+well as their discs. Use \code{display = list(moon = FALSE)} for a moonless
+comparison. The terrain masks the drawn sky; a local ridge hiding the Moon
+can still leave scattered moonlight in the sky.
 }
 
 \section{Constellations}{
@@ -126,133 +122,53 @@ plot clipping and the horizon foreground still apply. These are reference
 figures; their visibility is not an observing prediction.
 }
 
-\section{Stellar extinction and twilight visibility}{
+\section{Twilight and extinction}{
 
-Natural style adds \eqn{k X(h)} to magnitude, using Rozenberg's approximation
-\eqn{X(h) = 1 / (\sin h + 0.025 \exp(-11 \sin h))}, with angles converted
-from degrees. This is the extinction-airmass expression discussed by Krisciunas
-and Schaefer (1991, equation 14). Stellar point symbols use apparent altitude for
-this optical path calculation even if the display uses geometric altitude.
-Altitude is clamped at zero for this calculation. Planet symbols use their
-plotted altitude. Near-horizon extinction remains sensitive to the real atmosphere.
+At twilight the sky brightens differently towards and away from the Sun.
+Zenith brightness uses the Paranal V-band observations of Patat et al.
+(2006) at solar depressions of 5 to 15 degrees. Sacramento Peak measurements
+supply earlier twilight levels and the directional variation (Koomen et al.
+1952). These clear-sky estimates depend on site conditions. Moonlight uses
+the scattering model of Krisciunas and Schaefer (1991), with its dependence
+on lunar phase, altitude and angular separation.
 
-For effective sky brightness \eqn{B} in nanolamberts, the display limiting
-magnitude is \eqn{6 - 1.45 \log_{10}(B/60)}. Symbols fade smoothly over the last
-0.75 magnitude below this limit, with zero opacity at or beyond the limit.
-The smooth opacity is \eqn{f^2(3-2f)}, where \eqn{f} is the clipped fraction
-\eqn{(m_{lim}-m)/0.75}. This is a package display rule, not a published visual
-threshold law. Symbols are suppressed when the altitude used for visibility testing is
-negative.
-
-During twilight, stars and cluster centres use a shared adaptation term based
-on solar zenith brightness plus local scattered moonlight. Relative to the dark
-baseline of 60 nanolamberts, this brightness is raised to the power 0.40.
-Its weight increases linearly from zero at solar altitude -12 degrees to one
-at -9 degrees, stays one to -5 degrees, and falls to zero at -1 degree.
-Local and adapted brightness are blended logarithmically. This empirical
-wide-field display adjustment was informed by comparisons with Stellarium;
-it is not Stellarium's implementation or a universal calibration. Planets use
-the local brightness calculation without this stellar adaptation adjustment.
+Direct light fades towards the horizon as its path through the atmosphere
+lengthens. The coefficient \code{k} sets the loss per airmass. The model
+uses Rozenberg's airmass approximation (Krisciunas and Schaefer 1991);
+uncertainty is greatest close to the skyline. The twilight colours are
+illustrative (Lee 1994, 2015).
 }
 
-\section{Solar and lunar sky brightness}{
+\section{Milky Way and clusters}{
 
-Solar zenith brightness is interpolated logarithmically between representative
-values at solar altitudes -18, -12, -6, -0.833, 15 and 90 degrees: respectively
-60, 240, 100000, 3000000, 300000000 and 1000000000 nanolamberts. The scale is
-informed by Schaefer (1993); the interpolation and angular gradient are package
-approximations. Solar altitude for twilight is geometric. Sky colours and the
-Belt of Venus are illustrative approximations informed by Lee (1994, 2015),
-not calibrated photometry.
+The Milky Way is traced from the diffuse light in Deep Star Maps 2020.
+Within the smoothed envelope, retained dark patches have at least 10 percent
+local contrast; two bright tiers begin at 1.10 and 1.75 times the mean band
+tone after the dark patches are excluded. Retained patches cover at least
+10 square degrees. Natural sketches anchor the mean surface brightness
+of a four-degree field in Carina to 20.7 V magnitudes per square arcsecond
+(van der Kruit 2024). Brightness elsewhere is approximate. Atmospheric
+extinction can make the band difficult to follow down to its calculated
+horizon crossing. The Galactic equator is an optional geometric guide.
 
-Lunar scattering follows Krisciunas and Schaefer (1991, equations 20-23), using
-lunar phase angle, angular separation, viewing altitude and \code{k}. It uses
-their scattering-airmass expression, distinct from the stellar extinction
-expression. Separation is bounded below at 10 degrees to avoid extrapolation
-near the disc. Only a Moon above the astronomical horizontal contributes.
-A ridge can hide the disc without removing its modelled sky illumination.
-Terrain does not cast shadows into the atmospheric scattering calculation.
-
-The Sun and Moon switches control both their discs and their respective sky
-illumination. With both off, natural style uses its dark baseline while
-extinction remains active. Use \code{display = list(moon = FALSE)} for a
-moonless comparison. These are deliberate display scenarios rather than
-changes to the calculated astronomical instant.
+A supported cluster contributes its catalogue light across its angular
+extent. Light already assigned to plotted stars within that footprint is
+subtracted before the remaining glow is drawn. This accounts for projected
+overlap; it does not establish membership. Integrated cluster magnitude
+alone is insufficient to predict first detection (Crumey 2014).
 }
 
-\section{Unresolved clusters}{
+\section{Using a sketch with a stellar phase date}{
 
-In natural style with stars enabled, 17 catalogue-matched open and globular
-clusters can contribute a soft patch. Angular diameters come from OpenNGC;
-missing minor diameters use the major diameter. An equal-area circle has radius
-\code{sqrt(major.arcmin * minor.arcmin) / 120} degrees. Spherical angular
-separation defines its footprint, including across north and near the zenith.
-The integrated catalogue magnitude supplies an upper visibility bound through
-the stellar display rule. No integrated M45 point symbol is drawn.
+In 69 of 70 individual comparisons, the estimated first morning of visibility was within a week of the predicted heliacal-rising date.
 
-The patch fades as visible point symbols account for projected light within
-its footprint. This is a flux-weighted estimate using all projected stars,
-including possible foreground overlaps, not a cluster-membership calculation.
-The central opacity is \code{0.28 * integrated * remaining^3 / sqrt(1 + radius^2)},
-with a smooth radial taper to zero at the edge. These constants are rendering
-choices. Publication styles omit diffuse patches and retain individual stars.
-
-Integrated magnitude alone does not determine extended-object visibility.
-Surface brightness, angular size and contrast matter (Crumey 2014). This
-rendering does not implement Crumey's threshold model, resolve actual cluster
-structure, or establish a first-detection date. Only clusters in the supplied
-size table receive a patch; it is not a complete deep-sky renderer.
-}
-
-\section{Milky Way and reference guides}{
-
-The schematic Milky Way outline is adapted from NASA's Deep Star Maps 2020,
-credited to NASA/Goddard Scientific Visualization Studio and ESA/Gaia/DPAC.
-Its fixed shape is rotated to the observing epoch; stellar evolution and the
-Galaxy's physical evolution are not reconstructed. The main dark rift is
-retained, but the band is not a calibrated surface-brightness map.
-
-In natural style, solar fading decreases from full strength at -18 degrees
-to zero at -12 degrees. Local sky brightness reduces contrast, and both fill
-and outline are attenuated with altitude by transmission
-\eqn{10^{-0.4 k X(h)}}. Band altitude is clamped at zero for airmass. Publication
-styles show the schematic band without atmospheric dimming. The Galactic
-equator is a separate dash-dot guide. The ecliptic is dashed and the celestial
-equator dotted; these reference curves use geometric altitude. Pole markers
-are geometric and the zenith is labelled at the centre of the plot width.
-}
-
-\section{Interpretation and limitations}{
-
-Twilight thresholds and unresolved-cluster glow are display approximations,
-not a universally calibrated naked-eye detection model. Agreement in selected
-comparisons with Stellarium or \code{\link{star.phases}} does not establish
-agreement across other objects, sites, epochs or atmospheric conditions.
-Neither the presence nor absence of a cluster patch establishes its first
-or last detection date, and its opacity is not measured surface brightness.
-Report the visibility assumptions separately when interpreting a proposed
-observation.
-
-A sketch is a visualisation, not a test of naked-eye detectability. There is no
-observer-specific acuity, adaptation history, light-pollution map, cloud model,
-wavelength-dependent extinction, or variable-star brightness model. Very low
-altitudes, twilight thresholds and narrow terrain clearances deserve particular
-care. Screen size, symbol size and projection also affect what appears visible.
-
-\code{\link{star.phases}} uses a different visibility criterion: a fixed
-limiting magnitude, atmospheric extinction and a star-Sun altitude-separation
-rule on a synthetic annual cycle. Shared positions and extinction do not make
-its event dates identical to this display's threshold. A rise time from
-\code{\link{riseset}} is a centre crossing of the skyline, not first visibility.
-Inspect a short sequence after crossing with \code{\link{skyStep}} while the
-sky is still dark enough. An absent sketch symbol alone cannot rule out an
-observationally plausible heliacal sighting. Cluster predictions based on
-integrated magnitude require additional caution.
-
-For reproducibility, retain the sky object, horizon and external image, package
-and ephemeris versions, civil calendar/timezone, and atmosphere settings.
-Recalculation with \code{skyStep} reads the session refraction, pressure and
-temperature again; keep these fixed when comparing time steps.
+Use \code{\link{riseset}} to locate the skyline crossing on each morning,
+then \code{\link{skyStep}} to follow the star as it climbs through a
+brightening sky. A plotted pixel does not establish naked-eye visibility.
+A quantitative test needs a point-source threshold and an assumed observer
+limit (Crumey 2014). See also \code{\link{star.phases}}.
+Record site, horizon, epoch, calendar, timezone, extinction
+and display switches when reporting a reconstruction.
 }
 
 \section{Provenance}{
@@ -284,6 +200,17 @@ plot(hor, sky = mono, xrange = sector)
 }
 }
 \references{
+Patat, F., Ugolnikov, O. S. and Postylyakov, O. V. (2006).
+UBVRI twilight sky brightness at ESO-Paranal. Astronomy and Astrophysics 455, 385-393.
+\doi{10.1051/0004-6361:20064992}.
+
+Koomen, M. J. et al. (1952). Measurements of the brightness
+of the twilight sky. JOSA 42, 353-356. \doi{10.1364/JOSA.42.000353}.
+
+van der Kruit, P. C. (2024). Pannekoek's Galaxy.
+Journal of Astronomical History and Heritage 27, 135-199.
+\doi{10.3724/SP.J.1440-2807.2024.01.10}.
+
 Krisciunas, K. and Schaefer, B. E. (1991). A model of the brightness
 of moonlight. PASP 103, 1033-1039. \doi{10.1086/132921}.
 

@@ -105,7 +105,7 @@ from the astrometric catalogue. Fabio Silva manually transcribed the stellar
 names from an IAU table. The exact table version, extraction date and a separate
 licence declaration for that compilation are not recorded locally.
 
-Schematic Milky Way outline (extdata/milky-way.csv)
+Milky Way tracing (extdata/milky-way-layers.rds; earlier outline: milky-way.csv)
 ---------------------------------------------------
 Adapted from diffuse stellar light in Deep Star Maps 2020.
 https://svs.gsfc.nasa.gov/4851/

@@ -10,7 +10,7 @@
   xrange,
   yrange,
   obj,
-  col.ground = "darkgreen",
+  col.ground = NULL,
   col.sky,
   use.image = TRUE,
   ...,
@@ -18,7 +18,9 @@
   sky = NULL,
   xlim,
   ylim,
-  fastLoad = FALSE
+  fastLoad = FALSE,
+  show.legend = TRUE,
+  style = NULL
 )
 }
 \arguments{
@@ -35,7 +37,7 @@ directions. Defaults to TRUE when xrange is supplied.}
 a list of these objects. Each group retains its own epochs and styles
 for displaying the paths of celestial objects.}
 
-\item{col.ground}{Color of the ground. Defaults to \emph{darkgreen}.}
+\item{col.ground}{Silhouette colour. NULL uses a dark muted foreground for natural skies, pale grey-green for publication colour or grey for monochrome.}
 
 \item{col.sky}{Earlier name for a solid sky colour. Prefer sky.}
 
@@ -53,6 +55,12 @@ Missing or changed files warn and fall back to the numerical silhouette.}
 \item{ylim}{Earlier name for yrange.}
 
 \item{fastLoad}{Use a sampled PNG for quick plots. New photographic imports store a preview. For older horizons the first preview loads the image. The numerical skyline and celestial tracks retain their precision.}
+
+\item{show.legend}{Display the key for celestial tracks. The angular axes are always drawn.}
+
+\item{style}{Frame and silhouette style. A sketch supplies its stored style by default. Without a
+sketch the default is \code{"publication-colour"}. Other choices are \code{"natural"} and
+\code{"publication-mono"}. Supplied panorama pixels and sky objects retain their own rendering.}
 }
 \value{
 Draws the horizon and returns the session atmosphere invisibly in a list.

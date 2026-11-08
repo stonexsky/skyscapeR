@@ -123,6 +123,24 @@ No PNG or copy of the input horizon is stored in the output.
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
+\section{Comparison with the original simulations}{
+
+For SIM1, 5,024 of 5,136 events in the supplied 1620--2047 series at
+latitudes 0, 60 N and 60 S agree within 0.02 degrees in lunar declination.
+This comparison uses a level horizon, longitude 0, elevation 400 m, UTC,
+Gregorian dates, refraction, pressure 1013.25 mbar and temperature 15 degrees
+Celsius. The original 40-degree N series has additional systematic offsets.
+Of the 112 discrepancies outside that series, inferred matching dates suggest
+differences in the lunation search window and first/last crescent selection.
+Some lie close to the visibility threshold. Alternative window and solar-limb
+conventions improve some cases but disrupt others that already agree, so no
+replacement convention has been adopted. The exact original settings remain
+unresolved; the paper does not specify all atmospheric inputs. Inspect the
+diagnostics before interpreting individual events. Agreement with simulation
+tables is not independent observational validation, and these SIM1 counts do
+not establish the accuracy of SIM2.
+}
+
 \section{Provenance}{
 
 Structured results carry a \code{provenance} attribute. Read it with

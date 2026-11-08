@@ -4,7 +4,18 @@
 \alias{plotAzimuth}
 \title{Plot orientation measurements on a compass grid}
 \usage{
-plotAzimuth(az, obj, show.obj.labels = TRUE, col = "blue", lty = 1, lwd = 1.5)
+plotAzimuth(
+  az,
+  obj,
+  show.obj.labels = TRUE,
+  col = NULL,
+  lty = 1,
+  lwd = 1.5,
+  marks = c("spokes", "rim"),
+  obj.position = c("inside", "outside"),
+  show.legend = TRUE,
+  style = "publication-colour"
+)
 }
 \arguments{
 \item{az}{Azimuths in degrees clockwise from north. Can be omitted if \emph{obj} is given.}
@@ -23,6 +34,18 @@ Defaults to TRUE.}
 \item{lty}{Line type to plot measurements. Defaults to 1.}
 
 \item{lwd}{Line width for measured bearings. Defaults to 1.5.}
+
+\item{marks}{Draw measured orientations as equal-length \code{"spokes"} (default) or short \code{"rim"} ticks.}
+
+\item{obj.position}{Draw target reference lines \code{"inside"} the circle or just \code{"outside"} its rim.
+In both positions labels lie outside the circle. The first line names the target and the second gives rise or set.
+Range endpoints share a label. Non-crossing targets have no reference bearing.}
+
+\item{show.legend}{With TRUE, show the count and enabled target labels. FALSE centres the bare compass,
+including its cardinal scale, measured bearings and target lines.}
+
+\item{style}{Analytical display style, either \code{"publication-colour"} (default) or
+\code{"publication-mono"}. Monochrome uses grayscale and preserves line styles.}
 }
 \value{
 Draws measured bearings and optional target directions on the active graphics device. North is at the top and azimuth increases clockwise.
@@ -32,7 +55,7 @@ Inspect the directions of structural axes on a compass and compare them with can
 rise or set bearings.
 }
 \details{
-Each measurement appears as a radial line of equal length. North is at the top and
+Measurements are drawn as spokes or rim ticks. North is at the top and
 bearings increase clockwise; repeated bearings can overplot. A data frame supplies the
 True.Azimuth column. For optional targets the function uses the session atmosphere to compute a diurnal
 track and seeks a zero-altitude crossing in the eastern and western portions of the

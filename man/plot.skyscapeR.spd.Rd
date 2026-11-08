@@ -9,12 +9,14 @@
   xrange,
   yrange,
   title = NULL,
-  col = "blue",
+  col = NULL,
   shading = TRUE,
   ...,
   obj = NULL,
   xlim,
-  ylim
+  ylim,
+  show.legend = TRUE,
+  style = "publication-colour"
 )
 }
 \arguments{
@@ -26,7 +28,7 @@
 
 \item{title}{Title to add to the plot.}
 
-\item{col}{Color of summed probability density. Defaults to blue.}
+\item{col}{Observed density colour. NULL uses the current style.}
 
 \item{shading}{Logical to control whether to color the entire distribution. Defaults to TRUE}
 
@@ -37,6 +39,11 @@
 \item{xlim}{Earlier name for xrange.}
 
 \item{ylim}{Earlier name for yrange.}
+
+\item{show.legend}{Show the observed-curve and celestial-target key when target overlays are supplied.}
+
+\item{style}{Analytical display style, either \code{"publication-colour"} (default) or
+\code{"publication-mono"}. Monochrome uses grayscale and preserves line styles.}
 }
 \value{
 Draws the summed density against its angular coordinate on the active graphics device.

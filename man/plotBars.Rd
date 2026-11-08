@@ -16,7 +16,10 @@ plotBars(
   sort = FALSE,
   shade = TRUE,
   mark = TRUE,
-  col = "blue"
+  col = NULL,
+  geometry = if (missing(shade)) "interval" else "bar",
+  show.legend = TRUE,
+  style = "publication-colour"
 )
 }
 \arguments{
@@ -47,7 +50,16 @@ to \emph{TRUE}}
 \item{mark}{Logical to control whether to mark the declination value. Defaults to
 \emph{TRUE}}
 
-\item{col}{Color to plot measurements in. Defaults to \emph{blue}.}
+\item{col}{Measurement colour. NULL uses the current style.}
+
+\item{geometry}{Use \code{"interval"} for sightline intervals with a centre point, or
+\code{"bar"} for filled or outlined rectangles. Explicitly supplying the older \code{shade}
+setting selects rectangles unless \code{geometry} is supplied.}
+
+\item{show.legend}{Display target annotations when \code{show.obj.label} is also TRUE.}
+
+\item{style}{Analytical display style, either \code{"publication-colour"} (default) or
+\code{"publication-mono"}. Monochrome uses grayscale and preserves line styles.}
 }
 \value{
 Draws orientation measurements and their uncertainties on the active graphics device.

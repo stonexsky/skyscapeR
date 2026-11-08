@@ -10,11 +10,13 @@
   hdr = 0.954,
   show.az,
   xrange,
-  col = "#0000FF80",
+  col = NULL,
   ...,
   az,
   hor,
-  xlim
+  xlim,
+  show.legend = TRUE,
+  style = "publication-colour"
 )
 }
 \arguments{
@@ -29,7 +31,7 @@
 
 \item{xrange}{Range of x-axis to plot.}
 
-\item{col}{Color of high density region to highlight. Defaults to blue with 0.5 alpha.}
+\item{col}{Fill colour for highest-density regions. NULL uses the current style.}
 
 \item{...}{Additional arguments to be passed to \emph{plot}.}
 
@@ -41,6 +43,12 @@ to show combined panels for a single declination distribution.}
 and with the same length as the distributions in \code{x}. Supply with \code{az}.}
 
 \item{xlim}{Earlier name for xrange.}
+
+\item{show.legend}{Show the HDR mass above stacked densities. The linked diagnostic always identifies
+its component panels and reports the numerical interval or intervals.}
+
+\item{style}{Analytical display style, either \code{"publication-colour"} (default) or
+\code{"publication-mono"}. Monochrome uses grayscale and preserves line styles.}
 }
 \value{
 Draws the selected probability distributions and requested intervals on the active graphics device.
@@ -57,7 +65,7 @@ rows therefore do not measure relative probability mass. Use the linked panels f
 transformed observation to inspect how its source azimuth distribution and horizon
 produce the declination distribution. Its annotation gives the measurement name
 and the highest-density declination interval or intervals containing the requested
-probability mass, labelled as the confidence range.
+probability mass. Every disjoint component is listed in the HDR readout. Standalone curves have a fixed label column.
 
 With neither source input supplied, plot the distributions alone. With both
 \code{az} and \code{hor}, show the information, azimuth, transformation and

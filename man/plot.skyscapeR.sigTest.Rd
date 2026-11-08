@@ -8,13 +8,15 @@
   x,
   xrange,
   title = NULL,
-  col = "blue",
+  col = NULL,
   show.pval = TRUE,
   show.local = FALSE,
-  pal = c("#7B3294", "#008837"),
+  pal = NULL,
   ...,
   obj = NULL,
-  xlim
+  xlim,
+  show.legend = TRUE,
+  style = "publication-colour"
 )
 }
 \arguments{
@@ -24,19 +26,25 @@
 
 \item{title}{Title to add to the plot.}
 
-\item{col}{Color of summed probability density. Defaults to blue.}
+\item{col}{Observed density colour. NULL uses the current style.}
 
 \item{show.pval}{Logical to control whether to print the global p-value. Default is TRUE.}
 
-\item{show.local}{Show local regions and their significance symbols. An open circle marks p-values above 0.1. Default is FALSE}
+\item{show.local}{Draw a separate panel on the same angular scale, with Excess and Deficit rows. Default FALSE. Symbols are ***, **, *, + and an open circle, with upper cutoffs 0.001, 0.01, 0.05 and 0.10. The open circle is centred at the same height as the stars and marks values above 0.10.}
 
-\item{pal}{Two colours used to mark local regions. The default uses the first and fifth colours of the PRGn palette.}
+\item{pal}{Deficit and excess colours in that order. NULL uses the current style.}
 
 \item{...}{Additional arguments to be passed to \emph{plot}.}
 
 \item{obj}{A skyObject or list of target groups for a density or significance plot. Declination plots show single epochs as lines and epoch ranges as bands. Azimuth plots use each group's site latitude to mark rising and setting boundary bearings at a geometric level horizon.}
 
 \item{xlim}{Earlier name for xrange.}
+
+\item{show.legend}{Display the density/envelope key and any local significance symbol key.
+\code{show.pval} independently controls the numeric global p-value.}
+
+\item{style}{Analytical display style, either \code{"publication-colour"} (default) or
+\code{"publication-mono"}. Monochrome uses grayscale and preserves line styles.}
 }
 \value{
 Draws the empirical density and pointwise comparison envelope. Optional annotations display the global p-value and local regions.
@@ -50,7 +58,7 @@ The observed curve and envelope use the azimuth or declination grid stored in th
 result. The two-tailed display shades between its lower and upper pointwise bounds; the
 one-tailed display shades up to the upper bound from zero. Optional annotations show the
 stored global p-value and the local intervals, coloured by deficit or excess and
-labelled by p-value symbols. The plot reads the fitted result without repeating the
+labelled by p-value symbols. The observed and envelope curves jointly set the visible vertical range. The lower panel identifies adjusted and legacy unadjusted local results. The plot reads the fitted result without repeating the
 simulations. New local values use maximum-cluster adjustment under the complete null;
 cluster endpoints remain descriptive, not confidence limits. Legacy fits retain their
 original unadjusted values. Interpret local regions alongside the whole-curve test.

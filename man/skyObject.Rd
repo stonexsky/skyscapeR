@@ -5,9 +5,9 @@
 \alias{sky.objects}
 \title{Prepare celestial targets for orientation plots}
 \usage{
-skyObject(names, year, loc = FALSE, col = "red", lty = 1, lwd = 1, epoch)
+skyObject(names, year, loc = FALSE, col = "#A9542E", lty = 1, lwd = 1, epoch)
 
-sky.objects(names, year, loc = FALSE, col = "red", lty = 1, lwd = 1, epoch)
+sky.objects(names, year, loc = FALSE, col = "#A9542E", lty = 1, lwd = 1, epoch)
 }
 \arguments{
 \item{names}{Target names, star names or custom declinations in degrees. Use "solar extremes" for the solstices or "lunar extremes" for the four lunar extremes.}
@@ -18,7 +18,7 @@ sky.objects(names, year, loc = FALSE, col = "red", lty = 1, lwd = 1, epoch)
 location, or a \emph{skyscapeR.horizon} object.}
 
 \item{col}{The color for plotting, and differentiating these objects.
-Defaults to red for all objects.}
+Defaults to ochre for all objects.}
 
 \item{lty}{Line type (see \code{\link{par}}) used for differentiation.
 Used for single-year tracks and year-range boundaries.}

@@ -9,11 +9,12 @@
   y,
   show.labels = TRUE,
   show.legend = TRUE,
-  show.grid = FALSE,
+  show.grid = TRUE,
   sort.by,
   pal,
   ...,
-  layout = c("auto", "linear", "circular")
+  layout = c("auto", "linear", "circular"),
+  style = "publication-colour"
 )
 }
 \arguments{
@@ -25,10 +26,10 @@ a list of \emph{skyscapeR.starphases} objects for plotting (see Examples).}
 \item{show.labels}{Logical. Mark annual events for a single result in either layout. Defaults to TRUE.}
 
 \item{show.legend}{Show a legend for seasons present among the plotted
-stars (see example below). Default is TRUE.}
+stars (default TRUE). For circular plots FALSE also hides titles, site/epoch text and all layer or event callouts. The seasonal scale stays visible. Linear plots keep their data and event labels.}
 
-\item{show.grid}{Logical to control whether to show a grid of months.
-Default is FALSE}
+\item{show.grid}{Draw monthly dividers through each ring or strip. Defaults to TRUE.
+Set FALSE to omit the monthly divisions and retain the seasonal axis.}
 
 \item{sort.by}{Optional ordering by catalogue magnitude (\code{"mag"}), first R-only
 sample (\code{"rise"}) or first S-only sample (\code{"set"}) on the stored
@@ -36,16 +37,17 @@ cycle. This is not sorting by the dated heliacal event. Missing classes are
 placed last; omission retains input order.}
 
 \item{pal}{Five colours in the order RS (rise and set), R (rise only), S (set only),
-V (curtailed passage) and I (arising and lying hidden). The default uses four
-ColorBrewer Accent colours and grey. Supply all five even when only some
+V (curtailed passage) and I (arising and lying hidden). The default uses five colours from the plot style. Monochrome adds textures to distinguish the classes. Supply all five even when only some
 seasons occur.}
 
 \item{...}{Additional arguments to be passed to \emph{plot}.}
 
-\item{layout}{Plot layout: \code{"auto"} (default) uses a circle for one result and
-linear strips for multiple results. Choose \code{"linear"} or \code{"circular"}
-explicitly to override this. Multiple circular results use concentric rings,
-numbered from the outside inward. Supply this argument by name.}
+\item{layout}{\code{"auto"} and \code{"circular"} draw a single ring or concentric rings
+in input (or requested sort) order from the outside inward. Leaders connect the layer identifiers
+to their rings. Select \code{"linear"} for strips. Supply this argument by name.}
+
+\item{style}{Analytical display style, either \code{"publication-colour"} (default) or
+\code{"publication-mono"}. Monochrome uses grayscale and preserves line styles.}
 }
 \value{
 Draws on the active graphics device and returns NULL invisibly.
@@ -58,20 +60,20 @@ Read each colour as a daily model classification: visible rising and setting, ri
 only, setting only, visible without a qualifying near-horizon passage, or invisible. The
 function plots the stored phase sequence on a 365-day scale and can label seasons or
 display a legend. A single result defaults to a circular view, advancing clockwise
-from December solstice. Supplying a second object or a list defaults to rows;
+from December solstice. Further results use concentric rings with one leader per displayed layer;
 optional sorting uses the stored apparent magnitude or seasonal onset. Changing the
 display does not recalculate the visibility thresholds. Use \code{plot(first, list(second, third))} to compare results.
 }
 \section{Seasonal axis and comparison}{
 
 The axis is a 365-sample synthetic solar-longitude cycle anchored at December
-solstice. Equinoxes and solstices mark quarter-cycle positions. The optional
-monthly grid divides this cycle into twelve equal parts; it is not a sequence
-of calendar-month boundaries. For event dates use the underlying result's
+solstice. Equinoxes and solstices mark quarter-cycle positions. The monthly
+dividers mark twelve equal intervals of 30 degrees in solar longitude,
+beginning at December solstice. For calendar dates use the underlying result's
 \code{metadata$events$date.julian}, as described in \code{\link{star.phases}}.
 
 Objects may represent different stars, epochs, sites or model assumptions.
-Only star identity and epoch are included in the plot labels. Hold the site,
+Shared star, epoch and site appear once. Different epochs of the same star label individual rings or rows. Mixed comparisons identify both star and year. Hold the site,
 extinction and other inputs fixed for a controlled epoch comparison, or
 state their differences in the figure caption. Names on the supplied list can
 override the displayed star names. The legend contains only the union of
@@ -82,7 +84,14 @@ and first samples of the cycle. A season continuing through December solstice
 has no event at that boundary. Entry into and exit from I mark acronycal
 setting and heliacal rising; entry into and exit from V mark acronycal rising
 and heliacal setting. Constant classifications have no transition labels.
-Event labels are shown only for a single result. Both layouts use the same
+A single ring labels each event by name on two lines just outside the rim.
+Its short leader meets the ring at the event's model day. A single ring shows the star, epoch and site in its centre
+and labels the solstices and equinoxes outside its rim. Both layouts mark the event's model day,
+the last sample before entry into I or V, or the first after exit.
+The linear seasonal scale sits immediately below the lowest strip. Each quarter
+label aligns with its solstice or equinox across every row. Rising-event labels
+sit close above a single strip and setting-event labels close below it, leaving
+room for the seasonal scale where needed. Both layouts use the same
 sequence and colours; the circular layout makes the cycle boundary explicit.
 Labels wrap and shrink to fit; crowded comparisons need a larger device.
 }
@@ -99,7 +108,7 @@ if (requireNamespace("swephRdata", quietly = TRUE)) {
   s3 <- star.phases('Elnath',-4000, c(35,-8, 200))
   plot(s1, s2)
   plot(s1, list(s2,s3))
-  plot(s1, show.legend=FALSE, show.grid=TRUE)
+  plot(s1, show.legend=FALSE, show.grid=FALSE)
 }
 }
 }

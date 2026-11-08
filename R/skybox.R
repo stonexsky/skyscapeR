@@ -142,6 +142,7 @@ skyStep <- function(hor, sky, minutes=1, ...) {
   args <- c(list(hor=hor, jd=sky$jd + minutes/1440), sky$settings)
   if (inherits(sky,"skyscapeR.sketch")) {
     args$style <- if (identical(sky$style,"publication")) "publication-mono" else sky$style
+    args$light.model <- NULL  # Development sketches may carry the retired selector.
     args$display <- sky$display
     if (!is.null(args[["const"]])) {
       args$display <- as.list(args$display)

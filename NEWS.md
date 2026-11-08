@@ -3,20 +3,43 @@
 This development version is being tested ahead of the 2.0 release. For detailed
 migration instructions and positional-argument changes, see the README.
 
-## Vignette and help
+## Sky visualisation
 
-* Other tools now have separate subsections for sky styles, constellation
-  patterns, the Milky Way, twilight and Stellarium captures. The planisphere
-  example also shows the Chinese lunar mansions.
-* `planisphere()` accepts bundled constellation sets, selected figures and
-  imported line tables through `constellations`, with `col.constellations`
-  controlling their colour. Lines follow spherical arcs and are clipped to the
-  accessible sky; faint endpoints are retained independently of `max.mag`.
-* Help clarifies methods, defaults, return values and limitations of the revised
-  astronomical and plotting functions. The vignette uses named `CC()` arguments.
-* EFM moonset pairing and some CC event selections remain under investigation.
-  Their help pages now describe these known limitations; this update does not
-  change either calculation to incorporate the experimental corrections.
+* `sketchSky()` returns a reusable sky for `plot(hor, sky = sky)`. Natural
+  sketches combine stars, planets, lunar and cluster light, the Milky Way and
+  atmospheric light on a common visual brightness scale. Twilight depends on
+  solar altitude and viewing direction. Extinction dims the band near the
+  horizon. `skyRadiance()` returns the field before display compression.
+* Stars remain unresolved when zooming. Planetary and lunar discs use their
+  apparent sizes and phases. Cluster glow uses the catalogue light remaining
+  after accounting for stars drawn within the cluster footprint.
+* Both publication styles use magnitude-scaled stellar and planetary symbols.
+  In sketches and planispheres the Milky Way tracing includes dark lanes and
+  two brightness tiers. The Galactic equator is a separate optional guide.
+* Sketches and planispheres support Western and Chinese constellation figures,
+  the 28 Chinese lunar mansions and line tables from `importConstellations()`.
+  Line figures retain faint endpoints independently of the stellar magnitude
+  cutoff. Single-star figures use rings.
+* `stellariumSky()` captures an equirectangular view from Stellarium.
+  `skyStep()` advances or reverses the viewing time.
+
+## Analytical plots
+
+* `plotAzimuth()` supports spokes and rim ticks. Target lines can lie inside
+  or outside the circle; their two-line labels sit outside the rim.
+* Stellar-phase plots show a single star or compare stars and epochs in
+  concentric rings or aligned strips. Month divisions start at December
+  solstice. Use `show.grid = FALSE` to hide them. A single ring names each
+  event on two lines beside the rim, with the star and epoch in the centre and seasonal labels outside. A single strip places rising names
+  just above it and setting names just below, clear of the seasonal scale.
+* Significance plots separate local excesses and deficits beneath the observed
+  curve and pointwise envelope. Symbols indicate local p-value intervals;
+  older fits with unadjusted results are identified.
+* Analytical plots share publication colour and monochrome styles. Linked
+  density plots label every highest-density interval; `plotBars()` shows
+  measured spans and centres. Circular plots use base graphics and no longer
+  require plotrix. Set `show.legend = FALSE` to suppress titles and callouts
+  while retaining the coordinate scale.
 
 ## Changes requiring attention
 
@@ -27,15 +50,14 @@ migration instructions and positional-argument changes, see the README.
 
 * `star.phases()` results now retain the remaining visibility settings, the
   numerical horizon profile and loaded package versions. Existing fields and
-  phase calculations are unchanged; older saved objects lack the added record.
+  phase codes keep their existing meanings. Older objects lack the added record.
 
 * `planisphere()` now uses a south-polar projection at negative latitudes,
   with consistent star selection, RA labels, ecliptic and Milky Way layers.
+  The `constellations` and `col.constellations` arguments control line figures;
+  arcs are clipped to the accessible sky at the site latitude.
   The exact latitude-dependent outer radius is retained. The ecliptic now uses
   geocentric coordinates without local refraction. Regenerate affected charts.
-* `sketchSky()` help explicitly distinguishes cluster and twilight rendering
-  from calibrated naked-eye detection. The approved rendering is unchanged.
-
 * `spatial.equinox()` now accepts an epoch and consistent atmospheric settings.
   It selects first emergence and final disappearance from terrain crossings,
   inverts refraction and solar parallax consistently, and reports undefined
@@ -43,10 +65,7 @@ migration instructions and positional-argument changes, see the README.
   `findTargets()` uses the requested period endpoints for this candidate.
   Recalculate spatial-equinox candidates and downstream interpretations.
 
-* Single `star.phases()` results now plot as a circular seasonal cycle by default.
-  Comparisons retain linear strips; use `layout = "linear"` for the previous
-  single-result view or `layout = "circular"` for concentric comparisons.
-  Event labels respect seasons crossing December solstice, and the event table
+* Event labels respect seasons crossing December solstice, and the event table
   correctly names entry into and exit from the curtailed-passage season.
 
 * Replace `sky.sketch()` with `sketchSky()` followed by a horizon `plot()`.
@@ -134,12 +153,14 @@ migration instructions and positional-argument changes, see the README.
   and cyclic transitions. `solar.alt` separates twilight from terrain height.
   Event metadata provide Julian-calendar dates for subsequent rise/set searches.
 * `EFM()` selects the first sufficiently illuminated Moon with the required
-  rising or setting bearing on the solar event's local date. Calendar and
+  rising or setting bearing on the solar event's local date. Moonsets use the
+  preceding sunset. Calendar and
   timezone settings apply throughout, and selection uses topocentric bearings.
 * `CC()` calculates the four crescent crossover events following Silva and
   Pimenta (2012), with Caldwell–Laney visibility at sunset or sunrise. Visibility
   uses geocentric arc of light and topocentric lunar altitude. Horizon profiles,
-  diagnostic output and explicit missing results are supported.
+  diagnostic output and explicit missing results are supported. The EFM and CC
+  help pages document differences from the original simulations.
 * Fixed horizon metadata handling in `body.position()` and `antizenith()`, quiet
   geocentric calculations in `eq()`, and equinox overlays in `skyObject()`.
   `findTargets()` handles empty results and scalar dating bounds consistently.
@@ -165,30 +186,6 @@ migration instructions and positional-argument changes, see the README.
   to overwrite existing exports. `exportStellarium()` is an alias.
   `exportPanorama()` exports a transparent-sky, full-sphere PNG.
 
-## Sky visualisation and plotting
-
-* `sketchSky()` returns a reusable sky background with natural, publication
-  colour and monochrome styles. `stellariumSky()` captures an equirectangular
-  Stellarium view, and `skyStep()` advances or reverses the selected time.
-* Natural skies use shared twilight adaptation for stars with local moonlight
-  and directional contrast. The Milky Way is attenuated differentially with
-  altitude. These displays remain approximations of visual perception.
-* Unresolved clusters can appear as diffuse light over their catalogue footprint,
-  fading as individual stars become visible. This is an illustrative rendering,
-  not a calibrated prediction of extended-object detection. The Pleiades' member
-  stars are plotted individually, without an integrated M45 point symbol.
-* Constellation segments are drawn even when their endpoint stars are too faint
-  to display. Figures can be selected from modern Western, full Chinese and
-  Chinese lunar-mansion sets. `importConstellations()` accepts user-supplied
-  figures in Stellarium's legacy line format. Single-star figures use rings and
-  overlapping selections are deduplicated.
-* Single and multiple stellar-phase plots share a layout and show only applicable
-  seasons in the legend. Labels include the star name, Bayer designation and
-  epoch. Single-object plots retain event annotations.
-* Improved `plotBars()` labels, compass spokes in `plotAzimuth()`, planisphere
-  hour labels, celestial range overlays and PDF panel layouts. Plot coordinates
-  remain available for annotations and user-defined layouts.
-
 ## Data, installation and documentation
 
 * Compressed the stellar catalogue and lazy-data database with lossless xz
@@ -203,9 +200,8 @@ migration instructions and positional-argument changes, see the README.
 * `swephRdata` is optional at installation. Astronomical calculations require
   verified Swiss Ephemeris files covering the requested epoch, including stellar
   calculations. Existing `SE_EPHE_PATH` settings are preserved.
-* Reduced dependencies and removed obsolete parallel backends. Regression
-  scripts are not bundled in the package. Routine progress uses R messages and
-  can be silenced with `options(skyscapeR.verbose = FALSE)`.
+* Reduced dependencies and removed obsolete parallel backends. Silence progress
+  messages with `options(skyscapeR.verbose = FALSE)`.
 * Rebuilt the vignette around data input, single-site analysis, multiple-site
   analysis and other tools. The README includes installation and migration
   guidance and links to the illustrated online vignette. Help pages describe

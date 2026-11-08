@@ -1,0 +1,14 @@
+Deep Star Maps 2020. Ernie Wright, NASA/Goddard SVS; ESA/Gaia/DPAC.
+https://svs.gsfc.nasa.gov/4851/
+Source: milkyway_2020_4k_print.jpg (celestial coordinates, bright foreground omitted).
+milky-way-layers.rds: byte grid with row index Galactic longitude -180 to +179.75,
+column index latitude -60 to +60, spacing 0.25 degrees. Outer envelope: 35% local
+contrast after 1 degree FWHM smoothing, connected body, filled enclosed holes,
+then 4 degree FWHM mask smoothing. Dark lanes: 10% local depression from a
+directional grey-closing reference; 1 degree mask smoothing. Bright tiers at
+1.10 and 1.75 times the spherical-area-weighted mean smoothed image tone inside
+the envelope after retained dark patches are excluded. Minimum connected area
+10 square degrees for each dark or bright patch; eight-neighbour connectivity
+wraps at the longitude seam. Values 0 outside, 1 ordinary, 2 dark, 3 bright,
+4 brightest. Display classes are illustrative. The earlier north/south paths
+in milky-way.csv are retained for legacy calculations.
