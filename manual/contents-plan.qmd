@@ -1,8 +1,6 @@
-# Annotated contents {#sec-plan}
+# Methods by research question {#sec-plan}
 
-This is the proposed structure for the first draft of the technical manual for skyscapeR 2.0.9004. Each chapter below identifies its scope, the evidence already available, and a question for later validation. Questions are proposals; they do not report new tests. The [function index](function-index.qmd) assigns every public entry point to a chapter.
-
-The opening conventions and ephemeris material support the method chapters. The validation part follows the scientific question across functions, retaining the tested builds in the [study register](study-register.qmd).
+Use this guide to move from a research question to its methods chapter, principal functions and validation evidence. **Open question** identifies a comparison that remains to be carried out. For alphabetical lookup and individual help pages, use the [function index](function-index.qmd).
 
 ## Time, coordinates and ephemerides {#plan-time}
 
@@ -28,21 +26,18 @@ The [field reduction chapter](field-reduction.qmd) follows a compass reading and
 
 ## Terrain horizons and panoramas {#plan-terrain}
 
-The horizon chapter covers measured profiles, DEM skylines and reconstructed features. The [photographic calibration and interchange chapter](photographic-horizons.qmd) traces a mask through control-point fitting, angular sampling and landscape export.
+The [terrain methods](horizons.qmd) explain how measured profiles, DEM skylines and reconstructed features enter a horizon object. The [photographic calibration and interchange chapter](photographic-horizons.qmd) traces a mask through control-point fitting, angular sampling and landscape export.
 
-**Existing evidence.** The [international H01 study](study-register.qmd#h01-field-validation) reports field agreement for DEM-derived skyline altitudes by observing setup and terrain product, including the effect of search distance.
+**Existing evidence.** The [international H01 study](study-register.qmd#h01-field-validation) reports field agreement for DEM-derived skyline altitudes by observing setup and terrain product, including the effect of search distance. [H02](study-register.qmd#h02-skyline-comparison) compares independently computed skylines at matched viewpoints.
 
 **Open question.** How well are narrow features recovered between sampled bearings? How closely does a calibrated photographic skyline match surveyed points from the same viewpoint?
 
 **Entry points.** [`createHor()`](function-methods.html#fn-createhor), [`horFeature()`](function-methods.html#fn-horfeature), [`hor2alt()`](function-methods.html#fn-hor2alt), [`importPanorama()`](function-methods.html#fn-importpanorama), [`importPeakFinder()`](function-methods.html#fn-importpeakfinder), [`createHWT()`](function-methods.html#fn-createhwt), [`downloadHWT()`](function-methods.html#fn-downloadhwt), [`exportHor()`](function-methods.html#fn-exporthor), [`exportStellarium()`](function-methods.html#fn-exportstellarium), [`exportPanorama()`](function-methods.html#fn-exportpanorama), [`demPalettes()`](function-methods.html#fn-dempalettes), [`relinkHor()`](function-methods.html#fn-relinkhor), [`plot.skyscapeR.horizon()`](function-methods.html#fn-plot-skyscaper-horizon).
 
-[Existing horizon method](horizons.qmd).
 
 ## From bearings to celestial targets {#plan-targets}
 
-[Read the candidate-screening and limits chapter](celestial-targets.qmd).
-
-Connect the measured bearing and skyline altitude to declination, the accessible declination range and candidate targets. Explain the spatial equinox convention and the role of a date range in a target search.
+The [candidate-screening chapter](celestial-targets.qmd) takes a measured bearing and skyline altitude through the declination calculation to candidate targets. It explains how the spatial equinox convention and the search dates affect the candidates returned.
 
 **Existing evidence.** The horizon comparisons constrain one input. The worked stellar study checks a different output, a seasonal date.
 
@@ -52,11 +47,7 @@ Connect the measured bearing and skyline altitude to declination, the accessible
 
 ## Solar, lunar and planetary events {#plan-events}
 
-[Read the lunar crossover chapter](lunar-crossovers.qmd).
-
-[Read the terrain crossings and event searches chapter](event-searches.qmd).
-
-Explain the definition of each event, including first and last skyline crossings, standstill limits, equinoctial full Moons and crescent crossovers. Relate each local event to its horizon, calendar and time convention.
+The [event-search chapter](event-searches.qmd) distinguishes the first and last crossing of an irregular skyline. The [lunar crossover chapter](lunar-crossovers.qmd) explains how the observing calendar and event definition determine which lunation is selected.
 
 **Existing evidence.** The EFM and CC help pages record comparisons with published simulations and remaining discrepancies. The ephemeris chapter identifies the upstream assumptions.
 
@@ -66,7 +57,7 @@ Explain the definition of each event, including first and last skyline crossings
 
 ## Stellar positions and seasonal visibility {#plan-stars}
 
-Follow catalogue position through epoch calculation, extinction, visibility intervals and classification. Explain how the annual plot locates events and which date can be used for a sky reconstruction.
+The [stellar-phases chapter](stellar-phases.qmd) follows a catalogue position through the epoch calculation, extinction and visibility tests. It distinguishes the phase on the schematic seasonal axis from the Julian date used for a sky reconstruction.
 
 **Existing evidence.** The worked heliacal-rising chapter compares two visibility models over seven stars with comparable dates. The models share ephemeris and site inputs.
 
@@ -74,11 +65,10 @@ Follow catalogue position through epoch calculation, extinction, visibility inte
 
 **Entry points.** [`star()`](function-methods.html#fn-star), [`star.phases()`](function-methods.html#fn-star-phases), [`plot.skyscapeR.starphases()`](function-methods.html#fn-plot-skyscaper-starphases).
 
-[Existing stellar method](stellar-phases.qmd).
 
 ## Sky brightness and visualisation {#plan-light}
 
-The [sky reconstruction chapter](sky-rendering.qmd) separates the physical quantities returned by skyRadiance() from how sketchSky() displays them. Cover twilight, direct and diffuse light, the Milky Way outline and internal structure, extinction and the role of constellation overlays.
+The [sky reconstruction chapter](sky-rendering.qmd) follows the direct, diffuse and atmospheric light components from `skyRadiance()` to the display. Its [Milky Way comparison](sky-rendering.qmd#reading-the-traced-boundary) shows which structures the adopted boundary and brightness classes retain.
 
 **Existing evidence.** The register distinguishes outline derivation, held-out twilight measurements, conservation of flux across zoom levels and an extinction implementation check.
 
@@ -86,15 +76,13 @@ The [sky reconstruction chapter](sky-rendering.qmd) separates the physical quant
 
 **Entry points.** [`sketchSky()`](function-methods.html#fn-sketchsky), [`skyRadiance()`](function-methods.html#fn-skyradiance), [`planisphere()`](function-methods.html#fn-planisphere), [`importConstellations()`](function-methods.html#fn-importconstellations), [`stellariumSky()`](function-methods.html#fn-stellariumsky), [`skyStep()`](function-methods.html#fn-skystep).
 
-[Existing rendering checks](study-register.qmd).
+[Sky-rendering evidence](study-register.qmd#sky-rendering).
 
 ## Uncertainty and orientation distributions {#plan-density}
 
-[Read the density and transformation chapter](orientation-densities.qmd).
+The [orientation-density chapter](orientation-densities.qmd) shows how a measured opening becomes a bearing distribution, how the local skyline changes its declination distribution, and what is lost when disjoint highest-density intervals are reduced to a single range.
 
-Explain how a measured interval becomes a density, how it transforms into declination, how densities are summed and how highest-density intervals are read. Give the plotting methods a shared account of units and normalisation.
-
-**Existing evidence.** The existing vignette illustrates this workflow. Its examples supply use cases.
+**Existing evidence.** The doorway example records the transformed densities for the same measured opening against a level skyline and a notch.
 
 **Open question.** Does the transformation preserve probability mass at north and near declination limits? Can multimodal examples recover the expected disjoint intervals?
 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>13&nbsp; Identifying celestial candidates and limiting declinations – skyscapeR technical manual</title>
+<title>11&nbsp; Identifying celestial candidates and limiting declinations – skyscapeR technical manual</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -127,6 +127,7 @@ div.csl-indent {
 }</script>
 
 
+<link rel="stylesheet" href="manual.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -138,7 +139,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./celestial-targets.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Identifying celestial candidates and limiting declinations</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./celestial-targets.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Identifying celestial candidates and limiting declinations</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -172,25 +173,13 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./contents-plan.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Annotated contents</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./function-index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Function index</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./vignette-guide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Following the package vignette</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Methods by research question</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ephemeris.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">swephR and the Swiss Ephemeris</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">swephR and the Swiss Ephemeris</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -205,73 +194,67 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./astronomical-conventions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Astronomical conventions and stellar positions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Astronomical conventions and stellar positions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./field-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Reducing compass and theodolite observations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Reducing compass and theodolite observations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./horizons.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Constructing a site horizon</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Constructing a site horizon</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./photographic-horizons.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Calibrating photographic skylines and exchanging horizons</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Calibrating photographic skylines and exchanging horizons</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./stellar-phases.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Seasonal stellar visibility</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Seasonal stellar visibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./orientation-densities.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">From a measured orientation to a declination distribution</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">From a measured orientation to a declination distribution</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./event-searches.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Terrain crossings and event searches</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Terrain crossings and event searches</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lunar-crossovers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Equinoctial full Moons and crescent crossovers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Equinoctial full Moons and crescent crossovers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./celestial-targets.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Identifying celestial candidates and limiting declinations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Identifying celestial candidates and limiting declinations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./significance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Testing orientation distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Testing orientation distributions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sky-rendering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Sky reconstruction and visual radiance</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./function-methods.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Function methods and implementation notes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sky reconstruction and visual radiance</span></span></a>
   </div>
 </li>
       </ul>
@@ -279,12 +262,41 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Validation</span></a>
+ <span class="menu-text">Function reference</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./function-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Function index</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./function-methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Function methods and implementation notes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vignette-guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Following the package vignette</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Validation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./study-register.html" class="sidebar-item-text sidebar-link">
@@ -315,19 +327,19 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#target-band" id="toc-target-band" class="nav-link active" data-scroll-target="#target-band"><span class="header-section-number">13.1</span> Construct the search band</a></li>
-  <li><a href="#target-limits" id="toc-target-limits" class="nav-link" data-scroll-target="#target-limits"><span class="header-section-number">13.2</span> Solar and lunar reference limits</a></li>
-  <li><a href="#target-screen" id="toc-target-screen" class="nav-link" data-scroll-target="#target-screen"><span class="header-section-number">13.3</span> Candidate screening by family</a></li>
-  <li><a href="#target-overlay" id="toc-target-overlay" class="nav-link" data-scroll-target="#target-overlay"><span class="header-section-number">13.4</span> Overlays, fixed tracks and version-specific limits</a></li>
+  <li><a href="#target-band" id="toc-target-band" class="nav-link active" data-scroll-target="#target-band"><span class="header-section-number">11.1</span> Construct the search band</a></li>
+  <li><a href="#target-limits" id="toc-target-limits" class="nav-link" data-scroll-target="#target-limits"><span class="header-section-number">11.2</span> Solar and lunar reference limits</a></li>
+  <li><a href="#target-screen" id="toc-target-screen" class="nav-link" data-scroll-target="#target-screen"><span class="header-section-number">11.3</span> Candidate screening by family</a></li>
+  <li><a href="#target-overlay" id="toc-target-overlay" class="nav-link" data-scroll-target="#target-overlay"><span class="header-section-number">11.4</span> Overlays, fixed tracks and version-specific limits</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./celestial-targets.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Identifying celestial candidates and limiting declinations</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./celestial-targets.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Identifying celestial candidates and limiting declinations</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-celestial-targets" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Identifying celestial candidates and limiting declinations</span></span></h1>
+<h1 class="title"><span id="sec-celestial-targets" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Identifying celestial candidates and limiting declinations</span></span></h1>
 </div>
 
 
@@ -345,8 +357,8 @@ div.csl-indent {
 
 
 <p><strong>Implementation.</strong> skyscapeR 2.0.9004, <code>R/data-analysis.R</code>, <code>R/events.R</code>, <code>R/horizon.R</code>, <code>R/mechanics.R</code>, <code>R/misc.R</code> and <code>R/stars.R</code>. A field sightline defines a range of possible declinations. The relevant question is which celestial targets enter that band during the archaeological date range, and which could actually have been seen from that viewpoint. The first question can be computed before tackling the second. Silva &amp; Lomsdalen (2025, table 5) illustrate this distinction when screening stellar candidates for the Maltese temples <span class="citation" data-cites="silvaloms2025">(<a href="references.html#ref-silvaloms2025" role="doc-biblioref">Silva and Lomsdalen 2025</a>)</span>.</p>
-<section id="target-band" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="target-band"><span class="header-section-number">13.1</span> Construct the search band</h2>
+<section id="target-band" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="target-band"><span class="header-section-number">11.1</span> Construct the search band</h2>
 <p>For geometric altitude <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math> above the astronomical horizontal, true bearing <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> and latitude <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ϕ</mi><annotation encoding="application/x-tex">\phi</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>sin</mo><mi>δ</mi><mo>=</mo><mo>sin</mo><mi>ϕ</mi><mo>sin</mo><mi>h</mi><mo>+</mo><mo>cos</mo><mi>ϕ</mi><mo>cos</mo><mi>h</mi><mo>cos</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\sin\delta=\sin\phi\sin h+\cos\phi\cos h\cos A</annotation></semantics></math> <span class="citation" data-cites="silva2020">(<a href="references.html#ref-silva2020" role="doc-biblioref">Silva 2020</a>, eq. 1)</span>. Use the <a href="./orientation-densities.html">density chapter</a> when uncertainty across bearings or skyline heights changes the resulting distribution. Decide whether the search interval is an architectural opening, a highest-density region, or a cluster identified in a significance test. These represent different quantities. If several high-density regions are disjoint, search them separately; taking only the smallest and largest endpoints would admit targets in the intervening gaps. A declination band also loses the distinction between the eastern and western branches of a track.</p>
 <p><a href="function-methods.html#fn-hor2max-dec"><code>hor2max.dec()</code></a> searches bearings in a sector of half-width <code>range</code> around north; <a href="function-methods.html#fn-hor2min-dec"><code>hor2min.dec()</code></a> searches around south. In each case the step is 0.01° and the default half-width is 25°. The routines pass the sampled bearings and skyline to <a href="function-methods.html#fn-az2dec"><code>az2dec()</code></a> and return the extreme of the resulting declinations. With a scalar latitude they instead use the supplied constant altitude. On a level horizon at 40° N with refraction off, the meridian extrema are ±50°. The following synthetic horizon keeps the meridians level but puts a ridge at bearings 10–12°.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skyscapeR.vars</span>(<span class="at">refraction =</span> <span class="cn">FALSE</span>)</span>
@@ -357,15 +369,15 @@ div.csl-indent {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">hor2min.dec</span>(h)               <span class="co"># -50.00 degrees</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The wider search picks up the northern ridge. A meridian-only calculation misses more than ten degrees of accessible declination here. These are sampled <em>terrain sightline</em> limits. The default restricted sectors do not guarantee global extrema on every possible skyline.</p>
 </section>
-<section id="target-limits" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="target-limits"><span class="header-section-number">13.2</span> Solar and lunar reference limits</h2>
+<section id="target-limits" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="target-limits"><span class="header-section-number">11.2</span> Solar and lunar reference limits</h2>
 <p>Let <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\epsilon(y)</annotation></semantics></math> be the true obliquity obtained from Swiss Ephemeris for the year’s January reference instant. With no site supplied, <a href="function-methods.html#fn-js"><code>jS()</code></a> and <a href="function-methods.html#fn-ds"><code>dS()</code></a> return <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>+</mi><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">+\epsilon</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">-\epsilon</annotation></semantics></math>; <a href="function-methods.html#fn-eq"><code>eq()</code></a> returns zero. These are reference declinations. An equinox instant, the Sun’s position at sunrise on the equinox date, and the eastern spatial midpoint of the solstitial bearings at a particular site are three distinct quantities <span class="citation" data-cites="ruggles1997 sweprog">(<a href="references.html#ref-ruggles1997" role="doc-biblioref">Ruggles 1997</a>; <a href="references.html#ref-sweprog" role="doc-biblioref">Astrodienst, n.d.</a>)</span>.</p>
 <p>The standstill construction adopts <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>i</mi><mo>*</mo></msub><mo>=</mo><mn>5.145</mn><mi>°</mi><mo>+</mo><mn>0.145</mn><mi>°</mi></mrow><annotation encoding="application/x-tex">i_*=5.145°+0.145°</annotation></semantics></math>. Before local parallax the northern major and minor limits are <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi><mo>+</mo><msub><mi>i</mi><mo>*</mo></msub></mrow><annotation encoding="application/x-tex">\epsilon+i_*</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi><mo>−</mo><msub><mi>i</mi><mo>*</mo></msub></mrow><annotation encoding="application/x-tex">\epsilon-i_*</annotation></semantics></math>; the southern values have the opposite signs. These are the four functions <a href="function-methods.html#fn-nmjlx"><code>nMjLX()</code></a>, <a href="function-methods.html#fn-nmnlx"><code>nmnLX()</code></a>, <a href="function-methods.html#fn-smjlx"><code>sMjLX()</code></a> and <a href="function-methods.html#fn-smnlx"><code>smnLX()</code></a>. The distinction between a theoretical lunar extreme and an observed Moon is central to archaeological interpretation <span class="citation" data-cites="sprajc2016">(<a href="references.html#ref-sprajc2016" role="doc-biblioref">Šprajc 2016</a>)</span>. The fixed additional term is a skyscapeR implementation choice. The model does not search the lunar ephemeris for an extremum at a particular lunation.</p>
 <p>With a site supplied the limit functions subtract the approximate signed correction <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>cos</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>h</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>sin</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>ϕ</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">p\cos(h)\sin(\phi)</annotation></semantics></math>, with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math> the adopted horizontal parallax (default lunar value 0.952°, solar value 0.00224°). Report the altitude, site and convention when comparing a local limit with a point in a catalogue. The worked 2026 geocentric values are ±23.43813° for the solstices, ±28.72813° for the major lunar extremes and ±18.14813° for the minor ones.</p>
 <p><a href="function-methods.html#fn-zenith"><code>zenith()</code></a> and <a href="function-methods.html#fn-antizenith"><code>antizenith()</code></a> use <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ϕ</mi><annotation encoding="application/x-tex">\phi</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">-\phi</annotation></semantics></math> as the geometrical reference declinations and apply the specified parallax correction. Solar passage eligibility is checked against the solstitial limits using the session’s default epoch; neither function accepts the dating interval of a target search. This matters near the tropical boundary. <a href="function-methods.html#fn-spatial-equinox"><code>spatial.equinox()</code></a> is instead explicitly horizon- and epoch-dependent; the <a href="./event-searches.html">event chapter</a> explains its first-emergence and final-disappearance rule.</p>
 </section>
-<section id="target-screen" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="target-screen"><span class="header-section-number">13.3</span> Candidate screening by family</h2>
+<section id="target-screen" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="target-screen"><span class="header-section-number">11.3</span> Candidate screening by family</h2>
 <p><a href="function-methods.html#fn-findtargets"><code>findTargets()</code></a> receives a closed declination band and one year or an inclusive range. For generic candidate bounds <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">[</mo><msub><mi>d</mi><mn>1</mn></msub><mo>,</mo><msub><mi>d</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">[d_1,d_2]</annotation></semantics></math> and measurement bounds <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">[</mo><mi>L</mi><mo>,</mo><mi>U</mi><mo stretchy="true" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">[L,U]</annotation></semantics></math>, overlap requires <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mn>1</mn></msub><mo>≤</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">d_1\leq U</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mn>2</mn></msub><mo>≥</mo><mi>L</mi></mrow><annotation encoding="application/x-tex">d_2\geq L</annotation></semantics></math>. The implementation does not construct or search every family in exactly the same way.</p>
 <table class="caption-top table">
 <thead>
@@ -407,8 +419,8 @@ div.csl-indent {
 </div>
 <p>At archaeological timescales the annual grid is convenient for screening. Subannual excursions, catalogue completeness, stellar variability, extinction and local visibility are outside the overlap calculation. An integrated cluster entry can meet the magnitude cutoff even though individual stars have different detectability. Preserve the band, dating evidence, catalogue identifier, magnitude threshold and branch; check the candidate with <a href="function-methods.html#fn-star-phases"><code>star.phases()</code></a>, <a href="function-methods.html#fn-riseset"><code>riseset()</code></a> and <a href="function-methods.html#fn-sketchsky"><code>sketchSky()</code></a> as appropriate. Screening a band selected after inspection remains exploratory.</p>
 </section>
-<section id="target-overlay" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="target-overlay"><span class="header-section-number">13.4</span> Overlays, fixed tracks and version-specific limits</h2>
+<section id="target-overlay" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="target-overlay"><span class="header-section-number">11.4</span> Overlays, fixed tracks and version-specific limits</h2>
 <p><a href="function-methods.html#fn-skyobject"><code>skyObject()</code></a> prepares named targets or numerical declinations for a plot. <a href="function-methods.html#fn-sky-objects"><code>sky.objects()</code></a> is its compatibility alias. It can expand “solar extremes” and “lunar extremes”, retain graphic styles and carry different epochs for different groups. The horizon plot supplies the site for its tracks; the compass plot uses the object’s stored location and a level horizon. A declination plot needs no location. A plotted track keeps its declination fixed through a diurnal rotation. For an instant-specific comparison use <a href="function-methods.html#fn-body-position"><code>body.position()</code></a> in the desired frame and pass its numerical declination to the overlay.</p>
 <p>There is a consequential difference between the range algorithms. A stellar overlay takes the range of annual January samples. For a varying solar or lunar limit the 2.0.9004 range helper samples from the first year in 100-year steps, fits a spline and evaluates it across the requested interval. A short interval can therefore have just one source sample. For <code>skyObject("June Solstice", c(2020, 2026))</code> the returned bounds are both <strong>23.43621°</strong>, whereas the direct 2026 geocentric value is <strong>23.43813°</strong>. The range helper also defaults to geocentric evaluation for these named limits when called from the two-epoch overlay. This is a reason to compute the underlying limits directly for the required sites and years before using a narrow overlay to classify a borderline match. The choice of a finer plotted grid cannot supply missing input epochs.</p>
 <p>The strength of this workflow is traceability from an archaeological band through candidate dates to a site-specific reconstruction. Its output is a set of compatible geometries; it supplies neither a probability of target identity nor a correction for searching many stars, time ranges or subsections of the data. Matched comparisons of range envelopes against direct calculations and independent evidence of observational visibility remain separate tasks. <a href="archives/crossovers-and-targets.zip">Reproduce the target and crossover examples</a>.</p>
@@ -839,12 +851,12 @@ Silva, Fabio, and Tore Lomsdalen. 2025. <span>‘<span>“No Easy Way from the E
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./lunar-crossovers.html" class="pagination-link" aria-label="Equinoctial full Moons and crescent crossovers">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Equinoctial full Moons and crescent crossovers</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Equinoctial full Moons and crescent crossovers</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./significance.html" class="pagination-link" aria-label="Testing orientation distributions">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Testing orientation distributions</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Testing orientation distributions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

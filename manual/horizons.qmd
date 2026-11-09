@@ -28,6 +28,8 @@ $$
 
 Here $P$ is pressure in mbar, $T$ is temperature in °C, and $g$ is the vertical temperature gradient in °C/km. The retained altitude is $\max_i h_i$. A lower but nearer ridge can therefore conceal higher ground beyond it. This is the terrestrial light path from terrain to observer. Atmospheric refraction applied subsequently to a celestial position is a separate calculation [@patat2011]. With a supplied constant refraction coefficient $k$, the code instead uses the spherical geometry of an effective radius $6\,371\,008.8/(1-k)$ metres. With curvature disabled it uses $\operatorname{atan2}(z_i-z_o,d_i)$.
 
+![The two-ridge example viewed due east. For this geometric illustration, the maximum viewing angle occurs on the near face of the farther ridge. The production calculation also applies the selected curvature and refraction model.](figures/terrain-ray.png){fig-alt="Elevation along a ray and the corresponding angles at the observer, with the maximum marked."}
+
 For search distance $D$ and requested radial step $s$, the ordinary numerical rays use $n=\max(2,\lceil D/s\rceil)$ samples at $d_i=iD/n$. The default $s$ is half the smaller local raster-cell dimension. The base bearing grid similarly uses $\lceil 360/\texttt{az.step}\rceil$ equally spaced rays, supplemented for reconstructed features. Bilinear sampling can smooth a narrow crest. A denser output grid cannot recover a crest absent from the terrain data. If the ray has missing coverage, its largest available angle can underestimate the skyline. The source metadata records incomplete bearings. When examining a disputed foresight, inspect that bearing and the winning ridge distance before pooling errors across a station. [H01](study-register.qmd#h01-field-validation) gives per-station errors and compares DEMs over common bearings in Ireland.
 
 ## Generating a terrain panorama {#sec-dem-panorama}
@@ -135,11 +137,9 @@ The rules above follow the 2.0.9004 implementation in `R/horizon-features.R` and
 
 The 2.0 development documentation records the DEM construction route, terrestrial refraction and external terrain panorama. An existing horizon interpolated from a survey and a new one derived from a DTM can differ even at the same nominal location. Record which route supplied the profile in a published analysis.
 
-The [international H01 field comparison](study-register.qmd#h01-field-validation) covered 334 bearings at 31 observing setups. At the surveyed bearings, `createHor()` reproduced the observed terrain skyline to within half a degree in 91.9% of cases. The median absolute error was 0.036° and the mean absolute error was 0.169°. These figures describe field agreement for terrain altitudes at the sampled azimuths. The accuracy of unsurveyed parts of a skyline, panorama imagery and reconstructed structures requires separate evidence.
+[]{#comparison-with-provider-profiles}
 
-## Comparison with provider profiles
-
-[H02](study-register.qmd#h02-skyline-comparison) compares `createHor()` with independently calculated profiles at matched viewpoints and reports its error against field observations on common bearings. The two English controls use the same native DEM for `createHor()` and Horizon.
+The [H01 field comparison](study-register.qmd#h01-field-validation) quantifies error at surveyed bearings. [H02](study-register.qmd#h02-skyline-comparison) compares independently computed profiles at matched viewpoints. The English controls hold the terrain product, observer setup and search radius fixed. Delivered online profiles can also differ in their input terrain and effective observer height.
 
 ## Full package help
 

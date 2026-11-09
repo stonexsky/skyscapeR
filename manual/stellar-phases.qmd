@@ -19,6 +19,8 @@ In `R/stars.R`, the year-specific stellar coordinates are held fixed while the c
 
 For stellar altitude $h$, solar altitude $s$, stellar magnitude $m$, limiting magnitude $L$ and extinction coefficient $k$, the code uses $E(h)=k/[\sin h+0.025\exp(-11\sin h)]$ magnitudes. On terrain-clear segments it requires finite, nonnegative extinction, $m+E(h)\leq L$, $s<\texttt{solar.alt}$ and $h-s\geq 2.1m+10°$. The angular separation here is a **difference in altitudes**, even when star and Sun differ substantially in bearing [@purrington1988; @krisciunas1991]. Threshold margins are interpolated linearly between segment endpoints. An interval survives only when its end is strictly later than its start. Two conditions satisfied at different moments within the same segment do not by themselves establish visibility.
 
+![Illustrative dawn track with time $t$ in minutes, stellar altitude $1+0.15t$ degrees, solar altitude $-16+0.20t$ degrees, magnitude 1, $k=0.2$, limiting magnitude 3 and a 4° ridge. Coloured segments satisfy each condition. Only their overlap qualifies as a visible interval.](figures/visibility-window.png){fig-alt="Four time intervals and their common intersection. Extinction delays the beginning of visibility and the solar limit ends it."}
+
 A second pass restricts eligible intervals to $h\leq\texttt{alt.rs}$ and checks the sign of the stellar altitude change. A rising interval gives R, a descending interval S and both give RS. A day with visibility elsewhere but neither classified passage gives V. With no visible interval it gives I. Thus V can be the appropriate code even for a star which crosses the skyline twice. For a detection close to a threshold, record the adopted `res`, extinction and solar limit. Coarse solar interpolation and a very brief modelled opportunity have different implications for the assigned date.
 
 ## Choices that can change the interpretation
@@ -41,6 +43,10 @@ The output also distinguishes the schematic day of the seasonal cycle from `meta
 
 See the [event-search chapter](event-searches.qmd) for the crossing solver and an example of reoccultation on a rising track.
 
+## Comparing the same season across stars and epochs {#phase-comparisons}
+
+[`plot.skyscapeR.starphases()`](function-methods.html#fn-plot-skyscaper-starphases) places a result and any further results on a common seasonal axis beginning at December solstice. A single cycle can be drawn as a ring or a strip. Multiple results occupy concentric rings from the outside inward, or aligned strips in the linear layout. The month divisions are a shared seasonal reference. Use the saved event date for a historical calendar comparison. Ordering results by star or epoch and holding the skyline and visibility thresholds fixed makes it possible to attribute changes in the boundaries to the chosen comparison. The plot reads the classifications already calculated by [`star.phases()`](function-methods.html#fn-star-phases). Adding a ring does not refit the visibility model.
+
 ## Full package help
 
 The following help page is generated from the archived 2.0.9004 package documentation.
@@ -51,11 +57,6 @@ The following help page is generated from the archived 2.0.9004 package document
 
 </details>
 
-
 **Related function entries**
 
 [`createHor()`](function-methods.html#fn-createhor), [`plot.skyscapeR.starphases()`](function-methods.html#fn-plot-skyscaper-starphases), [`riseset()`](function-methods.html#fn-riseset), [`sketchSky()`](function-methods.html#fn-sketchsky), [`skyStep()`](function-methods.html#fn-skystep), [`star()`](function-methods.html#fn-star), [`star.phases()`](function-methods.html#fn-star-phases).
-
-## Comparing the same season across stars and epochs {#phase-comparisons}
-
-[`plot.skyscapeR.starphases()`](function-methods.html#fn-plot-skyscaper-starphases) places a result and any further results on a common seasonal axis beginning at December solstice. A single cycle can be drawn as a ring or a strip. Multiple results occupy concentric rings from the outside inward, or aligned strips in the linear layout. The month divisions are a shared seasonal reference. Use the saved event date for a historical calendar comparison. Ordering results by star or epoch and holding the skyline and visibility thresholds fixed makes it possible to attribute changes in the boundaries to the chosen comparison. The plot reads the classifications already calculated by [`star.phases()`](function-methods.html#fn-star-phases). Adding a ring does not refit the visibility model.

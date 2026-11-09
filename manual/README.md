@@ -1,17 +1,9 @@
 # skyscapeR technical manual
 
-Open `docs/index.html` for the rendered book. To rebuild, install Quarto and R, change to this directory and run `quarto render`. Rendering uses base R's tools package to convert both complete help pages and calculate the heliacal-rising summary from archived CSVs. The Rd files come from the 2.0.9004 source archive. The archives contain the heliacal-rising study and its 2.0.9003 source, and the H01 international field validation for 2.0.9004.
+Open `docs/index.html` for the chapter-based edition. Run `quarto render` from this directory to rebuild it. The pre-render script converts the versioned R help pages and calculates the heliacal-rising summary from its archived data.
 
-To publish this draft, commit the source and the rendered `docs/` directory to the intended GitHub repository, and select that branch's `/docs` folder as the GitHub Pages source. A `.nojekyll` marker is included. No service credentials are needed to read the manual locally.
+For the single-page edition currently used on GitHub Pages, render the book first and run `python scripts/standalone/build.py /path/to/manual/index.html` with Python and lxml installed. The output embeds its figures, help pages and study downloads. The hosted vignette remains at the site root; the technical manual is in the `manual/` subdirectory.
 
-The draft includes a complete function index, nine annotated chapter outlines, worked chapters on horizons, stellar phases, sky reconstruction and significance testing, a linked specialist methods catalogue and versioned individual help pages, the H01 and heliacal-rising studies, a register of sky-rendering studies, and an introduction to the astronomical dependency. H01 includes the international field comparison, its downloadable report and reproducible archive. The reproducibility archives preserve the data used for each study. The later methods chapters include executed examples for the documented development build. The ephemeris page records upstream accuracy claims and the data generation of the inspected files. It contains no new ephemeris benchmark.
+The methods guide organises the book by archaeological question. The function reference gives the implementation files, formal arguments and links to individual help pages. The validation register includes H01, H02 and the sky-rendering studies. Some study links lead to access-controlled review copies; a public release should use archival links available to its readers.
 
-The study register links to original review archives and a downloadable extract. Before public deployment, replace the access-controlled review links with permanent public archival links.
-
-The density and event-search chapters include executed examples with synthetic horizons, two figures and an archive of R scripts and outputs.
-
-The lunar crossover and candidate-screening chapters include executed examples, comparison with the 2012 simulation series and two additional evidence downloads.
-
-This draft adds worked chapters for astronomical conventions, field reduction and panorama calibration, with executable examples and their outputs.
-
-The vignette guide covers the archived package tutorial section by section. With the matching package installed, run `Rscript scripts/check-coverage.R` from the project root to compare the catalogue with the namespace, formal argument lists and explicit calls in every vignette R chunk. The check covers documentation structure. Source review is still needed when an implementation changes behaviour without changing a function signature.
+Run `Rscript scripts/check-coverage.R` with skyscapeR 2.0.9004 installed to check the catalogue against the package namespace, formal argument lists and calls in the vignette. Scientific illustrations, their data sources and reproduction instructions are under `figures/` and `scripts/illustrations/`.

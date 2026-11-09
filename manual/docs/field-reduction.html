@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; Reducing compass and theodolite observations – skyscapeR technical manual</title>
+<title>4&nbsp; Reducing compass and theodolite observations – skyscapeR technical manual</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -127,6 +127,7 @@ div.csl-indent {
 }</script>
 
 
+<link rel="stylesheet" href="manual.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -138,7 +139,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./field-reduction.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Reducing compass and theodolite observations</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./field-reduction.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Reducing compass and theodolite observations</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -172,25 +173,13 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./contents-plan.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Annotated contents</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./function-index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Function index</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./vignette-guide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Following the package vignette</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Methods by research question</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ephemeris.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">swephR and the Swiss Ephemeris</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">swephR and the Swiss Ephemeris</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -205,73 +194,67 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./astronomical-conventions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Astronomical conventions and stellar positions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Astronomical conventions and stellar positions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./field-reduction.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Reducing compass and theodolite observations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Reducing compass and theodolite observations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./horizons.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Constructing a site horizon</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Constructing a site horizon</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./photographic-horizons.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Calibrating photographic skylines and exchanging horizons</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Calibrating photographic skylines and exchanging horizons</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./stellar-phases.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Seasonal stellar visibility</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Seasonal stellar visibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./orientation-densities.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">From a measured orientation to a declination distribution</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">From a measured orientation to a declination distribution</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./event-searches.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Terrain crossings and event searches</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Terrain crossings and event searches</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lunar-crossovers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Equinoctial full Moons and crescent crossovers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Equinoctial full Moons and crescent crossovers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./celestial-targets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Identifying celestial candidates and limiting declinations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Identifying celestial candidates and limiting declinations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./significance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Testing orientation distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Testing orientation distributions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sky-rendering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Sky reconstruction and visual radiance</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./function-methods.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Function methods and implementation notes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sky reconstruction and visual radiance</span></span></a>
   </div>
 </li>
       </ul>
@@ -279,12 +262,41 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Validation</span></a>
+ <span class="menu-text">Function reference</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./function-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Function index</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./function-methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Function methods and implementation notes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vignette-guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Following the package vignette</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Validation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./study-register.html" class="sidebar-item-text sidebar-link">
@@ -315,18 +327,18 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#field-compass" id="toc-field-compass" class="nav-link active" data-scroll-target="#field-compass"><span class="header-section-number">6.1</span> Magnetic reference and observation date</a></li>
-  <li><a href="#field-solar" id="toc-field-solar" class="nav-link" data-scroll-target="#field-solar"><span class="header-section-number">6.2</span> Solar-reference reduction</a></li>
-  <li><a href="#field-example" id="toc-field-example" class="nav-link" data-scroll-target="#field-example"><span class="header-section-number">6.3</span> Worked circle reading</a></li>
+  <li><a href="#field-compass" id="toc-field-compass" class="nav-link active" data-scroll-target="#field-compass"><span class="header-section-number">4.1</span> Magnetic reference and observation date</a></li>
+  <li><a href="#field-solar" id="toc-field-solar" class="nav-link" data-scroll-target="#field-solar"><span class="header-section-number">4.2</span> Solar-reference reduction</a></li>
+  <li><a href="#field-example" id="toc-field-example" class="nav-link" data-scroll-target="#field-example"><span class="header-section-number">4.3</span> Worked circle reading</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./field-reduction.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Reducing compass and theodolite observations</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./field-reduction.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Reducing compass and theodolite observations</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-field-reduction" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Reducing compass and theodolite observations</span></span></h1>
+<h1 class="title"><span id="sec-field-reduction" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Reducing compass and theodolite observations</span></span></h1>
 </div>
 
 
@@ -344,8 +356,8 @@ div.csl-indent {
 
 
 <p><strong>Implementation.</strong> skyscapeR 2.0.9004, <code>R/data-reduction.R</code>, <code>R/misc.R</code> and <code>R/mechanics.R</code>. A compass gives a direction relative to magnetic north. A theodolite gives an angle on an instrument circle whose zero may be arbitrary. Reduction places each observation on a true-bearing scale before the skyline or celestial declination is evaluated. Retain the original readings; two corrected numbers alone cannot reveal an erroneous correction sign, solar limb or time convention <span class="citation" data-cites="ruggles1999">(<a href="references.html#ref-ruggles1999" role="doc-biblioref">Ruggles 1999</a>)</span>.</p>
-<section id="field-compass" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="field-compass"><span class="header-section-number">6.1</span> Magnetic reference and observation date</h2>
+<section id="field-compass" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="field-compass"><span class="header-section-number">4.1</span> Magnetic reference and observation date</h2>
 <p><a href="function-methods.html#fn-mag-dec"><code>mag.dec()</code></a> evaluates IGRF-14 through <code>oce::magneticField()</code> at sea level for the survey latitude, longitude and date. The date is converted to a decimal year by dividing elapsed days since 1 January by the actual number of days in the year. This implementation accepts 1 January 1900 through 1 January 2030 inclusive. Supply one site and many dates, one date and several sites, or matched rows. The date is that of the instrument reading, even for a monument built millennia earlier <span class="citation" data-cites="igrf ocefield">(<a href="references.html#ref-igrf" role="doc-biblioref">NOAA National Centers for Environmental Information, n.d.</a>; <a href="references.html#ref-ocefield" role="doc-biblioref">Kelley and Richards, n.d.</a>)</span>.</p>
 <p>With east-positive magnetic declination <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>, <a href="function-methods.html#fn-reduct-compass"><code>reduct.compass()</code></a> computes <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>T</mi></msub><mo>=</mo><msub><mi>A</mi><mi>M</mi></msub><mo>+</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">A_T=A_M+D</annotation></semantics></math>. An explicit <code>magdec</code> takes precedence if a date is also supplied. A bearing and correction shared across measurements or paired corrections should retain their row identities. The routine rounds using the numeric representation of the input bearings. It does not reduce the reported sum modulo 360°. Where altitude is provided, it also calculates celestial declination. An explicit altitude takes precedence over a supplied horizon; otherwise the corrected true bearing is used to look up the horizon altitude.</p>
 <p>At 35.84° N, 14.57° E on 20 February 2026 the model returned <strong>+3.827142°</strong>. The input and altitude columns below are illustrative readings.</p>
@@ -385,16 +397,16 @@ div.csl-indent {
 </table>
 <p>In particular, subtracting the positive correction would rotate the sightline in the wrong direction. IGRF models the main geomagnetic field. Local disturbance, instrument bias, a grid bearing mistaken for a magnetic bearing, or movement between observing positions require separate evidence. Numerical agreement with another IGRF implementation cannot test these field effects.</p>
 </section>
-<section id="field-solar" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="field-solar"><span class="header-section-number">6.2</span> Solar-reference reduction</h2>
+<section id="field-solar" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="field-solar"><span class="header-section-number">4.2</span> Solar-reference reduction</h2>
 <p>Let <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mi>T</mi></msub><annotation encoding="application/x-tex">r_T</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mi>S</mi></msub><annotation encoding="application/x-tex">r_S</annotation></semantics></math> be instrument-circle readings to the target and the observed solar point. If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>S</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">A_S(t)</annotation></semantics></math> is the predicted true bearing of that same solar point, the reduced bearing modulo one turn is</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>T</mi></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><msub><mi>A</mi><mi>S</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><msub><mi>r</mi><mi>T</mi></msub><mo>−</mo><msub><mi>r</mi><mi>S</mi></msub><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mspace width="0.222em"></mspace><mo>mod</mo><mspace width="0.222em"></mspace><mn>360</mn></mrow><mi>°</mi><mi>.</mi></mrow><annotation encoding="application/x-tex"> A_T = [ A_S(t) + r_T-r_S ]\bmod 360°.</annotation></semantics></math></p>
 <p><a href="function-methods.html#fn-sunaz"><code>sunAz()</code></a> parses the survey clock with R’s civil-time machinery, converts it to UTC, forms a Gregorian Julian date and calculates a topocentric solar direction. Its horizontal calculation uses 1013.25 mbar and 15 °C. The centre is used if no limb is given. Left and right limbs subtract or add a fixed <strong>16 arcminutes in azimuth</strong>. Optional altitude is the geometric centre altitude. The fixed limb offset is an approximation; it does not vary with the apparent solar diameter or project a changing semidiameter onto azimuth at each altitude. This timestamp route is distinct from the proleptic ancient-date conversion in the <a href="./astronomical-conventions.html">conventions chapter</a>.</p>
 <p><a href="function-methods.html#fn-reduct-theodolite"><code>reduct.theodolite()</code></a> adds the observed circle difference to the computed solar reference, rounded according to the input readings. For <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>r</mi><mi>T</mi></msub><mo>−</mo><msub><mi>r</mi><mi>S</mi></msub><mo stretchy="true" form="postfix">|</mo></mrow><mo>&gt;</mo><mn>180</mn><mi>°</mi></mrow><annotation encoding="application/x-tex">|r_T-r_S|&gt;180°</annotation></semantics></math> this build subtracts a full turn from the difference, including when it is already negative. It does not wrap the final sum. The resulting number represents the correct direction modulo 360° but can be far outside the normal horizon lookup range. For a crossing of north, retain the raw result and compute <code>True.Azimuth %% 360</code> before matching a profile; for that case one can reduce the bearing first and then pass the wrapped value and measured altitude to <a href="function-methods.html#fn-az2dec"><code>az2dec()</code></a>. With one observation, a one-row, three-column location matrix works in this build; a plain three-element vector can fail in the internal matrix indexing.</p>
 <p>The optional <code>name</code>, <code>ID</code> and <code>HWT.ID</code> fields identify output records. Supplying a HeyWhatsThat ID in these reduction functions records it in the table. To use the external skyline, retrieve the horizon with <a href="function-methods.html#fn-downloadhwt"><code>downloadHWT()</code></a> and supply the resulting object as the location; an explicit measured altitude takes precedence.</p>
 </section>
-<section id="field-example" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="field-example"><span class="header-section-number">6.3</span> Worked circle reading</h2>
+<section id="field-example" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="field-example"><span class="header-section-number">4.3</span> Worked circle reading</h2>
 <p>At the same site on 20 February 2026 at <strong>11:07:17 Europe/Malta</strong>, the calculated solar bearings were 157.4611° for the left limb, 157.7278° for the centre and 157.9944° for the right limb. A clock one minute later changed the centre bearing by <strong>+0.30759°</strong> in this example. That is a local time sensitivity, not a universal correction.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>site <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">35.84</span>, <span class="fl">14.57</span>, <span class="dv">100</span>), <span class="at">nrow =</span> <span class="dv">1</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">reduct.theodolite</span>(site, <span class="at">az =</span> <span class="fl">2.25</span>, <span class="at">az.sun =</span> <span class="fl">358.75</span>,</span>
@@ -402,6 +414,12 @@ div.csl-indent {
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>r<span class="sc">$</span>True.Azimuth</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>r<span class="sc">$</span>True.Azimuth <span class="sc">%%</span> <span class="dv">360</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The instrument crossed north by <strong>+3.50°</strong> between the solar and target readings. The rounded solar reference is 157.73°. The routine returns <strong>−558.77°</strong>, equivalent to <strong>161.23°</strong>, the direction obtained by adding 3.50° to the solar reference. The companion script also includes a non-wrapping reading and a compass reduction. These examples show why retaining the solar reading, limb, timestamp, timezone and original circle values matters when recovering a field result.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/survey-reference.png" class="img-fluid figure-img" alt="The instrument turn crosses north. The same turn takes the true bearing from 157.73 to 161.23 degrees."></p>
+<figcaption>A clockwise turn from 358.75° to 2.25° adds 3.50° to the solar reference. The two scales show the same turn in instrument and true coordinates.</figcaption>
+</figure>
+</div>
 <p>The international <a href="./study-register.html#h01-field-validation">H01</a> field comparison evaluates DEM skylines against already reduced bearings. Independent validation of the two reduction functions requires a different reference. The relevant future check is a repeat solar or magnetic orientation of a baseline with independently established endpoints, accompanied by instrument readings, timestamps, atmospheric conditions and positional uncertainties. <a href="archives/conventions-field-panorama.zip">Download the synthetic field records and reduction scripts</a>.</p>
 <p><strong>Related function entries</strong></p>
 <p><a href="function-methods.html#fn-mag-dec"><code>mag.dec()</code></a>, <a href="function-methods.html#fn-reduct-compass"><code>reduct.compass()</code></a>, <a href="function-methods.html#fn-hor2alt"><code>hor2alt()</code></a>, <a href="function-methods.html#fn-sunaz"><code>sunAz()</code></a>, <a href="function-methods.html#fn-reduct-theodolite"><code>reduct.theodolite()</code></a>, <a href="function-methods.html#fn-az2dec"><code>az2dec()</code></a>.</p>
@@ -824,12 +842,12 @@ Ruggles, Clive. 1999. <em>Astronomy in Prehistoric Britain and Ireland</em>. Yal
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./astronomical-conventions.html" class="pagination-link" aria-label="Astronomical conventions and stellar positions">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Astronomical conventions and stellar positions</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Astronomical conventions and stellar positions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./horizons.html" class="pagination-link" aria-label="Constructing a site horizon">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Constructing a site horizon</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Constructing a site horizon</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

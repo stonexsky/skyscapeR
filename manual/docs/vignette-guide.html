@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Following the package vignette – skyscapeR technical manual</title>
+<title>16&nbsp; Following the package vignette – skyscapeR technical manual</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ephemeris.html" rel="next">
-<link href="./function-index.html" rel="prev">
+<link href="./study-register.html" rel="next">
+<link href="./function-methods.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -72,6 +72,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
+<link rel="stylesheet" href="manual.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -83,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./vignette-guide.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Following the package vignette</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./function-index.html">Function reference</a></li><li class="breadcrumb-item"><a href="./vignette-guide.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Following the package vignette</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -117,25 +118,13 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./contents-plan.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Annotated contents</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./function-index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Function index</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./vignette-guide.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Following the package vignette</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Methods by research question</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ephemeris.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">swephR and the Swiss Ephemeris</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">swephR and the Swiss Ephemeris</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -150,73 +139,67 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./astronomical-conventions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Astronomical conventions and stellar positions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Astronomical conventions and stellar positions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./field-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Reducing compass and theodolite observations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Reducing compass and theodolite observations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./horizons.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Constructing a site horizon</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Constructing a site horizon</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./photographic-horizons.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Calibrating photographic skylines and exchanging horizons</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Calibrating photographic skylines and exchanging horizons</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./stellar-phases.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Seasonal stellar visibility</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Seasonal stellar visibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./orientation-densities.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">From a measured orientation to a declination distribution</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">From a measured orientation to a declination distribution</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./event-searches.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Terrain crossings and event searches</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Terrain crossings and event searches</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lunar-crossovers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Equinoctial full Moons and crescent crossovers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Equinoctial full Moons and crescent crossovers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./celestial-targets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Identifying celestial candidates and limiting declinations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Identifying celestial candidates and limiting declinations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./significance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Testing orientation distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Testing orientation distributions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sky-rendering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Sky reconstruction and visual radiance</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./function-methods.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Function methods and implementation notes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sky reconstruction and visual radiance</span></span></a>
   </div>
 </li>
       </ul>
@@ -224,12 +207,41 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Validation</span></a>
+ <span class="menu-text">Function reference</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./function-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Function index</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./function-methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Function methods and implementation notes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vignette-guide.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Following the package vignette</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Validation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./study-register.html" class="sidebar-item-text sidebar-link">
@@ -260,41 +272,41 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#field-data" id="toc-field-data" class="nav-link active" data-scroll-target="#field-data"><span class="header-section-number">3.1</span> Field data</a>
+  <li><a href="#field-data" id="toc-field-data" class="nav-link active" data-scroll-target="#field-data"><span class="header-section-number">16.1</span> Field data</a>
   <ul class="collapse">
-  <li><a href="#workflow-import-your-observations" id="toc-workflow-import-your-observations" class="nav-link" data-scroll-target="#workflow-import-your-observations"><span class="header-section-number">3.1.1</span> Import your observations</a></li>
-  <li><a href="#workflow-reduce-compass-readings-to-true-azimuth" id="toc-workflow-reduce-compass-readings-to-true-azimuth" class="nav-link" data-scroll-target="#workflow-reduce-compass-readings-to-true-azimuth"><span class="header-section-number">3.1.2</span> Reduce compass readings to true azimuth</a></li>
-  <li><a href="#workflow-reduce-a-theodolite-survey-with-a-solar-sight" id="toc-workflow-reduce-a-theodolite-survey-with-a-solar-sight" class="nav-link" data-scroll-target="#workflow-reduce-a-theodolite-survey-with-a-solar-sight"><span class="header-section-number">3.1.3</span> Reduce a theodolite survey with a solar sight</a></li>
-  <li><a href="#workflow-convert-each-sightline-to-celestial-declination" id="toc-workflow-convert-each-sightline-to-celestial-declination" class="nav-link" data-scroll-target="#workflow-convert-each-sightline-to-celestial-declination"><span class="header-section-number">3.1.4</span> Convert each sightline to celestial declination</a></li>
-  <li><a href="#workflow-which-targets-fit-the-measurement" id="toc-workflow-which-targets-fit-the-measurement" class="nav-link" data-scroll-target="#workflow-which-targets-fit-the-measurement"><span class="header-section-number">3.1.5</span> Which targets fit the measurement?</a></li>
+  <li><a href="#workflow-import-your-observations" id="toc-workflow-import-your-observations" class="nav-link" data-scroll-target="#workflow-import-your-observations"><span class="header-section-number">16.1.1</span> Import your observations</a></li>
+  <li><a href="#workflow-reduce-compass-readings-to-true-azimuth" id="toc-workflow-reduce-compass-readings-to-true-azimuth" class="nav-link" data-scroll-target="#workflow-reduce-compass-readings-to-true-azimuth"><span class="header-section-number">16.1.2</span> Reduce compass readings to true azimuth</a></li>
+  <li><a href="#workflow-reduce-a-theodolite-survey-with-a-solar-sight" id="toc-workflow-reduce-a-theodolite-survey-with-a-solar-sight" class="nav-link" data-scroll-target="#workflow-reduce-a-theodolite-survey-with-a-solar-sight"><span class="header-section-number">16.1.3</span> Reduce a theodolite survey with a solar sight</a></li>
+  <li><a href="#workflow-convert-each-sightline-to-celestial-declination" id="toc-workflow-convert-each-sightline-to-celestial-declination" class="nav-link" data-scroll-target="#workflow-convert-each-sightline-to-celestial-declination"><span class="header-section-number">16.1.4</span> Convert each sightline to celestial declination</a></li>
+  <li><a href="#workflow-which-targets-fit-the-measurement" id="toc-workflow-which-targets-fit-the-measurement" class="nav-link" data-scroll-target="#workflow-which-targets-fit-the-measurement"><span class="header-section-number">16.1.5</span> Which targets fit the measurement?</a></li>
   </ul></li>
-  <li><a href="#one-site" id="toc-one-site" class="nav-link" data-scroll-target="#one-site"><span class="header-section-number">3.2</span> One site</a>
+  <li><a href="#one-site" id="toc-one-site" class="nav-link" data-scroll-target="#one-site"><span class="header-section-number">16.2</span> One site</a>
   <ul class="collapse">
-  <li><a href="#workflow-the-doorway-at-mnajdra-south" id="toc-workflow-the-doorway-at-mnajdra-south" class="nav-link" data-scroll-target="#workflow-the-doorway-at-mnajdra-south"><span class="header-section-number">3.2.1</span> The doorway at Mnajdra South</a></li>
-  <li><a href="#workflow-importing-site-horizons" id="toc-workflow-importing-site-horizons" class="nav-link" data-scroll-target="#workflow-importing-site-horizons"><span class="header-section-number">3.2.2</span> Importing site horizons</a></li>
-  <li><a href="#workflow-which-objects-fit-the-doorway" id="toc-workflow-which-objects-fit-the-doorway" class="nav-link" data-scroll-target="#workflow-which-objects-fit-the-doorway"><span class="header-section-number">3.2.3</span> Which objects fit the doorway?</a></li>
-  <li><a href="#workflow-equinoctial-sunrise" id="toc-workflow-equinoctial-sunrise" class="nav-link" data-scroll-target="#workflow-equinoctial-sunrise"><span class="header-section-number">3.2.4</span> Equinoctial sunrise</a></li>
-  <li><a href="#workflow-the-heliacal-rising-of-the-pleiades" id="toc-workflow-the-heliacal-rising-of-the-pleiades" class="nav-link" data-scroll-target="#workflow-the-heliacal-rising-of-the-pleiades"><span class="header-section-number">3.2.5</span> The heliacal rising of the Pleiades</a></li>
-  <li><a href="#workflow-watch-the-cluster-rise-later-in-the-season" id="toc-workflow-watch-the-cluster-rise-later-in-the-season" class="nav-link" data-scroll-target="#workflow-watch-the-cluster-rise-later-in-the-season"><span class="header-section-number">3.2.6</span> Watch the cluster rise later in the season</a></li>
+  <li><a href="#workflow-the-doorway-at-mnajdra-south" id="toc-workflow-the-doorway-at-mnajdra-south" class="nav-link" data-scroll-target="#workflow-the-doorway-at-mnajdra-south"><span class="header-section-number">16.2.1</span> The doorway at Mnajdra South</a></li>
+  <li><a href="#workflow-importing-site-horizons" id="toc-workflow-importing-site-horizons" class="nav-link" data-scroll-target="#workflow-importing-site-horizons"><span class="header-section-number">16.2.2</span> Importing site horizons</a></li>
+  <li><a href="#workflow-which-objects-fit-the-doorway" id="toc-workflow-which-objects-fit-the-doorway" class="nav-link" data-scroll-target="#workflow-which-objects-fit-the-doorway"><span class="header-section-number">16.2.3</span> Which objects fit the doorway?</a></li>
+  <li><a href="#workflow-equinoctial-sunrise" id="toc-workflow-equinoctial-sunrise" class="nav-link" data-scroll-target="#workflow-equinoctial-sunrise"><span class="header-section-number">16.2.4</span> Equinoctial sunrise</a></li>
+  <li><a href="#workflow-the-heliacal-rising-of-the-pleiades" id="toc-workflow-the-heliacal-rising-of-the-pleiades" class="nav-link" data-scroll-target="#workflow-the-heliacal-rising-of-the-pleiades"><span class="header-section-number">16.2.5</span> The heliacal rising of the Pleiades</a></li>
+  <li><a href="#workflow-watch-the-cluster-rise-later-in-the-season" id="toc-workflow-watch-the-cluster-rise-later-in-the-season" class="nav-link" data-scroll-target="#workflow-watch-the-cluster-rise-later-in-the-season"><span class="header-section-number">16.2.6</span> Watch the cluster rise later in the season</a></li>
   </ul></li>
-  <li><a href="#multiple-sites" id="toc-multiple-sites" class="nav-link" data-scroll-target="#multiple-sites"><span class="header-section-number">3.3</span> Multiple sites</a>
+  <li><a href="#multiple-sites" id="toc-multiple-sites" class="nav-link" data-scroll-target="#multiple-sites"><span class="header-section-number">16.3</span> Multiple sites</a>
   <ul class="collapse">
-  <li><a href="#workflow-start-with-the-gantija-entrance-bearings" id="toc-workflow-start-with-the-gantija-entrance-bearings" class="nav-link" data-scroll-target="#workflow-start-with-the-gantija-entrance-bearings"><span class="header-section-number">3.3.1</span> Start with the Ġgantija entrance bearings</a></li>
-  <li><a href="#workflow-give-each-opening-a-distribution" id="toc-workflow-give-each-opening-a-distribution" class="nav-link" data-scroll-target="#workflow-give-each-opening-a-distribution"><span class="header-section-number">3.3.2</span> Give each opening a distribution</a></li>
-  <li><a href="#workflow-test-random-orientations" id="toc-workflow-test-random-orientations" class="nav-link" data-scroll-target="#workflow-test-random-orientations"><span class="header-section-number">3.3.3</span> Test random orientations</a></li>
-  <li><a href="#workflow-exploring-celestial-candidates" id="toc-workflow-exploring-celestial-candidates" class="nav-link" data-scroll-target="#workflow-exploring-celestial-candidates"><span class="header-section-number">3.3.4</span> Exploring celestial candidates</a></li>
+  <li><a href="#workflow-start-with-the-gantija-entrance-bearings" id="toc-workflow-start-with-the-gantija-entrance-bearings" class="nav-link" data-scroll-target="#workflow-start-with-the-gantija-entrance-bearings"><span class="header-section-number">16.3.1</span> Start with the Ġgantija entrance bearings</a></li>
+  <li><a href="#workflow-give-each-opening-a-distribution" id="toc-workflow-give-each-opening-a-distribution" class="nav-link" data-scroll-target="#workflow-give-each-opening-a-distribution"><span class="header-section-number">16.3.2</span> Give each opening a distribution</a></li>
+  <li><a href="#workflow-test-random-orientations" id="toc-workflow-test-random-orientations" class="nav-link" data-scroll-target="#workflow-test-random-orientations"><span class="header-section-number">16.3.3</span> Test random orientations</a></li>
+  <li><a href="#workflow-exploring-celestial-candidates" id="toc-workflow-exploring-celestial-candidates" class="nav-link" data-scroll-target="#workflow-exploring-celestial-candidates"><span class="header-section-number">16.3.4</span> Exploring celestial candidates</a></li>
   </ul></li>
-  <li><a href="#other-tools" id="toc-other-tools" class="nav-link" data-scroll-target="#other-tools"><span class="header-section-number">3.4</span> Other tools</a>
+  <li><a href="#other-tools" id="toc-other-tools" class="nav-link" data-scroll-target="#other-tools"><span class="header-section-number">16.4</span> Other tools</a>
   <ul class="collapse">
-  <li><a href="#workflow-compare-the-three-sky-styles" id="toc-workflow-compare-the-three-sky-styles" class="nav-link" data-scroll-target="#workflow-compare-the-three-sky-styles"><span class="header-section-number">3.4.1</span> Compare the three sky styles</a></li>
-  <li><a href="#workflow-compare-stellar-seasons" id="toc-workflow-compare-stellar-seasons" class="nav-link" data-scroll-target="#workflow-compare-stellar-seasons"><span class="header-section-number">3.4.2</span> Compare stellar seasons</a></li>
-  <li><a href="#workflow-compare-constellation-patterns" id="toc-workflow-compare-constellation-patterns" class="nav-link" data-scroll-target="#workflow-compare-constellation-patterns"><span class="header-section-number">3.4.3</span> Compare constellation patterns</a></li>
-  <li><a href="#workflow-explore-the-milky-way-and-reference-circles" id="toc-workflow-explore-the-milky-way-and-reference-circles" class="nav-link" data-scroll-target="#workflow-explore-the-milky-way-and-reference-circles"><span class="header-section-number">3.4.4</span> Explore the Milky Way and reference circles</a></li>
-  <li><a href="#workflow-compare-twilight-in-opposite-directions" id="toc-workflow-compare-twilight-in-opposite-directions" class="nav-link" data-scroll-target="#workflow-compare-twilight-in-opposite-directions"><span class="header-section-number">3.4.5</span> Compare twilight in opposite directions</a></li>
-  <li><a href="#workflow-capture-a-sky-from-stellarium" id="toc-workflow-capture-a-sky-from-stellarium" class="nav-link" data-scroll-target="#workflow-capture-a-sky-from-stellarium"><span class="header-section-number">3.4.6</span> Capture a sky from Stellarium</a></li>
-  <li><a href="#workflow-equinoctial-full-moons-and-solstitial-crescent-crossovers" id="toc-workflow-equinoctial-full-moons-and-solstitial-crescent-crossovers" class="nav-link" data-scroll-target="#workflow-equinoctial-full-moons-and-solstitial-crescent-crossovers"><span class="header-section-number">3.4.7</span> Equinoctial full Moons and solstitial crescent crossovers</a></li>
-  <li><a href="#workflow-a-planisphere-for-the-site-s-latitude" id="toc-workflow-a-planisphere-for-the-site-s-latitude" class="nav-link" data-scroll-target="#workflow-a-planisphere-for-the-site-s-latitude"><span class="header-section-number">3.4.8</span> A planisphere for the site’s latitude</a></li>
-  <li><a href="#workflow-other-questions-about-the-sky" id="toc-workflow-other-questions-about-the-sky" class="nav-link" data-scroll-target="#workflow-other-questions-about-the-sky"><span class="header-section-number">3.4.9</span> Other questions about the sky</a></li>
+  <li><a href="#workflow-compare-the-three-sky-styles" id="toc-workflow-compare-the-three-sky-styles" class="nav-link" data-scroll-target="#workflow-compare-the-three-sky-styles"><span class="header-section-number">16.4.1</span> Compare the three sky styles</a></li>
+  <li><a href="#workflow-compare-stellar-seasons" id="toc-workflow-compare-stellar-seasons" class="nav-link" data-scroll-target="#workflow-compare-stellar-seasons"><span class="header-section-number">16.4.2</span> Compare stellar seasons</a></li>
+  <li><a href="#workflow-compare-constellation-patterns" id="toc-workflow-compare-constellation-patterns" class="nav-link" data-scroll-target="#workflow-compare-constellation-patterns"><span class="header-section-number">16.4.3</span> Compare constellation patterns</a></li>
+  <li><a href="#workflow-explore-the-milky-way-and-reference-circles" id="toc-workflow-explore-the-milky-way-and-reference-circles" class="nav-link" data-scroll-target="#workflow-explore-the-milky-way-and-reference-circles"><span class="header-section-number">16.4.4</span> Explore the Milky Way and reference circles</a></li>
+  <li><a href="#workflow-compare-twilight-in-opposite-directions" id="toc-workflow-compare-twilight-in-opposite-directions" class="nav-link" data-scroll-target="#workflow-compare-twilight-in-opposite-directions"><span class="header-section-number">16.4.5</span> Compare twilight in opposite directions</a></li>
+  <li><a href="#workflow-capture-a-sky-from-stellarium" id="toc-workflow-capture-a-sky-from-stellarium" class="nav-link" data-scroll-target="#workflow-capture-a-sky-from-stellarium"><span class="header-section-number">16.4.6</span> Capture a sky from Stellarium</a></li>
+  <li><a href="#workflow-equinoctial-full-moons-and-solstitial-crescent-crossovers" id="toc-workflow-equinoctial-full-moons-and-solstitial-crescent-crossovers" class="nav-link" data-scroll-target="#workflow-equinoctial-full-moons-and-solstitial-crescent-crossovers"><span class="header-section-number">16.4.7</span> Equinoctial full Moons and solstitial crescent crossovers</a></li>
+  <li><a href="#workflow-a-planisphere-for-the-site-s-latitude" id="toc-workflow-a-planisphere-for-the-site-s-latitude" class="nav-link" data-scroll-target="#workflow-a-planisphere-for-the-site-s-latitude"><span class="header-section-number">16.4.8</span> A planisphere for the site’s latitude</a></li>
+  <li><a href="#workflow-other-questions-about-the-sky" id="toc-workflow-other-questions-about-the-sky" class="nav-link" data-scroll-target="#workflow-other-questions-about-the-sky"><span class="header-section-number">16.4.9</span> Other questions about the sky</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -302,9 +314,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./function-index.html">Function reference</a></li><li class="breadcrumb-item"><a href="./vignette-guide.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Following the package vignette</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-vignette-guide" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Following the package vignette</span></span></h1>
+<h1 class="title"><span id="sec-vignette-guide" class="quarto-section-identifier"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Following the package vignette</span></span></h1>
 </div>
 
 
@@ -323,134 +335,134 @@ ul.task-list li input[type="checkbox"] {
 
 <p>Use this guide alongside <em>skyscapeR: from field measurements to skyscape analysis</em>, the vignette in the archived 2.0.9004 source. Each entry follows a decision in that workflow to its technical explanation. In R, open the installed vignette with <code>vignette("skyscapeR", package="skyscapeR")</code> when vignettes are installed. The source is <code>vignettes/skyscapeR.Rmd</code> inside the package download in the <a href="./function-methods.html">function methods catalogue</a>.</p>
 <p>The opening setup checks for spreadsheet and ephemeris dependencies. Conditional examples may be skipped when the vignette is built without those inputs. The <a href="./ephemeris.html">ephemeris chapter</a> identifies the backend and data required for reproducing ancient positions.</p>
-<section id="field-data" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="field-data"><span class="header-section-number">3.1</span> Field data</h2>
-<section id="workflow-import-your-observations" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="workflow-import-your-observations"><span class="header-section-number">3.1.1</span> Import your observations</h3>
+<section id="field-data" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="field-data"><span class="header-section-number">16.1</span> Field data</h2>
+<section id="workflow-import-your-observations" class="level3" data-number="16.1.1">
+<h3 data-number="16.1.1" class="anchored" data-anchor-id="workflow-import-your-observations"><span class="header-section-number">16.1.1</span> Import your observations</h3>
 <p>Read the Compass worksheet with readxl. Keep the original bearing, date, site identifier, latitude, longitude, elevation and measured skyline altitude in the same row. A spreadsheet import is an external R operation. Its column order and units determine what the reduction receives.</p>
 <p><a href="field-reduction.html#field-compass">Technical explanation</a>.</p>
 </section>
-<section id="workflow-reduce-compass-readings-to-true-azimuth" class="level3" data-number="3.1.2">
-<h3 data-number="3.1.2" class="anchored" data-anchor-id="workflow-reduce-compass-readings-to-true-azimuth"><span class="header-section-number">3.1.2</span> Reduce compass readings to true azimuth</h3>
+<section id="workflow-reduce-compass-readings-to-true-azimuth" class="level3" data-number="16.1.2">
+<h3 data-number="16.1.2" class="anchored" data-anchor-id="workflow-reduce-compass-readings-to-true-azimuth"><span class="header-section-number">16.1.2</span> Reduce compass readings to true azimuth</h3>
 <p>Pass the location matrix and observation dates in worksheet order. Preserve the raw magnetic readings alongside the declination correction and the returned true bearings.</p>
 <p><a href="field-reduction.html#field-compass">Technical explanation</a>. <a href="function-methods.html#fn-reduct-compass"><code>reduct.compass()</code></a>, <a href="function-methods.html#fn-mag-dec"><code>mag.dec()</code></a>.</p>
 </section>
-<section id="workflow-reduce-a-theodolite-survey-with-a-solar-sight" class="level3" data-number="3.1.3">
-<h3 data-number="3.1.3" class="anchored" data-anchor-id="workflow-reduce-a-theodolite-survey-with-a-solar-sight"><span class="header-section-number">3.1.3</span> Reduce a theodolite survey with a solar sight</h3>
+<section id="workflow-reduce-a-theodolite-survey-with-a-solar-sight" class="level3" data-number="16.1.3">
+<h3 data-number="16.1.3" class="anchored" data-anchor-id="workflow-reduce-a-theodolite-survey-with-a-solar-sight"><span class="header-section-number">16.1.3</span> Reduce a theodolite survey with a solar sight</h3>
 <p>The solar limb, local clock and unchanged instrument circle setting identify the reference for the structural bearings. Pair the reduced bearings with their measured horizon altitudes.</p>
 <p><a href="field-reduction.html#field-solar">Technical explanation</a>. <a href="function-methods.html#fn-reduct-theodolite"><code>reduct.theodolite()</code></a>, <a href="function-methods.html#fn-ten"><code>ten()</code></a>, <a href="function-methods.html#fn-sunaz"><code>sunAz()</code></a>.</p>
 </section>
-<section id="workflow-convert-each-sightline-to-celestial-declination" class="level3" data-number="3.1.4">
-<h3 data-number="3.1.4" class="anchored" data-anchor-id="workflow-convert-each-sightline-to-celestial-declination"><span class="header-section-number">3.1.4</span> Convert each sightline to celestial declination</h3>
+<section id="workflow-convert-each-sightline-to-celestial-declination" class="level3" data-number="16.1.4">
+<h3 data-number="16.1.4" class="anchored" data-anchor-id="workflow-convert-each-sightline-to-celestial-declination"><span class="header-section-number">16.1.4</span> Convert each sightline to celestial declination</h3>
 <p>The measured horizon altitude belongs to the same true bearing and observer latitude. The direct transform gives one declination per row. Uncertainty propagation requires an orientation distribution.</p>
 <p><a href="orientation-densities.html#density-transform">Technical explanation</a>. <a href="function-methods.html#fn-az2dec"><code>az2dec()</code></a>.</p>
 </section>
-<section id="workflow-which-targets-fit-the-measurement" class="level3" data-number="3.1.5">
-<h3 data-number="3.1.5" class="anchored" data-anchor-id="workflow-which-targets-fit-the-measurement"><span class="header-section-number">3.1.5</span> Which targets fit the measurement?</h3>
+<section id="workflow-which-targets-fit-the-measurement" class="level3" data-number="16.1.5">
+<h3 data-number="16.1.5" class="anchored" data-anchor-id="workflow-which-targets-fit-the-measurement"><span class="header-section-number">16.1.5</span> Which targets fit the measurement?</h3>
 <p>Screen the two-degree interval around the example measurement over the stated dating interval. The two degrees are a choice in the vignette. The search does not estimate this uncertainty.</p>
 <p><a href="celestial-targets.html#target-screen">Technical explanation</a>. <a href="function-methods.html#fn-findtargets"><code>findTargets()</code></a>.</p>
 </section>
 </section>
-<section id="one-site" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="one-site"><span class="header-section-number">3.2</span> One site</h2>
-<section id="workflow-the-doorway-at-mnajdra-south" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="workflow-the-doorway-at-mnajdra-south"><span class="header-section-number">3.2.1</span> The doorway at Mnajdra South</h3>
+<section id="one-site" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="one-site"><span class="header-section-number">16.2</span> One site</h2>
+<section id="workflow-the-doorway-at-mnajdra-south" class="level3" data-number="16.2.1">
+<h3 data-number="16.2.1" class="anchored" data-anchor-id="workflow-the-doorway-at-mnajdra-south"><span class="header-section-number">16.2.1</span> The doorway at Mnajdra South</h3>
 <p>The bundled <code>malta_entrances</code> table contains 32 entrances. Its unnamed companion list <code>malta_horizons</code> contains the corresponding profiles generated by Tore Lomsdalen with Andrew Smith’s Horizon software from the Heritage Malta 5 m DEM. Check the stored site metadata after any reordering. Select a named entrance before extracting its edges. The vignette can average these two edge bearings because its opening does not cross north. For a north-crossing opening, take the clockwise width modulo 360° before computing its midpoint.</p>
 <p><a href="celestial-targets.html#target-band">Technical explanation</a>.</p>
 </section>
-<section id="workflow-importing-site-horizons" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="workflow-importing-site-horizons"><span class="header-section-number">3.2.2</span> Importing site horizons</h3>
+<section id="workflow-importing-site-horizons" class="level3" data-number="16.2.2">
+<h3 data-number="16.2.2" class="anchored" data-anchor-id="workflow-importing-site-horizons"><span class="header-section-number">16.2.2</span> Importing site horizons</h3>
 <p>Measured profiles, transparent photographs, HeyWhatsThat, PeakFinder and a DEM provide different evidence about the same direction. The bundled Mnajdra skyline is selected by the entrance row index. Read each edge altitude from that profile before transforming the edge.</p>
 <p><a href="horizons.html#sec-dem-panorama">Technical explanation</a>. <a href="function-methods.html#fn-createhor"><code>createHor()</code></a>, <a href="function-methods.html#fn-importpanorama"><code>importPanorama()</code></a>, <a href="function-methods.html#fn-createhwt"><code>createHWT()</code></a>, <a href="function-methods.html#fn-importpeakfinder"><code>importPeakFinder()</code></a>, <a href="function-methods.html#fn-exportstellarium"><code>exportStellarium()</code></a>, <a href="function-methods.html#fn-hor2alt"><code>hor2alt()</code></a>, <a href="function-methods.html#fn-az2dec"><code>az2dec()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-horizon"><code>plot.skyscapeR.horizon()</code></a>.</p>
 </section>
-<section id="workflow-which-objects-fit-the-doorway" class="level3" data-number="3.2.3">
-<h3 data-number="3.2.3" class="anchored" data-anchor-id="workflow-which-objects-fit-the-doorway"><span class="header-section-number">3.2.3</span> Which objects fit the doorway?</h3>
+<section id="workflow-which-objects-fit-the-doorway" class="level3" data-number="16.2.3">
+<h3 data-number="16.2.3" class="anchored" data-anchor-id="workflow-which-objects-fit-the-doorway"><span class="header-section-number">16.2.3</span> Which objects fit the doorway?</h3>
 <p>Use the declinations of both doorway edges and the monument’s date range. If the skyline has a notch or ridge inside the opening, also inspect the interior, since the extremal declination need not occur at either edge.</p>
 <p><a href="celestial-targets.html#target-screen">Technical explanation</a>. <a href="function-methods.html#fn-findtargets"><code>findTargets()</code></a>.</p>
 </section>
-<section id="workflow-equinoctial-sunrise" class="level3" data-number="3.2.4">
-<h3 data-number="3.2.4" class="anchored" data-anchor-id="workflow-equinoctial-sunrise"><span class="header-section-number">3.2.4</span> Equinoctial sunrise</h3>
+<section id="workflow-equinoctial-sunrise" class="level3" data-number="16.2.4">
+<h3 data-number="16.2.4" class="anchored" data-anchor-id="workflow-equinoctial-sunrise"><span class="header-section-number">16.2.4</span> Equinoctial sunrise</h3>
 <p>A zero-declination reference track and the Sun at its terrain crossing are different astronomical quantities. The equinox occurs at an instant, which can be hours after local sunrise. Retain the returned crossing declination for the dated track.</p>
 <p><a href="event-searches.html#sec-event-searches">Technical explanation</a>. <a href="function-methods.html#fn-riseset"><code>riseset()</code></a>, <a href="function-methods.html#fn-sketchsky"><code>sketchSky()</code></a>, <a href="function-methods.html#fn-skyobject"><code>skyObject()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-horizon"><code>plot.skyscapeR.horizon()</code></a>.</p>
 </section>
-<section id="workflow-the-heliacal-rising-of-the-pleiades" class="level3" data-number="3.2.5">
-<h3 data-number="3.2.5" class="anchored" data-anchor-id="workflow-the-heliacal-rising-of-the-pleiades"><span class="header-section-number">3.2.5</span> The heliacal rising of the Pleiades</h3>
+<section id="workflow-the-heliacal-rising-of-the-pleiades" class="level3" data-number="16.2.5">
+<h3 data-number="16.2.5" class="anchored" data-anchor-id="workflow-the-heliacal-rising-of-the-pleiades"><span class="header-section-number">16.2.5</span> The heliacal rising of the Pleiades</h3>
 <p>Take the event’s local Julian calendar date, compute the terrain crossing on that date, then advance the time to allow the centre to clear the ridge. Integrated M45 and the individual Alcyone use different magnitudes and can receive different phase dates.</p>
 <p><a href="stellar-phases.html#sec-stellar">Technical explanation</a>. <a href="function-methods.html#fn-star-phases"><code>star.phases()</code></a>, <a href="function-methods.html#fn-riseset"><code>riseset()</code></a>, <a href="function-methods.html#fn-time2jd"><code>time2jd()</code></a>, <a href="function-methods.html#fn-sketchsky"><code>sketchSky()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-starphases"><code>plot.skyscapeR.starphases()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-horizon"><code>plot.skyscapeR.horizon()</code></a>.</p>
 </section>
-<section id="workflow-watch-the-cluster-rise-later-in-the-season" class="level3" data-number="3.2.6">
-<h3 data-number="3.2.6" class="anchored" data-anchor-id="workflow-watch-the-cluster-rise-later-in-the-season"><span class="header-section-number">3.2.6</span> Watch the cluster rise later in the season</h3>
+<section id="workflow-watch-the-cluster-rise-later-in-the-season" class="level3" data-number="16.2.6">
+<h3 data-number="16.2.6" class="anchored" data-anchor-id="workflow-watch-the-cluster-rise-later-in-the-season"><span class="header-section-number">16.2.6</span> Watch the cluster rise later in the season</h3>
 <p>Adding 60 days to the earlier JD selects a later date for a new rise calculation. Adding five minutes to a particular crossing, or stepping a reconstructed sky ten minutes, instead changes the displayed instant. Keep the doorway edges and sector fixed across frames.</p>
 <p><a href="sky-rendering.html#sky-step-capture">Technical explanation</a>. <a href="function-methods.html#fn-riseset"><code>riseset()</code></a>, <a href="function-methods.html#fn-sketchsky"><code>sketchSky()</code></a>, <a href="function-methods.html#fn-skystep"><code>skyStep()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-horizon"><code>plot.skyscapeR.horizon()</code></a>.</p>
 </section>
 </section>
-<section id="multiple-sites" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="multiple-sites"><span class="header-section-number">3.3</span> Multiple sites</h2>
-<section id="workflow-start-with-the-gantija-entrance-bearings" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="workflow-start-with-the-gantija-entrance-bearings"><span class="header-section-number">3.3.1</span> Start with the Ġgantija entrance bearings</h3>
+<section id="multiple-sites" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="multiple-sites"><span class="header-section-number">16.3</span> Multiple sites</h2>
+<section id="workflow-start-with-the-gantija-entrance-bearings" class="level3" data-number="16.3.1">
+<h3 data-number="16.3.1" class="anchored" data-anchor-id="workflow-start-with-the-gantija-entrance-bearings"><span class="header-section-number">16.3.1</span> Start with the Ġgantija entrance bearings</h3>
 <p>Use the same indices for the entrances and their horizons. Plot centre bearings on the compass and half-widths on the interval plot. A compass solstice mark uses the level-horizon crossing at the supplied site.</p>
 <p><a href="orientation-densities.html#orientation-displays">Technical explanation</a>. <a href="function-methods.html#fn-plotazimuth"><code>plotAzimuth()</code></a>, <a href="function-methods.html#fn-plotbars"><code>plotBars()</code></a>, <a href="function-methods.html#fn-skyobject"><code>skyObject()</code></a>.</p>
 </section>
-<section id="workflow-give-each-opening-a-distribution" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="workflow-give-each-opening-a-distribution"><span class="header-section-number">3.3.2</span> Give each opening a distribution</h3>
+<section id="workflow-give-each-opening-a-distribution" class="level3" data-number="16.3.2">
+<h3 data-number="16.3.2" class="anchored" data-anchor-id="workflow-give-each-opening-a-distribution"><span class="header-section-number">16.3.2</span> Give each opening a distribution</h3>
 <p>A uniform azimuth PDF treats the directions between doorway edges as equally probable. Transform each opening across its own skyline before summation. The linked single-site view can show several disjoint intervals at the requested density mass.</p>
 <p><a href="orientation-densities.html#orientation-displays">Technical explanation</a>. <a href="function-methods.html#fn-az-pdf"><code>az.pdf()</code></a>, <a href="function-methods.html#fn-coordtrans"><code>coordtrans()</code></a>, <a href="function-methods.html#fn-spd"><code>spd()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-pdf"><code>plot.skyscapeR.pdf()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-spd"><code>plot.skyscapeR.spd()</code></a>.</p>
 </section>
-<section id="workflow-test-random-orientations" class="level3" data-number="3.3.3">
-<h3 data-number="3.3.3" class="anchored" data-anchor-id="workflow-test-random-orientations"><span class="header-section-number">3.3.3</span> Test random orientations</h3>
+<section id="workflow-test-random-orientations" class="level3" data-number="16.3.3">
+<h3 data-number="16.3.3" class="anchored" data-anchor-id="workflow-test-random-orientations"><span class="header-section-number">16.3.3</span> Test random orientations</h3>
 <p>The vignette reads a saved 500-simulation fit. Its lower panel displays separately adjusted excess and deficit clusters. Reading the bundled fit does not run 500 new simulations. Retain the seed, observations and matching skylines to reproduce the fit.</p>
 <p><a href="significance.html#sig-output">Technical explanation</a>. <a href="function-methods.html#fn-randomtest"><code>randomTest()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-sigtest"><code>plot.skyscapeR.sigTest()</code></a>.</p>
 </section>
-<section id="workflow-exploring-celestial-candidates" class="level3" data-number="3.3.4">
-<h3 data-number="3.3.4" class="anchored" data-anchor-id="workflow-exploring-celestial-candidates"><span class="header-section-number">3.3.4</span> Exploring celestial candidates</h3>
+<section id="workflow-exploring-celestial-candidates" class="level3" data-number="16.3.4">
+<h3 data-number="16.3.4" class="anchored" data-anchor-id="workflow-exploring-celestial-candidates"><span class="header-section-number">16.3.4</span> Exploring celestial candidates</h3>
 <p>Filter the positive clusters by adjusted p-value before searching their declination intervals. A compatible Gacrux band is a candidate. Checking its phase and the view from Skorba West asks a separate site-specific question.</p>
 <p><a href="celestial-targets.html#target-screen">Technical explanation</a>. <a href="function-methods.html#fn-findtargets"><code>findTargets()</code></a>, <a href="function-methods.html#fn-skyobject"><code>skyObject()</code></a>, <a href="function-methods.html#fn-star-phases"><code>star.phases()</code></a>, <a href="function-methods.html#fn-riseset"><code>riseset()</code></a>, <a href="function-methods.html#fn-time2jd"><code>time2jd()</code></a>, <a href="function-methods.html#fn-sketchsky"><code>sketchSky()</code></a>, <a href="function-methods.html#fn-modeltest"><code>modelTest()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-sigtest"><code>plot.skyscapeR.sigTest()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-horizon"><code>plot.skyscapeR.horizon()</code></a>.</p>
 </section>
 </section>
-<section id="other-tools" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="other-tools"><span class="header-section-number">3.4</span> Other tools</h2>
-<section id="workflow-compare-the-three-sky-styles" class="level3" data-number="3.4.1">
-<h3 data-number="3.4.1" class="anchored" data-anchor-id="workflow-compare-the-three-sky-styles"><span class="header-section-number">3.4.1</span> Compare the three sky styles</h3>
+<section id="other-tools" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="other-tools"><span class="header-section-number">16.4</span> Other tools</h2>
+<section id="workflow-compare-the-three-sky-styles" class="level3" data-number="16.4.1">
+<h3 data-number="16.4.1" class="anchored" data-anchor-id="workflow-compare-the-three-sky-styles"><span class="header-section-number">16.4.1</span> Compare the three sky styles</h3>
 <p>Recompute the same horizon and instant in each style. The natural rendering maps a light budget to the display. The two publication styles use symbols to show geometry, even when natural visual contrast is weak.</p>
 <p><a href="sky-rendering.html#sky-step-capture">Technical explanation</a>. <a href="function-methods.html#fn-sketchsky"><code>sketchSky()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-horizon"><code>plot.skyscapeR.horizon()</code></a>.</p>
 </section>
-<section id="workflow-compare-stellar-seasons" class="level3" data-number="3.4.2">
-<h3 data-number="3.4.2" class="anchored" data-anchor-id="workflow-compare-stellar-seasons"><span class="header-section-number">3.4.2</span> Compare stellar seasons</h3>
+<section id="workflow-compare-stellar-seasons" class="level3" data-number="16.4.2">
+<h3 data-number="16.4.2" class="anchored" data-anchor-id="workflow-compare-stellar-seasons"><span class="header-section-number">16.4.2</span> Compare stellar seasons</h3>
 <p>Pass the first result as x and further results in the second argument. Compare one star across epochs, several stars at one epoch, or a list ordered by star and year. A shared seasonal reference aligns the rows.</p>
 <p><a href="stellar-phases.html#phase-comparisons">Technical explanation</a>. <a href="function-methods.html#fn-star-phases"><code>star.phases()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-starphases"><code>plot.skyscapeR.starphases()</code></a>.</p>
 </section>
-<section id="workflow-compare-constellation-patterns" class="level3" data-number="3.4.3">
-<h3 data-number="3.4.3" class="anchored" data-anchor-id="workflow-compare-constellation-patterns"><span class="header-section-number">3.4.3</span> Compare constellation patterns</h3>
+<section id="workflow-compare-constellation-patterns" class="level3" data-number="16.4.3">
+<h3 data-number="16.4.3" class="anchored" data-anchor-id="workflow-compare-constellation-patterns"><span class="header-section-number">16.4.3</span> Compare constellation patterns</h3>
 <p>Keep site, epoch and field fixed while changing modern figures, Chinese mansion asterisms or selected figure identifiers. The bundled <code>constellations</code> table has 88 modern rows, 318 Chinese rows and a separate 28-row mansion selection. Each pair of HIP identifiers is an independent segment. The <code>star.names</code> lookup maps Western names to catalogue identifiers; it does not define the line patterns. The same catalogue star can participate in a different line pattern. Imported legacy HIP pairs specify connectivity.</p>
 <p><a href="sky-rendering.html#sky-constellations">Technical explanation</a>. <a href="function-methods.html#fn-sketchsky"><code>sketchSky()</code></a>, <a href="function-methods.html#fn-importconstellations"><code>importConstellations()</code></a>, <a href="function-methods.html#fn-skystep"><code>skyStep()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-horizon"><code>plot.skyscapeR.horizon()</code></a>.</p>
 </section>
-<section id="workflow-explore-the-milky-way-and-reference-circles" class="level3" data-number="3.4.4">
-<h3 data-number="3.4.4" class="anchored" data-anchor-id="workflow-explore-the-milky-way-and-reference-circles"><span class="header-section-number">3.4.4</span> Explore the Milky Way and reference circles</h3>
+<section id="workflow-explore-the-milky-way-and-reference-circles" class="level3" data-number="16.4.4">
+<h3 data-number="16.4.4" class="anchored" data-anchor-id="workflow-explore-the-milky-way-and-reference-circles"><span class="header-section-number">16.4.4</span> Explore the Milky Way and reference circles</h3>
 <p>The traced band, its dark and bright structure, and the Galactic equator have different geometrical meanings. A sketch and a planisphere expose these as separate layer choices.</p>
 <p><a href="sky-rendering.html#sky-constellations">Technical explanation</a>.</p>
 </section>
-<section id="workflow-compare-twilight-in-opposite-directions" class="level3" data-number="3.4.5">
-<h3 data-number="3.4.5" class="anchored" data-anchor-id="workflow-compare-twilight-in-opposite-directions"><span class="header-section-number">3.4.5</span> Compare twilight in opposite directions</h3>
+<section id="workflow-compare-twilight-in-opposite-directions" class="level3" data-number="16.4.5">
+<h3 data-number="16.4.5" class="anchored" data-anchor-id="workflow-compare-twilight-in-opposite-directions"><span class="header-section-number">16.4.5</span> Compare twilight in opposite directions</h3>
 <p>Use the same saved sky for solar and antisolar views. Changing the azimuth limits changes the sampled direction. Disable the Moon to isolate the solar contribution and hold JD and display scale fixed.</p>
 <p><a href="sky-rendering.html#sec-sketch">Technical explanation</a>. <a href="function-methods.html#fn-sketchsky"><code>sketchSky()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-horizon"><code>plot.skyscapeR.horizon()</code></a>.</p>
 </section>
-<section id="workflow-capture-a-sky-from-stellarium" class="level3" data-number="3.4.6">
-<h3 data-number="3.4.6" class="anchored" data-anchor-id="workflow-capture-a-sky-from-stellarium"><span class="header-section-number">3.4.6</span> Capture a sky from Stellarium</h3>
+<section id="workflow-capture-a-sky-from-stellarium" class="level3" data-number="16.4.6">
+<h3 data-number="16.4.6" class="anchored" data-anchor-id="workflow-capture-a-sky-from-stellarium"><span class="header-section-number">16.4.6</span> Capture a sky from Stellarium</h3>
 <p>A captured image reflects the external application’s state. Replotting a sector uses the existing raster, while stepping time requests a fresh capture. Record the external settings and the screenshot width.</p>
 <p><a href="sky-rendering.html#sky-step-capture">Technical explanation</a>. <a href="function-methods.html#fn-stellariumsky"><code>stellariumSky()</code></a>, <a href="function-methods.html#fn-skystep"><code>skyStep()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-horizon"><code>plot.skyscapeR.horizon()</code></a>.</p>
 </section>
-<section id="workflow-equinoctial-full-moons-and-solstitial-crescent-crossovers" class="level3" data-number="3.4.7">
-<h3 data-number="3.4.7" class="anchored" data-anchor-id="workflow-equinoctial-full-moons-and-solstitial-crescent-crossovers"><span class="header-section-number">3.4.7</span> Equinoctial full Moons and solstitial crescent crossovers</h3>
+<section id="workflow-equinoctial-full-moons-and-solstitial-crescent-crossovers" class="level3" data-number="16.4.7">
+<h3 data-number="16.4.7" class="anchored" data-anchor-id="workflow-equinoctial-full-moons-and-solstitial-crescent-crossovers"><span class="header-section-number">16.4.7</span> Equinoctial full Moons and solstitial crescent crossovers</h3>
 <p>EFM pairs lunar and solar events. CC additionally applies the selected crescent and simulation gates. Inspect the diagnostics and the visibility margin when explaining why a particular day was selected.</p>
 <p><a href="lunar-crossovers.html#sec-lunar-crossovers">Technical explanation</a>. <a href="function-methods.html#fn-efm"><code>EFM()</code></a>, <a href="function-methods.html#fn-cc"><code>CC()</code></a>.</p>
 </section>
-<section id="workflow-a-planisphere-for-the-site-s-latitude" class="level3" data-number="3.4.8">
-<h3 data-number="3.4.8" class="anchored" data-anchor-id="workflow-a-planisphere-for-the-site-s-latitude"><span class="header-section-number">3.4.8</span> A planisphere for the site’s latitude</h3>
+<section id="workflow-a-planisphere-for-the-site-s-latitude" class="level3" data-number="16.4.8">
+<h3 data-number="16.4.8" class="anchored" data-anchor-id="workflow-a-planisphere-for-the-site-s-latitude"><span class="header-section-number">16.4.8</span> A planisphere for the site’s latitude</h3>
 <p>The chart clips the epoch’s celestial sphere to the declinations that can rise at the specified latitude. Its geometric boundary and catalogue magnitude limit answer different questions from local detectability behind an actual skyline.</p>
 <p><a href="sky-rendering.html#sky-constellations">Technical explanation</a>. <a href="function-methods.html#fn-planisphere"><code>planisphere()</code></a>.</p>
 </section>
-<section id="workflow-other-questions-about-the-sky" class="level3" data-number="3.4.9">
-<h3 data-number="3.4.9" class="anchored" data-anchor-id="workflow-other-questions-about-the-sky"><span class="header-section-number">3.4.9</span> Other questions about the sky</h3>
+<section id="workflow-other-questions-about-the-sky" class="level3" data-number="16.4.9">
+<h3 data-number="16.4.9" class="anchored" data-anchor-id="workflow-other-questions-about-the-sky"><span class="header-section-number">16.4.9</span> Other questions about the sky</h3>
 <p>The concluding table lists public entry points by question. For the full set, including methods reached through plot, print and subset, use the function index below.</p>
 <p><a href="function-index.html#sec-functions">Technical explanation</a>. <a href="function-methods.html#fn-reduct-compass"><code>reduct.compass()</code></a>, <a href="function-methods.html#fn-mag-dec"><code>mag.dec()</code></a>, <a href="function-methods.html#fn-reduct-theodolite"><code>reduct.theodolite()</code></a>, <a href="function-methods.html#fn-sunaz"><code>sunAz()</code></a>, <a href="function-methods.html#fn-ten"><code>ten()</code></a>, <a href="function-methods.html#fn-createhor"><code>createHor()</code></a>, <a href="function-methods.html#fn-createhwt"><code>createHWT()</code></a>, <a href="function-methods.html#fn-downloadhwt"><code>downloadHWT()</code></a>, <a href="function-methods.html#fn-importpeakfinder"><code>importPeakFinder()</code></a>, <a href="function-methods.html#fn-importpanorama"><code>importPanorama()</code></a>, <a href="function-methods.html#fn-hor2alt"><code>hor2alt()</code></a>, <a href="function-methods.html#fn-horfeature"><code>horFeature()</code></a>, <a href="function-methods.html#fn-dempalettes"><code>demPalettes()</code></a>, <a href="function-methods.html#fn-relinkhor"><code>relinkHor()</code></a>, <a href="function-methods.html#fn-exportpanorama"><code>exportPanorama()</code></a>, <a href="function-methods.html#fn-exporthor"><code>exportHor()</code></a>, <a href="function-methods.html#fn-exportstellarium"><code>exportStellarium()</code></a>, <a href="function-methods.html#fn-plotazimuth"><code>plotAzimuth()</code></a>, <a href="function-methods.html#fn-plotbars"><code>plotBars()</code></a>, <a href="function-methods.html#fn-az2dec"><code>az2dec()</code></a>, <a href="function-methods.html#fn-az-pdf"><code>az.pdf()</code></a>, <a href="function-methods.html#fn-dec-pdf"><code>dec.pdf()</code></a>, <a href="function-methods.html#fn-coordtrans"><code>coordtrans()</code></a>, <a href="function-methods.html#fn-spd"><code>spd()</code></a>, <a href="function-methods.html#fn-hpdi"><code>hpdi()</code></a>, <a href="function-methods.html#fn-randomtest"><code>randomTest()</code></a>, <a href="function-methods.html#fn-modeltest"><code>modelTest()</code></a>, <a href="function-methods.html#fn-pval2stars"><code>pval2stars()</code></a>, <a href="function-methods.html#fn-bernoulli-trial"><code>bernoulli.trial()</code></a>, <a href="function-methods.html#fn-findtargets"><code>findTargets()</code></a>, <a href="function-methods.html#fn-star"><code>star()</code></a>, <a href="function-methods.html#fn-star-phases"><code>star.phases()</code></a>, <a href="function-methods.html#fn-skyobject"><code>skyObject()</code></a>, <a href="function-methods.html#fn-sky-objects"><code>sky.objects()</code></a>, <a href="function-methods.html#fn-body-position"><code>body.position()</code></a>, <a href="function-methods.html#fn-orbit"><code>orbit()</code></a>, <a href="function-methods.html#fn-riseset"><code>riseset()</code></a>, <a href="function-methods.html#fn-sketchsky"><code>sketchSky()</code></a>, <a href="function-methods.html#fn-stellariumsky"><code>stellariumSky()</code></a>, <a href="function-methods.html#fn-skystep"><code>skyStep()</code></a>, <a href="function-methods.html#fn-planisphere"><code>planisphere()</code></a>, <a href="function-methods.html#fn-importconstellations"><code>importConstellations()</code></a>, <a href="function-methods.html#fn-eq"><code>eq()</code></a>, <a href="function-methods.html#fn-spatial-equinox"><code>spatial.equinox()</code></a>, <a href="function-methods.html#fn-js"><code>jS()</code></a>, <a href="function-methods.html#fn-ds"><code>dS()</code></a>, <a href="function-methods.html#fn-obliquity"><code>obliquity()</code></a>, <a href="function-methods.html#fn-solar-date"><code>solar.date()</code></a>, <a href="function-methods.html#fn-zenith"><code>zenith()</code></a>, <a href="function-methods.html#fn-antizenith"><code>antizenith()</code></a>, <a href="function-methods.html#fn-hor2max-dec"><code>hor2max.dec()</code></a>, <a href="function-methods.html#fn-hor2min-dec"><code>hor2min.dec()</code></a>, <a href="function-methods.html#fn-nmjlx"><code>nMjLX()</code></a>, <a href="function-methods.html#fn-smjlx"><code>sMjLX()</code></a>, <a href="function-methods.html#fn-nmnlx"><code>nmnLX()</code></a>, <a href="function-methods.html#fn-smnlx"><code>smnLX()</code></a>, <a href="function-methods.html#fn-parallax-corr"><code>parallax.corr()</code></a>, <a href="function-methods.html#fn-planet-extremes"><code>planet.extremes()</code></a>, <a href="function-methods.html#fn-moonphase"><code>moonphase()</code></a>, <a href="function-methods.html#fn-efm"><code>EFM()</code></a>, <a href="function-methods.html#fn-cc"><code>CC()</code></a>, <a href="function-methods.html#fn-astroyear"><code>astroYear()</code></a>, <a href="function-methods.html#fn-bc-ad"><code>BC.AD()</code></a>, <a href="function-methods.html#fn-long-date"><code>long.date()</code></a>, <a href="function-methods.html#fn-timestring"><code>timestring()</code></a>, <a href="function-methods.html#fn-time2jd"><code>time2jd()</code></a>, <a href="function-methods.html#fn-jd2time"><code>jd2time()</code></a>, <a href="function-methods.html#fn-skyscaper-vars"><code>skyscapeR.vars()</code></a>.</p>
 
@@ -861,13 +873,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./function-index.html" class="pagination-link" aria-label="Function index">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Function index</span></span>
+      <a href="./function-methods.html" class="pagination-link" aria-label="Function methods and implementation notes">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Function methods and implementation notes</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ephemeris.html" class="pagination-link" aria-label="swephR and the Swiss Ephemeris">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">swephR and the Swiss Ephemeris</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./study-register.html" class="pagination-link" aria-label="Studies by question and package build">
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Studies by question and package build</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

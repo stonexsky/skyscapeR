@@ -6,7 +6,7 @@
 
 [`sketchSky()`](function-methods.html#fn-sketchsky) takes a georeferenced horizon and an instant. Record the calendar and timezone when specifying civil time. It resolves astronomical positions at the site using the epoch-appropriate ephemeris and captures the session's refraction, pressure and temperature settings. The horizontal frame uses true azimuth clockwise from north. The resulting object can be replotted for another sector without moving the sky in time. Recompute the instant with [`skyStep()`](function-methods.html#fn-skystep) for a time sequence. See the ephemeris chapter for file coverage, time scales and the scope of the upstream precision claim.
 
-Natural mode is the default. Stars, the Sun and the Moon are enabled by default; planets require their switch. The Milky Way switch follows the stars unless set explicitly. Turning the Moon off removes its disc and its illumination. A ridge occulting the disc in the plotted scene can still leave scattered moonlight. Constellation segments use the selected endpoint coordinates independently of the star-symbol magnitude cutoff. A drawn line is a cultural overlay and supplies no evidence that its endpoint stars could both have been detected.
+Natural mode is the default. Stars, the Sun and the Moon are enabled by default; planets require their switch. The Milky Way switch follows the stars unless set explicitly. Turning the Moon off removes its disc and its illumination. A ridge occulting the disc in the plotted scene can still leave scattered moonlight. The [constellation geometry section](#sky-constellations) describes the endpoint selection.
 
 ## Linear radiance and the rendered pixel
 
@@ -28,6 +28,22 @@ The outer envelope comes from a tracing of diffuse light in *Deep Star Maps 2020
 
 The implemented relative intensities are 0 outside the band, 1 for ordinary band, 0 for the dark class, and 1.35 and 2.1 for the two bright classes. These are provisional rendering weights. Atmospheric background can still contribute light in a dark-class pixel. The surface-brightness scale is anchored to a four-degree Carina field at 20.7 V mag arcsec⁻² [@kruit2024]. Normalisation in that field constrains the adopted scale, not every direction around the Galaxy. The direct atmospheric transmission is evaluated separately for the displayed altitude, so a geometrically predicted crossing can be difficult to follow near the skyline. A plotted Galactic equator and an outer Milky Way edge represent different sightlines.
 
+### Reading the traced boundary
+
+The tracing starts from the celestial-coordinate diffuse-light image in *Deep Star Maps 2020*, with bright foreground stars omitted [@deepstars]. On a 0.25° Galactic grid, the tracing script smooths image tone to 1° FWHM. At each longitude it estimates background tone from latitudes 35°–50° on either side of the plane and bright-band tone from the 90th percentile within 12° of the plane. Both longitude series are median-filtered over approximately 5°. For background $B$ and bright-band tone $P$, the selected contour level is $B+0.35(P-B)$. The algorithm keeps the main connected body across the longitude seam, fills enclosed holes, then smooths the envelope mask at 4° FWHM.
+
+![The same Galactic directions appear in each row. The turquoise line traces the deployed outer envelope. The third row shows the five classes assigned by build 2.0.9004. The bottom row renders the intrinsic diffuse component on a common linear grey scale, using the package’s relative intensities 0, 1, 0, 1.35 and 2.1. Atmospheric attenuation and screen adaptation enter later. Dark lanes remain inside the outer edge even where their assigned diffuse flux is zero. Source map: Ernie Wright, NASA/Goddard SVS; ESA/Gaia/DPAC [@deepstars].](figures/milky-way-reconstruction.png){fig-alt="Centre and anticentre hemispheres in Galactic coordinates, each shown as diffuse starlight, the same map with its outer edge, the class grid and the intrinsic diffuse brightness."}
+
+The anticentre band narrows at higher contrast cuts, but the same change also removes much of the extended bulge on the centre side. The adopted 35% cut preserves that structure using one rule around the full circumference. The 45% and 55% candidates below document the trade-off. The source image used to choose the edge cannot independently validate it.
+
+<details><summary>Original centre and anticentre contrast comparisons</summary>
+
+![Galactic centre. The 35%, 45% and 55% contours are shown on the same source image and exposure.](figures/mw-centre-review.jpg){fig-alt="Original centre comparison with the source map and three progressively tighter contours."}
+
+![Galactic anticentre. Compare the contraction of the band at higher cuts with the loss of the extended centre bulge in the preceding figure.](figures/mw-anticentre-review.jpg){fig-alt="Original anticentre comparison with the source map and the same three contrast cuts."}
+
+</details>
+
 ### How the Carina field fixes the intensity scale
 
 The implementation in `R/light-budget.R` samples a circle of radius 2° centred at Galactic $(l,b)=(287°,-2°)$ on a 0.1° grid. Let $q_i$ be the relative intensity of the class at sample $i$. The mean $\bar q=\sum_i q_i\cos b_i/\sum_i\cos b_i$ accounts for the area represented by each Galactic latitude row. The intrinsic brightness assigned to class $j$, in magnitude-zero flux per square degree, is
@@ -35,17 +51,6 @@ The implementation in `R/light-budget.R` samples a circle of radius 2° centred 
 $$B_j=q_j\,\frac{3600^2\,10^{-0.4\,(20.7)}}{\bar q}.$$
 
 The factor $3600^2$ converts square arcseconds to square degrees. This construction makes the field mean reproduce the adopted Carina brightness [@kruit2024, table 3]. A comparison in the same field therefore checks the normalisation. Independent photometry elsewhere is needed to assess the extrapolation. In the renderer, the Galactic class is looked up along the geometrical direction corresponding to the displayed pixel, and its brightness is multiplied by transmission at the displayed altitude. This explains how the outline can retain the same geometrical extent while a low-altitude section loses visual contrast. The [study register](study-register.qmd) distinguishes the traced boundary, measured twilight comparisons, flux recovery and extinction checks.
-
-## Comparative strengths and outstanding issues
-
-Stellarium provides an interactive planetarium with navigable sky, exchangeable sky cultures and landscape visualisation [@stellarium]. For an archaeological analysis, the specific advantage of skyscapeR is the ability to use the same R horizon and instant for the geometry, inspect the separate radiance components, and archive the inputs and calculation alongside the figure. No matched comparison in the register establishes photometric superiority over Stellarium. A screenshot can check gross appearance; validation of angular position, diffuse brightness or human detection requires a reference appropriate to that quantity.
-
-The register reports held-out twilight errors of 0.48 and 2.28 magnitudes for the revised and earlier curves on the configurations tested in 2.0.9003. The 2.0.9004 Sirius zoom check recovered the input flux at the three tested widths. The band-extinction check verifies application of the specified transmission law; it does not estimate an ancient site's extinction coefficient. Independent boundary measurements, brightness away from Carina and detection under other observing conditions remain open questions. The heliacal-rising comparison shares geometry between its models and evaluates a date, not the calibration of every pixel.
-
-
-**Related function entries**
-
-[`body.position()`](function-methods.html#fn-body-position), [`createHor()`](function-methods.html#fn-createhor), [`importConstellations()`](function-methods.html#fn-importconstellations), [`plot.skyscapeR.horizon()`](function-methods.html#fn-plot-skyscaper-horizon), [`sketchSky()`](function-methods.html#fn-sketchsky), [`skyRadiance()`](function-methods.html#fn-skyradiance), [`skyscapeR.vars()`](function-methods.html#fn-skyscaper-vars), [`skyStep()`](function-methods.html#fn-skystep), [`star()`](function-methods.html#fn-star), [`stellariumSky()`](function-methods.html#fn-stellariumsky), [`time2jd()`](function-methods.html#fn-time2jd).
 
 ## Constellation selection and planisphere geometry {#sky-constellations}
 
@@ -61,4 +66,12 @@ A natural [`sketchSky()`](function-methods.html#fn-sketchsky) uses enabled lumin
 
 [`skyStep()`](function-methods.html#fn-skystep) computes $JD'=JD+\texttt{minutes}/1440$. For a native sketch it rebuilds the sky using its stored calendar, style, magnitude limit, extinction coefficient and display selection. It reads refraction, pressure and temperature again from the current session. For a Stellarium sky it requests another screenshot with the saved capture settings. In both cases assign the invisibly returned object before stepping again. Drawing another sector at the same instant only requires replotting. Doorway edge lines added to the graphics device must be redrawn after the new plot.
 
-**Related functions.** [`plot.skyscapeR.horizon()`](function-methods.html#fn-plot-skyscaper-horizon), [`skyscapeR.vars()`](function-methods.html#fn-skyscaper-vars), [`skyRadiance()`](function-methods.html#fn-skyradiance).
+## Comparative strengths and outstanding issues
+
+Stellarium provides an interactive planetarium with navigable sky, exchangeable sky cultures and landscape visualisation [@stellarium]. For an archaeological analysis, the specific advantage of skyscapeR is the ability to use the same R horizon and instant for the geometry, inspect the separate radiance components, and archive the inputs and calculation alongside the figure. No matched comparison in the register establishes photometric superiority over Stellarium. A screenshot can check gross appearance; validation of angular position, diffuse brightness or human detection requires a reference appropriate to that quantity.
+
+The [study register](study-register.qmd#sky-rendering) reports the held-out twilight comparisons, the Sirius flux check and the differential extinction calculation. Independent measurements of the outer boundary and of surface brightness away from Carina remain outstanding.
+
+**Related function entries**
+
+[`body.position()`](function-methods.html#fn-body-position), [`createHor()`](function-methods.html#fn-createhor), [`importConstellations()`](function-methods.html#fn-importconstellations), [`plot.skyscapeR.horizon()`](function-methods.html#fn-plot-skyscaper-horizon), [`sketchSky()`](function-methods.html#fn-sketchsky), [`skyRadiance()`](function-methods.html#fn-skyradiance), [`skyscapeR.vars()`](function-methods.html#fn-skyscaper-vars), [`skyStep()`](function-methods.html#fn-skystep), [`star()`](function-methods.html#fn-star), [`stellariumSky()`](function-methods.html#fn-stellariumsky), [`time2jd()`](function-methods.html#fn-time2jd).

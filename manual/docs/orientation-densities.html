@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>10&nbsp; From a measured orientation to a declination distribution – skyscapeR technical manual</title>
+<title>8&nbsp; From a measured orientation to a declination distribution – skyscapeR technical manual</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -127,6 +127,7 @@ div.csl-indent {
 }</script>
 
 
+<link rel="stylesheet" href="manual.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -138,7 +139,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./orientation-densities.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">From a measured orientation to a declination distribution</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./orientation-densities.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">From a measured orientation to a declination distribution</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -172,25 +173,13 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./contents-plan.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Annotated contents</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./function-index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Function index</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./vignette-guide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Following the package vignette</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Methods by research question</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ephemeris.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">swephR and the Swiss Ephemeris</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">swephR and the Swiss Ephemeris</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -205,73 +194,67 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./astronomical-conventions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Astronomical conventions and stellar positions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Astronomical conventions and stellar positions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./field-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Reducing compass and theodolite observations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Reducing compass and theodolite observations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./horizons.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Constructing a site horizon</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Constructing a site horizon</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./photographic-horizons.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Calibrating photographic skylines and exchanging horizons</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Calibrating photographic skylines and exchanging horizons</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./stellar-phases.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Seasonal stellar visibility</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Seasonal stellar visibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./orientation-densities.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">From a measured orientation to a declination distribution</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">From a measured orientation to a declination distribution</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./event-searches.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Terrain crossings and event searches</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Terrain crossings and event searches</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lunar-crossovers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Equinoctial full Moons and crescent crossovers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Equinoctial full Moons and crescent crossovers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./celestial-targets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Identifying celestial candidates and limiting declinations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Identifying celestial candidates and limiting declinations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./significance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Testing orientation distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Testing orientation distributions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sky-rendering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Sky reconstruction and visual radiance</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./function-methods.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Function methods and implementation notes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sky reconstruction and visual radiance</span></span></a>
   </div>
 </li>
       </ul>
@@ -279,12 +262,41 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Validation</span></a>
+ <span class="menu-text">Function reference</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./function-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Function index</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./function-methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Function methods and implementation notes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vignette-guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Following the package vignette</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Validation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./study-register.html" class="sidebar-item-text sidebar-link">
@@ -315,13 +327,13 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#density-measurement" id="toc-density-measurement" class="nav-link active" data-scroll-target="#density-measurement"><span class="header-section-number">10.1</span> What does a measurement PDF represent?</a></li>
-  <li><a href="#density-transform" id="toc-density-transform" class="nav-link" data-scroll-target="#density-transform"><span class="header-section-number">10.2</span> Point transformation and the conditional density</a></li>
-  <li><a href="#density-notch" id="toc-density-notch" class="nav-link" data-scroll-target="#density-notch"><span class="header-section-number">10.3</span> Worked example: a doorway across a notch</a></li>
-  <li><a href="#density-summary" id="toc-density-summary" class="nav-link" data-scroll-target="#density-summary"><span class="header-section-number">10.4</span> Summation, highest-density regions and inference</a></li>
-  <li><a href="#orientation-displays" id="toc-orientation-displays" class="nav-link" data-scroll-target="#orientation-displays"><span class="header-section-number">10.5</span> What the orientation displays calculate</a>
+  <li><a href="#density-measurement" id="toc-density-measurement" class="nav-link active" data-scroll-target="#density-measurement"><span class="header-section-number">8.1</span> What does a measurement PDF represent?</a></li>
+  <li><a href="#density-transform" id="toc-density-transform" class="nav-link" data-scroll-target="#density-transform"><span class="header-section-number">8.2</span> Point transformation and the conditional density</a></li>
+  <li><a href="#density-notch" id="toc-density-notch" class="nav-link" data-scroll-target="#density-notch"><span class="header-section-number">8.3</span> Worked example: a doorway across a notch</a></li>
+  <li><a href="#density-summary" id="toc-density-summary" class="nav-link" data-scroll-target="#density-summary"><span class="header-section-number">8.4</span> Summation, highest-density regions and inference</a></li>
+  <li><a href="#orientation-displays" id="toc-orientation-displays" class="nav-link" data-scroll-target="#orientation-displays"><span class="header-section-number">8.5</span> What the orientation displays calculate</a>
   <ul class="collapse">
-  <li><a href="#subset-dec-centres" id="toc-subset-dec-centres" class="nav-link" data-scroll-target="#subset-dec-centres"><span class="header-section-number">10.5.1</span> Subsetting a directly constructed declination PDF</a></li>
+  <li><a href="#subset-dec-centres" id="toc-subset-dec-centres" class="nav-link" data-scroll-target="#subset-dec-centres"><span class="header-section-number">8.5.1</span> Subsetting a directly constructed declination PDF</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -329,9 +341,9 @@ div.csl-indent {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./orientation-densities.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">From a measured orientation to a declination distribution</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./orientation-densities.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">From a measured orientation to a declination distribution</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-densities" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">From a measured orientation to a declination distribution</span></span></h1>
+<h1 class="title"><span id="sec-densities" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">From a measured orientation to a declination distribution</span></span></h1>
 </div>
 
 
@@ -349,20 +361,26 @@ div.csl-indent {
 
 
 <p><strong>Implementation.</strong> skyscapeR 2.0.9004, <code>R/statistics.R</code>, <code>R/dec-pdf.R</code>, <code>R/mechanics.R</code> and <code>R/misc.R</code>. A doorway admits a range of sightlines; each can meet a different altitude on the skyline. <span class="citation" data-cites="silva2020">Silva (<a href="references.html#ref-silva2020" role="doc-biblioref">2020, secs 2–3</a>, figs. 1–5)</span> represents uncertainty in the orientation as a probability density and transforms that density using the local horizon. The worked example follows one doorway from its measured angular opening to three distinct regions in declination.</p>
-<section id="density-measurement" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="density-measurement"><span class="header-section-number">10.1</span> What does a measurement PDF represent?</h2>
+<section id="density-measurement" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="density-measurement"><span class="header-section-number">8.1</span> What does a measurement PDF represent?</h2>
 <p>Let <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> denote true azimuth, increasing clockwise from north. The density <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>A</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f_A(a)</annotation></semantics></math> expresses how the analyst allocates support across the bearings consistent with the measurement. In Silva’s framework the appropriate density depends on the measurement and the architecture <span class="citation" data-cites="silva2020">(<a href="references.html#ref-silva2020" role="doc-biblioref">Silva 2020, sec. 2</a>)</span>. A directly observed axis with repeat readings can justify a concentrated density; an opening bounded by two jambs may justify a bounded interval. Assigning equal support throughout a doorway is an archaeological assumption. The PDF does not measure how often an original observer looked in each direction.</p>
 <p><strong><a href="function-methods.html#fn-az-pdf"><code>az.pdf()</code></a>.</strong> In the normal family, <code>unc</code> is one standard deviation in degrees. In the uniform family, it is the half-width in degrees. A doorway bounded by 88° and 92° therefore has centre 90° and uniform half-width 2°. If instead those limits are interpreted as approximately two standard deviations from the centre, the normal standard deviation would be 1°. Substituting the same number into the two families changes the claim. The constructor evaluates each curve on an extended −90° to 450° grid, folds overlapping tails across north and trims density heights below <code>.cutoff</code>. The defaults are 0.01° spacing and a density-height cutoff of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>10</mn><mrow><mi>−</mi><mn>5</mn></mrow></msup><annotation encoding="application/x-tex">10^{-5}</annotation></semantics></math>, not an omitted probability-mass threshold. Retained tails are not renormalised at this stage.</p>
 <p><strong><a href="function-methods.html#fn-dec-pdf"><code>dec.pdf()</code></a>.</strong> Use this route when the observation and its uncertainty already refer to declination. The physical support ends at ±90°, and the default cutoff is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>10</mn><mrow><mi>−</mi><mn>4</mn></mrow></msup><annotation encoding="application/x-tex">10^{-4}</annotation></semantics></math>. A normal curve centred near a pole can therefore have less than unit area after clipping. A directly constructed declination density assigns its family in that coordinate. A normal azimuth density passed through terrain can yield a markedly different declination curve <span class="citation" data-cites="silva2020">(<a href="references.html#ref-silva2020" role="doc-biblioref">Silva 2020, sec. 3</a>)</span>.</p>
 </section>
-<section id="density-transform" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="density-transform"><span class="header-section-number">10.2</span> Point transformation and the conditional density</h2>
+<section id="density-transform" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="density-transform"><span class="header-section-number">8.2</span> Point transformation and the conditional density</h2>
 <p>For geometric altitude <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math>, site latitude <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ϕ</mi><annotation encoding="application/x-tex">\phi</annotation></semantics></math> and true bearing <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>, the spherical relation is <span class="citation" data-cites="silva2020">(<a href="references.html#ref-silva2020" role="doc-biblioref">Silva 2020</a>, eq. 1)</span></p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>sin</mo><mi>δ</mi><mo>=</mo><mo>sin</mo><mi>ϕ</mi><mo>sin</mo><mi>h</mi><mo>+</mo><mo>cos</mo><mi>ϕ</mi><mo>cos</mo><mi>h</mi><mo>cos</mo><mi>A</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">\sin\delta=\sin\phi\sin h+\cos\phi\cos h\cos A.</annotation></semantics></math></p>
 <p><a href="function-methods.html#fn-az2dec"><code>az2dec()</code></a> evaluates a single sightline using the inverse Swiss horizontal transformation, shifting the azimuth convention at the interface. With refraction enabled, the code adjusts altitude using observer elevation, pressure and temperature before the inverse transformation. It rounds returned declinations according to the input bearing representation. When reading a value off a measured skyline, distinguish the altitude of the terrain from an angular clearance above it. The inputs, atmosphere and precision must match before using an independent calculation as a comparator <span class="citation" data-cites="sweprog">(<a href="references.html#ref-sweprog" role="doc-biblioref">Astrodienst, n.d.</a>)</span>.</p>
 <p><strong><a href="function-methods.html#fn-coordtrans"><code>coordtrans()</code></a> implements the density transformation developed in Silva (2020).</strong> The published idea is to marginalise over the plausible bearings, retaining the dependence of horizon altitude on bearing <span class="citation" data-cites="silva2020">(<a href="references.html#ref-silva2020" role="doc-biblioref">Silva 2020, sec. 3</a>, figs. 2–5)</span>. In continuous notation,</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>δ</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>d</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mo>∫</mo><msub><mi>f</mi><mi>A</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>d</mi><mo>∣</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><mi>d</mi><mi>a</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">f_\delta(d)=\int f_A(a)\,g(d\mid a)\,da.</annotation></semantics></math></p>
 <p>For each sampled bearing, 2.0.9004 interpolates the profile height <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">H(a)</annotation></semantics></math> and its altitude uncertainty <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mi>h</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">s_h(a)</annotation></semantics></math>. It transforms the two endpoint heights <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>±</mo><mn>4</mn><msub><mi>s</mi><mi>h</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">H(a)\pm4s_h(a)</annotation></semantics></math> to declinations <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>d</mi><mo>−</mo></msub><annotation encoding="application/x-tex">d_-</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>d</mi><mo>+</mo></msub><annotation encoding="application/x-tex">d_+</annotation></semantics></math>. The conditional density <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math> is approximated by a normal with mean <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>d</mi><mo>−</mo></msub><mo>+</mo><msub><mi>d</mi><mo>+</mo></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">(d_-+d_+)/2</annotation></semantics></math> and standard deviation <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>d</mi><mo>+</mo></msub><mo>−</mo><msub><mi>d</mi><mo>−</mo></msub><mo stretchy="true" form="postfix">|</mo></mrow><mi>/</mi><mn>8</mn></mrow><annotation encoding="application/x-tex">|d_+-d_-|/8</annotation></semantics></math>. This preserves endpoint order reversals and allows the width to vary with the skyline. It is an endpoint-based approximation to a nonlinear mapping; the conditional mean need not equal the transform of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">H(a)</annotation></semantics></math>. A zero transformed width raises an error because a Gaussian density with zero standard deviation is undefined in this computation. Artificially inflating the reported horizon error changes the model.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/conditional-density.png" class="img-fluid figure-img" alt="A narrow conditional density follows a notch as bearing changes. Its integral has three declination modes."></p>
+<figcaption>Silva’s conditional-density construction applied to the doorway example below. Blue intensity gives the conditional density at each bearing. Integrating with uniform bearing weights produces the three maxima in the recorded package output on the right.</figcaption>
+</figure>
+</div>
 <p>On a steep notch flank, even the geometric central track has a bearing derivative proportional to the skyline slope. Where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>H</mi><annotation encoding="application/x-tex">H</annotation></semantics></math> is differentiable, in radians, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>cos</mo><mi>δ</mi><mspace width="0.167em"></mspace><mi mathvariant="normal">d</mi><mi>δ</mi><mi>/</mi><mi mathvariant="normal">d</mi><mi>A</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mo>sin</mo><mi>ϕ</mi><mo>cos</mo><mi>H</mi><mo>−</mo><mo>cos</mo><mi>ϕ</mi><mo>sin</mo><mi>H</mi><mo>cos</mo><mi>A</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>H</mi><mi>′</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>A</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mo>cos</mo><mi>ϕ</mi><mo>cos</mo><mi>H</mi><mo>sin</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\cos\delta\,\mathrm d\delta/\mathrm dA=(\sin\phi\cos H-\cos\phi\sin H\cos A)H'(A)-\cos\phi\cos H\sin A</annotation></semantics></math>. At a corner the adjacent segments have different slopes. A single error propagated at the centre can consequently miss entire branches sampled by the opening. The numerical mixture accommodates those branches without dividing by a local derivative.</p>
 <p>The implementation interpolates the conditional density values and azimuth weights onto an integration grid and sums their products with trapezoidal weights. Distinguish three numerical settings:</p>
 <table class="caption-top table">
@@ -398,8 +416,8 @@ div.csl-indent {
 </table>
 <p>Version 2.0.9004 uses linear interpolation, avoiding negative overshoot that could occur with a spline. It also explicitly treats distributions split across north. Each individual transformed PDF is normalised by its trapezoidal area on the returned grid. Transforming an already summed SPD does not perform that individual normalisation. In ideal continuous arithmetic, integration and summation commute for a common kernel. Site-specific skylines imply different kernels, while truncation and per-curve normalisation can also change finite-grid results. Supply horizons in observation order. Preserve the original azimuth curves and horizons for any later declination significance test.</p>
 </section>
-<section id="density-notch" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="density-notch"><span class="header-section-number">10.3</span> Worked example: a doorway across a notch</h2>
+<section id="density-notch" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="density-notch"><span class="header-section-number">8.3</span> Worked example: a doorway across a notch</h2>
 <p>At a synthetic site at 51° N, give the 88–92° doorway a uniform density. The terrain stands at 6° on either side and falls to 1° between bearings 89.2° and 90.8°, with 0.2°-wide sloping shoulders. Set horizon altitude uncertainty to 0.2° throughout and turn refraction off. A control uses the same doorway and uncertainty with a level 1° skyline. Only the terrain profile changes.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>site <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">51</span>, <span class="dv">0</span>, <span class="dv">100</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>notch <span class="ot">&lt;-</span> <span class="fu">createHor</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">87</span>, <span class="dv">89</span>, <span class="fl">89.2</span>, <span class="fl">90.8</span>, <span class="dv">91</span>, <span class="dv">93</span>, <span class="dv">360</span>),</span>
@@ -437,23 +455,23 @@ div.csl-indent {
 </table>
 <p>The central portion of the doorway faces the low notch. Its two flanks face higher terrain at different bearings, so they have different declinations even at the same terrain altitude. A conversion of only the centre and the two extremes loses this allocation of probability. Halving both calculation spacings from 0.02° to 0.01° gave the same reported interval endpoints to 0.01° in this example. This is a numerical sensitivity check on a constructed case, not field validation.</p>
 </section>
-<section id="density-summary" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="density-summary"><span class="header-section-number">10.4</span> Summation, highest-density regions and inference</h2>
+<section id="density-summary" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="density-summary"><span class="header-section-number">8.4</span> Summation, highest-density regions and inference</h2>
 <p><a href="function-methods.html#fn-spd"><code>spd()</code></a> linearly interpolates each retained curve onto a common angular grid, assigns zero outside its support and sums the heights. With an automatically determined range, it zeroes summed heights below the cutoff. An explicit range retains the calculated heights within that range. With <code>normalise = TRUE</code>, it divides by the trapezoidal area over the <em>returned interval</em>. A narrow explicit range therefore conditions the displayed mass on the selected interval. Earlier builds normalised using a sum of sampled heights: on a regular grid with zero endpoint heights, the new heights are the old ones divided by grid spacing. Record normalisation when comparing figure ordinates across versions (see the versioned function help and package NEWS).</p>
 <p><a href="function-methods.html#fn-hpdi"><code>hpdi()</code></a> implements a discrete highest-density region <span class="citation" data-cites="hyndman1996">(<a href="references.html#ref-hyndman1996" role="doc-biblioref">Hyndman 1996</a>)</span>. On an equally spaced grid it sorts density heights and finds the level whose cumulative sum reaches the requested mass fraction, then includes all cells tied at that level. The result can include more than the nominal fraction. Separate connected runs give separate intervals; endpoints are grid coordinates. Gaps representing omitted cells are treated as zero mass, and regions spanning north are returned as two linear intervals. This is a description of concentration under the assumed measurement model. It does not test intentionality or reject a null hypothesis.</p>
 <p>A strength of this workflow over a curve assembled by placing the same symmetric kernel at each converted central declination is that <strong>the horizon can change the shape of each site’s contribution</strong>. Silva’s worked comparison shows why curvigram and kernel-density peaks can shift relative to a terrain-aware SPD <span class="citation" data-cites="silva2020">(<a href="references.html#ref-silva2020" role="doc-biblioref">Silva 2020, fig. 5</a>)</span>. The price is sensitivity to the skyline, measurement model, endpoint approximation and numerical resolution. At limiting declinations or very small altitude uncertainties, check both grid convergence and the adequacy of the conditional Gaussian. A credible distribution still requires a defensible uncertainty model. The <a href="./significance.html">significance chapter</a> shows how these same curves enter simulations.</p>
 <p><a href="archives/doorway-and-ridge-examples.zip">Download the example scripts, inputs and outputs</a>. The archived package supplies the implementation; the example is reproducible separately from the validation studies.</p>
-<p><strong>Related function entries</strong></p>
-<p><a href="function-methods.html#fn-az-pdf"><code>az.pdf()</code></a>, <a href="function-methods.html#fn-dec-pdf"><code>dec.pdf()</code></a>, <a href="function-methods.html#fn-az2dec"><code>az2dec()</code></a>, <a href="function-methods.html#fn-coordtrans"><code>coordtrans()</code></a>, <a href="function-methods.html#fn-spd"><code>spd()</code></a>, <a href="function-methods.html#fn-hpdi"><code>hpdi()</code></a>, <a href="function-methods.html#fn-createhor"><code>createHor()</code></a>, <a href="function-methods.html#fn-skyscaper-vars"><code>skyscapeR.vars()</code></a>, <a href="function-methods.html#fn-randomtest"><code>randomTest()</code></a>, <a href="function-methods.html#fn-modeltest"><code>modelTest()</code></a>.</p>
 </section>
-<section id="orientation-displays" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="orientation-displays"><span class="header-section-number">10.5</span> What the orientation displays calculate</h2>
+<section id="orientation-displays" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="orientation-displays"><span class="header-section-number">8.5</span> What the orientation displays calculate</h2>
 <p>For an opening defined clockwise from left edge <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>A</mi><mi>L</mi></msub><annotation encoding="application/x-tex">A_L</annotation></semantics></math> to right edge <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>A</mi><mi>R</mi></msub><annotation encoding="application/x-tex">A_R</annotation></semantics></math>, compute <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>A</mi><mi>R</mi></msub><mo>−</mo><msub><mi>A</mi><mi>L</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mspace width="0.222em"></mspace><mo>mod</mo><mspace width="0.222em"></mspace><mn>360</mn></mrow><mi>°</mi></mrow><annotation encoding="application/x-tex">w=(A_R-A_L)\bmod360°</annotation></semantics></math> and centre <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>A</mi><mi>L</mi></msub><mo>+</mo><mi>w</mi><mi>/</mi><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mspace width="0.222em"></mspace><mo>mod</mo><mspace width="0.222em"></mspace><mn>360</mn></mrow><mi>°</mi></mrow><annotation encoding="application/x-tex">(A_L+w/2)\bmod360°</annotation></semantics></math>. An opening from 355° to 5° then has width 10° and centre 0°. Keep a common row order when selecting entrance records and site horizons. Passing <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">w/2</annotation></semantics></math> to <a href="function-methods.html#fn-plotbars"><code>plotBars()</code></a> draws symmetric measurement limits. The default geometry is a line interval; explicitly supplying <code>shade</code> selects the bar default unless geometry is also specified. The unit labels the axis. Celestial bands require declination coordinates in this display. On a Cartesian azimuth axis an interval crossing north can extend below 0° or above 360°.</p>
 <p><a href="function-methods.html#fn-plotazimuth"><code>plotAzimuth()</code></a> draws bearings clockwise from north, with spokes or short rim marks. For each reference declination and target location it computes a diurnal track with <a href="function-methods.html#fn-orbit"><code>orbit()</code></a>, interpolates altitude as a function of azimuth and solves for the zero-altitude roots on the eastern and western branches where bracketed. A two-epoch group contributes the stored boundary declinations. These compass marks assume a level horizon. The local terrain crossing for the same target can lie elsewhere. Inside/outside controls position the reference lines; labels remain outside. Repeated measured bearings can coincide.</p>
 <p>The linked view of <a href="function-methods.html#fn-plot-skyscaper-pdf"><code>plot.skyscapeR.pdf()</code></a> requires one transformed index, the original azimuth PDF and a matching horizon or ordered horizon list. The panels connect the input distribution, azimuth-to-declination mapping and output density. A mass such as 0.68 can select disjoint intervals. Supplying just one of the source inputs is an error. The legacy <code>show.az</code> switch is ignored with a warning. A plain density plot needs neither source input. <a href="function-methods.html#fn-subset-skyscaper-pdf"><code>subset.skyscapeR.pdf()</code></a> uses the supplied R index on the list of curves and the name, azimuth, uncertainty and horizon metadata. It leaves other fields as stored. <a href="function-methods.html#fn-plot-skyscaper-spd"><code>plot.skyscapeR.spd()</code></a> draws the summed density, optionally with targets. A plotted peak carries no significance level by itself <span class="citation" data-cites="silva2020">(<a href="references.html#ref-silva2020" role="doc-biblioref">Silva 2020</a>)</span>.</p>
-<section id="subset-dec-centres" class="level3" data-number="10.5.1">
-<h3 data-number="10.5.1" class="anchored" data-anchor-id="subset-dec-centres"><span class="header-section-number">10.5.1</span> Subsetting a directly constructed declination PDF</h3>
+<section id="subset-dec-centres" class="level3" data-number="8.5.1">
+<h3 data-number="8.5.1" class="anchored" data-anchor-id="subset-dec-centres"><span class="header-section-number">8.5.1</span> Subsetting a directly constructed declination PDF</h3>
 <p>For a <a href="function-methods.html#fn-dec-pdf"><code>dec.pdf()</code></a> object, 2.0.9004’s <a href="function-methods.html#fn-subset-skyscaper-pdf"><code>subset.skyscapeR.pdf()</code></a> selects the requested curves, names and uncertainties but leaves <code>metadata$dec</code> unchanged. Given centres of −10° and +20° named A and B, <code>subset(x, 2)</code> returns B’s curve and uncertainty but retains both centres in the metadata. A reader who pairs the first retained curve with the first stored centre would assign it −10°. To retain a consistent centre vector, apply the selection to the input records and construct their PDF, or explicitly index the original centres with the same selection. The worked check is in <code>object-coverage.R</code> in the <a href="photographic-horizons.html#partial-photo-consumers">photographic horizon examples</a>.</p>
+<p><strong>Related function entries</strong></p>
+<p><a href="function-methods.html#fn-az-pdf"><code>az.pdf()</code></a>, <a href="function-methods.html#fn-dec-pdf"><code>dec.pdf()</code></a>, <a href="function-methods.html#fn-az2dec"><code>az2dec()</code></a>, <a href="function-methods.html#fn-coordtrans"><code>coordtrans()</code></a>, <a href="function-methods.html#fn-spd"><code>spd()</code></a>, <a href="function-methods.html#fn-hpdi"><code>hpdi()</code></a>, <a href="function-methods.html#fn-createhor"><code>createHor()</code></a>, <a href="function-methods.html#fn-skyscaper-vars"><code>skyscapeR.vars()</code></a>, <a href="function-methods.html#fn-randomtest"><code>randomTest()</code></a>, <a href="function-methods.html#fn-modeltest"><code>modelTest()</code></a>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -874,12 +892,12 @@ Silva, Fabio. 2020. <span>‘A Probabilistic Framework and Significance Test for
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./stellar-phases.html" class="pagination-link" aria-label="Seasonal stellar visibility">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Seasonal stellar visibility</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Seasonal stellar visibility</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./event-searches.html" class="pagination-link" aria-label="Terrain crossings and event searches">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Terrain crossings and event searches</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Terrain crossings and event searches</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

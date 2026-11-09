@@ -55,6 +55,12 @@ Consider 999 simulations and an observed global score exceeded or tied by 9 simu
 
 For reproducible comparisons set the seed before fitting and specify the same comparison grid and tail across runs. Read `metadata$global.pval` for the dataset-wide test and `metadata$local.pval` for the local intervals. Save `metadata$inference` and `metadata$local.inference` with the result. In this build they identify the pooled and maximum-cluster algorithms. The returned envelope and constant-simulation departures are retained in `data`.
 
+## Reading the Ġgantija worked fit {#sig-output}
+
+The vignette loads a saved [`randomTest()`](function-methods.html#fn-randomtest) fit with 500 simulations, then uses [`plot.skyscapeR.sigTest()`](function-methods.html#fn-plot-skyscaper-sigtest) with `show.local=TRUE`. Its global p-value is 0.004. In the local table the excess from −33.7° to −28.6° has adjusted p = 0.004, the smaller excess near −49° has adjusted p = 0.557, and the deficit row contains no cluster. The plotted excess and deficit rows share the angular axis with the observed curve; `show.pval` independently controls display of the global value. [`print.skyscapeR.sigTest()`](function-methods.html#fn-print-skyscaper-sigtest) and [`pval2stars()`](function-methods.html#fn-pval2stars) summarise these stored probabilities. The open circle marks the larger p-value. Overlaying a Gacrux band or selecting the significant positive interval for [`findTargets()`](function-methods.html#fn-findtargets) does not recompute the test or assign a probability to Gacrux as the intended target [@silva2020; @silvaloms2025].
+
+![The saved Ġgantija fit over the declination sector containing both upper excursions. Each local p-value uses the largest cluster score in each simulated curve. Crossing the pointwise envelope at −49° gives little evidence once the search across declinations is included.](figures/significance-clusters.png){fig-alt="The observed curve crosses the upper envelope twice. The smaller excess has adjusted p 0.557 and the larger one p 0.004."}
+
 ## Strengths, limits and evidence
 
 For a simple count in predefined angular bins, R's `chisq.test()` accepts category counts and hypothesised probabilities [@rchisq]. Here the objects being compared are whole measurement-density curves. A doorway spanning a range of bearings can contribute across that range, and a declination null can incorporate the site's skyline. These are methodological advantages for that question. A small global p-value rejects the specified model; it gives neither the identity of a celestial target nor a probability for intentionality.
@@ -63,11 +69,6 @@ Neither routine automatically simulates shared construction episodes, uncertaint
 
 The archived package audit checks a saved Ġgantija result and the plotting of local findings. It checks reproducibility of a recorded result, not the family-wise rejection rate over independent datasets. The outstanding validation is to measure rejection rates under known generating models, varying sample size, horizon heterogeneity, the north seam and grid spacing. No historical or new significance fits were run for this manual revision.
 
-
 **Related function entries**
 
 [`az.pdf()`](function-methods.html#fn-az-pdf), [`coordtrans()`](function-methods.html#fn-coordtrans), [`dec.pdf()`](function-methods.html#fn-dec-pdf), [`modelTest()`](function-methods.html#fn-modeltest), [`plot.skyscapeR.sigTest()`](function-methods.html#fn-plot-skyscaper-sigtest), [`print.skyscapeR.sigTest()`](function-methods.html#fn-print-skyscaper-sigtest), [`pval2stars()`](function-methods.html#fn-pval2stars), [`randomTest()`](function-methods.html#fn-randomtest), [`spd()`](function-methods.html#fn-spd).
-
-## Reading the Ġgantija worked fit {#sig-output}
-
-The vignette loads a saved [`randomTest()`](function-methods.html#fn-randomtest) fit with 500 simulations, then uses [`plot.skyscapeR.sigTest()`](function-methods.html#fn-plot-skyscaper-sigtest) with `show.local=TRUE`. Its global p-value is 0.004. In the local table the excess from −33.7° to −28.6° has adjusted p = 0.004, the smaller excess near −49° has adjusted p = 0.557, and the deficit row contains no cluster. The plotted excess and deficit rows share the angular axis with the observed curve; `show.pval` independently controls display of the global value. [`print.skyscapeR.sigTest()`](function-methods.html#fn-print-skyscaper-sigtest) and [`pval2stars()`](function-methods.html#fn-pval2stars) summarise these stored probabilities. The open circle marks the larger p-value. Overlaying a Gacrux band or selecting the significant positive interval for [`findTargets()`](function-methods.html#fn-findtargets) does not recompute the test or assign a probability to Gacrux as the intended target [@silva2020; @silvaloms2025].

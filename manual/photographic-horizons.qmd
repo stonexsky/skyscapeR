@@ -2,8 +2,6 @@
 
 **Implementation.** skyscapeR 2.0.9004, `R/importPanorama.R`, `R/peakfinder.R`, `R/exportPanorama.R`, `R/horizon.R` and `R/relinkHor.R`. A horizon object can carry both a numerical altitude profile and an image. A terrain crossing uses the former. Reproducing the drawn landscape can also require the latter. The [terrain chapter](horizons.qmd) describes the alternative construction of a profile from elevations and reconstructed features.
 
-To render a shaded panorama directly from a DEM, see [Generating a terrain panorama](horizons.html#sec-dem-panorama).
-
 ## From a masked panorama to angular samples {#photo-calibration}
 
 [`importPanorama()`](function-methods.html#fn-importpanorama) expects an equirectangular PNG with transparent sky above terrain in every column. A stitched photograph must already have this projection and a sky mask. Supply the observer location, clockwise bearing limits and bottom and top altitude limits. For width $W$, column $j$ samples $A_j=A_L+(j-1/2)(A_R-A_L)/W$. If the first pixel meeting the opacity threshold is row $r$ from the top of an image of height $H$, the altitude is $h_T-(r-1)(h_T-h_B)/H$. This places the skyline at the **upper edge** of the terrain pixel. The default threshold is 0.5. A bird, mast or isolated opaque mask artefact above the ridge can therefore select the wrong edge. A column with no qualifying terrain or no sky above it stops the import.
@@ -23,6 +21,8 @@ The example creates a 360 × 100 pixel masked skyline with a vertical pixel size
 | Root mean square altitude difference | 0.5033° | 0.0266° |
 | Largest absolute altitude difference | 0.6240° | 0.0500° |
 
+![The worked mask and its angular control, followed by errors at the same true bearings under nominal and fitted limits. The remaining steps reflect the 0.1° pixel height.](figures/photo-calibration.png){fig-alt="A terraced skyline edge and control above two residual curves; the calibrated curve stays close to zero."}
+
 The remaining error is consistent with rounding the generated edge to the nearest pixel boundary. This exercise checks the sign and placement of angular corrections on an ideal mask. It provides no estimate of accuracy for a real photographic horizon or of the tilt fit with multiple controls. An independent field comparison would require a common viewpoint and surveyed control and check bearings, including points near the image seam.
 
 ## PeakFinder, Stellarium and moving an observation {#photo-interchange}
@@ -35,9 +35,7 @@ The remaining error is consistent with rounding the generated edge to the neares
 
 [Download the example scripts, input mask, 360-profile comparison and exported landscape](archives/conventions-field-panorama.zip).
 
-**Related function entries**
 
-[`importPanorama()`](function-methods.html#fn-importpanorama), [`hor2alt()`](function-methods.html#fn-hor2alt), [`exportPanorama()`](function-methods.html#fn-exportpanorama), [`importPeakFinder()`](function-methods.html#fn-importpeakfinder), [`exportHor()`](function-methods.html#fn-exporthor), [`exportStellarium()`](function-methods.html#fn-exportstellarium), [`relinkHor()`](function-methods.html#fn-relinkhor), [`sketchSky()`](function-methods.html#fn-sketchsky), [`plot.skyscapeR.horizon()`](function-methods.html#fn-plot-skyscaper-horizon), [`createHor()`](function-methods.html#fn-createhor).
 
 ## Looking up a bearing and choosing an export layout {#photo-routes}
 
@@ -50,3 +48,7 @@ The remaining error is consistent with rounding the generated edge to the neares
 An imported photograph records its angular coverage separately from the numerical profile, whose rows are repeated across turns to make lookup across north possible. [`hor2alt()`](function-methods.html#fn-hor2alt) checks that coverage. [`coordtrans()`](function-methods.html#fn-coordtrans) interpolates the profile rows directly. Likewise, [`riseset()`](function-methods.html#fn-riseset) can accept those rows as a closed horizon and interpolate across the unphotographed gap. The profile solver used by [`star.phases()`](function-methods.html#fn-star-phases) also works from the rows. A finite result does not establish that the relevant terrain was observed.
 
 In the archived example, the photographed sector covers 330° through north to 30°. At 180°, the direct altitude lookup returns `NA`, yet transforming a uniform bearing of 180° ± 1° produces a finite declination curve. On 20 March 2026 the same partial profile produces a sunrise bearing of **92.48°**, outside the photograph. There is no field evidence for the terrain at that bearing in this example. Before transforming an orientation, check the *entire support* of its azimuth PDF against the photographed sector. For a daily or seasonal crossing search, supply a full skyline or complete the missing sector from an independently identified source. The script `object-coverage.R` and its output are in the example download above.
+
+**Related function entries**
+
+[`importPanorama()`](function-methods.html#fn-importpanorama), [`hor2alt()`](function-methods.html#fn-hor2alt), [`exportPanorama()`](function-methods.html#fn-exportpanorama), [`importPeakFinder()`](function-methods.html#fn-importpeakfinder), [`exportHor()`](function-methods.html#fn-exporthor), [`exportStellarium()`](function-methods.html#fn-exportstellarium), [`relinkHor()`](function-methods.html#fn-relinkhor), [`sketchSky()`](function-methods.html#fn-sketchsky), [`plot.skyscapeR.horizon()`](function-methods.html#fn-plot-skyscaper-horizon), [`createHor()`](function-methods.html#fn-createhor).

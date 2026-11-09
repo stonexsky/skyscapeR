@@ -11,12 +11,10 @@ project:
 
 book:
   title: "skyscapeR technical manual"
-  subtitle: "Methods and validation · draft of 8 November 2026"
+  subtitle: "Methods and validation · illustrated draft of 9 November 2026"
   chapters:
     - index.qmd
     - contents-plan.qmd
-    - function-index.qmd
-    - vignette-guide.qmd
     - ephemeris.qmd
     - part: "Methods"
       chapters:
@@ -31,7 +29,11 @@ book:
         - celestial-targets.qmd
         - significance.qmd
         - sky-rendering.qmd
+    - part: "Function reference"
+      chapters:
+        - function-index.qmd
         - function-methods.qmd
+        - vignette-guide.qmd
     - part: "Validation"
       chapters:
         - study-register.qmd
@@ -42,6 +44,7 @@ bibliography: references.bib
 format:
   html:
     theme: cosmo
+    css: manual.css
     html-math-method: mathml
     toc: true
     fig-cap-location: bottom

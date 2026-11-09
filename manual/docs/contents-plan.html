@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; Annotated contents – skyscapeR technical manual</title>
+<title>1&nbsp; Methods by research question – skyscapeR technical manual</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./function-index.html" rel="next">
+<link href="./ephemeris.html" rel="next">
 <link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -72,6 +72,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
+<link rel="stylesheet" href="manual.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -83,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./contents-plan.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Annotated contents</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./contents-plan.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Methods by research question</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -117,25 +118,13 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./contents-plan.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Annotated contents</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./function-index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Function index</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./vignette-guide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Following the package vignette</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Methods by research question</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ephemeris.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">swephR and the Swiss Ephemeris</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">swephR and the Swiss Ephemeris</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -150,73 +139,67 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./astronomical-conventions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Astronomical conventions and stellar positions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Astronomical conventions and stellar positions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./field-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Reducing compass and theodolite observations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Reducing compass and theodolite observations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./horizons.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Constructing a site horizon</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Constructing a site horizon</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./photographic-horizons.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Calibrating photographic skylines and exchanging horizons</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Calibrating photographic skylines and exchanging horizons</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./stellar-phases.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Seasonal stellar visibility</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Seasonal stellar visibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./orientation-densities.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">From a measured orientation to a declination distribution</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">From a measured orientation to a declination distribution</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./event-searches.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Terrain crossings and event searches</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Terrain crossings and event searches</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lunar-crossovers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Equinoctial full Moons and crescent crossovers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Equinoctial full Moons and crescent crossovers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./celestial-targets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Identifying celestial candidates and limiting declinations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Identifying celestial candidates and limiting declinations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./significance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Testing orientation distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Testing orientation distributions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sky-rendering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Sky reconstruction and visual radiance</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./function-methods.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Function methods and implementation notes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sky reconstruction and visual radiance</span></span></a>
   </div>
 </li>
       </ul>
@@ -224,12 +207,41 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Validation</span></a>
+ <span class="menu-text">Function reference</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./function-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Function index</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./function-methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Function methods and implementation notes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vignette-guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Following the package vignette</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Validation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./study-register.html" class="sidebar-item-text sidebar-link">
@@ -277,7 +289,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-plan" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Annotated contents</span></span></h1>
+<h1 class="title"><span id="sec-plan" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Methods by research question</span></span></h1>
 </div>
 
 
@@ -294,8 +306,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This is the proposed structure for the first draft of the technical manual for skyscapeR 2.0.9004. Each chapter below identifies its scope, the evidence already available, and a question for later validation. Questions are proposals; they do not report new tests. The <a href="./function-index.html">function index</a> assigns every public entry point to a chapter.</p>
-<p>The opening conventions and ephemeris material support the method chapters. The validation part follows the scientific question across functions, retaining the tested builds in the <a href="./study-register.html">study register</a>.</p>
+<p>Use this guide to move from a research question to its methods chapter, principal functions and validation evidence. <strong>Open question</strong> identifies a comparison that remains to be carried out. For alphabetical lookup and individual help pages, use the <a href="./function-index.html">function index</a>.</p>
 <section id="plan-time" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="plan-time"><span class="header-section-number">1.1</span> Time, coordinates and ephemerides</h2>
 <p>The <a href="./astronomical-conventions.html">astronomical conventions chapter</a> traces a BCE date across two calendars, compares lunar positions from two origins and follows the fixed-star calculation across epochs.</p>
@@ -313,50 +324,44 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="plan-terrain" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="plan-terrain"><span class="header-section-number">1.3</span> Terrain horizons and panoramas</h2>
-<p>The horizon chapter covers measured profiles, DEM skylines and reconstructed features. The <a href="./photographic-horizons.html">photographic calibration and interchange chapter</a> traces a mask through control-point fitting, angular sampling and landscape export.</p>
-<p><strong>Existing evidence.</strong> The <a href="./study-register.html#h01-field-validation">international H01 study</a> reports field agreement for DEM-derived skyline altitudes by observing setup and terrain product, including the effect of search distance.</p>
+<p>The <a href="./horizons.html">terrain methods</a> explain how measured profiles, DEM skylines and reconstructed features enter a horizon object. The <a href="./photographic-horizons.html">photographic calibration and interchange chapter</a> traces a mask through control-point fitting, angular sampling and landscape export.</p>
+<p><strong>Existing evidence.</strong> The <a href="./study-register.html#h01-field-validation">international H01 study</a> reports field agreement for DEM-derived skyline altitudes by observing setup and terrain product, including the effect of search distance. <a href="./study-register.html#h02-skyline-comparison">H02</a> compares independently computed skylines at matched viewpoints.</p>
 <p><strong>Open question.</strong> How well are narrow features recovered between sampled bearings? How closely does a calibrated photographic skyline match surveyed points from the same viewpoint?</p>
 <p><strong>Entry points.</strong> <a href="function-methods.html#fn-createhor"><code>createHor()</code></a>, <a href="function-methods.html#fn-horfeature"><code>horFeature()</code></a>, <a href="function-methods.html#fn-hor2alt"><code>hor2alt()</code></a>, <a href="function-methods.html#fn-importpanorama"><code>importPanorama()</code></a>, <a href="function-methods.html#fn-importpeakfinder"><code>importPeakFinder()</code></a>, <a href="function-methods.html#fn-createhwt"><code>createHWT()</code></a>, <a href="function-methods.html#fn-downloadhwt"><code>downloadHWT()</code></a>, <a href="function-methods.html#fn-exporthor"><code>exportHor()</code></a>, <a href="function-methods.html#fn-exportstellarium"><code>exportStellarium()</code></a>, <a href="function-methods.html#fn-exportpanorama"><code>exportPanorama()</code></a>, <a href="function-methods.html#fn-dempalettes"><code>demPalettes()</code></a>, <a href="function-methods.html#fn-relinkhor"><code>relinkHor()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-horizon"><code>plot.skyscapeR.horizon()</code></a>.</p>
-<p><a href="./horizons.html">Existing horizon method</a>.</p>
 </section>
 <section id="plan-targets" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="plan-targets"><span class="header-section-number">1.4</span> From bearings to celestial targets</h2>
-<p><a href="./celestial-targets.html">Read the candidate-screening and limits chapter</a>.</p>
-<p>Connect the measured bearing and skyline altitude to declination, the accessible declination range and candidate targets. Explain the spatial equinox convention and the role of a date range in a target search.</p>
+<p>The <a href="./celestial-targets.html">candidate-screening chapter</a> takes a measured bearing and skyline altitude through the declination calculation to candidate targets. It explains how the spatial equinox convention and the search dates affect the candidates returned.</p>
 <p><strong>Existing evidence.</strong> The horizon comparisons constrain one input. The worked stellar study checks a different output, a seasonal date.</p>
 <p><strong>Open question.</strong> Where do high or asymmetric skylines change candidate membership, and how closely do the declination limits agree with independently calculated sightlines?</p>
 <p><strong>Entry points.</strong> <a href="function-methods.html#fn-az2dec"><code>az2dec()</code></a>, <a href="function-methods.html#fn-hor2max-dec"><code>hor2max.dec()</code></a>, <a href="function-methods.html#fn-hor2min-dec"><code>hor2min.dec()</code></a>, <a href="function-methods.html#fn-findtargets"><code>findTargets()</code></a>, <a href="function-methods.html#fn-skyobject"><code>skyObject()</code></a>, <a href="function-methods.html#fn-sky-objects"><code>sky.objects()</code></a>, <a href="function-methods.html#fn-zenith"><code>zenith()</code></a>, <a href="function-methods.html#fn-antizenith"><code>antizenith()</code></a>, <a href="function-methods.html#fn-orbit"><code>orbit()</code></a>, <a href="function-methods.html#fn-spatial-equinox"><code>spatial.equinox()</code></a>.</p>
 </section>
 <section id="plan-events" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="plan-events"><span class="header-section-number">1.5</span> Solar, lunar and planetary events</h2>
-<p><a href="./lunar-crossovers.html">Read the lunar crossover chapter</a>.</p>
-<p><a href="./event-searches.html">Read the terrain crossings and event searches chapter</a>.</p>
-<p>Explain the definition of each event, including first and last skyline crossings, standstill limits, equinoctial full Moons and crescent crossovers. Relate each local event to its horizon, calendar and time convention.</p>
+<p>The <a href="./event-searches.html">event-search chapter</a> distinguishes the first and last crossing of an irregular skyline. The <a href="./lunar-crossovers.html">lunar crossover chapter</a> explains how the observing calendar and event definition determine which lunation is selected.</p>
 <p><strong>Existing evidence.</strong> The EFM and CC help pages record comparisons with published simulations and remaining discrepancies. The ephemeris chapter identifies the upstream assumptions.</p>
 <p><strong>Open question.</strong> Which discrepancies survive matching observing geometry, event definition and calendar? Can a reference calculation recover brief or repeated crossings of an uneven skyline?</p>
 <p><strong>Entry points.</strong> <a href="function-methods.html#fn-riseset"><code>riseset()</code></a>, <a href="function-methods.html#fn-ds"><code>dS()</code></a>, <a href="function-methods.html#fn-js"><code>jS()</code></a>, <a href="function-methods.html#fn-eq"><code>eq()</code></a>, <a href="function-methods.html#fn-nmjlx"><code>nMjLX()</code></a>, <a href="function-methods.html#fn-nmnlx"><code>nmnLX()</code></a>, <a href="function-methods.html#fn-smjlx"><code>sMjLX()</code></a>, <a href="function-methods.html#fn-smnlx"><code>smnLX()</code></a>, <a href="function-methods.html#fn-solar-date"><code>solar.date()</code></a>, <a href="function-methods.html#fn-moonphase"><code>moonphase()</code></a>, <a href="function-methods.html#fn-planet-extremes"><code>planet.extremes()</code></a>, <a href="function-methods.html#fn-efm"><code>EFM()</code></a>, <a href="function-methods.html#fn-cc"><code>CC()</code></a>.</p>
 </section>
 <section id="plan-stars" class="level2" data-number="1.6">
 <h2 data-number="1.6" class="anchored" data-anchor-id="plan-stars"><span class="header-section-number">1.6</span> Stellar positions and seasonal visibility</h2>
-<p>Follow catalogue position through epoch calculation, extinction, visibility intervals and classification. Explain how the annual plot locates events and which date can be used for a sky reconstruction.</p>
+<p>The <a href="./stellar-phases.html">stellar-phases chapter</a> follows a catalogue position through the epoch calculation, extinction and visibility tests. It distinguishes the phase on the schematic seasonal axis from the Julian date used for a sky reconstruction.</p>
 <p><strong>Existing evidence.</strong> The worked heliacal-rising chapter compares two visibility models over seven stars with comparable dates. The models share ephemeris and site inputs.</p>
 <p><strong>Open question.</strong> How well do first and last visibility dates agree with dated sightings under documented observing conditions? Which phase transitions are still untested?</p>
 <p><strong>Entry points.</strong> <a href="function-methods.html#fn-star"><code>star()</code></a>, <a href="function-methods.html#fn-star-phases"><code>star.phases()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-starphases"><code>plot.skyscapeR.starphases()</code></a>.</p>
-<p><a href="./stellar-phases.html">Existing stellar method</a>.</p>
 </section>
 <section id="plan-light" class="level2" data-number="1.7">
 <h2 data-number="1.7" class="anchored" data-anchor-id="plan-light"><span class="header-section-number">1.7</span> Sky brightness and visualisation</h2>
-<p>The <a href="./sky-rendering.html">sky reconstruction chapter</a> separates the physical quantities returned by skyRadiance() from how sketchSky() displays them. Cover twilight, direct and diffuse light, the Milky Way outline and internal structure, extinction and the role of constellation overlays.</p>
+<p>The <a href="./sky-rendering.html">sky reconstruction chapter</a> follows the direct, diffuse and atmospheric light components from <code>skyRadiance()</code> to the display. Its <a href="./sky-rendering.html#reading-the-traced-boundary">Milky Way comparison</a> shows which structures the adopted boundary and brightness classes retain.</p>
 <p><strong>Existing evidence.</strong> The register distinguishes outline derivation, held-out twilight measurements, conservation of flux across zoom levels and an extinction implementation check.</p>
 <p><strong>Open question.</strong> Which independent observations constrain the outer Milky Way boundary and low-altitude surface brightness? How does performance change outside the twilight geometries already tested?</p>
 <p><strong>Entry points.</strong> <a href="function-methods.html#fn-sketchsky"><code>sketchSky()</code></a>, <a href="function-methods.html#fn-skyradiance"><code>skyRadiance()</code></a>, <a href="function-methods.html#fn-planisphere"><code>planisphere()</code></a>, <a href="function-methods.html#fn-importconstellations"><code>importConstellations()</code></a>, <a href="function-methods.html#fn-stellariumsky"><code>stellariumSky()</code></a>, <a href="function-methods.html#fn-skystep"><code>skyStep()</code></a>.</p>
-<p><a href="./study-register.html">Existing rendering checks</a>.</p>
+<p><a href="./study-register.html#sky-rendering">Sky-rendering evidence</a>.</p>
 </section>
 <section id="plan-density" class="level2" data-number="1.8">
 <h2 data-number="1.8" class="anchored" data-anchor-id="plan-density"><span class="header-section-number">1.8</span> Uncertainty and orientation distributions</h2>
-<p><a href="./orientation-densities.html">Read the density and transformation chapter</a>.</p>
-<p>Explain how a measured interval becomes a density, how it transforms into declination, how densities are summed and how highest-density intervals are read. Give the plotting methods a shared account of units and normalisation.</p>
-<p><strong>Existing evidence.</strong> The existing vignette illustrates this workflow. Its examples supply use cases.</p>
+<p>The <a href="./orientation-densities.html">orientation-density chapter</a> shows how a measured opening becomes a bearing distribution, how the local skyline changes its declination distribution, and what is lost when disjoint highest-density intervals are reduced to a single range.</p>
+<p><strong>Existing evidence.</strong> The doorway example records the transformed densities for the same measured opening against a level skyline and a notch.</p>
 <p><strong>Open question.</strong> Does the transformation preserve probability mass at north and near declination limits? Can multimodal examples recover the expected disjoint intervals?</p>
 <p><strong>Entry points.</strong> <a href="function-methods.html#fn-az-pdf"><code>az.pdf()</code></a>, <a href="function-methods.html#fn-dec-pdf"><code>dec.pdf()</code></a>, <a href="function-methods.html#fn-coordtrans"><code>coordtrans()</code></a>, <a href="function-methods.html#fn-spd"><code>spd()</code></a>, <a href="function-methods.html#fn-hpdi"><code>hpdi()</code></a>, <a href="function-methods.html#fn-subset-skyscaper-pdf"><code>subset.skyscapeR.pdf()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-pdf"><code>plot.skyscapeR.pdf()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-spd"><code>plot.skyscapeR.spd()</code></a>, <a href="function-methods.html#fn-plotazimuth"><code>plotAzimuth()</code></a>, <a href="function-methods.html#fn-plotbars"><code>plotBars()</code></a>.</p>
 </section>
@@ -778,8 +783,8 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./function-index.html" class="pagination-link" aria-label="Function index">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Function index</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ephemeris.html" class="pagination-link" aria-label="swephR and the Swiss Ephemeris">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">swephR and the Swiss Ephemeris</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

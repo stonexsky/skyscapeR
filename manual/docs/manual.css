@@ -1,0 +1,10 @@
+@media (max-width: 700px) {
+  main, main section, main details, main figure { min-width: 0; max-width: 100%; }
+  main table, main .math.display { display: block; max-width: 100%; overflow-x: auto; }
+  main p, main li, main summary { overflow-wrap: anywhere; }
+  main figure img { max-width: 100%; height: auto; }
+}
+@media (max-width: 700px) {
+  main p:has(math) { max-width: 100%; overflow-x: auto; }
+  main .csl-entry { overflow-wrap: anywhere; }
+}

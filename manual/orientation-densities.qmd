@@ -24,6 +24,8 @@ $$f_\delta(d)=\int f_A(a)\,g(d\mid a)\,da.$$
 
 For each sampled bearing, 2.0.9004 interpolates the profile height $H(a)$ and its altitude uncertainty $s_h(a)$. It transforms the two endpoint heights $H(a)\pm4s_h(a)$ to declinations $d_-$ and $d_+$. The conditional density $g$ is approximated by a normal with mean $(d_-+d_+)/2$ and standard deviation $|d_+-d_-|/8$. This preserves endpoint order reversals and allows the width to vary with the skyline. It is an endpoint-based approximation to a nonlinear mapping; the conditional mean need not equal the transform of $H(a)$. A zero transformed width raises an error because a Gaussian density with zero standard deviation is undefined in this computation. Artificially inflating the reported horizon error changes the model.
 
+![Silva’s conditional-density construction applied to the doorway example below. Blue intensity gives the conditional density at each bearing. Integrating with uniform bearing weights produces the three maxima in the recorded package output on the right.](figures/conditional-density.png){fig-alt="A narrow conditional density follows a notch as bearing changes. Its integral has three declination modes."}
+
 On a steep notch flank, even the geometric central track has a bearing derivative proportional to the skyline slope. Where $H$ is differentiable, in radians, $\cos\delta\,\mathrm d\delta/\mathrm dA=(\sin\phi\cos H-\cos\phi\sin H\cos A)H'(A)-\cos\phi\cos H\sin A$. At a corner the adjacent segments have different slopes. A single error propagated at the centre can consequently miss entire branches sampled by the opening. The numerical mixture accommodates those branches without dividing by a local derivative.
 
 The implementation interpolates the conditional density values and azimuth weights onto an integration grid and sums their products with trapezoidal weights. Distinguish three numerical settings:
@@ -73,9 +75,7 @@ A strength of this workflow over a curve assembled by placing the same symmetric
 [Download the example scripts, inputs and outputs](archives/doorway-and-ridge-examples.zip). The archived package supplies the implementation; the example is reproducible separately from the validation studies.
 
 
-**Related function entries**
 
-[`az.pdf()`](function-methods.html#fn-az-pdf), [`dec.pdf()`](function-methods.html#fn-dec-pdf), [`az2dec()`](function-methods.html#fn-az2dec), [`coordtrans()`](function-methods.html#fn-coordtrans), [`spd()`](function-methods.html#fn-spd), [`hpdi()`](function-methods.html#fn-hpdi), [`createHor()`](function-methods.html#fn-createhor), [`skyscapeR.vars()`](function-methods.html#fn-skyscaper-vars), [`randomTest()`](function-methods.html#fn-randomtest), [`modelTest()`](function-methods.html#fn-modeltest).
 
 ## What the orientation displays calculate {#orientation-displays}
 
@@ -88,3 +88,7 @@ The linked view of [`plot.skyscapeR.pdf()`](function-methods.html#fn-plot-skysca
 ### Subsetting a directly constructed declination PDF {#subset-dec-centres}
 
 For a [`dec.pdf()`](function-methods.html#fn-dec-pdf) object, 2.0.9004's [`subset.skyscapeR.pdf()`](function-methods.html#fn-subset-skyscaper-pdf) selects the requested curves, names and uncertainties but leaves `metadata$dec` unchanged. Given centres of −10° and +20° named A and B, `subset(x, 2)` returns B’s curve and uncertainty but retains both centres in the metadata. A reader who pairs the first retained curve with the first stored centre would assign it −10°. To retain a consistent centre vector, apply the selection to the input records and construct their PDF, or explicitly index the original centres with the same selection. The worked check is in `object-coverage.R` in the [photographic horizon examples](photographic-horizons.html#partial-photo-consumers).
+
+**Related function entries**
+
+[`az.pdf()`](function-methods.html#fn-az-pdf), [`dec.pdf()`](function-methods.html#fn-dec-pdf), [`az2dec()`](function-methods.html#fn-az2dec), [`coordtrans()`](function-methods.html#fn-coordtrans), [`spd()`](function-methods.html#fn-spd), [`hpdi()`](function-methods.html#fn-hpdi), [`createHor()`](function-methods.html#fn-createhor), [`skyscapeR.vars()`](function-methods.html#fn-skyscaper-vars), [`randomTest()`](function-methods.html#fn-randomtest), [`modelTest()`](function-methods.html#fn-modeltest).

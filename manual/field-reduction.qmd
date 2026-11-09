@@ -43,6 +43,8 @@ r$True.Azimuth %% 360
 
 The instrument crossed north by **+3.50°** between the solar and target readings. The rounded solar reference is 157.73°. The routine returns **−558.77°**, equivalent to **161.23°**, the direction obtained by adding 3.50° to the solar reference. The companion script also includes a non-wrapping reading and a compass reduction. These examples show why retaining the solar reading, limb, timestamp, timezone and original circle values matters when recovering a field result.
 
+![A clockwise turn from 358.75° to 2.25° adds 3.50° to the solar reference. The two scales show the same turn in instrument and true coordinates.](figures/survey-reference.png){fig-alt="The instrument turn crosses north. The same turn takes the true bearing from 157.73 to 161.23 degrees."}
+
 The international [H01](study-register.qmd#h01-field-validation) field comparison evaluates DEM skylines against already reduced bearings. Independent validation of the two reduction functions requires a different reference. The relevant future check is a repeat solar or magnetic orientation of a baseline with independently established endpoints, accompanied by instrument readings, timestamps, atmospheric conditions and positional uncertainties. [Download the synthetic field records and reduction scripts](archives/conventions-field-panorama.zip).
 
 **Related function entries**

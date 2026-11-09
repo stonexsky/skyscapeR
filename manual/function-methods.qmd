@@ -1,6 +1,6 @@
 # Function methods and implementation notes {#sec-methods}
 
-These entries follow the archived 2.0.9004 implementation. Each gives the documented calculation, its implementation file, a direct link to the complete help topic and links back to the chapters that use it. Detailed scientific comparisons are developed in the linked methods chapters. An entry derived from the package documentation is not a new validation result. [Download the exact package source, including NEWS and Rd references](archives/skyscapeR_2.0.9004.tar.gz).
+Use these entries to check the implementation file, formal arguments, return value and documented modes for skyscapeR 2.0.9004. Each entry links to its complete help page and to the relevant methods chapter. In the argument tables, a dash marks a formal argument without a default expression. The implementation may resolve an omitted value internally. [Download the documented source build](archives/skyscapeR_2.0.9004.tar.gz).
 
 ## Time, coordinates and ephemerides {#group-time}
 
@@ -23,7 +23,7 @@ Era labels are case-insensitive and follow a positive whole year.
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>x</code></th><td>—</td><td><p>Numeric astronomical years, character integer years, or historical labels.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Numeric astronomical years in input order.
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>x</code></th><td>—</td><td><p>Numeric astronomical years, character integer years, or historical labels.</p></td></tr></tbody></table><h5>Return value</h5><p>Numeric astronomical years in input order.
 </p>
 ```
 
@@ -44,13 +44,13 @@ instant.
 </p>
 ```
 
-**Interpretation and limits.** When an excavation report gives 1 BC, the corresponding astronomical year is zero. Convert the year once before computing an ephemeris. An off-by-one year can survive a round trip through calendar formatting if both ends use the same mistaken convention.
+[Year zero and round-trip checks](#fn-astroyear).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>year</code></th><td>—</td><td><p>Numeric astronomical year or vector of years. Year zero is 1 BC. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Character labels for astronomical years. Year 0 is 1 BC and year -1 is 2 BC.
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>year</code></th><td>—</td><td><p>Numeric astronomical year or vector of years. Year zero is 1 BC. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr></tbody></table><h5>Return value</h5><p>Character labels for astronomical years. Year 0 is 1 BC and year -1 is 2 BC.
 </p>
 ```
 
@@ -102,7 +102,7 @@ longitude in degrees and elevation in metres, in that order, or a
 <em>skyscapeR.horizon</em> object whose metadata supplies those coordinates.
 Required for topocentric coordinates and for horizontal output in either
 frame. With no location, only geocentric equatorial coordinates are returned.</p></td></tr><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See <code>time2jd</code> for named zones and offsets.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p></td></tr><tr><th scope="row"><code>dec</code></th><td>—</td><td><p>Output declination: <em>geo</em> for the geocentric, or <em>topo</em> for the topocentric
-frame of reference. If not given the value set by <code>skyscapeR.vars</code> will be used instead.</p></td></tr><tr><th scope="row"><code>refraction</code></th><td>—</td><td><p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>atm</code></th><td>—</td><td><p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>temp</code></th><td>—</td><td><p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>T</code></td><td><p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A list containing an <code>equatorial</code> data frame with columns
+frame of reference. If not given the value set by <code>skyscapeR.vars</code> will be used instead.</p></td></tr><tr><th scope="row"><code>refraction</code></th><td>—</td><td><p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>atm</code></th><td>—</td><td><p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>temp</code></th><td>—</td><td><p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>T</code></td><td><p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p></td></tr></tbody></table><h5>Return value</h5><p>A list containing an <code>equatorial</code> data frame with columns
 <code>RA</code> and <code>Dec</code>, in degrees. When <code>loc</code> is supplied, the list
 also contains a <code>horizontal</code> data frame with columns <code>az</code> and
 <code>alt</code>, in degrees. Each data frame has one row per input time.
@@ -136,7 +136,7 @@ mean zero offset; an empty string does not select the system timezone.
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>jd</code></th><td>—</td><td><p>Finite numeric vector of UT Julian dates.</p></td></tr><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>Timezone name or fixed offset; defaults to the value in <code>skyscapeR.vars()</code>. See Details.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>Output calendar: G or Gregorian, J or Julian. Defaults to the package calendar setting, initially Gregorian.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>F</code></td><td><p>Logical; display a conversion message. Default is FALSE.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A character vector in YYYY/MM/DD HH:MM:SS format. Years are signed as needed and are not padded to four digits.
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>jd</code></th><td>—</td><td><p>Finite numeric vector of UT Julian dates.</p></td></tr><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>Timezone name or fixed offset; defaults to the value in <code>skyscapeR.vars()</code>. See Details.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>Output calendar: G or Gregorian, J or Julian. Defaults to the package calendar setting, initially Gregorian.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>F</code></td><td><p>Logical; display a conversion message. Default is FALSE.</p></td></tr></tbody></table><h5>Return value</h5><p>A character vector in YYYY/MM/DD HH:MM:SS format. Years are signed as needed and are not padded to four digits.
 </p>
 ```
 
@@ -163,7 +163,7 @@ calendars.
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>date</code></th><td>—</td><td><p>date in 'MM-DD' format</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Character month-and-day labels such as "21 Jun", derived from the supplied month and day.
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>date</code></th><td>—</td><td><p>date in 'MM-DD' format</p></td></tr></tbody></table><h5>Return value</h5><p>Character month-and-day labels such as "21 Jun", derived from the supplied month and day.
 </p>
 ```
 
@@ -205,7 +205,7 @@ Astroph.</em>, 428, 261-285, doi:10.1051/0004-6361:20041335.
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>year</code></th><td><code>skyscapeR.env$cur.year</code></td><td><p>Year for which to calculate the obliquity. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.
-Defaults to present year as given by <em>Sys.Date</em></p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Numeric obliquity of the ecliptic in degrees, one value per astronomical year.
+Defaults to present year as given by <em>Sys.Date</em></p></td></tr></tbody></table><h5>Return value</h5><p>Numeric obliquity of the ecliptic in degrees, one value per astronomical year.
 </p>
 ```
 
@@ -241,13 +241,13 @@ declination calculator.
 
 </details>
 
-**Interpretation and limits.** Separate the annual obliquity reference from the approximate local parallax correction. A limiting declination used as a target has a different meaning from a position calculated for an observed instant.
+[Obliquity and parallax conventions](#fn-obliquity).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>parallax</code></th><td>—</td><td><p>Average parallax to correct (e.g. 0.00224 for the Sun, or 0.952 for the Moon)</p></td></tr><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>This can be either the latitude of the location, or a <em>skyscapeR.horizon</em> object.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>0</code></td><td><p>Altitude of the celestial object. Defaults to 0 degrees.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Numeric declination correction in degrees. The sign depends on latitude.
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>parallax</code></th><td>—</td><td><p>Average parallax to correct (e.g. 0.00224 for the Sun, or 0.952 for the Moon)</p></td></tr><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>This can be either the latitude of the location, or a <em>skyscapeR.horizon</em> object.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>0</code></td><td><p>Altitude of the celestial object. Defaults to 0 degrees.</p></td></tr></tbody></table><h5>Return value</h5><p>Numeric declination correction in degrees. The sign depends on latitude.
 </p>
 ```
 
@@ -294,7 +294,7 @@ the survey data.
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>Timezone name (for example "Europe/London") or fixed offset in hours east of UTC,
 or a string such as "UTC+02:00". Initially "Europe/London". Use UTC or a fixed
 offset for dates before 1900. See <code>time2jd</code> for details.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p></td></tr><tr><th scope="row"><code>refraction</code></th><td>—</td><td><p>Whether atmospheric refraction is to be taken into account. Default is TRUE.</p></td></tr><tr><th scope="row"><code>atm</code></th><td>—</td><td><p>Air pressure in mbar for the refraction calculation. Default is 1013.25 mbar.</p></td></tr><tr><th scope="row"><code>temp</code></th><td>—</td><td><p>Air temperature in degrees Celsius for the refraction calculation. Default is 15 degrees Celsius.</p></td></tr><tr><th scope="row"><code>dec</code></th><td>—</td><td><p>Output declination: <em>geo</em> for the geocentric, or <em>topo</em> for the topocentric
-frame of reference. Defaults to topocentric.</p></td></tr><tr><th scope="row"><code>k</code></th><td>—</td><td><p>Visual extinction in magnitudes per airmass, shared by natural sky sketches and stellar phase calculations. The initial value of 0.2 is a clear-sky baseline, consistent with the approximate V-band coefficient for Kitt Peak in the UC Davis Physics 157 Observing Guide. Extinction varies with site and atmospheric conditions (Schaefer 1986, 1993). Use zero to disable extinction.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A named list of the current session settings, including the current year. Supplying an argument updates that setting for subsequent package calls in this R session.
+frame of reference. Defaults to topocentric.</p></td></tr><tr><th scope="row"><code>k</code></th><td>—</td><td><p>Visual extinction in magnitudes per airmass, shared by natural sky sketches and stellar phase calculations. The initial value of 0.2 is a clear-sky baseline, consistent with the approximate V-band coefficient for Kitt Peak in the UC Davis Physics 157 Observing Guide. Extinction varies with site and atmospheric conditions (Schaefer 1986, 1993). Use zero to disable extinction.</p></td></tr></tbody></table><h5>Return value</h5><p>A named list of the current session settings, including the current year. Supplying an argument updates that setting for subsequent package calls in this R session.
 </p>
 ```
 
@@ -315,14 +315,14 @@ A string such as "-0:30" preserves the negative sign even when degrees are zero.
 </p>
 ```
 
-**Interpretation and limits.** These are representation changes. Preserve the original field string so the conversion can be inspected, especially for negative angles smaller than one degree or a date recorded without its clock or timezone.
+[Preserving the original field representation](#fn-long-date).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>dd</code></th><td>—</td><td><p>Degrees as a finite numeric scalar, or a single character string
-containing an angle, for example <code>"-8:30:00"</code>.</p></td></tr><tr><th scope="row"><code>mm</code></th><td><code>0</code></td><td><p>Arcminutes as a finite numeric scalar. Defaults to zero.</p></td></tr><tr><th scope="row"><code>ss</code></th><td><code>0</code></td><td><p>Arcseconds as a finite numeric scalar. Defaults to zero.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A numeric scalar giving the angle in signed decimal degrees.
+containing an angle, for example <code>"-8:30:00"</code>.</p></td></tr><tr><th scope="row"><code>mm</code></th><td><code>0</code></td><td><p>Arcminutes as a finite numeric scalar. Defaults to zero.</p></td></tr><tr><th scope="row"><code>ss</code></th><td><code>0</code></td><td><p>Arcseconds as a finite numeric scalar. Defaults to zero.</p></td></tr></tbody></table><h5>Return value</h5><p>A numeric scalar giving the angle in signed decimal degrees.
 </p>
 ```
 
@@ -349,13 +349,13 @@ mean zero offset; an empty string does not select the system timezone.
 </p>
 ```
 
-**Interpretation and limits.** For an ancient event near local midnight, retain the UT Julian day alongside the printed date. Round-tripping a civil label tests conversion conventions; it cannot establish the prehistoric difference between terrestrial and rotational time.
+[Civil dates near local midnight](#fn-jd2time).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>time</code></th><td>—</td><td><p>Character vector in YYYY/MM/DD format, optionally followed by HH:MM or HH:MM:SS. Fractional seconds are accepted. Omitted clock time means midnight.</p></td></tr><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>Timezone name or fixed offset; defaults to the value in <code>skyscapeR.vars()</code>. See Details.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>Calendar: G or Gregorian, J or Julian. Defaults to the package calendar setting, initially Gregorian.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>F</code></td><td><p>Logical; display a conversion message. Default is FALSE.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A numeric vector of UT Julian dates, in the same order as time.
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>time</code></th><td>—</td><td><p>Character vector in YYYY/MM/DD format, optionally followed by HH:MM or HH:MM:SS. Fractional seconds are accepted. Omitted clock time means midnight.</p></td></tr><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>Timezone name or fixed offset; defaults to the value in <code>skyscapeR.vars()</code>. See Details.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>Calendar: G or Gregorian, J or Julian. Defaults to the package calendar setting, initially Gregorian.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>F</code></td><td><p>Logical; display a conversion message. Default is FALSE.</p></td></tr></tbody></table><h5>Return value</h5><p>A numeric vector of UT Julian dates, in the same order as time.
 </p>
 ```
 
@@ -376,13 +376,13 @@ it.
 </p>
 ```
 
-**Interpretation and limits.** These are representation changes. Preserve the original field string so the conversion can be inspected, especially for negative angles smaller than one degree or a date recorded without its clock or timezone.
+[Preserving the original field representation](#fn-long-date).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>year</code></th><td>—</td><td><p>Year. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr><tr><th scope="row"><code>month</code></th><td>—</td><td><p>Month</p></td></tr><tr><th scope="row"><code>day</code></th><td>—</td><td><p>Day</p></td></tr><tr><th scope="row"><code>hour</code></th><td><code>12</code></td><td><p>Hour</p></td></tr><tr><th scope="row"><code>minute</code></th><td><code>0</code></td><td><p>Minute</p></td></tr><tr><th scope="row"><code>second</code></th><td><code>0</code></td><td><p>Second</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A character date-time string in the slash-separated format accepted by <code>time2jd</code>.
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>year</code></th><td>—</td><td><p>Year. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr><tr><th scope="row"><code>month</code></th><td>—</td><td><p>Month</p></td></tr><tr><th scope="row"><code>day</code></th><td>—</td><td><p>Day</p></td></tr><tr><th scope="row"><code>hour</code></th><td><code>12</code></td><td><p>Hour</p></td></tr><tr><th scope="row"><code>minute</code></th><td><code>0</code></td><td><p>Minute</p></td></tr><tr><th scope="row"><code>second</code></th><td><code>0</code></td><td><p>Second</p></td></tr></tbody></table><h5>Return value</h5><p>A character date-time string in the slash-separated format accepted by <code>time2jd</code>.
 </p>
 ```
 
@@ -427,7 +427,7 @@ through 1 January 2030 inclusive. Site elevation is ignored by this model call.
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>Latitude and longitude in degrees as a vector, matrix or data frame with one row per site, or a horizon object. An optional third column gives elevation.</p></td></tr><tr><th scope="row"><code>date</code></th><td>—</td><td><p>One or more survey dates as Date objects or YYYY/MM/DD strings.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Numeric magnetic declination in degrees. Use it as the correction added to a magnetic bearing in <code>reduct.compass</code>.
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>Latitude and longitude in degrees as a vector, matrix or data frame with one row per site, or a horizon object. An optional third column gives elevation.</p></td></tr><tr><th scope="row"><code>date</code></th><td>—</td><td><p>One or more survey dates as Date objects or YYYY/MM/DD strings.</p></td></tr></tbody></table><h5>Return value</h5><p>Numeric magnetic declination in degrees. Use it as the correction added to a magnetic bearing in <code>reduct.compass</code>.
 </p>
 ```
 
@@ -457,7 +457,7 @@ A supplied correction can likewise be shared or paired with each bearing.
 </p>
 ```
 
-**Interpretation and limits.** An externally supplied magnetic correction and a modelled IGRF value are alternative inputs. Keep the correction's sign, survey date and origin with the field data. Agreement with a regional magnetic model does not rule out local disturbance at the instrument.
+[Source and date of the magnetic correction](#fn-mag-dec).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
@@ -469,7 +469,7 @@ Only necessary if <em>magdec</em> is not given. When omitted, the output
 Date column contains missing values (NA).</p></td></tr><tr><th scope="row"><code>magdec</code></th><td>—</td><td><p>Magnetic declination, if known.</p></td></tr><tr><th scope="row"><code>alt</code></th><td>—</td><td><p>Altitude, necessary for automatic declination calculation.
 If missing and <em>loc</em> is a <em>skyscapeR.horizon</em> object then the altitude
 will be automatically read from the horizon profile.</p></td></tr><tr><th scope="row"><code>name</code></th><td>—</td><td><p>Names or labels to identify each measurement.</p></td></tr><tr><th scope="row"><code>ID</code></th><td>—</td><td><p>IDs or codes to identify each measurement.</p></td></tr><tr><th scope="row"><code>HWT.ID</code></th><td>—</td><td><p>HeyWhatsThat IDs relating to a previously generated
-horizon profile for measurement.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A data frame with one row per measurement, including location,
+horizon profile for measurement.</p></td></tr></tbody></table><h5>Return value</h5><p>A data frame with one row per measurement, including location,
 magnetic azimuth, date, magnetic declination and true azimuth. Altitude and
 celestial declination are included when altitudes are supplied or a horizon
 is available. Optional identification columns are retained.
@@ -523,7 +523,7 @@ a string with continent followed by country capital (e.g. "Europe/London").</p><
 If missing the center of the sun will be used for calculations.</p></td></tr><tr><th scope="row"><code>alt</code></th><td>—</td><td><p>Altitude, necessary for automatic declination calculation.
 If missing and <em>loc</em> is a <em>skyscapeR.horizon</em> object then the altitude
 will be automatically read from the horizon profile.</p></td></tr><tr><th scope="row"><code>name</code></th><td>—</td><td><p>Names or labels to identify each measurement.</p></td></tr><tr><th scope="row"><code>ID</code></th><td>—</td><td><p>IDs or codes to identify each measurement.</p></td></tr><tr><th scope="row"><code>HWT.ID</code></th><td>—</td><td><p>HeyWhatsThat IDs relating to a previously generated
-horizon profile for measurement.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A data frame with one row per observation. True.Azimuth is the corrected azimuth in degrees. The table also records the observed azimuth, solar azimuth, time and site coordinates. Where available it includes Altitude and Declination in degrees and the supplied identifiers.
+horizon profile for measurement.</p></td></tr></tbody></table><h5>Return value</h5><p>A data frame with one row per observation. True.Azimuth is the corrected azimuth in degrees. The table also records the observed azimuth, solar azimuth, time and site coordinates. Where available it includes Altitude and Declination in degrees and the supplied identifiers.
 </p>
 ```
 
@@ -548,7 +548,7 @@ recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-pa
 </p>
 ```
 
-**Interpretation and limits.** For a solar sight, the measured limb, civil time, timezone and instrument readings define a single observation. The useful independent check is recovery of a known terrestrial bearing from that observation.
+[The time and limb of the solar reference](#fn-reduct-theodolite).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
@@ -558,7 +558,7 @@ recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-pa
 containing the latitude, longitude and elevation of location, in this order.</p></td></tr><tr><th scope="row"><code>time</code></th><td>—</td><td><p>String containing the date and time in the following format:
 "YYYY-MM-DD HH:MM:SS"</p></td></tr><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See <code>time2jd</code> for named zones and offsets.</p></td></tr><tr><th scope="row"><code>limb</code></th><td>—</td><td><p>Measured limb of the sun. Options are <em>left</em>, <em>right</em>.
 If missing the center of the sun will be output.</p></td></tr><tr><th scope="row"><code>alt</code></th><td><code>FALSE</code></td><td><p>Logical that triggers output of altitude of the sun at exact time.
-Default is FALSE.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Solar azimuth in degrees clockwise from north, one value per observation. With alt = TRUE, a data frame with columns az and alt is returned. The altitude is geometric and is expressed in degrees.
+Default is FALSE.</p></td></tr></tbody></table><h5>Return value</h5><p>Solar azimuth in degrees clockwise from north, one value per observation. With alt = TRUE, a data frame with columns az and alt is returned. The altitude is geometric and is expressed in degrees.
 </p>
 ```
 
@@ -688,31 +688,10 @@ are 315 and 45 degrees. Hillshading uses upward surface normals in metric
 east, north and vertical coordinates. This is local illumination without
 cast shadows from other terrain.</p></td></tr><tr><th scope="row"><code>ambient</code></th><td><code>0.38</code></td><td><p>Fraction of illumination retained on slopes facing away from
 the light (0 to 1). Default 0.38. Use 1 for unshaded palette colours.</p></td></tr><tr><th scope="row"><code>haze</code></th><td><code>0.65</code></td><td><p>Maximum fraction of distance haze (0 to 1). Default 0.65.
-Set haze=0 and ambient=1 to inspect the colour mapping alone.</p></td></tr><tr><th scope="row"><code>image.dir</code></th><td><code>getwd()</code></td><td><p>Directory for the DEM PNG. Defaults to the working directory. Site names form the filename; different images with the same name receive a checksum suffix.</p></td></tr><tr><th scope="row"><code>attribution</code></th><td><code>&quot;User-supplied DEM&quot;</code></td><td><p>Credit for the DEM, included in plots and exports. The generic default credit is omitted from plots.</p></td></tr><tr><th scope="row"><code>license</code></th><td><code>&quot;See source DEM terms&quot;</code></td><td><p>Source licence or terms for the DEM, included in exports.</p></td></tr><tr><th scope="row"><code>ncores</code></th><td><code>NULL</code></td><td><p>Maximum DEM tracing workers. Defaults to half the available logical cores, rounded down with a minimum of one. The startup message reports used and available cores. Workers share file-backed DEM data and process separate bearings.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Announce the DEM radius, sampling and rendering stages.</p></td></tr><tr><th scope="row"><code>progress</code></th><td><code>interactive() &amp;&amp; verbose</code></td><td><p>Show a progress bar for each tracing stage. Default on in interactive verbose sessions.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A skyscapeR.horizon list with metadata (site name and georeference) and a data frame named data. Its az, alt and alt.unc columns contain azimuth, horizon altitude and altitude uncertainty, all in degrees.
-</p><h5>Accuracy, uncertainty and reproducibility</h5><p>H01 compared 334 bearings at 31 observing setups.
-At the surveyed bearings, <code>createHor()</code> reproduced the observed terrain skyline to within half a degree in 91.9% of cases.
-See the <a href="https://stonexsky.github.io/skyscapeR/manual/#h01-field-validation">H01 field validation in the skyscapeR technical manual</a> for the survey protocol, station results and limitations.
+Set haze=0 and ambient=1 to inspect the colour mapping alone.</p></td></tr><tr><th scope="row"><code>image.dir</code></th><td><code>getwd()</code></td><td><p>Directory for the DEM PNG. Defaults to the working directory. Site names form the filename; different images with the same name receive a checksum suffix.</p></td></tr><tr><th scope="row"><code>attribution</code></th><td><code>&quot;User-supplied DEM&quot;</code></td><td><p>Credit for the DEM, included in plots and exports. The generic default credit is omitted from plots.</p></td></tr><tr><th scope="row"><code>license</code></th><td><code>&quot;See source DEM terms&quot;</code></td><td><p>Source licence or terms for the DEM, included in exports.</p></td></tr><tr><th scope="row"><code>ncores</code></th><td><code>NULL</code></td><td><p>Maximum DEM tracing workers. Defaults to half the available logical cores, rounded down with a minimum of one. The startup message reports used and available cores. Workers share file-backed DEM data and process separate bearings.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Announce the DEM radius, sampling and rendering stages.</p></td></tr><tr><th scope="row"><code>progress</code></th><td><code>interactive() &amp;&amp; verbose</code></td><td><p>Show a progress bar for each tracing stage. Default on in interactive verbose sessions.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.horizon list with metadata (site name and georeference) and a data frame named data. Its az, alt and alt.unc columns contain azimuth, horizon altitude and altitude uncertainty, all in degrees.
 </p>
-<p>With the same 1 m terrain, <code>createHor()</code> reproduced Horizon’s skylines to a mean absolute difference of 0.004 degrees at each of two English sites. Against field measurements at 344 Irish bearings, <code>createHor()</code> using SRTM had a mean absolute error of 0.328 degrees, lower than either HeyWhatsThat or PeakFinder on that sample. Field accuracy varied by site. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#h02-skyline-comparison">H02 comparison in the skyscapeR technical manual</a>.
-</p>
-<p>The numerical skyline is a maximum over sampled terrain, not an accuracy
-certificate for the DEM. Horizontal and vertical datum differences, observer
-height, missing raster values, vegetation and buildings can exceed the sampling
-error. DEM elevations and a supplied observer ground elevation must use a
-compatible vertical datum. No geoid conversion or vertical-datum correction is
-performed automatically. Refine the angular and distance sampling and expand
-the radius until the relevant sightlines are stable. Compare with surveyed
-bearings and altitudes where available.
-</p><p><code>alt.unc</code> is supplied by the user and is not estimated from DEM resolution,
-control residuals or atmospheric variability. Smoothing a measured profile can
-remove narrow notches or peaks. Adaptive panorama sampling and illustrative
-lighting concern the image; they do not increase numerical horizon precision.
-The terrestrial refraction approximation assumes the supplied atmosphere and
-cannot reproduce all near-ground gradients or mirage conditions.
-</p><p>Save the DEM provenance, observer location and datum, constructor arguments,
-feature objects, returned horizon and external PNG. Rebuilding from the same
-source is distinct from merely replotting the saved horizon.
-</p>
+
+
 ```
 
 </details>
@@ -757,7 +736,7 @@ profiles need field verification where vegetation or structures affect visibilit
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>lat</code></th><td>—</td><td><p>The latitude of the location.</p></td></tr><tr><th scope="row"><code>lon</code></th><td>—</td><td><p>The longitude of the location.</p></td></tr><tr><th scope="row"><code>name</code></th><td>—</td><td><p>Name assigned to the returned horizon profile.</p></td></tr><tr><th scope="row"><code>elevation</code></th><td><code>1.6</code></td><td><p>The elevation of the observer above
 ground level in meters. Default is 1.6 meters (eye level).</p></td></tr><tr><th scope="row"><code>src</code></th><td><code>&quot;skyscapeR&quot;</code></td><td><p>Request source ID for <em>HeyWhatsThat</em>. Default is
 'skyscapeR'. Only change this if you have been given a source ID by the
-creator of <em>HeyWhatsThat</em>.</p></td></tr><tr><th scope="row"><code>max.wait</code></th><td><code>600</code></td><td><p>Maximum seconds to wait for panorama readiness after submission. Default 600.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical switch to control output. Default is <em>TRUE</em>.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A skyscapeR.horizon object for the requested panorama, as returned by <code>downloadHWT</code>. This function submits a remote request and waits for the calculated profile.
+creator of <em>HeyWhatsThat</em>.</p></td></tr><tr><th scope="row"><code>max.wait</code></th><td><code>600</code></td><td><p>Maximum seconds to wait for panorama readiness after submission. Default 600.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical switch to control output. Default is <em>TRUE</em>.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.horizon object for the requested panorama, as returned by <code>downloadHWT</code>. This function submits a remote request and waits for the calculated profile.
 </p>
 ```
 
@@ -789,7 +768,7 @@ sea_level=NULL uses the land ramp for all elevations.
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>name</code></th><td><code>NULL</code></td><td><p>Optional exact preset name. Omit to retrieve the full catalogue.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>With a name, a list containing land_cols and sea_cols. Without a
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>name</code></th><td><code>NULL</code></td><td><p>Optional exact preset name. Omit to retrieve the full catalogue.</p></td></tr></tbody></table><h5>Return value</h5><p>With a name, a list containing land_cols and sea_cols. Without a
 name, a named list of those pairs.
 </p>
 ```
@@ -826,14 +805,14 @@ height offsets of plus and minus 9.73 metres estimates altitude uncertainty.
 
 </details>
 
-**Interpretation and limits.** Separate where a provider actually placed its viewpoint from the coordinate in the request. Record the downloaded profile, reference direction and acquisition date. A provider comparison can mix terrain-source and algorithm differences.
+[Checking the provider’s viewpoint](#fn-createhwt).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>HWTID</code></th><td>—</td><td><p>This is the 8 character ID attributed by
-<em>HeyWhatsThat.com</em></p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A skyscapeR.horizon list containing site metadata and horizon samples. The data columns az, alt and alt.unc are in degrees. Retrieval requires access to the HeyWhatsThat service.
+<em>HeyWhatsThat.com</em></p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.horizon list containing site metadata and horizon samples. The data columns az, alt and alt.unc are in degrees. Retrieval requires access to the HeyWhatsThat service.
 </p>
 ```
 
@@ -882,7 +861,7 @@ exportStellarium is an alias for exportHor.
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>Horizon data in <em>skyscapeR.horizon</em> format.</p></td></tr><tr><th scope="row"><code>name</code></th><td>—</td><td><p>Horizon name to be displayed in <em>Stellarium</em>, if different
 from one in <em>skyscapeR.horizon</em> object.</p></td></tr><tr><th scope="row"><code>author</code></th><td><code>&quot;skyscapeR&quot;</code></td><td><p>Author, to be included in <em>landscape.ini</em> file.</p></td></tr><tr><th scope="row"><code>description</code></th><td>—</td><td><p>Description, to be included in <em>landscape.ini</em> file.</p></td></tr><tr><th scope="row"><code>use.image</code></th><td><code>TRUE</code></td><td><p>Include a valid external panorama PNG when available. Default TRUE.
-Missing or changed files warn and use a polygonal horizon instead.</p></td></tr><tr><th scope="row"><code>peakfinder.layout</code></th><td><code>c(&quot;single&quot;, &quot;native&quot;)</code></td><td><p>Single spherical PNG (default) or original native tiles. Textured DEM and PeakFinder exports use their PNG silhouette.</p></td></tr><tr><th scope="row"><code>max.texture.width</code></th><td><code>4096</code></td><td><p>Maximum exported DEM or photographic panorama width in pixels. The default is 4096. Use max.texture.width=2048 for a smaller texture, or Inf to keep the original dimensions. Stellarium supports textures only up to the graphics hardware limit. PNG compression does not reduce the decoded texture dimensions. Larger exports are at your own risk and may fail to load or crash Stellarium. This setting does not resize PeakFinder textures.</p></td></tr><tr><th scope="row"><code>ground_col</code></th><td>—</td><td><p>Color of ground. Defaults to <em>Stellarium</em>'s default.</p></td></tr><tr><th scope="row"><code>hor_col</code></th><td>—</td><td><p>Colour of a polygonal horizon line. Textured DEM and PeakFinder landscapes omit this line.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Invisibly, the absolute path of the created ZIP archive.
+Missing or changed files warn and use a polygonal horizon instead.</p></td></tr><tr><th scope="row"><code>peakfinder.layout</code></th><td><code>c(&quot;single&quot;, &quot;native&quot;)</code></td><td><p>Single spherical PNG (default) or original native tiles. Textured DEM and PeakFinder exports use their PNG silhouette.</p></td></tr><tr><th scope="row"><code>max.texture.width</code></th><td><code>4096</code></td><td><p>Maximum exported DEM or photographic panorama width in pixels. The default is 4096. Use max.texture.width=2048 for a smaller texture, or Inf to keep the original dimensions. Stellarium supports textures only up to the graphics hardware limit. PNG compression does not reduce the decoded texture dimensions. Larger exports are at your own risk and may fail to load or crash Stellarium. This setting does not resize PeakFinder textures.</p></td></tr><tr><th scope="row"><code>ground_col</code></th><td>—</td><td><p>Color of ground. Defaults to <em>Stellarium</em>'s default.</p></td></tr><tr><th scope="row"><code>hor_col</code></th><td>—</td><td><p>Colour of a polygonal horizon line. Textured DEM and PeakFinder landscapes omit this line.</p></td></tr></tbody></table><h5>Return value</h5><p>Invisibly, the absolute path of the created ZIP archive.
 </p>
 ```
 
@@ -905,14 +884,14 @@ a warning and the numerical silhouette is exported instead.
 </p>
 ```
 
-**Interpretation and limits.** Retain the original photograph and angular controls. Re-encoding a panorama or successfully relinking its image does not independently verify its north direction, its vertical calibration or the coordinate assigned to the observer.
+[Retaining panorama calibration and provenance](#fn-exporthor).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>A skyscapeR.horizon object.</p></td></tr><tr><th scope="row"><code>file</code></th><td>—</td><td><p>Destination PNG filename. Choose a new filename for each export.</p></td></tr><tr><th scope="row"><code>width</code></th><td><code>4096</code></td><td><p>Even output width in pixels. Height is half the width. Default 4096.</p></td></tr><tr><th scope="row"><code>use.image</code></th><td><code>TRUE</code></td><td><p>Use the attached terrain or photographic texture when available.
-Set FALSE to export the numerical skyline as a silhouette.</p></td></tr><tr><th scope="row"><code>col.ground</code></th><td><code>&quot;darkgreen&quot;</code></td><td><p>Fill colour for a numerical silhouette.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>The absolute PNG path, invisibly.
+Set FALSE to export the numerical skyline as a silhouette.</p></td></tr><tr><th scope="row"><code>col.ground</code></th><td><code>&quot;darkgreen&quot;</code></td><td><p>Fill colour for a numerical silhouette.</p></td></tr></tbody></table><h5>Return value</h5><p>The absolute PNG path, invisibly.
 </p>
 ```
 
@@ -953,7 +932,7 @@ exportStellarium is an alias for exportHor.
 
 </details>
 
-**Interpretation and limits.** Retain the original photograph and angular controls. Re-encoding a panorama or successfully relinking its image does not independently verify its north direction, its vertical calibration or the coordinate assigned to the observer.
+[Retaining panorama calibration and provenance](#fn-exporthor).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
@@ -961,7 +940,7 @@ exportStellarium is an alias for exportHor.
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>Horizon data in <em>skyscapeR.horizon</em> format.</p></td></tr><tr><th scope="row"><code>name</code></th><td>—</td><td><p>Horizon name to be displayed in <em>Stellarium</em>, if different
 from one in <em>skyscapeR.horizon</em> object.</p></td></tr><tr><th scope="row"><code>author</code></th><td><code>&quot;skyscapeR&quot;</code></td><td><p>Author, to be included in <em>landscape.ini</em> file.</p></td></tr><tr><th scope="row"><code>description</code></th><td>—</td><td><p>Description, to be included in <em>landscape.ini</em> file.</p></td></tr><tr><th scope="row"><code>use.image</code></th><td><code>TRUE</code></td><td><p>Include a valid external panorama PNG when available. Default TRUE.
-Missing or changed files warn and use a polygonal horizon instead.</p></td></tr><tr><th scope="row"><code>peakfinder.layout</code></th><td><code>c(&quot;single&quot;, &quot;native&quot;)</code></td><td><p>Single spherical PNG (default) or original native tiles. Textured DEM and PeakFinder exports use their PNG silhouette.</p></td></tr><tr><th scope="row"><code>max.texture.width</code></th><td><code>4096</code></td><td><p>Maximum exported DEM or photographic panorama width in pixels. The default is 4096. Use max.texture.width=2048 for a smaller texture, or Inf to keep the original dimensions. Stellarium supports textures only up to the graphics hardware limit. PNG compression does not reduce the decoded texture dimensions. Larger exports are at your own risk and may fail to load or crash Stellarium. This setting does not resize PeakFinder textures.</p></td></tr><tr><th scope="row"><code>ground_col</code></th><td>—</td><td><p>Color of ground. Defaults to <em>Stellarium</em>'s default.</p></td></tr><tr><th scope="row"><code>hor_col</code></th><td>—</td><td><p>Colour of a polygonal horizon line. Textured DEM and PeakFinder landscapes omit this line.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Invisibly, the absolute path of the created ZIP archive.
+Missing or changed files warn and use a polygonal horizon instead.</p></td></tr><tr><th scope="row"><code>peakfinder.layout</code></th><td><code>c(&quot;single&quot;, &quot;native&quot;)</code></td><td><p>Single spherical PNG (default) or original native tiles. Textured DEM and PeakFinder exports use their PNG silhouette.</p></td></tr><tr><th scope="row"><code>max.texture.width</code></th><td><code>4096</code></td><td><p>Maximum exported DEM or photographic panorama width in pixels. The default is 4096. Use max.texture.width=2048 for a smaller texture, or Inf to keep the original dimensions. Stellarium supports textures only up to the graphics hardware limit. PNG compression does not reduce the decoded texture dimensions. Larger exports are at your own risk and may fail to load or crash Stellarium. This setting does not resize PeakFinder textures.</p></td></tr><tr><th scope="row"><code>ground_col</code></th><td>—</td><td><p>Color of ground. Defaults to <em>Stellarium</em>'s default.</p></td></tr><tr><th scope="row"><code>hor_col</code></th><td>—</td><td><p>Colour of a polygonal horizon line. Textured DEM and PeakFinder landscapes omit this line.</p></td></tr></tbody></table><h5>Return value</h5><p>Invisibly, the absolute path of the created ZIP archive.
 </p>
 ```
 
@@ -984,7 +963,7 @@ Missing or changed files warn and use a polygonal horizon instead.</p></td></tr>
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>A <em>skyscapeR.horizon</em> object from which to retrieve horizon altitude.</p></td></tr><tr><th scope="row"><code>az</code></th><td>—</td><td><p>Array of azimuth(s) for which to retrieve horizon altitude(s).</p></td></tr><tr><th scope="row"><code>return.unc</code></th><td><code>F</code></td><td><p>Logical controlling whether to return altitude uncertainty.
-Default is <em>FALSE</em>.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>With <code>return.unc = FALSE</code>, a numeric vector of altitudes.
+Default is <em>FALSE</em>.</p></td></tr></tbody></table><h5>Return value</h5><p>With <code>return.unc = FALSE</code>, a numeric vector of altitudes.
 With <code>return.unc = TRUE</code> and one azimuth, an unnamed numeric vector
 containing altitude followed by uncertainty. With multiple azimuths, a
 numeric matrix with columns <code>alt</code> and <code>alt.unc</code>, one row per
@@ -1016,7 +995,7 @@ edges. Dimensions are metres in a local azimuthal equidistant projection.
 </p>
 ```
 
-**Interpretation and limits.** A feature height is additional relief on the supplied surface. A bank can be visible below the terrain skyline, so inspect the numerical profile and panorama separately. The [H01](study-register.qmd#h01-field-validation) field residuals quantify agreement at surveyed terrain bearings. Reconstructed features need their own reference measurements.
+[Feature heights and the scope of terrain validation](#fn-createhor).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
@@ -1043,7 +1022,7 @@ the same bounds as common values. Colour fields must contain valid colours.</p><
 mounds, and flat for stones, poles, platforms and walls.</p></td></tr><tr><th scope="row"><code>use</code></th><td><code>NULL</code></td><td><p>For polygons, area or boundary. NULL chooses the type's default.</p></td></tr><tr><th scope="row"><code>colour</code></th><td><code>NULL</code></td><td><p>One opaque R colour, or NULL for the terrain palette.</p></td></tr><tr><th scope="row"><code>colour_field</code></th><td><code>NULL</code></td><td><p>Optional
 attribute column names supplying per-row settings. Do not also supply the
 corresponding common value. Numeric fields must be numeric, finite and meet
-the same bounds as common values. Colour fields must contain valid colours.</p></td></tr><tr><th scope="row"><code>name</code></th><td><code>NULL</code></td><td><p>Descriptive label for the layer. Defaults to the structure type.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A serialisable skyscapeR.horFeature object. Pass it or a list of these
+the same bounds as common values. Colour fields must contain valid colours.</p></td></tr><tr><th scope="row"><code>name</code></th><td><code>NULL</code></td><td><p>Descriptive label for the layer. Defaults to the structure type.</p></td></tr></tbody></table><h5>Return value</h5><p>A serialisable skyscapeR.horFeature object. Pass it or a list of these
 objects as features to createHor with a DEM.
 </p>
 ```
@@ -1063,13 +1042,13 @@ objects as features to createHor with a DEM.
 </p>
 ```
 
-**Interpretation and limits.** Retain the original photograph and angular controls. Re-encoding a panorama or successfully relinking its image does not independently verify its north direction, its vertical calibration or the coordinate assigned to the observer.
+[Retaining panorama calibration and provenance](#fn-exporthor).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>file</code></th><td>—</td><td><p>PNG with sky removed to transparency. Keep this file alongside saved horizon objects.</p></td></tr><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>WGS84 latitude, longitude and optional elevation in metres.</p></td></tr><tr><th scope="row"><code>az.lim</code></th><td><code>c(0, 360)</code></td><td><p>True bearings of the left and right edges, increasing clockwise. A sector may cross north, e.g. c(330,30).</p></td></tr><tr><th scope="row"><code>alt.lim</code></th><td><code>c(-90, 90)</code></td><td><p>Altitudes of the bottom and top edges in degrees. Set these explicitly for a cropped panorama.</p></td></tr><tr><th scope="row"><code>name</code></th><td><code>tools::file_path_sans_ext(basename(file))</code></td><td><p>Site name.</p></td></tr><tr><th scope="row"><code>calibrate</code></th><td><code>FALSE</code></td><td><p>Open the interactive graphics picker. Choose Zoom and click two corners to enlarge a region. Add a control by clicking a landmark and entering its true azimuth, altitude or both. Finish to apply the fit.</p></td></tr><tr><th scope="row"><code>points</code></th><td><code>NULL</code></td><td><p>Optional data frame with numeric x, y, az and alt. Pixel coordinates start at the upper-left image edge. Use NA for an unknown angle.</p></td></tr><tr><th scope="row"><code>alpha.threshold</code></th><td><code>0.5</code></td><td><p>Minimum opacity counted as terrain, from above zero to one.</p></td></tr><tr><th scope="row"><code>alt.unc</code></th><td><code>0.5</code></td><td><p>Assumed skyline altitude uncertainty in degrees.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A skyscapeR.horizon object with a numerical profile, external PNG reference, angular bounds and control points. Use saveRDS() to save the object. Copy the displayed panorama PNG with the RDS and use <code>relinkHor</code> to reconnect a moved horizon or list.
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>file</code></th><td>—</td><td><p>PNG with sky removed to transparency. Keep this file alongside saved horizon objects.</p></td></tr><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>WGS84 latitude, longitude and optional elevation in metres.</p></td></tr><tr><th scope="row"><code>az.lim</code></th><td><code>c(0, 360)</code></td><td><p>True bearings of the left and right edges, increasing clockwise. A sector may cross north, e.g. c(330,30).</p></td></tr><tr><th scope="row"><code>alt.lim</code></th><td><code>c(-90, 90)</code></td><td><p>Altitudes of the bottom and top edges in degrees. Set these explicitly for a cropped panorama.</p></td></tr><tr><th scope="row"><code>name</code></th><td><code>tools::file_path_sans_ext(basename(file))</code></td><td><p>Site name.</p></td></tr><tr><th scope="row"><code>calibrate</code></th><td><code>FALSE</code></td><td><p>Open the interactive graphics picker. Choose Zoom and click two corners to enlarge a region. Add a control by clicking a landmark and entering its true azimuth, altitude or both. Finish to apply the fit.</p></td></tr><tr><th scope="row"><code>points</code></th><td><code>NULL</code></td><td><p>Optional data frame with numeric x, y, az and alt. Pixel coordinates start at the upper-left image edge. Use NA for an unknown angle.</p></td></tr><tr><th scope="row"><code>alpha.threshold</code></th><td><code>0.5</code></td><td><p>Minimum opacity counted as terrain, from above zero to one.</p></td></tr><tr><th scope="row"><code>alt.unc</code></th><td><code>0.5</code></td><td><p>Assumed skyline altitude uncertainty in degrees.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.horizon object with a numerical profile, external PNG reference, angular bounds and control points. Use saveRDS() to save the object. Copy the displayed panorama PNG with the RDS and use <code>relinkHor</code> to reconnect a moved horizon or list.
 </p><h5>Extraction method and limitations</h5><p>Sky detection uses the PNG alpha channel. In each image column the first pixel
 whose opacity reaches <code>alpha.threshold</code> defines the terrain edge. The
 function does not segment an ordinary opaque photograph by sky colour. Remove
@@ -1128,13 +1107,13 @@ attributed to PeakFinder under CC BY 4.0. Geometry conventions follow the
 
 </details>
 
-**Interpretation and limits.** Separate where a provider actually placed its viewpoint from the coordinate in the request. Record the downloaded profile, reference direction and acquisition date. A provider comparison can mix terrain-source and algorithm differences.
+[Checking the provider’s viewpoint](#fn-createhwt).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>file</code></th><td>—</td><td><p>Path to a PeakFinder Stellarium ZIP export.</p></td></tr><tr><th scope="row"><code>svg</code></th><td><code>NULL</code></td><td><p>Optional path to the matching full-circle Vector SVG export.</p></td></tr><tr><th scope="row"><code>elevation</code></th><td><code>NULL</code></td><td><p>Optional verified absolute observer elevation in metres.</p></td></tr><tr><th scope="row"><code>alt.unc</code></th><td><code>0.5</code></td><td><p>Assumed horizon altitude uncertainty in degrees, a nonnegative scalar.</p></td></tr><tr><th scope="row"><code>width</code></th><td><code>4096</code></td><td><p>PNG width in pixels, an integer from 512 to 8192. Default 4096.</p></td></tr><tr><th scope="row"><code>image.dir</code></th><td><code>getwd()</code></td><td><p>Directory for generated PNGs; defaults to the working directory.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A skyscapeR.horizon containing a periodically extended numerical horizon,
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>file</code></th><td>—</td><td><p>Path to a PeakFinder Stellarium ZIP export.</p></td></tr><tr><th scope="row"><code>svg</code></th><td><code>NULL</code></td><td><p>Optional path to the matching full-circle Vector SVG export.</p></td></tr><tr><th scope="row"><code>elevation</code></th><td><code>NULL</code></td><td><p>Optional verified absolute observer elevation in metres.</p></td></tr><tr><th scope="row"><code>alt.unc</code></th><td><code>0.5</code></td><td><p>Assumed horizon altitude uncertainty in degrees, a nonnegative scalar.</p></td></tr><tr><th scope="row"><code>width</code></th><td><code>4096</code></td><td><p>PNG width in pixels, an integer from 512 to 8192. Default 4096.</p></td></tr><tr><th scope="row"><code>image.dir</code></th><td><code>getwd()</code></td><td><p>Directory for generated PNGs; defaults to the working directory.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.horizon containing a periodically extended numerical horizon,
 site and source metadata, and, on successful calibration, metadata$image with
 the external PNG path, checksum, angular bounds and calibration diagnostics.
 </p>
@@ -1162,7 +1141,7 @@ solid lines of width 1.
 </p>
 ```
 
-**Interpretation and limits.** Terrain colour, shading and cropping can make a landform easier to recognise. Evaluate the profile at the archaeological bearing for a numerical claim about horizon altitude.
+[Shading and numerical altitude](#fn-dempalettes).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
@@ -1174,7 +1153,7 @@ a list of these objects. Each group retains its own epochs and styles
 for displaying the paths of celestial objects.</p></td></tr><tr><th scope="row"><code>col.ground</code></th><td><code>NULL</code></td><td><p>Silhouette colour. NULL uses a dark muted foreground for natural skies, pale grey-green for publication colour or grey for monochrome.</p></td></tr><tr><th scope="row"><code>col.sky</code></th><td>—</td><td><p>Earlier name for a solid sky colour. Prefer sky.</p></td></tr><tr><th scope="row"><code>use.image</code></th><td><code>TRUE</code></td><td><p>Use an attached external panorama PNG when available. Default TRUE.
 Missing or changed files warn and fall back to the numerical silhouette.</p></td></tr><tr><th scope="row"><code>...</code></th><td>—</td><td><p>Additional arguments to be passed to <em>plot</em>.</p></td></tr><tr><th scope="row"><code>show.skyline</code></th><td><code>NULL</code></td><td><p>Draw the numerical skyline. By default the line appears only without a panorama PNG.</p></td></tr><tr><th scope="row"><code>sky</code></th><td><code>NULL</code></td><td><p>A colour string or a background from <code>sketchSky</code> or <code>stellariumSky</code>.</p></td></tr><tr><th scope="row"><code>xlim</code></th><td>—</td><td><p>Earlier name for xrange.</p></td></tr><tr><th scope="row"><code>ylim</code></th><td>—</td><td><p>Earlier name for yrange.</p></td></tr><tr><th scope="row"><code>fastLoad</code></th><td><code>FALSE</code></td><td><p>Use a sampled PNG for quick plots. New photographic imports store a preview. For older horizons the first preview loads the image. The numerical skyline and celestial tracks retain their precision.</p></td></tr><tr><th scope="row"><code>show.legend</code></th><td><code>TRUE</code></td><td><p>Display the key for celestial tracks. The angular axes are always drawn.</p></td></tr><tr><th scope="row"><code>style</code></th><td><code>NULL</code></td><td><p>Frame and silhouette style. A sketch supplies its stored style by default. Without a
 sketch the default is <code>"publication-colour"</code>. Other choices are <code>"natural"</code> and
-<code>"publication-mono"</code>. Supplied panorama pixels and sky objects retain their own rendering.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Draws the horizon and returns the session atmosphere invisibly in a list.
+<code>"publication-mono"</code>. Supplied panorama pixels and sky objects retain their own rendering.</p></td></tr></tbody></table><h5>Return value</h5><p>Draws the horizon and returns the session atmosphere invisibly in a list.
 </p><h5>Layers and coordinate consistency</h5><p>A reusable sky is calculated for its own stored location and instant. Pair it
 with the horizon used to create it; drawing a saved sky does not recalculate
 its positions for another observer. Celestial reference tracks from
@@ -1203,13 +1182,13 @@ comparing styles, epochs or constellation traditions.
 </p>
 ```
 
-**Interpretation and limits.** Retain the original photograph and angular controls. Re-encoding a panorama or successfully relinking its image does not independently verify its north direction, its vertical calibration or the coordinate assigned to the observer.
+[Retaining panorama calibration and provenance](#fn-exporthor).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>A skyscapeR.horizon object or a list of horizon objects.</p></td></tr><tr><th scope="row"><code>path</code></th><td>—</td><td><p>A directory containing the moved PNGs, or a character vector of PNG filenames in any order.</p></td></tr><tr><th scope="row"><code>recursive</code></th><td><code>FALSE</code></td><td><p>Search subdirectories when path names a directory. Defaults to FALSE.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>The horizon or list, retaining its names, order and metadata with updated absolute PNG paths.
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>A skyscapeR.horizon object or a list of horizon objects.</p></td></tr><tr><th scope="row"><code>path</code></th><td>—</td><td><p>A directory containing the moved PNGs, or a character vector of PNG filenames in any order.</p></td></tr><tr><th scope="row"><code>recursive</code></th><td><code>FALSE</code></td><td><p>Search subdirectories when path names a directory. Defaults to FALSE.</p></td></tr></tbody></table><h5>Return value</h5><p>The horizon or list, retaining its names, order and metadata with updated absolute PNG paths.
 </p>
 ```
 
@@ -1241,7 +1220,7 @@ orientations, not an observable solar transit below ground.
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>This can be either the latitude of the
-location, or a <em>skyscapeR.horizon</em> object.</p></td></tr><tr><th scope="row"><code>parallax</code></th><td><code>0.00224</code></td><td><p>Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>0</code></td><td><p>Altitude of the sun. Defaults to 0 degrees.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Solar declination in degrees with the requested parallax correction, or NULL when the latitude falls outside the solstitial limits used by the function.
+location, or a <em>skyscapeR.horizon</em> object.</p></td></tr><tr><th scope="row"><code>parallax</code></th><td><code>0.00224</code></td><td><p>Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>0</code></td><td><p>Altitude of the sun. Defaults to 0 degrees.</p></td></tr></tbody></table><h5>Return value</h5><p>Solar declination in degrees with the requested parallax correction, or NULL when the latitude falls outside the solstitial limits used by the function.
 </p>
 ```
 
@@ -1273,7 +1252,7 @@ input bearing representation.
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>az</code></th><td>—</td><td><p>True bearing or vector of bearings in degrees clockwise from north.</p></td></tr><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>One latitude or one per bearing (degrees north), a site matrix with one row per bearing
 (latitude, longitude and optional elevation), a shared horizon or a list of horizons in measurement order.</p></td></tr><tr><th scope="row"><code>alt</code></th><td>—</td><td><p>Horizon altitude in degrees, shared or one per bearing. Omit when supplying
-horizons to interpolate altitude at each bearing with <code>hor2alt</code>.</p></td></tr><tr><th scope="row"><code>refraction</code></th><td><code>skyscapeR.env$refraction</code></td><td><p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>atm</code></th><td><code>skyscapeR.env$atm</code></td><td><p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>temp</code></th><td><code>skyscapeR.env$temp</code></td><td><p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Numeric declination in degrees for the supplied azimuth and altitude values.
+horizons to interpolate altitude at each bearing with <code>hor2alt</code>.</p></td></tr><tr><th scope="row"><code>refraction</code></th><td><code>skyscapeR.env$refraction</code></td><td><p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>atm</code></th><td><code>skyscapeR.env$atm</code></td><td><p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>temp</code></th><td><code>skyscapeR.env$temp</code></td><td><p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr></tbody></table><h5>Return value</h5><p>Numeric declination in degrees for the supplied azimuth and altitude values.
 </p>
 ```
 
@@ -1317,14 +1296,14 @@ catalogue brightness and does not model atmospheric visibility.
 
 </details>
 
-**Interpretation and limits.** A target match inherits the skyline, epoch range and sightline uncertainty used to generate it. The number of plausible candidates also depends on catalogue coverage and the search window.
+[Propagation of site and sightline uncertainty](#fn-az2dec).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>decrange</code></th><td>—</td><td><p>Range of declination to consider.</p></td></tr><tr><th scope="row"><code>year</code></th><td>—</td><td><p>Temporal range to consider. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr><tr><th scope="row"><code>loc</code></th><td><code>FALSE</code></td><td><p>FALSE for geocentric declinations, a vector of latitude, longitude and elevation, or a skyscapeR.horizon to also evaluate the local horizon.</p></td></tr><tr><th scope="row"><code>max.mag</code></th><td><code>2.5</code></td><td><p>Maximum magnitude of stars to consider. Defaults to 2.5</p></td></tr><tr><th scope="row"><code>dates</code></th><td><code>FALSE</code></td><td><p>Whether to display time period when identified celestial targets
-occur within declination range. Default is FALSE.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td><code>skyscapeR.env$calendar</code></td><td><p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p></td></tr><tr><th scope="row"><code>timerange</code></th><td>—</td><td><p>Earlier argument name for <code>year</code>, retained for existing scripts.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A list of candidate solar, lunar and stellar matches. The tables give target names and declination limits in degrees. Stellar matches also carry catalogue identifiers and visual magnitudes. Set dates to TRUE to request stellar date ranges. A category with no matches may be absent.
+occur within declination range. Default is FALSE.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td><code>skyscapeR.env$calendar</code></td><td><p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p></td></tr><tr><th scope="row"><code>timerange</code></th><td>—</td><td><p>Earlier argument name for <code>year</code>, retained for existing scripts.</p></td></tr></tbody></table><h5>Return value</h5><p>A list of candidate solar, lunar and stellar matches. The tables give target names and declination limits in degrees. Stellar matches also carry catalogue identifiers and visual magnitudes. Set dates to TRUE to request stellar date ranges. A category with no matches may be absent.
 </p><h5>Candidate selection and visibility</h5><p>A match is a declination overlap, not evidence that a celestial object was
 visible, deliberately observed or associated with the archaeological feature.
 The magnitude filter uses fixed catalogue values; it includes integrated
@@ -1362,7 +1341,7 @@ search sector may miss a more extreme sightline elsewhere.
 </p>
 ```
 
-**Interpretation and limits.** The returned extremum or altitude depends on the supplied skyline and the bearings searched. A sharp local notch can be missed between measurements; a wider numerical search cannot recover terrain absent from the profile.
+[Sensitivity to the sampled skyline](#fn-hor2alt).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
@@ -1370,7 +1349,7 @@ search sector may miss a more extreme sightline elsewhere.
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>Either a <em>skyscapeR.horizon</em> object or the latitude of the place.</p></td></tr><tr><th scope="row"><code>alt</code></th><td><code>0</code></td><td><p>Altitude of the horizon at northernmost point. Only necessary if no
 <em>skyscapeR.horizon</em> object is provided. Default is 0.</p></td></tr><tr><th scope="row"><code>range</code></th><td><code>25</code></td><td><p>Range of azimuths to check for minimum declination. Default is 25
-degrees either side of North.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>One numeric value in degrees, the largest declination sampled across the specified azimuth range around north.
+degrees either side of North.</p></td></tr></tbody></table><h5>Return value</h5><p>One numeric value in degrees, the largest declination sampled across the specified azimuth range around north.
 </p>
 ```
 
@@ -1391,7 +1370,7 @@ search sector may miss a more extreme sightline elsewhere.
 </p>
 ```
 
-**Interpretation and limits.** The returned extremum or altitude depends on the supplied skyline and the bearings searched. A sharp local notch can be missed between measurements; a wider numerical search cannot recover terrain absent from the profile.
+[Sensitivity to the sampled skyline](#fn-hor2alt).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
@@ -1399,7 +1378,7 @@ search sector may miss a more extreme sightline elsewhere.
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>Either a <em>skyscapeR.horizon</em> object or the latitude of the place.</p></td></tr><tr><th scope="row"><code>alt</code></th><td><code>0</code></td><td><p>Altitude of the horizon at southernmost point. Only necessary if no
 <em>skyscapeR.horizon</em> object is provided. Default is 0.</p></td></tr><tr><th scope="row"><code>range</code></th><td><code>25</code></td><td><p>Range of azimuths to check for minimum declination. Default is 25
-degrees either side of South</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>One numeric value in degrees, the smallest declination sampled across the specified azimuth range around south.
+degrees either side of South</p></td></tr></tbody></table><h5>Return value</h5><p>One numeric value in degrees, the smallest declination sampled across the specified azimuth range around south.
 </p>
 ```
 
@@ -1428,7 +1407,7 @@ test of terrain obstruction or event times.
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>dec</code></th><td>—</td><td><p>Declination of object.</p></td></tr><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>Location, either a <em>skyscapeR.horizon</em> or a vector
-containing the latitude and longitude of location, in this order.</p></td></tr><tr><th scope="row"><code>refraction</code></th><td>—</td><td><p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>atm</code></th><td>—</td><td><p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>temp</code></th><td>—</td><td><p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>res</code></th><td><code>0.25</code></td><td><p>The resolution (in degrees of RA) with which to calculate the path.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A skyscapeR.orbit list with az and alt vectors in degrees, ordered by azimuth, plus the input declination (dec) and location (georef). The sampled track retains altitudes above -20 degrees.
+containing the latitude and longitude of location, in this order.</p></td></tr><tr><th scope="row"><code>refraction</code></th><td>—</td><td><p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>atm</code></th><td>—</td><td><p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>temp</code></th><td>—</td><td><p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>res</code></th><td><code>0.25</code></td><td><p>The resolution (in degrees of RA) with which to calculate the path.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.orbit list with az and alt vectors in degrees, ordered by azimuth, plus the input declination (dec) and location (georef). The sampled track retains altitudes above -20 degrees.
 </p>
 ```
 
@@ -1470,7 +1449,7 @@ sky.objects is a silent compatibility alias for skyObject.
 location, or a <em>skyscapeR.horizon</em> object.</p></td></tr><tr><th scope="row"><code>col</code></th><td><code>&quot;#A9542E&quot;</code></td><td><p>The color for plotting, and differentiating these objects.
 Defaults to ochre for all objects.</p></td></tr><tr><th scope="row"><code>lty</code></th><td><code>1</code></td><td><p>Line type (see <code>par</code>) used for differentiation.
 Used for single-year tracks and year-range boundaries.</p></td></tr><tr><th scope="row"><code>lwd</code></th><td><code>1</code></td><td><p>Line width (see <code>par</code>) used for differentiation.
-Used for single-year tracks and year-range boundaries.</p></td></tr><tr><th scope="row"><code>epoch</code></th><td>—</td><td><p>Earlier argument name for <code>year</code>, retained for existing scripts.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A skyscapeR.object list. Columns of decs represent targets, in degrees. A single epoch produces one row. For a two-year range the rows are labelled min and max. The other fields record target count, epoch, location and plotting styles.
+Used for single-year tracks and year-range boundaries.</p></td></tr><tr><th scope="row"><code>epoch</code></th><td>—</td><td><p>Earlier argument name for <code>year</code>, retained for existing scripts.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.object list. Columns of decs represent targets, in degrees. A single epoch produces one row. For a two-year range the rows are labelled min and max. The other fields record target count, epoch, location and plotting styles.
 </p><h5>A reference track is not a dated orbit</h5><p>Each target represents a declination or declination range. A plotted track
 holds that declination fixed while hour angle varies. It does not follow the
 changing declination of a moving Solar System body through a particular day.
@@ -1514,7 +1493,7 @@ sky.objects is a silent compatibility alias for skyObject.
 </p>
 ```
 
-**Interpretation and limits.** Overlays help compare specified targets with an orientation distribution. Selecting overlays after viewing a peak introduces a search across targets outside the local adjustment in the significance test.
+[Choosing a target after viewing the distribution](#fn-sky-objects).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
@@ -1524,7 +1503,7 @@ sky.objects is a silent compatibility alias for skyObject.
 location, or a <em>skyscapeR.horizon</em> object.</p></td></tr><tr><th scope="row"><code>col</code></th><td><code>&quot;#A9542E&quot;</code></td><td><p>The color for plotting, and differentiating these objects.
 Defaults to ochre for all objects.</p></td></tr><tr><th scope="row"><code>lty</code></th><td><code>1</code></td><td><p>Line type (see <code>par</code>) used for differentiation.
 Used for single-year tracks and year-range boundaries.</p></td></tr><tr><th scope="row"><code>lwd</code></th><td><code>1</code></td><td><p>Line width (see <code>par</code>) used for differentiation.
-Used for single-year tracks and year-range boundaries.</p></td></tr><tr><th scope="row"><code>epoch</code></th><td>—</td><td><p>Earlier argument name for <code>year</code>, retained for existing scripts.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A skyscapeR.object list. Columns of decs represent targets, in degrees. A single epoch produces one row. For a two-year range the rows are labelled min and max. The other fields record target count, epoch, location and plotting styles.
+Used for single-year tracks and year-range boundaries.</p></td></tr><tr><th scope="row"><code>epoch</code></th><td>—</td><td><p>Earlier argument name for <code>year</code>, retained for existing scripts.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.object list. Columns of decs represent targets, in degrees. A single epoch produces one row. For a two-year range the rows are labelled min and max. The other fields record target count, epoch, location and plotting styles.
 </p><h5>A reference track is not a dated orbit</h5><p>Each target represents a declination or declination range. A plotted track
 holds that declination fixed while hour angle varies. It does not follow the
 changing declination of a moving Solar System body through a particular day.
@@ -1576,7 +1555,7 @@ the geocentric declination. Atmospheric settings are identical in both stages.
 
 </details>
 
-**Interpretation and limits.** An orbit is sampled from an idealised fixed-declination track. A spatial equinox uses site-specific solstitial crossing geometry. State which eastern or western skyline feature supports an archaeological interpretation of the midpoint.
+[Idealised tracks and the spatial equinox](#fn-orbit).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
@@ -1586,7 +1565,7 @@ the geocentric declination. Atmospheric settings are identical in both stages.
 0 to 360 degrees and matching endpoint altitudes.</p></td></tr><tr><th scope="row"><code>parallax</code></th><td><code>0.00224</code></td><td><p>Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.</p></td></tr><tr><th scope="row"><code>year</code></th><td><code>skyscapeR.env$cur.year</code></td><td><p>One astronomical year, defaulting to the package's current-year
 setting. Historical labels such as <code>"3250 BC"</code> are accepted.</p></td></tr><tr><th scope="row"><code>refraction</code></th><td><code>skyscapeR.env$refraction</code></td><td><p>Whether to apply atmospheric refraction. Defaults to the
 package setting, normally TRUE.</p></td></tr><tr><th scope="row"><code>atm</code></th><td><code>skyscapeR.env$atm</code></td><td><p>Atmospheric pressure in hPa. Defaults to the package setting.
-Zero requests an estimate from site elevation.</p></td></tr><tr><th scope="row"><code>temp</code></th><td><code>skyscapeR.env$temp</code></td><td><p>Air temperature in degrees Celsius. Defaults to the package setting.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A list containing azimuth and declination. Each contains rise and set
+Zero requests an estimate from site elevation.</p></td></tr><tr><th scope="row"><code>temp</code></th><td><code>skyscapeR.env$temp</code></td><td><p>Air temperature in degrees Celsius. Defaults to the package setting.</p></td></tr></tbody></table><h5>Return value</h5><p>A list containing azimuth and declination. Each contains rise and set
 values in degrees for the supplied horizon. Declinations are geocentric.
 An undefined side returns NA for both values, with a warning; the other side
 is retained when defined.
@@ -1627,14 +1606,14 @@ a declination criterion rather than the dates of the passages.
 </p>
 ```
 
-**Interpretation and limits.** Record the site's latitude and the epoch and parallax assumptions used for a solar limit. A returned limit is a geometrical target; an observer still needs an independent reason to regard it as culturally significant.
+[Latitude, epoch and parallax assumptions](#fn-antizenith).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>This can be either the latitude of the
-location, or a <em>skyscapeR.horizon</em> object.</p></td></tr><tr><th scope="row"><code>parallax</code></th><td><code>0.00224</code></td><td><p>Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>0</code></td><td><p>Altitude of the sun. Defaults to 0 degrees.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Solar declination in degrees with the requested parallax correction, or NULL when the latitude falls outside the solstitial limits used by the function.
+location, or a <em>skyscapeR.horizon</em> object.</p></td></tr><tr><th scope="row"><code>parallax</code></th><td><code>0.00224</code></td><td><p>Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>0</code></td><td><p>Altitude of the sun. Defaults to 0 degrees.</p></td></tr></tbody></table><h5>Return value</h5><p>Solar declination in degrees with the requested parallax correction, or NULL when the latitude falls outside the solstitial limits used by the function.
 </p>
 ```
 
@@ -1722,7 +1701,7 @@ African Skies 5, 15–23. The authors' online version defines dalt and arcl:
 a <code>skyscapeR.horizon</code> object.</p></td></tr><tr><th scope="row"><code>season</code></th><td><code>&quot;winter&quot;</code></td><td><p>Either <code>"winter"</code> (default) or <code>"summer"</code>.</p></td></tr><tr><th scope="row"><code>crescent</code></th><td><code>&quot;first&quot;</code></td><td><p>Either <code>"first"</code> (default, waxing/set) or
 <code>"last"</code> (waning/rise).</p></td></tr><tr><th scope="row"><code>simulation</code></th><td><code>&quot;SIM1&quot;</code></td><td><p><code>"SIM1"</code> (default) or <code>"SIM2"</code>; see Details.</p></td></tr><tr><th scope="row"><code>timezone</code></th><td><code>skyscapeR.env$timezone</code></td><td><p>Output and observing-day timezone. Defaults to package settings.
 Use UTC or a fixed offset before 1900.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td><code>skyscapeR.env$calendar</code></td><td><p><code>"G"</code> for Gregorian or <code>"J"</code> for Julian dates.
-Defaults to package settings.</p></td></tr><tr><th scope="row"><code>refraction</code></th><td><code>skyscapeR.env$refraction</code></td><td><p>Logical; use atmospheric refraction. Defaults to package settings.</p></td></tr><tr><th scope="row"><code>atm</code></th><td><code>skyscapeR.env$atm</code></td><td><p>Atmospheric pressure in mbar. Defaults to package settings.</p></td></tr><tr><th scope="row"><code>temp</code></th><td><code>skyscapeR.env$temp</code></td><td><p>Air temperature in degrees Celsius. Defaults to package settings.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A list with <code>Event</code>, paired <code>Moon</code> and <code>Sun</code> data
+Defaults to package settings.</p></td></tr><tr><th scope="row"><code>refraction</code></th><td><code>skyscapeR.env$refraction</code></td><td><p>Logical; use atmospheric refraction. Defaults to package settings.</p></td></tr><tr><th scope="row"><code>atm</code></th><td><code>skyscapeR.env$atm</code></td><td><p>Atmospheric pressure in mbar. Defaults to package settings.</p></td></tr><tr><th scope="row"><code>temp</code></th><td><code>skyscapeR.env$temp</code></td><td><p>Air temperature in degrees Celsius. Defaults to package settings.</p></td></tr></tbody></table><h5>Return value</h5><p>A list with <code>Event</code>, paired <code>Moon</code> and <code>Sun</code> data
 frames (year, date, time, azimuth, declination, UT Julian date), and a
 <code>diagnostics</code> data frame. Diagnostics include status, solstice and
 conjunction JDs, visibility-assessment JD, illuminated fraction, lower-limb
@@ -1730,20 +1709,6 @@ altitude, elongation, visibility margin, signed azimuth difference, preceding
 difference, number of qualifying lunations, and day offset (0 for SIM1's day, 1 for SIM2's additional day).
 All angles are degrees. Missing results retain the requested year,
 use NA for observations and issue a warning. <code>settings</code> records conventions.
-</p><h5>Comparison with the original simulations</h5><p>For SIM1, 5,024 of 5,136 events in the supplied 1620–2047 series at
-latitudes 0, 60 N and 60 S agree within 0.02 degrees in lunar declination.
-This comparison uses a level horizon, longitude 0, elevation 400 m, UTC,
-Gregorian dates, refraction, pressure 1013.25 mbar and temperature 15 degrees
-Celsius. The original 40-degree N series has additional systematic offsets.
-Of the 112 discrepancies outside that series, inferred matching dates suggest
-differences in the lunation search window and first/last crescent selection.
-Some lie close to the visibility threshold. Alternative window and solar-limb
-conventions improve some cases but disrupt others that already agree, so no
-replacement convention has been adopted. The exact original settings remain
-unresolved; the paper does not specify all atmospheric inputs. Inspect the
-diagnostics before interpreting individual events. Agreement with simulation
-tables is not independent observational validation, and these SIM1 counts do
-not establish the accuracy of SIM2.
 </p>
 ```
 
@@ -1771,7 +1736,7 @@ sunset bearing.
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>year</code></th><td><code>skyscapeR.env$cur.year</code></td><td><p>Astronomical year. The default is the current year in the package settings. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr><tr><th scope="row"><code>loc</code></th><td><code>FALSE</code></td><td><p>Latitude in degrees north or a <code>skyscapeR.horizon</code> object. Omit this argument or use <code>FALSE</code> for geocentric declination.</p></td></tr><tr><th scope="row"><code>parallax</code></th><td><code>0.00224</code></td><td><p>Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>0</code></td><td><p>Altitude of the sun. Defaults to 0 degrees.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical to control output of warnings and messages.
-Defaults to TRUE.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Numeric declination in degrees. With loc = FALSE the result is geocentric. Supplying a location applies the parallax correction for the chosen altitude.
+Defaults to TRUE.</p></td></tr></tbody></table><h5>Return value</h5><p>Numeric declination in degrees. With loc = FALSE the result is geocentric. Supplying a location applies the parallax correction for the chosen altitude.
 </p>
 ```
 
@@ -1862,7 +1827,7 @@ Preserve all inputs when comparing series.
 
 </details>
 
-**Interpretation and limits.** The event-selection rules include ordered conditions across solar and lunar events. Use the recorded diagnostics to identify the first condition that differs when comparing with the Silva and Pimenta simulations. A similar terminal azimuth does not establish identical event selection.
+[Selection of the event and lunation](#fn-cc).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
@@ -1871,32 +1836,7 @@ Preserve all inputs when comparing series.
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>year</code></th><td>—</td><td><p>Astronomical year or years. Can be either a single value (the year), Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.
 two values (range of years), or a vector of years.</p></td></tr><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>This can be either a <em>skyscapeR.horizon</em> object, or a vector with the
 latitude, longitude and elevation of the site, in this order.</p></td></tr><tr><th scope="row"><code>season</code></th><td><code>&quot;spring&quot;</code></td><td><p>Either 'spring' or 'autumn'. Default is 'spring'.</p></td></tr><tr><th scope="row"><code>rise</code></th><td><code>TRUE</code></td><td><p>Logical to choose whether to calculate Equinoctial Full
-Moon rises or sets. Defaults to <em>TRUE</em>.</p></td></tr><tr><th scope="row"><code>min.phase</code></th><td><code>0.99</code></td><td><p>Minimum illuminated fraction of the Moon, from 0 to 1. The default 0.99 means 99 percent illumination.</p></td></tr><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See <code>time2jd</code> for named zones and offsets.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p></td></tr><tr><th scope="row"><code>refraction</code></th><td>—</td><td><p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>atm</code></th><td>—</td><td><p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>temp</code></th><td>—</td><td><p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A list with an Event label and Moon and Sun data frames. Each row gives year, date, time, azimuth and declination for the selected rising or setting event. Angles are in degrees.
-</p><h5>Comparison with the original simulations</h5><p>With the corrected preceding-sunset pairing, 2,562 of 2,568 moonsets in
-the supplied 1620–2047 series at latitudes 0, 60 N and 60 S agree within
-0.02 degrees in lunar declination. The comparison uses a level horizon,
-longitude 0, elevation 400 m, UTC, Gregorian dates, geocentric declinations,
-refraction, pressure 1013.25 mbar, temperature 15 degrees Celsius and the
-default illumination threshold. Five remaining cases lie just above the
-0.99 illumination boundary; one lies about 0.002 degrees beyond the azimuth
-crossover boundary. The original series selects the following morning in
-each case. Thresholds have not been tuned to reproduce those selections.
-</p><p>The original 40-degree N series retains systematic coordinate differences.
-Diagnostic comparisons suggest a different coordinate-conversion or timing
-convention, but the original settings have not been established. Agreement
-with these simulation tables is not independent observational validation.
-The paper does not specify all atmospheric settings; the values above describe
-this comparison, not confirmed settings of the original simulations.
-</p><p>Astronomical positions require Swiss Ephemeris files covering the epoch. We
-recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-package</code> for setup.
-</p><h5>Scope of the event model</h5><p>The illumination fraction is a selection criterion, not a naked-eye detection
-model. The calculation does not include weather, sky brightness or extinction.
-It uses centre crossings rather than the first appearance of the upper limb.
-Only the first qualifying event is returned, so changes in illumination
-threshold, civil-day convention or horizon can change the selected lunation.
-Remaining differences from the original simulations are described above.
-Numerical precision does not establish agreement with a published distribution.
-Preserve all inputs when comparing series.
+Moon rises or sets. Defaults to <em>TRUE</em>.</p></td></tr><tr><th scope="row"><code>min.phase</code></th><td><code>0.99</code></td><td><p>Minimum illuminated fraction of the Moon, from 0 to 1. The default 0.99 means 99 percent illumination.</p></td></tr><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See <code>time2jd</code> for named zones and offsets.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p></td></tr><tr><th scope="row"><code>refraction</code></th><td>—</td><td><p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>atm</code></th><td>—</td><td><p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>temp</code></th><td>—</td><td><p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr></tbody></table><h5>Return value</h5><p>A list with an Event label and Moon and Sun data frames. Each row gives year, date, time, azimuth and declination for the selected rising or setting event. Angles are in degrees.
 </p>
 ```
 
@@ -1916,14 +1856,14 @@ in degrees; no equinox date, event time or horizon crossing is calculated.
 </p>
 ```
 
-**Interpretation and limits.** A target constructed from obliquity or a zero equinoctial declination answers a different question from dating a crossing. For a near-horizon observation report whether the calculation includes the local parallax adjustment.
+[Seasonal reference declinations](#fn-ds).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>loc</code></th><td><code>FALSE</code></td><td><p>Latitude in degrees north or a <code>skyscapeR.horizon</code> object. Omit this argument or use <code>FALSE</code> for geocentric declination.</p></td></tr><tr><th scope="row"><code>parallax</code></th><td><code>0.00224</code></td><td><p>Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>0</code></td><td><p>Altitude of the sun. Defaults to 0 degrees.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical to control output of warnings and messages.
-Defaults to TRUE. This affects messages only, not the calculated declination.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Numeric declination in degrees. With loc = FALSE the result is geocentric. Supplying a location applies the parallax correction for the chosen altitude.
+Defaults to TRUE. This affects messages only, not the calculated declination.</p></td></tr></tbody></table><h5>Return value</h5><p>Numeric declination in degrees. With loc = FALSE the result is geocentric. Supplying a location applies the parallax correction for the chosen altitude.
 </p>
 ```
 
@@ -1944,14 +1884,14 @@ sunset bearing.
 </p>
 ```
 
-**Interpretation and limits.** A target constructed from obliquity or a zero equinoctial declination answers a different question from dating a crossing. For a near-horizon observation report whether the calculation includes the local parallax adjustment.
+[Seasonal reference declinations](#fn-ds).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>year</code></th><td><code>skyscapeR.env$cur.year</code></td><td><p>Astronomical year. The default is the current year in the package settings. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr><tr><th scope="row"><code>loc</code></th><td><code>FALSE</code></td><td><p>Latitude in degrees north or a <code>skyscapeR.horizon</code> object. Omit this argument or use <code>FALSE</code> for geocentric declination.</p></td></tr><tr><th scope="row"><code>parallax</code></th><td><code>0.00224</code></td><td><p>Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>0</code></td><td><p>Altitude of the sun. Defaults to 0 degrees.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical to control output of warnings and messages.
-Defaults to TRUE.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Numeric declination in degrees. With loc = FALSE the result is geocentric. Supplying a location applies the parallax correction for the chosen altitude.
+Defaults to TRUE.</p></td></tr></tbody></table><h5>Return value</h5><p>Numeric declination in degrees. With loc = FALSE the result is geocentric. Supplying a location applies the parallax correction for the chosen altitude.
 </p>
 ```
 
@@ -1981,7 +1921,7 @@ recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-pa
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>time</code></th><td>—</td><td><p>One or more UT Julian dates, or local date-time strings in the form YYYY/MM/DD HH:MM:SS.</p></td></tr><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See <code>time2jd</code> for named zones and offsets.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Numeric illuminated fraction of the lunar disc, one value per input time. At full illumination the fraction is 1.
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>time</code></th><td>—</td><td><p>One or more UT Julian dates, or local date-time strings in the form YYYY/MM/DD HH:MM:SS.</p></td></tr><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See <code>time2jd</code> for named zones and offsets.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p></td></tr></tbody></table><h5>Return value</h5><p>Numeric illuminated fraction of the lunar disc, one value per input time. At full illumination the fraction is 1.
 </p>
 ```
 
@@ -2024,7 +1964,7 @@ inclination. This package also includes the fixed 0.145-degree term above.
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>year</code></th><td><code>skyscapeR.env$cur.year</code></td><td><p>Astronomical year. The default is the current year in the package settings. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr><tr><th scope="row"><code>loc</code></th><td><code>FALSE</code></td><td><p>Latitude in degrees north or a <code>skyscapeR.horizon</code> object. Omit this argument or use <code>FALSE</code> for geocentric declination.</p></td></tr><tr><th scope="row"><code>parallax</code></th><td><code>0.952</code></td><td><p>Mean horizontal parallax in degrees. The default is 0.952 degrees for the Moon.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>0</code></td><td><p>Altitude of the Moon. Defaults to 0 degrees.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical to control output of warnings and messages.
-Defaults to TRUE.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Numeric declination in degrees. With loc = FALSE the result is geocentric. Supplying a location applies the parallax correction for the chosen altitude.
+Defaults to TRUE.</p></td></tr></tbody></table><h5>Return value</h5><p>Numeric declination in degrees. With loc = FALSE the result is geocentric. Supplying a location applies the parallax correction for the chosen altitude.
 </p>
 ```
 
@@ -2060,14 +2000,14 @@ inclination. This package also includes the fixed 0.145-degree term above.
 
 </details>
 
-**Interpretation and limits.** A standstill envelope gives a target limit. To compare with a particular observed Moon, compute its topocentric position at the instant and test the local skyline separately.
+[Standstill limits and observation dates](#fn-nmjlx).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>year</code></th><td><code>skyscapeR.env$cur.year</code></td><td><p>Astronomical year. The default is the current year in the package settings. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr><tr><th scope="row"><code>loc</code></th><td><code>FALSE</code></td><td><p>Latitude in degrees north or a <code>skyscapeR.horizon</code> object. Omit this argument or use <code>FALSE</code> for geocentric declination.</p></td></tr><tr><th scope="row"><code>parallax</code></th><td><code>0.952</code></td><td><p>Mean horizontal parallax in degrees. The default is 0.952 degrees for the Moon.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>0</code></td><td><p>Altitude of the Moon. Defaults to 0 degrees.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical to control output of warnings and messages.
-Defaults to TRUE.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Numeric declination in degrees. With loc = FALSE the result is geocentric. Supplying a location applies the parallax correction for the chosen altitude.
+Defaults to TRUE.</p></td></tr></tbody></table><h5>Return value</h5><p>Numeric declination in degrees. With loc = FALSE the result is geocentric. Supplying a location applies the parallax correction for the chosen altitude.
 </p>
 ```
 
@@ -2092,14 +2032,14 @@ recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-pa
 </p>
 ```
 
-**Interpretation and limits.** Illuminated fraction alone supplies no brightness or atmospheric detection criterion. A planetary extreme is conditional on its sampled time window and cadence. Retain that window when comparing extremes between studies.
+[Illumination and detection](#fn-moonphase).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>obj</code></th><td>—</td><td><p>Planet name, with this capitalisation: Mercury, Venus, Mars, Jupiter or Saturn.</p></td></tr><tr><th scope="row"><code>year</code></th><td>—</td><td><p>Year for which to do calculations. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr><tr><th scope="row"><code>loc</code></th><td><code>NULL</code></td><td><p>This can be either a <em>skyscapeR.horizon</em> object, or a vector with the
-latitude, longitude and elevation of the site, in this order.</p></td></tr><tr><th scope="row"><code>epoch</code></th><td>—</td><td><p>Earlier argument name for <code>year</code>, retained for existing scripts.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A list containing planet, min.dec and max.dec. The two declinations are extrema of daily samples and are expressed in degrees.
+latitude, longitude and elevation of the site, in this order.</p></td></tr><tr><th scope="row"><code>epoch</code></th><td>—</td><td><p>Earlier argument name for <code>year</code>, retained for existing scripts.</p></td></tr></tbody></table><h5>Return value</h5><p>A list containing planet, min.dec and max.dec. The two declinations are extrema of daily samples and are expressed in degrees.
 </p>
 ```
 
@@ -2163,7 +2103,7 @@ containing the latitude, longitude and elevation of location, in this order.</p>
 Can also be a single year ("YYYY") or a month ("YYYY/MM") to calculate risings and settings for every day in the
 year or month, respectively. Not necessary if <em>jd</em> is given.</p></td></tr><tr><th scope="row"><code>jd</code></th><td>—</td><td><p>A numeric containing the julian date (see <code>time2jd</code>) for which to
 calculate rising and settings. Only needed if <em>date</em> is not given.</p></td></tr><tr><th scope="row"><code>obj</code></th><td><code>&quot;sun&quot;</code></td><td><p>Solar System body, Western star name or fixed-star catalogue identifier (including M 45). Defaults to 'sun'.</p></td></tr><tr><th scope="row"><code>alt</code></th><td><code>0</code></td><td><p>The altitude of the horizon to consider. Defaults to zero degrees.</p></td></tr><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See <code>time2jd</code> for named zones and offsets.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p></td></tr><tr><th scope="row"><code>dec</code></th><td>—</td><td><p>Output declination: <em>geo</em> for the geocentric, or <em>topo</em> for the topocentric
-frame of reference. If not given the value set by <code>skyscapeR.vars</code> will be used instead.</p></td></tr><tr><th scope="row"><code>refraction</code></th><td>—</td><td><p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>atm</code></th><td>—</td><td><p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>temp</code></th><td>—</td><td><p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A list containing object, rise and set; rise/set are data frames
+frame of reference. If not given the value set by <code>skyscapeR.vars</code> will be used instead.</p></td></tr><tr><th scope="row"><code>refraction</code></th><td>—</td><td><p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>atm</code></th><td>—</td><td><p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>temp</code></th><td>—</td><td><p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p></td></tr></tbody></table><h5>Return value</h5><p>A list containing object, rise and set; rise/set are data frames
 with date, time, azimuth and declination columns. Missing events have NA fields.
 </p><h5>Crossing is not first visibility</h5><p>The result supplies geometry and time. It applies neither atmospheric extinction
 nor a twilight detection threshold and does not test whether the star can be
@@ -2212,14 +2152,14 @@ inclination. This package also includes the fixed 0.145-degree term above.
 
 </details>
 
-**Interpretation and limits.** A standstill envelope gives a target limit. To compare with a particular observed Moon, compute its topocentric position at the instant and test the local skyline separately.
+[Standstill limits and observation dates](#fn-nmjlx).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>year</code></th><td><code>skyscapeR.env$cur.year</code></td><td><p>Astronomical year. The default is the current year in the package settings. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr><tr><th scope="row"><code>loc</code></th><td><code>FALSE</code></td><td><p>Latitude in degrees north or a <code>skyscapeR.horizon</code> object. Omit this argument or use <code>FALSE</code> for geocentric declination.</p></td></tr><tr><th scope="row"><code>parallax</code></th><td><code>0.952</code></td><td><p>Mean horizontal parallax in degrees. The default is 0.952 degrees for the Moon.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>0</code></td><td><p>Altitude of the Moon. Defaults to 0 degrees.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical to control output of warnings and messages.
-Defaults to TRUE.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Numeric declination in degrees. With loc = FALSE the result is geocentric. Supplying a location applies the parallax correction for the chosen altitude.
+Defaults to TRUE.</p></td></tr></tbody></table><h5>Return value</h5><p>Numeric declination in degrees. With loc = FALSE the result is geocentric. Supplying a location applies the parallax correction for the chosen altitude.
 </p>
 ```
 
@@ -2255,14 +2195,14 @@ inclination. This package also includes the fixed 0.145-degree term above.
 
 </details>
 
-**Interpretation and limits.** A standstill envelope gives a target limit. To compare with a particular observed Moon, compute its topocentric position at the instant and test the local skyline separately.
+[Standstill limits and observation dates](#fn-nmjlx).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>year</code></th><td><code>skyscapeR.env$cur.year</code></td><td><p>Astronomical year. The default is the current year in the package settings. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr><tr><th scope="row"><code>loc</code></th><td><code>FALSE</code></td><td><p>Latitude in degrees north or a <code>skyscapeR.horizon</code> object. Omit this argument or use <code>FALSE</code> for geocentric declination.</p></td></tr><tr><th scope="row"><code>parallax</code></th><td><code>0.952</code></td><td><p>Mean horizontal parallax in degrees. The default is 0.952 degrees for the Moon.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>0</code></td><td><p>Altitude of the Moon. Defaults to 0 degrees.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical to control output of warnings and messages.
-Defaults to TRUE.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Numeric declination in degrees. With loc = FALSE the result is geocentric. Supplying a location applies the parallax correction for the chosen altitude.
+Defaults to TRUE.</p></td></tr></tbody></table><h5>Return value</h5><p>Numeric declination in degrees. With loc = FALSE the result is geocentric. Supplying a location applies the parallax correction for the chosen altitude.
 </p>
 ```
 
@@ -2288,13 +2228,13 @@ recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-pa
 </p>
 ```
 
-**Interpretation and limits.** An event time is conditional on the chosen event definition and clock. A centre crossing of terrain differs from first visibility of a limb; a recurring solar declination can admit more than one date.
+[Event definition and clock convention](#fn-riseset).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>dec</code></th><td>—</td><td><p>One or more declinations in degrees.</p></td></tr><tr><th scope="row"><code>year</code></th><td>—</td><td><p>Year for which to do calculations. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>Calendar for sampling and output. G for Gregorian or J for Julian. Defaults to the package calendar, initially Gregorian.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A character matrix with one column per reachable input, in input order. The rows
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>dec</code></th><td>—</td><td><p>One or more declinations in degrees.</p></td></tr><tr><th scope="row"><code>year</code></th><td>—</td><td><p>Year for which to do calculations. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>Calendar for sampling and output. G for Gregorian or J for Julian. Defaults to the package calendar, initially Gregorian.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p></td></tr></tbody></table><h5>Return value</h5><p>A character matrix with one column per reachable input, in input order. The rows
 are Dec, Date1 and Date2, with Date3 added if three passages fall in one civil
 year. Dates are chronological day/month labels. Unused date cells are missing.
 The function stops if all requested declinations are unreachable.
@@ -2341,7 +2281,7 @@ V (curtailed passage) and I (arising and lying hidden). The default uses five co
 seasons occur.</p></td></tr><tr><th scope="row"><code>...</code></th><td>—</td><td><p>Additional arguments to be passed to <em>plot</em>.</p></td></tr><tr><th scope="row"><code>layout</code></th><td><code>c(&quot;auto&quot;, &quot;linear&quot;, &quot;circular&quot;)</code></td><td><p><code>"auto"</code> and <code>"circular"</code> draw a single ring or concentric rings
 in input (or requested sort) order from the outside inward. Leaders connect the layer identifiers
 to their rings. Select <code>"linear"</code> for strips. Supply this argument by name.</p></td></tr><tr><th scope="row"><code>style</code></th><td><code>&quot;publication-colour&quot;</code></td><td><p>Analytical display style, either <code>"publication-colour"</code> (default) or
-<code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Draws on the active graphics device and returns NULL invisibly.
+<code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p></td></tr></tbody></table><h5>Return value</h5><p>Draws on the active graphics device and returns NULL invisibly.
 </p><h5>Seasonal axis and comparison</h5><p>The axis is a 365-sample synthetic solar-longitude cycle anchored at December
 solstice. Equinoxes and solstices mark quarter-cycle positions. The monthly
 dividers mark twelve equal intervals of 30 degrees in solar longitude,
@@ -2410,7 +2350,7 @@ visibility estimates, which additionally require observer and atmosphere informa
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>string</code></th><td>—</td><td><p>This can be either the traditional name for the star or its Bayer designation.</p></td></tr><tr><th scope="row"><code>year</code></th><td><code>skyscapeR.env$cur.year</code></td><td><p>Year for which to calculate the coordinates. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.
-Defaults to current year.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A skyscapeR.star list with name, Bayer designation, apparent magnitude (app.mag) and a coord data frame. Each row contains year, right ascension (RA) and declination (Dec), both angles in degrees.
+Defaults to current year.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.star list with name, Bayer designation, apparent magnitude (app.mag) and a coord data frame. Each row contains year, right ascension (RA) and declination (Dec), both angles in degrees.
 </p>
 ```
 
@@ -2473,7 +2413,7 @@ of moonlight. PASP 103, 1033-1039 (equation 14 for extinction airmass).
 
 </details>
 
-**Interpretation and limits.** Track clearance, seasonal visibility and the representative Julian date are different outputs. Month and phase labels organise the cycle; deciding whether a star could be detected requires a time interval above the actual skyline.
+[Visibility intervals and event dates](#fn-plot-skyscaper-starphases).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
@@ -2486,7 +2426,7 @@ visibility for it to still be considered to be as rising or setting.
 Defaults to ten degrees.</p></td></tr><tr><th scope="row"><code>solar.alt</code></th><td><code>NULL</code></td><td><p>Solar altitude threshold in degrees. NULL uses
 -6 for a horizon, or alt.hor - 6 for coordinate input.</p></td></tr><tr><th scope="row"><code>k</code></th><td><code>skyscapeR.vars()$k</code></td><td><p>Visual extinction in magnitudes per airmass (Schaefer 1986, p. S33). The package adopts 0.2 as a clear-sky baseline. Extinction varies with site and atmospheric conditions (Schaefer 1986, 1993). Defaults to the session value from skyscapeR.vars().</p></td></tr><tr><th scope="row"><code>limit</code></th><td><code>6</code></td><td><p>The maximum magnitude of a star that can be
 visible with the naked eye. Defaults to 6.</p></td></tr><tr><th scope="row"><code>refraction</code></th><td>—</td><td><p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>atm</code></th><td>—</td><td><p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>temp</code></th><td>—</td><td><p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>res</code></th><td><code>1/24/6</code></td><td><p>Spacing of solar altitude samples in days, greater than zero and at
-most one. Default 1/144 day (ten minutes). Terrain crossings are refined separately.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A skyscapeR.starphases list. The data table gives each model day and its phase code: I for invisible, V for visible without a classified rise or set, R for rising, S for setting and RS for both. Metadata include the star, year, observer coordinates, phase type, season and event tables, refraction setting and solar altitude threshold. For a named horizon, <code>metadata$site.name</code> retains the site label for comparisons. The logical <code>metadata$horizon</code> records whether a horizon object was supplied. The separate <code>metadata$horizon.status</code> reports <code>"always above"</code>, <code>"always below"</code> or <code>"crosses"</code> relative to the supplied skyline. Event rows include solar.longitude in degrees on the synthetic cycle. The date.julian column gives the representative local Julian calendar date at the supplied longitude. Pass this date to <code>riseset</code> with <code>calendar = "J"</code> to time the skyline crossing. For a dawn sketch, advance from that crossing until the star clears the terrain while the sky is still dark enough. The phase date alone does not specify a visible instant.
+most one. Default 1/144 day (ten minutes). Terrain crossings are refined separately.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.starphases list. The data table gives each model day and its phase code: I for invisible, V for visible without a classified rise or set, R for rising, S for setting and RS for both. Metadata include the star, year, observer coordinates, phase type, season and event tables, refraction setting and solar altitude threshold. For a named horizon, <code>metadata$site.name</code> retains the site label for comparisons. The logical <code>metadata$horizon</code> records whether a horizon object was supplied. The separate <code>metadata$horizon.status</code> reports <code>"always above"</code>, <code>"always below"</code> or <code>"crosses"</code> relative to the supplied skyline. Event rows include solar.longitude in degrees on the synthetic cycle. The date.julian column gives the representative local Julian calendar date at the supplied longitude. Pass this date to <code>riseset</code> with <code>calendar = "J"</code> to time the skyline crossing. For a dawn sketch, advance from that crossing until the star clears the terrain while the sky is still dark enough. The phase date alone does not specify a visible instant.
 </p><h5>Extinction and model scope</h5><p>The implementation uses Rozenberg's airmass approximation,
 <i>X(h)=1/(\sin h+0.025\exp(-11\sin h))</i>, multiplying it by <code>k</code>
 and adding the result to the fixed catalogue magnitude. Here <code>h</code> is the
@@ -2603,7 +2543,7 @@ Legacy example: <a href="https://github.com/Stellarium/stellarium/blob/v0.22.2/s
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>file</code></th><td>—</td><td><p>Path to a Stellarium legacy constellationship.fab text file.</p></td></tr><tr><th scope="row"><code>set</code></th><td><code>&quot;custom&quot;</code></td><td><p>Label for this collection, default "custom".</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A data frame with the same columns as <code>constellations</code>, accepted by
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>file</code></th><td>—</td><td><p>Path to a Stellarium legacy constellationship.fab text file.</p></td></tr><tr><th scope="row"><code>set</code></th><td><code>&quot;custom&quot;</code></td><td><p>Label for this collection, default "custom".</p></td></tr></tbody></table><h5>Return value</h5><p>A data frame with the same columns as <code>constellations</code>, accepted by
 the <code>display$constellations</code> setting of <code>sketchSky</code> or the
 <code>constellations</code> argument of <code>planisphere</code>. Subset rows to select individual figures.
 </p>
@@ -2649,7 +2589,7 @@ Deep Star Maps 2020. <a href="https://svs.gsfc.nasa.gov/4851/">https://svs.gsfc.
 
 </details>
 
-**Interpretation and limits.** A drawn figure expresses a chosen connection between catalogue stars. Endpoints, projection and cultural attribution must be documented separately from any claim that the figure was visible together at a particular instant.
+[Catalogue endpoints and cultural figures](#fn-importconstellations).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
@@ -2660,7 +2600,7 @@ Deep Star Maps 2020. <a href="https://svs.gsfc.nasa.gov/4851/">https://svs.gsfc.
 or identifiers, or a table from <code>importConstellations</code>.
 The default <code>NULL</code> draws no constellation lines.</p></td></tr><tr><th scope="row"><code>col.constellations</code></th><td><code>&quot;#638582&quot;</code></td><td><p>Colour of the constellation lines (default muted teal).</p></td></tr><tr><th scope="row"><code>show.legend</code></th><td><code>TRUE</code></td><td><p>Show chart pole, latitude, epoch, magnitude limit and the enabled layer key.
 FALSE centres the bare chart, keeping its data and right-ascension ticks.</p></td></tr><tr><th scope="row"><code>style</code></th><td><code>&quot;publication-colour&quot;</code></td><td><p>Analytical display style, either <code>"publication-colour"</code> (default) or
-<code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Draws the polar chart on the active graphics device and invisibly returns the saved xpd, mar and pty graphics settings.
+<code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p></td></tr></tbody></table><h5>Return value</h5><p>Draws the polar chart on the active graphics device and invisibly returns the saved xpd, mar and pty graphics settings.
 </p><h5>Constellation patterns</h5><p>Constellation segments follow the shorter great-circle arc between catalogue
 endpoints at the requested epoch. They use the same polar projection as the
 stars and are clipped to the chart's accessible sky. Faint endpoints remain
@@ -2785,7 +2725,7 @@ the cutoff includes additional stars only where the catalogue supplies them.</p>
 for natural style. Defaults to <code>skyscapeR.vars()$k</code>, initially 0.2.
 This clear-sky baseline is an assumption, not an estimate of the site's weather.
 Zero removes extinction and the modelled lunar scattering. Publication styles
-do not apply extinction to symbols.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>An object of classes <code>skyscapeR.sketch</code> and <code>skyscapeR.sky</code>.
+do not apply extinction to symbols.</p></td></tr></tbody></table><h5>Return value</h5><p>An object of classes <code>skyscapeR.sketch</code> and <code>skyscapeR.sky</code>.
 It stores <code>jd</code>, <code>loc</code>, <code>style</code>, <code>display</code>, <code>settings</code>
 (calendar, magnitude cutoff and extinction), and <code>atmosphere</code>.
 <code>stars</code> and <code>coords</code> contain azimuth, altitude and symbol size;
@@ -2879,14 +2819,14 @@ and interpretation.
 </p>
 ```
 
-**Interpretation and limits.** For photometric claims work with the linear component matrices and pixel area. Changing the field of view or display mapping can change screen intensity even when integrated source flux is conserved.
+[Linear flux, solid angle and display colour](#fn-sketchsky).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>sky</code></th><td>—</td><td><p>A natural sketch from <code>sketchSky</code>.</p></td></tr><tr><th scope="row"><code>xrange</code></th><td><code>c(0, 360)</code></td><td><p>Increasing true azimuth limits in degrees. A sector may cross
-north, for example c(340,380).</p></td></tr><tr><th scope="row"><code>yrange</code></th><td><code>c(0, 90)</code></td><td><p>Increasing altitude limits within -90 to 90 degrees.</p></td></tr><tr><th scope="row"><code>size</code></th><td><code>c(720, 180)</code></td><td><p>Positive integer column and row counts, up to 1600 by 1000.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A list containing azimuth and altitude pixel centres, total radiance,
+north, for example c(340,380).</p></td></tr><tr><th scope="row"><code>yrange</code></th><td><code>c(0, 90)</code></td><td><p>Increasing altitude limits within -90 to 90 degrees.</p></td></tr><tr><th scope="row"><code>size</code></th><td><code>c(720, 180)</code></td><td><p>Positive integer column and row counts, up to 1600 by 1000.</p></td></tr></tbody></table><h5>Return value</h5><p>A list containing azimuth and altitude pixel centres, total radiance,
 direct light (stars, residual cluster light, planets and lunar disc), and
 Milky Way radiance. Matrices are in magnitude-zero flux units per square
 degree, ordered from high to low altitude and increasing azimuth. Multiply
@@ -2914,7 +2854,7 @@ background. The Sun contributes to the background; its disc is a plot overlay.
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>Site horizon with latitude, longitude and elevation in metres.</p></td></tr><tr><th scope="row"><code>sky</code></th><td>—</td><td><p>A background returned by sketchSky(), stellariumSky() or skyStep().</p></td></tr><tr><th scope="row"><code>minutes</code></th><td><code>1</code></td><td><p>Signed elapsed minutes from the captured instant. Fractions are allowed.</p></td></tr><tr><th scope="row"><code>...</code></th><td>—</td><td><p>Arguments passed to plot(hor, sky=...), such as xrange.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>stellariumSky() returns a skyscapeR.sky object with the native raster, PNG path, Julian day, observer location and capture settings. skyStep() invisibly returns the updated sky of the same kind.
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>Site horizon with latitude, longitude and elevation in metres.</p></td></tr><tr><th scope="row"><code>sky</code></th><td>—</td><td><p>A background returned by sketchSky(), stellariumSky() or skyStep().</p></td></tr><tr><th scope="row"><code>minutes</code></th><td><code>1</code></td><td><p>Signed elapsed minutes from the captured instant. Fractions are allowed.</p></td></tr><tr><th scope="row"><code>...</code></th><td>—</td><td><p>Arguments passed to plot(hor, sky=...), such as xrange.</p></td></tr></tbody></table><h5>Return value</h5><p>stellariumSky() returns a skyscapeR.sky object with the native raster, PNG path, Julian day, observer location and capture settings. skyStep() invisibly returns the updated sky of the same kind.
 </p><h5>Reproducibility and stepping</h5><p>A Stellarium capture reflects the installed Stellarium version, its catalogues,
 selected sky culture and current settings for switches not explicitly supplied.
 It is an external rendered image, not the package's twilight or extinction
@@ -2949,13 +2889,13 @@ Each call draws immediately and returns the new object invisibly. Save it with
 </p>
 ```
 
-**Interpretation and limits.** Preserve the sky object or captured image and the settings of the system that produced it. Stepping through several instants is informative near a terrain crossing; a screen capture alone carries no per-pixel naked-eye detection threshold.
+[Reconstructing a saved sky](#fn-skystep).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>Site horizon with latitude, longitude and elevation in metres.</p></td></tr><tr><th scope="row"><code>jd</code></th><td><code>NULL</code></td><td><p>Numeric UT Julian day. Supply either jd or time.</p></td></tr><tr><th scope="row"><code>screenshot.dir</code></th><td><code>getOption(&quot;skyscapeR.screenshot.dir&quot;, &quot;~/Pictures/Stellarium&quot;)</code></td><td><p>Existing local directory where Stellarium writes screenshots.</p></td></tr><tr><th scope="row"><code>port</code></th><td><code>8090L</code></td><td><p>Local Remote Control server port.</p></td></tr><tr><th scope="row"><code>timeout</code></th><td><code>60</code></td><td><p>Maximum wait for the capture in seconds.</p></td></tr><tr><th scope="row"><code>time</code></th><td><code>NULL</code></td><td><p>A date and clock time such as "2026/12/21 16:00", or a POSIXct or POSIXlt instant.</p></td></tr><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>For character time, a zone name or fixed UTC offset as in time2jd(). Defaults to the package setting.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>For character time, the Gregorian or Julian calendar as in time2jd(). Defaults to the package setting.</p></td></tr><tr><th scope="row"><code>display</code></th><td><code>c(landscape = FALSE, fog = FALSE)</code></td><td><p>Named logical switches: atmosphere, landscape, fog, cardinals, compass.marks (numbered horizon bearings), azimuthal.grid, equatorial.grid, constellation.lines, constellation.labels (names) and constellation.art. Use galactic.equator to toggle the Galactic equator independently of the equatorial grid. Use ecliptic and equator for the lines of date, poles for the celestial poles and zenith for the Stellarium zenith/nadir markers. Older Stellarium versions may require the Compass Marks plugin to be loaded to show the bearings. Landscape and fog default to FALSE so the site horizon supplies the foreground. Other omitted switches use the current Stellarium setting.</p></td></tr><tr><th scope="row"><code>width</code></th><td><code>NULL</code></td><td><p>Even screenshot width in pixels, up to 8192. The default <code>NULL</code> uses the size configured in Stellarium. Try 4096 if a larger capture fails. For a narrow sector, <code>sketchSky</code> gives scalable vector detail.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>stellariumSky() returns a skyscapeR.sky object with the native raster, PNG path, Julian day, observer location and capture settings. skyStep() invisibly returns the updated sky of the same kind.
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>Site horizon with latitude, longitude and elevation in metres.</p></td></tr><tr><th scope="row"><code>jd</code></th><td><code>NULL</code></td><td><p>Numeric UT Julian day. Supply either jd or time.</p></td></tr><tr><th scope="row"><code>screenshot.dir</code></th><td><code>getOption(&quot;skyscapeR.screenshot.dir&quot;, &quot;~/Pictures/Stellarium&quot;)</code></td><td><p>Existing local directory where Stellarium writes screenshots.</p></td></tr><tr><th scope="row"><code>port</code></th><td><code>8090L</code></td><td><p>Local Remote Control server port.</p></td></tr><tr><th scope="row"><code>timeout</code></th><td><code>60</code></td><td><p>Maximum wait for the capture in seconds.</p></td></tr><tr><th scope="row"><code>time</code></th><td><code>NULL</code></td><td><p>A date and clock time such as "2026/12/21 16:00", or a POSIXct or POSIXlt instant.</p></td></tr><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>For character time, a zone name or fixed UTC offset as in time2jd(). Defaults to the package setting.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>For character time, the Gregorian or Julian calendar as in time2jd(). Defaults to the package setting.</p></td></tr><tr><th scope="row"><code>display</code></th><td><code>c(landscape = FALSE, fog = FALSE)</code></td><td><p>Named logical switches: atmosphere, landscape, fog, cardinals, compass.marks (numbered horizon bearings), azimuthal.grid, equatorial.grid, constellation.lines, constellation.labels (names) and constellation.art. Use galactic.equator to toggle the Galactic equator independently of the equatorial grid. Use ecliptic and equator for the lines of date, poles for the celestial poles and zenith for the Stellarium zenith/nadir markers. Older Stellarium versions may require the Compass Marks plugin to be loaded to show the bearings. Landscape and fog default to FALSE so the site horizon supplies the foreground. Other omitted switches use the current Stellarium setting.</p></td></tr><tr><th scope="row"><code>width</code></th><td><code>NULL</code></td><td><p>Even screenshot width in pixels, up to 8192. The default <code>NULL</code> uses the size configured in Stellarium. Try 4096 if a larger capture fails. For a narrow sector, <code>sketchSky</code> gives scalable vector detail.</p></td></tr></tbody></table><h5>Return value</h5><p>stellariumSky() returns a skyscapeR.sky object with the native raster, PNG path, Julian day, observer location and capture settings. skyStep() invisibly returns the updated sky of the same kind.
 </p><h5>Reproducibility and stepping</h5><p>A Stellarium capture reflects the installed Stellarium version, its catalogues,
 selected sky culture and current settings for switches not explicitly supplied.
 It is an external rendered image, not the package's twilight or extinction
@@ -3017,7 +2957,7 @@ in skyscape archaeology <em>Journal of Archaeological Science</em> 118, 105138. 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>az</code></th><td>—</td><td><p>True bearings in degrees clockwise from north, one per observation.</p></td></tr><tr><th scope="row"><code>unc</code></th><td>—</td><td><p>Angular uncertainty in degrees, one value shared across observations or one per azimuth. For a normal distribution this is the standard deviation. For a uniform distribution it is the half-width on either side of the measurement.</p></td></tr><tr><th scope="row"><code>pdf</code></th><td><code>&quot;normal&quot;</code></td><td><p>Uncertainty distribution. Choose <code>"normal"</code> (default) or <code>"uniform"</code>.</p></td></tr><tr><th scope="row"><code>name</code></th><td>—</td><td><p>Optional labels in the same order as the measurements.</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.01</code></td><td><p>Spacing of the output bearing grid in degrees. Default 0.01.</p></td></tr><tr><th scope="row"><code>.cutoff</code></th><td><code>1e-05</code></td><td><p>Minimum density retained on the output grid. Default <code>1e-5</code>.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>T</code></td><td><p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A skyscapeR.pdf list. The data component contains one data frame per measurement, in input order, with azimuth x in degrees and density y. The metadata record the measurements, names, uncertainties, distribution type and numerical settings.
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>az</code></th><td>—</td><td><p>True bearings in degrees clockwise from north, one per observation.</p></td></tr><tr><th scope="row"><code>unc</code></th><td>—</td><td><p>Angular uncertainty in degrees, one value shared across observations or one per azimuth. For a normal distribution this is the standard deviation. For a uniform distribution it is the half-width on either side of the measurement.</p></td></tr><tr><th scope="row"><code>pdf</code></th><td><code>&quot;normal&quot;</code></td><td><p>Uncertainty distribution. Choose <code>"normal"</code> (default) or <code>"uniform"</code>.</p></td></tr><tr><th scope="row"><code>name</code></th><td>—</td><td><p>Optional labels in the same order as the measurements.</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.01</code></td><td><p>Spacing of the output bearing grid in degrees. Default 0.01.</p></td></tr><tr><th scope="row"><code>.cutoff</code></th><td><code>1e-05</code></td><td><p>Minimum density retained on the output grid. Default <code>1e-5</code>.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>T</code></td><td><p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.pdf list. The data component contains one data frame per measurement, in input order, with azimuth x in degrees and density y. The metadata record the measurements, names, uncertainties, distribution type and numerical settings.
 </p>
 ```
 
@@ -3077,7 +3017,7 @@ in skyscape archaeology <em>Journal of Archaeological Science</em> 118, 105138. 
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>pdf</code></th><td>—</td><td><p>A <em>skyscapeR.pdf</em> object created with <code>az.pdf</code> or a <em>skyscapeR.spd</em> object created with <code>spd</code></p></td></tr><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>A shared <code>skyscapeR.horizon</code> or, for individual azimuth PDFs, a list of horizons in measurement order.</p></td></tr><tr><th scope="row"><code>xrange</code></th><td>—</td><td><p>Array of values (min and max) for SPD when transforming a <em>skyscapeR.spd</em> object.</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.1</code></td><td><p>Spacing of the declination calculation grid, in degrees. Default 0.1.</p></td></tr><tr><th scope="row"><code>.prec</code></th><td><code>0.1</code></td><td><p>Azimuth integration spacing, in degrees. Default 0.1.
 Previously ignored; smaller values increase integration work. Must not exceed 540.</p></td></tr><tr><th scope="row"><code>.output.res</code></th><td><code>0.01</code></td><td><p>Spacing of the returned declination grid, in degrees.
 Default 0.01. Coarser spacing reduces output size. All spacings must be
-positive finite scalars, and the returned grid must contain at least two points.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A <code>skyscapeR.pdf</code> object for PDF input, or a <code>skyscapeR.spd</code>
+positive finite scalars, and the returned grid must contain at least two points.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p></td></tr></tbody></table><h5>Return value</h5><p>A <code>skyscapeR.pdf</code> object for PDF input, or a <code>skyscapeR.spd</code>
 object for SPD input. Both contain <code>metadata</code> and <code>data</code>. PDF data
 are a list of data frames with declination <code>x</code> and density <code>y</code>;
 SPD data are a single such data frame. Metadata include the coordinate type,
@@ -3116,13 +3056,13 @@ uncertainty interpretation when comparing results from different surveys.
 
 </details>
 
-**Interpretation and limits.** A reported uncertainty enters differently as the standard deviation of a normal density and as the half-width of a uniform density. Record which interpretation the measurement supports before combining sites.
+[Distribution shape and the meaning of uncertainty](#fn-az-pdf).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>dec</code></th><td>—</td><td><p>Measured declinations in degrees, between -90 and 90 inclusive.</p></td></tr><tr><th scope="row"><code>unc</code></th><td>—</td><td><p>Positive uncertainties in degrees of declination. Supply one value or one per measurement. For normal densities this is the standard deviation. For uniform densities it is the half-width.</p></td></tr><tr><th scope="row"><code>pdf</code></th><td><code>&quot;normal&quot;</code></td><td><p>Distribution family, "normal" or "uniform", with the same abbreviations as <code>az.pdf</code>.</p></td></tr><tr><th scope="row"><code>name</code></th><td>—</td><td><p>Optional measurement labels in input order.</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.01</code></td><td><p>Grid spacing in degrees. Default 0.01.</p></td></tr><tr><th scope="row"><code>.cutoff</code></th><td><code>1e-04</code></td><td><p>Minimum retained density height. Default 0.0001.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical. Report completion.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A skyscapeR.pdf list with one x/y data frame per observation. Metadata record coord = "dec", the input measurements, family, uncertainties, labels and numerical settings.
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>dec</code></th><td>—</td><td><p>Measured declinations in degrees, between -90 and 90 inclusive.</p></td></tr><tr><th scope="row"><code>unc</code></th><td>—</td><td><p>Positive uncertainties in degrees of declination. Supply one value or one per measurement. For normal densities this is the standard deviation. For uniform densities it is the half-width.</p></td></tr><tr><th scope="row"><code>pdf</code></th><td><code>&quot;normal&quot;</code></td><td><p>Distribution family, "normal" or "uniform", with the same abbreviations as <code>az.pdf</code>.</p></td></tr><tr><th scope="row"><code>name</code></th><td>—</td><td><p>Optional measurement labels in input order.</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.01</code></td><td><p>Grid spacing in degrees. Default 0.01.</p></td></tr><tr><th scope="row"><code>.cutoff</code></th><td><code>1e-04</code></td><td><p>Minimum retained density height. Default 0.0001.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical. Report completion.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.pdf list with one x/y data frame per observation. Metadata record coord = "dec", the input measurements, family, uncertainties, labels and numerical settings.
 </p>
 ```
 
@@ -3166,7 +3106,7 @@ mass can exceed the requested value. Densities need not sum to one.
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>x</code></th><td>—</td><td><p>A <em>skyscapeR.spd</em> or <em>skyscapeR.pdf</em> object,
 or one data frame/list with numeric components <code>x</code> and <code>y</code>.</p></td></tr><tr><th scope="row"><code>mass</code></th><td><code>0.954</code></td><td><p>Probability mass, greater than zero and at most one.
-Default is 0.954.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>For a PDF object, a list of interval matrices, one per distribution,
+Default is 0.954.</p></td></tr></tbody></table><h5>Return value</h5><p>For a PDF object, a list of interval matrices, one per distribution,
 even for a single distribution. For SPD or x/y input, one matrix.
 Each matrix has columns <code>start</code> and <code>end</code>, with ordered endpoints
 and one row per contiguous region, sorted by start.
@@ -3211,7 +3151,7 @@ the same number of distributions as <code>x</code>. Supply together with <code>h
 to show combined panels for a single declination distribution.</p></td></tr><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>Original horizon object, or a list of horizons in the same order
 and with the same length as the distributions in <code>x</code>. Supply with <code>az</code>.</p></td></tr><tr><th scope="row"><code>xlim</code></th><td>—</td><td><p>Earlier name for xrange.</p></td></tr><tr><th scope="row"><code>show.legend</code></th><td><code>TRUE</code></td><td><p>Show the HDR mass above stacked densities. The linked diagnostic always identifies
 its component panels and reports the numerical interval or intervals.</p></td></tr><tr><th scope="row"><code>style</code></th><td><code>&quot;publication-colour&quot;</code></td><td><p>Analytical display style, either <code>"publication-colour"</code> (default) or
-<code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Draws the selected probability distributions and requested intervals on the active graphics device.
+<code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p></td></tr></tbody></table><h5>Return value</h5><p>Draws the selected probability distributions and requested intervals on the active graphics device.
 </p>
 ```
 
@@ -3232,14 +3172,14 @@ object. Assess departures from a specified null using a significance test.
 </p>
 ```
 
-**Interpretation and limits.** An interval bar, a bearing spoke and a density curve encode different features of a measurement. Retain individual measurement identities, especially where overplotting makes repeated orientations appear to be a single observation.
+[The quantity represented on the angular axis](#fn-plot-skyscaper-pdf).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>x</code></th><td>—</td><td><p>A <em>skyscapeR.spd</em> object created with <code>spd</code></p></td></tr><tr><th scope="row"><code>xrange</code></th><td>—</td><td><p>Range of x-axis to plot.</p></td></tr><tr><th scope="row"><code>yrange</code></th><td>—</td><td><p>Range of y-axis to plot.</p></td></tr><tr><th scope="row"><code>title</code></th><td><code>NULL</code></td><td><p>Title to add to the plot.</p></td></tr><tr><th scope="row"><code>col</code></th><td><code>NULL</code></td><td><p>Observed density colour. NULL uses the current style.</p></td></tr><tr><th scope="row"><code>shading</code></th><td><code>TRUE</code></td><td><p>Logical to control whether to color the entire distribution. Defaults to TRUE</p></td></tr><tr><th scope="row"><code>...</code></th><td>—</td><td><p>Additional arguments to be passed to <em>plot</em>.</p></td></tr><tr><th scope="row"><code>obj</code></th><td><code>NULL</code></td><td><p>A skyObject or list of target groups for a density or significance plot. Declination plots show single epochs as lines and epoch ranges as bands. Azimuth plots use each group's site latitude to mark rising and setting boundary bearings at a geometric level horizon.</p></td></tr><tr><th scope="row"><code>xlim</code></th><td>—</td><td><p>Earlier name for xrange.</p></td></tr><tr><th scope="row"><code>ylim</code></th><td>—</td><td><p>Earlier name for yrange.</p></td></tr><tr><th scope="row"><code>show.legend</code></th><td><code>TRUE</code></td><td><p>Show the observed-curve and celestial-target key when target overlays are supplied.</p></td></tr><tr><th scope="row"><code>style</code></th><td><code>&quot;publication-colour&quot;</code></td><td><p>Analytical display style, either <code>"publication-colour"</code> (default) or
-<code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Draws the summed density against its angular coordinate on the active graphics device.
+<code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p></td></tr></tbody></table><h5>Return value</h5><p>Draws the summed density against its angular coordinate on the active graphics device.
 </p>
 ```
 
@@ -3261,7 +3201,7 @@ crossings to exist.
 </p>
 ```
 
-**Interpretation and limits.** An interval bar, a bearing spoke and a density curve encode different features of a measurement. Retain individual measurement identities, especially where overplotting makes repeated orientations appear to be a single observation.
+[The quantity represented on the angular axis](#fn-plot-skyscaper-pdf).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
@@ -3276,7 +3216,7 @@ Defaults to TRUE.</p></td></tr><tr><th scope="row"><code>col</code></th><td><cod
 In both positions labels lie outside the circle. The first line names the target and the second gives rise or set.
 Range endpoints share a label. Non-crossing targets have no reference bearing.</p></td></tr><tr><th scope="row"><code>show.legend</code></th><td><code>TRUE</code></td><td><p>With TRUE, show the count and enabled target labels. FALSE centres the bare compass,
 including its cardinal scale, measured bearings and target lines.</p></td></tr><tr><th scope="row"><code>style</code></th><td><code>&quot;publication-colour&quot;</code></td><td><p>Analytical display style, either <code>"publication-colour"</code> (default) or
-<code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Draws measured bearings and optional target directions on the active graphics device. North is at the top and azimuth increases clockwise.
+<code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p></td></tr></tbody></table><h5>Return value</h5><p>Draws measured bearings and optional target directions on the active graphics device. North is at the top and azimuth increases clockwise.
 </p>
 ```
 
@@ -3301,7 +3241,7 @@ height. Single-year targets are displayed as lines.
 </p>
 ```
 
-**Interpretation and limits.** An interval bar, a bearing spoke and a density curve encode different features of a measurement. Retain individual measurement identities, especially where overplotting makes repeated orientations appear to be a single observation.
+[The quantity represented on the angular axis](#fn-plot-skyscaper-pdf).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
@@ -3315,7 +3255,7 @@ to <em>TRUE</em></p></td></tr><tr><th scope="row"><code>mark</code></th><td><cod
 <em>TRUE</em></p></td></tr><tr><th scope="row"><code>col</code></th><td><code>NULL</code></td><td><p>Measurement colour. NULL uses the current style.</p></td></tr><tr><th scope="row"><code>geometry</code></th><td><code>if (missing(shade)) &quot;interval&quot; else &quot;bar&quot;</code></td><td><p>Use <code>"interval"</code> for sightline intervals with a centre point, or
 <code>"bar"</code> for filled or outlined rectangles. Explicitly supplying the older <code>shade</code>
 setting selects rectangles unless <code>geometry</code> is supplied.</p></td></tr><tr><th scope="row"><code>show.legend</code></th><td><code>TRUE</code></td><td><p>Display target annotations when <code>show.obj.label</code> is also TRUE.</p></td></tr><tr><th scope="row"><code>style</code></th><td><code>&quot;publication-colour&quot;</code></td><td><p>Analytical display style, either <code>"publication-colour"</code> (default) or
-<code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Draws orientation measurements and their uncertainties on the active graphics device.
+<code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p></td></tr></tbody></table><h5>Return value</h5><p>Draws orientation measurements and their uncertainties on the active graphics device.
 </p><h5>Coordinates and interpretation</h5><p><code>unit</code> labels the measurement axis; it does not transform azimuths into
 declinations. Celestial overlay values are declinations. Use them with
 declination measurements, or convert measurements first using the appropriate
@@ -3365,7 +3305,7 @@ in skyscape archaeology <em>Journal of Archaeological Science</em> 118, 105138. 
 
 </details>
 
-**Interpretation and limits.** A summed curve depends on its inputs, grid and normalisation. Selecting a subset changes the archaeological population being summarised. A highest-density interval describes concentrated probability mass, with no null-model adjustment.
+[Subsetting and normalising densities](#fn-hpdi).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
@@ -3373,7 +3313,7 @@ in skyscape archaeology <em>Journal of Archaeological Science</em> 118, 105138. 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>pdf</code></th><td>—</td><td><p>A <em>skyscapeR.pdf</em> object created with either <code>az.pdf</code> or <code>coordtrans</code></p></td></tr><tr><th scope="row"><code>xrange</code></th><td>—</td><td><p>Array of values (min and max) for SPD if different from range of <em>pdf</em>. If given,
 it overrides <em>.cutoff</em></p></td></tr><tr><th scope="row"><code>normalise</code></th><td><code>F</code></td><td><p>If TRUE, scale the returned density to unit area using
-trapezoidal integration. Default FALSE leaves the summed density unnormalised.</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.01</code></td><td><p>Resolution with which to output SPD. Default is 0.01 degrees.</p></td></tr><tr><th scope="row"><code>.cutoff</code></th><td><code>1e-05</code></td><td><p>When the range is chosen automatically, set summed densities below this threshold to zero. Default <code>1e-5</code>.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A <code>skyscapeR.spd</code> list with <code>metadata</code> and a <code>data</code>
+trapezoidal integration. Default FALSE leaves the summed density unnormalised.</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.01</code></td><td><p>Resolution with which to output SPD. Default is 0.01 degrees.</p></td></tr><tr><th scope="row"><code>.cutoff</code></th><td><code>1e-05</code></td><td><p>When the range is chosen automatically, set summed densities below this threshold to zero. Default <code>1e-5</code>.</p></td></tr></tbody></table><h5>Return value</h5><p>A <code>skyscapeR.spd</code> list with <code>metadata</code> and a <code>data</code>
 data frame containing coordinate <code>x</code> (degrees) and density <code>y</code>.
 Normalised densities have units of inverse degrees.
 </p>
@@ -3391,13 +3331,13 @@ Normalised densities have units of inverse degrees.
 <p>This registered S3 method has no separate package help topic. The implementation subsets the name, azimuth, uncertainty and horizon metadata and the corresponding entries in the list of measurement curves using the same index. It returns the modified object.</p>
 ```
 
-**Interpretation and limits.** A summed curve depends on its inputs, grid and normalisation. Selecting a subset changes the archaeological population being summarised. A highest-density interval describes concentrated probability mass, with no null-model adjustment.
+[Subsetting and normalising densities](#fn-hpdi).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>x</code></th><td>—</td><td>A skyscapeR.pdf holding the source measurement curves.</td></tr><tr><th scope="row"><code>subset</code></th><td>—</td><td>An R index applied to curves and paired metadata. Logical and integer selection follow ordinary list indexing.</td></tr><tr><th scope="row"><code>...</code></th><td>—</td><td>Accepted by S3 dispatch and unused by this implementation.</td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>The selected PDF object, retaining its class.</p>
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>x</code></th><td>—</td><td>A skyscapeR.pdf holding the source measurement curves.</td></tr><tr><th scope="row"><code>subset</code></th><td>—</td><td>An R index applied to curves and paired metadata. Logical and integer selection follow ordinary list indexing.</td></tr><tr><th scope="row"><code>...</code></th><td>—</td><td>Accepted by S3 dispatch and unused by this implementation.</td></tr></tbody></table><h5>Return value</h5><p>The selected PDF object, retaining its class.</p>
 ```
 
 </details>
@@ -3445,7 +3385,7 @@ probability 1 for either type. Inputs are scalar; invalid inputs error.
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>n</code></th><td>—</td><td><p>Total number of structures: a single finite nonnegative integer.</p></td></tr><tr><th scope="row"><code>p</code></th><td>—</td><td><p>Target probability: a single finite number between 0 and 1.</p></td></tr><tr><th scope="row"><code>r</code></th><td>—</td><td><p>Number of hits: a single finite integer between 0 and n.</p></td></tr><tr><th scope="row"><code>type</code></th><td><code>&quot;tail&quot;</code></td><td><p>Either <code>"single"</code> for exactly r hits or <code>"tail"</code>
-for at least r hits (the default).</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A numeric probability between 0 and 1.
+for at least r hits (the default).</p></td></tr></tbody></table><h5>Return value</h5><p>A numeric probability between 0 and 1.
 </p>
 ```
 
@@ -3518,18 +3458,7 @@ See <code>randomTest</code> for study-design and Monte Carlo limitations.
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>pdf</code></th><td>—</td><td><p>Empirical skyscapeR.pdf from <code>az.pdf</code>, <code>dec.pdf</code> or <code>coordtrans</code>. Its coordinate selects the simulation path.</p></td></tr><tr><th scope="row"><code>model</code></th><td>—</td><td><p>One shared data frame or an ordered list with one table per observation. The first column contains candidate coordinates in degrees and the second contains nonnegative discrete sampling weights, with at least one positive weight. On equally spaced grids, density heights can serve as weights.</p></td></tr><tr><th scope="row"><code>unc</code></th><td><code>NULL</code></td><td><p>Positive standard deviation (normal) or half-width (uniform), in degrees of the tested coordinate. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.</p></td></tr><tr><th scope="row"><code>nsims</code></th><td><code>1000</code></td><td><p>Number of simulations, at least two. Default is 1000.</p></td></tr><tr><th scope="row"><code>conf</code></th><td><code>0.95</code></td><td><p>Confidence level as a fraction.</p></td></tr><tr><th scope="row"><code>tails</code></th><td><code>2</code></td><td><p>1 for upper excesses, 2 for excesses and deficits.</p></td></tr><tr><th scope="row"><code>normalise</code></th><td><code>FALSE</code></td><td><p>Scale each summed density to unit area before comparison.</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.01</code></td><td><p>Spacing of the empirical and simulated comparison grids in degrees. Default 0.01.</p></td></tr><tr><th scope="row"><code>ncores</code></th><td><code>NULL</code></td><td><p>Worker count. By default use half the detected available logical cores, rounded down with a minimum of one. Set ncores=1 for serial execution. The simulation count and memory batch size can further limit workers. Verbose output reports the effective count.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Display simulation progress.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A skyscapeR.sigTest list with settings and global/local results in metadata, empirical density and null envelope in data.
-</p><h5>Model weights and interpretation</h5><p>Weights are discrete sampling probabilities up to proportionality. If a
-continuous model is evaluated on an uneven coordinate grid, density heights
-alone do not represent probability mass; construct weights that account for
-the bin widths before calling the function. Put site-specific model tables in
-the same order as the observed measurements.
-</p><p>A large p-value does not prove the proposed explanation or measure its
-probability. The test asks whether the specified model is incompatible with
-the observed departure statistic. Alternative models can remain compatible.
-The simulations do not automatically represent dependence between sites,
-selection after viewing the data, or uncertainty in fitted model parameters.
-See <code>randomTest</code> for study-design and Monte Carlo limitations.
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>pdf</code></th><td>—</td><td><p>Empirical skyscapeR.pdf from <code>az.pdf</code>, <code>dec.pdf</code> or <code>coordtrans</code>. Its coordinate selects the simulation path.</p></td></tr><tr><th scope="row"><code>model</code></th><td>—</td><td><p>One shared data frame or an ordered list with one table per observation. The first column contains candidate coordinates in degrees and the second contains nonnegative discrete sampling weights, with at least one positive weight. On equally spaced grids, density heights can serve as weights.</p></td></tr><tr><th scope="row"><code>unc</code></th><td><code>NULL</code></td><td><p>Positive standard deviation (normal) or half-width (uniform), in degrees of the tested coordinate. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.</p></td></tr><tr><th scope="row"><code>nsims</code></th><td><code>1000</code></td><td><p>Number of simulations, at least two. Default is 1000.</p></td></tr><tr><th scope="row"><code>conf</code></th><td><code>0.95</code></td><td><p>Confidence level as a fraction.</p></td></tr><tr><th scope="row"><code>tails</code></th><td><code>2</code></td><td><p>1 for upper excesses, 2 for excesses and deficits.</p></td></tr><tr><th scope="row"><code>normalise</code></th><td><code>FALSE</code></td><td><p>Scale each summed density to unit area before comparison.</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.01</code></td><td><p>Spacing of the empirical and simulated comparison grids in degrees. Default 0.01.</p></td></tr><tr><th scope="row"><code>ncores</code></th><td><code>NULL</code></td><td><p>Worker count. By default use half the detected available logical cores, rounded down with a minimum of one. Set ncores=1 for serial execution. The simulation count and memory batch size can further limit workers. Verbose output reports the effective count.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Display simulation progress.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.sigTest list with settings and global/local results in metadata, empirical density and null envelope in data.
 </p>
 ```
 
@@ -3561,7 +3490,7 @@ original unadjusted values. Interpret local regions alongside the whole-curve te
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>x</code></th><td>—</td><td><p>A <em>skyscapeR.sigTest</em> object created with <code>randomTest</code></p></td></tr><tr><th scope="row"><code>xrange</code></th><td>—</td><td><p>Range of x-axis to plot.</p></td></tr><tr><th scope="row"><code>title</code></th><td><code>NULL</code></td><td><p>Title to add to the plot.</p></td></tr><tr><th scope="row"><code>col</code></th><td><code>NULL</code></td><td><p>Observed density colour. NULL uses the current style.</p></td></tr><tr><th scope="row"><code>show.pval</code></th><td><code>TRUE</code></td><td><p>Logical to control whether to print the global p-value. Default is TRUE.</p></td></tr><tr><th scope="row"><code>show.local</code></th><td><code>FALSE</code></td><td><p>Draw a separate panel on the same angular scale, with Excess and Deficit rows. Default FALSE. Symbols are ***, **, *, + and an open circle, with upper cutoffs 0.001, 0.01, 0.05 and 0.10. The open circle is centred at the same height as the stars and marks values above 0.10.</p></td></tr><tr><th scope="row"><code>pal</code></th><td><code>NULL</code></td><td><p>Deficit and excess colours in that order. NULL uses the current style.</p></td></tr><tr><th scope="row"><code>...</code></th><td>—</td><td><p>Additional arguments to be passed to <em>plot</em>.</p></td></tr><tr><th scope="row"><code>obj</code></th><td><code>NULL</code></td><td><p>A skyObject or list of target groups for a density or significance plot. Declination plots show single epochs as lines and epoch ranges as bands. Azimuth plots use each group's site latitude to mark rising and setting boundary bearings at a geometric level horizon.</p></td></tr><tr><th scope="row"><code>xlim</code></th><td>—</td><td><p>Earlier name for xrange.</p></td></tr><tr><th scope="row"><code>show.legend</code></th><td><code>TRUE</code></td><td><p>Display the density/envelope key and any local significance symbol key.
 <code>show.pval</code> independently controls the numeric global p-value.</p></td></tr><tr><th scope="row"><code>style</code></th><td><code>&quot;publication-colour&quot;</code></td><td><p>Analytical display style, either <code>"publication-colour"</code> (default) or
-<code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Draws the empirical density and pointwise comparison envelope. Optional annotations display the global p-value and local regions.
+<code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p></td></tr></tbody></table><h5>Return value</h5><p>Draws the empirical density and pointwise comparison envelope. Optional annotations display the global p-value and local regions.
 </p>
 ```
 
@@ -3583,13 +3512,13 @@ coordinate system of the fitted test.
 </p>
 ```
 
-**Interpretation and limits.** Keep the numerical global and adjusted local p-values with the output. Symbol thresholds and the placement of a band on the plot do not supply extra precision about its endpoints.
+[Interpreting the global and adjusted local results](#fn-plot-skyscaper-sigtest).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>x</code></th><td>—</td><td><p>Object of <em>skyscapeR.sigTest</em> format.</p></td></tr><tr><th scope="row"><code>...</code></th><td>—</td><td><p>Additional arguments to be passed to <em>print</em>.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>Prints the test summary and global and local results to the console.
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>x</code></th><td>—</td><td><p>Object of <em>skyscapeR.sigTest</em> format.</p></td></tr><tr><th scope="row"><code>...</code></th><td>—</td><td><p>Additional arguments to be passed to <em>print</em>.</p></td></tr></tbody></table><h5>Return value</h5><p>Prints the test summary and global and local results to the console.
 </p>
 ```
 
@@ -3611,13 +3540,13 @@ comparisons.
 </p>
 ```
 
-**Interpretation and limits.** Keep the numerical global and adjusted local p-values with the output. Symbol thresholds and the placement of a band on the plot do not supply extra precision about its endpoints.
+[Interpreting the global and adjusted local results](#fn-plot-skyscaper-sigtest).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>p.value</code></th><td>—</td><td><p>p-value</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A character vector of significance symbols: ***, **, *, + or an open circle, using cut points 0.001, 0.01, 0.05 and 0.1.
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>p.value</code></th><td>—</td><td><p>p-value</p></td></tr></tbody></table><h5>Return value</h5><p>A character vector of significance symbols: ***, **, *, + or an open circle, using cut points 0.001, 0.01, 0.05 and 0.1.
 </p>
 ```
 
@@ -3685,7 +3614,7 @@ models are not included in the within-fit local-cluster adjustment.
 
 </details>
 
-**Interpretation and limits.** Preserve the generating model, measurement-to-site mapping, simulation seed, comparison grid and rank convention. A change in the null answers a different archaeological question even when the same observed curve is used.
+[Reproducing a test under its null model](#fn-modeltest).
 
 
 <details><summary>Implementation arguments, return value and documented modes</summary>
@@ -3695,21 +3624,9 @@ models are not included in the within-fit local-cluster adjustment.
 contains declination distributions. Must match its distribution count and
 order. Do not supply this argument when <code>pdf</code> already contains azimuths.</p></td></tr><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>For azimuth input, optionally supply one shared <em>skyscapeR.horizon</em>
 to test in declination. For declination input, required: the original shared
-horizon or an ordered list matching the distributions in <code>pdf</code>.</p></td></tr><tr><th scope="row"><code>nsims</code></th><td><code>1000</code></td><td><p>Number of simulations, at least two. Default is 1000.</p></td></tr><tr><th scope="row"><code>conf</code></th><td><code>0.95</code></td><td><p>Confidence level as a fraction. For example, 0.95 requests a 95 percent envelope.</p></td></tr><tr><th scope="row"><code>tails</code></th><td><code>2</code></td><td><p>1 for upper excesses, 2 for excesses and deficits (default).</p></td></tr><tr><th scope="row"><code>normalise</code></th><td><code>F</code></td><td><p>Logical to control whether to normalize SPDs. Default is FALSE</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.1</code></td><td><p>Resolution with which to output probability distribution(s). Default is 0.1 degrees.</p></td></tr><tr><th scope="row"><code>ncores</code></th><td><code>NULL</code></td><td><p>Worker count. By default use half the detected available logical cores, rounded down with a minimum of one. Set ncores=1 for serial execution. The simulation count and memory batch size can further limit workers. Verbose output reports the effective count.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>T</code></td><td><p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A <em>skyscapeR.sigTest</em> list containing metadata (test settings,
+horizon or an ordered list matching the distributions in <code>pdf</code>.</p></td></tr><tr><th scope="row"><code>nsims</code></th><td><code>1000</code></td><td><p>Number of simulations, at least two. Default is 1000.</p></td></tr><tr><th scope="row"><code>conf</code></th><td><code>0.95</code></td><td><p>Confidence level as a fraction. For example, 0.95 requests a 95 percent envelope.</p></td></tr><tr><th scope="row"><code>tails</code></th><td><code>2</code></td><td><p>1 for upper excesses, 2 for excesses and deficits (default).</p></td></tr><tr><th scope="row"><code>normalise</code></th><td><code>F</code></td><td><p>Logical to control whether to normalize SPDs. Default is FALSE</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.1</code></td><td><p>Resolution with which to output probability distribution(s). Default is 0.1 degrees.</p></td></tr><tr><th scope="row"><code>ncores</code></th><td><code>NULL</code></td><td><p>Worker count. By default use half the detected available logical cores, rounded down with a minimum of one. Set ncores=1 for serial execution. The simulation count and memory batch size can further limit workers. Verbose output reports the effective count.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>T</code></td><td><p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p></td></tr></tbody></table><h5>Return value</h5><p>A <em>skyscapeR.sigTest</em> list containing metadata (test settings,
 global and local p-values) and data (empirical SPD and null confidence envelope).
 No original PDFs or horizon objects are attached.
-</p><h5>Study design and numerical checks</h5><p>The simulated null describes independently sampled orientations with the
-specified site geometry and measurement model. It does not automatically model
-shared construction episodes, correlated measurement errors, geographical
-clustering or selection of sites after inspecting their orientations. Such
-structure needs a justified sampling model or separate sensitivity analysis.
-</p><p>The pointwise envelope is not a simultaneous confidence band. A significant
-global result rejects the specified random-orientation model; it does not
-identify a celestial target. Refine the comparison grid and increase
-<code>nsims</code> to assess borderline results, preserving the seed and inputs.
-More simulations improve Monte Carlo resolution, not the validity of the
-archaeological sampling design. Repeated searches over alternative subsets or
-models are not included in the within-fit local-cluster adjustment.
 </p>
 ```
 
