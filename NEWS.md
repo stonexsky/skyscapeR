@@ -3,6 +3,16 @@
 This development version is being tested ahead of the 2.0 release. For detailed
 migration instructions and positional-argument changes, see the README.
 
+## Development build 2.0.9012
+
+* The uniform opening convolved with normal survey error now uses a survey-error standard deviation of 0.5 degrees when omitted in `az.pdf()` and `dec.pdf()`. An explicit value or vector overrides this assumption.
+* The manual gives the current `zenith()` and `antizenith()` arguments and follows the current vignette topics and function links.
+
+## Development build 2.0.9011
+
+* `az.pdf()` and `dec.pdf()` now also accept `epanechnikov`, `triangular`, `tapered_uniform` and `uniform_normal`. Their help pages include a six-family field guide, a figure and worked examples. For an asymmetric triangle supply the modal direction and two limits. For softened openings specify the taper width or the independent survey-error standard deviation separately from the opening half-width.
+* `randomTest()` and `modelTest()` carry each observation's measurement shape through their simulations. When a direct triangular model is moved, the sampled coordinate represents its mode.
+
 ## Development build 2.0.9010
 
 * Natural daylight sketches now show a clear blue upper sky with paler colours towards the horizon and Sun. The daytime palette and display exposure blend in over solar altitudes of 0 to 15 degrees.

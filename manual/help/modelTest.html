@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>modelTest | skyscapeR 2.0.9008</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-modeltest">modelTest() method</a></nav><h2 id='modelTest'>Test orientations against a specified null model</h2><span id='topic+modelTest'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>modelTest | skyscapeR 2.0.9011</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}img{max-width:100%;height:auto}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-modeltest">modelTest() method</a></nav><h2 id='modelTest'>Test orientations against a specified null model</h2><span id='topic+modelTest'></span>
 
 <h3>Description</h3>
 
@@ -38,7 +38,7 @@ specific to each site.
 </td></tr>
 <tr><td><code id="modelTest_:_unc">unc</code></td>
 <td>
-<p>Positive standard deviation (normal) or half-width (uniform), in degrees of the tested coordinate. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.</p>
+<p>Optional replacement width in degrees of the tested coordinate. Use a standard deviation for normal, half the total span for triangular, or the family-specific half-width documented in <code>az.pdf</code>. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.</p>
 </td></tr>
 <tr><td><code id="modelTest_:_nsims">nsims</code></td>
 <td>
@@ -88,7 +88,12 @@ according to the weights in its model table. The function constructs an azimuth 
 density around each centre and sums these densities on the same comparison grid as the
 observed SPD. The observed measurement curves are used as supplied.
 </p>
-<p><strong>Measurement uncertainty.</strong> Direct measurement PDFs use their stored normal or uniform family and uncertainties.
+<p><strong>Measurement uncertainty.</strong> Direct measurement PDFs reuse the family selected in
+<code>az.pdf</code> or <code>dec.pdf</code>, including the observation's
+taper, survey error and triangular asymmetry. A direct triangular model is
+positioned by its mode. Overriding <code>unc</code> rescales its two sides in
+proportion; for the two softened uniform families the taper or survey-error
+SD stays fixed in degrees.
 For declinations from <code>coordtrans</code>, omit <code>unc</code> to use each observation's own density as a template.
 A model draw represents the expected mean declination for that observation. The function calculates the
 density-weighted mean of its piecewise-linear curve and adds (draw minus mean) to every declination.
@@ -120,6 +125,14 @@ disk space per simulation per grid point. Temporary files are removed on return 
 </p>
 
 
+<h3>Validation</h3>
+
+<p>In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See <a href="https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks">S03 validation in the technical manual</a>.
+</p>
+<p>In S02, identical candidate bearings produced identical directly constructed observed and simulated densities on build 2.0.9008. Global rejection at the 5 percent level ranged from 4.35 to 5.50 percent under the six matched null designs. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#s02-specified-models">S02 check in the technical manual</a>.
+</p>
+
+
 <h3>Model weights and interpretation</h3>
 
 <p>Weights are discrete sampling probabilities up to proportionality. If a
@@ -134,14 +147,6 @@ the observed departure statistic. Alternative models can remain compatible.
 The simulations do not automatically represent dependence between sites,
 selection after viewing the data, or uncertainty in fitted model parameters.
 See <code>randomTest</code> for study-design and Monte Carlo limitations.
-</p>
-
-
-<h3>Validation</h3>
-
-<p>In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See <a href="../numerical-validation.html#s03-scoring-checks">S03 validation in the technical manual</a>.
-</p>
-<p>In S02, identical candidate bearings produced identical directly constructed observed and simulated densities on build 2.0.9008. Global rejection at the 5 percent level ranged from 4.35 to 5.50 percent under the six matched null designs. See the <a href="../numerical-validation.html#s02-specified-models">S02 check in the technical manual</a>.
 </p>
 
 
@@ -163,7 +168,7 @@ See <code>randomTest</code> for study-design and Monte Carlo limitations.
 
 <h3>See Also</h3>
 
-<p><code>az.pdf</code>, <code>dec.pdf</code>, <code>coordtrans</code>, <code>spd</code>, <code>randomTest</code>, <code>plot.skyscapeR.sigTest</code>
+<p><a href="../help/az.pdf.html"><code>az.pdf</code></a>, <a href="../help/dec.pdf.html"><code>dec.pdf</code></a>, <a href="../help/coordtrans.html"><code>coordtrans</code></a>, <a href="../help/spd.html"><code>spd</code></a>, <a href="../help/randomTest.html"><code>randomTest</code></a>, <a href="../help/plot.skyscapeR.sigTest.html"><code>plot.skyscapeR.sigTest</code></a>
 </p>
 
 

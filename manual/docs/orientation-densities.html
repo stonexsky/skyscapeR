@@ -339,7 +339,10 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#density-measurement" id="toc-density-measurement" class="nav-link active" data-scroll-target="#density-measurement"><span class="header-section-number">8.1</span> What does a measurement PDF represent?</a></li>
+  <li><a href="#density-measurement" id="toc-density-measurement" class="nav-link active" data-scroll-target="#density-measurement"><span class="header-section-number">8.1</span> What does a measurement PDF represent?</a>
+  <ul class="collapse">
+  <li><a href="#measurement-families" id="toc-measurement-families" class="nav-link" data-scroll-target="#measurement-families"><span class="header-section-number">8.1.1</span> Choosing the measurement model</a></li>
+  </ul></li>
   <li><a href="#density-transform" id="toc-density-transform" class="nav-link" data-scroll-target="#density-transform"><span class="header-section-number">8.2</span> Point transformation and the conditional density</a></li>
   <li><a href="#density-notch" id="toc-density-notch" class="nav-link" data-scroll-target="#density-notch"><span class="header-section-number">8.3</span> Worked example: a doorway across a notch</a></li>
   <li><a href="#density-summary" id="toc-density-summary" class="nav-link" data-scroll-target="#density-summary"><span class="header-section-number">8.4</span> Summation, highest-density regions and inference</a></li>
@@ -373,13 +376,70 @@ div.csl-indent {
 
 
 <p><a href="./numerical-validation.html#h07-panorama-coverage">Coverage of bearing densities on partial photographs</a>.</p>
-<p><strong>Implementation.</strong> skyscapeR 2.0.9004, <code>R/statistics.R</code>, <code>R/dec-pdf.R</code>, <code>R/mechanics.R</code> and <code>R/misc.R</code>. A doorway admits a range of sightlines; each can meet a different altitude on the skyline. <span class="citation" data-cites="silva2020">Silva (<a href="references.html#ref-silva2020" role="doc-biblioref">2020, secs 2–3</a>, figs. 1–5)</span> represents uncertainty in the orientation as a probability density and transforms that density using the local horizon. The worked example follows one doorway from its measured angular opening to three distinct regions in declination.</p>
+<p><strong>Implementation.</strong> skyscapeR 2.0.9011, <code>R/measurement-density.R</code>, <code>R/statistics.R</code>, <code>R/dec-pdf.R</code>, <code>R/mechanics.R</code> and <code>R/misc.R</code>. A doorway admits a range of sightlines; each can meet a different altitude on the skyline. <span class="citation" data-cites="silva2020">Silva (<a href="references.html#ref-silva2020" role="doc-biblioref">2020, secs 2–3</a>, figs. 1–5)</span> represents uncertainty in the orientation as a probability density and transforms that density using the local horizon. The worked example follows one doorway from its measured angular opening to three distinct regions in declination.</p>
 <p><a href="./numerical-validation.html#d01-density-checks">D01</a> checks the input densities. <a href="./numerical-validation.html#d02-bearing-propagation">D02</a> compares the propagated density with independent integration and direct simulation on sloping, asymmetric and surveyed skylines. It documents grid-sensitive highest-density regions and the limits of the conditional Gaussian near the celestial pole.</p>
 <section id="density-measurement" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="density-measurement"><span class="header-section-number">8.1</span> What does a measurement PDF represent?</h2>
 <p>Let <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> denote true azimuth, increasing clockwise from north. The density <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>A</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f_A(a)</annotation></semantics></math> expresses how the analyst allocates support across the bearings consistent with the measurement. In Silva’s framework the appropriate density depends on the measurement and the architecture <span class="citation" data-cites="silva2020">(<a href="references.html#ref-silva2020" role="doc-biblioref">Silva 2020, sec. 2</a>)</span>. A directly observed axis with repeat readings can justify a concentrated density; an opening bounded by two jambs may justify a bounded interval. Assigning equal support throughout a doorway is an archaeological assumption. The PDF does not measure how often an original observer looked in each direction.</p>
-<p><strong><a href="function-methods.html#fn-az-pdf"><code>az.pdf()</code></a>.</strong> In the normal family, <code>unc</code> is one standard deviation in degrees. In the uniform family, it is the half-width in degrees. A doorway bounded by 88° and 92° therefore has centre 90° and uniform half-width 2°. If instead those limits are interpreted as approximately two standard deviations from the centre, the normal standard deviation would be 1°. Substituting the same number into the two families changes the claim. Build 2.0.9006 evaluates the wrapped density at each grid bearing in [0°, 360°), sums contributions from periodic copies, then trims values below <code>.cutoff</code>. Uniform densities count every copy inside the inclusive half-width. Gaussian densities use shifted normal terms, or a Fourier representation for standard deviations of at least one turn. The defaults are 0.01° spacing and a density-height cutoff of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>10</mn><mrow><mi>−</mi><mn>5</mn></mrow></msup><annotation encoding="application/x-tex">10^{-5}</annotation></semantics></math>, not an omitted probability-mass threshold. Retained tails are not renormalised at this stage.</p>
+<section id="measurement-families" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="measurement-families"><span class="header-section-number">8.1.1</span> Choosing the measurement model</h3>
+<p>All six <a href="function-methods.html#fn-az-pdf">azimuth measurement models</a> express a judgement about the sightline as seen from a particular observing position. Suppose the measured edges of a doorway are 88° and 92°.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Family</th>
+<th style="text-align: left;">What the field evidence supports</th>
+<th style="text-align: left;">Meaning of the arguments</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>normal</code></td>
+<td style="text-align: left;">Repeated readings or a calibrated error model support symmetric, approximately Gaussian error around one bearing.</td>
+<td style="text-align: left;"><code>az=90, unc=1</code> sets a standard deviation of 1°. About 95.45% of the probability then lies between 88° and 92°.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>uniform</code></td>
+<td style="text-align: left;">The edges are firm limits and all sightlines inside are equally plausible.</td>
+<td style="text-align: left;"><code>az=90, unc=2</code> defines the outer limits 88° and 92°.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>epanechnikov</code></td>
+<td style="text-align: left;">A central axis is preferred and the architecture bounds the view.</td>
+<td style="text-align: left;"><code>az=90, unc=2</code> gives greatest density at 90° and a parabolic decline to zero at 88° and 92°.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>tapered_uniform</code></td>
+<td style="text-align: left;">The full opening deserves equal weight. Both recorded edges admit a finite margin.</td>
+<td style="text-align: left;"><code>unc=2, taper=0.5</code> gives a flat 88°–92° core and a half-cosine taper to 87.5° and 92.5°.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>triangular</code></td>
+<td style="text-align: left;">The most plausible axis is identifiable. One side may be less securely reconstructed.</td>
+<td style="text-align: left;"><code>az=90, lower=89, upper=93</code> gives a linear decline on each side, with a longer tail towards 93°. For a symmetric triangle, supply <code>unc</code> alone.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>uniform_normal</code></td>
+<td style="text-align: left;">The width of an equally weighted opening and an independent, zero-mean Gaussian error in its measured bearing can be estimated separately.</td>
+<td style="text-align: left;">The survey-error SD defaults to 0.5°. An explicit <code>unc=2, survey.sd=0.2</code> rounds the profile inside and outside 88° and 92°. There is no finite outer cutoff in the underlying Gaussian error.</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/azimuth-uncertainty-distributions.png" class="img-fluid figure-img" alt="Six density curves and a detail of the two softened edges at 92 degrees."></p>
+<figcaption>Six models for azimuth uncertainty on common scales. Vertical lines mark the nominal doorway edges. The detail compares the tapered uniform and the uniform convolved with normal survey error.</figcaption>
+</figure>
+</div>
+<p>For a core half-width <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math> and a cosine taper of length <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math> on each side, the plateau has height <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mi>w</mi><mo>+</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">1/(2w+t)</annotation></semantics></math> and the two shoulders together contain <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mi>w</mi><mo>+</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">t/(2w+t)</annotation></semantics></math> of the probability. In this example, 11.1% lies outside the core. For the convolution, write the bearing as the sum of an equally weighted direction through the opening and an independent survey error. If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math> is the offset from the centre, the unwrapped density is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">[</mo><mi>Φ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>+</mo><mi>w</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mi>s</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>Φ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>−</mo><mi>w</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mi>s</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mi>w</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">[\Phi((x+w)/s)-\Phi((x-w)/s)]/(2w)</annotation></semantics></math>, where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math> is the error standard deviation. With <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo>=</mo><mn>0.2</mn><mi>°</mi></mrow><annotation encoding="application/x-tex">s=0.2°</annotation></semantics></math> the probability outside the nominal opening is about 4.0%. The taper stays level to the edge itself. The convolution has already fallen to approximately half its central height there.</p>
+<p>Azimuth densities are periodic. A triangular interval from 358° to 3° can therefore have its mode at 0°. The grid samples [0°, 360°) at 0.01° by default. The cutoff of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>10</mn><mrow><mi>−</mi><mn>5</mn></mrow></msup><annotation encoding="application/x-tex">10^{-5}</annotation></semantics></math> is a density height applied after wrapping. Trimming tails leaves their mass out of the stored curve. Use a spacing fine enough to resolve both the opening and any narrow shoulders.</p>
 <p><strong><a href="function-methods.html#fn-dec-pdf"><code>dec.pdf()</code></a>.</strong> Use this route when the observation and its uncertainty already refer to declination. The physical support ends at ±90°, and the default cutoff is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>10</mn><mrow><mi>−</mi><mn>4</mn></mrow></msup><annotation encoding="application/x-tex">10^{-4}</annotation></semantics></math>. A normal curve centred near a pole can therefore have less than unit area after clipping. A directly constructed declination density assigns its family in that coordinate. A normal azimuth density passed through terrain can yield a markedly different declination curve <span class="citation" data-cites="silva2020">(<a href="references.html#ref-silva2020" role="doc-biblioref">Silva 2020, sec. 3</a>)</span>.</p>
+</section>
 </section>
 <section id="density-transform" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="density-transform"><span class="header-section-number">8.2</span> Point transformation and the conditional density</h2>

@@ -2,7 +2,7 @@
 
 [Coverage of bearing densities on partial photographs](numerical-validation.qmd#h07-panorama-coverage).
 
-**Implementation.** skyscapeR 2.0.9004, `R/statistics.R`, `R/dec-pdf.R`, `R/mechanics.R` and `R/misc.R`. A doorway admits a range of sightlines; each can meet a different altitude on the skyline. @silva2020 [§§2–3, figs. 1–5] represents uncertainty in the orientation as a probability density and transforms that density using the local horizon. The worked example follows one doorway from its measured angular opening to three distinct regions in declination.
+**Implementation.** skyscapeR 2.0.9011, `R/measurement-density.R`, `R/statistics.R`, `R/dec-pdf.R`, `R/mechanics.R` and `R/misc.R`. A doorway admits a range of sightlines; each can meet a different altitude on the skyline. @silva2020 [§§2–3, figs. 1–5] represents uncertainty in the orientation as a probability density and transforms that density using the local horizon. The worked example follows one doorway from its measured angular opening to three distinct regions in declination.
 
 [D01](numerical-validation.qmd#d01-density-checks) checks the input densities. [D02](numerical-validation.qmd#d02-bearing-propagation) compares the propagated density with independent integration and direct simulation on sloping, asymmetric and surveyed skylines. It documents grid-sensitive highest-density regions and the limits of the conditional Gaussian near the celestial pole.
 
@@ -10,7 +10,24 @@
 
 Let $A$ denote true azimuth, increasing clockwise from north. The density $f_A(a)$ expresses how the analyst allocates support across the bearings consistent with the measurement. In Silva's framework the appropriate density depends on the measurement and the architecture [@silva2020, §2]. A directly observed axis with repeat readings can justify a concentrated density; an opening bounded by two jambs may justify a bounded interval. Assigning equal support throughout a doorway is an archaeological assumption. The PDF does not measure how often an original observer looked in each direction.
 
-**[`az.pdf()`](function-methods.html#fn-az-pdf).** In the normal family, `unc` is one standard deviation in degrees. In the uniform family, it is the half-width in degrees. A doorway bounded by 88° and 92° therefore has centre 90° and uniform half-width 2°. If instead those limits are interpreted as approximately two standard deviations from the centre, the normal standard deviation would be 1°. Substituting the same number into the two families changes the claim. Build 2.0.9006 evaluates the wrapped density at each grid bearing in [0°, 360°), sums contributions from periodic copies, then trims values below `.cutoff`. Uniform densities count every copy inside the inclusive half-width. Gaussian densities use shifted normal terms, or a Fourier representation for standard deviations of at least one turn. The defaults are 0.01° spacing and a density-height cutoff of $10^{-5}$, not an omitted probability-mass threshold. Retained tails are not renormalised at this stage.
+### Choosing the measurement model {#measurement-families}
+
+All six [azimuth measurement models](function-methods.html#fn-az-pdf) express a judgement about the sightline as seen from a particular observing position. Suppose the measured edges of a doorway are 88° and 92°.
+
+| Family | What the field evidence supports | Meaning of the arguments |
+|:--|:--|:--|
+| `normal` | Repeated readings or a calibrated error model support symmetric, approximately Gaussian error around one bearing. | `az=90, unc=1` sets a standard deviation of 1°. About 95.45% of the probability then lies between 88° and 92°. |
+| `uniform` | The edges are firm limits and all sightlines inside are equally plausible. | `az=90, unc=2` defines the outer limits 88° and 92°. |
+| `epanechnikov` | A central axis is preferred and the architecture bounds the view. | `az=90, unc=2` gives greatest density at 90° and a parabolic decline to zero at 88° and 92°. |
+| `tapered_uniform` | The full opening deserves equal weight. Both recorded edges admit a finite margin. | `unc=2, taper=0.5` gives a flat 88°–92° core and a half-cosine taper to 87.5° and 92.5°. |
+| `triangular` | The most plausible axis is identifiable. One side may be less securely reconstructed. | `az=90, lower=89, upper=93` gives a linear decline on each side, with a longer tail towards 93°. For a symmetric triangle, supply `unc` alone. |
+| `uniform_normal` | The width of an equally weighted opening and an independent, zero-mean Gaussian error in its measured bearing can be estimated separately. | The survey-error SD defaults to 0.5°. An explicit `unc=2, survey.sd=0.2` rounds the profile inside and outside 88° and 92°. There is no finite outer cutoff in the underlying Gaussian error. |
+
+![Six models for azimuth uncertainty on common scales. Vertical lines mark the nominal doorway edges. The detail compares the tapered uniform and the uniform convolved with normal survey error.](figures/azimuth-uncertainty-distributions.png){fig-alt="Six density curves and a detail of the two softened edges at 92 degrees."}
+
+For a core half-width $w$ and a cosine taper of length $t$ on each side, the plateau has height $1/(2w+t)$ and the two shoulders together contain $t/(2w+t)$ of the probability. In this example, 11.1% lies outside the core. For the convolution, write the bearing as the sum of an equally weighted direction through the opening and an independent survey error. If $x$ is the offset from the centre, the unwrapped density is $[\Phi((x+w)/s)-\Phi((x-w)/s)]/(2w)$, where $s$ is the error standard deviation. With $s=0.2°$ the probability outside the nominal opening is about 4.0%. The taper stays level to the edge itself. The convolution has already fallen to approximately half its central height there.
+
+Azimuth densities are periodic. A triangular interval from 358° to 3° can therefore have its mode at 0°. The grid samples [0°, 360°) at 0.01° by default. The cutoff of $10^{-5}$ is a density height applied after wrapping. Trimming tails leaves their mass out of the stored curve. Use a spacing fine enough to resolve both the opening and any narrow shoulders.
 
 **[`dec.pdf()`](function-methods.html#fn-dec-pdf).** Use this route when the observation and its uncertainty already refer to declination. The physical support ends at ±90°, and the default cutoff is $10^{-4}$. A normal curve centred near a pole can therefore have less than unit area after clipping. A directly constructed declination density assigns its family in that coordinate. A normal azimuth density passed through terrain can yield a markedly different declination curve [@silva2020, §3].
 

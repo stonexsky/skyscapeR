@@ -1,6 +1,6 @@
 # Function methods and implementation notes {#sec-methods}
 
-Use these entries to check the implementation file, formal arguments, return value and documented modes for skyscapeR 2.0.9004. Each entry links to its complete help page and to the relevant methods chapter. In the argument tables, a dash marks a formal argument without a default expression. The implementation may resolve an omitted value internally. [Download the documented source build](archives/skyscapeR_2.0.9004.tar.gz).
+Use these entries to check the implementation file, formal arguments, return value and documented modes for skyscapeR 2.0.9012. Each entry links to its complete help page and to the relevant methods chapter. In the argument tables, a dash marks a formal argument without a default expression. The implementation may resolve an omitted value internally. [Download the documented source build](archives/skyscapeR_2.0.9012.tar.gz).
 
 ## Time, coordinates and ephemerides {#group-time}
 
@@ -1205,7 +1205,7 @@ comparing styles, epochs or constellation traditions.
 
 </details>
 
-**Implementation.** `R/plotting.R`. [Full function help](help/plot.skyscapeR.horizon.html) · [Terrain horizons](horizons.html#sec-horizon) · [Sky reconstruction](sky-rendering.html#sec-sketch) · [Terrain horizons and panoramas outline](contents-plan.html#plan-terrain) · [Photographic calibration and interchange](photographic-horizons.html#photo-interchange) · [Generating a terrain panorama](horizons.html#sec-dem-panorama) · [Display styles, capture and stepping time](sky-rendering.html#sky-step-capture) · [Importing site horizons](vignette-guide.html#workflow-importing-site-horizons) · [Equinoctial sunrise](vignette-guide.html#workflow-equinoctial-sunrise) · [The heliacal rising of the Pleiades](vignette-guide.html#workflow-the-heliacal-rising-of-the-pleiades) · [Watch the cluster rise later in the season](vignette-guide.html#workflow-watch-the-cluster-rise-later-in-the-season) · [Exploring celestial candidates](vignette-guide.html#workflow-exploring-celestial-candidates) · [Compare the three sky styles](vignette-guide.html#workflow-compare-the-three-sky-styles) · [Compare constellation patterns](vignette-guide.html#workflow-compare-constellation-patterns) · [Compare twilight in opposite directions](vignette-guide.html#workflow-compare-twilight-in-opposite-directions) · [Capture a sky from Stellarium](vignette-guide.html#workflow-capture-a-sky-from-stellarium)
+**Implementation.** `R/plotting.R`. [Full function help](help/plot.skyscapeR.horizon.html) · [Terrain horizons](horizons.html#sec-horizon) · [Sky reconstruction](sky-rendering.html#sec-sketch) · [Terrain horizons and panoramas outline](contents-plan.html#plan-terrain) · [Photographic calibration and interchange](photographic-horizons.html#photo-interchange) · [Generating a terrain panorama](horizons.html#sec-dem-panorama) · [Display styles, capture and stepping time](sky-rendering.html#sky-step-capture) · [Importing site horizons](vignette-guide.html#workflow-importing-site-horizons) · [Equinoctial sunrise](vignette-guide.html#workflow-equinoctial-sunrise) · [The heliacal rising of the Pleiades](vignette-guide.html#workflow-the-heliacal-rising-of-the-pleiades) · [Watch the cluster rise later in the season](vignette-guide.html#workflow-watch-the-cluster-rise-later-in-the-season) · [Exploring celestial candidates](vignette-guide.html#workflow-exploring-celestial-candidates) · [Compare the three sky styles](vignette-guide.html#workflow-compare-the-three-sky-styles) · [Compare constellation patterns](vignette-guide.html#workflow-compare-constellation-patterns) · [Capture a sky from Stellarium](vignette-guide.html#workflow-capture-a-sky-from-stellarium)
 
 ### `relinkHor()` {#fn-relinkhor}
 
@@ -1255,7 +1255,7 @@ orientations, not an observable solar transit below ground.
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>This can be either the latitude of the
-location, or a <em>skyscapeR.horizon</em> object.</p></td></tr><tr><th scope="row"><code>parallax</code></th><td><code>0.00224</code></td><td><p>Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>0</code></td><td><p>Altitude of the sun. Defaults to 0 degrees.</p></td></tr></tbody></table><h5>Return value</h5><p>Solar declination in degrees with the requested parallax correction, or NULL when the latitude falls outside the solstitial limits used by the function.
+location, or a <em>skyscapeR.horizon</em> object.</p></td></tr><tr><th scope="row"><code>parallax</code></th><td><code>0.00224</code></td><td><p>Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>-90</code></td><td><p>Altitude in degrees used for the approximate parallax correction. The geometric default is -90 degrees.</p></td></tr><tr><th scope="row"><code>year</code></th><td><code>skyscapeR.env$cur.year</code></td><td><p>Astronomical year used to calculate the obliquity and hence the tropical latitude limit.</p></td></tr></tbody></table><h5>Return value</h5><p>Solar declination in degrees with the requested parallax correction, or NULL when the latitude falls outside the solstitial limits used by the function.
 </p>
 ```
 
@@ -1660,7 +1660,7 @@ a declination criterion rather than the dates of the passages.
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>This can be either the latitude of the
-location, or a <em>skyscapeR.horizon</em> object.</p></td></tr><tr><th scope="row"><code>parallax</code></th><td><code>0.00224</code></td><td><p>Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>0</code></td><td><p>Altitude of the sun. Defaults to 0 degrees.</p></td></tr></tbody></table><h5>Return value</h5><p>Solar declination in degrees with the requested parallax correction, or NULL when the latitude falls outside the solstitial limits used by the function.
+location, or a <em>skyscapeR.horizon</em> object.</p></td></tr><tr><th scope="row"><code>parallax</code></th><td><code>0.00224</code></td><td><p>Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>90</code></td><td><p>Altitude in degrees used for the approximate parallax correction. The geometric default is 90 degrees.</p></td></tr><tr><th scope="row"><code>year</code></th><td><code>skyscapeR.env$cur.year</code></td><td><p>Astronomical year used to calculate the obliquity and hence the tropical latitude limit.</p></td></tr></tbody></table><h5>Return value</h5><p>Solar declination in degrees with the requested parallax correction, or NULL when the latitude falls outside the solstitial limits used by the function.
 </p>
 ```
 
@@ -2875,7 +2875,7 @@ and display switches when reporting a reconstruction.
 
 </details>
 
-**Implementation.** `R/sketchSky.R`. [Full function help](help/sketchSky.html) · [Stellar visibility](stellar-phases.html#sec-stellar) · [Sky reconstruction](sky-rendering.html#sec-sketch) · [Sky brightness and visualisation outline](contents-plan.html#plan-light) · [Terrain crossings and event searches](event-searches.html#event-ridge) · [Identifying celestial candidates and limiting declinations](celestial-targets.html#target-screen) · [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-frame) · [Photographic calibration and interchange](photographic-horizons.html#photo-interchange) · [Generating a terrain panorama](horizons.html#sec-dem-panorama) · [Display styles, capture and stepping time](sky-rendering.html#sky-step-capture) · [Constellation selection and planisphere geometry](sky-rendering.html#sky-constellations) · [Equinoctial sunrise](vignette-guide.html#workflow-equinoctial-sunrise) · [The heliacal rising of the Pleiades](vignette-guide.html#workflow-the-heliacal-rising-of-the-pleiades) · [Watch the cluster rise later in the season](vignette-guide.html#workflow-watch-the-cluster-rise-later-in-the-season) · [Exploring celestial candidates](vignette-guide.html#workflow-exploring-celestial-candidates) · [Compare the three sky styles](vignette-guide.html#workflow-compare-the-three-sky-styles) · [Compare constellation patterns](vignette-guide.html#workflow-compare-constellation-patterns) · [Compare twilight in opposite directions](vignette-guide.html#workflow-compare-twilight-in-opposite-directions)
+**Implementation.** `R/sketchSky.R`. [Full function help](help/sketchSky.html) · [Stellar visibility](stellar-phases.html#sec-stellar) · [Sky reconstruction](sky-rendering.html#sec-sketch) · [Sky brightness and visualisation outline](contents-plan.html#plan-light) · [Terrain crossings and event searches](event-searches.html#event-ridge) · [Identifying celestial candidates and limiting declinations](celestial-targets.html#target-screen) · [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-frame) · [Photographic calibration and interchange](photographic-horizons.html#photo-interchange) · [Generating a terrain panorama](horizons.html#sec-dem-panorama) · [Display styles, capture and stepping time](sky-rendering.html#sky-step-capture) · [Constellation selection and planisphere geometry](sky-rendering.html#sky-constellations) · [Equinoctial sunrise](vignette-guide.html#workflow-equinoctial-sunrise) · [The heliacal rising of the Pleiades](vignette-guide.html#workflow-the-heliacal-rising-of-the-pleiades) · [Watch the cluster rise later in the season](vignette-guide.html#workflow-watch-the-cluster-rise-later-in-the-season) · [Exploring celestial candidates](vignette-guide.html#workflow-exploring-celestial-candidates) · [Compare the three sky styles](vignette-guide.html#workflow-compare-the-three-sky-styles) · [Compare constellation patterns](vignette-guide.html#workflow-compare-constellation-patterns)
 
 ### `skyRadiance()` {#fn-skyradiance}
 
@@ -3003,15 +3003,19 @@ Record the density family, sampling interval, cutoff, coordinate transformation 
 [Function index](function-index.html#idx-az-pdf)
 
 ```{=html}
-<p>A field bearing defines a centre and an angular uncertainty. Model the uncertainty as a
-normal density with the supplied standard deviation, or as a uniform density over the
-centre plus or minus the supplied half-width. A scalar uncertainty is reused for each
-measurement. The function samples from -90 to 450 degrees, folds the overlapping tails
-across north and retains density values at or above the cutoff. Use a spacing compatible
-with a full turn on the grid. The input measurements remain separate and truncated tails
-are not renormalised. The supported families are normal and uniform.
+<p>Azimuth is circular. Curves wrap across north before the density-height
+cutoff is applied. For an asymmetric triangle, the clockwise arc from <code>lower</code>
+to <code>upper</code> must include <code>az</code> and be shorter than a full turn.
+For example, limits 358 and 3 enclose a mode of 0. For the four new families,
+the field interval (including both cosine tapers, if used) spans at most one
+turn. An aperture convolved with Gaussian survey error can still have tails
+across the full circle. The grid starts at zero and ends before 360. Each
+measurement is retained separately. Trimming does not renormalise the stored
+ordinates. Choose a grid fine enough to resolve the narrowest shoulder.
 </p>
 ```
+
+[Field examples and comparison of all six profiles](orientation-densities.qmd#measurement-families).
 
 <details><summary>Method references</summary>
 
@@ -3032,19 +3036,32 @@ in skyscape archaeology <em>Journal of Archaeological Science</em> 118, 105138. 
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>az</code></th><td>—</td><td><p>True bearings in degrees clockwise from north, one per observation.</p></td></tr><tr><th scope="row"><code>unc</code></th><td>—</td><td><p>Angular uncertainty in degrees, one value shared across observations or one per azimuth. For a normal distribution this is the standard deviation. For a uniform distribution it is the half-width on either side of the measurement.</p></td></tr><tr><th scope="row"><code>pdf</code></th><td><code>&quot;normal&quot;</code></td><td><p>Uncertainty distribution. Choose <code>"normal"</code> (default) or <code>"uniform"</code>.</p></td></tr><tr><th scope="row"><code>name</code></th><td>—</td><td><p>Optional labels in the same order as the measurements.</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.01</code></td><td><p>Spacing of the output bearing grid in degrees. Default 0.01.</p></td></tr><tr><th scope="row"><code>.cutoff</code></th><td><code>1e-05</code></td><td><p>Minimum density retained on the output grid. Default <code>1e-5</code>.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>T</code></td><td><p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.pdf list. The data component contains one data frame per measurement, in input order, with azimuth x in degrees and density y. The metadata record the measurements, names, uncertainties, distribution type and numerical settings.
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>az</code></th><td>—</td><td><p>True bearings clockwise from north, in degrees. For triangular, the preferred bearing (mode).</p></td></tr><tr><th scope="row"><code>unc</code></th><td><code>NULL</code></td><td><p>One width or one per observation. Standard deviation for normal,
+outer half-width for uniform, Epanechnikov or symmetric triangular, and core
+half-width for tapered uniform or uniform convolved with normal. Omit when
+supplying triangular limits. See 'Choosing a measurement model'.</p></td></tr><tr><th scope="row"><code>pdf</code></th><td><code>&quot;normal&quot;</code></td><td><p>One measurement family per call. See 'Choosing a measurement model'
+for all six names. The default is <code>"normal"</code>. The historical abbreviations
+<code>"n"</code> and <code>"u"</code> are accepted and names are case-insensitive.</p></td></tr><tr><th scope="row"><code>name</code></th><td>—</td><td><p>Optional labels in the same order as the measurements.</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.01</code></td><td><p>Spacing of the output bearing grid in degrees. Default 0.01.</p></td></tr><tr><th scope="row"><code>.cutoff</code></th><td><code>1e-05</code></td><td><p>Minimum density retained on the output grid. Default <code>1e-5</code>.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p></td></tr><tr><th scope="row"><code>taper</code></th><td><code>NULL</code></td><td><p>Outer extension on each side of a tapered uniform core, in degrees.
+Required for <code>"tapered_uniform"</code>. Zero gives a uniform density.</p></td></tr><tr><th scope="row"><code>survey.sd</code></th><td><code>0.5</code></td><td><p>Standard deviation of independent bearing or declination
+error, in degrees, for <code>"uniform_normal"</code>. Defaults to 0.5 degrees per observation. Zero gives a uniform density.</p></td></tr><tr><th scope="row"><code>lower</code></th><td><code>NULL</code></td><td><p>The two bounding directions of a triangular model, in degrees.
+Supply both and omit <code>unc</code>. Each bound, <code>taper</code> and <code>survey.sd</code>
+may be a scalar or a vector in measurement order.</p></td></tr><tr><th scope="row"><code>upper</code></th><td><code>NULL</code></td><td><p>The two bounding directions of a triangular model, in degrees.
+Supply both and omit <code>unc</code>. Each bound, <code>taper</code> and <code>survey.sd</code>
+may be a scalar or a vector in measurement order.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.pdf list. The data component contains one data frame per measurement, in input order, with azimuth x in degrees and density y. The metadata record the measurements, names, uncertainties, distribution type and numerical settings.
 </p>
 ```
 
 </details>
 
-**Implementation.** `R/statistics.R`. [Full function help](help/az.pdf.html) · [Significance tests](significance.html#sec-tests) · [Uncertainty and orientation distributions outline](contents-plan.html#plan-density) · [From a measured orientation to a declination distribution](orientation-densities.html#density-measurement) · [Give each opening a distribution](vignette-guide.html#workflow-give-each-opening-a-distribution)
+**Implementation.** `R/statistics.R` and `R/measurement-density.R`. [Full function help](help/az.pdf.html) · [Significance tests](significance.html#sec-tests) · [Uncertainty and orientation distributions outline](contents-plan.html#plan-density) · [From a measured orientation to a declination distribution](orientation-densities.html#density-measurement) · [Give each opening a distribution](vignette-guide.html#workflow-give-each-opening-a-distribution)
 
 ### `coordtrans()` {#fn-coordtrans}
 
 For a partial photograph the stored positive bearing density must lie within its photographed sector. H07 verified agreement with a complete skyline on the covered north-crossing cases and rejection of uncovered densities. [H07 results](numerical-validation.qmd#h07-panorama-coverage).
 
 In D02, declination quantiles agreed with direct propagation within 0.008 degrees across nine terrain and observer cases. Near the celestial pole the discrepancy reached 0.17 degrees on the fine grid; at the pole a zero conditional width prevented calculation. [D02 results](numerical-validation.qmd#d02-bearing-propagation).
+
+The integration uses the full bearing density from any of the six measurement families. [Measurement families](orientation-densities.qmd#measurement-families).
 
 [Function index](function-index.html#idx-coordtrans)
 
@@ -3117,15 +3134,18 @@ transformation settings, format version and descriptive source labels.
 [Function index](function-index.html#idx-dec-pdf)
 
 ```{=html}
-<p>A declination estimate already incorporates the sightline geometry. This constructor
-works directly in that coordinate. For each centre it evaluates a normal density with
-the given standard deviation or a uniform density with the given half-width. A single
-uncertainty is shared, or one can be supplied per observation. Save the original
-uncertainty interpretation when comparing results from different surveys.
-</p>
-<p>Each grid is restricted to physical declinations and trimmed at .cutoff. The retained curve is not renormalised after truncation. Use <code>spd</code> to combine measurements.
+<p>Use this constructor when both the measurement and its uncertainty
+are already expressed in declination. All six families have the same parameter
+meaning as in <code>az.pdf</code>. The doorway examples in 'Choosing a
+measurement model' illustrate their shapes. When starting from measured bearings
+and site horizons, use <code>coordtrans</code> to propagate the bearing model.
+Direct declinations are linear. A triangle must satisfy lower &lt;= dec &lt;= upper.
+The sampled curve is clipped to physical declinations from -90 to +90 degrees
+and trimmed at <code>.cutoff</code>. The retained area can consequently be less than one.
 </p>
 ```
+
+[Field examples and comparison of all six profiles](orientation-densities.qmd#measurement-families).
 
 <details><summary>Method references</summary>
 
@@ -3145,13 +3165,24 @@ uncertainty interpretation when comparing results from different surveys.
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>dec</code></th><td>—</td><td><p>Measured declinations in degrees, between -90 and 90 inclusive.</p></td></tr><tr><th scope="row"><code>unc</code></th><td>—</td><td><p>Positive uncertainties in degrees of declination. Supply one value or one per measurement. For normal densities this is the standard deviation. For uniform densities it is the half-width.</p></td></tr><tr><th scope="row"><code>pdf</code></th><td><code>&quot;normal&quot;</code></td><td><p>Distribution family, "normal" or "uniform", with the same abbreviations as <code>az.pdf</code>.</p></td></tr><tr><th scope="row"><code>name</code></th><td>—</td><td><p>Optional measurement labels in input order.</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.01</code></td><td><p>Grid spacing in degrees. Default 0.01.</p></td></tr><tr><th scope="row"><code>.cutoff</code></th><td><code>1e-04</code></td><td><p>Minimum retained density height. Default 0.0001.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical. Report completion.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.pdf list with one x/y data frame per observation. Metadata record coord = "dec", the input measurements, family, uncertainties, labels and numerical settings.
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>dec</code></th><td>—</td><td><p>Measured declinations between -90 and +90 degrees. For triangular, the modal declination.</p></td></tr><tr><th scope="row"><code>unc</code></th><td><code>NULL</code></td><td><p>One width or one per observation. Standard deviation for normal,
+outer half-width for uniform, Epanechnikov or symmetric triangular, and core
+half-width for tapered uniform or uniform convolved with normal. Omit when
+supplying triangular limits. See 'Choosing a measurement model'.</p></td></tr><tr><th scope="row"><code>pdf</code></th><td><code>&quot;normal&quot;</code></td><td><p>One measurement family per call. See 'Choosing a measurement model'
+for all six names. The default is <code>"normal"</code>. The historical abbreviations
+<code>"n"</code> and <code>"u"</code> are accepted and names are case-insensitive.</p></td></tr><tr><th scope="row"><code>name</code></th><td>—</td><td><p>Optional measurement labels in input order.</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.01</code></td><td><p>Grid spacing in degrees. Default 0.01.</p></td></tr><tr><th scope="row"><code>.cutoff</code></th><td><code>1e-04</code></td><td><p>Minimum retained density height. Default 0.0001.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical. Report completion.</p></td></tr><tr><th scope="row"><code>taper</code></th><td><code>NULL</code></td><td><p>Outer extension on each side of a tapered uniform core, in degrees.
+Required for <code>"tapered_uniform"</code>. Zero gives a uniform density.</p></td></tr><tr><th scope="row"><code>survey.sd</code></th><td><code>0.5</code></td><td><p>Standard deviation of independent bearing or declination
+error, in degrees, for <code>"uniform_normal"</code>. Defaults to 0.5 degrees per observation. Zero gives a uniform density.</p></td></tr><tr><th scope="row"><code>lower</code></th><td><code>NULL</code></td><td><p>The two bounding directions of a triangular model, in degrees.
+Supply both and omit <code>unc</code>. Each bound, <code>taper</code> and <code>survey.sd</code>
+may be a scalar or a vector in measurement order.</p></td></tr><tr><th scope="row"><code>upper</code></th><td><code>NULL</code></td><td><p>The two bounding directions of a triangular model, in degrees.
+Supply both and omit <code>unc</code>. Each bound, <code>taper</code> and <code>survey.sd</code>
+may be a scalar or a vector in measurement order.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.pdf list with one x/y data frame per observation. Metadata record coord = "dec", the input measurements, family, uncertainties, labels and numerical settings.
 </p>
 ```
 
 </details>
 
-**Implementation.** `R/dec-pdf.R`. [Full function help](help/dec.pdf.html) · [Significance tests](significance.html#sec-tests) · [Uncertainty and orientation distributions outline](contents-plan.html#plan-density) · [From a measured orientation to a declination distribution](orientation-densities.html#density-measurement) · [Subsetting declination centres](orientation-densities.html#subset-dec-centres)
+**Implementation.** `R/dec-pdf.R` and `R/measurement-density.R`. [Full function help](help/dec.pdf.html) · [Significance tests](significance.html#sec-tests) · [Uncertainty and orientation distributions outline](contents-plan.html#plan-density) · [From a measured orientation to a declination distribution](orientation-densities.html#density-measurement) · [Subsetting declination centres](orientation-densities.html#subset-dec-centres)
 
 ### `hpdi()` {#fn-hpdi}
 
@@ -3508,6 +3539,8 @@ In S02, identical candidate bearings produced identical directly constructed obs
 
 **Validation on 2.0.9005.** Independent scoring reproduced the stored linear-grid probabilities. A north-crossing azimuth excess can split into two clusters; including both 0 and 360 degrees can also affect the global rank. [S03 results](numerical-validation.qmd#s03-scoring-checks).
 
+A directly measured triangular density follows the sampled mode, retaining its left/right proportions. Both softened uniform families preserve their second width in degrees. [Measurement families](orientation-densities.qmd#measurement-families).
+
 [Function index](function-index.html#idx-modeltest)
 
 ```{=html}
@@ -3571,7 +3604,7 @@ See <code>randomTest</code> for study-design and Monte Carlo limitations.
 <details><summary>Implementation arguments, return value and documented modes</summary>
 
 ```{=html}
-<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>pdf</code></th><td>—</td><td><p>Empirical skyscapeR.pdf from <code>az.pdf</code>, <code>dec.pdf</code> or <code>coordtrans</code>. Its coordinate selects the simulation path.</p></td></tr><tr><th scope="row"><code>model</code></th><td>—</td><td><p>One shared data frame or an ordered list with one table per observation. The first column contains candidate coordinates in degrees and the second contains nonnegative discrete sampling weights, with at least one positive weight. On equally spaced grids, density heights can serve as weights.</p></td></tr><tr><th scope="row"><code>unc</code></th><td><code>NULL</code></td><td><p>Positive standard deviation (normal) or half-width (uniform), in degrees of the tested coordinate. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.</p></td></tr><tr><th scope="row"><code>nsims</code></th><td><code>1000</code></td><td><p>Number of simulations, at least two. Default is 1000.</p></td></tr><tr><th scope="row"><code>conf</code></th><td><code>0.95</code></td><td><p>Confidence level as a fraction.</p></td></tr><tr><th scope="row"><code>tails</code></th><td><code>2</code></td><td><p>1 for upper excesses, 2 for excesses and deficits.</p></td></tr><tr><th scope="row"><code>normalise</code></th><td><code>FALSE</code></td><td><p>Scale each summed density to unit area before comparison.</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.01</code></td><td><p>Spacing of the empirical and simulated comparison grids in degrees. Default 0.01.</p></td></tr><tr><th scope="row"><code>ncores</code></th><td><code>NULL</code></td><td><p>Worker count. By default use half the detected available logical cores, rounded down with a minimum of one. Set ncores=1 for serial execution. The simulation count and memory batch size can further limit workers. Verbose output reports the effective count.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Display simulation progress.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.sigTest list with settings and global/local results in metadata, empirical density and null envelope in data.
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>pdf</code></th><td>—</td><td><p>Empirical skyscapeR.pdf from <code>az.pdf</code>, <code>dec.pdf</code> or <code>coordtrans</code>. Its coordinate selects the simulation path.</p></td></tr><tr><th scope="row"><code>model</code></th><td>—</td><td><p>One shared data frame or an ordered list with one table per observation. The first column contains candidate coordinates in degrees and the second contains nonnegative discrete sampling weights, with at least one positive weight. On equally spaced grids, density heights can serve as weights.</p></td></tr><tr><th scope="row"><code>unc</code></th><td><code>NULL</code></td><td><p>Optional replacement width in degrees of the tested coordinate. Use a standard deviation for normal, half the total span for triangular, or the family-specific half-width documented in <code>az.pdf</code>. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.</p></td></tr><tr><th scope="row"><code>nsims</code></th><td><code>1000</code></td><td><p>Number of simulations, at least two. Default is 1000.</p></td></tr><tr><th scope="row"><code>conf</code></th><td><code>0.95</code></td><td><p>Confidence level as a fraction.</p></td></tr><tr><th scope="row"><code>tails</code></th><td><code>2</code></td><td><p>1 for upper excesses, 2 for excesses and deficits.</p></td></tr><tr><th scope="row"><code>normalise</code></th><td><code>FALSE</code></td><td><p>Scale each summed density to unit area before comparison.</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.01</code></td><td><p>Spacing of the empirical and simulated comparison grids in degrees. Default 0.01.</p></td></tr><tr><th scope="row"><code>ncores</code></th><td><code>NULL</code></td><td><p>Worker count. By default use half the detected available logical cores, rounded down with a minimum of one. Set ncores=1 for serial execution. The simulation count and memory batch size can further limit workers. Verbose output reports the effective count.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Display simulation progress.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.sigTest list with settings and global/local results in metadata, empirical density and null envelope in data.
 </p>
 ```
 
@@ -3690,6 +3723,8 @@ In S01, at a nominal 5 percent level the global rejection rate was 4.25 to 5.85 
 **Verified on 2.0.9006.** The global score counts north once. A qualifying excess across north is reported as one interval with start greater than end. [S03 rerun](numerical-validation.qmd#s03-scoring-checks).
 
 **Validation on 2.0.9005.** Independent scoring reproduced the stored linear-grid probabilities. A north-crossing azimuth excess can split into two clusters; including both 0 and 360 degrees can also affect the global rank. [S03 results](numerical-validation.qmd#s03-scoring-checks).
+
+The null draw relocates each observation’s full measurement model, including triangular asymmetry, taper and independent survey error. [Measurement families](orientation-densities.qmd#measurement-families).
 
 [Function index](function-index.html#idx-randomtest)
 

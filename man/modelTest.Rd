@@ -22,7 +22,7 @@ modelTest(
 
 \item{model}{One shared data frame or an ordered list with one table per observation. The first column contains candidate coordinates in degrees and the second contains nonnegative discrete sampling weights, with at least one positive weight. On equally spaced grids, density heights can serve as weights.}
 
-\item{unc}{Positive standard deviation (normal) or half-width (uniform), in degrees of the tested coordinate. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.}
+\item{unc}{Optional replacement width in degrees of the tested coordinate. Use a standard deviation for normal, half the total span for triangular, or the family-specific half-width documented in \code{\link{az.pdf}}. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.}
 
 \item{nsims}{Number of simulations, at least two. Default is 1000.}
 
@@ -62,7 +62,12 @@ according to the weights in its model table. The function constructs an azimuth 
 density around each centre and sums these densities on the same comparison grid as the
 observed SPD. The observed measurement curves are used as supplied.
 
-\strong{Measurement uncertainty.} Direct measurement PDFs use their stored normal or uniform family and uncertainties.
+\strong{Measurement uncertainty.} Direct measurement PDFs reuse the family selected in
+\code{\link{az.pdf}} or \code{\link{dec.pdf}}, including the observation's
+taper, survey error and triangular asymmetry. A direct triangular model is
+positioned by its mode. Overriding \code{unc} rescales its two sides in
+proportion; for the two softened uniform families the taper or survey-error
+SD stays fixed in degrees.
 For declinations from \code{\link{coordtrans}}, omit \code{unc} to use each observation's own density as a template.
 A model draw represents the expected mean declination for that observation. The function calculates the
 density-weighted mean of its piecewise-linear curve and adds (draw minus mean) to every declination.

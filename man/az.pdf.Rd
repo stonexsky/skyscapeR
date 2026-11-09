@@ -6,20 +6,29 @@
 \usage{
 az.pdf(
   az,
-  unc,
+  unc = NULL,
   pdf = "normal",
   name,
   .res = 0.01,
   .cutoff = 1e-05,
-  verbose = T
+  verbose = TRUE,
+  taper = NULL,
+  survey.sd = 0.5,
+  lower = NULL,
+  upper = NULL
 )
 }
 \arguments{
-\item{az}{True bearings in degrees clockwise from north, one per observation.}
+\item{az}{True bearings clockwise from north, in degrees. For triangular, the preferred bearing (mode).}
 
-\item{unc}{Angular uncertainty in degrees, one value shared across observations or one per azimuth. For a normal distribution this is the standard deviation. For a uniform distribution it is the half-width on either side of the measurement.}
+\item{unc}{One width or one per observation. Standard deviation for normal,
+outer half-width for uniform, Epanechnikov or symmetric triangular, and core
+half-width for tapered uniform or uniform convolved with normal. Omit when
+supplying triangular limits. See 'Choosing a measurement model'.}
 
-\item{pdf}{Uncertainty distribution. Choose \code{"normal"} (default) or \code{"uniform"}.}
+\item{pdf}{One measurement family per call. See 'Choosing a measurement model'
+for all six names. The default is \code{"normal"}. The historical abbreviations
+\code{"n"} and \code{"u"} are accepted and names are case-insensitive.}
 
 \item{name}{Optional labels in the same order as the measurements.}
 
@@ -28,6 +37,17 @@ az.pdf(
 \item{.cutoff}{Minimum density retained on the output grid. Default \code{1e-5}.}
 
 \item{verbose}{Logical. Display progress or informational messages. Default \code{TRUE}.}
+
+\item{taper}{Outer extension on each side of a tapered uniform core, in degrees.
+Required for \code{"tapered_uniform"}. Zero gives a uniform density.}
+
+\item{survey.sd}{Standard deviation of independent bearing or declination
+error, in degrees, for \code{"uniform_normal"}. Defaults to 0.5 degrees per
+observation. Zero gives a uniform density.}
+
+\item{lower, upper}{The two bounding directions of a triangular model, in degrees.
+Supply both and omit \code{unc}. Each bound, \code{taper} and \code{survey.sd}
+may be a scalar or a vector in measurement order.}
 }
 \value{
 A skyscapeR.pdf list. The data component contains one data frame per measurement, in input order, with azimuth x in degrees and density y. The metadata record the measurements, names, uncertainties, distribution type and numerical settings.
@@ -37,23 +57,79 @@ Represent uncertainty in a measured orientation before comparing it with other b
 or transforming it to declination.
 }
 \details{
-A field bearing defines a centre and an angular uncertainty. Model the uncertainty as a
-normal density with the supplied standard deviation, or as a uniform density over the
-centre plus or minus the supplied half-width. A scalar uncertainty is reused for each
-measurement. The function evaluates the periodic density on a grid starting at zero
-and ending before 360 degrees. Normal densities sum wrapped Gaussian contributions;
-uniform densities count all copies within the inclusive half-width. The cutoff is
-applied to the combined density at each bearing. The input measurements remain separate and truncated tails
-are not renormalised. The supported families are normal and uniform.
+Azimuth is circular. Curves wrap across north before the density-height
+cutoff is applied. For an asymmetric triangle, the clockwise arc from \code{lower}
+to \code{upper} must include \code{az} and be shorter than a full turn.
+For example, limits 358 and 3 enclose a mode of 0. For the four new families,
+the field interval (including both cosine tapers, if used) spans at most one
+turn. An aperture convolved with Gaussian survey error can still have tails
+across the full circle. The grid starts at zero and ends before 360. Each
+measurement is retained separately. Trimming does not renormalise the stored
+ordinates. Choose a grid fine enough to resolve the narrowest shoulder.
 }
+\section{Choosing a measurement model}{
+
+All widths and limits are in degrees. Choose the family from the evidence for
+the sightline and the survey. The examples below refer to a doorway spanning
+88 to 92 degrees as seen from the observing position.
+\describe{
+\item{\code{"normal"}}{A central estimate with symmetric, approximately Gaussian
+error. \code{unc} is one standard deviation. Bearings farther from the centre
+remain possible. Use this for repeated readings or a survey error model that
+supplies a standard deviation. At a centre of 90 and \code{unc=1}, about
+95.45 percent of the unwrapped probability lies between 88 and 92.}
+\item{\code{"uniform"}}{Every sightline within the stated limits receives equal
+weight. The density is zero beyond them. \code{unc} is the half-width, so
+\code{az=90, unc=2} gives an opening from 88 to 92. Use this when the two
+edges are defensible limits and no direction within the opening is preferred.}
+\item{\code{"epanechnikov"}}{A preferred central axis with firm limits.
+Density decreases parabolically to zero at the limits and is zero beyond them.
+\code{unc} is the outer half-width. Use \code{unc=2} when bearings closer to
+90 are more plausible and 88 and 92 are the limiting sightlines.}
+\item{\code{"tapered_uniform"}}{An equally plausible core with approximate
+edges. \code{unc} gives the core half-width. \code{taper} is the additional
+width on EACH side over which a half-cosine falls smoothly to zero. With
+\code{unc=2, taper=0.5}, the whole 88--92 interval, including its edges,
+has the same density. The outer limits are 87.5 and 92.5. About 11.1 percent of
+the mass lies outside the core. Use this when field evidence supports a finite
+margin beyond both recorded edges.}
+\item{\code{"triangular"}}{A preferred bearing (the mode) and defensible
+limits. Density falls linearly from the mode to each outer limit. Use this
+when one side of a reconstructed axis is less certain. For example,
+\code{az=90, lower=89, upper=93} allows a longer tail towards higher bearings.
+The mode may be at either limit for a one-sided triangle. Supplying only
+\code{unc} gives a symmetric triangle with that half-width.}
+\item{\code{"uniform_normal"}}{An equally weighted opening whose measured
+bearing has an independent, additive, zero-mean Gaussian error.
+\code{unc} is the opening half-width and \code{survey.sd} is the standard
+deviation of that error. The default is 0.5 degrees. Supply a survey-specific
+estimate when available. The convolution rounds the profile on both sides of
+each nominal edge and has tails beyond it. With \code{unc=2, survey.sd=0.2},
+about 4.0 percent of the mass lies outside 88--92. Use this when the angular
+opening and the error in its bearing can be estimated separately.}
+}
+A standard deviation, an outer half-width and a core half-width express
+different field judgements. For example, passing 2 as a normal standard
+deviation gives a much wider model than interpreting 88 and 92 as two
+standard deviations from 90.
+\if{html}{\figure{azimuth-uncertainty-distributions.png}{options: width="640" alt="Six density profiles and a close-up of the two softened edges at 92 degrees."}}
+}
+
 \section{Validation}{
 
-Build 2.0.9006 passed all 173 D01 assertions, including 0.005-degree samples across north and the broad-width periodic density cases. See \href{https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks}{D01 validation in the technical manual}.
+The 2.0.9011 family checks cover analytic profiles, circular rotation, soft-edge limits and simulation reuse. Build 2.0.9006 passed all 173 original D01 assertions, including 0.005-degree samples across north and the broad-width periodic density cases. See \href{https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks}{D01 validation in the technical manual}.
 }
 
 \examples{
-test <- az.pdf(az=c(87,93,90,110), unc=3)
-plot(test)
+opening <- az.pdf(90, 2, pdf="uniform")
+axis <- az.pdf(90, 1, pdf="normal")
+bounded <- az.pdf(90, 2, pdf="epanechnikov")
+soft <- az.pdf(90, 2, pdf="tapered_uniform", taper=0.5)
+skew <- az.pdf(90, pdf="triangular", lower=89, upper=93)
+surveyed <- az.pdf(90, 2, pdf="uniform_normal") # survey SD defaults to 0.5 degrees
+precise <- az.pdf(90, 2, pdf="uniform_normal", survey.sd=0.2)
+north <- az.pdf(0, pdf="triangular", lower=358, upper=3)
+plot(surveyed)
 }
 \references{
 Silva, F (2020) A probabilistic framework and significance test for the analysis of structural orientations

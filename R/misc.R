@@ -238,6 +238,7 @@ subset.skyscapeR.pdf <- function(x, subset, ...) {
   x$metadata$name <- x$metadata$name[subset]
   x$metadata$az <- x$metadata$az[subset]
   x$metadata$unc <- x$metadata$unc[subset]
+  if (length(x$metadata$shape)) x$metadata$shape <- lapply(x$metadata$shape, `[`, subset)
   x$metadata$horizon <- x$metadata$horizon[subset]
   x$data <- x$data[subset]
   x

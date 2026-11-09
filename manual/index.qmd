@@ -1,6 +1,8 @@
 # About this edition {.unnumbered}
 
-This is the technical manual for skyscapeR **2.0**, with methods anchored to **2.0.9004** and versioned validation through **2.0.9009**. It documents how the package calculates its results, which assumptions affect their interpretation and which comparisons have been made against independent observations. Each study names the build tested.
+This is the technical manual for skyscapeR **2.0**, with methods anchored to **2.0.9004** and versioned validation through **2.0.9011**. The function catalogue and vignette guide were checked against **2.0.9012**. It documents how the package calculates its results, which assumptions affect their interpretation and which comparisons have been made against independent observations. Each study names the build tested.
+
+The [measurement-model guide](orientation-densities.qmd#measurement-families) compares six ways to represent uncertainty and gives the assumptions behind each. In build 2.0.9012 the uniform opening convolved with Gaussian survey error defaults to a survey-error standard deviation of 0.5°.
 
 For a first analysis, follow the [worked vignette](https://stonexsky.github.io/skyscapeR/). The [package README](https://github.com/stonexsky/skyscapeR/blob/development-2.0/README.md) covers installation and migration to version 2.0.
 

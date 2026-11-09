@@ -35,6 +35,8 @@ dec <- coordtrans(az, hor)
 plot(spd(dec))
 ```
 
+Here `unc = 2` is a normal standard deviation of 2°. For a doorway spanning 88°–92°, `az.pdf(90, 2, "uniform")` treats the edges as firm limits. If each edge admits a further 0.5°, `az.pdf(90, 2, "tapered_uniform", taper = 0.5)` keeps the opening equally weighted and tapers beyond it. See `?az.pdf` or the [illustrated guide to all six measurement families](https://stonexsky.github.io/skyscapeR/manual/#measurement-families).
+
 To install the illustrated vignette locally, install `knitr`, `rmarkdown` and `readxl`, then repeat the GitHub installation with `build_vignettes = TRUE, force = TRUE`. Open it with `vignette("skyscapeR", package = "skyscapeR")`. Use `?skyscapeR` for a guide to the help pages.
 
 ## Explore a site or compare sites
@@ -102,7 +104,7 @@ This table compares the public v1.2.0 package with 2.0. To migrate a positional 
 
 | Function | v1.2 arguments in order | 2.0 arguments in order or named survey call |
 |---|---|---|
-| `az.pdf()` | `pdf, az, unc, name, verbose, .cutoff, .res` | `az, unc, pdf, name, .res, .cutoff, verbose` |
+| `az.pdf()` | `pdf, az, unc, name, verbose, .cutoff, .res` | `az, unc, pdf, name, .res, .cutoff, verbose, taper, survey.sd, lower, upper` |
 | `body.position()` | `obj, time, timezone, calendar, dec, loc, refraction, atm, temp, verbose` | `time, obj, loc, timezone, calendar, dec, refraction, atm, temp, verbose` |
 | `coordtrans()` | `pdf, hor, xrange, refraction, atm, temp, verbose, .res, .prec` | `pdf, hor, xrange, .res, .prec, .output.res, verbose` |
 | `createHor()` | `az, alt, alt.unc, loc, name, smooth, .scale` | `createHor(az = bearings, alt = heights, alt.unc = uncertainty, loc = site, name = label, smooth = FALSE, .scale = 1000)` |

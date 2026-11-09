@@ -60,16 +60,19 @@
   spd(sim,xrange=settings$xrange,normalise=settings$normalise,.res=settings$resolution)$data$y
 }
 
+.simulated_measurements <- function(draw, settings, coord) {
+  .measurement_pdf(draw, coord, settings$unc, settings$family, settings$shape,
+                   paste("Measurement", seq_along(draw)), settings$source.res,
+                   settings$source.cutoff, FALSE)
+}
+
 .model_curve <- function(draw, settings) {
-  density <- if (settings$coord == "dec") dec.pdf else az.pdf
-  sim <- density(draw, settings$unc, pdf=settings$family, .res=settings$source.res,
-                 .cutoff=settings$source.cutoff, verbose=FALSE)
+  sim <- .simulated_measurements(draw, settings, settings$coord)
   spd(sim, xrange=settings$xrange, normalise=settings$normalise, .res=settings$resolution)$data$y
 }
 
 .random_curve <- function(draw, settings) {
-  sim <- az.pdf(pdf=settings$family, az=draw, unc=settings$unc,
-                .res=settings$source.res, .cutoff=settings$source.cutoff, verbose=FALSE)
+  sim <- .simulated_measurements(draw, settings, "az")
   if (settings$quick) {
     transform <- settings$transform
     transformed <- coordtrans_unc(spd(sim, .res=settings$resolution), transform$hor, xrange=settings$xrange,

@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>coordtrans | skyscapeR 2.0.9008</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-coordtrans">coordtrans() method</a></nav><h2 id='coordtrans'>Transform azimuth densities into declination densities</h2><span id='topic+coordtrans'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>coordtrans | skyscapeR 2.0.9011</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}img{max-width:100%;height:auto}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-coordtrans">coordtrans() method</a></nav><h2 id='coordtrans'>Transform azimuth densities into declination densities</h2><span id='topic+coordtrans'></span>
 
 <h3>Description</h3>
 
@@ -65,6 +65,10 @@ potentially different part of the horizon. For every sampled bearing the functio
 interpolates horizon altitude and uncertainty, maps an altitude range to declination and
 approximates the conditional declination distribution by a Gaussian. It weights that
 distribution by the azimuth density and integrates the product by the trapezoidal rule.
+All six <code>az.pdf</code> families supply these bearing weights. The
+Gaussian approximation here describes uncertainty in horizon altitude at
+a fixed bearing. An asymmetric or bounded bearing model can therefore
+produce a declination curve with a different shape or several peaks.
 A shared horizon can serve several observations, or a supplied list can represent their
 individual sites.
 </p>
@@ -115,9 +119,9 @@ transformation settings, format version and descriptive source labels.
 
 <h3>Validation</h3>
 
-<p>In D02, declination quantiles agreed with direct propagation within 0.008 degrees across nine terrain and observer cases. Near the celestial pole the discrepancy reached 0.17 degrees on the fine grid; at the pole a zero conditional width prevented calculation. See the <a href="../numerical-validation.html#d02-bearing-propagation">D02 check in the technical manual</a>.
+<p>In D02, declination quantiles agreed with direct propagation within 0.008 degrees across nine terrain and observer cases. Near the celestial pole the discrepancy reached 0.17 degrees on the fine grid; at the pole a zero conditional width prevented calculation. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#d02-bearing-propagation">D02 check in the technical manual</a>.
 </p>
-<p>For a partial photograph the stored positive bearing density must lie within its photographed sector. H07 verified agreement with a complete skyline on the covered north-crossing cases and rejection of uncovered densities. See the <a href="../numerical-validation.html#h07-panorama-coverage">H07 check in the technical manual</a>.
+<p>For a partial photograph the stored positive bearing density must lie within its photographed sector. H07 verified agreement with a complete skyline on the covered north-crossing cases and rejection of uncovered densities. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage">H07 check in the technical manual</a>.
 </p>
 
 
@@ -130,7 +134,7 @@ in skyscape archaeology <em>Journal of Archaeological Science</em> 118, 105138. 
 
 <h3>See Also</h3>
 
-<p><code>az.pdf</code>, <code>spd</code>, <code>hpdi</code>, <code>randomTest</code>, <code>dec.pdf</code>, <code>modelTest</code>
+<p><a href="../help/az.pdf.html"><code>az.pdf</code></a>, <a href="../help/spd.html"><code>spd</code></a>, <a href="../help/hpdi.html"><code>hpdi</code></a>, <a href="../help/randomTest.html"><code>randomTest</code></a>, <a href="../help/dec.pdf.html"><code>dec.pdf</code></a>, <a href="../help/modelTest.html"><code>modelTest</code></a>
 </p>
 
 

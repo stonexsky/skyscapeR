@@ -1,7 +1,7 @@
 Package: skyscapeR
 Type: Package
 Title: Data Analysis and Visualization for Skyscape Archaeology
-Version: 2.0.9010
+Version: 2.0.9012
 Authors@R: c(
     person("Fabio", "Silva", email = "fsilva@stonexsky.com",
            role = c("aut", "cre")),

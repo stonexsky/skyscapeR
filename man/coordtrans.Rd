@@ -49,6 +49,10 @@ potentially different part of the horizon. For every sampled bearing the functio
 interpolates horizon altitude and uncertainty, maps an altitude range to declination and
 approximates the conditional declination distribution by a Gaussian. It weights that
 distribution by the azimuth density and integrates the product by the trapezoidal rule.
+All six \code{\link{az.pdf}} families supply these bearing weights. The
+Gaussian approximation here describes uncertainty in horizon altitude at
+a fixed bearing. An asymmetric or bounded bearing model can therefore
+produce a declination curve with a different shape or several peaks.
 A shared horizon can serve several observations, or a supplied list can represent their
 individual sites.
 

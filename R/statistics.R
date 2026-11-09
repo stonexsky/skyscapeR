@@ -61,87 +61,106 @@ bernoulli.trial <- function(n,p,r, type='tail') {
 #' Represent measured azimuths as probability densities
 #' @description Represent uncertainty in a measured orientation before comparing it with other bearings
 #' or transforming it to declination.
-#' @details A field bearing defines a centre and an angular uncertainty. Model the uncertainty as a
-#' normal density with the supplied standard deviation, or as a uniform density over the
-#' centre plus or minus the supplied half-width. A scalar uncertainty is reused for each
-#' measurement. The function evaluates the periodic density on a grid starting at zero
-#' and ending before 360 degrees. Normal densities sum wrapped Gaussian contributions;
-#' uniform densities count all copies within the inclusive half-width. The cutoff is
-#' applied to the combined density at each bearing. The input measurements remain separate and truncated tails
-#' are not renormalised. The supported families are normal and uniform.
+#' @details Azimuth is circular. Curves wrap across north before the density-height
+#' cutoff is applied. For an asymmetric triangle, the clockwise arc from \code{lower}
+#' to \code{upper} must include \code{az} and be shorter than a full turn.
+#' For example, limits 358 and 3 enclose a mode of 0. For the four new families,
+#' the field interval (including both cosine tapers, if used) spans at most one
+#' turn. An aperture convolved with Gaussian survey error can still have tails
+#' across the full circle. The grid starts at zero and ends before 360. Each
+#' measurement is retained separately. Trimming does not renormalise the stored
+#' ordinates. Choose a grid fine enough to resolve the narrowest shoulder.
+#' @section Choosing a measurement model:
+#' All widths and limits are in degrees. Choose the family from the evidence for
+#' the sightline and the survey. The examples below refer to a doorway spanning
+#' 88 to 92 degrees as seen from the observing position.
+#' \describe{
+#' \item{\code{"normal"}}{A central estimate with symmetric, approximately Gaussian
+#' error. \code{unc} is one standard deviation. Bearings farther from the centre
+#' remain possible. Use this for repeated readings or a survey error model that
+#' supplies a standard deviation. At a centre of 90 and \code{unc=1}, about
+#' 95.45 percent of the unwrapped probability lies between 88 and 92.}
+#' \item{\code{"uniform"}}{Every sightline within the stated limits receives equal
+#' weight. The density is zero beyond them. \code{unc} is the half-width, so
+#' \code{az=90, unc=2} gives an opening from 88 to 92. Use this when the two
+#' edges are defensible limits and no direction within the opening is preferred.}
+#' \item{\code{"epanechnikov"}}{A preferred central axis with firm limits.
+#' Density decreases parabolically to zero at the limits and is zero beyond them.
+#' \code{unc} is the outer half-width. Use \code{unc=2} when bearings closer to
+#' 90 are more plausible and 88 and 92 are the limiting sightlines.}
+#' \item{\code{"tapered_uniform"}}{An equally plausible core with approximate
+#' edges. \code{unc} gives the core half-width. \code{taper} is the additional
+#' width on EACH side over which a half-cosine falls smoothly to zero. With
+#' \code{unc=2, taper=0.5}, the whole 88--92 interval, including its edges,
+#' has the same density. The outer limits are 87.5 and 92.5. About 11.1 percent of
+#' the mass lies outside the core. Use this when field evidence supports a finite
+#' margin beyond both recorded edges.}
+#' \item{\code{"triangular"}}{A preferred bearing (the mode) and defensible
+#' limits. Density falls linearly from the mode to each outer limit. Use this
+#' when one side of a reconstructed axis is less certain. For example,
+#' \code{az=90, lower=89, upper=93} allows a longer tail towards higher bearings.
+#' The mode may be at either limit for a one-sided triangle. Supplying only
+#' \code{unc} gives a symmetric triangle with that half-width.}
+#' \item{\code{"uniform_normal"}}{An equally weighted opening whose measured
+#' bearing has an independent, additive, zero-mean Gaussian error.
+#' \code{unc} is the opening half-width and \code{survey.sd} is the standard
+#' deviation of that error. The default is 0.5 degrees. Supply a survey-specific
+#' estimate when available. The convolution rounds the profile on both sides of
+#' each nominal edge and has tails beyond it. With \code{unc=2, survey.sd=0.2},
+#' about 4.0 percent of the mass lies outside 88--92. Use this when the angular
+#' opening and the error in its bearing can be estimated separately.}
+#' }
+#' A standard deviation, an outer half-width and a core half-width express
+#' different field judgements. For example, passing 2 as a normal standard
+#' deviation gives a much wider model than interpreting 88 and 92 as two
+#' standard deviations from 90.
+#' \if{html}{\figure{azimuth-uncertainty-distributions.png}{options: width="640" alt="Six density profiles and a close-up of the two softened edges at 92 degrees."}}
 #' @return A skyscapeR.pdf list. The data component contains one data frame per measurement, in input order, with azimuth x in degrees and density y. The metadata record the measurements, names, uncertainties, distribution type and numerical settings.
-#' @param pdf Uncertainty distribution. Choose \code{"normal"} (default) or \code{"uniform"}.
-#' @param az True bearings in degrees clockwise from north, one per observation.
-#' @param unc Angular uncertainty in degrees, one value shared across observations or one per azimuth. For a normal distribution this is the standard deviation. For a uniform distribution it is the half-width on either side of the measurement.
+#' @param unc One width or one per observation. Standard deviation for normal,
+#' outer half-width for uniform, Epanechnikov or symmetric triangular, and core
+#' half-width for tapered uniform or uniform convolved with normal. Omit when
+#' supplying triangular limits. See 'Choosing a measurement model'.
+#' @param pdf One measurement family per call. See 'Choosing a measurement model'
+#' for all six names. The default is \code{"normal"}. The historical abbreviations
+#' \code{"n"} and \code{"u"} are accepted and names are case-insensitive.
+#' @param taper Outer extension on each side of a tapered uniform core, in degrees.
+#' Required for \code{"tapered_uniform"}. Zero gives a uniform density.
+#' @param survey.sd Standard deviation of independent bearing or declination
+#' error, in degrees, for \code{"uniform_normal"}. Defaults to 0.5 degrees per
+#' observation. Zero gives a uniform density.
+#' @param lower,upper The two bounding directions of a triangular model, in degrees.
+#' Supply both and omit \code{unc}. Each bound, \code{taper} and \code{survey.sd}
+#' may be a scalar or a vector in measurement order.
+#' @param az True bearings clockwise from north, in degrees. For triangular, the preferred bearing (mode).
 #' @param name Optional labels in the same order as the measurements.
 #' @param verbose Logical. Display progress or informational messages. Default \code{TRUE}.
 #' @param .cutoff Minimum density retained on the output grid. Default \code{1e-5}.
 #' @param .res Spacing of the output bearing grid in degrees. Default 0.01.
 #' @section Validation:
-#' Build 2.0.9006 passed all 173 D01 assertions, including 0.005-degree samples across north and the broad-width periodic density cases. See \href{https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks}{D01 validation in the technical manual}.
+#' The 2.0.9011 family checks cover analytic profiles, circular rotation, soft-edge limits and simulation reuse. Build 2.0.9006 passed all 173 original D01 assertions, including 0.005-degree samples across north and the broad-width periodic density cases. See \href{https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks}{D01 validation in the technical manual}.
 #' @export
 #' @references Silva, F (2020) A probabilistic framework and significance test for the analysis of structural orientations
 #'  in skyscape archaeology \emph{Journal of Archaeological Science} 118, 105138. \doi{10.1016/j.jas.2020.105138}
 #' @seealso \code{\link{coordtrans}}, \code{\link{spd}}, \code{\link{hpdi}}, \code{\link{randomTest}}, \code{\link{dec.pdf}}, \code{\link{modelTest}}
 #' @examples
-#' test <- az.pdf(az=c(87,93,90,110), unc=3)
-#' plot(test)
-az.pdf <- function(az, unc, pdf='normal', name, .res=0.01, .cutoff=1e-5, verbose=T) {
-
-  if (!is.character(pdf) || length(pdf)!=1L || is.na(pdf) ||
-      !tolower(pdf) %in% c("n","normal","u","uniform"))
-    stop("Choose a normal or uniform density.")
+#' opening <- az.pdf(90, 2, pdf="uniform")
+#' axis <- az.pdf(90, 1, pdf="normal")
+#' bounded <- az.pdf(90, 2, pdf="epanechnikov")
+#' soft <- az.pdf(90, 2, pdf="tapered_uniform", taper=0.5)
+#' skew <- az.pdf(90, pdf="triangular", lower=89, upper=93)
+#' surveyed <- az.pdf(90, 2, pdf="uniform_normal") # survey SD defaults to 0.5 degrees
+#' precise <- az.pdf(90, 2, pdf="uniform_normal", survey.sd=0.2)
+#' north <- az.pdf(0, pdf="triangular", lower=358, upper=3)
+#' plot(surveyed)
+az.pdf <- function(az, unc=NULL, pdf='normal', name, .res=0.01, .cutoff=1e-5, verbose=TRUE,
+                   taper=NULL, survey.sd=0.5, lower=NULL, upper=NULL) {
   if (!is.numeric(az) || !length(az) || any(!is.finite(az)))
     stop("Supply finite azimuths.")
-  n <- length(az)
-  unc <- .measurement_unc(unc,n)
-  if (!is.numeric(.res) || length(.res)!=1L || !is.finite(.res) || .res<=0 || .res>=360 ||
-      !is.numeric(.cutoff) || length(.cutoff)!=1L || !is.finite(.cutoff) || .cutoff<0)
-    stop("Supply a positive grid spacing below 360 degrees and a nonnegative cutoff.")
-  if (!missing(name) && length(name)!=n) stop("Supply one name per azimuth.")
-  normal <- tolower(pdf) %in% c("n","normal")
-  x <- seq(0,360,by=.res)
-  x <- x[x<360]
-  out <- vector("list",n)
-  if (.sky_progress(verbose) && n>1L) {
-    pb <- txtProgressBar(max=n,style=3)
-    on.exit(close(pb),add=TRUE)
-  }
-  for (k in seq_len(n)) {
-    delta <- (x-(az[k] %% 360)+180) %% 360-180
-    width <- unc[k]
-    if (!normal) {
-      # Count all copies of this bearing in the inclusive uniform interval.
-      turns <- floor((width-delta)/360) + floor((width+delta)/360) + 1
-      yy <- (turns/width)/2
-    } else if (width<360) {
-      yy <- stats::dnorm(delta,mean=0,sd=width)
-      for (turn in seq_len(ceiling((9*width+180)/360))) {
-        yy <- yy + stats::dnorm(delta+360*turn,mean=0,sd=width) + stats::dnorm(delta-360*turn,mean=0,sd=width)
-      }
-    } else {
-      # At sigma >= one turn, Fourier harmonics beyond the first are below double precision.
-      yy <- (1+2*exp(-0.5*(width*(pi/180))^2)*cos(delta*pi/180))/360
-    }
-    ind <- which(yy >= .cutoff)
-    out[[k]] <- data.frame(x = x[ind], y = yy[ind])
-
-    if (.sky_progress(verbose) && length(az)>1) { setTxtProgressBar(pb, k) }
-  }
-
-  if (missing(name)) { name <- paste('Measurement',seq(1,length(az))) }
-
-  mtdta <- list(
-    coord = 'az',
-    pdf = pdf,
-    name = name,
-    az = az,
-    unc = unc)
-  mtdta$param <- list(.cutoff=.cutoff, .res=.res)
-  out <- list(metadata = mtdta, data = out)
-  class(out) <- 'skyscapeR.pdf'
-
-  return(out)
+  if (missing(name)) name <- paste("Measurement", seq_along(az))
+  family <- .measurement_family(pdf)
+  if (missing(survey.sd) && family != "uniform_normal") survey.sd <- NULL
+  spec <- .measurement_spec(az, "az", unc, family, taper, survey.sd, lower, upper)
+  .measurement_pdf(az, "az", spec$unc, pdf, spec$shape, name, .res, .cutoff, verbose)
 }
 
 
@@ -311,6 +330,10 @@ coordtrans_unc <- function(pdf, hor, refraction, atm, temp, xrange, .res=0.1, .p
 #' interpolates horizon altitude and uncertainty, maps an altitude range to declination and
 #' approximates the conditional declination distribution by a Gaussian. It weights that
 #' distribution by the azimuth density and integrates the product by the trapezoidal rule.
+#' All six \code{\link{az.pdf}} families supply these bearing weights. The
+#' Gaussian approximation here describes uncertainty in horizon altitude at
+#' a fixed bearing. An asymmetric or bounded bearing model can therefore
+#' produce a declination curve with a different shape or several peaks.
 #' A shared horizon can serve several observations, or a supplied list can represent their
 #' individual sites.
 #'
@@ -549,7 +572,6 @@ randomTest_unc <- function(pdf, az, hor, nsims=1000, conf=.95, tails=2, normalis
       !is.numeric(source$metadata$unc) || any(!is.finite(source$metadata$unc)) ||
       any(source$metadata$unc <= 0) ||
       !is.character(source$metadata$pdf) || length(source$metadata$pdf) != 1L ||
-      !source$metadata$pdf %in% c('N','Normal','n','normal','U','Uniform','u','uniform') ||
       !is.numeric(source$metadata$param$.res) || length(source$metadata$param$.res) != 1L ||
       !is.finite(source$metadata$param$.res) || source$metadata$param$.res <= 0) {
     stop("Source azimuth PDF must have valid distribution type, uncertainties, names and resolution.")
@@ -604,7 +626,7 @@ randomTest_unc <- function(pdf, az, hor, nsims=1000, conf=.95, tails=2, normalis
 
   grid <- seq(0, 360, source$metadata$param$.res)
   grid <- grid[grid<360]
-  settings <- list(family=source$metadata$pdf, unc=source$metadata$unc,
+  settings <- list(family=source$metadata$pdf, unc=source$metadata$unc, shape=source$metadata$shape,
                    coord=coord, quick=quick, xrange=xrange, resolution=.res,
                    normalise=normalise)
   settings$source.res <- source$metadata$param$.res
@@ -625,6 +647,9 @@ randomTest_unc <- function(pdf, az, hor, nsims=1000, conf=.95, tails=2, normalis
   ## output
   out <- c()
   out$metadata$coord <- coord
+  out$metadata$pdf <- settings$family
+  out$metadata$unc <- settings$unc
+  out$metadata$shape <- settings$shape
   if (coord=="dec") out$metadata$atmosphere <- settings$transform[c("refraction","atm","temp")]
   out$metadata$nsims <- nsims
   out$metadata$inference <- result$method
@@ -652,6 +677,10 @@ randomTest_unc <- function(pdf, az, hor, nsims=1000, conf=.95, tails=2, normalis
 #' For each simulated dataset, the function draws one azimuth per measurement with replacement
 #' from the uniform grid from 0 to 360 degrees at the source azimuth spacing. It applies the
 #' source density family and measurement uncertainties and constructs a comparable SPD.
+#' All six families from \code{\link{az.pdf}} are supported. Simulated centres are
+#' uniformly distributed under the null. At each centre the original observation's
+#' taper, survey error or triangular left/right proportions are reused. For a
+#' triangle the sampled bearing is its mode.
 #' For a declination test, random azimuths are transformed using the site geometry; the
 #' resulting null distribution in declination depends on latitude and horizon.
 #'
@@ -822,6 +851,7 @@ modelTest_unc <- function(pdf, model, unc=NULL, nsims=1000, conf=.95, tails=2, n
     unc <- .measurement_unc(unc,n)
     family <- pdf$metadata$pdf
     if (is.null(family)) family <- "normal"
+    settings$shape <- pdf$metadata$shape
     settings$family <- family
     settings$unc <- unc
     # A directly constructed measurement retains its constructor settings.
@@ -840,6 +870,7 @@ modelTest_unc <- function(pdf, model, unc=NULL, nsims=1000, conf=.95, tails=2, n
   out <- c()
   out$metadata$unc <- unc
   out$metadata$pdf <- family
+  out$metadata$shape <- settings$shape
   atmospheric <- intersect(c("refraction","atm","temp"), names(pdf$metadata$param))
   if (length(atmospheric)) out$metadata$source.atmosphere <- pdf$metadata$param[atmospheric]
   out$metadata$.res <- .res
@@ -880,7 +911,12 @@ modelTest_unc <- function(pdf, model, unc=NULL, nsims=1000, conf=.95, tails=2, n
 #' density around each centre and sums these densities on the same comparison grid as the
 #' observed SPD. The observed measurement curves are used as supplied.
 #'
-#' \strong{Measurement uncertainty.} Direct measurement PDFs use their stored normal or uniform family and uncertainties.
+#' \strong{Measurement uncertainty.} Direct measurement PDFs reuse the family selected in
+#' \code{\link{az.pdf}} or \code{\link{dec.pdf}}, including the observation's
+#' taper, survey error and triangular asymmetry. A direct triangular model is
+#' positioned by its mode. Overriding \code{unc} rescales its two sides in
+#' proportion; for the two softened uniform families the taper or survey-error
+#' SD stays fixed in degrees.
 #' For declinations from \code{\link{coordtrans}}, omit \code{unc} to use each observation's own density as a template.
 #' A model draw represents the expected mean declination for that observation. The function calculates the
 #' density-weighted mean of its piecewise-linear curve and adds (draw minus mean) to every declination.
@@ -912,7 +948,7 @@ modelTest_unc <- function(pdf, model, unc=NULL, nsims=1000, conf=.95, tails=2, n
 #' @param ncores Worker count. By default use half the detected available logical cores, rounded down with a minimum of one. Set ncores=1 for serial execution. The simulation count and memory batch size can further limit workers. Verbose output reports the effective count.
 #' @param verbose Display simulation progress.
 #' @param .res Spacing of the empirical and simulated comparison grids in degrees. Default 0.01.
-#' @param unc Positive standard deviation (normal) or half-width (uniform), in degrees of the tested coordinate. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.
+#' @param unc Optional replacement width in degrees of the tested coordinate. Use a standard deviation for normal, half the total span for triangular, or the family-specific half-width documented in \code{\link{az.pdf}}. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.
 #' @return A skyscapeR.sigTest list with settings and global/local results in metadata, empirical density and null envelope in data.
 #' @references Silva, F. (2020). A probabilistic framework and significance test for the analysis of structural orientations in skyscape archaeology. \emph{Journal of Archaeological Science}, 118, 105138. \doi{10.1016/j.jas.2020.105138}.
 #'

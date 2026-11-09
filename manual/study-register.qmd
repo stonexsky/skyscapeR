@@ -39,7 +39,7 @@ Status refers to the agreed protocol for this programme. Earlier studies and wor
 | V05 | Atmospheric extinction by altitude | `sketchSky()`, `skyRadiance()`, `star.phases()`, `skyscapeR.vars()` | Planned |
 | V06 | Planisphere, sky cultures and constellation geometry | `planisphere()`, `importConstellations()`, `sketchSky()`, `star()` | Planned |
 | V07 | Sky state, Stellarium capture and time stepping | `stellariumSky()`, `sketchSky()`, `skyStep()`, `skyscapeR.vars()`, `plot.skyscapeR.horizon()`, `time2jd()` | Planned |
-| [D01](numerical-validation.qmd#d01-density-checks) | Measurement PDFs, circular support and highest-density regions | `az.pdf()`, `dec.pdf()`, `hpdi()`, `spd()`, `subset.skyscapeR.pdf()` | Complete; corrected and verified on 2.0.9006 |
+| [D01](numerical-validation.qmd#d01-density-checks) | Measurement PDFs, circular support and highest-density regions | `az.pdf()`, `dec.pdf()`, `hpdi()`, `spd()`, `subset.skyscapeR.pdf()` | Complete. Original checks repeated and four additional families verified on 2.0.9011 |
 | [D02](numerical-validation.qmd#d02-bearing-propagation) | Azimuth-to-declination propagation | `az2dec()`, `coordtrans()`, `hor2alt()`, `az.pdf()`, `dec.pdf()`, `spd()`, `hpdi()` | Complete · grid sensitivity and celestial-pole limits quantified on 2.0.9006 |
 | [S01](numerical-validation.qmd#s01-uniform-orientation) | Uniform-orientation null model | `randomTest()`, `coordtrans()`, `az.pdf()`, `spd()`, `pval2stars()` | Complete · calibrated on 2.0.9007 |
 | [S02](numerical-validation.qmd#s02-specified-models) | Specified and site-specific nulls | `modelTest()`, `dec.pdf()`, `az.pdf()`, `spd()`, `coordtrans()` | Complete · verified on 2.0.9008 |

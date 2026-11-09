@@ -57,6 +57,10 @@ Following Silva (2020), the test combines the observed measurement densities int
 For each simulated dataset, the function draws one azimuth per measurement with replacement
 from the uniform grid from 0 to 360 degrees at the source azimuth spacing. It applies the
 source density family and measurement uncertainties and constructs a comparable SPD.
+All six families from \code{\link{az.pdf}} are supported. Simulated centres are
+uniformly distributed under the null. At each centre the original observation's
+taper, survey error or triangular left/right proportions are reused. For a
+triangle the sampled bearing is its mode.
 For a declination test, random azimuths are transformed using the site geometry; the
 resulting null distribution in declination depends on latitude and horizon.
 

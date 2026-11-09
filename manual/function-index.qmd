@@ -2,7 +2,7 @@
 
 For a workflow from the package vignette, use the [vignette guide](vignette-guide.qmd).
 
-Choose the function name for its methodological entry, the chapter for its scientific context, or **Help** to open its individual 2.0.9004 help page. The index includes 69 exported functions and seven registered S3 methods. Aliases share their canonical help page. The registered subset method has a source note because it has no dedicated package help page.
+Choose the function name for its methodological entry, the chapter for its scientific context, or **Help** to open its versioned help page. The index includes 69 exported functions and seven registered S3 methods. Aliases share their canonical help page. The registered subset method has a source note because it has no dedicated package help page.
 
 | Entry point | Purpose | Chapter or outline | R help topic |
 |---|---|---|---|
@@ -87,4 +87,4 @@ Choose the function name for its methodological entry, the chapter for its scien
 
 The package also documents `constellations`, `star.names`, `malta_entrances` and `malta_horizons`. These are data topics. Package-level help is available at `?skyscapeR`.
 
-Inventory source: `skyscapeR_2.0.9004.tar.gz`, SHA-256 `1056ded8780d663a876fe9a35fb61fb66541ee34d7af8e411e0b2bc8bd7e4db0`.
+The [2.0.9012 source archive](archives/skyscapeR_2.0.9012.tar.gz) supplies the namespace and vignette for the inventory check.
