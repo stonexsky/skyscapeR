@@ -34,7 +34,7 @@ LazyDataCompression: xz
 Suggests: swephRdata, terra (>= 1.7-65), xml2, png, httr2 (>= 1.0.0),
         knitr, rmarkdown, readxl
 VignetteBuilder: knitr
-Config/roxygen2/version: 8.1.0
+Config/roxygen2/version: 8.1.1
 NeedsCompilation: no
 Packaged: 2026-11-09 11:56:14 UTC; root
 Author: Fabio Silva [aut, cre],

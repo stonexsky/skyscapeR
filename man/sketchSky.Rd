@@ -173,6 +173,11 @@ Record site, horizon, epoch, calendar, timezone, extinction
 and display switches when reporting a reconstruction.
 }
 
+\section{Validation}{
+
+W02 verified the reconstructed Gacrux bearing and altitude at the same instant and viewpoint using direct equatorial coordinates and spherical geometry. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
+}
+
 \section{Provenance}{
 
 Structured results carry a \code{provenance} attribute. Read it with
@@ -182,10 +187,6 @@ This attribute adds no list entries or table columns. Ordinary subsetting or
 transformations may discard attributes; save the original result for reference.
 It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
-}
-
-\section{Validation}{
-W02 verified the reconstructed Gacrux bearing and altitude at the same instant and viewpoint using direct equatorial coordinates and spherical geometry. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
 }
 
 \examples{
