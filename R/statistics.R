@@ -344,6 +344,8 @@ coordtrans_unc <- function(pdf, hor, refraction, atm, temp, xrange, .res=0.1, .p
 #' are a list of data frames with declination \code{x} and density \code{y};
 #' SPD data are a single such data frame. Metadata include the coordinate type,
 #' transformation settings, format version and descriptive source labels.
+#' @section Validation:
+#' On a constant skyline with refraction disabled, the median and endpoints of the central 95 percent declination interval agreed with direct Monte Carlo propagation within 0.0051 degrees, including for bearings distributed across north. See the \href{https://stonexsky.github.io/skyscapeR/manual/#d02-bearing-propagation}{D02 check in the technical manual}.
 #' @export
 #' @references Silva, F (2020) A probabilistic framework and significance test for the analysis of structural orientations
 #'  in skyscape archaeology \emph{Journal of Archaeological Science} 118, 105138. \doi{10.1016/j.jas.2020.105138}

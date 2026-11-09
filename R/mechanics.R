@@ -352,7 +352,9 @@ moonphase <- function(time, timezone, calendar) {
 #' @return A list containing object, rise and set; rise/set are data frames
 #' with date, time, azimuth and declination columns. Missing events have NA fields.
 #' @section Validation:
-#' A02 tested sensitivity to ephemeris conventions using a separate solver on airless lunar-centre trajectories. Across 177 prehistoric skyline crossings, default azimuths differed from JPL Horizons by a median of 0.059 degrees and a maximum of 0.322 degrees. Matching delta T reduced the maximum to 0.027 degrees. Validation of the riseset() event solver is scheduled under A04. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
+#' A02 tested sensitivity to ephemeris conventions using a separate solver on airless lunar-centre trajectories. Across 177 prehistoric skyline crossings, default azimuths differed from JPL Horizons by a median of 0.059 degrees and a maximum of 0.322 degrees. Matching delta T reduced the maximum to 0.027 degrees. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
+#'
+#' On three synthetic skylines with refraction disabled, Mintaka's rising and setting azimuths agreed with the spherical reference within 0.000022 degrees, and the circumpolar Polaris returned no crossing. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a04-stellar-crossings}{A04 check in the technical manual}.
 #' @export
 #' @references Astrodienst. Swiss Ephemeris programmer's manual. \url{https://www.astro.com/swisseph/swephprg.htm}.
 #' @seealso \code{\link[swephR]{swe_calc_ut}}, \code{\link[swephR]{swe_azalt}}, \code{\link{body.position}}, \code{\link{star.phases}}

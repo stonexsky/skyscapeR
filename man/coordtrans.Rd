@@ -85,6 +85,11 @@ declination test. The result stores the numerical distributions and settings.
 The names in \code{metadata$source.labels} describe the inputs but cannot
 reconstruct them. See \code{\link{plot.skyscapeR.pdf}} and \code{\link{randomTest}}.
 }
+\section{Validation}{
+
+On a constant skyline with refraction disabled, the median and endpoints of the central 95 percent declination interval agreed with direct Monte Carlo propagation within 0.0051 degrees, including for bearings distributed across north. See the \href{https://stonexsky.github.io/skyscapeR/manual/#d02-bearing-propagation}{D02 check in the technical manual}.
+}
+
 \examples{
 Az <- az.pdf(az=c(87,93,90,110), unc=3)
 hor <- createHor(az=c(0,360), alt=c(0,0), loc=c(35,-8,25)) # flat horizon
