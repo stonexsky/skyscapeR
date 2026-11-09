@@ -228,6 +228,8 @@ H01 compared 334 bearings at 31 observing setups.
 At the surveyed bearings, \code{createHor()} reproduced the observed terrain skyline to within half a degree in 91.9\% of cases.
 See the \href{https://stonexsky.github.io/skyscapeR/manual/#h01-field-validation}{H01 field validation in the skyscapeR technical manual} for the survey protocol, station results and limitations.
 
+With the same 1 m terrain, \code{createHor()} reproduced Horizon’s skylines to a mean absolute difference of 0.004 degrees at each of two English sites. Against field measurements at 344 Irish bearings, \code{createHor()} using SRTM had a mean absolute error of 0.328 degrees, lower than either HeyWhatsThat or PeakFinder on that sample. Field accuracy varied by site. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h02-skyline-comparison}{H02 comparison in the skyscapeR technical manual}.
+
 The numerical skyline is a maximum over sampled terrain, not an accuracy
 certificate for the DEM. Horizontal and vertical datum differences, observer
 height, missing raster values, vegetation and buildings can exceed the sampling

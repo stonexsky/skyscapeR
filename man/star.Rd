@@ -32,8 +32,8 @@ The Swiss Ephemeris manual documents fixed-star positions and catalogue magnitud
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
-\section{Provenance}{
 
+\section{Provenance}{
 Structured results carry a \code{provenance} attribute. Read it with
 \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
 skyscapeR and swephR versions, with NA when a namespace version is unavailable.
@@ -42,7 +42,6 @@ transformations may discard attributes; save the original result for reference.
 It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
 }
-
 \examples{
 # M45 and M 45 identify the Pleiades.
 if (requireNamespace("swephRdata", quietly=TRUE)) star("M45", -4300)

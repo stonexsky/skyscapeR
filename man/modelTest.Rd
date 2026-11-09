@@ -86,8 +86,8 @@ fitted to the same observations, its fitting procedure must be accounted for sep
 counts. For grids larger than 16 MiB, allow about eight bytes of temporary
 disk space per simulation per grid point. Temporary files are removed on return or error.
 }
-\section{Model weights and interpretation}{
 
+\section{Model weights and interpretation}{
 Weights are discrete sampling probabilities up to proportionality. If a
 continuous model is evaluated on an uneven coordinate grid, density heights
 alone do not represent probability mass; construct weights that account for
@@ -101,7 +101,6 @@ The simulations do not automatically represent dependence between sites,
 selection after viewing the data, or uncertainty in fitted model parameters.
 See \code{\link{randomTest}} for study-design and Monte Carlo limitations.
 }
-
 \examples{
 d <- dec.pdf(dec = c(-18, 12), unc = c(0.8, 1.4))
 m <- list(data.frame(x = -20:-16, w = 1), data.frame(x = 10:14, w = 1))

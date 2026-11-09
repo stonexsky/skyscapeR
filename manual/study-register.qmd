@@ -4,6 +4,8 @@ A result belongs to the build, inputs and settings that produced it. The tables 
 
 {{< include _h01-validation.qmd >}}
 
+{{< include _h02-validation.qmd >}}
+
 ## Lunar event selection
 
 The [historical crossover comparison](lunar-crossovers.html#crossover-archive) checks annual selections against the Silva & Pimenta (2012) simulation workbooks. It reports moonset pairing changes, SIM1 residuals and the separate unresolved 40° N series. The new worked examples use 2.0.9004 and do not replace the archived runs.

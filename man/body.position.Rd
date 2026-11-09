@@ -19,7 +19,7 @@ body.position(
 }
 \arguments{
 \item{time}{Either a string containing the date and time in the format "YYYY/MM/DD HH:MM:SS"
-(see \code{\link{timestring}}), or a numeric containing the julian date (see \code{\link{time2jd}}).}
+ (see \code{\link{timestring}}), or a numeric containing the julian date (see \code{\link{time2jd}}).}
 
 \item{obj}{String containing name of the solar system body of interest. Can be
 any of the planets (inc. Pluto), the Moon, the Sun or the Ecliptic. Defaults to 'sun'.}
@@ -73,8 +73,8 @@ The Swiss Ephemeris manual documents planetary coordinates and reference frames.
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
-\section{Provenance}{
 
+\section{Provenance}{
 Structured results carry a \code{provenance} attribute. Read it with
 \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
 skyscapeR and swephR versions, with NA when a namespace version is unavailable.
@@ -83,7 +83,6 @@ transformations may discard attributes; save the original result for reference.
 It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
 }
-
 \examples{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
   # Position of the sun at noon GMT on Christmas day 2018:

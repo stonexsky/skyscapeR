@@ -21,20 +21,20 @@ CC(
 \item{year}{One integer year, two ascending endpoints, or a vector of years. Historical labels such as \code{"3700 BC"} are accepted by \code{\link{astroYear}}.}
 
 \item{loc}{Latitude, longitude and elevation (degrees, degrees, metres), or
-a \code{skyscapeR.horizon} object.}
+  a \code{skyscapeR.horizon} object.}
 
 \item{season}{Either \code{"winter"} (default) or \code{"summer"}.}
 
 \item{crescent}{Either \code{"first"} (default, waxing/set) or
-\code{"last"} (waning/rise).}
+  \code{"last"} (waning/rise).}
 
 \item{simulation}{\code{"SIM1"} (default) or \code{"SIM2"}; see Details.}
 
 \item{timezone}{Output and observing-day timezone. Defaults to package settings.
-Use UTC or a fixed offset before 1900.}
+  Use UTC or a fixed offset before 1900.}
 
 \item{calendar}{\code{"G"} for Gregorian or \code{"J"} for Julian dates.
-Defaults to package settings.}
+  Defaults to package settings.}
 
 \item{refraction}{Logical; use atmospheric refraction. Defaults to package settings.}
 
@@ -123,8 +123,8 @@ No PNG or copy of the input horizon is stored in the output.
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
-\section{Comparison with the original simulations}{
 
+\section{Comparison with the original simulations}{
 For SIM1, 5,024 of 5,136 events in the supplied 1620--2047 series at
 latitudes 0, 60 N and 60 S agree within 0.02 degrees in lunar declination.
 This comparison uses a level horizon, longitude 0, elevation 400 m, UTC,
@@ -142,7 +142,6 @@ not establish the accuracy of SIM2.
 }
 
 \section{Provenance}{
-
 Structured results carry a \code{provenance} attribute. Read it with
 \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
 skyscapeR and swephR versions, with NA when a namespace version is unavailable.
@@ -151,7 +150,6 @@ transformations may discard attributes; save the original result for reference.
 It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
 }
-
 \examples{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
   CC(year=2026, loc=c(40, 0, 400), timezone="UTC")

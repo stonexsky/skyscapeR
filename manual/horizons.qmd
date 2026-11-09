@@ -139,7 +139,7 @@ The [international H01 field comparison](study-register.qmd#h01-field-validation
 
 ## Comparison with provider profiles
 
-H01 uses field measurements as its reference. To compare horizon programs in H02, each program must receive the same DEM, observer position and height, with comparable search and sampling settings. Profiles delivered by online services can differ through their terrain inputs as well as their numerical methods.
+[H02](study-register.qmd#h02-skyline-comparison) compares `createHor()` with independently calculated profiles at matched viewpoints and reports its error against field observations on common bearings. The two English controls use the same native DEM for `createHor()` and Horizon.
 
 ## Full package help
 

@@ -62,8 +62,8 @@ Capture restores the requested display switches, location, time and time rate af
  
 To move through time, pass either kind of sky to \code{skyStep()}. For a natural \code{\link{sketchSky}} background, each step retains the Sun and Moon display settings and recalculates illumination from the enabled sources. Positive minutes advance the clock and negative minutes rewind it. Assign the result back to the sky variable to continue from the new instant. Repeat \code{xrange} and any other plot limits to keep the framing. A sketch is recalculated locally with its style, display switches, constellations and magnitude limit. Older sketches without saved catalogue or calendar settings use the defaults. A Stellarium step takes a fresh screenshot using the saved capture settings.
 }
-\section{Reproducibility and stepping}{
 
+\section{Reproducibility and stepping}{
 A Stellarium capture reflects the installed Stellarium version, its catalogues,
 selected sky culture and current settings for switches not explicitly supplied.
 It is an external rendered image, not the package's twilight or extinction
@@ -73,7 +73,6 @@ required for every new capture, but not for replotting a saved raster.
 }
 
 \section{Atmospheric settings when using skyStep}{
-
 For a sketch, \code{skyStep} retains calendar, \code{max.mag}, \code{k}, style
 and display selections. Refraction, pressure and temperature are read again
 from \code{\link{skyscapeR.vars}}; the previous object's atmosphere is not
@@ -87,7 +86,6 @@ Each call draws immediately and returns the new object invisibly. Save it with
 }
 
 \section{Provenance}{
-
 Structured results carry a \code{provenance} attribute. Read it with
 \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
 skyscapeR and swephR versions, with NA when a namespace version is unavailable.
@@ -99,7 +97,6 @@ For Stellarium captures, these are the R package versions, not the external
 Stellarium engine version. Record that version and its settings separately.
 A stepped sky carries the package versions from the new calculation or capture.
 }
-
 \examples{
 \dontrun{
 hor <- malta_horizons[[1]]

@@ -113,8 +113,8 @@ from these observations, account for that fitting when interpreting the test.
 counts. For grids larger than 16 MiB, allow about eight bytes of temporary
 disk space per simulation per grid point. Temporary files are removed on return or error.
 }
-\section{Study design and numerical checks}{
 
+\section{Study design and numerical checks}{
 The simulated null describes independently sampled orientations with the
 specified site geometry and measurement model. It does not automatically model
 shared construction episodes, correlated measurement errors, geographical
@@ -129,7 +129,6 @@ More simulations improve Monte Carlo resolution, not the validity of the
 archaeological sampling design. Repeated searches over alternative subsets or
 models are not included in the within-fit local-cluster adjustment.
 }
-
 \examples{
 \dontrun{
 # significance test for azimuth
