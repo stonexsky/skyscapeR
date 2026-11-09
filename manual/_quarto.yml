@@ -38,6 +38,7 @@ book:
       chapters:
         - study-register.qmd
         - a02-ephemeris.qmd
+        - numerical-validation.qmd
         - heliacal-rising.qmd
     - references.qmd
 

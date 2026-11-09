@@ -851,6 +851,8 @@ plot.skyscapeR.spd <- function(x, xrange, yrange, title=NULL, col=NULL, shading=
 #' @param ... Additional arguments to be passed to \emph{plot}.
 #' @inheritParams plot.skyscapeR.spd
 #' @rdname plot.skyscapeR.sigTest
+#' @section Validation:
+#' The tested public fits plotted the stored local interval midpoints and significance symbols. A wrapped interval has start greater than end. A plot spanning the full turn displays its two visible segments with the same adjusted probability. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
 #' @export
 #' @seealso \code{\link{randomTest}}, \code{\link{modelTest}}, \code{\link{print.skyscapeR.sigTest}}
 #' @examples
@@ -1340,6 +1342,8 @@ plot.skyscapeR.starphases <- function(x, y, show.labels=TRUE, show.legend=TRUE, 
 #' @return Prints the test summary and global and local results to the console.
 #' @param x Object of \emph{skyscapeR.sigTest} format.
 #' @param ... Additional arguments to be passed to \emph{print}.
+#' @section Validation:
+#' The tested public fits printed the stored global probability and local interval endpoints. A wrapped interval has start greater than end. A plot spanning the full turn displays its two visible segments with the same adjusted probability. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
 #' @export
 #' @seealso \code{\link{randomTest}}, \code{\link{modelTest}}, \code{\link{plot.skyscapeR.sigTest}}
 #' @examples

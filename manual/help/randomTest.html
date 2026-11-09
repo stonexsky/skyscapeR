@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>randomTest | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-randomtest">randomTest() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Test orientations against the null hypothesis of random azimuths</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>randomTest | skyscapeR 2.0.9006</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-randomtest">randomTest() method</a></nav><p>skyscapeR 2.0.9006</p><h2 id='randomTest'>Test orientations against the null hypothesis of random azimuths</h2><span id='topic+randomTest'></span>
 
 <h3>Description</h3>
 
@@ -28,47 +28,47 @@ their horizons into account.
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code>pdf</code></td>
+<tr><td><code id="randomTest_:_pdf">pdf</code></td>
 <td>
 <p>A <em>skyscapeR.pdf</em> object created with either <code>az.pdf</code> or <code>coordtrans</code></p>
 </td></tr>
-<tr><td><code>az</code></td>
+<tr><td><code id="randomTest_:_az">az</code></td>
 <td>
 <p>Original azimuth <em>skyscapeR.pdf</em>; required only when <code>pdf</code>
 contains declination distributions. Must match its distribution count and
 order. Do not supply this argument when <code>pdf</code> already contains azimuths.</p>
 </td></tr>
-<tr><td><code>hor</code></td>
+<tr><td><code id="randomTest_:_hor">hor</code></td>
 <td>
 <p>For azimuth input, optionally supply one shared <em>skyscapeR.horizon</em>
 to test in declination. For declination input, required: the original shared
 horizon or an ordered list matching the distributions in <code>pdf</code>.</p>
 </td></tr>
-<tr><td><code>nsims</code></td>
+<tr><td><code id="randomTest_:_nsims">nsims</code></td>
 <td>
 <p>Number of simulations, at least two. Default is 1000.</p>
 </td></tr>
-<tr><td><code>conf</code></td>
+<tr><td><code id="randomTest_:_conf">conf</code></td>
 <td>
 <p>Confidence level as a fraction. For example, 0.95 requests a 95 percent envelope.</p>
 </td></tr>
-<tr><td><code>tails</code></td>
+<tr><td><code id="randomTest_:_tails">tails</code></td>
 <td>
 <p>1 for upper excesses, 2 for excesses and deficits (default).</p>
 </td></tr>
-<tr><td><code>normalise</code></td>
+<tr><td><code id="randomTest_:_normalise">normalise</code></td>
 <td>
 <p>Logical to control whether to normalize SPDs. Default is FALSE</p>
 </td></tr>
-<tr><td><code>.res</code></td>
+<tr><td><code id="randomTest_:_.res">.res</code></td>
 <td>
 <p>Resolution with which to output probability distribution(s). Default is 0.1 degrees.</p>
 </td></tr>
-<tr><td><code>ncores</code></td>
+<tr><td><code id="randomTest_:_ncores">ncores</code></td>
 <td>
 <p>Worker count. By default use half the detected available logical cores, rounded down with a minimum of one. Set ncores=1 for serial execution. The simulation count and memory batch size can further limit workers. Verbose output reports the effective count.</p>
 </td></tr>
-<tr><td><code>verbose</code></td>
+<tr><td><code id="randomTest_:_verbose">verbose</code></td>
 <td>
 <p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p>
 </td></tr>
@@ -113,7 +113,7 @@ null and exchangeable curves this controls the probability of reporting any clus
 significant, accounting for the interval search. It is not strong error control for
 arbitrary mixtures of true and false local nulls, and does not establish that every
 angle inside a cluster is significant or that its endpoints are confidence limits.
-Azimuth clusters spanning north are split at the stored 0/360 boundary in every curve.
+Azimuth scoring counts each direction once and joins qualifying excursions across north for both observed and simulated curves. A start greater than the end denotes a wrapped interval. Declination retains its two endpoints.
 The filter does not change the global test. The maximum-cluster principle is adapted
 from Maris and Oostenveld (2007); cluster interpretation follows Sassenhagen and Draschkow
 (2019).
@@ -124,9 +124,9 @@ and can contribute to the score. Such points are also listed in
 <code>result$data$constant.departures</code> with coordinate <code>x</code> (degrees), <code>observed</code>
 and <code>simulated</code> densities and <code>direction</code> (above or below), for either tail setting.
 </p>
-<p><strong>Monte Carlo ranks.</strong> Global and local Monte Carlo p-values use <i>(b+1)/(B+1)</i>, where <i>B</i> is the number of
-simulations and <i>b</i> counts simulated scores at least as large as the observed score,
-including ties (North, Curtis and Sham, 2002). The minimum is <i>1/(B+1)</i>; all ties give 1.
+<p><strong>Monte Carlo ranks.</strong> Global and local Monte Carlo p-values use <code class="reqn">(b+1)/(B+1)</code>, where <code class="reqn">B</code> is the number of
+simulations and <code class="reqn">b</code> counts simulated scores at least as large as the observed score,
+including ties (North, Curtis and Sham, 2002). The minimum is <code class="reqn">1/(B+1)</code>; all ties give 1.
 The observation enters the pooled bounds, mean and standard deviation once. The envelope
 describes each grid point separately. The rank test assumes that observed and simulated
 curves are exchangeable under the specified null (Dufour, 2006). Apply the same
@@ -162,6 +162,12 @@ identify a celestial target. Refine the comparison grid and increase
 More simulations improve Monte Carlo resolution, not the validity of the
 archaeological sampling design. Repeated searches over alternative subsets or
 models are not included in the within-fit local-cluster adjustment.
+</p>
+
+
+<h3>Validation</h3>
+
+<p>In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See <a href="../numerical-validation.html#s03-scoring-checks">S03 validation in the technical manual</a>.
 </p>
 
 
@@ -204,4 +210,4 @@ plot(st2)
 ## End(Not run)
 </code></pre>
 
-<p><a href="../function-methods.html#fn-randomtest">randomTest() method</a></p></body></html>
+</body></html>

@@ -1,6 +1,6 @@
 # About this edition {.unnumbered}
 
-This is the technical manual for skyscapeR **2.0.9004**. It documents how the package calculates its results, which assumptions affect their interpretation and which comparisons have been made against independent observations. Each study names the build tested.
+This is the technical manual for skyscapeR **2.0**, with methods anchored to **2.0.9004** and versioned validation through **2.0.9006**. It documents how the package calculates its results, which assumptions affect their interpretation and which comparisons have been made against independent observations. Each study names the build tested.
 
 For a first analysis, follow the [worked vignette](https://stonexsky.github.io/skyscapeR/). The [package README](https://github.com/stonexsky/skyscapeR/blob/development-2.0/README.md) covers installation and migration to version 2.0.
 
@@ -10,4 +10,4 @@ Use the [function index](function-index.qmd) to find a help page or an implement
 
 ## Finding the evidence
 
-For astronomical positions and prehistoric lunar bearings, [A02](a02-ephemeris.qmd) compares skyscapeR with the parent JPL ephemerides and JPL Horizons. For terrain horizons, [H01](study-register.qmd#h01-field-validation) measures field accuracy and [H02](study-register.qmd#h02-skyline-comparison) compares numerical skylines at matched viewpoints. For sky reconstruction, consult the [Milky Way tracing and calibration](sky-rendering.qmd#milky-way-boundary-internal-structure-and-calibration) and the [sky-rendering studies](study-register.qmd#sky-rendering). The [heliacal-rising study](heliacal-rising.qmd) evaluates event timing. The [ephemeris chapter](ephemeris.qmd) distinguishes upstream precision claims from independent tests of this package.
+[A01, D01 and S03](numerical-validation.qmd) report calendar, density and significance checks on build 2.0.9005 and the D01 and S03 corrections verified on **2.0.9006**. For astronomical positions and prehistoric lunar bearings, [A02](a02-ephemeris.qmd) compares skyscapeR with the parent JPL ephemerides and JPL Horizons. For terrain horizons, [H01](study-register.qmd#h01-field-validation) measures field accuracy and [H02](study-register.qmd#h02-skyline-comparison) compares numerical skylines at matched viewpoints. For sky reconstruction, consult the [Milky Way tracing and calibration](sky-rendering.qmd#milky-way-boundary-internal-structure-and-calibration) and the [sky-rendering studies](study-register.qmd#sky-rendering). The [heliacal-rising study](heliacal-rising.qmd) evaluates event timing. The [ephemeris chapter](ephemeris.qmd) distinguishes upstream precision claims from independent tests of this package.

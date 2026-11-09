@@ -40,11 +40,17 @@ or transforming it to declination.
 A field bearing defines a centre and an angular uncertainty. Model the uncertainty as a
 normal density with the supplied standard deviation, or as a uniform density over the
 centre plus or minus the supplied half-width. A scalar uncertainty is reused for each
-measurement. The function samples from -90 to 450 degrees, folds the overlapping tails
-across north and retains density values at or above the cutoff. Use a spacing compatible
-with a full turn on the grid. The input measurements remain separate and truncated tails
+measurement. The function evaluates the periodic density on a grid starting at zero
+and ending before 360 degrees. Normal densities sum wrapped Gaussian contributions;
+uniform densities count all copies within the inclusive half-width. The cutoff is
+applied to the combined density at each bearing. The input measurements remain separate and truncated tails
 are not renormalised. The supported families are normal and uniform.
 }
+\section{Validation}{
+
+Build 2.0.9006 passed all 173 D01 assertions, including 0.005-degree samples across north and the broad-width periodic density cases. See \href{https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks}{D01 validation in the technical manual}.
+}
+
 \examples{
 test <- az.pdf(az=c(87,93,90,110), unc=3)
 plot(test)

@@ -23,6 +23,11 @@ point. For legacy strings beginning with a less-than sign and space, the functio
 classifies the printed bound. It does not calculate a test or adjust for multiple
 comparisons.
 }
+\section{Validation}{
+
+All tested symbol thresholds, their equality cases and the legacy printed bound agreed with their stated probability ranges. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+}
+
 \examples{
 pval2stars(c(0.0005, 0.008, 0.03, 0.08, 0.2))
 }

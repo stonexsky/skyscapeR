@@ -86,6 +86,11 @@ fitted to the same observations, its fitting procedure must be accounted for sep
 counts. For grids larger than 16 MiB, allow about eight bytes of temporary
 disk space per simulation per grid point. Temporary files are removed on return or error.
 }
+\section{Validation}{
+
+In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+}
+
 \section{Model weights and interpretation}{
 
 Weights are discrete sampling probabilities up to proportionality. If a

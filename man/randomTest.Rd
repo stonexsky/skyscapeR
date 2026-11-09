@@ -89,7 +89,7 @@ null and exchangeable curves this controls the probability of reporting any clus
 significant, accounting for the interval search. It is not strong error control for
 arbitrary mixtures of true and false local nulls, and does not establish that every
 angle inside a cluster is significant or that its endpoints are confidence limits.
-Azimuth clusters spanning north are split at the stored 0/360 boundary in every curve.
+Azimuth scoring counts each direction once and joins qualifying excursions across north for both observed and simulated curves. A start greater than the end denotes a wrapped interval. Declination retains its two endpoints.
 The filter does not change the global test. The maximum-cluster principle is adapted
 from Maris and Oostenveld (2007); cluster interpretation follows Sassenhagen and Draschkow
 (2019).
@@ -113,6 +113,11 @@ from these observations, account for that fitting when interpreting the test.
 counts. For grids larger than 16 MiB, allow about eight bytes of temporary
 disk space per simulation per grid point. Temporary files are removed on return or error.
 }
+\section{Validation}{
+
+In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+}
+
 \section{Study design and numerical checks}{
 
 The simulated null describes independently sampled orientations with the

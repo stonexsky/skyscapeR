@@ -22,6 +22,11 @@ or a negative year, subtract the astronomical year from one and append BC. The
 conversion works element by element and changes only the label, not the calendar or
 instant.
 }
+\section{Validation}{
+
+Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks}{A01 validation in the technical manual}.
+}
+
 \examples{
 BC.AD(100)
 BC.AD(0)

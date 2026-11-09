@@ -35,6 +35,11 @@ p-value under this model. Calculations use \code{stats::dbinom} and
 At least zero hits has probability 1. With zero structures, zero hits has
 probability 1 for either type. Inputs are scalar; invalid inputs error.
 }
+\section{Validation}{
+
+Exact and upper-tail probabilities agreed with independent binomial calculations for the tested counts up to 1,000, including zero hits. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+}
+
 \examples{
 # At least 10 out of 30 structures, with targets covering 20\% of the horizon:
 bernoulli.trial(30, 0.2, 10)

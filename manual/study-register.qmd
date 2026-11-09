@@ -24,7 +24,7 @@ Status refers to the agreed protocol for this programme. Earlier studies and wor
 | H06 | Horizon providers, PNGs and Stellarium landscapes | `createHWT()`, `downloadHWT()`, `importPeakFinder()`, `importPanorama()`, `exportHor()`, `exportStellarium()`, `exportPanorama()`, `relinkHor()`, `plot.skyscapeR.horizon()` | Planned |
 | H07 | Passing incomplete horizons between functions | `importPanorama()`, `hor2alt()`, `coordtrans()`, `riseset()`, `star.phases()`, `spatial.equinox()`, `exportHor()` | Planned |
 | F01 | Compass and solar-sight reduction | `mag.dec()`, `reduct.compass()`, `reduct.theodolite()`, `sunAz()`, `ten()`, `az2dec()` | Planned |
-| A01 | Calendar, clock, angle and session conventions | `BC.AD()`, `astroYear()`, `time2jd()`, `jd2time()`, `timestring()`, `long.date()`, `ten()`, `skyscapeR.vars()` | Planned |
+| [A01](numerical-validation.qmd#a01-calendar-checks) | Calendar, clock, angle and session conventions | `BC.AD()`, `astroYear()`, `time2jd()`, `jd2time()`, `timestring()`, `long.date()`, `ten()`, `skyscapeR.vars()` | Complete |
 | [A02](a02-ephemeris.qmd) | How closely do planetary positions and lunar skyline bearings agree with their JPL references? Includes a crossing sensitivity study relevant to riseset(). | `body.position()`, `moonphase()` | Complete |
 | A03 | Stellar propagation and reference frames | `star()`, `body.position()`, `obliquity()`, `parallax.corr()`, `orbit()` | Planned |
 | A04 | Crossings on flat and irregular skylines | `riseset()`, `orbit()`, `body.position()`, `hor2alt()`, `star.phases()` | Planned |
@@ -39,11 +39,11 @@ Status refers to the agreed protocol for this programme. Earlier studies and wor
 | V05 | Atmospheric extinction by altitude | `sketchSky()`, `skyRadiance()`, `star.phases()`, `skyscapeR.vars()` | Planned |
 | V06 | Planisphere, sky cultures and constellation geometry | `planisphere()`, `importConstellations()`, `sketchSky()`, `star()` | Planned |
 | V07 | Sky state, Stellarium capture and time stepping | `stellariumSky()`, `sketchSky()`, `skyStep()`, `skyscapeR.vars()`, `plot.skyscapeR.horizon()`, `time2jd()` | Planned |
-| D01 | Measurement PDFs, circular support and highest-density regions | `az.pdf()`, `dec.pdf()`, `hpdi()`, `spd()`, `subset.skyscapeR.pdf()` | Planned |
+| [D01](numerical-validation.qmd#d01-density-checks) | Measurement PDFs, circular support and highest-density regions | `az.pdf()`, `dec.pdf()`, `hpdi()`, `spd()`, `subset.skyscapeR.pdf()` | Complete; corrected and verified on 2.0.9006 |
 | D02 | Azimuth-to-declination propagation | `az2dec()`, `coordtrans()`, `hor2alt()`, `az.pdf()`, `dec.pdf()`, `spd()`, `hpdi()` | Planned |
 | S01 | Uniform-orientation null model | `randomTest()`, `coordtrans()`, `az.pdf()`, `spd()`, `pval2stars()` | Planned |
 | S02 | Specified and site-specific nulls | `modelTest()`, `dec.pdf()`, `az.pdf()`, `spd()`, `coordtrans()` | Planned |
-| S03 | Shared scoring, local clusters and analytic probability helpers | `randomTest()`, `modelTest()`, `bernoulli.trial()`, `pval2stars()`, `print.skyscapeR.sigTest()`, `plot.skyscapeR.sigTest()` | Planned |
+| [S03](numerical-validation.qmd#s03-scoring-checks) | Shared scoring, local clusters and analytic probability helpers | `randomTest()`, `modelTest()`, `bernoulli.trial()`, `pval2stars()`, `print.skyscapeR.sigTest()`, `plot.skyscapeR.sigTest()` | Complete; corrected and verified on 2.0.9006 |
 | W01 | Graphical outputs encode the underlying data | `plotAzimuth()`, `plotBars()`, `plot.skyscapeR.horizon()`, `plot.skyscapeR.pdf()`, `plot.skyscapeR.spd()`, `plot.skyscapeR.sigTest()`, `plot.skyscapeR.starphases()`, `print.skyscapeR.sigTest()` | Planned |
 | W02 | End-to-end field-to-sky and group workflows | `reduct.compass()`, `reduct.theodolite()`, `createHor()`, `hor2alt()`, `az2dec()`, `az.pdf()`, `coordtrans()`, `spd()`, `randomTest()`, `modelTest()`, `findTargets()`, `skyObject()`, `star.phases()`, `riseset()`, `sketchSky()` | Planned |
 

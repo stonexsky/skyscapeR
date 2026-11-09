@@ -8,6 +8,8 @@ State the time scale, civil calendar, reference frame and refraction convention 
 
 ### `astroYear()` {#fn-astroyear}
 
+**Validation on 2.0.9005.** Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. [A01 results](numerical-validation.qmd#a01-calendar-checks).
+
 [Function index](function-index.html#idx-astroyear)
 
 ```{=html}
@@ -32,6 +34,8 @@ Era labels are case-insensitive and follow a positive whole year.
 **Implementation.** `R/dates.R`. [Full function help](help/astroYear.html) · [Time, coordinates and ephemerides outline](contents-plan.html#plan-time) · [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-time)
 
 ### `BC.AD()` {#fn-bc-ad}
+
+**Validation on 2.0.9005.** Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. [A01 results](numerical-validation.qmd#a01-calendar-checks).
 
 [Function index](function-index.html#idx-bc-ad)
 
@@ -117,6 +121,8 @@ also contains a <code>horizontal</code> data frame with columns <code>az</code> 
 
 ### `jd2time()` {#fn-jd2time}
 
+**Validation on 2.0.9005.** Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. [A01 results](numerical-validation.qmd#a01-calendar-checks).
+
 [Function index](function-index.html#idx-jd2time)
 
 ```{=html}
@@ -147,6 +153,8 @@ mean zero offset; an empty string does not select the system timezone.
 **Implementation.** `R/dates.R`. [Full function help](help/jd2time.html) · [Time, coordinates and ephemerides outline](contents-plan.html#plan-time) · [Equinoctial full Moons and crescent crossovers](lunar-crossovers.html#crossover-efm) · [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-time)
 
 ### `long.date()` {#fn-long-date}
+
+**Validation on 2.0.9005.** Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. [A01 results](numerical-validation.qmd#a01-calendar-checks).
 
 [Function index](function-index.html#idx-long-date)
 
@@ -259,6 +267,8 @@ declination calculator.
 
 ### `skyscapeR.vars()` {#fn-skyscaper-vars}
 
+**Validation on 2.0.9005.** Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. [A01 results](numerical-validation.qmd#a01-calendar-checks).
+
 [Function index](function-index.html#idx-skyscaper-vars)
 
 ```{=html}
@@ -306,6 +316,8 @@ frame of reference. Defaults to topocentric.</p></td></tr><tr><th scope="row"><c
 
 ### `ten()` {#fn-ten}
 
+**Validation on 2.0.9005.** Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. [A01 results](numerical-validation.qmd#a01-calendar-checks).
+
 [Function index](function-index.html#idx-ten)
 
 ```{=html}
@@ -333,6 +345,8 @@ containing an angle, for example <code>"-8:30:00"</code>.</p></td></tr><tr><th s
 **Implementation.** `R/misc.R`. [Full function help](help/ten.html) · [Time, coordinates and ephemerides outline](contents-plan.html#plan-time) · [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-time) · [Reduce a theodolite survey with a solar sight](vignette-guide.html#workflow-reduce-a-theodolite-survey-with-a-solar-sight)
 
 ### `time2jd()` {#fn-time2jd}
+
+**Validation on 2.0.9005.** Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. [A01 results](numerical-validation.qmd#a01-calendar-checks).
 
 [Function index](function-index.html#idx-time2jd)
 
@@ -366,6 +380,8 @@ mean zero offset; an empty string does not select the system timezone.
 **Implementation.** `R/dates.R`. [Full function help](help/time2jd.html) · [Sky reconstruction](sky-rendering.html#sec-sketch) · [Ephemeris](ephemeris.html#sec-ephemeris) · [Time, coordinates and ephemerides outline](contents-plan.html#plan-time) · [Equinoctial full Moons and crescent crossovers](lunar-crossovers.html#crossover-efm) · [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-time) · [The heliacal rising of the Pleiades](vignette-guide.html#workflow-the-heliacal-rising-of-the-pleiades) · [Exploring celestial candidates](vignette-guide.html#workflow-exploring-celestial-candidates)
 
 ### `timestring()` {#fn-timestring}
+
+**Validation on 2.0.9005.** Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. [A01 results](numerical-validation.qmd#a01-calendar-checks).
 
 [Function index](function-index.html#idx-timestring)
 
@@ -2931,6 +2947,10 @@ Record the density family, sampling interval, cutoff, coordinate transformation 
 
 ### `az.pdf()` {#fn-az-pdf}
 
+**Verified on 2.0.9006.** Periodic azimuth densities passed the fine-grid and wide-width D01 checks. [D01 rerun](numerical-validation.qmd#d01-density-checks).
+
+**Validation on 2.0.9005.** The analytic density checks in D01 found a folding error near north at 0.005-degree spacing and omitted periodic tails in the two 100-degree-width cases. [D01 results](numerical-validation.qmd#d01-density-checks).
+
 [Function index](function-index.html#idx-az-pdf)
 
 ```{=html}
@@ -3037,6 +3057,10 @@ transformation settings, format version and descriptive source labels.
 
 ### `dec.pdf()` {#fn-dec-pdf}
 
+**Verified on 2.0.9006.** Declination subsets retained the selected centres in all four cases. [D01 rerun](numerical-validation.qmd#d01-density-checks).
+
+**Validation on 2.0.9005.** The sampled declination densities agreed with analytic references at the tested bounds and cutoffs. Subsetting curves can leave stale input centres in metadata$dec. [D01 results](numerical-validation.qmd#d01-density-checks).
+
 [Function index](function-index.html#idx-dec-pdf)
 
 ```{=html}
@@ -3077,6 +3101,8 @@ uncertainty interpretation when comparing results from different surveys.
 **Implementation.** `R/dec-pdf.R`. [Full function help](help/dec.pdf.html) · [Significance tests](significance.html#sec-tests) · [Uncertainty and orientation distributions outline](contents-plan.html#plan-density) · [From a measured orientation to a declination distribution](orientation-densities.html#density-measurement) · [Subsetting declination centres](orientation-densities.html#subset-dec-centres)
 
 ### `hpdi()` {#fn-hpdi}
+
+**Validation on 2.0.9005.** Known tied, truncated and disjoint test distributions returned the expected interval endpoints and achieved the requested minimum discrete mass. [D01 results](numerical-validation.qmd#d01-density-checks).
 
 [Function index](function-index.html#idx-hpdi)
 
@@ -3277,6 +3303,10 @@ confidence intervals. Use <code>az.pdf</code>, <code>coordtrans</code> and
 
 ### `spd()` {#fn-spd}
 
+**Verified on 2.0.9006.** Broad azimuth SPDs were continuous at north and correctly interpolated across the final grid segment. [D01 rerun](numerical-validation.qmd#d01-density-checks).
+
+**Validation on 2.0.9005.** The tested sums agreed with independently constructed density sums, and the normalised curves had unit trapezoidal area. [D01 results](numerical-validation.qmd#d01-density-checks).
+
 [Function index](function-index.html#idx-spd)
 
 ```{=html}
@@ -3331,6 +3361,10 @@ Normalised densities have units of inverse degrees.
 
 ### `subset.skyscapeR.pdf()` {#fn-subset-skyscaper-pdf}
 
+**Verified on 2.0.9006.** Selecting, reordering, duplicating or dropping all declination PDFs now retains matching centre metadata. [D01 rerun](numerical-validation.qmd#d01-density-checks).
+
+**Validation on 2.0.9005.** Declination PDF subsets retained the original centre metadata in four tests, although curve order and labels followed the selection. [D01 results](numerical-validation.qmd#d01-density-checks).
+
 [Function index](function-index.html#idx-subset-skyscaper-pdf)
 
 ```{=html}
@@ -3355,6 +3389,8 @@ Normalised densities have units of inverse degrees.
 The reference distribution, score, Monte Carlo rank and any search across intervals all affect the inferential claim. A display symbol summarises an already-calculated p-value.
 
 ### `bernoulli.trial()` {#fn-bernoulli-trial}
+
+**Validation on 2.0.9005.** Exact and upper-tail probabilities agreed with independent binomial calculations for the tested counts up to 1,000, including zero hits. [S03 results](numerical-validation.qmd#s03-scoring-checks).
 
 [Function index](function-index.html#idx-bernoulli-trial)
 
@@ -3400,6 +3436,10 @@ for at least r hits (the default).</p></td></tr></tbody></table><h5>Return value
 **Implementation.** `R/statistics.R`. [Full function help](help/bernoulli.trial.html) · [Null models and significance outline](contents-plan.html#plan-null)
 
 ### `modelTest()` {#fn-modeltest}
+
+**Verified on 2.0.9006.** The observed and simulated azimuth curves use the same circular cluster search. The original test matrix gave one interval from 346° to 15°. [S03 rerun](numerical-validation.qmd#s03-scoring-checks).
+
+**Validation on 2.0.9005.** Independent scoring reproduced the stored linear-grid probabilities. A north-crossing azimuth excess can split into two clusters; including both 0 and 360 degrees can also affect the global rank. [S03 results](numerical-validation.qmd#s03-scoring-checks).
 
 [Function index](function-index.html#idx-modeltest)
 
@@ -3474,6 +3514,10 @@ See <code>randomTest</code> for study-design and Monte Carlo limitations.
 
 ### `plot.skyscapeR.sigTest()` {#fn-plot-skyscaper-sigtest}
 
+**Verified on 2.0.9006.** On a full-turn panel, a cluster crossing north can have two visible segments with one shared probability. [S03 rerun](numerical-validation.qmd#s03-scoring-checks).
+
+**Validation on 2.0.9005.** The tested public fits plotted the stored local interval midpoints and significance symbols. North-crossing intervals can appear separately. [S03 results](numerical-validation.qmd#s03-scoring-checks).
+
 [Function index](function-index.html#idx-plot-skyscaper-sigtest)
 
 ```{=html}
@@ -3506,6 +3550,10 @@ original unadjusted values. Interpret local regions alongside the whole-curve te
 
 ### `print.skyscapeR.sigTest()` {#fn-print-skyscaper-sigtest}
 
+**Verified on 2.0.9006.** A single adjusted probability is printed for a range crossing north. [S03 rerun](numerical-validation.qmd#s03-scoring-checks).
+
+**Validation on 2.0.9005.** The tested public fits printed the stored global probability and local interval endpoints. North-crossing intervals can appear separately. [S03 results](numerical-validation.qmd#s03-scoring-checks).
+
 [Function index](function-index.html#idx-print-skyscaper-sigtest)
 
 ```{=html}
@@ -3534,6 +3582,8 @@ coordinate system of the fitted test.
 
 ### `pval2stars()` {#fn-pval2stars}
 
+**Validation on 2.0.9005.** All tested symbol thresholds, their equality cases and the legacy printed bound agreed with their stated probability ranges. [S03 results](numerical-validation.qmd#s03-scoring-checks).
+
 [Function index](function-index.html#idx-pval2stars)
 
 ```{=html}
@@ -3561,6 +3611,10 @@ comparisons.
 **Implementation.** `R/misc.R`. [Full function help](help/pval2stars.html) · [Significance tests](significance.html#sec-tests) · [Null models and significance outline](contents-plan.html#plan-null) · [Reading the Ġgantija fit](significance.html#sig-output)
 
 ### `randomTest()` {#fn-randomtest}
+
+**Verified on 2.0.9006.** The global score counts north once. A qualifying excess across north is reported as one interval with start greater than end. [S03 rerun](numerical-validation.qmd#s03-scoring-checks).
+
+**Validation on 2.0.9005.** Independent scoring reproduced the stored linear-grid probabilities. A north-crossing azimuth excess can split into two clusters; including both 0 and 360 degrees can also affect the global rank. [S03 results](numerical-validation.qmd#s03-scoring-checks).
 
 [Function index](function-index.html#idx-randomtest)
 

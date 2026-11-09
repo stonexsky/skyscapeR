@@ -49,6 +49,11 @@ Silva (2020) sets out the probability-distribution framework for uncertain
 orientations. Here the supplied measurements and uncertainties are already
 expressed in declination.
 }
+\section{Validation}{
+
+In D01, sampled declination densities agreed with analytic references. Build 2.0.9006 retained the corresponding declination centres in all four subset checks. See \href{https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks}{D01 validation in the technical manual}.
+}
+
 \examples{
 d <- dec.pdf(dec = c(-18, 12), unc = c(0.8, 1.4))
 head(d$data[[1]])

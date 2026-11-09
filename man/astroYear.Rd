@@ -20,6 +20,11 @@ Astronomical years include zero. Historical BC or BCE years convert
 by subtracting the historical year from one. AD and CE years keep their value.
 Era labels are case-insensitive and follow a positive whole year.
 }
+\section{Validation}{
+
+Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks}{A01 validation in the technical manual}.
+}
+
 \examples{
 astroYear(c("3700 BC", "1 BCE", "1 AD", "2026 CE"))
 }

@@ -39,6 +39,11 @@ subsequent calls in the current R session. Functions with their own explicit arg
 or fixed UT sampling conventions may override these defaults. Record the settings with
 the survey data.
 }
+\section{Validation}{
+
+Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks}{A01 validation in the technical manual}.
+}
+
 \examples{
 settings <- skyscapeR.vars()
 settings$timezone

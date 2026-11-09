@@ -33,6 +33,11 @@ year/month/day and hours:minutes:seconds. Omitted time is noon. Formatting alone
 not supply a timezone or check that the date exists; use time2jd to validate and convert
 it.
 }
+\section{Validation}{
+
+Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks}{A01 validation in the technical manual}.
+}
+
 \examples{
 timestring(2018, 12, 25, 2, 34)
 }

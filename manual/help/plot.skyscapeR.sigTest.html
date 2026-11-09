@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>plot.skyscapeR.sigTest | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-plot-skyscaper-sigtest">plot.skyscapeR.sigTest() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Plot an orientation significance test</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>plot.skyscapeR.sigTest | skyscapeR 2.0.9006</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-plot-skyscaper-sigtest">plot.skyscapeR.sigTest() method</a></nav><p>skyscapeR 2.0.9006</p><h2 id='plot.skyscapeR.sigTest'>Plot an orientation significance test</h2><span id='topic+plot.skyscapeR.sigTest'></span>
 
 <h3>Description</h3>
 
@@ -30,52 +30,52 @@ plot(
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code>x</code></td>
+<tr><td><code id="plot.skyscapeR.sigTest_:_x">x</code></td>
 <td>
 <p>A <em>skyscapeR.sigTest</em> object created with <code>randomTest</code></p>
 </td></tr>
-<tr><td><code>xrange</code></td>
+<tr><td><code id="plot.skyscapeR.sigTest_:_xrange">xrange</code></td>
 <td>
 <p>Range of x-axis to plot.</p>
 </td></tr>
-<tr><td><code>title</code></td>
+<tr><td><code id="plot.skyscapeR.sigTest_:_title">title</code></td>
 <td>
 <p>Title to add to the plot.</p>
 </td></tr>
-<tr><td><code>col</code></td>
+<tr><td><code id="plot.skyscapeR.sigTest_:_col">col</code></td>
 <td>
 <p>Observed density colour. NULL uses the current style.</p>
 </td></tr>
-<tr><td><code>show.pval</code></td>
+<tr><td><code id="plot.skyscapeR.sigTest_:_show.pval">show.pval</code></td>
 <td>
 <p>Logical to control whether to print the global p-value. Default is TRUE.</p>
 </td></tr>
-<tr><td><code>show.local</code></td>
+<tr><td><code id="plot.skyscapeR.sigTest_:_show.local">show.local</code></td>
 <td>
 <p>Draw a separate panel on the same angular scale, with Excess and Deficit rows. Default FALSE. Symbols are ***, **, *, + and an open circle, with upper cutoffs 0.001, 0.01, 0.05 and 0.10. The open circle is centred at the same height as the stars and marks values above 0.10.</p>
 </td></tr>
-<tr><td><code>pal</code></td>
+<tr><td><code id="plot.skyscapeR.sigTest_:_pal">pal</code></td>
 <td>
 <p>Deficit and excess colours in that order. NULL uses the current style.</p>
 </td></tr>
-<tr><td><code>...</code></td>
+<tr><td><code id="plot.skyscapeR.sigTest_:_...">...</code></td>
 <td>
 <p>Additional arguments to be passed to <em>plot</em>.</p>
 </td></tr>
-<tr><td><code>obj</code></td>
+<tr><td><code id="plot.skyscapeR.sigTest_:_obj">obj</code></td>
 <td>
 <p>A skyObject or list of target groups for a density or significance plot. Declination plots show single epochs as lines and epoch ranges as bands. Azimuth plots use each group's site latitude to mark rising and setting boundary bearings at a geometric level horizon.</p>
 </td></tr>
-<tr><td><code>xlim</code></td>
+<tr><td><code id="plot.skyscapeR.sigTest_:_xlim">xlim</code></td>
 <td>
 <p>Earlier name for xrange.</p>
 </td></tr>
-<tr><td><code>show.legend</code></td>
+<tr><td><code id="plot.skyscapeR.sigTest_:_show.legend">show.legend</code></td>
 <td>
 <p>Display the density/envelope key and any local significance symbol key.
 <code>show.pval</code> independently controls the numeric global p-value.</p>
 </td></tr>
-<tr><td><code>style</code></td>
+<tr><td><code id="plot.skyscapeR.sigTest_:_style">style</code></td>
 <td>
 <p>Analytical display style, either <code>"publication-colour"</code> (default) or
 <code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p>
@@ -102,6 +102,12 @@ original unadjusted values. Interpret local regions alongside the whole-curve te
 </p>
 
 
+<h3>Validation</h3>
+
+<p>The tested public fits plotted the stored local interval midpoints and significance symbols. A wrapped interval has start greater than end. A plot spanning the full turn displays its two visible segments with the same adjusted probability. See <a href="../numerical-validation.html#s03-scoring-checks">S03 validation in the technical manual</a>.
+</p>
+
+
 <h3>See Also</h3>
 
 <p><code>randomTest</code>, <code>modelTest</code>, <code>print.skyscapeR.sigTest</code>
@@ -116,4 +122,4 @@ fit &lt;- randomTest(az, nsims = 10, ncores = 1, .res = 2, verbose = FALSE)
 plot(fit)
 </code></pre>
 
-<p><a href="../function-methods.html#fn-plot-skyscaper-sigtest">plot.skyscapeR.sigTest() method</a></p></body></html>
+</body></html>

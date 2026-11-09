@@ -45,6 +45,11 @@ new heights equal old heights divided by \code{.res}. Existing saved objects
 are not converted. Changing resolution can still affect interpolation and
 truncation accuracy, but the returned trapezoidal area is one.
 }
+\section{Validation}{
+
+The tested sums agreed with independently constructed density sums, and the normalised curves had unit trapezoidal area. See \href{https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks}{D01 validation in the technical manual}.
+}
+
 \examples{
 # SPD of azimuths
 Az <- az.pdf(az=c(87,93,90,110), unc=3)

@@ -1,7 +1,7 @@
 Package: skyscapeR
 Type: Package
 Title: Data Analysis and Visualization for Skyscape Archaeology
-Version: 2.0.9005
+Version: 2.0.9006
 Authors@R: c(
     person("Fabio", "Silva", email = "fsilva@stonexsky.com",
            role = c("aut", "cre")),
@@ -34,5 +34,10 @@ LazyDataCompression: xz
 Suggests: swephRdata, terra (>= 1.7-65), xml2, png, httr2 (>= 1.0.0),
         knitr, rmarkdown, readxl
 VignetteBuilder: knitr
-Config/roxygen2/version: 8.1.0
+Config/roxygen2/version: 8.1.1
 NeedsCompilation: no
+Packaged: 2026-11-09 11:56:14 UTC; root
+Author: Fabio Silva [aut, cre],
+  Billy Finnimore [ctb],
+  Victor Reijs [ctb],
+  Rita Gautschy [ctb]

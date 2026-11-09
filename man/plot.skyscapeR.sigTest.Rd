@@ -63,6 +63,11 @@ simulations. New local values use maximum-cluster adjustment under the complete 
 cluster endpoints remain descriptive, not confidence limits. Legacy fits retain their
 original unadjusted values. Interpret local regions alongside the whole-curve test.
 }
+\section{Validation}{
+
+The tested public fits plotted the stored local interval midpoints and significance symbols. A wrapped interval has start greater than end. A plot spanning the full turn displays its two visible segments with the same adjusted probability. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+}
+
 \examples{
 az <- az.pdf(az = c(85, 95, 112), unc = 3, verbose = FALSE)
 set.seed(42)

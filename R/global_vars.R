@@ -45,6 +45,8 @@ skyscapeR.env$cur.year <- as.numeric(format(Sys.Date(), "%Y"))
 #' @param dec Output declination: \emph{geo} for the geocentric, or \emph{topo} for the topocentric
 #' frame of reference. Defaults to topocentric.
 #' @param k Visual extinction in magnitudes per airmass, shared by natural sky sketches and stellar phase calculations. The initial value of 0.2 is a clear-sky baseline, consistent with the approximate V-band coefficient for Kitt Peak in the UC Davis Physics 157 Observing Guide. Extinction varies with site and atmospheric conditions (Schaefer 1986, 1993). Use zero to disable extinction.
+#' @section Validation:
+#' Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks}{A01 validation in the technical manual}.
 #' @export
 skyscapeR.vars = function(timezone, calendar, refraction, atm, temp, dec, k) {
   if (!missing(k)) {

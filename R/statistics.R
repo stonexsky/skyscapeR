@@ -24,6 +24,8 @@ bernoulli <- function(n,p,r) {
 #' @param type Either \code{"single"} for exactly r hits or \code{"tail"}
 #' for at least r hits (the default).
 #' @return A numeric probability between 0 and 1.
+#' @section Validation:
+#' Exact and upper-tail probabilities agreed with independent binomial calculations for the tested counts up to 1,000, including zero hits. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
 #' @export
 #' @references Ruggles, C (1999) \emph{Astronomy in Prehistoric Britain and Ireland}. Yale University Press.
 #' @seealso \code{\link{randomTest}}, \code{\link{modelTest}}
@@ -62,9 +64,10 @@ bernoulli.trial <- function(n,p,r, type='tail') {
 #' @details A field bearing defines a centre and an angular uncertainty. Model the uncertainty as a
 #' normal density with the supplied standard deviation, or as a uniform density over the
 #' centre plus or minus the supplied half-width. A scalar uncertainty is reused for each
-#' measurement. The function samples from -90 to 450 degrees, folds the overlapping tails
-#' across north and retains density values at or above the cutoff. Use a spacing compatible
-#' with a full turn on the grid. The input measurements remain separate and truncated tails
+#' measurement. The function evaluates the periodic density on a grid starting at zero
+#' and ending before 360 degrees. Normal densities sum wrapped Gaussian contributions;
+#' uniform densities count all copies within the inclusive half-width. The cutoff is
+#' applied to the combined density at each bearing. The input measurements remain separate and truncated tails
 #' are not renormalised. The supported families are normal and uniform.
 #' @return A skyscapeR.pdf list. The data component contains one data frame per measurement, in input order, with azimuth x in degrees and density y. The metadata record the measurements, names, uncertainties, distribution type and numerical settings.
 #' @param pdf Uncertainty distribution. Choose \code{"normal"} (default) or \code{"uniform"}.
@@ -74,6 +77,8 @@ bernoulli.trial <- function(n,p,r, type='tail') {
 #' @param verbose Logical. Display progress or informational messages. Default \code{TRUE}.
 #' @param .cutoff Minimum density retained on the output grid. Default \code{1e-5}.
 #' @param .res Spacing of the output bearing grid in degrees. Default 0.01.
+#' @section Validation:
+#' Build 2.0.9006 passed all 173 D01 assertions, including 0.005-degree samples across north and the broad-width periodic density cases. See \href{https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks}{D01 validation in the technical manual}.
 #' @export
 #' @references Silva, F (2020) A probabilistic framework and significance test for the analysis of structural orientations
 #'  in skyscape archaeology \emph{Journal of Archaeological Science} 118, 105138. \doi{10.1016/j.jas.2020.105138}
@@ -83,56 +88,41 @@ bernoulli.trial <- function(n,p,r, type='tail') {
 #' plot(test)
 az.pdf <- function(az, unc, pdf='normal', name, .res=0.01, .cutoff=1e-5, verbose=T) {
 
-  ## probability distribution
-  if (inherits(pdf,'character')) {
-
-    code <- switch(pdf, N = 0, Normal = 0, n = 0, normal = 0, U = 1, Uniform = 1, u = 1, uniform = 1, -1)
-
-    if (code == 0) {
-      if (verbose) { .sky_message('Using normal azimuth uncertainties.') }
-      azpdf <- function(x,i) dnorm(x, az[i], unc[i])
-    } else if (code == 1) {
-      if (verbose) { .sky_message('Using uniform azimuth uncertainties.') }
-      azpdf <- function(x,i) dunif(x, az[i]-unc[i], az[i]+unc[i])
-    } else { stop('Probability density function not recognized. Please use only normal or uniform.')}
-
-    if (missing(az) | missing (unc)) {
-      stop('Missing azimuths and/or uncertainties.')
-    }
-
-  } else if (inherits(pdf, 'data.frame') & sum(colnames(pdf) == c('az','dens'))) {
-    if (verbose) { stop('Custom probability distribution found. This feature is not yet functional.') }
-
-  } else if (inherits(pdf, 'list') & is(pdf[[1]], 'data.frame') & sum(colnames(pdf[[1]]) == c('az','dens'))) {
-    if (verbose) { stop('Custom probability distribution(s) found. This feature is not yet functional.') }
-
-  } else {
-    stop('Probability density function not recognized. Please use only normal or uniform.')# or a list of data.frames with columns "az" and "dens".')
-  }
-
-  ## init parameters
+  if (!is.character(pdf) || length(pdf)!=1L || is.na(pdf) ||
+      !tolower(pdf) %in% c("n","normal","u","uniform"))
+    stop("Choose a normal or uniform density.")
+  if (!is.numeric(az) || !length(az) || any(!is.finite(az)))
+    stop("Supply finite azimuths.")
   n <- length(az)
-  if (n > 1 & length(unc) == 1) {
-    if (verbose) { .sky_message('Single uncertainty value found. Using it for all measurements.') }
-    unc <- rep(unc, length(az))
+  unc <- .measurement_unc(unc,n)
+  if (!is.numeric(.res) || length(.res)!=1L || !is.finite(.res) || .res<=0 || .res>=360 ||
+      !is.numeric(.cutoff) || length(.cutoff)!=1L || !is.finite(.cutoff) || .cutoff<0)
+    stop("Supply a positive grid spacing below 360 degrees and a nonnegative cutoff.")
+  if (!missing(name) && length(name)!=n) stop("Supply one name per azimuth.")
+  normal <- tolower(pdf) %in% c("n","normal")
+  x <- seq(0,360,by=.res)
+  x <- x[x<360]
+  out <- vector("list",n)
+  if (.sky_progress(verbose) && n>1L) {
+    pb <- txtProgressBar(max=n,style=3)
+    on.exit(close(pb),add=TRUE)
   }
-
-  xx <- seq(0-90, 360+90, .res)
-
-  out <- list()
-  if (.sky_progress(verbose) && length(az)>1) { pb <- txtProgressBar(max = length(az), style = 3); on.exit(close(pb),add=TRUE) }
-
-  for (k in 1:n) {
-    yy <- azpdf(xx,k)
-
-    ## clean-up due to circularity of azimuths
-    ind <- which(xx < 0)
-    yy[ind + 360/.res] <- yy[ind + 360/.res] + yy[ind]
-    x <- xx[-ind]; yy <- yy[-ind]
-    ind <- which(x > 359.99)
-    yy[ind - 360/.res] <- yy[ind - 360/.res] + yy[ind]
-    x <- x[-ind]; yy <- yy[-ind]
-
+  for (k in seq_len(n)) {
+    delta <- (x-(az[k] %% 360)+180) %% 360-180
+    width <- unc[k]
+    if (!normal) {
+      # Count all copies of this bearing in the inclusive uniform interval.
+      turns <- floor((width-delta)/360) + floor((width+delta)/360) + 1
+      yy <- (turns/width)/2
+    } else if (width<360) {
+      yy <- stats::dnorm(delta,mean=0,sd=width)
+      for (turn in seq_len(ceiling((9*width+180)/360))) {
+        yy <- yy + stats::dnorm(delta+360*turn,mean=0,sd=width) + stats::dnorm(delta-360*turn,mean=0,sd=width)
+      }
+    } else {
+      # At sigma >= one turn, Fourier harmonics beyond the first are below double precision.
+      yy <- (1+2*exp(-0.5*(width*(pi/180))^2)*cos(delta*pi/180))/360
+    }
     ind <- which(yy >= .cutoff)
     out[[k]] <- data.frame(x = x[ind], y = yy[ind])
 
@@ -417,6 +407,8 @@ coordtrans <- function(pdf, hor, xrange, .res=.1, .prec=.1, .output.res=.01, ver
 #' it overrides \emph{.cutoff}
 #' @param .cutoff When the range is chosen automatically, set summed densities below this threshold to zero. Default \code{1e-5}.
 #' @param .res Resolution with which to output SPD. Default is 0.01 degrees.
+#' @section Validation:
+#' The tested sums agreed with independently constructed density sums, and the normalised curves had unit trapezoidal area. See \href{https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks}{D01 validation in the technical manual}.
 #' @export
 #' @references Silva, F (2020) A probabilistic framework and significance test for the analysis of structural orientations
 #'  in skyscape archaeology \emph{Journal of Archaeological Science} 118, 105138. \doi{10.1016/j.jas.2020.105138}
@@ -454,8 +446,19 @@ spd <- function(pdf, xrange, normalise = F, .res = 0.01, .cutoff = 1e-5) {
     curve <- aux[[i]]
     query <- xx
     if (identical(pdf$metadata$coord,"az")) {
-      curve <- .unwrap_north_pdf(curve)
-      if (!identical(curve$x,x[[i]])) query <- (xx+180) %% 360-180
+      # Interpolate periodically, with zero density in the discarded tails.
+      step <- pdf$metadata$param$.res
+      if (is.null(step)) step <- min(diff(curve$x))
+      turn <- rbind(transform(tail(curve,1),x=x-360),curve,transform(head(curve,1),x=x+360))
+      gaps <- which(diff(turn$x)>step*(1+1e-7))
+      if (length(gaps)) {
+        left <- turn$x[gaps]+step
+        right <- turn$x[gaps+1L]-step
+        missing <- unique(round(c(left,right),12))
+        turn <- rbind(turn,data.frame(x=missing,y=0))
+      }
+      curve <- turn
+      query <- xx %% 360
     }
     spd <- spd + approx(curve$x, curve$y, xout=query, yleft=0, yright=0)$y
   }
@@ -577,6 +580,7 @@ randomTest_unc <- function(pdf, az, hor, nsims=1000, conf=.95, tails=2, normalis
   }
 
   grid <- seq(0, 360, source$metadata$param$.res)
+  grid <- grid[grid<360]
   settings <- list(family=source$metadata$pdf, unc=source$metadata$unc,
                    coord=coord, quick=quick, xrange=xrange, resolution=.res,
                    normalise=normalise)
@@ -654,7 +658,7 @@ randomTest_unc <- function(pdf, az, hor, nsims=1000, conf=.95, tails=2, normalis
 #' significant, accounting for the interval search. It is not strong error control for
 #' arbitrary mixtures of true and false local nulls, and does not establish that every
 #' angle inside a cluster is significant or that its endpoints are confidence limits.
-#' Azimuth clusters spanning north are split at the stored 0/360 boundary in every curve.
+#' Azimuth scoring counts each direction once and joins qualifying excursions across north for both observed and simulated curves. A start greater than the end denotes a wrapped interval. Declination retains its two endpoints.
 #' The filter does not change the global test. The maximum-cluster principle is adapted
 #' from Maris and Oostenveld (2007); cluster interpretation follows Sassenhagen and Draschkow
 #' (2019).
@@ -694,6 +698,8 @@ randomTest_unc <- function(pdf, az, hor, nsims=1000, conf=.95, tails=2, normalis
 #' @return A \emph{skyscapeR.sigTest} list containing metadata (test settings,
 #' global and local p-values) and data (empirical SPD and null confidence envelope).
 #' No original PDFs or horizon objects are attached.
+#' @section Validation:
+#' In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
 #' @export
 #' @references Silva, F. (2020). A probabilistic framework and significance test for the analysis of structural orientations in skyscape archaeology. \emph{Journal of Archaeological Science}, 118, 105138. \doi{10.1016/j.jas.2020.105138}.
 #'
@@ -883,6 +889,8 @@ modelTest_unc <- function(pdf, model, unc=NULL, nsims=1000, conf=.95, tails=2, n
 #' Dufour, J.-M. (2006). Monte Carlo tests with nuisance parameters: A general approach to finite-sample inference and nonstandard asymptotics. \emph{Journal of Econometrics}, 133, 443-477. \doi{10.1016/j.jeconom.2005.06.007}.
 #'
 #' North, B. V., Curtis, D. and Sham, P. C. (2002). A note on the calculation of empirical P values from Monte Carlo procedures. \emph{American Journal of Human Genetics}, 71, 439-441. \doi{10.1086/341527}.
+#' @section Validation:
+#' In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
 #' @export
 #' @seealso \code{\link{az.pdf}}, \code{\link{dec.pdf}}, \code{\link{coordtrans}}, \code{\link{spd}}, \code{\link{randomTest}}, \code{\link{plot.skyscapeR.sigTest}}
 #' @examples

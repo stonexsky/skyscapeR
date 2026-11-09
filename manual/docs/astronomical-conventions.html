@@ -311,8 +311,14 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./numerical-validation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Calendar, density and significance checks</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span></a>
   </div>
 </li>
       </ul>
@@ -362,6 +368,7 @@ div.csl-indent {
 
 
 <p><strong>Implementation.</strong> skyscapeR 2.0.9004, <code>R/dates.R</code>, <code>R/mechanics.R</code>, <code>R/stars.R</code>, <code>R/ephemeris.R</code> and <code>R/misc.R</code>. To reproduce a position, specify the instant, the origin of the coordinate frame, the axes and the observer. A calendar agreement does not guarantee that two programs return the same coordinate. This chapter follows those choices from a dated record to a local sightline. The <a href="./ephemeris.html">ephemeris chapter</a> covers file selection and the supplier’s accuracy claim.</p>
+<p>See the <a href="./numerical-validation.html#a01-calendar-checks">independent checks on build 2.0.9005</a> for results and limitations.</p>
 <section id="conventions-time" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="conventions-time"><span class="header-section-number">3.1</span> From a year label to an instant</h2>
 <p><a href="function-methods.html#fn-astroyear"><code>astroYear()</code></a> and <a href="function-methods.html#fn-bc-ad"><code>BC.AD()</code></a> translate between historical labels and astronomical year numbers. Astronomical year 0 is 1 BCE, −1 is 2 BCE and −3499 is 3500 BCE. This conversion addresses the year numbering only. The Gregorian and Julian calendars in <a href="function-methods.html#fn-time2jd"><code>time2jd()</code></a> are proleptic: the analyst selects a rule for the whole calculation, without an automatic reform date. A Julian <strong>day number</strong> can represent an instant specified in <strong>either</strong> calendar.</p>

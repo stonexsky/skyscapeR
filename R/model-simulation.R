@@ -142,7 +142,8 @@
     parallel::stopCluster(cl)
     cl <- NULL
   }
-  result <- .simulation_inference(observed, nsims, batches, paths, memory, conf, tails, progress)
+  result <- .simulation_inference(observed, nsims, batches, paths, memory, conf, tails, progress,
+                                  circular=identical(settings$coord,"az"))
   result
 }
 
@@ -157,8 +158,11 @@
   matrix(vals, nrow=nrows)
 }
 
-.simulation_inference <- function(observed, nsims, batches, paths, memory, conf, tails, progress=FALSE) {
+.simulation_inference <- function(observed, nsims, batches, paths, memory, conf, tails, progress=FALSE, circular=FALSE) {
   width <- nrow(observed)
+  # Preserve the closing sample for plotting, but rank only distinct directions.
+  duplicate.north <- circular && width>1L && abs(diff(range(observed$x))-360)<1e-10
+  last.index <- width-as.integer(duplicate.north)
   disk <- length(paths) > 0L
   stride <- max(1, floor(8*1024^2 / (8 * (as.double(nsims)+1))))
   mean.sim <- sd.sim <- upper <- null.mean <- numeric(width)
@@ -211,6 +215,7 @@
   row.tick <- max(1L,ceiling(nsims/100))
   constant <- sd.sim == 0
   flagged <- which(null.constant & observed$y != null.mean)
+  flagged <- flagged[flagged<=last.index]
   departures <- data.frame(x=observed$x[flagged], observed=observed$y[flagged],
     simulated=null.mean[flagged],
     direction=c("below","above")[1L + (observed$y[flagged] > null.mean[flagged])])
@@ -223,6 +228,7 @@
       below <- which(!constant & y < lower)
       score[below] <- (y[below]-lower[below])/sd.sim[below]
     }
+    if (duplicate.north) score[width] <- 0
     score
   }
   observed.score <- departure(observed$y)
@@ -231,8 +237,14 @@
   runs <- function(i) {
     if (!length(i)) return(list())
     groups <- split(i,cumsum(c(TRUE,diff(i)>1)))
-    groups[vapply(groups,function(g) length(g)>1L &&
-      observed$x[tail(g,1)]-observed$x[g[1]] >= 0.5-1000*.Machine$double.eps,logical(1))]
+    if (circular && length(groups)>1L && i[1L]==1L && tail(i,1L)==last.index) {
+      groups <- c(list(c(groups[[length(groups)]],groups[[1L]])),groups[-c(1L,length(groups))])
+    }
+    groups[vapply(groups,function(g) {
+      span <- observed$x[tail(g,1L)]-observed$x[g[1L]]
+      if (span<0 && circular) span <- span+360
+      length(g)>1L && span>=0.5-1000*.Machine$double.eps
+    },logical(1))]
   }
   pos <- runs(above)
   intervals <- c(pos,runs(below))
@@ -263,8 +275,6 @@
     start=vapply(intervals,function(i) observed$x[i[1L]],numeric(1)),
     end=vapply(intervals,function(i) observed$x[tail(i,1L)],numeric(1)),
     p.value=pval(local.extreme),row.names=NULL)
-  # Allow for subtraction of floating-point grid coordinates at the boundary.
-  local <- local[local$end-local$start >= 0.5-1000*.Machine$double.eps,,drop=FALSE]
   rownames(local) <- NULL
   envelope <- list(x=observed$x, CE.mean=mean.sim, CE.upper=upper)
   if (tails==2) envelope$CE.lower <- lower

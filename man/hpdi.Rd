@@ -49,6 +49,11 @@ grid; they are not joined into a circular interval.
 Hyndman (1996) defines a highest-density region by a common density threshold.
 The discrete grid and tie rule above implement that principle for sampled curves.
 }
+\section{Validation}{
+
+Known tied, truncated and disjoint test distributions returned the expected interval endpoints and achieved the requested minimum discrete mass. See \href{https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks}{D01 validation in the technical manual}.
+}
+
 \examples{
 xx <- seq(-6, 6, by=0.01)
 hpdi(data.frame(x=xx, y=stats::dnorm(xx)), mass=0.95)

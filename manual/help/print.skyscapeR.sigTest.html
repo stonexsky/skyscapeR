@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>print.skyscapeR.sigTest | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-print-skyscaper-sigtest">print.skyscapeR.sigTest() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Print global and local significance results</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>print.skyscapeR.sigTest | skyscapeR 2.0.9006</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-print-skyscaper-sigtest">print.skyscapeR.sigTest() method</a></nav><p>skyscapeR 2.0.9006</p><h2 id='print.skyscapeR.sigTest'>Print global and local significance results</h2><span id='topic+print.skyscapeR.sigTest'></span>
 
 <h3>Description</h3>
 
@@ -17,11 +17,11 @@ print(x, ...)
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code>x</code></td>
+<tr><td><code id="print.skyscapeR.sigTest_:_x">x</code></td>
 <td>
 <p>Object of <em>skyscapeR.sigTest</em> format.</p>
 </td></tr>
-<tr><td><code>...</code></td>
+<tr><td><code id="print.skyscapeR.sigTest_:_...">...</code></td>
 <td>
 <p>Additional arguments to be passed to <em>print</em>.</p>
 </td></tr>
@@ -45,6 +45,12 @@ coordinate system of the fitted test.
 </p>
 
 
+<h3>Validation</h3>
+
+<p>The tested public fits printed the stored global probability and local interval endpoints. A wrapped interval has start greater than end. A plot spanning the full turn displays its two visible segments with the same adjusted probability. See <a href="../numerical-validation.html#s03-scoring-checks">S03 validation in the technical manual</a>.
+</p>
+
+
 <h3>See Also</h3>
 
 <p><code>randomTest</code>, <code>modelTest</code>, <code>plot.skyscapeR.sigTest</code>
@@ -59,4 +65,4 @@ fit &lt;- randomTest(az, nsims = 10, ncores = 1, .res = 2, verbose = FALSE)
 print(fit)
 </code></pre>
 
-<p><a href="../function-methods.html#fn-print-skyscaper-sigtest">print.skyscapeR.sigTest() method</a></p></body></html>
+</body></html>

@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>spd | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-spd">spd() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Sum orientation probability densities</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>spd | skyscapeR 2.0.9006</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-spd">spd() method</a></nav><p>skyscapeR 2.0.9006</p><h2 id='spd'>Sum orientation probability densities</h2><span id='topic+spd'></span>
 
 <h3>Description</h3>
 
@@ -16,25 +16,25 @@ azimuth or declination.
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code>pdf</code></td>
+<tr><td><code id="spd_:_pdf">pdf</code></td>
 <td>
 <p>A <em>skyscapeR.pdf</em> object created with either <code>az.pdf</code> or <code>coordtrans</code></p>
 </td></tr>
-<tr><td><code>xrange</code></td>
+<tr><td><code id="spd_:_xrange">xrange</code></td>
 <td>
 <p>Array of values (min and max) for SPD if different from range of <em>pdf</em>. If given,
 it overrides <em>.cutoff</em></p>
 </td></tr>
-<tr><td><code>normalise</code></td>
+<tr><td><code id="spd_:_normalise">normalise</code></td>
 <td>
 <p>If TRUE, scale the returned density to unit area using
 trapezoidal integration. Default FALSE leaves the summed density unnormalised.</p>
 </td></tr>
-<tr><td><code>.res</code></td>
+<tr><td><code id="spd_:_.res">.res</code></td>
 <td>
 <p>Resolution with which to output SPD. Default is 0.01 degrees.</p>
 </td></tr>
-<tr><td><code>.cutoff</code></td>
+<tr><td><code id="spd_:_.cutoff">.cutoff</code></td>
 <td>
 <p>When the range is chosen automatically, set summed densities below this threshold to zero. Default <code>1e-5</code>.</p>
 </td></tr>
@@ -69,6 +69,12 @@ Normalised densities have units of inverse degrees.
 </p>
 
 
+<h3>Validation</h3>
+
+<p>The tested sums agreed with independently constructed density sums, and the normalised curves had unit trapezoidal area. See <a href="../numerical-validation.html#d01-density-checks">D01 validation in the technical manual</a>.
+</p>
+
+
 <h3>References</h3>
 
 <p>Silva, F (2020) A probabilistic framework and significance test for the analysis of structural orientations
@@ -98,4 +104,4 @@ s2 &lt;- spd(Dec)
 plot(s2)
 </code></pre>
 
-<p><a href="../function-methods.html#fn-spd">spd() method</a></p></body></html>
+</body></html>

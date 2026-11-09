@@ -26,6 +26,11 @@ separately and reports when there are no local regions. The method formats a sav
 result on the console without recomputing it. Read interval coordinates in the units and
 coordinate system of the fitted test.
 }
+\section{Validation}{
+
+The tested public fits printed the stored global probability and local interval endpoints. A wrapped interval has start greater than end. A plot spanning the full turn displays its two visible segments with the same adjusted probability. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+}
+
 \examples{
 az <- az.pdf(az = c(85, 95, 112), unc = 3, verbose = FALSE)
 set.seed(42)

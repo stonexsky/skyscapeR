@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>19&nbsp; Checking the date of heliacal rising – skyscapeR technical manual</title>
+<title>20&nbsp; Checking the date of heliacal rising – skyscapeR technical manual</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -51,7 +51,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./references.html" rel="next">
-<link href="./a02-ephemeris.html" rel="prev">
+<link href="./numerical-validation.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -104,7 +104,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./study-register.html">Validation</a></li><li class="breadcrumb-item"><a href="./heliacal-rising.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./study-register.html">Validation</a></li><li class="breadcrumb-item"><a href="./heliacal-rising.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -276,8 +276,14 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./numerical-validation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Calendar, density and significance checks</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span></a>
   </div>
 </li>
       </ul>
@@ -298,19 +304,19 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sites-stars-and-epochs" id="toc-sites-stars-and-epochs" class="nav-link active" data-scroll-target="#sites-stars-and-epochs"><span class="header-section-number">19.1</span> Sites, stars and epochs</a></li>
-  <li><a href="#comparator-and-shared-inputs" id="toc-comparator-and-shared-inputs" class="nav-link" data-scroll-target="#comparator-and-shared-inputs"><span class="header-section-number">19.2</span> Comparator and shared inputs</a></li>
-  <li><a href="#results-and-their-scope" id="toc-results-and-their-scope" class="nav-link" data-scroll-target="#results-and-their-scope"><span class="header-section-number">19.3</span> Results and their scope</a></li>
-  <li><a href="#reproduce-the-comparison" id="toc-reproduce-the-comparison" class="nav-link" data-scroll-target="#reproduce-the-comparison"><span class="header-section-number">19.4</span> Reproduce the comparison</a></li>
+  <li><a href="#sites-stars-and-epochs" id="toc-sites-stars-and-epochs" class="nav-link active" data-scroll-target="#sites-stars-and-epochs"><span class="header-section-number">20.1</span> Sites, stars and epochs</a></li>
+  <li><a href="#comparator-and-shared-inputs" id="toc-comparator-and-shared-inputs" class="nav-link" data-scroll-target="#comparator-and-shared-inputs"><span class="header-section-number">20.2</span> Comparator and shared inputs</a></li>
+  <li><a href="#results-and-their-scope" id="toc-results-and-their-scope" class="nav-link" data-scroll-target="#results-and-their-scope"><span class="header-section-number">20.3</span> Results and their scope</a></li>
+  <li><a href="#reproduce-the-comparison" id="toc-reproduce-the-comparison" class="nav-link" data-scroll-target="#reproduce-the-comparison"><span class="header-section-number">20.4</span> Reproduce the comparison</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./study-register.html">Validation</a></li><li class="breadcrumb-item"><a href="./heliacal-rising.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./study-register.html">Validation</a></li><li class="breadcrumb-item"><a href="./heliacal-rising.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-rising" class="quarto-section-identifier"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span></h1>
+<h1 class="title"><span id="sec-rising" class="quarto-section-identifier"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span></h1>
 </div>
 
 
@@ -329,18 +335,18 @@ div.csl-indent {
 
 <p><strong>Question.</strong> How close is the seasonal date from <a href="function-methods.html#fn-star-phases"><code>star.phases()</code></a> to the first morning that a second visibility model puts the star above its detection threshold?</p>
 <p><strong>Finding.</strong> In 69 of 70 comparable cases, the two dates fell within one week of each other. The comparison uses modelled visibility at dawn. Assessing accuracy against what people actually saw would require dated naked-eye observations.</p>
-<section id="sites-stars-and-epochs" class="level2" data-number="19.1">
-<h2 data-number="19.1" class="anchored" data-anchor-id="sites-stars-and-epochs"><span class="header-section-number">19.1</span> Sites, stars and epochs</h2>
+<section id="sites-stars-and-epochs" class="level2" data-number="20.1">
+<h2 data-number="20.1" class="anchored" data-anchor-id="sites-stars-and-epochs"><span class="header-section-number">20.1</span> Sites, stars and epochs</h2>
 <p>The main design crossed eight stars with five epochs (3500, 3250 and 2000 BCE, 200 and 2026 CE) and two horizons. Wiltshire used a level horizon at 51.18° N, 1.83° W. Mnajdra South used a terrain skyline from the package. The Mnajdra runs allowed all bearings and held the skyline fixed across epochs. The comparison makes no claim that either monument was in use throughout the sampled period.</p>
 <p>Capella produced no heliacal-rising event in the ten site–epoch combinations. Its ten rows remain in the download with blank event dates. The resulting 70 comparisons represent seven stars. Five southern-star cases at Mnajdra form a separate follow-up and are excluded from the headline count.</p>
 </section>
-<section id="comparator-and-shared-inputs" class="level2" data-number="19.2">
-<h2 data-number="19.2" class="anchored" data-anchor-id="comparator-and-shared-inputs"><span class="header-section-number">19.2</span> Comparator and shared inputs</h2>
+<section id="comparator-and-shared-inputs" class="level2" data-number="20.2">
+<h2 data-number="20.2" class="anchored" data-anchor-id="comparator-and-shared-inputs"><span class="header-section-number">20.2</span> Comparator and shared inputs</h2>
 <p>The reference date comes from <a href="function-methods.html#fn-star-phases"><code>star.phases()</code></a>. The comparator searches mornings around that date on a one-minute grid. It evaluates extinction-adjusted point-source flux against the local background radiance, applying the point-source contrast threshold of <span class="citation" data-cites="crumey2014">Crumey (<a href="references.html#ref-crumey2014" role="doc-biblioref">2014</a>, eqs. 32–33)</span>. A minute above threshold qualifies. The search covered 24 days on either side of the reference date, extended to 64 days where necessary. The experiment therefore checks agreement near the selected event.</p>
 <p>The two calculations share the site, ephemeris and stellar catalogue. The assumed central dark-sky limit was magnitude 6, extinction was 0.20 magnitudes per airmass, refraction was disabled and the Moon was hidden. The benchmark used the twilight and sky-brightness model in development build 2.0.9003. Its threshold is applied to radiance before display compression. It is a criterion used by this study.</p>
 </section>
-<section id="results-and-their-scope" class="level2" data-number="19.3">
-<h2 data-number="19.3" class="anchored" data-anchor-id="results-and-their-scope"><span class="header-section-number">19.3</span> Results and their scope</h2>
+<section id="results-and-their-scope" class="level2" data-number="20.3">
+<h2 data-number="20.3" class="anchored" data-anchor-id="results-and-their-scope"><span class="header-section-number">20.3</span> Results and their scope</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -380,8 +386,8 @@ div.csl-indent {
 </div>
 <p>The week is a useful rule of thumb for agreement over this grid. The cases reuse stars, sites and model inputs. They do not estimate a 69-in-70 probability for an archaeological observer. The study also varied the assumed dark-sky limit to magnitudes 5.5 and 6.5. The corresponding offsets are supplied for each case so the reader can examine sensitivity to that choice.</p>
 </section>
-<section id="reproduce-the-comparison" class="level2" data-number="19.4">
-<h2 data-number="19.4" class="anchored" data-anchor-id="reproduce-the-comparison"><span class="header-section-number">19.4</span> Reproduce the comparison</h2>
+<section id="reproduce-the-comparison" class="level2" data-number="20.4">
+<h2 data-number="20.4" class="anchored" data-anchor-id="reproduce-the-comparison"><span class="header-section-number">20.4</span> Reproduce the comparison</h2>
 <ul>
 <li><a href="study/results.csv">Download the per-case results</a>. Positive <code>calibrated_days</code> means that the comparator’s first qualifying morning fell later than the phase date. The table carries the main/follow-up label, the event dates and the alternative model outputs.</li>
 <li><a href="archives/heliacal-rising-test.zip">Download the archived test</a>. It contains the original R scripts, the Python export script, daily margins, checks through the public renderer and the study README.</li>
@@ -803,8 +809,8 @@ Crumey, Andrew. 2014. <span>‘Human Contrast Threshold and Astronomical Visibil
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./a02-ephemeris.html" class="pagination-link" aria-label="A02 · Ephemeris accuracy and lunar skyline crossings">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></span>
+      <a href="./numerical-validation.html" class="pagination-link" aria-label="Calendar, density and significance checks">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Calendar, density and significance checks</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

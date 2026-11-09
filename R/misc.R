@@ -107,6 +107,8 @@ minmaxdec = function(name, from, to, loc=FALSE) {
 #' @param mm Arcminutes as a finite numeric scalar. Defaults to zero.
 #' @param ss Arcseconds as a finite numeric scalar. Defaults to zero.
 #' @return A numeric scalar giving the angle in signed decimal degrees.
+#' @section Validation:
+#' Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks}{A01 validation in the technical manual}.
 #' @export
 #' @examples
 #' ten(24, 52, 16)
@@ -240,6 +242,7 @@ mag.dec = function(loc, date) {
 #' @noRd
 #' @export
 subset.skyscapeR.pdf <- function(x, subset, ...) {
+  if (!is.null(x$metadata$dec)) x$metadata$dec <- x$metadata$dec[subset]
   x$metadata$name <- x$metadata$name[subset]
   x$metadata$az <- x$metadata$az[subset]
   x$metadata$unc <- x$metadata$unc[subset]
@@ -292,6 +295,8 @@ sampleList <- function(ll) {
 #' even for a single distribution. For SPD or x/y input, one matrix.
 #' Each matrix has columns \code{start} and \code{end}, with ordered endpoints
 #' and one row per contiguous region, sorted by start.
+#' @section Validation:
+#' Known tied, truncated and disjoint test distributions returned the expected interval endpoints and achieved the requested minimum discrete mass. See \href{https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks}{D01 validation in the technical manual}.
 #' @export
 #' @references Hyndman, R. J. (1996). Computing and Graphing Highest Density Regions. The American Statistician 50, 120-126. \doi{10.1080/00031305.1996.10474359}.
 #' @seealso \code{\link{az.pdf}}, \code{\link{dec.pdf}}, \code{\link{spd}}, \code{\link{plot.skyscapeR.pdf}}
@@ -366,6 +371,8 @@ hpdi <- function(x, mass=0.954) {
 #' @examples pval2stars(c(0.0005, 0.008, 0.03, 0.08, 0.2))
 #' @return A character vector of significance symbols: ***, **, *, + or an open circle, using cut points 0.001, 0.01, 0.05 and 0.1.
 #' @param p.value p-value
+#' @section Validation:
+#' All tested symbol thresholds, their equality cases and the legacy printed bound agreed with their stated probability ranges. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
 #' @export
 pval2stars <- function(p.value) {
   if (is(p.value,'character')) { p.value <- as.numeric(substr(p.value, 3,nchar(p.value))) }

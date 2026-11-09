@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>modelTest | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-modeltest">modelTest() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Test orientations against a specified null model</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>modelTest | skyscapeR 2.0.9006</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-modeltest">modelTest() method</a></nav><p>skyscapeR 2.0.9006</p><h2 id='modelTest'>Test orientations against a specified null model</h2><span id='topic+modelTest'></span>
 
 <h3>Description</h3>
 
@@ -28,43 +28,43 @@ specific to each site.
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code>pdf</code></td>
+<tr><td><code id="modelTest_:_pdf">pdf</code></td>
 <td>
 <p>Empirical skyscapeR.pdf from <code>az.pdf</code>, <code>dec.pdf</code> or <code>coordtrans</code>. Its coordinate selects the simulation path.</p>
 </td></tr>
-<tr><td><code>model</code></td>
+<tr><td><code id="modelTest_:_model">model</code></td>
 <td>
 <p>One shared data frame or an ordered list with one table per observation. The first column contains candidate coordinates in degrees and the second contains nonnegative discrete sampling weights, with at least one positive weight. On equally spaced grids, density heights can serve as weights.</p>
 </td></tr>
-<tr><td><code>unc</code></td>
+<tr><td><code id="modelTest_:_unc">unc</code></td>
 <td>
 <p>Positive standard deviation (normal) or half-width (uniform), in degrees of the tested coordinate. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.</p>
 </td></tr>
-<tr><td><code>nsims</code></td>
+<tr><td><code id="modelTest_:_nsims">nsims</code></td>
 <td>
 <p>Number of simulations, at least two. Default is 1000.</p>
 </td></tr>
-<tr><td><code>conf</code></td>
+<tr><td><code id="modelTest_:_conf">conf</code></td>
 <td>
 <p>Confidence level as a fraction.</p>
 </td></tr>
-<tr><td><code>tails</code></td>
+<tr><td><code id="modelTest_:_tails">tails</code></td>
 <td>
 <p>1 for upper excesses, 2 for excesses and deficits.</p>
 </td></tr>
-<tr><td><code>normalise</code></td>
+<tr><td><code id="modelTest_:_normalise">normalise</code></td>
 <td>
 <p>Scale each summed density to unit area before comparison.</p>
 </td></tr>
-<tr><td><code>.res</code></td>
+<tr><td><code id="modelTest_:_.res">.res</code></td>
 <td>
 <p>Spacing of the empirical and simulated comparison grids in degrees. Default 0.01.</p>
 </td></tr>
-<tr><td><code>ncores</code></td>
+<tr><td><code id="modelTest_:_ncores">ncores</code></td>
 <td>
 <p>Worker count. By default use half the detected available logical cores, rounded down with a minimum of one. Set ncores=1 for serial execution. The simulation count and memory batch size can further limit workers. Verbose output reports the effective count.</p>
 </td></tr>
-<tr><td><code>verbose</code></td>
+<tr><td><code id="modelTest_:_verbose">verbose</code></td>
 <td>
 <p>Display simulation progress.</p>
 </td></tr>
@@ -137,6 +137,12 @@ See <code>randomTest</code> for study-design and Monte Carlo limitations.
 </p>
 
 
+<h3>Validation</h3>
+
+<p>In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See <a href="../numerical-validation.html#s03-scoring-checks">S03 validation in the technical manual</a>.
+</p>
+
+
 <h3>References</h3>
 
 <p>Silva, F. (2020). A probabilistic framework and significance test for the analysis of structural orientations in skyscape archaeology. <em>Journal of Archaeological Science</em>, 118, 105138. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/j.jas.2020.105138")}.
@@ -179,4 +185,4 @@ fit &lt;- modelTest(Dec, data.frame(x = c(-22, 18), w = c(1, 1)))
 ## End(Not run)
 </code></pre>
 
-<p><a href="../function-methods.html#fn-modeltest">modelTest() method</a></p></body></html>
+</body></html>

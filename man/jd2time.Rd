@@ -53,6 +53,11 @@ The result does not contain a timezone or UTC offset. During a repeated
 local hour, two distinct instants can have identical output strings; retain
 the original Julian date or use a fixed offset for an unambiguous round trip.
 }
+\section{Validation}{
+
+Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks}{A01 validation in the technical manual}.
+}
+
 \examples{
 jd <- time2jd("2019/12/31 23:30:00", "UTC")
 jd2time(jd, "UTC+02") # 2020/01/01 01:30:00

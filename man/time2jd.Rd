@@ -54,6 +54,11 @@ Ambiguous and nonexistent local times at clock transitions are rejected.
 For an ambiguous time, specify a fixed offset to identify the intended instant.
 Calendar dates and clock components are validated before conversion.
 }
+\section{Validation}{
+
+Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks}{A01 validation in the technical manual}.
+}
+
 \examples{
 time2jd("2000/01/01 12:00:00", "UTC") # 2451545
 # A positive offset crosses into the preceding UTC year:

@@ -28,6 +28,11 @@ nonzero component sets the sign and later components must be nonnegative. A stri
 contain one to three colon- or space-separated components and an optional leading sign.
 A string such as "-0:30" preserves the negative sign even when degrees are zero.
 }
+\section{Validation}{
+
+Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks}{A01 validation in the technical manual}.
+}
+
 \examples{
 ten(24, 52, 16)
 ten(-8, 30, 0)     # -8.5 degrees

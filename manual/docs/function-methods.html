@@ -256,8 +256,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./numerical-validation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Calendar, density and significance checks</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span></a>
   </div>
 </li>
       </ul>
@@ -412,6 +418,7 @@ ul.task-list li input[type="checkbox"] {
 <p>State the time scale, civil calendar, reference frame and refraction convention before comparing outputs. A correct calendar conversion can still pass the wrong physical instant to a downstream calculation.</p>
 <section id="fn-astroyear" class="level3" data-number="15.1.1">
 <h3 data-number="15.1.1" class="anchored" data-anchor-id="fn-astroyear"><span class="header-section-number">15.1.1</span> <code>astroYear()</code></h3>
+<p><strong>Validation on 2.0.9005.</strong> Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. <a href="./numerical-validation.html#a01-calendar-checks">A01 results</a>.</p>
 <p><a href="function-index.html#idx-astroyear">Function index</a></p>
 <p>Astronomical years include zero. Historical BC or BCE years convert
 by subtracting the historical year from one. AD and CE years keep their value.
@@ -445,6 +452,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-bc-ad" class="level3" data-number="15.1.2">
 <h3 data-number="15.1.2" class="anchored" data-anchor-id="fn-bc-ad"><span class="header-section-number">15.1.2</span> <code>BC.AD()</code></h3>
+<p><strong>Validation on 2.0.9005.</strong> Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. <a href="./numerical-validation.html#a01-calendar-checks">A01 results</a>.</p>
 <p><a href="function-index.html#idx-bc-ad">Function index</a></p>
 <p>Astronomical dating includes a year zero, whereas historical BC and AD labels run
 directly from 1 BC to AD 1. Positive years retain their number and receive AD. For zero
@@ -580,6 +588,7 @@ also contains a <code>horizontal</code> data frame with columns <code>az</code> 
 </section>
 <section id="fn-jd2time" class="level3" data-number="15.1.4">
 <h3 data-number="15.1.4" class="anchored" data-anchor-id="fn-jd2time"><span class="header-section-number">15.1.4</span> <code>jd2time()</code></h3>
+<p><strong>Validation on 2.0.9005.</strong> Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. <a href="./numerical-validation.html#a01-calendar-checks">A01 results</a>.</p>
 <p><a href="function-index.html#idx-jd2time">Function index</a></p>
 <p>An instant is specified by its UT Julian date. To label it consistently, choose the
 calendar and the offset or civil timezone appropriate to the record. The conversion
@@ -634,6 +643,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-long-date" class="level3" data-number="15.1.5">
 <h3 data-number="15.1.5" class="anchored" data-anchor-id="fn-long-date"><span class="header-section-number">15.1.5</span> <code>long.date()</code></h3>
+<p><strong>Validation on 2.0.9005.</strong> Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. <a href="./numerical-validation.html#a01-calendar-checks">A01 results</a>.</p>
 <p><a href="function-index.html#idx-long-date">Function index</a></p>
 <p>A season or event table may need a day/month label without an epoch. The first two
 characters are the month number and characters four and five the day number; the
@@ -774,6 +784,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-skyscaper-vars" class="level3" data-number="15.1.8">
 <h3 data-number="15.1.8" class="anchored" data-anchor-id="fn-skyscaper-vars"><span class="header-section-number">15.1.8</span> <code>skyscapeR.vars()</code></h3>
+<p><strong>Validation on 2.0.9005.</strong> Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. <a href="./numerical-validation.html#a01-calendar-checks">A01 results</a>.</p>
 <p><a href="function-index.html#idx-skyscaper-vars">Function index</a></p>
 <p>The same observation can have different labels or apparent coordinates under different
 calendar, timezone, reference-frame or atmospheric choices. With no arguments the
@@ -854,6 +865,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-ten" class="level3" data-number="15.1.9">
 <h3 data-number="15.1.9" class="anchored" data-anchor-id="fn-ten"><span class="header-section-number">15.1.9</span> <code>ten()</code></h3>
+<p><strong>Validation on 2.0.9005.</strong> Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. <a href="./numerical-validation.html#a01-calendar-checks">A01 results</a>.</p>
 <p><a href="function-index.html#idx-ten">Function index</a></p>
 <p>The sign applies to the whole angle. The magnitude is the sum of absolute degrees,
 minutes divided by 60 and seconds divided by 3600. With numeric components the first
@@ -899,6 +911,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-time2jd" class="level3" data-number="15.1.10">
 <h3 data-number="15.1.10" class="anchored" data-anchor-id="fn-time2jd"><span class="header-section-number">15.1.10</span> <code>time2jd()</code></h3>
+<p><strong>Validation on 2.0.9005.</strong> Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. <a href="./numerical-validation.html#a01-calendar-checks">A01 results</a>.</p>
 <p><a href="function-index.html#idx-time2jd">Function index</a></p>
 <p>Civil dates require both a calendar and a time convention to specify an instant. The
 function parses each supplied date and time, verifies that the calendar date exists by
@@ -955,6 +968,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-timestring" class="level3" data-number="15.1.11">
 <h3 data-number="15.1.11" class="anchored" data-anchor-id="fn-timestring"><span class="header-section-number">15.1.11</span> <code>timestring()</code></h3>
+<p><strong>Validation on 2.0.9005.</strong> Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. <a href="./numerical-validation.html#a01-calendar-checks">A01 results</a>.</p>
 <p><a href="function-index.html#idx-timestring">Function index</a></p>
 <p>Survey records often store year, month, day and clock time separately. This formatter
 pads the month, day and clock components to two characters and joins them as
@@ -5175,6 +5189,8 @@ Each call draws immediately and returns the new object invisibly. Save it with
 <p>Record the density family, sampling interval, cutoff, coordinate transformation and any unit-area normalisation. Interpolating an SPD onto a finer grid does not improve a bearing measurement.</p>
 <section id="fn-az-pdf" class="level3" data-number="15.8.1">
 <h3 data-number="15.8.1" class="anchored" data-anchor-id="fn-az-pdf"><span class="header-section-number">15.8.1</span> <code>az.pdf()</code></h3>
+<p><strong>Verified on 2.0.9006.</strong> Periodic azimuth densities passed the fine-grid and wide-width D01 checks. <a href="./numerical-validation.html#d01-density-checks">D01 rerun</a>.</p>
+<p><strong>Validation on 2.0.9005.</strong> The analytic density checks in D01 found a folding error near north at 0.005-degree spacing and omitted periodic tails in the two 100-degree-width cases. <a href="./numerical-validation.html#d01-density-checks">D01 results</a>.</p>
 <p><a href="function-index.html#idx-az-pdf">Function index</a></p>
 <p>A field bearing defines a centre and an angular uncertainty. Model the uncertainty as a
 normal density with the supplied standard deviation, or as a uniform density over the
@@ -5350,6 +5366,8 @@ transformation settings, format version and descriptive source labels.
 </section>
 <section id="fn-dec-pdf" class="level3" data-number="15.8.3">
 <h3 data-number="15.8.3" class="anchored" data-anchor-id="fn-dec-pdf"><span class="header-section-number">15.8.3</span> <code>dec.pdf()</code></h3>
+<p><strong>Verified on 2.0.9006.</strong> Declination subsets retained the selected centres in all four cases. <a href="./numerical-validation.html#d01-density-checks">D01 rerun</a>.</p>
+<p><strong>Validation on 2.0.9005.</strong> The sampled declination densities agreed with analytic references at the tested bounds and cutoffs. Subsetting curves can leave stale input centres in metadata$dec. <a href="./numerical-validation.html#d01-density-checks">D01 results</a>.</p>
 <p><a href="function-index.html#idx-dec-pdf">Function index</a></p>
 <p>A declination estimate already incorporates the sightline geometry. This constructor
 works directly in that coordinate. For each centre it evaluates a normal density with
@@ -5427,6 +5445,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-hpdi" class="level3" data-number="15.8.4">
 <h3 data-number="15.8.4" class="anchored" data-anchor-id="fn-hpdi"><span class="header-section-number">15.8.4</span> <code>hpdi()</code></h3>
+<p><strong>Validation on 2.0.9005.</strong> Known tied, truncated and disjoint test distributions returned the expected interval endpoints and achieved the requested minimum discrete mass. <a href="./numerical-validation.html#d01-density-checks">D01 results</a>.</p>
 <p><a href="function-index.html#idx-hpdi">Function index</a></p>
 <p>A distribution with several peaks can give several disjoint intervals. The mass
 parameter applies to the selected regions together; the result describes concentration
@@ -5868,6 +5887,8 @@ confidence intervals. Use <code>az.pdf</code>, <code>coordtrans</code> and
 </section>
 <section id="fn-spd" class="level3" data-number="15.8.9">
 <h3 data-number="15.8.9" class="anchored" data-anchor-id="fn-spd"><span class="header-section-number">15.8.9</span> <code>spd()</code></h3>
+<p><strong>Verified on 2.0.9006.</strong> Broad azimuth SPDs were continuous at north and correctly interpolated across the final grid segment. <a href="./numerical-validation.html#d01-density-checks">D01 rerun</a>.</p>
+<p><strong>Validation on 2.0.9005.</strong> The tested sums agreed with independently constructed density sums, and the normalised curves had unit trapezoidal area. <a href="./numerical-validation.html#d01-density-checks">D01 results</a>.</p>
 <p><a href="function-index.html#idx-spd">Function index</a></p>
 <p>A summed probability density gives each input measurement one density curve. The
 function linearly interpolates these curves onto one angular grid, assigns zero outside
@@ -5946,6 +5967,8 @@ Normalised densities have units of inverse degrees.
 </section>
 <section id="fn-subset-skyscaper-pdf" class="level3" data-number="15.8.10">
 <h3 data-number="15.8.10" class="anchored" data-anchor-id="fn-subset-skyscaper-pdf"><span class="header-section-number">15.8.10</span> <code>subset.skyscapeR.pdf()</code></h3>
+<p><strong>Verified on 2.0.9006.</strong> Selecting, reordering, duplicating or dropping all declination PDFs now retains matching centre metadata. <a href="./numerical-validation.html#d01-density-checks">D01 rerun</a>.</p>
+<p><strong>Validation on 2.0.9005.</strong> Declination PDF subsets retained the original centre metadata in four tests, although curve order and labels followed the selection. <a href="./numerical-validation.html#d01-density-checks">D01 results</a>.</p>
 <p><a href="function-index.html#idx-subset-skyscaper-pdf">Function index</a></p>
 <p>This registered S3 method has no separate package help topic. The implementation subsets the name, azimuth, uncertainty and horizon metadata and the corresponding entries in the list of measurement curves using the same index. It returns the modified object.</p>
 <p><a href="#fn-hpdi">Subsetting and normalising densities</a>.</p>
@@ -5989,6 +6012,7 @@ Implementation arguments, return value and documented modes
 <p>The reference distribution, score, Monte Carlo rank and any search across intervals all affect the inferential claim. A display symbol summarises an already-calculated p-value.</p>
 <section id="fn-bernoulli-trial" class="level3" data-number="15.9.1">
 <h3 data-number="15.9.1" class="anchored" data-anchor-id="fn-bernoulli-trial"><span class="header-section-number">15.9.1</span> <code>bernoulli.trial()</code></h3>
+<p><strong>Validation on 2.0.9005.</strong> Exact and upper-tail probabilities agreed with independent binomial calculations for the tested counts up to 1,000, including zero hits. <a href="./numerical-validation.html#s03-scoring-checks">S03 results</a>.</p>
 <p><a href="function-index.html#idx-bernoulli-trial">Function index</a></p>
 <p>Define a hit and the per-structure chance of a hit before counting the orientations. A
 single-count probability answers how often exactly that count arises; the upper tail
@@ -6054,6 +6078,8 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-modeltest" class="level3" data-number="15.9.2">
 <h3 data-number="15.9.2" class="anchored" data-anchor-id="fn-modeltest"><span class="header-section-number">15.9.2</span> <code>modelTest()</code></h3>
+<p><strong>Verified on 2.0.9006.</strong> The observed and simulated azimuth curves use the same circular cluster search. The original test matrix gave one interval from 346° to 15°. <a href="./numerical-validation.html#s03-scoring-checks">S03 rerun</a>.</p>
+<p><strong>Validation on 2.0.9005.</strong> Independent scoring reproduced the stored linear-grid probabilities. A north-crossing azimuth excess can split into two clusters; including both 0 and 360 degrees can also affect the global rank. <a href="./numerical-validation.html#s03-scoring-checks">S03 results</a>.</p>
 <p><a href="function-index.html#idx-modeltest">Function index</a></p>
 <p>A proposed topographical or astronomical explanation can predict some orientations more
 frequently than others. Testing that explanation requires simulating its predicted
@@ -6174,6 +6200,8 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-plot-skyscaper-sigtest" class="level3" data-number="15.9.3">
 <h3 data-number="15.9.3" class="anchored" data-anchor-id="fn-plot-skyscaper-sigtest"><span class="header-section-number">15.9.3</span> <code>plot.skyscapeR.sigTest()</code></h3>
+<p><strong>Verified on 2.0.9006.</strong> On a full-turn panel, a cluster crossing north can have two visible segments with one shared probability. <a href="./numerical-validation.html#s03-scoring-checks">S03 rerun</a>.</p>
+<p><strong>Validation on 2.0.9005.</strong> The tested public fits plotted the stored local interval midpoints and significance symbols. North-crossing intervals can appear separately. <a href="./numerical-validation.html#s03-scoring-checks">S03 results</a>.</p>
 <p><a href="function-index.html#idx-plot-skyscaper-sigtest">Function index</a></p>
 <p>The observed curve and envelope use the azimuth or declination grid stored in the test
 result. The two-tailed display shades between its lower and upper pointwise bounds; the
@@ -6267,6 +6295,8 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-print-skyscaper-sigtest" class="level3" data-number="15.9.4">
 <h3 data-number="15.9.4" class="anchored" data-anchor-id="fn-print-skyscaper-sigtest"><span class="header-section-number">15.9.4</span> <code>print.skyscapeR.sigTest()</code></h3>
+<p><strong>Verified on 2.0.9006.</strong> A single adjusted probability is printed for a range crossing north. <a href="./numerical-validation.html#s03-scoring-checks">S03 rerun</a>.</p>
+<p><strong>Validation on 2.0.9005.</strong> The tested public fits printed the stored global probability and local interval endpoints. North-crossing intervals can appear separately. <a href="./numerical-validation.html#s03-scoring-checks">S03 results</a>.</p>
 <p><a href="function-index.html#idx-print-skyscaper-sigtest">Function index</a></p>
 <p>Start with the stored global Monte Carlo result, then examine the direction, limits and
 local p-value of each reported interval. The summary gives the tail setting, confidence
@@ -6308,6 +6338,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-pval2stars" class="level3" data-number="15.9.5">
 <h3 data-number="15.9.5" class="anchored" data-anchor-id="fn-pval2stars"><span class="header-section-number">15.9.5</span> <code>pval2stars()</code></h3>
+<p><strong>Validation on 2.0.9005.</strong> All tested symbol thresholds, their equality cases and the legacy printed bound agreed with their stated probability ranges. <a href="./numerical-validation.html#s03-scoring-checks">S03 results</a>.</p>
 <p><a href="function-index.html#idx-pval2stars">Function index</a></p>
 <p>Use a symbol for compact plot labels while retaining the numeric p-value for
 interpretation. The cut points are 0.001, 0.01, 0.05 and 0.1, with symbols ***, **, *, +
@@ -6344,6 +6375,8 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-randomtest" class="level3" data-number="15.9.6">
 <h3 data-number="15.9.6" class="anchored" data-anchor-id="fn-randomtest"><span class="header-section-number">15.9.6</span> <code>randomTest()</code></h3>
+<p><strong>Verified on 2.0.9006.</strong> The global score counts north once. A qualifying excess across north is reported as one interval with start greater than end. <a href="./numerical-validation.html#s03-scoring-checks">S03 rerun</a>.</p>
+<p><strong>Validation on 2.0.9005.</strong> Independent scoring reproduced the stored linear-grid probabilities. A north-crossing azimuth excess can split into two clusters; including both 0 and 360 degrees can also affect the global rank. <a href="./numerical-validation.html#s03-scoring-checks">S03 results</a>.</p>
 <p><a href="function-index.html#idx-randomtest">Function index</a></p>
 <p>Following Silva (2020), the test combines the observed measurement densities into a summed probability density (SPD).
 For each simulated dataset, the function draws one azimuth per measurement with replacement

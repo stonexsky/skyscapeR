@@ -4,6 +4,8 @@
 
 For the construction of the empirical and transformed measurement curves, see the [density chapter](orientation-densities.qmd).
 
+See the [independent checks on build 2.0.9005](numerical-validation.qmd#s03-scoring-checks) for results and limitations.
+
 ## Random orientations {#meth-random}
 
 [`randomTest()`](function-methods.html#fn-randomtest) asks whether independent draws of structural bearings, with the observed sample size, measurement errors and site geometry, could produce departures at least as large as those observed. Randomness is specified in **azimuth**. A uniform distribution of bearings generally induces a non-uniform distribution of declinations. Even on a level horizon, the mapping from bearing to declination has turning points; terrain relief changes the mapping further [@silva2020, §§3–4].
@@ -36,7 +38,7 @@ Set the contribution to zero where all curves agree; omit the lower term in an u
 
 For the global test let $b$ be the number of simulated scores greater than or equal to $T_0$. The returned value is $(b+1)/(B+1)$ [@north2002; @dufour2006]. At $B=1000$, zero exceedances gives $1/1001$; complete ties give 1. Exchangeability requires that the observed and simulated datasets be processed comparably under the specified null. More simulations improve rank resolution. They cannot repair a null that ignores dependence among structures.
 
-For a local result, find contiguous crossings of the same bound with at least two grid points spanning at least 0.5°. Sum the departures within each observed cluster. Repeat the cluster search in every simulation and retain its **largest** cluster score, or zero if none qualifies. Compare each observed cluster with these simulated maxima using the same inclusive rank. A two-tailed search includes both signs. The global test uses all departures, including those too narrow for local reporting. The local correction accounts for searching this grid under the complete null; it does not locate an individual significant endpoint or adjust for comparing many archaeological subsets [@maris2007; @sassen2019]. North-crossing clusters are split at the stored 0°/360° seam. A split can affect qualification and the local score.
+For a local result, find contiguous crossings of the same bound with at least two grid points spanning at least 0.5°. Sum the departures within each observed cluster. Repeat the cluster search in every simulation and retain its **largest** cluster score, or zero if none qualifies. Compare each observed cluster with these simulated maxima using the same inclusive rank. A two-tailed search includes both signs. The global test uses all departures, including those too narrow for local reporting. The local correction accounts for searching this grid under the complete null; it does not locate an individual significant endpoint or adjust for comparing many archaeological subsets [@maris2007; @sassen2019]. Through 2.0.9005, north-crossing clusters were split at the stored seam. Build 2.0.9006 joins adjacent excesses or deficits across north in both the observations and simulations, and excludes a duplicate north direction from the global score. A reported interval with start greater than end crosses north clockwise. See the [fixed-input S03 replay](numerical-validation.qmd#s03-scoring-checks).
 
 ## What changed since the publications? {#sig-history}
 

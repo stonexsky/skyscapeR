@@ -14,6 +14,9 @@ lines <- readLines(home, encoding = "UTF-8", warn = FALSE)
 if (!any(grepl(marker, lines, fixed = TRUE))) {
   script <- paste(c(marker, "<script>",
     "const studyPages = {",
+    "  '#a01-calendar-checks': 'numerical-validation.html',",
+    "  '#d01-density-checks': 'numerical-validation.html',",
+    "  '#s03-scoring-checks': 'numerical-validation.html',",
     "  '#a02-ephemeris-accuracy': 'a02-ephemeris.html',",
     "  '#h01-field-validation': 'study-register.html',",
     "  '#h02-skyline-comparison': 'study-register.html'",

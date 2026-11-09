@@ -3,6 +3,12 @@
 This development version is being tested ahead of the 2.0 release. For detailed
 migration instructions and positional-argument changes, see the README.
 
+## Development build 2.0.9006
+
+* Azimuth PDFs retain fine-grid values across north and account for wide uncertainties over a complete turn. Declination PDF subsets retain their selected centres.
+* Azimuth significance tests count north once in the random bearing grid and the global score. A local interval that crosses north is returned with its start greater than its end. Refit earlier azimuth analyses to obtain the revised ranks and cluster probabilities. Saved fits retain their original results.
+* The D01 and S03 validation records preserve both the 2.0.9005 results and the 2.0.9006 reruns.
+
 ## Sky visualisation
 
 * Publication-colour star symbols use distinct spectral-class inks on white at all magnitudes; symbol size indicates magnitude. The lunar limb and illuminated portion in publication styles are projected at their angular sizes on the sky.
