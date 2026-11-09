@@ -1,0 +1,43 @@
+# Studies by question and package build {#sec-register}
+
+A result belongs to the build, inputs and settings that produced it. The tables give the latest verified run **for the stated question and sample** in these archives. The function chapters describe build 2.0.9004. An older build in the table means that the reported result has not been established here for the newer implementation.
+
+{{< include _h01-validation.qmd >}}
+
+## Lunar event selection
+
+The [historical crossover comparison](lunar-crossovers.html#crossover-archive) checks annual selections against the Silva & Pimenta (2012) simulation workbooks. It reports moonset pairing changes, SIM1 residuals and the separate unresolved 40° N series. The new worked examples use 2.0.9004 and do not replace the archived runs.
+
+## Sky rendering
+
+A plausible image can conceal errors in its outline, brightness or response to altitude. Each row concerns one quantity. A change to the outline can require repeating one study while leaving a recorded twilight comparison relevant.
+
+| Question | Evidence, tested implementation and scope |
+|---|---|
+| **Milky Way shape. Where are the outer boundary and internal lanes?** | The 2.0 development archive retains the diffuse-light source map, candidate thresholds, traced boundaries and bright and dark masks. These document how the depiction was derived and how sensitive its shape was to the tracing choices. The later photometric field comparisons concern brightness in selected patches. They do not independently establish the position of an outer edge. For alignment work the outer outline includes the enclosed dark regions. If a later release revises the anticentre outline, its boundary comparison needs a new run. |
+| **Twilight. Does the sky brighten by the observed amount in different directions?** | In 2.0.9003 the study compared the calibrated curve with Koomen's Maryland observations held outside the fit. Across 22 directions/solar-altitude combinations the mean absolute difference, expressed in magnitudes, was 0.48 for the revised curve and 2.28 for the earlier curve on the same observations. This checks the observed configurations at solar altitudes −3° and −6°. |
+| **Flux. Does a point source retain its integrated light when the field of view changes?** | The 2.0.9004 release check recovered the modelled Sirius flux at 90°, 45° and 5° field widths (reported ratio 1 at each width). Additional checks compare Sirius, the cluster and a Carina field. Recovery of the input flux verifies the calculation. It does not by itself calibrate the absolute brightness of the night sky. |
+| **Extinction. Does the Milky Way dim by the specified altitude-dependent factor?** | The 2.0.9002 test compared the same skies with the band extinction coefficient set to 0 and 0.2. The script checked the band radiance against the expected multiplier. Model transmission at 0.2 was 0.149 at 5° altitude and 0.832 at 90°. This verifies application of the extinction law. It is not a set of atmospheric transmission measurements. |
+
+The [heliacal-rising comparison](heliacal-rising.qmd) draws on the rendering model for a separate question about the timing of an event.
+
+## Study records
+
+[Download the sky-check outputs and code](archives/study-register-evidence.zip). The H01 report and reproducible field archive are linked in the H01 section above.
+
+* [Sky-rendering development studies and code](https://chatgpt.com/library?file_id=libfile_95fe5213a7ec8191bda3065faa73ff1a&account_id=personal)
+
+## When a test changes the package
+
+| What changed? | How the manual reports it |
+|---|---|
+| Implementation changes, but the question, data, settings and metric stay the same | Add a run to the same study. Show the latest tested build first, with the old and new values, the reason for the code change, and links to both records. Until a rerun exists, identify the last build actually tested. |
+| A new station, dataset, phenomenon or accuracy claim is introduced | Add a linked study alongside the existing one. If extending a cohort, retain results for the original common sample and give the expanded sample its own denominator. |
+| An error in the reference data, selection or scoring invalidates a result | Mark the affected result as superseded and explain why. Put the corrected result in the main text. Retain the original record and the correction together in the history. |
+| A discrepancy was used to tune the model | Label the repeated comparison as calibration or a regression check. Report an independent validation separately when observations unused in tuning are available. |
+
+Each study should have a stable link. Each run should identify the exact source revision or package archive checksum, the data and protocol versions, settings, metric, sample and dated outputs. The main text carries the conclusion a reader can use for the documented release. Earlier runs remain accessible in that study's history.
+
+## Worked checks for the final methods chapters
+
+[Calendar and position calculations](astronomical-conventions.qmd), [synthetic instrument reductions](field-reduction.qmd) and the [known photographic skyline](photographic-horizons.qmd) have reproducible worked examples for 2.0.9004. Independent frame-matched positions, a surveyed baseline and photographic check bearings remain outstanding.

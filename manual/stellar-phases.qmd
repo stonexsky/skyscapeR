@@ -1,0 +1,61 @@
+# Seasonal stellar visibility {#sec-stellar}
+
+**Function** [`star.phases()`](function-methods.html#fn-star-phases) · **Package** skyscapeR 2.0.9004
+
+At an archaeological site, a star can rise above a ridge while the sky is still too bright to see it. [`star.phases()`](function-methods.html#fn-star-phases) asks on which mornings or evenings the terrain, darkness and stellar brightness allow an opportunity to observe it. Its heliacal-rising date is the return of such an opportunity after a season of invisibility.
+
+A seasonal search needs the skyline across the stellar track. See [partial photographic horizons](photographic-horizons.html#partial-photo-consumers) before supplying a sector image.
+
+## How a date is assigned
+
+1. **Construct the annual cycle.** The function fixes the star's position for the chosen year and samples 365 equally spaced solar longitudes. These steps describe progress through the seasons. Their spacing in elapsed civil time varies. The package maps the longitude of each event back to a representative local Julian-calendar date in the requested year.
+2. **Find intervals above the skyline.** The stellar track is tested against the altitude of the horizon at the star's bearing. A full profile can produce more than one interval of clearance. A track which just touches the ridge gives zero time above it. The solver refines terrain crossings separately from the sampling used for solar altitude.
+3. **Apply the visibility criteria together.** A qualifying interval must last longer than zero, the Sun must be below the adopted solar-altitude threshold, and both a star–Sun altitude separation and an extinction test must be satisfied. If the catalogue magnitude is $m$, the required altitude difference is $2.1m+10$ degrees [@purrington1988, p. S74]. For a magnitude 1 star this is 12.1°. The package also adds $kX(h)$ magnitudes of extinction, where $k$ is the extinction coefficient and $X(h)$ is the airmass at stellar altitude $h$ [@schaefer1986; @krisciunas1991, eq. 14]. Extinction depends on altitude above the horizontal, even if a ridge is much higher than that.
+4. **Classify the day and its transitions.** Continuous intervals of visibility give the daily phase codes. A visible ascending or descending interval below `alt.rs` can qualify as rising or setting. The first transition out of an invisible season defines heliacal rising. Since the year is cyclic, a season that spans the December solstice continues across the end of the table.
+
+### What qualifies as a visible interval?
+
+In `R/stars.R`, the year-specific stellar coordinates are held fixed while the code constructs a reusable diurnal track on a reference day starting at 2000-01-01 00:00 UTC. The seasonal loop changes the solar coordinates. Thus the time nodes of this track have computational meaning; an archaeological observation date comes from mapping the selected solar longitude back to the requested year. For an irregular skyline, the solver locates crossings, combines them with one-minute nodes and the solar grid specified by `res`, and refines turning points in stellar altitude. It tests each segment midpoint for clearance above the skyline. Multiple unobstructed intervals on the same track remain eligible.
+
+For stellar altitude $h$, solar altitude $s$, stellar magnitude $m$, limiting magnitude $L$ and extinction coefficient $k$, the code uses $E(h)=k/[\sin h+0.025\exp(-11\sin h)]$ magnitudes. On terrain-clear segments it requires finite, nonnegative extinction, $m+E(h)\leq L$, $s<\texttt{solar.alt}$ and $h-s\geq 2.1m+10°$. The angular separation here is a **difference in altitudes**, even when star and Sun differ substantially in bearing [@purrington1988; @krisciunas1991]. Threshold margins are interpolated linearly between segment endpoints. An interval survives only when its end is strictly later than its start. Two conditions satisfied at different moments within the same segment do not by themselves establish visibility.
+
+A second pass restricts eligible intervals to $h\leq\texttt{alt.rs}$ and checks the sign of the stellar altitude change. A rising interval gives R, a descending interval S and both give RS. A day with visibility elsewhere but neither classified passage gives V. With no visible interval it gives I. Thus V can be the appropriate code even for a star which crosses the skyline twice. For a detection close to a threshold, record the adopted `res`, extinction and solar limit. Coarse solar interpolation and a very brief modelled opportunity have different implications for the assigned date.
+
+## Choices that can change the interpretation
+
+| Choice | Consequence for the reader |
+|---|---|
+| Supply a terrain profile or a single horizon altitude | A profile allows the skyline to vary along the stellar track. The default solar threshold also depends on the input form. For a fair comparison set `solar.alt` explicitly to the same value in both runs. |
+| Set extinction, limiting magnitude and refraction | These assumptions change the visibility window. The default extinction coefficient, 0.2 magnitudes per airmass, represents a clear-sky baseline. Local observing conditions may differ. |
+| Use the altitude-difference rule for other kinds of events | Purrington's empirical relation covers dawn rising and dusk setting on the Sun's side of the sky, down to about magnitude 3. The package extends the same threshold across relative azimuths. Opposite-horizon events and fainter stars therefore involve extrapolation [@purrington1988, pp. S74–S75]. |
+| Count any positive-duration window | A short break above an uneven skyline can qualify. A human observer may need longer to find the star. Moonlight, weather and an observer's adaptation history also affect detection [@schaefer1987]. |
+| Enter a cluster such as M45 | The function applies the cluster's integrated catalogue magnitude to a single target. Use an individual star to ask about the visibility of a particular Pleiad. |
+
+## Changes that matter for earlier analyses
+
+The 2.0 development NEWS records changes to handling southern, circumpolar and obstructed tracks. A completely obstructed star now returns an all-invisible result. An always-clear star can still enter different seasonal phases. The separate `metadata$horizon.status` field lets the analyst distinguish these cases. An earlier analysis involving a star close to the circumpolar limit or a raised skyline is a priority for recalculation.
+
+The output also distinguishes the schematic day of the seasonal cycle from `metadata$events$date.julian`. Use the latter when passing an event to [`riseset()`](function-methods.html#fn-riseset) for a terrain crossing. The crossing gives a starting time from which to examine the changing dawn sky.
+
+**Evidence for the date.** The [heliacal-rising comparison](heliacal-rising.qmd) quantifies agreement for this event under a specified set of observing assumptions. Other phase transitions require their own evidence.
+
+See the [event-search chapter](event-searches.qmd) for the crossing solver and an example of reoccultation on a rising track.
+
+## Full package help
+
+The following help page is generated from the archived 2.0.9004 package documentation.
+
+<details><summary>Read the complete <code>star.phases()</code> help page</summary>
+
+{{< include _help.qmd >}}
+
+</details>
+
+
+**Related function entries**
+
+[`createHor()`](function-methods.html#fn-createhor), [`plot.skyscapeR.starphases()`](function-methods.html#fn-plot-skyscaper-starphases), [`riseset()`](function-methods.html#fn-riseset), [`sketchSky()`](function-methods.html#fn-sketchsky), [`skyStep()`](function-methods.html#fn-skystep), [`star()`](function-methods.html#fn-star), [`star.phases()`](function-methods.html#fn-star-phases).
+
+## Comparing the same season across stars and epochs {#phase-comparisons}
+
+[`plot.skyscapeR.starphases()`](function-methods.html#fn-plot-skyscaper-starphases) places a result and any further results on a common seasonal axis beginning at December solstice. A single cycle can be drawn as a ring or a strip. Multiple results occupy concentric rings from the outside inward, or aligned strips in the linear layout. The month divisions are a shared seasonal reference. Use the saved event date for a historical calendar comparison. Ordering results by star or epoch and holding the skyline and visibility thresholds fixed makes it possible to attribute changes in the boundaries to the chosen comparison. The plot reads the classifications already calculated by [`star.phases()`](function-methods.html#fn-star-phases). Adding a ring does not refit the visibility model.

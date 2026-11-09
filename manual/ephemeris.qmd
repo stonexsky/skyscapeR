@@ -1,0 +1,36 @@
+# swephR and the Swiss Ephemeris {#sec-ephemeris}
+
+**Scope.** This page records the astronomical dependency and its manufacturer's accuracy claim. The documented visibility and terrain studies address different quantities from the planetary and lunar position errors discussed here.
+
+## Which layer supplies the result?
+
+| Layer | Role in an analysis |
+|---|---|
+| skyscapeR | Chooses the body, date, site and calculation settings. In 2.0.9004 its file-backed planetary position routine checks for paired planetary and lunar file coverage at the epoch, requests Swiss files and checks the returned ephemeris flag and messages. A missing file can therefore stop a calculation. |
+| swephR | Provides R bindings to the Swiss Ephemeris routines. The R package and the underlying engine have separate versions. The wrapper documentation describes the file-free Moshier option and the optional `swephRdata` distribution [@swephr]. |
+| Swiss Ephemeris and its data files | The engine reads the available numerical ephemeris and applies the requested transformations. The compressed planetary and lunar files identify their parent JPL solution. File generation and temporal coverage must be recorded for the position being compared [@astrodienst; @sweprog]. |
+
+The environment inspected for the 7 November pilot had swephR **0.3.2**, Swiss Ephemeris **2.10.03** and swephRdata **0.0.1**. The headers of the planetary and lunar files inspected for the modern and prehistoric blocks (`sepl_18.se1`, `semo_18.se1`, `seplm36.se1`, `semom36.se1`) identify **DE431**. Astrodienst reports a transition to **DE441** in May 2026. An installation can continue to use older files. The four headers establish the provenance of these files only. They do not establish the data used for a different run [@astrodienst].
+
+The [event-search examples](event-searches.qmd) were subsequently run with modern planetary and lunar files whose headers identify DE441. The accompanying example archive records both hashes. These runs illustrate event selection and do not test compression accuracy.
+
+## What the quoted accuracy measures
+
+Astrodienst reports **0.001 arcsecond** precision for its compressed ephemeris in reproducing the parent JPL data [@astrodienst]. This specifies agreement between two numerical representations of the same underlying lunar and planetary trajectories. A comparison against another release also includes differences between the two JPL solutions. JPL makes a corresponding distinction between the precision of its numerical representation and the uncertainty in the trajectory itself [@horizonsmanual].
+
+For an archaeological horizon event, another question is where the body would have appeared to a person at a particular place and time. The answer also depends on the observer's position, the skyline, atmospheric refraction and Earth rotation. For ancient epochs, the conversion between dynamical time and Earth-rotation time involves an uncertain ΔT [@deltat]. A fixed star brings in its catalogue position and motion as well. The quoted planetary and lunar figure therefore supplies no general error bound for stellar phase dates or horizon bearings.
+
+## Validation status
+
+| Question | Evidence in this edition |
+|---|---|
+| Which data generation is available in the inspected environment? | Version inspection and four file headers identifying DE431. This is a provenance check. |
+| How closely do those files reproduce the parent JPL positions at selected epochs? | The figure above is the supplier's claim. This edition contains no measured residuals for a matched DE431 comparison. |
+| How accurately can a local event be reconstructed? | The [heliacal-rising study](heliacal-rising.qmd) concerns agreement between two visibility models sharing an ephemeris. The [H01](study-register.qmd#h01-field-validation) field study concerns terrain altitude. Each has its own unit of error and scope. |
+
+
+**Related function entries**
+
+[`body.position()`](function-methods.html#fn-body-position), [`riseset()`](function-methods.html#fn-riseset), [`star()`](function-methods.html#fn-star), [`time2jd()`](function-methods.html#fn-time2jd).
+
+For worked calendar, reference-frame and fixed-star calculations, see [astronomical conventions and stellar positions](astronomical-conventions.qmd).

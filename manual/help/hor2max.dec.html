@@ -1,0 +1,63 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>hor2max.dec | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-hor2max-dec">hor2max.dec() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Find the northern declination limit of a horizon</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Estimate the largest declination indicated by the horizon near true north.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>hor2max.dec(hor, alt = 0, range = 25)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>hor</code></td>
+<td>
+<p>Either a <em>skyscapeR.horizon</em> object or the latitude of the place.</p>
+</td></tr>
+<tr><td><code>alt</code></td>
+<td>
+<p>Altitude of the horizon at northernmost point. Only necessary if no
+<em>skyscapeR.horizon</em> object is provided. Default is 0.</p>
+</td></tr>
+<tr><td><code>range</code></td>
+<td>
+<p>Range of azimuths to check for minimum declination. Default is 25
+degrees either side of North.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Terrain relief can shift the limiting sightline away from the meridian. The function
+samples bearings at 0.01-degree spacing within the specified half-width around 0
+degrees. It calls az2dec at each bearing with the stored horizon, or with the supplied
+latitude and constant altitude, then returns the maximum sampled declination. A limited
+search sector may miss a more extreme sightline elsewhere.
+</p>
+
+
+<h3>Value</h3>
+
+<p>One numeric value in degrees, the largest declination sampled across the specified azimuth range around north.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>createHor</code>, <code>downloadHWT</code>, <code>createHWT</code>, <code>exportHor</code>, <code>hor2alt</code>, <code>hor2min.dec</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>hor &lt;- malta_horizons[[1]]
+hor2max.dec(hor)
+</code></pre>
+
+<p><a href="../function-methods.html#fn-hor2max-dec">hor2max.dec() method</a></p></body></html>

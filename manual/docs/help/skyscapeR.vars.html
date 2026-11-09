@@ -1,0 +1,92 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>skyscapeR.vars | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-skyscaper-vars">skyscapeR.vars() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Inspect or set session defaults for skyscapeR</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Set the observing and time conventions that should be shared across an analysis, or
+retrieve them for a reproducible methods record.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>skyscapeR.vars(timezone, calendar, refraction, atm, temp, dec, k)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>timezone</code></td>
+<td>
+<p>Timezone name (for example &quot;Europe/London&quot;) or fixed offset in hours east of UTC,
+or a string such as &quot;UTC+02:00&quot;. Initially &quot;Europe/London&quot;. Use UTC or a fixed
+offset for dates before 1900. See <code>time2jd</code> for details.</p>
+</td></tr>
+<tr><td><code>calendar</code></td>
+<td>
+<p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p>
+</td></tr>
+<tr><td><code>refraction</code></td>
+<td>
+<p>Whether atmospheric refraction is to be taken into account. Default is TRUE.</p>
+</td></tr>
+<tr><td><code>atm</code></td>
+<td>
+<p>Air pressure in mbar for the refraction calculation. Default is 1013.25 mbar.</p>
+</td></tr>
+<tr><td><code>temp</code></td>
+<td>
+<p>Air temperature in degrees Celsius for the refraction calculation. Default is 15 degrees Celsius.</p>
+</td></tr>
+<tr><td><code>dec</code></td>
+<td>
+<p>Output declination: <em>geo</em> for the geocentric, or <em>topo</em> for the topocentric
+frame of reference. Defaults to topocentric.</p>
+</td></tr>
+<tr><td><code>k</code></td>
+<td>
+<p>Visual extinction in magnitudes per airmass, shared by natural sky sketches and stellar phase calculations. The initial value of 0.2 is a clear-sky baseline, consistent with the approximate V-band coefficient for Kitt Peak in the UC Davis Physics 157 Observing Guide. Extinction varies with site and atmospheric conditions (Schaefer 1986, 1993). Use zero to disable extinction.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The same observation can have different labels or apparent coordinates under different
+calendar, timezone, reference-frame or atmospheric choices. With no arguments the
+function returns a named snapshot. Supplied arguments update the package environment for
+subsequent calls in the current R session. Functions with their own explicit arguments
+or fixed UT sampling conventions may override these defaults. Record the settings with
+the survey data.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A named list of the current session settings, including the current year. Supplying an argument updates that setting for subsequent package calls in this R session.
+</p>
+
+
+<h3>References</h3>
+
+<p>Schaefer, B. E. (1986). Atmospheric Extinction Effects on Stellar Alignments. Journal for the History of Astronomy 17, S32-S42. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1177/002182868601701003")}.
+</p>
+<p>Schaefer, B. E. (1993). Astronomy and the Limits of Vision. Vistas in Astronomy 36, 311-361. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/0083-6656(93)90113-X")}.
+</p>
+<p>University of California, Davis. <em>Physics 157 Observing Guide</em>, Spring 2022, discussion of extinction coefficients.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>skyscapeR-package</code>, <code>time2jd</code>, <code>body.position</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>settings &lt;- skyscapeR.vars()
+settings$timezone
+</code></pre>
+
+<p><a href="../function-methods.html#fn-skyscaper-vars">skyscapeR.vars() method</a></p></body></html>

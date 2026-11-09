@@ -1,0 +1,172 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>plot.skyscapeR.horizon | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-plot-skyscaper-horizon">plot.skyscapeR.horizon() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Plot a site horizon and celestial targets</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Inspect the terrain along a site's horizon and compare it with the apparent paths of
+candidate celestial targets.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>## S3 method for class 'skyscapeR.horizon'
+plot(
+  x,
+  show.az = (!missing(xrange) || !missing(xlim)),
+  xrange,
+  yrange,
+  obj,
+  col.ground = NULL,
+  col.sky,
+  use.image = TRUE,
+  ...,
+  show.skyline = NULL,
+  sky = NULL,
+  xlim,
+  ylim,
+  fastLoad = FALSE,
+  show.legend = TRUE,
+  style = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>x</code></td>
+<td>
+<p>Object of <em>skyscapeR.horizon</em> format.</p>
+</td></tr>
+<tr><td><code>show.az</code></td>
+<td>
+<p>Logical that controls whether to display azimuth values or cardinal
+directions. Defaults to TRUE when xrange is supplied.</p>
+</td></tr>
+<tr><td><code>xrange</code></td>
+<td>
+<p>Azimuth range for plotting.</p>
+</td></tr>
+<tr><td><code>yrange</code></td>
+<td>
+<p>Altitude range for plotting. By default one degree of altitude occupies the same distance as one degree of azimuth on the device.</p>
+</td></tr>
+<tr><td><code>obj</code></td>
+<td>
+<p>A <em>skyscapeR.object</em> from <code>skyObject</code>, or
+a list of these objects. Each group retains its own epochs and styles
+for displaying the paths of celestial objects.</p>
+</td></tr>
+<tr><td><code>col.ground</code></td>
+<td>
+<p>Silhouette colour. NULL uses a dark muted foreground for natural skies, pale grey-green for publication colour or grey for monochrome.</p>
+</td></tr>
+<tr><td><code>col.sky</code></td>
+<td>
+<p>Earlier name for a solid sky colour. Prefer sky.</p>
+</td></tr>
+<tr><td><code>use.image</code></td>
+<td>
+<p>Use an attached external panorama PNG when available. Default TRUE.
+Missing or changed files warn and fall back to the numerical silhouette.</p>
+</td></tr>
+<tr><td><code>...</code></td>
+<td>
+<p>Additional arguments to be passed to <em>plot</em>.</p>
+</td></tr>
+<tr><td><code>show.skyline</code></td>
+<td>
+<p>Draw the numerical skyline. By default the line appears only without a panorama PNG.</p>
+</td></tr>
+<tr><td><code>sky</code></td>
+<td>
+<p>A colour string or a background from <code>sketchSky</code> or <code>stellariumSky</code>.</p>
+</td></tr>
+<tr><td><code>xlim</code></td>
+<td>
+<p>Earlier name for xrange.</p>
+</td></tr>
+<tr><td><code>ylim</code></td>
+<td>
+<p>Earlier name for yrange.</p>
+</td></tr>
+<tr><td><code>fastLoad</code></td>
+<td>
+<p>Use a sampled PNG for quick plots. New photographic imports store a preview. For older horizons the first preview loads the image. The numerical skyline and celestial tracks retain their precision.</p>
+</td></tr>
+<tr><td><code>show.legend</code></td>
+<td>
+<p>Display the key for celestial tracks. The angular axes are always drawn.</p>
+</td></tr>
+<tr><td><code>style</code></td>
+<td>
+<p>Frame and silhouette style. A sketch supplies its stored style by default. Without a
+sketch the default is <code>"publication-colour"</code>. Other choices are <code>"natural"</code> and
+<code>"publication-mono"</code>. Supplied panorama pixels and sky objects retain their own rendering.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>A track meeting the horizon identifies a possible rise or set direction for that
+declination. The horizontal axis is true bearing and the vertical axis is angular
+altitude. The function fills the terrain below the stored profile and can overlay
+diurnal tracks computed for the observing location. Refraction affects those tracks.
+Rescaling the display or changing its colours does not change the underlying horizon. Add lines or polygons in azimuth and altitude immediately after plotting. Set <code>par(mfrow=c(2,1))</code> before plotting to stack two horizons.
+</p>
+<p>For a two-year epoch range, draw tracks for the stored minimum and maximum
+declinations, using the session refraction setting for both tracks. Line
+styles are taken from the target object; older objects without them use
+solid lines of width 1.
+</p>
+<p>A horizon with an attached DEM, PeakFinder or photographic PNG displays the image by default. Add show.skyline = TRUE to inspect its numerical profile, or use.image = FALSE to draw the silhouette alone. With xrange supplied, azimuth labels default to degrees. A partial photograph initially opens on its recorded sector. An image-backed horizon or a supplied sky uses a 2:1 plot box. Copy the PNG with the saved horizon and use relinkHor() after moving it. With automatic altitude limits, a 30-degree azimuth sector shows 15 degrees of altitude.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Draws the horizon and returns the session atmosphere invisibly in a list.
+</p>
+
+
+<h3>Layers and coordinate consistency</h3>
+
+<p>A reusable sky is calculated for its own stored location and instant. Pair it
+with the horizon used to create it; drawing a saved sky does not recalculate
+its positions for another observer. Celestial reference tracks from
+<code>skyObject</code> use the plotted horizon's location and session
+atmosphere. Keep that atmosphere consistent with the stored sketch when
+comparing a track with a disc or point symbol.
+</p>
+<p>The foreground masks sky layers geometrically. It does not make the sky object
+an extinction or visibility calculation through the terrain. Image calibration
+and numerical skyline agreement remain the responsibility of the horizon
+source. Azimuth-altitude plotting is a cylindrical display, with increasing
+horizontal distortion towards the zenith. Retain consistent ranges when
+comparing styles, epochs or constellation traditions.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>downloadHWT</code>, <code>skyObject</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'># Plot a bundled Maltese horizon:
+hor &lt;- malta_horizons[[1]]
+plot(hor)
+
+# Add the paths of the solstices and equinoxes sun in the year 1999 BC:
+tt &lt;- skyObject('solar extremes', epoch=-2000, col='blue')
+plot(hor, obj=tt)
+# Compare the bounding tracks across a range of years:
+hor &lt;- createHor(c(0,360), c(2,2), loc=c(35,-8,25))
+targets &lt;- skyObject('solar extremes', epoch=c("4001 BC", "2001 BC"), col='red')
+plot(hor, obj=targets)
+</code></pre>
+
+<p><a href="../function-methods.html#fn-plot-skyscaper-horizon">plot.skyscapeR.horizon() method</a></p></body></html>

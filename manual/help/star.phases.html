@@ -1,0 +1,303 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>star.phases | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-star-phases">star.phases() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Model seasonal changes in stellar visibility</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Estimate the seasons in which a star's rising or setting could be visible in twilight at
+an archaeological site.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>star.phases(
+  star,
+  year,
+  loc,
+  alt.hor = 0,
+  alt.rs = 10,
+  solar.alt = NULL,
+  k = skyscapeR.vars()$k,
+  limit = 6,
+  refraction,
+  atm,
+  temp,
+  res = 1/24/6
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>star</code></td>
+<td>
+<p>Either the star name or a <em>skyscapeR.star</em> object.</p>
+</td></tr>
+<tr><td><code>year</code></td>
+<td>
+<p>The year of interest. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p>
+</td></tr>
+<tr><td><code>loc</code></td>
+<td>
+<p>Location, either a <em>skyscapeR.horizon</em> or a vector
+containing the latitude, longitude and elevation of location, in this order.</p>
+</td></tr>
+<tr><td><code>alt.hor</code></td>
+<td>
+<p>The altitude of the horizon to consider.
+Defaults to zero degrees.</p>
+</td></tr>
+<tr><td><code>alt.rs</code></td>
+<td>
+<p>The maximum altitude of a star's first or last
+visibility for it to still be considered to be as rising or setting.
+Defaults to ten degrees.</p>
+</td></tr>
+<tr><td><code>solar.alt</code></td>
+<td>
+<p>Solar altitude threshold in degrees. NULL uses
+-6 for a horizon, or alt.hor - 6 for coordinate input.</p>
+</td></tr>
+<tr><td><code>k</code></td>
+<td>
+<p>Visual extinction in magnitudes per airmass (Schaefer 1986, p. S33). The package adopts 0.2 as a clear-sky baseline. Extinction varies with site and atmospheric conditions (Schaefer 1986, 1993). Defaults to the session value from skyscapeR.vars().</p>
+</td></tr>
+<tr><td><code>limit</code></td>
+<td>
+<p>The maximum magnitude of a star that can be
+visible with the naked eye. Defaults to 6.</p>
+</td></tr>
+<tr><td><code>refraction</code></td>
+<td>
+<p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
+</td></tr>
+<tr><td><code>atm</code></td>
+<td>
+<p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
+</td></tr>
+<tr><td><code>temp</code></td>
+<td>
+<p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
+</td></tr>
+<tr><td><code>res</code></td>
+<td>
+<p>Spacing of solar altitude samples in days, greater than zero and at
+most one. Default 1/144 day (ten minutes). Terrain crossings are refined separately.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Seasonal visibility depends on solar depression, stellar altitude, apparent magnitude
+and atmospheric extinction as well as terrain. The model holds the star's position fixed
+for the chosen year and samples a 365-day solar cycle with uniformly spaced ecliptic
+longitudes. It requires a star-Sun altitude separation of 2.1 times the catalogue
+magnitude plus 10 degrees, and compares extinction-adjusted magnitude with the limiting
+magnitude. A positive-duration overlap of visibility conditions determines the daily
+code. The stellar altitude trend within a visible interval below alt.rs determines
+rising or setting. Terrain reappearance of a descending star therefore contributes
+a setting phase. Disjoint runs are reported as separate seasons on the circular
+model year, including runs spanning the December-solstice reference.
+</p>
+<p>Both constant and varying horizons are evaluated on all 365 model days. A horizon
+object supplies the coordinates and piecewise-linear horizon. The profile must
+cover all bearings and close at north. Use alt.hor only with coordinate input.
+A fixed-coordinate stellar track is shared across model days. The terrain search
+uses the same corners, azimuth reversals, interior extrema and 0.01-second root
+tolerance as <code>riseset</code>, collecting all crossings during the model day.
+Visible windows can lie wholly between minute samples. A touch without clearance
+contributes no visible duration. Source terrain resolution and numerical tolerances
+limit the shortest resolvable window.
+</p>
+<p>Refraction selects apparent or geometric altitudes for both Sun and star.
+A stellar horizon affects obstruction at the star's azimuth. The solar darkness
+test uses altitude relative to the astronomical horizon, with default solar.alt
+of -6 for a profile and alt.hor - 6 for coordinates. Supply the same solar.alt
+to compare a constant profile and a raised scalar horizon. Extinction, the
+star-Sun separation and alt.rs use stellar altitude above the astronomical horizon.
+Solar altitude is interpolated between res samples. Stellar visibility margins
+are interpolated on a grid containing minute samples, solar samples, terrain
+crossings and stellar altitude extrema. Decrease res to assess borderline dates.
+Any positive-duration opportunity in this threshold model qualifies. Actual
+naked-eye detection over a very short interval depends on observing conditions.
+The synthetic solar year and solstice calendar mapping
+are conventions inherited from the phase model.
+</p>
+<p>Purrington (1988, p. S74, equation 1 and Fig. 2) fitted the altitude-difference
+rule to empirical data down to about magnitude 3. It describes rising at dawn and
+setting at dusk on the same side of the sky as the Sun. Purrington discusses a
+smaller separation for opposite-horizon events (p. S75). This function applies
+the same threshold at every relative azimuth. Schaefer (1987, section 4)
+examines how sky brightness and observing conditions affect heliacal visibility.
+Brady (2015) gives the archaeological context for the phase terminology.
+</p>
+<p>Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-package</code> for setup.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A skyscapeR.starphases list. The data table gives each model day and its phase code: I for invisible, V for visible without a classified rise or set, R for rising, S for setting and RS for both. Metadata include the star, year, observer coordinates, phase type, season and event tables, refraction setting and solar altitude threshold. For a named horizon, <code>metadata$site.name</code> retains the site label for comparisons. The logical <code>metadata$horizon</code> records whether a horizon object was supplied. The separate <code>metadata$horizon.status</code> reports <code>"always above"</code>, <code>"always below"</code> or <code>"crosses"</code> relative to the supplied skyline. Event rows include solar.longitude in degrees on the synthetic cycle. The date.julian column gives the representative local Julian calendar date at the supplied longitude. Pass this date to <code>riseset</code> with <code>calendar = "J"</code> to time the skyline crossing. For a dawn sketch, advance from that crossing until the star clears the terrain while the sky is still dark enough. The phase date alone does not specify a visible instant.
+</p>
+
+
+<h3>Extinction and model scope</h3>
+
+<p>The implementation uses Rozenberg's airmass approximation,
+<i>X(h)=1/(\sin h+0.025\exp(-11\sin h))</i>, multiplying it by <code>k</code>
+and adding the result to the fixed catalogue magnitude. Here <code>h</code> is the
+stellar altitude selected by <code>refraction</code>, above the astronomical
+horizontal. This is distinct from the height above a ridge. The star-Sun
+altitude-separation rule uses the catalogue magnitude before extinction.
+</p>
+<p>The model does not calculate scattered moonlight, artificial light pollution,
+weather, an observer's adaptation history, or variable-star light curves.
+The same separation threshold is used at all relative azimuths. It is therefore
+a screening model for seasonal opportunities, not a probability of detection.
+Supplying an integrated cluster entry such as M45 treats its total magnitude as
+one target; cluster size, surface brightness and resolution into individual
+stars do not enter this calculation. It does not predict when each Pleiad is
+individually visible.
+</p>
+<p>Horizon status is determined from positive-duration clearance intervals along
+the same stellar track used for the phase calculation, with the supplied
+skyline and refraction setting. The same calculation applies in both
+hemispheres. A track with no clearance returns an ordinary all-I result,
+rather than raising an error. An always-clear track still undergoes the
+extinction and solar-darkness tests; never setting does not imply visibility.
+A star that never sets below a level horizontal can cross a raised ridge.
+Isolated tangencies do not count as intervals of clearance or obstruction.
+Numerical resolution and the supplied terrain profile limit this status.
+</p>
+<p>The separate metadata$horizon.status field is &quot;always above&quot;, &quot;always below&quot;
+or &quot;crosses&quot;, relative to the supplied skyline. Phase codes R and S describe
+the rising or descending part of a visible track below alt.rs; they do not
+require a physical skyline crossing that day. An always-clear star may thus
+have seasonal R/S codes. The type &quot;circumpolar&quot; is retained for an all-V
+result only when the track is always above the skyline; other all-V results
+are labelled &quot;visible throughout cycle&quot;. Use horizon.status, not type, to
+distinguish clearance from seasonal visibility.
+</p>
+
+
+<h3>Dates and a subsequent sky sketch</h3>
+
+<p>Events follow adjacent-sample transitions around the closed cycle, including
+the December-solstice boundary. Entering and leaving I mark acronycal setting
+and heliacal rising; entering and leaving V mark acronycal rising and heliacal
+setting. A season continuing across the boundary creates no event there.
+Constant phase sequences have no transition events.
+</p>
+<p>The 365 model samples are equally spaced in solar longitude, not in elapsed
+civil time. Printed seasonal labels are anchored to the December solstice.
+<code>metadata$events$date.julian</code> instead solves for the event solar longitude
+in the requested year and converts it to a local mean-solar Julian-calendar
+date using longitude. It is a representative date, not an exact detection
+instant, and can differ from the synthetic <code>day</code> label.
+</p>
+<p>Pass the representative date to <code>riseset</code> with
+<code>calendar = "J"</code> and an explicit timezone. With UTC or a fixed offset,
+inspect neighbouring dates when local mean-solar and civil days differ.
+The returned rise is a skyline crossing. Follow it by a short time sequence
+with <code>sketchSky</code> and <code>skyStep</code> to inspect terrain
+clearance and the changing brightness of the local sky.
+</p>
+<p>A supplied <code>skyscapeR.star</code> is used as given. Recompute it for the requested
+year; the phase function does not update an existing object's coordinates.
+</p>
+
+
+<h3>How precise is a heliacal-rising date?</h3>
+
+<p>In 69 of 70 individual comparisons, the estimated first morning of visibility was within a week of the predicted heliacal-rising date.
+</p>
+
+
+<h3>Reproducing a saved result</h3>
+
+<p>Metadata retain the resolved star, year, observer coordinates, extinction,
+atmospheric settings and solar-altitude threshold, together with <code>limit</code>,
+<code>alt.rs</code>, <code>res</code> and <code>alt.hor</code>. The latter is NA when a terrain
+profile replaces the constant horizon. <code>metadata$horizon.profile</code> contains
+the numerical <code>az</code>/<code>alt</code> table used, or NULL for a constant horizon.
+Landscape images and DEMs are not copied into the result. Existing logical
+<code>horizon</code> and <code>skyline</code> fields are retained.
+</p>
+<p><code>metadata$provenance$packages</code> records the loaded skyscapeR and swephR
+versions; an unavailable version is NA, for example when sourcing functions
+outside a package namespace. Version strings do not uniquely identify
+development builds. Retain the original script, code revision and ephemeris
+files as well: the saved metadata do not identify or archive those files.
+Earlier saved results do not acquire these fields automatically.
+</p>
+
+
+<h3>Provenance</h3>
+
+<p>Structured results carry a <code>provenance</code> attribute. Read it with
+<code>attr(result, "provenance")</code>; its <code>packages</code> entry records the loaded
+skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+This attribute adds no list entries or table columns. Ordinary subsetting or
+transformations may discard attributes; save the original result for reference.
+It does not identify ephemeris files, catalogue revisions or a development
+commit. Retain those and the analysis script separately for exact reproduction.
+The same record remains available in <code>metadata$provenance</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Crumey, A. (2014). Human contrast threshold and astronomical
+visibility. MNRAS 442, 2600-2619. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1093/mnras/stu992")}.
+</p>
+<p>Purrington, R. D. (1988). Heliacal Rising and Setting: Quantitative Aspects. Journal for the History of Astronomy 19, S72-S84. <a href="https://articles.adsabs.harvard.edu/pdf/1988JHAS...19...72P">https://articles.adsabs.harvard.edu/pdf/1988JHAS...19...72P</a>.
+</p>
+<p>Schaefer, B. E. (1986). Atmospheric Extinction Effects on Stellar Alignments. Journal for the History of Astronomy 17, S32-S42. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1177/002182868601701003")}.
+</p>
+<p>Schaefer, B. E. (1993). Astronomy and the Limits of Vision. Vistas in Astronomy 36, 311-361. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/0083-6656(93)90113-X")}.
+</p>
+<p>Schaefer, B. E. (1987). Heliacal Rise Phenomena. Journal for the History of Astronomy 18, S19-S33. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1177/002182868701801103")}.
+</p>
+<p>Brady, B. (2015). Star Phases: the Naked-eye Astronomy of the Old Kingdom Pyramid Texts. In F. Silva and N. Campion (eds), Skyscapes: The Role and Importance of the Sky in Archaeology. Oxbow Books, pp. 76-86.
+</p>
+<p>Krisciunas, K. and Schaefer, B. E. (1991). A model of the brightness
+of moonlight. PASP 103, 1033-1039 (equation 14 for extinction airmass).
+\Sexpr[results=rd]{tools:::Rd_expr_doi("10.1086/132921")}.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>plot.skyscapeR.starphases</code>, <code>riseset</code>, <code>sketchSky</code>, <code>skyStep</code>, <code>star</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>## Not run: 
+if (requireNamespace("swephRdata", quietly = TRUE)) {
+  ss1 &lt;- star.phases('Aldebaran',-4000, c(35,-8,200))
+  
+  # One can then look at the star's phase type:
+  ss1$metadata$type
+  
+  # Date range of seasons:
+  ss1$metadata$seasons
+  
+  # Date range of phase-type events:
+  ss1$metadata$events
+  
+  # And plot them:
+  plot(ss1)
+  
+  # You can play with the parameters and see how predictions change:
+  ss1 &lt;- star.phases('Aldebaran',-4000, c(35,-8,200), alt.hor=2, alt.rs=5)
+  plot(ss1)
+}
+
+## End(Not run)
+</code></pre>
+
+<p><a href="../function-methods.html#fn-star-phases">star.phases() method</a></p></body></html>

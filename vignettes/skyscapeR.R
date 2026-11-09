@@ -278,6 +278,11 @@ guides <- sketchSky(hor, time = mw_time, timezone = "UTC",
                     galactic.equator = TRUE, equator = TRUE, ecliptic = TRUE))
 plot(hor, sky = guides, xrange = c(115, 235), yrange = c(-2, 65))
 
+## ----milky-way-off, eval=astronomy_examples, fig.cap="The same natural view with the Milky Way switched off; the stars and atmosphere are still drawn."----
+without_band <- sketchSky(hor, time = mw_time, timezone = "UTC",
+                          display = list(moon = FALSE, milky.way = FALSE))
+plot(hor, sky = without_band, xrange = c(115, 235), yrange = c(-2, 65))
+
 ## ----efm, eval=astronomy_examples---------------------------------------------
 full_moon <- EFM(year = 2026, loc = c(40, 0, 400), season = "spring", timezone = "UTC")
 full_moon$Moon

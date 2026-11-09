@@ -1,0 +1,380 @@
+```{=html}
+<h2 id='createHor'>Construct a site horizon from measurements or an elevation model</h2><span id='topic+createHor'></span>
+
+<h3>Description</h3>
+
+<p>Build a continuous horizon profile from measurements of horizon altitude at known
+bearings around a site, or predict the horizon and visible terrain from a DEM.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>createHor(
+  az,
+  alt,
+  loc,
+  dem = NULL,
+  loc.crs = NULL,
+  name = "",
+  alt.unc = 0.5,
+  smooth = F,
+  .scale = 1000,
+  eye.height = 1.6,
+  max.distance = 10000,
+  az.step = 0.25,
+  distance.step = NULL,
+  features = NULL,
+  curvature = TRUE,
+  refraction.k = NULL,
+  atm = skyscapeR.env$atm,
+  temp = skyscapeR.env$temp,
+  tempgrad = -10,
+  panorama = TRUE,
+  width = 4096,
+  panorama.distance.step = "adaptive",
+  panorama.acuity = 1,
+  terrain.palette = "temperate",
+  land_cols = NULL,
+  sea_cols = NULL,
+  sea_level = 0,
+  n_sea = 3L,
+  palette_n = 256L,
+  lighting = c("relief", "directional"),
+  light.azimuth = 315,
+  light.altitude = 45,
+  ambient = 0.38,
+  haze = 0.65,
+  image.dir = getwd(),
+  attribution = "User-supplied DEM",
+  license = "See source DEM terms",
+  ncores = NULL,
+  verbose = TRUE,
+  progress = interactive() &amp;&amp; verbose
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="createHor_:_az">az</code></td>
+<td>
+<p>Array of azimuth values</p>
+</td></tr>
+<tr><td><code id="createHor_:_alt">alt</code></td>
+<td>
+<p>Array of altitude values.</p>
+</td></tr>
+<tr><td><code id="createHor_:_loc">loc</code></td>
+<td>
+<p>Observer location. For DEMs, pass a single CRS-bearing terra SpatVector point directly as loc, or a numeric latitude and longitude. Ground elevation is read from the DEM unless supplied as a third numeric value. Measured horizons take latitude, longitude and elevation.</p>
+</td></tr>
+<tr><td><code id="createHor_:_dem">dem</code></td>
+<td>
+<p>Optional single-band terra SpatRaster or local raster filename.
+Supply dem in place of az and alt. Requires the optional terra package.</p>
+</td></tr>
+<tr><td><code id="createHor_:_loc.crs">loc.crs</code></td>
+<td>
+<p>CRS for numeric DEM observer coordinates in x,y order (easting, northing or longitude, latitude). Without it, numeric loc uses latitude, longitude in WGS84. A single terra SpatVector point carries its own CRS. An optional third numeric coordinate is ground elevation in metres.</p>
+</td></tr>
+<tr><td><code id="createHor_:_name">name</code></td>
+<td>
+<p>Name of site.</p>
+</td></tr>
+<tr><td><code id="createHor_:_alt.unc">alt.unc</code></td>
+<td>
+<p>Either a single value or an array of altitude
+uncertainty.</p>
+</td></tr>
+<tr><td><code id="createHor_:_smooth">smooth</code></td>
+<td>
+<p>Logical to control whether to smooth horizon profile using rolling mean.
+Defaults to FALSE</p>
+</td></tr>
+<tr><td><code id="createHor_:_.scale">.scale</code></td>
+<td>
+<p>Number of samples in the rolling mean when smooth = TRUE. The grid spacing is 0.01 degrees, so 1000 samples span approximately 10 degrees.</p>
+</td></tr>
+<tr><td><code id="createHor_:_eye.height">eye.height</code></td>
+<td>
+<p>Observer height above the selected ground elevation in metres.</p>
+</td></tr>
+<tr><td><code id="createHor_:_max.distance">max.distance</code></td>
+<td>
+<p>DEM search radius in metres, default 10000. Include any
+distant terrain that could form the horizon within the DEM coverage.</p>
+</td></tr>
+<tr><td><code id="createHor_:_az.step">az.step</code></td>
+<td>
+<p>Maximum spacing of numerical DEM rays in degrees. The default
+is 0.25. An equal number of steps fills the circle.</p>
+</td></tr>
+<tr><td><code id="createHor_:_distance.step">distance.step</code></td>
+<td>
+<p>Maximum spacing of samples along each ray in metres.
+By default use half the smaller native cell dimension estimated at the site.</p>
+</td></tr>
+<tr><td><code id="createHor_:_features">features</code></td>
+<td>
+<p>Optional <code>horFeature</code> object or list of such
+objects describing reconstructed or highlighted structures. Requires dem.
+Elevations are additive, with the largest positive and deepest negative
+contributions combined at overlaps. Later footprints take colour precedence.
+Features affect both numerical horizon and visible terrain. Their geometry
+is kept out of the returned horizon; save the feature objects separately.</p>
+</td></tr>
+<tr><td><code id="createHor_:_curvature">curvature</code></td>
+<td>
+<p>Apply Earth curvature to DEM sightlines. Default TRUE.</p>
+</td></tr>
+<tr><td><code id="createHor_:_refraction.k">refraction.k</code></td>
+<td>
+<p>Default NULL applies Patat when curvature is enabled. Set zero for geometric curvature without terrestrial refraction, or supply a coefficient below one for the effective-radius model.</p>
+</td></tr>
+<tr><td><code id="createHor_:_atm">atm</code></td>
+<td>
+<p>Ground atmospheric pressure in millibars for Patat terrestrial refraction.</p>
+</td></tr>
+<tr><td><code id="createHor_:_temp">temp</code></td>
+<td>
+<p>Ground air temperature in degrees Celsius.</p>
+</td></tr>
+<tr><td><code id="createHor_:_tempgrad">tempgrad</code></td>
+<td>
+<p>Vertical temperature gradient in kelvins per kilometre (default -10).</p>
+</td></tr>
+<tr><td><code id="createHor_:_panorama">panorama</code></td>
+<td>
+<p>Render an external terrain PNG for a DEM. Default TRUE.
+Set FALSE for the numerical horizon alone.</p>
+</td></tr>
+<tr><td><code id="createHor_:_width">width</code></td>
+<td>
+<p>DEM panorama width in pixels, an even integer from 32 to 81920.
+Default 4096 by 2048 pixels. Height is half the width. Widths above 8192 are assembled from temporary image tiles. Both dimensions grow with width, so a tenfold increase generates 100 times as many pixels.</p>
+</td></tr>
+<tr><td><code id="createHor_:_panorama.distance.step">panorama.distance.step</code></td>
+<td>
+<p>The default, &quot;adaptive&quot;, starts at one local DEM cell and increases radial
+spacing with distance using the larger of the requested angular acuity and
+one horizontal PNG pixel. This transverse footprint is a proxy for radial
+detail. A narrow ridge may fall between samples. Use a positive number for
+fixed spacing in metres or NULL to reuse distance.step. The numerical horizon
+uses distance.step independently. Inspect metadata$image$sampling for the
+effective angle, sample count and actual step range. On large DEM-only panoramas, the renderer checks near terrain against a conservative upper bound for the remaining terrain on each ray. It skips distant samples only where all remaining elevations are hidden and keeps neighbours for surface shading. Terrain with added archaeological features uses the full sampling path.</p>
+</td></tr>
+<tr><td><code id="createHor_:_panorama.acuity">panorama.acuity</code></td>
+<td>
+<p>Angular detail target in arcminutes for adaptive PNG sampling. Defaults to 1 (nominal 20/20 acuity). Larger values coarsen distant terrain.</p>
+</td></tr>
+<tr><td><code id="createHor_:_terrain.palette">terrain.palette</code></td>
+<td>
+<p>Named land/water pair from <code>demPalettes</code>.
+Options are temperate (default), standalone, arid, alpine, coastal and relief.</p>
+</td></tr>
+<tr><td><code id="createHor_:_land_cols">land_cols</code>, <code id="createHor_:_sea_cols">sea_cols</code></td>
+<td>
+<p>Opaque R colour names or hex colours in increasing
+elevation order. NULL inherits the respective ramp from terrain.palette.
+Supply either vector to override just that ramp. One colour gives a uniform base. Colours interpolate in Lab space.</p>
+</td></tr>
+<tr><td><code id="createHor_:_sea_level">sea_level</code></td>
+<td>
+<p>DEM elevation in metres at or below which the sea colour
+ramp is used. Default 0. A level water surface uses the shallow colour. This is an elevation threshold. Use NULL to apply
+the land palette over the whole visible elevation range, including depressions.
+The temperate land ramp starts at the lowest visible land level or sea threshold, whichever is higher. Other palettes with a threshold start at sea_level. The ramp ends at the highest
+visible elevation. The sea ramp starts at the lowest visible elevation.</p>
+</td></tr>
+<tr><td><code id="createHor_:_n_sea">n_sea</code></td>
+<td>
+<p>Number of entries reserved for the sea ramp, leaving at least
+two land colours. Default 3.</p>
+</td></tr>
+<tr><td><code id="createHor_:_palette_n">palette_n</code></td>
+<td>
+<p>Total number of palette entries, from 4 to 65536. Default
+256.</p>
+</td></tr>
+<tr><td><code id="createHor_:_lighting">lighting</code></td>
+<td>
+<p>Relief lighting (default) blends a light at the observer (75 percent)
+with the directional source (25 percent). It shades both sides of a slope and
+lifts deep shadows. Choose &quot;directional&quot;
+for one-sided hillshade. Lighting affects the PNG only.</p>
+</td></tr>
+<tr><td><code id="createHor_:_light.azimuth">light.azimuth</code>, <code id="createHor_:_light.altitude">light.altitude</code></td>
+<td>
+<p>Direction towards the illustrative light
+source in degrees clockwise from true north and above the horizon. Defaults
+are 315 and 45 degrees. Hillshading uses upward surface normals in metric
+east, north and vertical coordinates. This is local illumination without
+cast shadows from other terrain.</p>
+</td></tr>
+<tr><td><code id="createHor_:_ambient">ambient</code></td>
+<td>
+<p>Fraction of illumination retained on slopes facing away from
+the light (0 to 1). Default 0.38. Use 1 for unshaded palette colours.</p>
+</td></tr>
+<tr><td><code id="createHor_:_haze">haze</code></td>
+<td>
+<p>Maximum fraction of distance haze (0 to 1). Default 0.65.
+Set haze=0 and ambient=1 to inspect the colour mapping alone.</p>
+</td></tr>
+<tr><td><code id="createHor_:_image.dir">image.dir</code></td>
+<td>
+<p>Directory for the DEM PNG. Defaults to the working directory. Site names form the filename; different images with the same name receive a checksum suffix.</p>
+</td></tr>
+<tr><td><code id="createHor_:_attribution">attribution</code></td>
+<td>
+<p>Credit for the DEM, included in plots and exports. The generic default credit is omitted from plots.</p>
+</td></tr>
+<tr><td><code id="createHor_:_license">license</code></td>
+<td>
+<p>Source licence or terms for the DEM, included in exports.</p>
+</td></tr>
+<tr><td><code id="createHor_:_ncores">ncores</code></td>
+<td>
+<p>Maximum DEM tracing workers. Defaults to half the available logical cores, rounded down with a minimum of one. The startup message reports used and available cores. Workers share file-backed DEM data and process separate bearings.</p>
+</td></tr>
+<tr><td><code id="createHor_:_verbose">verbose</code></td>
+<td>
+<p>Announce the DEM radius, sampling and rendering stages.</p>
+</td></tr>
+<tr><td><code id="createHor_:_progress">progress</code></td>
+<td>
+<p>Show a progress bar for each tracing stage. Default on in interactive verbose sessions.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><strong>Measured bearings.</strong> To evaluate sightlines between measured bearings, the constructor repeats the azimuths
+one turn in each direction, removes duplicate azimuth entries and linearly interpolates
+altitude and altitude uncertainty onto a 0.01-degree grid from -90 to 450 degrees.
+Scalar uncertainty is repeated. Optional smoothing applies a running mean over the
+specified number of grid samples to both series, with zero fill at the outer ends.
+Latitude, longitude and elevation identify the observer; omitted elevation defaults to
+zero. Interpolation cannot recover narrow features between measurements.
+</p>
+<p><strong>Observer and DEM coverage.</strong> For a DEM, supply a point with a CRS, projected x and y with loc.crs, or WGS84 latitude and longitude.
+The optional third coordinate is ground elevation in metres in the DEM's vertical
+datum. Otherwise ground elevation is bilinearly sampled at the site. Observer
+elevation in the returned georeference is ground elevation plus eye.height.
+A terrain model represents bare earth. A surface model includes the objects
+represented in its elevations. Use a single continuous band in metres with a
+defined horizontal CRS. Missing samples and terrain beyond the raster edge are skipped. A warning and the incomplete.bearings metadata identify incomplete coverage. Each bearing needs at least one usable sample.
+</p>
+<p><strong>Sampling narrow ridges.</strong> Terrain is sampled along true bearings from north, clockwise. A WGS84 local
+azimuthal equidistant projection sets the distances and bearings. Sample coordinates
+are transformed to the source grid for bilinear elevation extraction in batches.
+Each horizon angle is the maximum sampled elevation angle along its ray. The
+requested radius is included wherever covered. A missing observer ground elevation without an override or an observer outside the
+DEM cause an error. Rays and distance samples are discrete. A finer constructor
+output grid cannot recover a ridge between rays, steps or DEM cells. Increase
+the radius and refine both sampling intervals to check convergence for a site.
+At 5 km the default 0.25-degree rays are approximately 22 metres apart.
+The supplied altitude uncertainty is an assumption in degrees.
+</p>
+<p><strong>Curvature and terrestrial refraction.</strong> By default the apparent altitude at each sampled distance d (metres) follows
+Patat (2011), equations 1 and 2. The geometric angle is atan((z-observer)/d - d/(2R)).
+Add (d/R) times 0.252 P (34.2 + tempgrad) / T squared in radians, using
+temperature T in kelvins and the latitude-dependent radius R from Appendix A1.
+The same corrected angles determine the numerical horizon and the visible terrain in the PNG.
+An explicit numeric refraction.k selects a spherical vertical section of effective radius
+6371008.8 / (1 - refraction.k) metres. At ground distance d and elevation z,
+the forward component is (R + z) sin(d/R) and the vertical component is
+z minus observer elevation minus 2 (R + z) sin(d/(2R)) squared, where the
+square applies to the sine. The angle is obtained with atan2. With curvature
+disabled, use the height difference and horizontal distance directly.
+Terrestrial refraction applies to the terrain
+sightline. Atmospheric refraction is controlled separately in astronomical calls.
+</p>
+<p><strong>Panorama and reconstructed features.</strong> By default a second set of rays paints the first visible terrain at each
+azimuth and elevation, using local surface normals, elevation colours and
+distance haze. The transparent sky edge follows the numerical horizon.
+With features, each PNG column is traced directly through the reconstructed
+terrain; its edge can differ from the interpolated numerical horizon between
+rays. Refine az.step and width when examining narrow structures.
+The panorama spans the full 360 degrees from nadir to zenith. The horizon object
+stores its bounds, checksum, attribution and licence in <code>metadata$image</code>.
+Save the external PNG alongside the RDS. If you move them, use <code>relinkHor</code>
+to reconnect the image. A rendering failure returns the numerical horizon with a warning.
+Plotting also falls back to the numerical horizon if the image is missing or has changed.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A skyscapeR.horizon list with metadata (site name and georeference) and a data frame named data. Its az, alt and alt.unc columns contain azimuth, horizon altitude and altitude uncertainty, all in degrees.
+</p>
+
+
+<h3>Accuracy, uncertainty and reproducibility</h3>
+
+<p>H01 compared 334 bearings at 31 observing setups.
+At the surveyed bearings, <code>createHor()</code> reproduced the observed terrain skyline to within half a degree in 91.9% of cases.
+</p>
+<p>The numerical skyline is a maximum over sampled terrain, not an accuracy
+certificate for the DEM. Horizontal and vertical datum differences, observer
+height, missing raster values, vegetation and buildings can exceed the sampling
+error. DEM elevations and a supplied observer ground elevation must use a
+compatible vertical datum. No geoid conversion or vertical-datum correction is
+performed automatically. Refine the angular and distance sampling and expand
+the radius until the relevant sightlines are stable. Compare with surveyed
+bearings and altitudes where available.
+</p>
+<p><code>alt.unc</code> is supplied by the user and is not estimated from DEM resolution,
+control residuals or atmospheric variability. Smoothing a measured profile can
+remove narrow notches or peaks. Adaptive panorama sampling and illustrative
+lighting concern the image; they do not increase numerical horizon precision.
+The terrestrial refraction approximation assumes the supplied atmosphere and
+cannot reproduce all near-ground gradients or mirage conditions.
+</p>
+<p>Save the DEM provenance, observer location and datum, constructor arguments,
+feature objects, returned horizon and external PNG. Rebuilding from the same
+source is distinct from merely replotting the saved horizon.
+</p>
+
+
+<h3>References</h3>
+
+<p>Patat, F. (2011). Horizon synthesis for archaeo-astronomical purposes. Astronomische Nachrichten 332, 743-749. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1002/asna.201111570")}.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>importPeakFinder</code>, <code>plot.skyscapeR.horizon</code>
+</p>
+<p><code>createHWT</code>, <code>downloadHWT</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>## Not run: 
+observer &lt;- terra::vect("observer.gpkg") # one point with a CRS
+h &lt;- createHor(dem="terrain.tif", loc=observer, eye.height=1.6)
+
+## End(Not run)
+# Create a skyscapeR.horizon from 5 measurements:
+az &lt;- c(0,90,180,270,360)
+alt &lt;- c(0,5,5,0,0)
+hor &lt;- createHor(az, alt, alt.unc=0.1, loc=c(40.1,-8), name='Test')
+plot(hor)
+## Not run: 
+# loc is latitude, longitude. Distances and elevations are metres.
+terrain &lt;- createHor(dem="site-dtm.tif", loc=c(51.19,-1.75),
+  name="Survey site", max.distance=5000, eye.height=1.6,
+  image.dir="horizons", attribution="Survey DTM", license="Survey terms")
+plot(terrain)
+exportStellarium(terrain, name="Survey site")
+
+## End(Not run)
+</code></pre>
+
+```

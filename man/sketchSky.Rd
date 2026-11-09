@@ -94,7 +94,7 @@ Jupiter, Saturn and the Moon use apparent disc sizes and illuminated
 fractions from Swiss Ephemeris. A close view can therefore show the phase
 of Venus. Star colours follow catalogue spectral classes; the diffuse band
 has a neutral tint. Colour and projection influence the screen appearance.
-Publication styles use magnitude-scaled star and planet symbols on white.
+Publication styles use magnitude-scaled star and planet symbols on white. In publication colour, stellar hue identifies the leading catalogue spectral class O through M; other or missing classes use neutral grey.
 
 Azimuth increases clockwise from true north. Refraction, pressure and
 temperature come from \code{\link{skyscapeR.vars}} when the sky is calculated.

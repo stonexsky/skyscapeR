@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; Constructing a site horizon – skyscapeR technical manual</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./photographic-horizons.html" rel="next">
+<link href="./field-reduction.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a33b4903dc4ac24f2ffbded35a86d5f2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./horizons.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Constructing a site horizon</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="index.html">skyscapeR technical manual</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About this edition</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./contents-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Annotated contents</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./function-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Function index</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vignette-guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Following the package vignette</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ephemeris.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">swephR and the Swiss Ephemeris</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Methods</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./astronomical-conventions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Astronomical conventions and stellar positions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./field-reduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Reducing compass and theodolite observations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./horizons.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Constructing a site horizon</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./photographic-horizons.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Calibrating photographic skylines and exchanging horizons</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./stellar-phases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Seasonal stellar visibility</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./orientation-densities.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">From a measured orientation to a declination distribution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./event-searches.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Terrain crossings and event searches</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lunar-crossovers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Equinoctial full Moons and crescent crossovers</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./celestial-targets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Identifying celestial candidates and limiting declinations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./significance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Testing orientation distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sky-rendering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Sky reconstruction and visual radiance</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./function-methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Function methods and implementation notes</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Validation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Studies by question and package build</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#from-field-measurements" id="toc-from-field-measurements" class="nav-link active" data-scroll-target="#from-field-measurements"><span class="header-section-number">7.1</span> From field measurements</a></li>
+  <li><a href="#from-an-elevation-model" id="toc-from-an-elevation-model" class="nav-link" data-scroll-target="#from-an-elevation-model"><span class="header-section-number">7.2</span> From an elevation model</a>
+  <ul class="collapse">
+  <li><a href="#which-point-supplies-the-skyline" id="toc-which-point-supplies-the-skyline" class="nav-link" data-scroll-target="#which-point-supplies-the-skyline"><span class="header-section-number">7.2.1</span> Which point supplies the skyline?</a></li>
+  </ul></li>
+  <li><a href="#sec-dem-panorama" id="toc-sec-dem-panorama" class="nav-link" data-scroll-target="#sec-dem-panorama"><span class="header-section-number">7.3</span> Generating a terrain panorama</a>
+  <ul class="collapse">
+  <li><a href="#from-terrain-rays-to-image-pixels" id="toc-from-terrain-rays-to-image-pixels" class="nav-link" data-scroll-target="#from-terrain-rays-to-image-pixels"><span class="header-section-number">7.3.1</span> From terrain rays to image pixels</a></li>
+  <li><a href="#keeping-and-reusing-the-image" id="toc-keeping-and-reusing-the-image" class="nav-link" data-scroll-target="#keeping-and-reusing-the-image"><span class="header-section-number">7.3.2</span> Keeping and reusing the image</a></li>
+  </ul></li>
+  <li><a href="#sec-terrain-features" id="toc-sec-terrain-features" class="nav-link" data-scroll-target="#sec-terrain-features"><span class="header-section-number">7.4</span> Reconstructing features on a DEM</a>
+  <ul class="collapse">
+  <li><a href="#footprint-height-and-viewpoint" id="toc-footprint-height-and-viewpoint" class="nav-link" data-scroll-target="#footprint-height-and-viewpoint"><span class="header-section-number">7.4.1</span> Footprint, height and viewpoint</a></li>
+  <li><a href="#from-feature-to-skyline" id="toc-from-feature-to-skyline" class="nav-link" data-scroll-target="#from-feature-to-skyline"><span class="header-section-number">7.4.2</span> From feature to skyline</a></li>
+  <li><a href="#example-a-1.5-m-bank-across-a-sightline" id="toc-example-a-1.5-m-bank-across-a-sightline" class="nav-link" data-scroll-target="#example-a-1.5-m-bank-across-a-sightline"><span class="header-section-number">7.4.3</span> Example: a 1.5 m bank across a sightline</a></li>
+  </ul></li>
+  <li><a href="#choices-that-affect-a-sightline" id="toc-choices-that-affect-a-sightline" class="nav-link" data-scroll-target="#choices-that-affect-a-sightline"><span class="header-section-number">7.5</span> Choices that affect a sightline</a></li>
+  <li><a href="#changes-and-evidence" id="toc-changes-and-evidence" class="nav-link" data-scroll-target="#changes-and-evidence"><span class="header-section-number">7.6</span> Changes and evidence</a></li>
+  <li><a href="#comparison-with-provider-profiles" id="toc-comparison-with-provider-profiles" class="nav-link" data-scroll-target="#comparison-with-provider-profiles"><span class="header-section-number">7.7</span> Comparison with provider profiles</a></li>
+  <li><a href="#full-package-help" id="toc-full-package-help" class="nav-link" data-scroll-target="#full-package-help"><span class="header-section-number">7.8</span> Full package help</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./horizons.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Constructing a site horizon</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-horizon" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Constructing a site horizon</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Function</strong> <a href="function-methods.html#fn-createhor"><code>createHor()</code></a> · <strong>Package</strong> skyscapeR 2.0.9004</p>
+<p>A skyline is the altitude of the obstruction at each bearing from a particular viewpoint. <a href="function-methods.html#fn-createhor"><code>createHor()</code></a> builds this profile from observations or predicts it from a digital elevation model (DEM). Both routes return the same kind of horizon object. The evidence between adjacent bearings is quite different.</p>
+<section id="from-field-measurements" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="from-field-measurements"><span class="header-section-number">7.1</span> From field measurements</h2>
+<p>Supply the measured bearings and altitudes in degrees, with the observer’s latitude, longitude and elevation. The constructor repeats the measurements on either side of north, removes duplicate bearings and linearly interpolates both altitude and the supplied altitude uncertainty. This gives a continuous profile across north on a 0.01° grid. The grid is convenient for evaluating a sightline at any bearing. A narrow notch between two measurements can still be absent from the result.</p>
+<p>For example, two measured points of equal altitude on opposite sides of a notch produce a level interpolated skyline between them. Record a foresight at the bottom of the notch if that feature matters to the interpretation. Repeated readings at the same bearing should be reduced to an estimate and uncertainty before calling the constructor. Optional smoothing averages over neighbouring samples and can lower a peak or fill a notch. With the default smoothing width of 1,000 samples, the window spans about 10°. Smoothing is off by default.</p>
+</section>
+<section id="from-an-elevation-model" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="from-an-elevation-model"><span class="header-section-number">7.2</span> From an elevation model</h2>
+<ol type="1">
+<li><strong>Place the observer.</strong> The function samples the ground height at the site unless an elevation is supplied explicitly, then adds <code>eye.height</code>. Supply numeric latitude and longitude in that order for the default WGS84 route. When <code>loc.crs</code> is explicit, coordinates are in x, y order. A point object with its own coordinate reference system removes that ordering ambiguity. Ground height and DEM elevations must use compatible vertical datums.</li>
+<li><strong>Trace rays.</strong> A local azimuthal equidistant projection supplies distances and bearings clockwise from true north. Along each ray the function samples the source raster by bilinear interpolation, calculates the elevation angle to each terrain sample and keeps the maximum. A more distant ridge may set the horizon even if the near terrain rises steeply.</li>
+<li><strong>Correct the terrain angle.</strong> The default combines Earth curvature and terrestrial refraction using the pressure, temperature and vertical temperature gradient in Patat’s approximation <span class="citation" data-cites="patat2011">(<a href="references.html#ref-patat2011" role="doc-biblioref">Patat 2011</a>, eqs. 1–2)</span>. With an explicit <code>refraction.k</code>, the calculation uses an effective Earth radius. Zero retains geometric curvature. With <code>curvature = FALSE</code>, it uses the uncorrected height difference and distance. Refraction along a terrain sightline is a separate choice from astronomical refraction applied later to a star or the Sun.</li>
+<li><strong>Retain the profile and its provenance.</strong> Record the elevation product and date, horizontal and vertical reference systems, observer position and height, sampling settings, coverage and any reconstructed features. The optional panorama has its own sampling and lighting. Changing its pixel width cannot recover a ridge missed by the numerical rays.</li>
+</ol>
+<section id="which-point-supplies-the-skyline" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="which-point-supplies-the-skyline"><span class="header-section-number">7.2.1</span> Which point supplies the skyline?</h3>
+<p>For an observer at elevation <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>z</mi><mi>o</mi></msub><annotation encoding="application/x-tex">z_o</annotation></semantics></math> (including eye height), the solver maximises the apparent terrain angle over finite samples along each ray. In the default Patat branch, with ground elevation <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>z</mi><mi>i</mi></msub><annotation encoding="application/x-tex">z_i</annotation></semantics></math>, horizontal distance <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>d</mi><mi>i</mi></msub><annotation encoding="application/x-tex">d_i</annotation></semantics></math>, and local Earth radius <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>, the candidate angle in radians is</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>=</mo><mo>arctan</mo><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><msub><mi>z</mi><mi>i</mi></msub><mo>−</mo><msub><mi>z</mi><mi>o</mi></msub></mrow><msub><mi>d</mi><mi>i</mi></msub></mfrac><mo>−</mo><mfrac><msub><mi>d</mi><mi>i</mi></msub><mrow><mn>2</mn><mi>R</mi></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>C</mi><mfrac><msub><mi>d</mi><mi>i</mi></msub><mi>R</mi></mfrac><mo>,</mo><mspace width="2.0em"></mspace><mi>C</mi><mo>=</mo><mfrac><mrow><mn>0.252</mn><mspace width="0.167em"></mspace><mi>P</mi><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mn>34.2</mn><mo>+</mo><mi>g</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>T</mi><mo>+</mo><mn>273.15</mn><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+h_i=\arctan\!\left(\frac{z_i-z_o}{d_i}-\frac{d_i}{2R}\right)+C\frac{d_i}{R},
+\qquad C=\frac{0.252\,P\,(34.2+g)}{(T+273.15)^2}.
+</annotation></semantics></math></p>
+<p>Here <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math> is pressure in mbar, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math> is temperature in °C, and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math> is the vertical temperature gradient in °C/km. The retained altitude is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>max</mo><mi>i</mi></msub><msub><mi>h</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\max_i h_i</annotation></semantics></math>. A lower but nearer ridge can therefore conceal higher ground beyond it. This is the terrestrial light path from terrain to observer. Atmospheric refraction applied subsequently to a celestial position is a separate calculation <span class="citation" data-cites="patat2011">(<a href="references.html#ref-patat2011" role="doc-biblioref">Patat 2011</a>)</span>. With a supplied constant refraction coefficient <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>, the code instead uses the spherical geometry of an effective radius <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>6</mn><mspace width="0.167em"></mspace><mn>371</mn><mspace width="0.167em"></mspace><mn>008.8</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">6\,371\,008.8/(1-k)</annotation></semantics></math> metres. With curvature disabled it uses <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>atan2</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>z</mi><mi>i</mi></msub><mo>−</mo><msub><mi>z</mi><mi>o</mi></msub><mo>,</mo><msub><mi>d</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\operatorname{atan2}(z_i-z_o,d_i)</annotation></semantics></math>.</p>
+<p>For search distance <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math> and requested radial step <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math>, the ordinary numerical rays use <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo>,</mo><mo stretchy="false" form="prefix">⌈</mo><mi>D</mi><mi>/</mi><mi>s</mi><mo stretchy="false" form="postfix">⌉</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">n=\max(2,\lceil D/s\rceil)</annotation></semantics></math> samples at <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mi>i</mi></msub><mo>=</mo><mi>i</mi><mi>D</mi><mi>/</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">d_i=iD/n</annotation></semantics></math>. The default <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math> is half the smaller local raster-cell dimension. The base bearing grid similarly uses <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌈</mo><mn>360</mn><mi>/</mi><mtext mathvariant="monospace">𝚊𝚣.𝚜𝚝𝚎𝚙</mtext><mo stretchy="false" form="postfix">⌉</mo></mrow><annotation encoding="application/x-tex">\lceil 360/\texttt{az.step}\rceil</annotation></semantics></math> equally spaced rays, supplemented for reconstructed features. Bilinear sampling can smooth a narrow crest. A denser output grid cannot recover a crest absent from the terrain data. If the ray has missing coverage, its largest available angle can underestimate the skyline. The source metadata records incomplete bearings. When examining a disputed foresight, inspect that bearing and the winning ridge distance before pooling errors across a station. <a href="./study-register.html#h01-field-validation">H01</a> gives per-station errors and compares DEMs over common bearings in Ireland.</p>
+</section>
+</section>
+<section id="sec-dem-panorama" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="sec-dem-panorama"><span class="header-section-number">7.3</span> Generating a terrain panorama</h2>
+<p>The DEM route through <a href="function-methods.html#fn-createhor"><code>createHor()</code></a> produces two outputs: the numerical skyline in <code>h$data</code> and a shaded image of the terrain visible <strong>below</strong> it. A measured series of azimuths and altitudes supplies no distances, slopes or intervening surfaces from which to render that foreground. To make a panorama, supply a single-band DEM with elevations in metres, observer coordinates in the specified reference system, and an output directory. The R packages <code>terra</code> and <code>png</code> are required for this example.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skyscapeR)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>dem <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="at">xmin=</span><span class="dv">499450</span>, <span class="at">xmax=</span><span class="dv">500550</span>, <span class="at">ymin=</span><span class="dv">5699450</span>, <span class="at">ymax=</span><span class="dv">5700550</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">resolution=</span><span class="dv">5</span>, <span class="at">crs=</span><span class="st">"EPSG:32630"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>xy <span class="ot">&lt;-</span> <span class="fu">xyFromCell</span>(dem, <span class="fu">seq_len</span>(<span class="fu">ncell</span>(dem)))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>east <span class="ot">&lt;-</span> xy[, <span class="dv">1</span>] <span class="sc">-</span> <span class="dv">500000</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>north <span class="ot">&lt;-</span> xy[, <span class="dv">2</span>] <span class="sc">-</span> <span class="dv">5700000</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">values</span>(dem) <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">+</span> <span class="dv">15</span> <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>((east<span class="dv">-80</span>)<span class="sc">/</span><span class="dv">35</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> ((north<span class="sc">+</span><span class="dv">30</span>)<span class="sc">/</span><span class="dv">90</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="dv">88</span> <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>((east<span class="dv">-270</span>)<span class="sc">/</span><span class="dv">70</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> ((north<span class="dv">-40</span>)<span class="sc">/</span><span class="dv">200</span>)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">createHor</span>(<span class="at">dem=</span>dem, <span class="at">loc=</span><span class="fu">c</span>(<span class="dv">500000</span>, <span class="dv">5700000</span>), <span class="at">loc.crs=</span><span class="st">"EPSG:32630"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">name=</span><span class="st">"Two ridges"</span>, <span class="at">eye.height=</span><span class="fl">1.6</span>, <span class="at">max.distance=</span><span class="dv">500</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>               <span class="at">az.step=</span><span class="dv">1</span>, <span class="at">distance.step=</span><span class="fl">2.5</span>, <span class="at">panorama=</span><span class="cn">TRUE</span>, <span class="at">width=</span><span class="dv">1024</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>               <span class="at">image.dir=</span><span class="st">"terrain-images"</span>, <span class="at">ncores=</span><span class="dv">1</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">file.exists</span>(h<span class="sc">$</span>metadata<span class="sc">$</span>image<span class="sc">$</span>path))</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(h, <span class="at">xrange=</span><span class="fu">c</span>(<span class="dv">35</span>,<span class="dv">145</span>), <span class="at">yrange=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">21</span>), <span class="at">use.image=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>For a survey, replace the synthetic surface with <code>rast("survey-dtm.tif")</code>, enter the actual observer coordinates and choose a search radius that includes any distant ridge liable to form the skyline. The DEM should cover that search area. Supply the dataset credit and terms using <code>attribution</code> and <code>license</code>. If working from a photograph with a sky mask, use the <a href="./photographic-horizons.html">photographic calibration chapter</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="study/terrain-east.png" class="img-fluid figure-img" alt="Plot of the eastward view, with a dark foreground ridge rising to about ten degrees and a lighter distant crest reaching about eighteen degrees."></p>
+<figcaption>Eastern sector of the generated DEM panorama. The darker foreground rise obscures the lower part of the taller ridge. Only the upper terrain edge enters the skyline.</figcaption>
+</figure>
+</div>
+<section id="from-terrain-rays-to-image-pixels" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="from-terrain-rays-to-image-pixels"><span class="header-section-number">7.3.1</span> From terrain rays to image pixels</h3>
+<p>The output is a 2:1 equirectangular RGBA PNG covering 0–360° clockwise from north and −90° to +90° altitude. Column centres are displaced half a pixel from the north seam. The renderer interpolates the numerical skyline to each column to fix the upper edge and leaves sky pixels transparent. Along each column it traces near to far, tracking the greatest elevation angle encountered. For a row below the skyline, the first terrain segment that reaches its viewing angle supplies the visible surface. More distant terrain below that line is hidden. The renderer interpolates surface properties between samples. A reconstructed <a href="function-methods.html#fn-horfeature"><code>horFeature()</code></a> can change the foreground colours or relief even when a distant ridge still determines the upper edge.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>What changes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>az.step</code>, <code>distance.step</code>, <code>max.distance</code></td>
+<td>The bearings, radial sampling and outer limit used to calculate the numerical skyline. The outer limit also bounds the rendered terrain.</td>
+</tr>
+<tr class="even">
+<td><code>width</code></td>
+<td>The number of panorama columns. Height is half the width. The default 4096 × 2048 has an angular pixel width of about 5.27 arcminutes.</td>
+</tr>
+<tr class="odd">
+<td><code>panorama.distance.step</code>, <code>panorama.acuity</code></td>
+<td>The radial spacing for the image. With the default adaptive rule, the effective angle is the larger of one PNG pixel and the requested acuity (default one arcminute). At distance <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>, the proposed step is the larger of the near step (normally one local DEM cell) and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>tan</mo><mi>θ</mi></mrow><annotation encoding="application/x-tex">d\tan\theta</annotation></semantics></math>, with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math> the effective angle. A narrow ridge can fall between samples. Supply a fixed step in metres to check a critical feature, or <code>NULL</code> to reuse the numerical ray spacing.</td>
+</tr>
+<tr class="even">
+<td><code>terrain.palette</code>, <code>land_cols</code>, <code>sea_cols</code>, <code>sea_level</code></td>
+<td>Colour the surface by elevation. Inspect the available ramps with <a href="function-methods.html#fn-dempalettes"><code>demPalettes()</code></a>. A sea-level threshold can colour low-lying dry ground as water. Use <code>sea_level=NULL</code> where that interpretation is inappropriate.</td>
+</tr>
+<tr class="odd">
+<td><code>lighting</code>, <code>light.azimuth</code>, <code>light.altitude</code>, <code>ambient</code>, <code>haze</code></td>
+<td>Relief mode blends observer-facing and directional illumination. Directional mode uses the selected light direction. The hillshade has no cast shadows. For an inspection of the palette alone, set <code>ambient=1, haze=0</code>. The default illumination is illustrative and does not reconstruct illumination at a dated solar event.</td>
+</tr>
+</tbody>
+</table>
+<p>The example wrote a 1024 × 512 PNG. Its adaptive grid used 100 radial samples, with an effective angular target of 21.09 arcminutes. Inspect <code>h$metadata$image$sampling</code> for the values used on another DEM. Increasing image width alone leaves the numerical bearing grid unchanged. When a narrow bank or notch matters, check both grids.</p>
+</section>
+<section id="keeping-and-reusing-the-image" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="keeping-and-reusing-the-image"><span class="header-section-number">7.3.2</span> Keeping and reusing the image</h3>
+<p><code>panorama=TRUE</code> is the DEM default. <code>image.dir</code> defaults to the working directory, and <code>h$metadata$image$path</code> identifies the actual file. An image-rendering failure can return a valid numerical horizon with a warning and no image metadata. Save the PNG alongside <code>saveRDS(h, "two-ridges.rds")</code>; the RDS stores its path and checksum. After moving the files, assign the result of <a href="function-methods.html#fn-relinkhor"><code>relinkHor()</code></a>. <a href="function-methods.html#fn-plot-skyscaper-horizon"><code>plot.skyscapeR.horizon()</code></a> displays the terrain, <a href="function-methods.html#fn-sketchsky"><code>sketchSky()</code></a> places a sky above it, and <a href="function-methods.html#fn-exportstellarium"><code>exportStellarium()</code></a> packages it for Stellarium. The <a href="photographic-horizons.html#photo-interchange">interchange section</a> describes that export.</p>
+<p><a href="archives/dem-panorama-example.zip">Download the runnable example, full-sphere PNG, eastern view and run log</a>. The terrain is synthetic and illustrates rendering and occlusion. The field comparisons in the <a href="./study-register.html">study register</a> evaluate skyline altitudes.</p>
+</section>
+</section>
+<section id="sec-terrain-features" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="sec-terrain-features"><span class="header-section-number">7.4</span> Reconstructing features on a DEM</h2>
+<p>A bank can be visible from a monument without forming its skyline. To distinguish those possibilities, pass a <a href="function-methods.html#fn-horfeature"><code>horFeature()</code></a> object, or an ordered list of them, in the <code>features</code> argument to <a href="function-methods.html#fn-createhor"><code>createHor()</code></a>. This route requires a DEM. A profile supplied as measured bearing–altitude pairs contains no terrain distances at which to place the earthwork.</p>
+<section id="footprint-height-and-viewpoint" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="footprint-height-and-viewpoint"><span class="header-section-number">7.4.1</span> Footprint, height and viewpoint</h3>
+<p>Supply vector geometry with a known coordinate reference system. Dimensions are in metres. A point stone or pole uses a circular footprint of the given diameter. A line becomes a strip of the specified total width, centred on the line. For a polygon, banks, ditches and walls follow the boundary by default; stones, poles, mounds and platforms occupy the area. Use <code>use = "area"</code> or <code>"boundary"</code> explicitly when the distinction matters. Interior rings are respected, including their edges in boundary mode.</p>
+<p>At each sample the reconstruction modifies the local DEM elevation. A bank adds height, a ditch subtracts depth, and a zero-height feature can colour a visible surface without raising it. If the DEM already contains 0.6 m of surviving bank and the hypothesis is a 1.5 m crest above the adjacent ground, the additional height at that crest is 0.9 m. Adding the full 1.5 m there would count the surviving relief twice. The viewpoint stays at its original elevation. To place the observer on a reconstructed platform, supply its hypothesised top elevation as the observer’s ground elevation, then add eye height.</p>
+<p>Banks, ditches and mounds default to a rounded profile. The displacement rises from zero at the edge according to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mo>sin</mo><mn>2</mn></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>π</mi><mi>t</mi><mi>/</mi><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\sin^2(\pi t/2)</annotation></semantics></math>, where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math> is the inward distance expressed as a fraction of the profile radius. For a line this radius is half its width. Stones, poles, platforms and walls default to a flat profile that follows the underlying terrain. Where features overlap, the greatest positive displacement and the deepest negative displacement are added. Two overlapping banks therefore contribute the taller bank at each sample. Later layers, and later rows within a layer, take colour precedence. This representation supports terrain-attached relief; a doorway through a bank requires a gap in its footprint.</p>
+</section>
+<section id="from-feature-to-skyline" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="from-feature-to-skyline"><span class="header-section-number">7.4.2</span> From feature to skyline</h3>
+<p>The numerical calculation adds bearings at the edges and centre of raised or cut features and samples where rays intersect their footprints. It evaluates the modified surface against all other terrain along the same ray. A bank changes the skyline only where it exceeds the previous maximum elevation angle. A ditch can lower the skyline only where it cuts the terrain that previously set that maximum. A foreground feature below a distant ridge can therefore alter the <strong>panorama</strong> while leaving the <strong>skyline altitude</strong> effectively unchanged.</p>
+<p>Panorama columns trace the reconstructed surface independently. Colour is subject to visibility, shading and haze. A narrow feature can fall between columns even when the numerical rays detect it. Refine <code>az.step</code> and <code>distance.step</code> for a critical bearing and increase PNG <code>width</code> to check the depiction. The returned numerical profile is interpolated to the usual 0.01° grid.</p>
+</section>
+<section id="example-a-1.5-m-bank-across-a-sightline" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="example-a-1.5-m-bank-across-a-sightline"><span class="header-section-number">7.4.3</span> Example: a 1.5 m bank across a sightline</h3>
+<p>This illustrative terrain is level at 100 m. A bank 100 m east of the observer crosses the due-east ray. The crest is 1.5 m above ground and the eye is 1 m above ground. With curvature disabled, the line to the crest has an altitude of approximately <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>arctan</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>0.5</mn><mi>/</mi><mn>100</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>0.29</mn><mi>°</mi></mrow><annotation encoding="application/x-tex">\arctan(0.5/100)=0.29°</annotation></semantics></math>. The returned skyline uses the maximum along the rounded bank, which can occur slightly nearer than its centre.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dem <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="at">xmin =</span> <span class="dv">499500</span>, <span class="at">xmax =</span> <span class="dv">500500</span>, <span class="at">ymin =</span> <span class="dv">5699500</span>,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ymax =</span> <span class="dv">5700500</span>, <span class="at">resolution =</span> <span class="dv">5</span>, <span class="at">crs =</span> <span class="st">"EPSG:32630"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">values</span>(dem) <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>axis <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">vect</span>(<span class="st">"LINESTRING (500100 5699950, 500100 5700050)"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">crs =</span> <span class="st">"EPSG:32630"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>bank <span class="ot">&lt;-</span> <span class="fu">horFeature</span>(axis, <span class="st">"bank"</span>, <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="fl">1.5</span>, <span class="at">colour =</span> <span class="st">"ivory"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">dem =</span> dem, <span class="at">loc =</span> <span class="fu">c</span>(<span class="dv">500000</span>, <span class="dv">5700000</span>), <span class="at">loc.crs =</span> <span class="st">"EPSG:32630"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">eye.height =</span> <span class="dv">1</span>, <span class="at">max.distance =</span> <span class="dv">400</span>, <span class="at">curvature =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">panorama =</span> <span class="cn">FALSE</span>, <span class="at">ncores =</span> <span class="dv">1</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>bare <span class="ot">&lt;-</span> <span class="fu">do.call</span>(createHor, settings)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>raised <span class="ot">&lt;-</span> <span class="fu">do.call</span>(createHor, <span class="fu">c</span>(settings, <span class="fu">list</span>(<span class="at">features =</span> bank)))</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">vapply</span>(<span class="fu">list</span>(<span class="at">bare =</span> bare, <span class="at">raised =</span> raised), <span class="cf">function</span>(h) {</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">approx</span>(h<span class="sc">$</span>data<span class="sc">$</span>az, h<span class="sc">$</span>data<span class="sc">$</span>alt, <span class="at">xout =</span> <span class="dv">90</span>)<span class="sc">$</span>y</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>}, <span class="fu">numeric</span>(<span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To model a chalk-coloured cursus enclosure, a zero-height polygon in area mode can supply the interior colour, with a raised boundary bank later in the list. This lets the interior and bank have different colours while only the bank adds relief. Save the feature objects with the DEM provenance, viewpoint and settings. The returned <code>metadata$features</code> summarises the layers and records checksums; rebuilding the geometry requires the saved features. Save the external PNG as well when a panorama was requested.</p>
+<p>The rules above follow the 2.0.9004 implementation in <code>R/horizon-features.R</code> and <code>R/dem-horizon.R</code>. The example illustrates the geometry of an assumed bank. <a href="./study-register.html#h01-field-validation">H01</a> tests terrain skylines. Reconstructed earthworks need independent measurements of their geometry.</p>
+</section>
+</section>
+<section id="choices-that-affect-a-sightline" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="choices-that-affect-a-sightline"><span class="header-section-number">7.5</span> Choices that affect a sightline</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Choice</th>
+<th>Practical consequence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Viewpoint and terrain source</td>
+<td>A small shift on a barrow can change the nearest obstruction. A bare-earth DTM omits trees and buildings that may appear in a survey. An assumed instrument height introduces a station-specific uncertainty.</td>
+</tr>
+<tr class="even">
+<td>Search radius and coverage</td>
+<td>The default radius is 10 km. Terrain beyond it cannot contribute. Missing raster samples can leave a ray incomplete. Inspect <code>incomplete.bearings</code> and repeat with a wider radius where distant ground is plausible.</td>
+</tr>
+<tr class="odd">
+<td>Angular and radial sampling</td>
+<td>The default angular interval is 0.25°, about 22 m between adjacent rays at 5 km. Along a ray, the default step is half the smaller estimated local cell dimension. Refine the two independently when a narrow feature determines a result.</td>
+</tr>
+<tr class="even">
+<td>Altitude uncertainty</td>
+<td><code>alt.unc</code> carries the uncertainty supplied by the analyst. The default 0.5° is an input assumption. Assign a value appropriate to the survey or error evidence available for the site.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="changes-and-evidence" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="changes-and-evidence"><span class="header-section-number">7.6</span> Changes and evidence</h2>
+<p>The 2.0 development documentation records the DEM construction route, terrestrial refraction and external terrain panorama. An existing horizon interpolated from a survey and a new one derived from a DTM can differ even at the same nominal location. Record which route supplied the profile in a published analysis.</p>
+<p>The <a href="./study-register.html#h01-field-validation">international H01 field comparison</a> covered 334 bearings at 31 observing setups. At the surveyed bearings, <code>createHor()</code> reproduced the observed terrain skyline to within half a degree in 91.9% of cases. The median absolute error was 0.036° and the mean absolute error was 0.169°. These figures describe field agreement for terrain altitudes at the sampled azimuths. The accuracy of unsurveyed parts of a skyline, panorama imagery and reconstructed structures requires separate evidence.</p>
+</section>
+<section id="comparison-with-provider-profiles" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="comparison-with-provider-profiles"><span class="header-section-number">7.7</span> Comparison with provider profiles</h2>
+<p>H01 uses field measurements as its reference. To compare horizon programs in H02, each program must receive the same DEM, observer position and height, with comparable search and sampling settings. Profiles delivered by online services can differ through their terrain inputs as well as their numerical methods.</p>
+</section>
+<section id="full-package-help" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="full-package-help"><span class="header-section-number">7.8</span> Full package help</h2>
+<details>
+<summary>
+Read the complete <code>createHor()</code> help page
+</summary>
+<h2 id="createHor" class="anchored">Construct a site horizon from measurements or an elevation model</h2><span id="topic+createHor"></span>
+
+<h3 class="anchored">Description</h3>
+
+<p>Build a continuous horizon profile from measurements of horizon altitude at known
+bearings around a site, or predict the horizon and visible terrain from a DEM.
+</p>
+
+
+<h3 class="anchored">Usage</h3>
+
+<pre><code class="language-R">createHor(
+  az,
+  alt,
+  loc,
+  dem = NULL,
+  loc.crs = NULL,
+  name = "",
+  alt.unc = 0.5,
+  smooth = F,
+  .scale = 1000,
+  eye.height = 1.6,
+  max.distance = 10000,
+  az.step = 0.25,
+  distance.step = NULL,
+  features = NULL,
+  curvature = TRUE,
+  refraction.k = NULL,
+  atm = skyscapeR.env$atm,
+  temp = skyscapeR.env$temp,
+  tempgrad = -10,
+  panorama = TRUE,
+  width = 4096,
+  panorama.distance.step = "adaptive",
+  panorama.acuity = 1,
+  terrain.palette = "temperate",
+  land_cols = NULL,
+  sea_cols = NULL,
+  sea_level = 0,
+  n_sea = 3L,
+  palette_n = 256L,
+  lighting = c("relief", "directional"),
+  light.azimuth = 315,
+  light.altitude = 45,
+  ambient = 0.38,
+  haze = 0.65,
+  image.dir = getwd(),
+  attribution = "User-supplied DEM",
+  license = "See source DEM terms",
+  ncores = NULL,
+  verbose = TRUE,
+  progress = interactive() &amp;&amp; verbose
+)
+</code></pre>
+
+
+<h3 class="anchored">Arguments</h3>
+
+
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td><code id="createHor_:_az">az</code></td>
+<td><p>Array of azimuth values</p></td>
+</tr>
+<tr class="even">
+<td><code id="createHor_:_alt">alt</code></td>
+<td><p>Array of altitude values.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="createHor_:_loc">loc</code></td>
+<td><p>Observer location. For DEMs, pass a single CRS-bearing terra SpatVector point directly as loc, or a numeric latitude and longitude. Ground elevation is read from the DEM unless supplied as a third numeric value. Measured horizons take latitude, longitude and elevation.</p></td>
+</tr>
+<tr class="even">
+<td><code id="createHor_:_dem">dem</code></td>
+<td><p>Optional single-band terra SpatRaster or local raster filename. Supply dem in place of az and alt. Requires the optional terra package.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="createHor_:_loc.crs">loc.crs</code></td>
+<td><p>CRS for numeric DEM observer coordinates in x,y order (easting, northing or longitude, latitude). Without it, numeric loc uses latitude, longitude in WGS84. A single terra SpatVector point carries its own CRS. An optional third numeric coordinate is ground elevation in metres.</p></td>
+</tr>
+<tr class="even">
+<td><code id="createHor_:_name">name</code></td>
+<td><p>Name of site.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="createHor_:_alt.unc">alt.unc</code></td>
+<td><p>Either a single value or an array of altitude uncertainty.</p></td>
+</tr>
+<tr class="even">
+<td><code id="createHor_:_smooth">smooth</code></td>
+<td><p>Logical to control whether to smooth horizon profile using rolling mean. Defaults to FALSE</p></td>
+</tr>
+<tr class="odd">
+<td><code id="createHor_:_.scale">.scale</code></td>
+<td><p>Number of samples in the rolling mean when smooth = TRUE. The grid spacing is 0.01 degrees, so 1000 samples span approximately 10 degrees.</p></td>
+</tr>
+<tr class="even">
+<td><code id="createHor_:_eye.height">eye.height</code></td>
+<td><p>Observer height above the selected ground elevation in metres.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="createHor_:_max.distance">max.distance</code></td>
+<td><p>DEM search radius in metres, default 10000. Include any distant terrain that could form the horizon within the DEM coverage.</p></td>
+</tr>
+<tr class="even">
+<td><code id="createHor_:_az.step">az.step</code></td>
+<td><p>Maximum spacing of numerical DEM rays in degrees. The default is 0.25. An equal number of steps fills the circle.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="createHor_:_distance.step">distance.step</code></td>
+<td><p>Maximum spacing of samples along each ray in metres. By default use half the smaller native cell dimension estimated at the site.</p></td>
+</tr>
+<tr class="even">
+<td><code id="createHor_:_features">features</code></td>
+<td><p>Optional <code>horFeature</code> object or list of such objects describing reconstructed or highlighted structures. Requires dem. Elevations are additive, with the largest positive and deepest negative contributions combined at overlaps. Later footprints take colour precedence. Features affect both numerical horizon and visible terrain. Their geometry is kept out of the returned horizon; save the feature objects separately.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="createHor_:_curvature">curvature</code></td>
+<td><p>Apply Earth curvature to DEM sightlines. Default TRUE.</p></td>
+</tr>
+<tr class="even">
+<td><code id="createHor_:_refraction.k">refraction.k</code></td>
+<td><p>Default NULL applies Patat when curvature is enabled. Set zero for geometric curvature without terrestrial refraction, or supply a coefficient below one for the effective-radius model.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="createHor_:_atm">atm</code></td>
+<td><p>Ground atmospheric pressure in millibars for Patat terrestrial refraction.</p></td>
+</tr>
+<tr class="even">
+<td><code id="createHor_:_temp">temp</code></td>
+<td><p>Ground air temperature in degrees Celsius.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="createHor_:_tempgrad">tempgrad</code></td>
+<td><p>Vertical temperature gradient in kelvins per kilometre (default -10).</p></td>
+</tr>
+<tr class="even">
+<td><code id="createHor_:_panorama">panorama</code></td>
+<td><p>Render an external terrain PNG for a DEM. Default TRUE. Set FALSE for the numerical horizon alone.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="createHor_:_width">width</code></td>
+<td><p>DEM panorama width in pixels, an even integer from 32 to 81920. Default 4096 by 2048 pixels. Height is half the width. Widths above 8192 are assembled from temporary image tiles. Both dimensions grow with width, so a tenfold increase generates 100 times as many pixels.</p></td>
+</tr>
+<tr class="even">
+<td><code id="createHor_:_panorama.distance.step">panorama.distance.step</code></td>
+<td><p>The default, "adaptive", starts at one local DEM cell and increases radial spacing with distance using the larger of the requested angular acuity and one horizontal PNG pixel. This transverse footprint is a proxy for radial detail. A narrow ridge may fall between samples. Use a positive number for fixed spacing in metres or NULL to reuse distance.step. The numerical horizon uses distance.step independently. Inspect metadata$image$sampling for the effective angle, sample count and actual step range. On large DEM-only panoramas, the renderer checks near terrain against a conservative upper bound for the remaining terrain on each ray. It skips distant samples only where all remaining elevations are hidden and keeps neighbours for surface shading. Terrain with added archaeological features uses the full sampling path.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="createHor_:_panorama.acuity">panorama.acuity</code></td>
+<td><p>Angular detail target in arcminutes for adaptive PNG sampling. Defaults to 1 (nominal 20/20 acuity). Larger values coarsen distant terrain.</p></td>
+</tr>
+<tr class="even">
+<td><code id="createHor_:_terrain.palette">terrain.palette</code></td>
+<td><p>Named land/water pair from <code>demPalettes</code>. Options are temperate (default), standalone, arid, alpine, coastal and relief.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="createHor_:_land_cols">land_cols</code>, <code id="createHor_:_sea_cols">sea_cols</code></td>
+<td><p>Opaque R colour names or hex colours in increasing elevation order. NULL inherits the respective ramp from terrain.palette. Supply either vector to override just that ramp. One colour gives a uniform base. Colours interpolate in Lab space.</p></td>
+</tr>
+<tr class="even">
+<td><code id="createHor_:_sea_level">sea_level</code></td>
+<td><p>DEM elevation in metres at or below which the sea colour ramp is used. Default 0. A level water surface uses the shallow colour. This is an elevation threshold. Use NULL to apply the land palette over the whole visible elevation range, including depressions. The temperate land ramp starts at the lowest visible land level or sea threshold, whichever is higher. Other palettes with a threshold start at sea_level. The ramp ends at the highest visible elevation. The sea ramp starts at the lowest visible elevation.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="createHor_:_n_sea">n_sea</code></td>
+<td><p>Number of entries reserved for the sea ramp, leaving at least two land colours. Default 3.</p></td>
+</tr>
+<tr class="even">
+<td><code id="createHor_:_palette_n">palette_n</code></td>
+<td><p>Total number of palette entries, from 4 to 65536. Default 256.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="createHor_:_lighting">lighting</code></td>
+<td><p>Relief lighting (default) blends a light at the observer (75 percent) with the directional source (25 percent). It shades both sides of a slope and lifts deep shadows. Choose "directional" for one-sided hillshade. Lighting affects the PNG only.</p></td>
+</tr>
+<tr class="even">
+<td><code id="createHor_:_light.azimuth">light.azimuth</code>, <code id="createHor_:_light.altitude">light.altitude</code></td>
+<td><p>Direction towards the illustrative light source in degrees clockwise from true north and above the horizon. Defaults are 315 and 45 degrees. Hillshading uses upward surface normals in metric east, north and vertical coordinates. This is local illumination without cast shadows from other terrain.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="createHor_:_ambient">ambient</code></td>
+<td><p>Fraction of illumination retained on slopes facing away from the light (0 to 1). Default 0.38. Use 1 for unshaded palette colours.</p></td>
+</tr>
+<tr class="even">
+<td><code id="createHor_:_haze">haze</code></td>
+<td><p>Maximum fraction of distance haze (0 to 1). Default 0.65. Set haze=0 and ambient=1 to inspect the colour mapping alone.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="createHor_:_image.dir">image.dir</code></td>
+<td><p>Directory for the DEM PNG. Defaults to the working directory. Site names form the filename; different images with the same name receive a checksum suffix.</p></td>
+</tr>
+<tr class="even">
+<td><code id="createHor_:_attribution">attribution</code></td>
+<td><p>Credit for the DEM, included in plots and exports. The generic default credit is omitted from plots.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="createHor_:_license">license</code></td>
+<td><p>Source licence or terms for the DEM, included in exports.</p></td>
+</tr>
+<tr class="even">
+<td><code id="createHor_:_ncores">ncores</code></td>
+<td><p>Maximum DEM tracing workers. Defaults to half the available logical cores, rounded down with a minimum of one. The startup message reports used and available cores. Workers share file-backed DEM data and process separate bearings.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="createHor_:_verbose">verbose</code></td>
+<td><p>Announce the DEM radius, sampling and rendering stages.</p></td>
+</tr>
+<tr class="even">
+<td><code id="createHor_:_progress">progress</code></td>
+<td><p>Show a progress bar for each tracing stage. Default on in interactive verbose sessions.</p></td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h3 class="anchored">Details</h3>
+
+<p><strong>Measured bearings.</strong> To evaluate sightlines between measured bearings, the constructor repeats the azimuths
+one turn in each direction, removes duplicate azimuth entries and linearly interpolates
+altitude and altitude uncertainty onto a 0.01-degree grid from -90 to 450 degrees.
+Scalar uncertainty is repeated. Optional smoothing applies a running mean over the
+specified number of grid samples to both series, with zero fill at the outer ends.
+Latitude, longitude and elevation identify the observer; omitted elevation defaults to
+zero. Interpolation cannot recover narrow features between measurements.
+</p>
+<p><strong>Observer and DEM coverage.</strong> For a DEM, supply a point with a CRS, projected x and y with loc.crs, or WGS84 latitude and longitude.
+The optional third coordinate is ground elevation in metres in the DEM's vertical
+datum. Otherwise ground elevation is bilinearly sampled at the site. Observer
+elevation in the returned georeference is ground elevation plus eye.height.
+A terrain model represents bare earth. A surface model includes the objects
+represented in its elevations. Use a single continuous band in metres with a
+defined horizontal CRS. Missing samples and terrain beyond the raster edge are skipped. A warning and the incomplete.bearings metadata identify incomplete coverage. Each bearing needs at least one usable sample.
+</p>
+<p><strong>Sampling narrow ridges.</strong> Terrain is sampled along true bearings from north, clockwise. A WGS84 local
+azimuthal equidistant projection sets the distances and bearings. Sample coordinates
+are transformed to the source grid for bilinear elevation extraction in batches.
+Each horizon angle is the maximum sampled elevation angle along its ray. The
+requested radius is included wherever covered. A missing observer ground elevation without an override or an observer outside the
+DEM cause an error. Rays and distance samples are discrete. A finer constructor
+output grid cannot recover a ridge between rays, steps or DEM cells. Increase
+the radius and refine both sampling intervals to check convergence for a site.
+At 5 km the default 0.25-degree rays are approximately 22 metres apart.
+The supplied altitude uncertainty is an assumption in degrees.
+</p>
+<p><strong>Curvature and terrestrial refraction.</strong> By default the apparent altitude at each sampled distance d (metres) follows
+Patat (2011), equations 1 and 2. The geometric angle is atan((z-observer)/d - d/(2R)).
+Add (d/R) times 0.252 P (34.2 + tempgrad) / T squared in radians, using
+temperature T in kelvins and the latitude-dependent radius R from Appendix A1.
+The same corrected angles determine the numerical horizon and the visible terrain in the PNG.
+An explicit numeric refraction.k selects a spherical vertical section of effective radius
+6371008.8 / (1 - refraction.k) metres. At ground distance d and elevation z,
+the forward component is (R + z) sin(d/R) and the vertical component is
+z minus observer elevation minus 2 (R + z) sin(d/(2R)) squared, where the
+square applies to the sine. The angle is obtained with atan2. With curvature
+disabled, use the height difference and horizontal distance directly.
+Terrestrial refraction applies to the terrain
+sightline. Atmospheric refraction is controlled separately in astronomical calls.
+</p>
+<p><strong>Panorama and reconstructed features.</strong> By default a second set of rays paints the first visible terrain at each
+azimuth and elevation, using local surface normals, elevation colours and
+distance haze. The transparent sky edge follows the numerical horizon.
+With features, each PNG column is traced directly through the reconstructed
+terrain; its edge can differ from the interpolated numerical horizon between
+rays. Refine az.step and width when examining narrow structures.
+The panorama spans the full 360 degrees from nadir to zenith. The horizon object
+stores its bounds, checksum, attribution and licence in <code>metadata$image</code>.
+Save the external PNG alongside the RDS. If you move them, use <code>relinkHor</code>
+to reconnect the image. A rendering failure returns the numerical horizon with a warning.
+Plotting also falls back to the numerical horizon if the image is missing or has changed.
+</p>
+
+
+<h3 class="anchored">Value</h3>
+
+<p>A skyscapeR.horizon list with metadata (site name and georeference) and a data frame named data. Its az, alt and alt.unc columns contain azimuth, horizon altitude and altitude uncertainty, all in degrees.
+</p>
+
+
+<h3 class="anchored">Accuracy, uncertainty and reproducibility</h3>
+
+<p>H01 compared 334 bearings at 31 observing setups.
+At the surveyed bearings, <code>createHor()</code> reproduced the observed terrain skyline to within half a degree in 91.9% of cases.
+</p>
+<p>The numerical skyline is a maximum over sampled terrain, not an accuracy
+certificate for the DEM. Horizontal and vertical datum differences, observer
+height, missing raster values, vegetation and buildings can exceed the sampling
+error. DEM elevations and a supplied observer ground elevation must use a
+compatible vertical datum. No geoid conversion or vertical-datum correction is
+performed automatically. Refine the angular and distance sampling and expand
+the radius until the relevant sightlines are stable. Compare with surveyed
+bearings and altitudes where available.
+</p>
+<p><code>alt.unc</code> is supplied by the user and is not estimated from DEM resolution,
+control residuals or atmospheric variability. Smoothing a measured profile can
+remove narrow notches or peaks. Adaptive panorama sampling and illustrative
+lighting concern the image; they do not increase numerical horizon precision.
+The terrestrial refraction approximation assumes the supplied atmosphere and
+cannot reproduce all near-ground gradients or mirage conditions.
+</p>
+<p>Save the DEM provenance, observer location and datum, constructor arguments,
+feature objects, returned horizon and external PNG. Rebuilding from the same
+source is distinct from merely replotting the saved horizon.
+</p>
+
+
+<h3 class="anchored">References</h3>
+
+<p>Patat, F. (2011). Horizon synthesis for archaeo-astronomical purposes. Astronomische Nachrichten 332, 743-749. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1002/asna.201111570")}.
+</p>
+
+
+<h3 class="anchored">See Also</h3>
+
+<p><code>importPeakFinder</code>, <code>plot.skyscapeR.horizon</code>
+</p>
+<p><code>createHWT</code>, <code>downloadHWT</code>
+</p>
+
+
+<h3 class="anchored">Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+observer &lt;- terra::vect("observer.gpkg") # one point with a CRS
+h &lt;- createHor(dem="terrain.tif", loc=observer, eye.height=1.6)
+
+## End(Not run)
+# Create a skyscapeR.horizon from 5 measurements:
+az &lt;- c(0,90,180,270,360)
+alt &lt;- c(0,5,5,0,0)
+hor &lt;- createHor(az, alt, alt.unc=0.1, loc=c(40.1,-8), name='Test')
+plot(hor)
+## Not run: 
+# loc is latitude, longitude. Distances and elevations are metres.
+terrain &lt;- createHor(dem="site-dtm.tif", loc=c(51.19,-1.75),
+  name="Survey site", max.distance=5000, eye.height=1.6,
+  image.dir="horizons", attribution="Survey DTM", license="Survey terms")
+plot(terrain)
+exportStellarium(terrain, name="Survey site")
+
+## End(Not run)
+</code></pre>
+</details>
+<p><strong>Related function entries</strong></p>
+<p><a href="function-methods.html#fn-createhor"><code>createHor()</code></a>, <a href="function-methods.html#fn-hor2alt"><code>hor2alt()</code></a>, <a href="function-methods.html#fn-horfeature"><code>horFeature()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-horizon"><code>plot.skyscapeR.horizon()</code></a>, <a href="function-methods.html#fn-relinkhor"><code>relinkHor()</code></a>.</p>
+<p>For control-point fitting, mask sampling and landscape export, see <a href="./photographic-horizons.html">photographic horizons</a>.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-patat2011" class="csl-entry" role="listitem">
+Patat, Ferdinando. 2011. <span>‘Horizon Synthesis for Archaeo-Astronomical Purposes’</span>. <em>Astronomische Nachrichten</em> 332: 743–49. <a href="https://doi.org/10.1002/asna.201111570">https://doi.org/10.1002/asna.201111570</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./field-reduction.html" class="pagination-link" aria-label="Reducing compass and theodolite observations">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Reducing compass and theodolite observations</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./photographic-horizons.html" class="pagination-link" aria-label="Calibrating photographic skylines and exchanging horizons">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Calibrating photographic skylines and exchanging horizons</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

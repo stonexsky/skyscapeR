@@ -7,13 +7,8 @@
 ^cran-comments\.md$
 ^CRAN-RELEASE$
 ^RELEASE-CHANGES\.md$
-
 ^DOCUMENTATION\.md$
-
-
 ^data-raw$
-
 ^inst/doc/skyscapeR_files$
-
-
 ^docs$
+^manual$

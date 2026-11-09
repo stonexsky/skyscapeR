@@ -1,0 +1,98 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>dec.pdf | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-dec-pdf">dec.pdf() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Represent measured declinations as probability densities</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Represent the uncertainty of directly supplied declinations so they can be summed or
+tested against a declination model.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>dec.pdf(
+  dec,
+  unc,
+  pdf = "normal",
+  name,
+  .res = 0.01,
+  .cutoff = 1e-04,
+  verbose = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>dec</code></td>
+<td>
+<p>Measured declinations in degrees, between -90 and 90 inclusive.</p>
+</td></tr>
+<tr><td><code>unc</code></td>
+<td>
+<p>Positive uncertainties in degrees of declination. Supply one value or one per measurement. For normal densities this is the standard deviation. For uniform densities it is the half-width.</p>
+</td></tr>
+<tr><td><code>pdf</code></td>
+<td>
+<p>Distribution family, &quot;normal&quot; or &quot;uniform&quot;, with the same abbreviations as <code>az.pdf</code>.</p>
+</td></tr>
+<tr><td><code>name</code></td>
+<td>
+<p>Optional measurement labels in input order.</p>
+</td></tr>
+<tr><td><code>.res</code></td>
+<td>
+<p>Grid spacing in degrees. Default 0.01.</p>
+</td></tr>
+<tr><td><code>.cutoff</code></td>
+<td>
+<p>Minimum retained density height. Default 0.0001.</p>
+</td></tr>
+<tr><td><code>verbose</code></td>
+<td>
+<p>Logical. Report completion.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>A declination estimate already incorporates the sightline geometry. This constructor
+works directly in that coordinate. For each centre it evaluates a normal density with
+the given standard deviation or a uniform density with the given half-width. A single
+uncertainty is shared, or one can be supplied per observation. Save the original
+uncertainty interpretation when comparing results from different surveys.
+</p>
+<p>Each grid is restricted to physical declinations and trimmed at .cutoff. The retained curve is not renormalised after truncation. Use <code>spd</code> to combine measurements.
+</p>
+<p>Silva (2020) sets out the probability-distribution framework for uncertain
+orientations. Here the supplied measurements and uncertainties are already
+expressed in declination.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A skyscapeR.pdf list with one x/y data frame per observation. Metadata record coord = &quot;dec&quot;, the input measurements, family, uncertainties, labels and numerical settings.
+</p>
+
+
+<h3>References</h3>
+
+<p>Silva, F. (2020). A probabilistic framework and significance test for the analysis of structural orientations in skyscape archaeology. Journal of Archaeological Science 118, 105138. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/j.jas.2020.105138")}.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>az.pdf</code>, <code>coordtrans</code>, <code>spd</code>, <code>modelTest</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>d &lt;- dec.pdf(dec = c(-18, 12), unc = c(0.8, 1.4))
+head(d$data[[1]])
+</code></pre>
+
+<p><a href="../function-methods.html#fn-dec-pdf">dec.pdf() method</a></p></body></html>

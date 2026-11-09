@@ -1,0 +1,71 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>parallax.corr | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-parallax-corr">parallax.corr() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Estimate the parallax correction to declination</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Estimate how the observer's position on Earth shifts a solar or lunar target declination
+relative to its geocentric value.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>parallax.corr(parallax, loc, altitude = 0)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>parallax</code></td>
+<td>
+<p>Average parallax to correct (e.g. 0.00224 for the Sun, or 0.952 for the Moon)</p>
+</td></tr>
+<tr><td><code>loc</code></td>
+<td>
+<p>This can be either the latitude of the location, or a <em>skyscapeR.horizon</em> object.</p>
+</td></tr>
+<tr><td><code>altitude</code></td>
+<td>
+<p>Altitude of the celestial object. Defaults to 0 degrees.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The limiting-declination functions subtract this approximate correction from their
+geocentric target. The correction in degrees is the supplied parallax multiplied by the
+cosine of altitude and sine of latitude, with the angular arguments evaluated in
+degrees. The sign therefore reverses between hemispheres. This scalar approximation is
+distinct from computing an instantaneous topocentric ephemeris.
+</p>
+<p>Ruggles gives an archaeological example of applying mean lunar parallax in a
+declination calculator.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Numeric declination correction in degrees. The sign depends on latitude.
+</p>
+
+
+<h3>References</h3>
+
+<p>Ruggles, C. L. N. Basic declination calculator. <a href="https://web.cliveruggles.com/tools/declination-calculator">https://web.cliveruggles.com/tools/declination-calculator</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>skyObject</code>, <code>jS</code>, <code>dS</code>, <code>eq</code>, <code>nmnLX</code>, <code>smnLX</code>, <code>nMjLX</code>, <code>sMjLX</code>, <code>obliquity</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'># Parallax correction for the moon, as seen from latitude 50ºN and at 0º altitude
+parallax.corr(0.952, 50, 0)
+</code></pre>
+
+<p><a href="../function-methods.html#fn-parallax-corr">parallax.corr() method</a></p></body></html>

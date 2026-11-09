@@ -1,0 +1,90 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>planet.extremes | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-planet-extremes">planet.extremes() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Extreme declinations for five visible planets</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Estimate the most northerly and southerly declinations reached by a visible planet near
+an archaeological epoch.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>planet.extremes(obj, year, loc = NULL, epoch)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>obj</code></td>
+<td>
+<p>Planet name, with this capitalisation: Mercury, Venus, Mars, Jupiter or Saturn.</p>
+</td></tr>
+<tr><td><code>year</code></td>
+<td>
+<p>Year for which to do calculations. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p>
+</td></tr>
+<tr><td><code>loc</code></td>
+<td>
+<p>This can be either a <em>skyscapeR.horizon</em> object, or a vector with the
+latitude, longitude and elevation of the site, in this order.</p>
+</td></tr>
+<tr><td><code>epoch</code></td>
+<td>
+<p>Earlier argument name for <code>year</code>, retained for existing scripts.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>An epoch alone does not specify the planet's position in its cycle. The search extends
+three quarters of the package's planet-specific period on either side of the epoch,
+rounds the limiting years, and samples at daily intervals from noon UT on 1 January of
+the start year to the corresponding date in the end year. Each sample uses body.position
+and the requested site if supplied. The returned extrema are the range of these samples;
+finer extrema can fall between sampled instants.
+</p>
+<p>Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-package</code> for setup.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list containing planet, min.dec and max.dec. The two declinations are extrema of daily samples and are expressed in degrees.
+</p>
+
+
+<h3>Provenance</h3>
+
+<p>Structured results carry a <code>provenance</code> attribute. Read it with
+<code>attr(result, "provenance")</code>; its <code>packages</code> entry records the loaded
+skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+This attribute adds no list entries or table columns. Ordinary subsetting or
+transformations may discard attributes; save the original result for reference.
+It does not identify ephemeris files, catalogue revisions or a development
+commit. Retain those and the analysis script separately for exact reproduction.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>spatial.equinox</code>, <code>zenith</code>, <code>antizenith</code>, <code>solar.date</code>, <code>findTargets</code>, <code>EFM</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>## Not run: 
+# Searches across multiple planetary cycles; may take more than five seconds.
+if (requireNamespace("swephRdata", quietly = TRUE)) {
+  planet.extremes('Jupiter', 2023)
+  
+  planet.extremes('Venus', "4001 BC")
+}
+
+## End(Not run)
+</code></pre>
+
+<p><a href="../function-methods.html#fn-planet-extremes">planet.extremes() method</a></p></body></html>

@@ -1,0 +1,9 @@
+| Measure | Result |
+|:---|---:|
+| Comparable dates | 70 |
+| Absolute difference of three days or less | 61 of 70 |
+| Absolute difference of seven days or less | 69 of 70 |
+| Median signed difference | +2 days |
+| Largest absolute difference | 8 days |
+
+The largest difference occurred for Alcyone at Wiltshire in 200 CE. The comparator placed its first qualifying morning 8 days later than the phase date.

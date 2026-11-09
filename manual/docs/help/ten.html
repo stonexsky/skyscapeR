@@ -1,0 +1,67 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ten | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-ten">ten() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Convert degrees, arcminutes and arcseconds to decimal degrees</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Convert a signed field angle in degrees, minutes and seconds to decimal degrees for
+coordinate and orientation calculations.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>ten(dd, mm = 0, ss = 0)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>dd</code></td>
+<td>
+<p>Degrees as a finite numeric scalar, or a single character string
+containing an angle, for example <code>"-8:30:00"</code>.</p>
+</td></tr>
+<tr><td><code>mm</code></td>
+<td>
+<p>Arcminutes as a finite numeric scalar. Defaults to zero.</p>
+</td></tr>
+<tr><td><code>ss</code></td>
+<td>
+<p>Arcseconds as a finite numeric scalar. Defaults to zero.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The sign applies to the whole angle. The magnitude is the sum of absolute degrees,
+minutes divided by 60 and seconds divided by 3600. With numeric components the first
+nonzero component sets the sign and later components must be nonnegative. A string may
+contain one to three colon- or space-separated components and an optional leading sign.
+A string such as &quot;-0:30&quot; preserves the negative sign even when degrees are zero.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A numeric scalar giving the angle in signed decimal degrees.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>reduct.compass</code>, <code>reduct.theodolite</code>, <code>mag.dec</code>, <code>sunAz</code>, <code>az2dec</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>ten(24, 52, 16)
+ten(-8, 30, 0)     # -8.5 degrees
+ten(0, -30, 0)     # -0.5 degrees
+ten(0, 0, -30)     # -1/120 degrees
+ten("-8:30:00")    # -8.5 degrees
+ten("-0:30:00")    # Preserve the minus sign when degrees are zero
+</code></pre>
+
+<p><a href="../function-methods.html#fn-ten">ten() method</a></p></body></html>

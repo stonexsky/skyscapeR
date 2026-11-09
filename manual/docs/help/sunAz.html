@@ -1,0 +1,93 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>sunAz | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-sunaz">sunAz() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Calculate the solar bearing for a field observation</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Establish the true direction of a timed solar sight used to orient an instrument in a
+field survey.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>sunAz(loc, time, timezone, limb, alt = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>loc</code></td>
+<td>
+<p>Location, either a <em>skyscapeR.horizon</em> or a vector
+containing the latitude, longitude and elevation of location, in this order.</p>
+</td></tr>
+<tr><td><code>time</code></td>
+<td>
+<p>String containing the date and time in the following format:
+&quot;YYYY-MM-DD HH:MM:SS&quot;</p>
+</td></tr>
+<tr><td><code>timezone</code></td>
+<td>
+<p>Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See <code>time2jd</code> for named zones and offsets.</p>
+</td></tr>
+<tr><td><code>limb</code></td>
+<td>
+<p>Measured limb of the sun. Options are <em>left</em>, <em>right</em>.
+If missing the center of the sun will be output.</p>
+</td></tr>
+<tr><td><code>alt</code></td>
+<td>
+<p>Logical that triggers output of altitude of the sun at exact time.
+Default is FALSE.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>A solar reference requires the observer position, timestamp, timezone and the part of
+the disc that was sighted. Times are parsed using R's civil-time routines and converted
+to UT Julian dates. Swiss Ephemeris supplies the topocentric solar position and its
+horizontal coordinates using 1013.25 mbar and 15 degrees Celsius. The returned bearing
+is measured clockwise from north. Sighting the left or right limb applies a fixed minus
+or plus 16 arcminutes in azimuth. Optional altitude is the geometric centre altitude.
+</p>
+<p>Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-package</code> for setup.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Solar azimuth in degrees clockwise from north, one value per observation. With alt = TRUE, a data frame with columns az and alt is returned. The altitude is geometric and is expressed in degrees.
+</p>
+
+
+<h3>Provenance</h3>
+
+<p>Structured results carry a <code>provenance</code> attribute. Read it with
+<code>attr(result, "provenance")</code>; its <code>packages</code> entry records the loaded
+skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+This attribute adds no list entries or table columns. Ordinary subsetting or
+transformations may discard attributes; save the original result for reference.
+It does not identify ephemeris files, catalogue revisions or a development
+commit. Retain those and the analysis script separately for exact reproduction.
+Only the table returned with <code>alt = TRUE</code> carries this attribute;
+the default numeric output is unchanged.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>reduct.theodolite</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>if (requireNamespace("swephRdata", quietly = TRUE)) {
+  sunAz(c(52,-3,100), '2017-10-04 12:32:14', 'Europe/London')
+}
+</code></pre>
+
+<p><a href="../function-methods.html#fn-sunaz">sunAz() method</a></p></body></html>

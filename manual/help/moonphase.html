@@ -1,0 +1,67 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>moonphase | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-moonphase">moonphase() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Calculate the illuminated fraction of the Moon</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Determine how much of the lunar disc is illuminated at the time of an observation or
+proposed lunar event.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>moonphase(time, timezone, calendar)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>time</code></td>
+<td>
+<p>One or more UT Julian dates, or local date-time strings in the form YYYY/MM/DD HH:MM:SS.</p>
+</td></tr>
+<tr><td><code>timezone</code></td>
+<td>
+<p>Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See <code>time2jd</code> for named zones and offsets.</p>
+</td></tr>
+<tr><td><code>calendar</code></td>
+<td>
+<p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Lunar illumination can be used to screen events for a nearly full Moon. The routine
+converts calendar input to UT Julian dates when needed and obtains the illuminated
+fraction from the lunar phenomena calculation in Swiss Ephemeris. Values near zero
+indicate a nearly new Moon and values near one a nearly full Moon; the fraction alone
+cannot distinguish waxing from waning.
+</p>
+<p>Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-package</code> for setup.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Numeric illuminated fraction of the lunar disc, one value per input time. At full illumination the fraction is 1.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>swe_pheno_ut</code>, <code>EFM</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>if (requireNamespace("swephRdata", quietly = TRUE)) {
+  # Moonphase at noon GMT on Christmas day 2018:
+  moonphase('2018/12/25 12:00:00', 'GMT')
+}
+</code></pre>
+
+<p><a href="../function-methods.html#fn-moonphase">moonphase() method</a></p></body></html>

@@ -1,0 +1,93 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>jd2time | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-jd2time">jd2time() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Convert a UT Julian date to local calendar date and time</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Express an ephemeris instant as a calendar date and clock time suitable for comparison
+with an observation or historical record.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>jd2time(jd, timezone, calendar, verbose = F)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>jd</code></td>
+<td>
+<p>Finite numeric vector of UT Julian dates.</p>
+</td></tr>
+<tr><td><code>timezone</code></td>
+<td>
+<p>Timezone name or fixed offset; defaults to the value in <code>skyscapeR.vars()</code>. See Details.</p>
+</td></tr>
+<tr><td><code>calendar</code></td>
+<td>
+<p>Output calendar: G or Gregorian, J or Julian. Defaults to the package calendar setting, initially Gregorian.</p>
+</td></tr>
+<tr><td><code>verbose</code></td>
+<td>
+<p>Logical; display a conversion message. Default is FALSE.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>An instant is specified by its UT Julian date. To label it consistently, choose the
+calendar and the offset or civil timezone appropriate to the record. The conversion
+rounds to the nearest second, applies the offset at the rounded instant, handles day
+rollover and converts the day number with Swiss Ephemeris.
+</p>
+<p>Fixed offsets may be numeric hours east of UTC (for example 5.5), or
+strings such as <code>"UTC+05:30"</code>, <code>"UTC-02"</code> or <code>"GMT+01"</code>.
+Offsets must lie between -14 and +14 hours. UTC, GMT and the empty string
+mean zero offset; an empty string does not select the system timezone.
+</p>
+<p>Named zones listed by <code>OlsonNames()</code>, such as <code>"Europe/London"</code>,
+use the installed timezone database for the actual Gregorian date, not a
+surrogate year. They are supported only for Gregorian years 1900-9999.
+Earlier dates require UTC or a fixed offset. For ancient-date workflows,
+set <code>skyscapeR.vars(timezone="UTC")</code> or provide timezone explicitly.
+The package's initial timezone remains Europe/London. Database versions
+may differ across systems; fixed offsets provide reproducible conversions.
+</p>
+<p>Gregorian and Julian calendars are proleptic: no automatic calendar reform
+is applied. Astronomical year numbering is used: 0 is 1 BCE, -1 is 2 BCE.
+Fixed-offset input dates support years from -100000 to 100000.
+A timezone offset represents civil clock time, not local solar time.
+These functions apply clock offsets to a UT Julian day; they do not apply
+leap-second, UTC-to-UT1 or TT corrections. Leap-second input is rejected.
+</p>
+<p>Output is rounded to the nearest whole second, including date rollover.
+The result does not contain a timezone or UTC offset. During a repeated
+local hour, two distinct instants can have identical output strings; retain
+the original Julian date or use a fixed offset for an unambiguous round trip.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A character vector in YYYY/MM/DD HH:MM:SS format. Years are signed as needed and are not padded to four digits.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>time2jd</code>, <code>timestring</code>, <code>skyscapeR.vars</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>jd &lt;- time2jd("2019/12/31 23:30:00", "UTC")
+jd2time(jd, "UTC+02") # 2020/01/01 01:30:00
+jd2time(jd, "Europe/Paris")
+jd &lt;- time2jd("-1/12/31 23:30:00", "UTC", calendar="J")
+jd2time(jd, "UTC+02", calendar="J") # 0/01/01 01:30:00
+</code></pre>
+
+<p><a href="../function-methods.html#fn-jd2time">jd2time() method</a></p></body></html>

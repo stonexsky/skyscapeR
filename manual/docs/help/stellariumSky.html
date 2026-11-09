@@ -1,0 +1,165 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>stellariumSky | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-skystep">skyStep() method</a> · <a href="../function-methods.html#fn-stellariumsky">stellariumSky() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Capture and step through the Stellarium sky above a horizon</h2><span></span><span></span>
+
+<h3>Description</h3>
+
+<p>Capture an equirectangular sky panorama at the observing site and display it behind a horizon.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>stellariumSky(
+  hor,
+  jd = NULL,
+  screenshot.dir = getOption("skyscapeR.screenshot.dir", "~/Pictures/Stellarium"),
+  port = 8090L,
+  timeout = 60,
+  time = NULL,
+  timezone,
+  calendar,
+  display = c(landscape = FALSE, fog = FALSE),
+  width = NULL
+)
+
+skyStep(hor, sky, minutes = 1, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>hor</code></td>
+<td>
+<p>Site horizon with latitude, longitude and elevation in metres.</p>
+</td></tr>
+<tr><td><code>jd</code></td>
+<td>
+<p>Numeric UT Julian day. Supply either jd or time.</p>
+</td></tr>
+<tr><td><code>screenshot.dir</code></td>
+<td>
+<p>Existing local directory where Stellarium writes screenshots.</p>
+</td></tr>
+<tr><td><code>port</code></td>
+<td>
+<p>Local Remote Control server port.</p>
+</td></tr>
+<tr><td><code>timeout</code></td>
+<td>
+<p>Maximum wait for the capture in seconds.</p>
+</td></tr>
+<tr><td><code>time</code></td>
+<td>
+<p>A date and clock time such as &quot;2026/12/21 16:00&quot;, or a POSIXct or POSIXlt instant.</p>
+</td></tr>
+<tr><td><code>timezone</code></td>
+<td>
+<p>For character time, a zone name or fixed UTC offset as in time2jd(). Defaults to the package setting.</p>
+</td></tr>
+<tr><td><code>calendar</code></td>
+<td>
+<p>For character time, the Gregorian or Julian calendar as in time2jd(). Defaults to the package setting.</p>
+</td></tr>
+<tr><td><code>display</code></td>
+<td>
+<p>Named logical switches: atmosphere, landscape, fog, cardinals, compass.marks (numbered horizon bearings), azimuthal.grid, equatorial.grid, constellation.lines, constellation.labels (names) and constellation.art. Use galactic.equator to toggle the Galactic equator independently of the equatorial grid. Use ecliptic and equator for the lines of date, poles for the celestial poles and zenith for the Stellarium zenith/nadir markers. Older Stellarium versions may require the Compass Marks plugin to be loaded to show the bearings. Landscape and fog default to FALSE so the site horizon supplies the foreground. Other omitted switches use the current Stellarium setting.</p>
+</td></tr>
+<tr><td><code>width</code></td>
+<td>
+<p>Even screenshot width in pixels, up to 8192. The default <code>NULL</code> uses the size configured in Stellarium. Try 4096 if a larger capture fails. For a narrow sector, <code>sketchSky</code> gives scalable vector detail.</p>
+</td></tr>
+<tr><td><code>sky</code></td>
+<td>
+<p>A background returned by sketchSky(), stellariumSky() or skyStep().</p>
+</td></tr>
+<tr><td><code>minutes</code></td>
+<td>
+<p>Signed elapsed minutes from the captured instant. Fractions are allowed.</p>
+</td></tr>
+<tr><td><code>...</code></td>
+<td>
+<p>Arguments passed to plot(hor, sky=...), such as xrange.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Enable Remote Control under Configuration &gt; Plugins in Stellarium Desktop, select Load at startup and restart if needed. Enable the server in the plugin settings. Use the local server without a password and install the R packages httr2 and png. Close dialogs and use a normal rectangular viewport. Point screenshot.dir at the directory configured in Stellarium.
+</p>
+<p>The script freezes time and takes one full-sphere Cylinder Fill screenshot. The centre is south, the seam is north, and the horizon is halfway up. Choose width for more pixels per degree. R keeps the native pixels for each plotted sector. For a 30-degree sector a width of 8192 supplies about 683 source pixels. The physical plot size and graphics device determine the displayed resolution. If the script times out, check the screenshot path and that your Stellarium version offers Cylinder Fill.
+</p>
+<p>Capture restores the requested display switches, location, time and time rate after taking the picture. The GUI is shown again. Each capture leaves one PNG in the screenshot directory. Replot an existing sky to inspect another bearing without recapturing.
+</p>
+<p>To move through time, pass either kind of sky to <code>skyStep()</code>. For a natural <code>sketchSky</code> background, each step retains the Sun and Moon display settings and recalculates illumination from the enabled sources. Positive minutes advance the clock and negative minutes rewind it. Assign the result back to the sky variable to continue from the new instant. Repeat <code>xrange</code> and any other plot limits to keep the framing. A sketch is recalculated locally with its style, display switches, constellations and magnitude limit. Older sketches without saved catalogue or calendar settings use the defaults. A Stellarium step takes a fresh screenshot using the saved capture settings.
+</p>
+
+
+<h3>Value</h3>
+
+<p>stellariumSky() returns a skyscapeR.sky object with the native raster, PNG path, Julian day, observer location and capture settings. skyStep() invisibly returns the updated sky of the same kind.
+</p>
+
+
+<h3>Reproducibility and stepping</h3>
+
+<p>A Stellarium capture reflects the installed Stellarium version, its catalogues,
+selected sky culture and current settings for switches not explicitly supplied.
+It is an external rendered image, not the package's twilight or extinction
+model. Record those settings when comparing it with <code>sketchSky</code>.
+The external application and a working local Remote Control connection are
+required for every new capture, but not for replotting a saved raster.
+</p>
+
+
+<h3>Atmospheric settings when using skyStep</h3>
+
+<p>For a sketch, <code>skyStep</code> retains calendar, <code>max.mag</code>, <code>k</code>, style
+and display selections. Refraction, pressure and temperature are read again
+from <code>skyscapeR.vars</code>; the previous object's atmosphere is not
+restored automatically. Changing these session settings between the original
+sketch and a step changes the atmosphere as well as the time. Keep them fixed
+for a time-only comparison, including when resuming a saved sketch in another
+R session. This behaviour is intentional. Stellarium captures instead use
+the external application's atmospheric settings.
+Each call draws immediately and returns the new object invisibly. Save it with
+<code>sky &lt;- skyStep(hor, sky, minutes = 10)</code> before taking the next step.
+</p>
+
+
+<h3>Provenance</h3>
+
+<p>Structured results carry a <code>provenance</code> attribute. Read it with
+<code>attr(result, "provenance")</code>; its <code>packages</code> entry records the loaded
+skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+This attribute adds no list entries or table columns. Ordinary subsetting or
+transformations may discard attributes; save the original result for reference.
+It does not identify ephemeris files, catalogue revisions or a development
+commit. Retain those and the analysis script separately for exact reproduction.
+For Stellarium captures, these are the R package versions, not the external
+Stellarium engine version. Record that version and its settings separately.
+A stepped sky carries the package versions from the new calculation or capture.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>time2jd</code>, <code>plot.skyscapeR.horizon</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>## Not run: 
+hor &lt;- malta_horizons[[1]]
+sector &lt;- c(220, 240)
+sky &lt;- stellariumSky(hor, time = "2026/12/21 16:00", timezone = "UTC",
+                    display = c(atmosphere = TRUE, cardinals = FALSE))
+plot(hor, sky = sky, xrange = sector)
+sky &lt;- skyStep(hor, sky, minutes = 2, xrange = sector)
+sky &lt;- skyStep(hor, sky, minutes = -0.5, xrange = sector)
+
+## End(Not run)
+</code></pre>
+
+<p><a href="../function-methods.html#fn-skystep">skyStep() method</a> · <a href="../function-methods.html#fn-stellariumsky">stellariumSky() method</a></p></body></html>

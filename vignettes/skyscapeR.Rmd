@@ -392,7 +392,7 @@ To test a particular explanation, `modelTest()` accepts an expected distribution
 
 ## Compare the three sky styles {#capture-sky}
 
-Look high in the southeast from Mnajdra South at 20:00 UTC on 21 December 2026. Keep the time, horizon and field of view fixed. The Moon is 93% illuminated. Look just below and left of it for the Pleiades. At the Moon’s altitude of 76°, one degree of azimuth spans only about a quarter of a degree on the sky. This close view uses matching horizontal and vertical angular scales near the Moon so its gibbous outline is visible. The two publication styles show the stellar pattern on a white background. Colour retains the stellar tints, while monochrome is suitable for a black-and-white figure.
+Look high in the southeast from Mnajdra South at 20:00 UTC on 21 December 2026. Keep the time, horizon and field of view fixed. The Moon is 93% illuminated. Look just below and left of it for the Pleiades. At the Moon’s altitude of 76°, one degree of azimuth spans only about a quarter of a degree on the sky. This close view uses matching horizontal and vertical angular scales near the Moon so its gibbous outline is visible. The two publication styles show the stellar pattern on a white background. Publication colour uses spectral class for hue and magnitude for symbol size. The hot B-type Pleiades stars appear blue even when their symbols are small. Publication monochrome draws them in black.
 
 ```{r sky-styles, eval=astronomy_examples, fig.show="hold", fig.cap=c("Natural", "Publication colour", "Publication monochrome")}
 moon_sector <- c(119, 157)
@@ -495,6 +495,14 @@ guides <- sketchSky(hor, time = mw_time, timezone = "UTC",
                     style = "publication-colour", display = list(moon = FALSE,
                     galactic.equator = TRUE, equator = TRUE, ecliptic = TRUE))
 plot(hor, sky = guides, xrange = c(115, 235), yrange = c(-2, 65))
+```
+
+To see which features belong to the Milky Way, keep the same view and switch off just the band. Compare the stars and dark sky below with the natural view above.
+
+```{r milky-way-off, eval=astronomy_examples, fig.cap="The same natural view with the Milky Way switched off; the stars and atmosphere are still drawn."}
+without_band <- sketchSky(hor, time = mw_time, timezone = "UTC",
+                          display = list(moon = FALSE, milky.way = FALSE))
+plot(hor, sky = without_band, xrange = c(115, 235), yrange = c(-2, 65))
 ```
 
 ## Capture a sky from Stellarium

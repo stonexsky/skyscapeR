@@ -1,0 +1,53 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>long.date | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-long-date">long.date() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Format a month and day as a calendar label</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Format a month and day for reporting recurring solar or stellar events within a year.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>long.date(date)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>date</code></td>
+<td>
+<p>date in 'MM-DD' format</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>A season or event table may need a day/month label without an epoch. The first two
+characters are the month number and characters four and five the day number; the
+separator occupies position three. The month is looked up in R's English month
+abbreviations. This formatting step does not validate a calendar date or convert between
+calendars.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Character month-and-day labels such as &quot;21 Jun&quot;, derived from the supplied month and day.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>time2jd</code>, <code>jd2time</code>, <code>timestring</code>, <code>BC.AD</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>long.date('01-01')
+long.date('08-23')
+</code></pre>
+
+<p><a href="../function-methods.html#fn-long-date">long.date() method</a></p></body></html>

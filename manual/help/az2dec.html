@@ -1,0 +1,94 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>az2dec | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-az2dec">az2dec() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Convert azimuth and altitude to declination</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Find the celestial declination corresponding to a terrestrial sightline at a known
+latitude and horizon altitude.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>az2dec(
+  az,
+  loc,
+  alt,
+  refraction = skyscapeR.env$refraction,
+  atm = skyscapeR.env$atm,
+  temp = skyscapeR.env$temp
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>az</code></td>
+<td>
+<p>True bearing or vector of bearings in degrees clockwise from north.</p>
+</td></tr>
+<tr><td><code>loc</code></td>
+<td>
+<p>One latitude or one per bearing (degrees north), a site matrix with one row per bearing
+(latitude, longitude and optional elevation), a shared horizon or a list of horizons in measurement order.</p>
+</td></tr>
+<tr><td><code>alt</code></td>
+<td>
+<p>Horizon altitude in degrees, shared or one per bearing. Omit when supplying
+horizons to interpolate altitude at each bearing with <code>hor2alt</code>.</p>
+</td></tr>
+<tr><td><code>refraction</code></td>
+<td>
+<p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
+</td></tr>
+<tr><td><code>atm</code></td>
+<td>
+<p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
+</td></tr>
+<tr><td><code>temp</code></td>
+<td>
+<p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The same true bearing can indicate different declinations when the observer or horizon
+changes. Supply angular altitude directly or interpolate it from one shared horizon or
+one horizon per observation. Numeric latitude inputs imply zero longitude and elevation;
+a location matrix can include both. When refraction is enabled, the function adjusts the
+input altitude using pressure, temperature and elevation, then calls the inverse Swiss
+Ephemeris horizontal transformation. Bearings are clockwise from north; the routine
+shifts them to the engine convention and rounds the returned declinations using the
+input bearing representation.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Numeric declination in degrees for the supplied azimuth and altitude values.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>swe_azalt_rev</code>, <code>hor2alt</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>dec &lt;- az2dec(az=92, loc=35, alt=2)
+
+dec &lt;- az2dec(az=c(92,89,102), loc=35, alt=c(0,2,4))
+
+# flat horizon with 2 degrees of altitude
+hor &lt;- createHor(az=c(0,360), alt=c(2,2), loc=c(35,-8,25))
+dec &lt;- az2dec(92, loc=hor)
+
+# Can also be used for an array of azimuths:
+decs &lt;- az2dec(az=c(87,92,110), loc=hor)
+</code></pre>
+
+<p><a href="../function-methods.html#fn-az2dec">az2dec() method</a></p></body></html>

@@ -1,0 +1,111 @@
+# Annotated contents {#sec-plan}
+
+This is the proposed structure for the first draft of the technical manual for skyscapeR 2.0.9004. Each chapter below identifies its scope, the evidence already available, and a question for later validation. Questions are proposals; they do not report new tests. The [function index](function-index.qmd) assigns every public entry point to a chapter.
+
+The opening conventions and ephemeris material support the method chapters. The validation part follows the scientific question across functions, retaining the tested builds in the [study register](study-register.qmd).
+
+## Time, coordinates and ephemerides {#plan-time}
+
+The [astronomical conventions chapter](astronomical-conventions.qmd) traces a BCE date across two calendars, compares lunar positions from two origins and follows the fixed-star calculation across epochs.
+
+**Existing evidence.** The ephemeris chapter identifies the inspected data generation and the supplier’s precision claim.
+
+**Open question.** What positional differences remain against the matching JPL solution when epoch, time scale, origin and reference frame are held fixed?
+
+**Entry points.** [`BC.AD()`](function-methods.html#fn-bc-ad), [`astroYear()`](function-methods.html#fn-astroyear), [`jd2time()`](function-methods.html#fn-jd2time), [`time2jd()`](function-methods.html#fn-time2jd), [`long.date()`](function-methods.html#fn-long-date), [`timestring()`](function-methods.html#fn-timestring), [`ten()`](function-methods.html#fn-ten), [`skyscapeR.vars()`](function-methods.html#fn-skyscaper-vars), [`obliquity()`](function-methods.html#fn-obliquity), [`parallax.corr()`](function-methods.html#fn-parallax-corr), [`body.position()`](function-methods.html#fn-body-position).
+
+[Ephemeris background](ephemeris.qmd).
+
+## Reducing field observations {#plan-survey}
+
+The [field reduction chapter](field-reduction.qmd) follows a compass reading and a timed solar sight from instrument readings to true bearing, including a circle reading that crosses north.
+
+**Existing evidence.** The horizon studies use published survey bearings. Their residuals do not isolate the reduction step.
+
+**Open question.** Can an independently oriented baseline be recovered from repeat compass and solar-reference observations, including the transition across north?
+
+**Entry points.** [`mag.dec()`](function-methods.html#fn-mag-dec), [`reduct.compass()`](function-methods.html#fn-reduct-compass), [`reduct.theodolite()`](function-methods.html#fn-reduct-theodolite), [`sunAz()`](function-methods.html#fn-sunaz).
+
+## Terrain horizons and panoramas {#plan-terrain}
+
+The horizon chapter covers measured profiles, DEM skylines and reconstructed features. The [photographic calibration and interchange chapter](photographic-horizons.qmd) traces a mask through control-point fitting, angular sampling and landscape export.
+
+**Existing evidence.** The [international H01 study](study-register.qmd#h01-field-validation) reports field agreement for DEM-derived skyline altitudes by observing setup and terrain product, including the effect of search distance.
+
+**Open question.** How well are narrow features recovered between sampled bearings? How closely does a calibrated photographic skyline match surveyed points from the same viewpoint?
+
+**Entry points.** [`createHor()`](function-methods.html#fn-createhor), [`horFeature()`](function-methods.html#fn-horfeature), [`hor2alt()`](function-methods.html#fn-hor2alt), [`importPanorama()`](function-methods.html#fn-importpanorama), [`importPeakFinder()`](function-methods.html#fn-importpeakfinder), [`createHWT()`](function-methods.html#fn-createhwt), [`downloadHWT()`](function-methods.html#fn-downloadhwt), [`exportHor()`](function-methods.html#fn-exporthor), [`exportStellarium()`](function-methods.html#fn-exportstellarium), [`exportPanorama()`](function-methods.html#fn-exportpanorama), [`demPalettes()`](function-methods.html#fn-dempalettes), [`relinkHor()`](function-methods.html#fn-relinkhor), [`plot.skyscapeR.horizon()`](function-methods.html#fn-plot-skyscaper-horizon).
+
+[Existing horizon method](horizons.qmd).
+
+## From bearings to celestial targets {#plan-targets}
+
+[Read the candidate-screening and limits chapter](celestial-targets.qmd).
+
+Connect the measured bearing and skyline altitude to declination, the accessible declination range and candidate targets. Explain the spatial equinox convention and the role of a date range in a target search.
+
+**Existing evidence.** The horizon comparisons constrain one input. The worked stellar study checks a different output, a seasonal date.
+
+**Open question.** Where do high or asymmetric skylines change candidate membership, and how closely do the declination limits agree with independently calculated sightlines?
+
+**Entry points.** [`az2dec()`](function-methods.html#fn-az2dec), [`hor2max.dec()`](function-methods.html#fn-hor2max-dec), [`hor2min.dec()`](function-methods.html#fn-hor2min-dec), [`findTargets()`](function-methods.html#fn-findtargets), [`skyObject()`](function-methods.html#fn-skyobject), [`sky.objects()`](function-methods.html#fn-sky-objects), [`zenith()`](function-methods.html#fn-zenith), [`antizenith()`](function-methods.html#fn-antizenith), [`orbit()`](function-methods.html#fn-orbit), [`spatial.equinox()`](function-methods.html#fn-spatial-equinox).
+
+## Solar, lunar and planetary events {#plan-events}
+
+[Read the lunar crossover chapter](lunar-crossovers.qmd).
+
+[Read the terrain crossings and event searches chapter](event-searches.qmd).
+
+Explain the definition of each event, including first and last skyline crossings, standstill limits, equinoctial full Moons and crescent crossovers. Relate each local event to its horizon, calendar and time convention.
+
+**Existing evidence.** The EFM and CC help pages record comparisons with published simulations and remaining discrepancies. The ephemeris chapter identifies the upstream assumptions.
+
+**Open question.** Which discrepancies survive matching observing geometry, event definition and calendar? Can a reference calculation recover brief or repeated crossings of an uneven skyline?
+
+**Entry points.** [`riseset()`](function-methods.html#fn-riseset), [`dS()`](function-methods.html#fn-ds), [`jS()`](function-methods.html#fn-js), [`eq()`](function-methods.html#fn-eq), [`nMjLX()`](function-methods.html#fn-nmjlx), [`nmnLX()`](function-methods.html#fn-nmnlx), [`sMjLX()`](function-methods.html#fn-smjlx), [`smnLX()`](function-methods.html#fn-smnlx), [`solar.date()`](function-methods.html#fn-solar-date), [`moonphase()`](function-methods.html#fn-moonphase), [`planet.extremes()`](function-methods.html#fn-planet-extremes), [`EFM()`](function-methods.html#fn-efm), [`CC()`](function-methods.html#fn-cc).
+
+## Stellar positions and seasonal visibility {#plan-stars}
+
+Follow catalogue position through epoch calculation, extinction, visibility intervals and classification. Explain how the annual plot locates events and which date can be used for a sky reconstruction.
+
+**Existing evidence.** The worked heliacal-rising chapter compares two visibility models over seven stars with comparable dates. The models share ephemeris and site inputs.
+
+**Open question.** How well do first and last visibility dates agree with dated sightings under documented observing conditions? Which phase transitions are still untested?
+
+**Entry points.** [`star()`](function-methods.html#fn-star), [`star.phases()`](function-methods.html#fn-star-phases), [`plot.skyscapeR.starphases()`](function-methods.html#fn-plot-skyscaper-starphases).
+
+[Existing stellar method](stellar-phases.qmd).
+
+## Sky brightness and visualisation {#plan-light}
+
+The [sky reconstruction chapter](sky-rendering.qmd) separates the physical quantities returned by skyRadiance() from how sketchSky() displays them. Cover twilight, direct and diffuse light, the Milky Way outline and internal structure, extinction and the role of constellation overlays.
+
+**Existing evidence.** The register distinguishes outline derivation, held-out twilight measurements, conservation of flux across zoom levels and an extinction implementation check.
+
+**Open question.** Which independent observations constrain the outer Milky Way boundary and low-altitude surface brightness? How does performance change outside the twilight geometries already tested?
+
+**Entry points.** [`sketchSky()`](function-methods.html#fn-sketchsky), [`skyRadiance()`](function-methods.html#fn-skyradiance), [`planisphere()`](function-methods.html#fn-planisphere), [`importConstellations()`](function-methods.html#fn-importconstellations), [`stellariumSky()`](function-methods.html#fn-stellariumsky), [`skyStep()`](function-methods.html#fn-skystep).
+
+[Existing rendering checks](study-register.qmd).
+
+## Uncertainty and orientation distributions {#plan-density}
+
+[Read the density and transformation chapter](orientation-densities.qmd).
+
+Explain how a measured interval becomes a density, how it transforms into declination, how densities are summed and how highest-density intervals are read. Give the plotting methods a shared account of units and normalisation.
+
+**Existing evidence.** The existing vignette illustrates this workflow. Its examples supply use cases.
+
+**Open question.** Does the transformation preserve probability mass at north and near declination limits? Can multimodal examples recover the expected disjoint intervals?
+
+**Entry points.** [`az.pdf()`](function-methods.html#fn-az-pdf), [`dec.pdf()`](function-methods.html#fn-dec-pdf), [`coordtrans()`](function-methods.html#fn-coordtrans), [`spd()`](function-methods.html#fn-spd), [`hpdi()`](function-methods.html#fn-hpdi), [`subset.skyscapeR.pdf()`](function-methods.html#fn-subset-skyscaper-pdf), [`plot.skyscapeR.pdf()`](function-methods.html#fn-plot-skyscaper-pdf), [`plot.skyscapeR.spd()`](function-methods.html#fn-plot-skyscaper-spd), [`plotAzimuth()`](function-methods.html#fn-plotazimuth), [`plotBars()`](function-methods.html#fn-plotbars).
+
+## Null models and significance {#plan-null}
+
+The [significance chapter](significance.qmd) documents the scientific hypothesis represented by each null, what counts as a trial, the handling of repeated sites, simulation size, and how global and local results should be read.
+
+**Existing evidence.** Existing package checks include stored significance outputs. Those checks address numerical reproducibility; calibration of false-positive rates is a separate question.
+
+**Open question.** Under data generated by each specified null, how often does the test reject at its stated threshold? How does that rate change with sample size and repeated measurements?
+
+**Entry points.** [`randomTest()`](function-methods.html#fn-randomtest), [`modelTest()`](function-methods.html#fn-modeltest), [`bernoulli.trial()`](function-methods.html#fn-bernoulli-trial), [`pval2stars()`](function-methods.html#fn-pval2stars), [`plot.skyscapeR.sigTest()`](function-methods.html#fn-plot-skyscaper-sigtest), [`print.skyscapeR.sigTest()`](function-methods.html#fn-print-skyscaper-sigtest).

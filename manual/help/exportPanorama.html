@@ -1,0 +1,81 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>exportPanorama | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-exportpanorama">exportPanorama() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Export a horizon as an equirectangular PNG</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Write a full-sphere 2:1 RGBA texture for planetaria or image editors.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>exportPanorama(
+  hor,
+  file,
+  width = 4096,
+  use.image = TRUE,
+  col.ground = "darkgreen"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>hor</code></td>
+<td>
+<p>A skyscapeR.horizon object.</p>
+</td></tr>
+<tr><td><code>file</code></td>
+<td>
+<p>Destination PNG filename. Choose a new filename for each export.</p>
+</td></tr>
+<tr><td><code>width</code></td>
+<td>
+<p>Even output width in pixels. Height is half the width. Default 4096.</p>
+</td></tr>
+<tr><td><code>use.image</code></td>
+<td>
+<p>Use the attached terrain or photographic texture when available.
+Set FALSE to export the numerical skyline as a silhouette.</p>
+</td></tr>
+<tr><td><code>col.ground</code></td>
+<td>
+<p>Fill colour for a numerical silhouette.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The left edge is true north. Azimuth increases clockwise through east,
+south and west. The top is the zenith, the middle is zero altitude and the
+bottom is the nadir. Image exports preserve the calibrated angular bounds and
+sample source pixels by nearest neighbour. Sky and areas outside photographic
+coverage are transparent. For a numerical skyline, the ground extends to the
+nadir over the measured azimuth sector. A missing or modified image triggers
+a warning and the numerical silhouette is exported instead.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The absolute PNG path, invisibly.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>exportStellarium</code>, <code>importPanorama</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>## Not run: 
+exportPanorama(hor, "site.png")
+exportPanorama(hor, "site-silhouette.png", width = 2048, use.image = FALSE)
+
+## End(Not run)
+</code></pre>
+
+<p><a href="../function-methods.html#fn-exportpanorama">exportPanorama() method</a></p></body></html>

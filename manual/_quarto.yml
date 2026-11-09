@@ -1,0 +1,48 @@
+project:
+  type: book
+  output-dir: docs
+  pre-render: Rscript scripts/prepare.R
+  post-render: Rscript scripts/local-links.R
+  resources:
+    - "archives/*"
+    - "study/*.csv"
+    - "help/*.html"
+    - ".nojekyll"
+
+book:
+  title: "skyscapeR technical manual"
+  subtitle: "Methods and validation · draft of 8 November 2026"
+  chapters:
+    - index.qmd
+    - contents-plan.qmd
+    - function-index.qmd
+    - vignette-guide.qmd
+    - ephemeris.qmd
+    - part: "Methods"
+      chapters:
+        - astronomical-conventions.qmd
+        - field-reduction.qmd
+        - horizons.qmd
+        - photographic-horizons.qmd
+        - stellar-phases.qmd
+        - orientation-densities.qmd
+        - event-searches.qmd
+        - lunar-crossovers.qmd
+        - celestial-targets.qmd
+        - significance.qmd
+        - sky-rendering.qmd
+        - function-methods.qmd
+    - part: "Validation"
+      chapters:
+        - study-register.qmd
+        - heliacal-rising.qmd
+    - references.qmd
+
+bibliography: references.bib
+format:
+  html:
+    theme: cosmo
+    html-math-method: mathml
+    toc: true
+    fig-cap-location: bottom
+lang: en-GB

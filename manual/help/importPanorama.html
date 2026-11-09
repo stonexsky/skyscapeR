@@ -1,0 +1,140 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>importPanorama | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-importpanorama">importPanorama() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Import a sky-masked photographic panorama</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Extract a numerical skyline from a transparent-sky panorama and attach the calibrated photograph.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>importPanorama(
+  file,
+  loc,
+  az.lim = c(0, 360),
+  alt.lim = c(-90, 90),
+  name = tools::file_path_sans_ext(basename(file)),
+  calibrate = FALSE,
+  points = NULL,
+  alpha.threshold = 0.5,
+  alt.unc = 0.5
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>file</code></td>
+<td>
+<p>PNG with sky removed to transparency. Keep this file alongside saved horizon objects.</p>
+</td></tr>
+<tr><td><code>loc</code></td>
+<td>
+<p>WGS84 latitude, longitude and optional elevation in metres.</p>
+</td></tr>
+<tr><td><code>az.lim</code></td>
+<td>
+<p>True bearings of the left and right edges, increasing clockwise. A sector may cross north, e.g. c(330,30).</p>
+</td></tr>
+<tr><td><code>alt.lim</code></td>
+<td>
+<p>Altitudes of the bottom and top edges in degrees. Set these explicitly for a cropped panorama.</p>
+</td></tr>
+<tr><td><code>name</code></td>
+<td>
+<p>Site name.</p>
+</td></tr>
+<tr><td><code>calibrate</code></td>
+<td>
+<p>Open the interactive graphics picker. Choose Zoom and click two corners to enlarge a region. Add a control by clicking a landmark and entering its true azimuth, altitude or both. Finish to apply the fit.</p>
+</td></tr>
+<tr><td><code>points</code></td>
+<td>
+<p>Optional data frame with numeric x, y, az and alt. Pixel coordinates start at the upper-left image edge. Use NA for an unknown angle.</p>
+</td></tr>
+<tr><td><code>alpha.threshold</code></td>
+<td>
+<p>Minimum opacity counted as terrain, from above zero to one.</p>
+</td></tr>
+<tr><td><code>alt.unc</code></td>
+<td>
+<p>Assumed skyline altitude uncertainty in degrees.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Choose controls according to what you know:
+</p>
+
+<ul>
+<li><p> If the image limits are already calibrated, leave <code>calibrate = FALSE</code> and omit <code>points</code>.
+</p>
+</li>
+<li><p> To rotate an already level panorama to true north, click one landmark, enter its true azimuth, leave altitude blank and choose Finish. This changes only the azimuth origin.
+</p>
+</li>
+<li><p> One altitude alone shifts the altitude origin. One landmark with both coordinates shifts both origins. Neither case estimates tilt.
+</p>
+</li>
+<li><p> Two altitude controls at different bearings can raise one side and lower the other. For tilt around a full turn, use at least three well-spaced bearings. These fits retain the supplied vertical scale. Two altitude controls at the same bearing but different pixel heights can instead calibrate vertical scale.
+</p>
+</li>
+<li><p> Multiple known azimuths at distinct horizontal positions can calibrate the horizontal scale of a partial panorama. A full turn keeps its 360-degree span.
+</p>
+</li></ul>
+
+<p>The picker samples the overview. Choose Zoom and click two corners to display the selected region at native pixel detail, then choose Add control point. Full-turn plots cut the calibrated view at north. In scripted controls use <code>NA_real_</code> for each unknown angle. Levelling adjusts the near-horizon band. If an altitude shift takes image rows beyond the poles, only whole rows within the physical altitude range are kept. A one-point adjustment records the calibrated bounds and uses the original PNG. Keep it with the saved object. A tilt adjustment writes a levelled PNG in the working directory. Use a panorama with nominally linear angular axes and transparent sky above terrain in every column. A partial panorama supports altitude lookup within its photographed sector. Stellarium export requires a full turn.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A skyscapeR.horizon object with a numerical profile, external PNG reference, angular bounds and control points. Use saveRDS() to save the object. Copy the displayed panorama PNG with the RDS and use <code>relinkHor</code> to reconnect a moved horizon or list.
+</p>
+
+
+<h3>Extraction method and limitations</h3>
+
+<p>Sky detection uses the PNG alpha channel. In each image column the first pixel
+whose opacity reaches <code>alpha.threshold</code> defines the terrain edge. The
+function does not segment an ordinary opaque photograph by sky colour. Remove
+the sky to transparency beforehand and retain sky above terrain in every column.
+Trees, buildings and mask errors become part of the extracted skyline.
+</p>
+<p>Calibration uses linear angular axes, origin shifts and, where supported by
+the controls, fitted scale or sinusoidal near-horizon tilt corrections.
+This is not a general camera/lens model or a full spherical photogrammetric
+adjustment. Wide-angle distortion, stitched-image parallax and inaccurate
+control measurements are not removed automatically. The supplied
+<code>alt.unc</code> is an assumed error, not an uncertainty estimated from the fit.
+Inspect independent field controls after calibration.
+</p>
+<p>A partial panorama only supplies the photographed sector; it is unsuitable for
+functions requiring a closed full horizon. Supplying only latitude and longitude
+leaves observer elevation unknown. Add a finite measured elevation before
+using functions, such as <code>sketchSky</code>, that require it.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>hor2alt</code>, <code>exportPanorama</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>## Not run: 
+# Known bearing at pixel (1240, 380) in a level, cropped panorama
+anchor &lt;- data.frame(x = 1240, y = 380, az = 96.4, alt = NA_real_)
+h &lt;- importPanorama("ridge.png", c(51.75, -9.37, 150),
+                    az.lim = c(70, 120), alt.lim = c(-5, 12), points = anchor)
+plot(h, show.skyline = TRUE)
+
+## End(Not run)
+</code></pre>
+
+<p><a href="../function-methods.html#fn-importpanorama">importPanorama() method</a></p></body></html>

@@ -5,6 +5,8 @@ migration instructions and positional-argument changes, see the README.
 
 ## Sky visualisation
 
+* Publication-colour star symbols use distinct spectral-class inks on white at all magnitudes; symbol size indicates magnitude. The lunar limb and illuminated portion in publication styles are projected at their angular sizes on the sky.
+
 * Natural sketches keep the drawn Pleiades within their integrated light budget and use a broader residual glow. Higher-resolution raster devices receive a finer sky field.
 
 * `sketchSky()` returns a reusable sky for `plot(hor, sky = sky)`. Natural

@@ -1,0 +1,86 @@
+site,epoch,astronomical_year,star,sample,phase_class,phases_local_date_Julian,phases_date_JD_code,calibrated_days_at_limit_5.5,calibrated_days,calibrated_date_Julian,calibrated_date_JD_code,calibrated_days_at_limit_6.5,earlier_curve_days,earlier_curve_date_Julian,earlier_curve_date_JD_code,standard_symbol_days,standard_symbol_date_Julian,standard_symbol_date_JD_code
+Wiltshire,3500 BCE,-3499,Sirius,main,arising and lying hidden,3500-08-18 BCE,443277.5,4.0,3.0,3500-08-21 BCE,443280.5,2.0,-4.0,3500-08-14 BCE,443273.5,-2.0,3500-08-16 BCE,443275.5
+Mnajdra,3500 BCE,-3499,Sirius,main,arising and lying hidden,3500-07-21 BCE,443249.5,4.0,3.0,3500-07-24 BCE,443252.5,2.0,-3.0,3500-07-18 BCE,443246.5,-2.0,3500-07-19 BCE,443247.5
+Wiltshire,3250 BCE,-3249,Sirius,main,arising and lying hidden,3250-08-18 BCE,534589.5,3.0,2.0,3250-08-20 BCE,534591.5,1.0,-5.0,3250-08-13 BCE,534584.5,-3.0,3250-08-15 BCE,534586.5
+Mnajdra,3250 BCE,-3249,Sirius,main,arising and lying hidden,3250-07-22 BCE,534562.5,3.0,2.0,3250-07-24 BCE,534564.5,2.0,-4.0,3250-07-18 BCE,534558.5,-2.0,3250-07-20 BCE,534560.5
+Wiltshire,2000 BCE,-1999,Sirius,main,arising and lying hidden,2000-08-12 BCE,991146.5,4.0,3.0,2000-08-15 BCE,991149.5,2.0,-4.0,2000-08-08 BCE,991142.5,-2.0,2000-08-10 BCE,991144.5
+Mnajdra,2000 BCE,-1999,Sirius,main,arising and lying hidden,2000-07-20 BCE,991123.5,4.0,3.0,2000-07-23 BCE,991126.5,3.0,-2.0,2000-07-18 BCE,991121.5,-1.0,2000-07-19 BCE,991122.5
+Wiltshire,200 CE,200,Sirius,main,arising and lying hidden,0200-08-08 CE,1794327.5,4.0,3.0,0200-08-11 CE,1794330.5,2.0,-3.0,0200-08-05 CE,1794324.5,-2.0,0200-08-06 CE,1794325.5
+Mnajdra,200 CE,200,Sirius,main,arising and lying hidden,0200-07-22 CE,1794310.5,2.0,2.0,0200-07-24 CE,1794312.5,1.0,-3.0,0200-07-19 CE,1794307.5,-3.0,0200-07-19 CE,1794307.5
+Wiltshire,2026 CE,2026,Sirius,main,arising and lying hidden,2026-08-08 CE,2461273.5,4.0,4.0,2026-08-12 CE,2461277.5,3.0,-1.0,2026-08-07 CE,2461272.5,-1.0,2026-08-07 CE,2461272.5
+Mnajdra,2026 CE,2026,Sirius,main,arising and lying hidden,2026-07-24 CE,2461258.5,3.0,3.0,2026-07-27 CE,2461261.5,2.0,-2.0,2026-07-22 CE,2461256.5,-2.0,2026-07-22 CE,2461256.5
+Wiltshire,3500 BCE,-3499,Aldebaran,main,arising and lying hidden,3500-06-19 BCE,443217.5,6.0,3.0,3500-06-22 BCE,443220.5,1.0,-6.0,3500-06-13 BCE,443211.5,-14.0,3500-06-05 BCE,443203.5
+Mnajdra,3500 BCE,-3499,Aldebaran,main,arising and lying hidden,3500-05-18 BCE,443185.5,3.0,2.0,3500-05-20 BCE,443187.5,0.0,-3.0,3500-05-15 BCE,443182.5,-8.0,3500-05-10 BCE,443177.5
+Wiltshire,3250 BCE,-3249,Aldebaran,main,arising and lying hidden,3250-06-19 BCE,534529.5,7.0,4.0,3250-06-23 BCE,534533.5,2.0,-5.0,3250-06-14 BCE,534524.5,-13.0,3250-06-06 BCE,534516.5
+Mnajdra,3250 BCE,-3249,Aldebaran,main,arising and lying hidden,3250-05-19 BCE,534498.5,4.0,3.0,3250-05-22 BCE,534501.5,1.0,-2.0,3250-05-17 BCE,534496.5,-7.0,3250-05-12 BCE,534491.5
+Wiltshire,2000 BCE,-1999,Aldebaran,main,arising and lying hidden,2000-06-19 BCE,991092.5,7.0,5.0,2000-06-24 BCE,991097.5,2.0,-3.0,2000-06-16 BCE,991089.5,-11.0,2000-06-08 BCE,991081.5
+Mnajdra,2000 BCE,-1999,Aldebaran,main,arising and lying hidden,2000-05-26 BCE,991068.5,3.0,2.0,2000-05-28 BCE,991070.5,0.0,-3.0,2000-05-23 BCE,991065.5,-7.0,2000-05-19 BCE,991061.5
+Wiltshire,200 CE,200,Aldebaran,main,arising and lying hidden,0200-06-19 CE,1794277.5,6.0,4.0,0200-06-23 CE,1794281.5,2.0,-2.0,0200-06-17 CE,1794275.5,-8.0,0200-06-11 CE,1794269.5
+Mnajdra,200 CE,200,Aldebaran,main,arising and lying hidden,0200-06-03 CE,1794261.5,4.0,2.0,0200-06-05 CE,1794263.5,1.0,-1.0,0200-06-02 CE,1794260.5,-5.0,0200-05-29 CE,1794256.5
+Wiltshire,2026 CE,2026,Aldebaran,main,arising and lying hidden,2026-06-21 CE,2461225.5,4.0,3.0,2026-06-24 CE,2461228.5,1.0,-2.0,2026-06-19 CE,2461223.5,-7.0,2026-06-14 CE,2461218.5
+Mnajdra,2026 CE,2026,Aldebaran,main,arising and lying hidden,2026-06-10 CE,2461214.5,3.0,2.0,2026-06-12 CE,2461216.5,1.0,-1.0,2026-06-09 CE,2461213.5,-3.0,2026-06-07 CE,2461211.5
+Wiltshire,3500 BCE,-3499,Regulus,main,arising and lying hidden,3500-08-01 BCE,443260.5,5.0,3.0,3500-08-04 BCE,443263.5,2.0,-1.0,3500-07-31 BCE,443259.5,-7.0,3500-07-25 BCE,443253.5
+Mnajdra,3500 BCE,-3499,Regulus,main,arising and lying hidden,3500-07-24 BCE,443252.5,3.0,2.0,3500-07-26 BCE,443254.5,1.0,-1.0,3500-07-23 BCE,443251.5,-4.0,3500-07-20 BCE,443248.5
+Wiltshire,3250 BCE,-3249,Regulus,main,arising and lying hidden,3250-08-02 BCE,534573.5,5.0,3.0,3250-08-05 BCE,534576.5,2.0,-1.0,3250-08-01 BCE,534572.5,-7.0,3250-07-26 BCE,534566.5
+Mnajdra,3250 BCE,-3249,Regulus,main,arising and lying hidden,3250-07-26 BCE,534566.5,3.0,2.0,3250-07-28 BCE,534568.5,1.0,-1.0,3250-07-25 BCE,534565.5,-4.0,3250-07-22 BCE,534562.5
+Wiltshire,2000 BCE,-1999,Regulus,main,arising and lying hidden,2000-08-05 BCE,991139.5,4.0,3.0,2000-08-08 BCE,991142.5,2.0,-1.0,2000-08-04 BCE,991138.5,-5.0,2000-07-31 BCE,991134.5
+Mnajdra,2000 BCE,-1999,Regulus,main,arising and lying hidden,2000-07-31 BCE,991134.5,4.0,3.0,2000-08-03 BCE,991137.5,2.0,0.0,2000-07-31 BCE,991134.5,-2.0,2000-07-29 BCE,991132.5
+Wiltshire,200 CE,200,Regulus,main,arising and lying hidden,0200-08-15 CE,1794334.5,3.0,1.0,0200-08-16 CE,1794335.5,0.0,-2.0,0200-08-13 CE,1794332.5,-5.0,0200-08-10 CE,1794329.5
+Mnajdra,200 CE,200,Regulus,main,arising and lying hidden,0200-08-13 CE,1794332.5,2.0,1.0,0200-08-14 CE,1794333.5,1.0,-1.0,0200-08-12 CE,1794331.5,-3.0,0200-08-10 CE,1794329.5
+Wiltshire,2026 CE,2026,Regulus,main,arising and lying hidden,2026-08-26 CE,2461291.5,2.0,1.0,2026-08-27 CE,2461292.5,0.0,-2.0,2026-08-24 CE,2461289.5,-5.0,2026-08-21 CE,2461286.5
+Mnajdra,2026 CE,2026,Regulus,main,arising and lying hidden,2026-08-24 CE,2461289.5,2.0,2.0,2026-08-26 CE,2461291.5,1.0,-1.0,2026-08-23 CE,2461288.5,-3.0,2026-08-21 CE,2461286.5
+Wiltshire,3500 BCE,-3499,Alcyone,main,arising and lying hidden,3500-05-25 BCE,443192.5,13.0,5.0,3500-05-30 BCE,443197.5,-1.0,-7.0,3500-05-18 BCE,443185.5,-7.0,3500-05-18 BCE,443185.5
+Mnajdra,3500 BCE,-3499,Alcyone,main,arising and lying hidden,3500-04-30 BCE,443167.5,6.0,1.0,3500-05-01 BCE,443168.5,-2.0,-4.0,3500-04-26 BCE,443163.5,-5.0,3500-04-25 BCE,443162.5
+Wiltshire,3250 BCE,-3249,Alcyone,main,arising and lying hidden,3250-05-27 BCE,534506.5,13.0,5.0,3250-06-01 BCE,534511.5,-1.0,-7.0,3250-05-20 BCE,534499.5,-7.0,3250-05-20 BCE,534499.5
+Mnajdra,3250 BCE,-3249,Alcyone,main,arising and lying hidden,3250-05-02 BCE,534481.5,6.0,1.0,3250-05-03 BCE,534482.5,-1.0,-4.0,3250-04-28 BCE,534477.5,-4.0,3250-04-28 BCE,534477.5
+Wiltshire,2000 BCE,-1999,Alcyone,main,arising and lying hidden,2000-05-31 BCE,991073.5,14.0,7.0,2000-06-07 BCE,991080.5,2.0,-4.0,2000-05-27 BCE,991069.5,-5.0,2000-05-26 BCE,991068.5
+Mnajdra,2000 BCE,-1999,Alcyone,main,arising and lying hidden,2000-05-09 BCE,991051.5,6.0,2.0,2000-05-11 BCE,991053.5,-1.0,-3.0,2000-05-06 BCE,991048.5,-4.0,2000-05-05 BCE,991047.5
+Wiltshire,200 CE,200,Alcyone,main,arising and lying hidden,0200-06-04 CE,1794262.5,12.0,8.0,0200-06-12 CE,1794270.5,4.0,-1.0,0200-06-03 CE,1794261.5,-3.0,0200-06-01 CE,1794259.5
+Mnajdra,200 CE,200,Alcyone,main,arising and lying hidden,0200-05-19 CE,1794246.5,7.0,3.0,0200-05-22 CE,1794249.5,1.0,-2.0,0200-05-17 CE,1794244.5,-2.0,0200-05-17 CE,1794244.5
+Wiltshire,2026 CE,2026,Alcyone,main,arising and lying hidden,2026-06-08 CE,2461212.5,9.0,5.0,2026-06-13 CE,2461217.5,3.0,-2.0,2026-06-06 CE,2461210.5,-3.0,2026-06-05 CE,2461209.5
+Mnajdra,2026 CE,2026,Alcyone,main,arising and lying hidden,2026-05-28 CE,2461201.5,6.0,3.0,2026-05-31 CE,2461204.5,2.0,-1.0,2026-05-27 CE,2461200.5,-2.0,2026-05-26 CE,2461199.5
+Wiltshire,3500 BCE,-3499,Spica,main,arising and lying hidden,3500-09-15 BCE,443305.5,2.0,1.0,3500-09-16 BCE,443306.5,0.0,-2.0,3500-09-13 BCE,443303.5,-5.0,3500-09-10 BCE,443300.5
+Mnajdra,3500 BCE,-3499,Spica,main,arising and lying hidden,3500-09-12 BCE,443302.5,2.0,2.0,3500-09-14 BCE,443304.5,1.0,-1.0,3500-09-11 BCE,443301.5,-3.0,3500-09-09 BCE,443299.5
+Wiltshire,3250 BCE,-3249,Spica,main,arising and lying hidden,3250-09-16 BCE,534618.5,3.0,2.0,3250-09-18 BCE,534620.5,1.0,-1.0,3250-09-15 BCE,534617.5,-4.0,3250-09-12 BCE,534614.5
+Mnajdra,3250 BCE,-3249,Spica,main,arising and lying hidden,3250-09-13 BCE,534615.5,3.0,3.0,3250-09-16 BCE,534618.5,2.0,0.0,3250-09-13 BCE,534615.5,-2.0,3250-09-11 BCE,534613.5
+Wiltshire,2000 BCE,-1999,Spica,main,arising and lying hidden,2000-09-23 BCE,991188.5,2.0,1.0,2000-09-24 BCE,991189.5,0.0,-1.0,2000-09-22 BCE,991187.5,-4.0,2000-09-19 BCE,991184.5
+Mnajdra,2000 BCE,-1999,Spica,main,arising and lying hidden,2000-09-21 BCE,991186.5,3.0,2.0,2000-09-23 BCE,991188.5,1.0,0.0,2000-09-21 BCE,991186.5,-3.0,2000-09-18 BCE,991183.5
+Wiltshire,200 CE,200,Spica,main,arising and lying hidden,0200-10-07 CE,1794387.5,2.0,1.0,0200-10-08 CE,1794388.5,0.0,-1.0,0200-10-06 CE,1794386.5,-4.0,0200-10-03 CE,1794383.5
+Mnajdra,200 CE,200,Spica,main,arising and lying hidden,0200-10-05 CE,1794385.5,2.0,1.0,0200-10-06 CE,1794386.5,1.0,-1.0,0200-10-04 CE,1794384.5,-3.0,0200-10-02 CE,1794382.5
+Wiltshire,2026 CE,2026,Spica,main,arising and lying hidden,2026-10-20 CE,2461346.5,2.0,1.0,2026-10-21 CE,2461347.5,0.0,-2.0,2026-10-18 CE,2461344.5,-5.0,2026-10-15 CE,2461341.5
+Mnajdra,2026 CE,2026,Spica,main,arising and lying hidden,2026-10-18 CE,2461344.5,2.0,1.0,2026-10-19 CE,2461345.5,0.0,-2.0,2026-10-16 CE,2461342.5,-4.0,2026-10-14 CE,2461340.5
+Wiltshire,3500 BCE,-3499,Antares,main,arising and lying hidden,3500-10-28 BCE,443348.5,2.0,2.0,3500-10-30 BCE,443350.5,1.0,-1.0,3500-10-27 BCE,443347.5,-4.0,3500-10-24 BCE,443344.5
+Mnajdra,3500 BCE,-3499,Antares,main,arising and lying hidden,3500-10-26 BCE,443346.5,2.0,1.0,3500-10-27 BCE,443347.5,1.0,-1.0,3500-10-25 BCE,443345.5,-3.0,3500-10-23 BCE,443343.5
+Wiltshire,3250 BCE,-3249,Antares,main,arising and lying hidden,3250-10-31 BCE,534663.5,2.0,1.0,3250-11-01 BCE,534664.5,0.0,-2.0,3250-10-29 BCE,534661.5,-5.0,3250-10-26 BCE,534658.5
+Mnajdra,3250 BCE,-3249,Antares,main,arising and lying hidden,3250-10-28 BCE,534660.5,2.0,2.0,3250-10-30 BCE,534662.5,1.0,-1.0,3250-10-27 BCE,534659.5,-3.0,3250-10-25 BCE,534657.5
+Wiltshire,2000 BCE,-1999,Antares,main,arising and lying hidden,2000-11-08 BCE,991234.5,2.0,1.0,2000-11-09 BCE,991235.5,0.0,-1.0,2000-11-07 BCE,991233.5,-4.0,2000-11-04 BCE,991230.5
+Mnajdra,2000 BCE,-1999,Antares,main,arising and lying hidden,2000-11-06 BCE,991232.5,1.0,1.0,2000-11-07 BCE,991233.5,0.0,-2.0,2000-11-04 BCE,991230.5,-4.0,2000-11-02 BCE,991228.5
+Wiltshire,200 CE,200,Antares,main,arising and lying hidden,0200-11-26 CE,1794437.5,2.0,1.0,0200-11-27 CE,1794438.5,0.0,-2.0,0200-11-24 CE,1794435.5,-5.0,0200-11-21 CE,1794432.5
+Mnajdra,200 CE,200,Antares,main,arising and lying hidden,0200-11-21 CE,1794432.5,2.0,1.0,0200-11-22 CE,1794433.5,1.0,-1.0,0200-11-20 CE,1794431.5,-4.0,0200-11-17 CE,1794428.5
+Wiltshire,2026 CE,2026,Antares,main,arising and lying hidden,2026-12-14 CE,2461401.5,4.0,3.0,2026-12-17 CE,2461404.5,1.0,-1.0,2026-12-13 CE,2461400.5,-5.0,2026-12-09 CE,2461396.5
+Mnajdra,2026 CE,2026,Antares,main,arising and lying hidden,2026-12-06 CE,2461393.5,3.0,1.0,2026-12-07 CE,2461394.5,1.0,-1.0,2026-12-05 CE,2461392.5,-4.0,2026-12-02 CE,2461389.5
+Wiltshire,3500 BCE,-3499,Procyon,main,arising and lying hidden,3500-07-28 BCE,443256.5,4.0,3.0,3500-07-31 BCE,443259.5,1.0,-3.0,3500-07-25 BCE,443253.5,-6.0,3500-07-22 BCE,443250.5
+Mnajdra,3500 BCE,-3499,Procyon,main,arising and lying hidden,3500-07-08 BCE,443236.5,3.0,2.0,3500-07-10 BCE,443238.5,1.0,-2.0,3500-07-06 BCE,443234.5,-4.0,3500-07-04 BCE,443232.5
+Wiltshire,3250 BCE,-3249,Procyon,main,arising and lying hidden,3250-07-28 BCE,534568.5,4.0,3.0,3250-07-31 BCE,534571.5,2.0,-3.0,3250-07-25 BCE,534565.5,-6.0,3250-07-22 BCE,534562.5
+Mnajdra,3250 BCE,-3249,Procyon,main,arising and lying hidden,3250-07-09 BCE,534549.5,3.0,2.0,3250-07-11 BCE,534551.5,2.0,-2.0,3250-07-07 BCE,534547.5,-4.0,3250-07-05 BCE,534545.5
+Wiltshire,2000 BCE,-1999,Procyon,main,arising and lying hidden,2000-07-27 BCE,991130.5,4.0,3.0,2000-07-30 BCE,991133.5,2.0,-2.0,2000-07-25 BCE,991128.5,-5.0,2000-07-22 BCE,991125.5
+Mnajdra,2000 BCE,-1999,Procyon,main,arising and lying hidden,2000-07-12 BCE,991115.5,3.0,2.0,2000-07-14 BCE,991117.5,2.0,-1.0,2000-07-11 BCE,991114.5,-3.0,2000-07-09 BCE,991112.5
+Wiltshire,200 CE,200,Procyon,main,arising and lying hidden,0200-07-28 CE,1794316.5,4.0,3.0,0200-07-31 CE,1794319.5,2.0,-1.0,0200-07-27 CE,1794315.5,-4.0,0200-07-24 CE,1794312.5
+Mnajdra,200 CE,200,Procyon,main,arising and lying hidden,0200-07-18 CE,1794306.5,3.0,3.0,0200-07-21 CE,1794309.5,2.0,-1.0,0200-07-17 CE,1794305.5,-2.0,0200-07-16 CE,1794304.5
+Wiltshire,2026 CE,2026,Procyon,main,arising and lying hidden,2026-08-02 CE,2461267.5,3.0,2.0,2026-08-04 CE,2461269.5,1.0,-1.0,2026-08-01 CE,2461266.5,-4.0,2026-07-29 CE,2461263.5
+Mnajdra,2026 CE,2026,Procyon,main,arising and lying hidden,2026-07-25 CE,2461259.5,3.0,3.0,2026-07-28 CE,2461262.5,2.0,0.0,2026-07-25 CE,2461259.5,-2.0,2026-07-23 CE,2461257.5
+Wiltshire,3500 BCE,-3499,Capella,main,curtailed passage,,,,,,,,,,,,,
+Mnajdra,3500 BCE,-3499,Capella,main,curtailed passage,,,,,,,,,,,,,
+Wiltshire,3250 BCE,-3249,Capella,main,curtailed passage,,,,,,,,,,,,,
+Mnajdra,3250 BCE,-3249,Capella,main,curtailed passage,,,,,,,,,,,,,
+Wiltshire,2000 BCE,-1999,Capella,main,curtailed passage,,,,,,,,,,,,,
+Mnajdra,2000 BCE,-1999,Capella,main,curtailed passage,,,,,,,,,,,,,
+Wiltshire,200 CE,200,Capella,main,curtailed passage,,,,,,,,,,,,,
+Mnajdra,200 CE,200,Capella,main,curtailed passage,,,,,,,,,,,,,
+Wiltshire,2026 CE,2026,Capella,main,curtailed passage,,,,,,,,,,,,,
+Mnajdra,2026 CE,2026,Capella,main,curtailed passage,,,,,,,,,,,,,
+Mnajdra,3250 BCE,-3249,Miaplacidus,Mnajdra follow-up,arising and lying hidden,3250-11-10 BCE,534673.5,8.0,4.0,3250-11-14 BCE,534677.5,1.0,4.0,3250-11-14 BCE,534677.5,4.0,3250-11-14 BCE,534677.5
+Mnajdra,3250 BCE,-3249,Alnair,Mnajdra follow-up,arising and lying hidden,3250-03-03 BCE,534421.5,,4.0,3250-03-07 BCE,534425.5,-1.0,4.0,3250-03-07 BCE,534425.5,4.0,3250-03-07 BCE,534425.5
+Mnajdra,3250 BCE,-3249,Avior,Mnajdra follow-up,arising and lying hidden,3250-10-14 BCE,534646.5,6.0,2.0,3250-10-16 BCE,534648.5,-1.0,-1.0,3250-10-13 BCE,534645.5,0.0,3250-10-14 BCE,534646.5
+Mnajdra,3250 BCE,-3249,Peacock,Mnajdra follow-up,arising and lying hidden,3249-01-07 BCE,534731.5,7.0,3.0,3249-01-10 BCE,534734.5,0.0,0.0,3249-01-07 BCE,534731.5,0.0,3249-01-07 BCE,534731.5
+Mnajdra,3250 BCE,-3249,Rigil Kentaurus,Mnajdra follow-up,arising and lying hidden,3250-11-01 BCE,534664.5,3.0,2.0,3250-11-03 BCE,534666.5,1.0,0.0,3250-11-01 BCE,534664.5,-2.0,3250-10-30 BCE,534662.5

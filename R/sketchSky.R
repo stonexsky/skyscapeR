@@ -51,7 +51,7 @@
 #' fractions from Swiss Ephemeris. A close view can therefore show the phase
 #' of Venus. Star colours follow catalogue spectral classes; the diffuse band
 #' has a neutral tint. Colour and projection influence the screen appearance.
-#' Publication styles use magnitude-scaled star and planet symbols on white.
+#' Publication styles use magnitude-scaled star and planet symbols on white. In publication colour, stellar hue identifies the leading catalogue spectral class O through M; other or missing classes use neutral grey.
 #'
 #' Azimuth increases clockwise from true north. Refraction, pressure and
 #' temperature come from \code{\link{skyscapeR.vars}} when the sky is calculated.
@@ -288,7 +288,11 @@ sketchSky <- function(hor, jd=NULL, time=NULL, timezone, calendar,
     catalogue <- .plot_star_catalogue(catalogue)
     keep <- which(catalogue$magV<=max.mag)
     stars <- as.character(catalogue$identifier[keep])
-    if (length(keep) && !is.null(catalogue$stellar)) star.colours <- .sketch_star_colours(catalogue$stellar[keep],catalogue$magV[keep])
+    if (length(keep) && !is.null(catalogue$stellar)) {
+      star.colours <- if (style=="publication-colour") {
+        .publication_star_colours(catalogue$stellar[keep],stars)
+      } else .sketch_star_colours(catalogue$stellar[keep],catalogue$magV[keep])
+    }
   }
   if (flags["constellation.lines"]) edges <- do.call(rbind,constLines(selection))
   ids <- unique(as.character(c(stars,edges,clusters$identifier)))
@@ -396,6 +400,15 @@ sketchSky <- function(hor, jd=NULL, time=NULL, timezone, calendar,
   if (pheno$return<0L || bitwAnd(pheno$return,7L)!=2L)
     .ephemeris_failure(jd,id,pheno$serr)
   pheno$attr
+}
+
+.publication_star_colours <- function(type,ids) {
+  # Keep spectral hues legible on white. Magnitude is encoded by symbol size.
+  palette <- c(O="#294C9A",B="#416DB6",A="#637C9C",F="#847B60",
+               G="#91691C",K="#B15B23",M="#AC4039")
+  colours <- unname(palette[substr(trimws(type),1,1)])
+  colours[is.na(colours)] <- "#61656A"
+  stats::setNames(colours,ids)
 }
 
 .sketch_star_colours <- function(type,mag) {
@@ -548,6 +561,29 @@ sketchSky <- function(hor, jd=NULL, time=NULL, timezone, calendar,
   atan2(sin(sa)*cos(ma)-cos(sa)*sin(ma)*cos(da), cos(sa)*sin(da))
 }
 
+.lunar_plot_path <- function(centre,east,up,shift) {
+  rad <- pi/180
+  h <- centre[2]*rad
+  distance <- sqrt(east^2+up^2)*rad
+  bearing <- atan2(east,up)
+  alt <- asin(pmax(-1,pmin(1,sin(h)*cos(distance)+cos(h)*sin(distance)*cos(bearing))))
+  offset <- atan2(sin(bearing)*sin(distance)*cos(h),cos(distance)-sin(h)*sin(alt))/rad
+  # Follow the boundary continuously across the azimuth seam.
+  az <- centre[1]+shift+offset[1]+c(0,cumsum((diff(offset)+180)%%360-180))
+  list(x=az,y=alt/rad)
+}
+
+.lunar_plot_fill <- function(path,col) {
+  x <- path$x
+  y <- path$y
+  if (abs(tail(x,1)-x[1])>180) {
+    # A boundary enclosing a pole closes along the edge of the sky map.
+    x <- c(x,tail(x,1),x[1])
+    y <- c(y,rep(sign(mean(y))*90,2))
+  }
+  graphics::polygon(x,y,col=col,border=NA)
+}
+
 .lunar_lit_polygon <- function(fraction, angle, radius=.25) {
   # Limb and terminator share the two horns. Their separation sets the lit area.
   t <- seq(-pi/2,pi/2,length.out=97)
@@ -570,13 +606,16 @@ sketchSky <- function(hor, jd=NULL, time=NULL, timezone, calendar,
   }
   ink <- if (paper) "black" else "white"
   stars.ink <- ink
-  if ((!paper || colour.paper) && length(sky$star.colours)) {
-    stars.ink <- sky$star.colours
-    if (colour.paper) {
-      channels <- grDevices::col2rgb(stars.ink)*0.45
-      stars.ink <- grDevices::rgb(channels[1,],channels[2,],channels[3,],maxColorValue=255)
+  if (colour.paper && NROW(sky$stars)) {
+    ids <- rownames(sky$stars)
+    if (!is.null(names(sky$star.colours)) && all(ids %in% names(sky$star.colours))) {
+      stars.ink <- sky$star.colours[ids]
+    } else {
+      # Older sketches stored the natural, magnitude-faded tints.
+      catalogue <- .read_star_catalogue()
+      stars.ink <- .publication_star_colours(catalogue$stellar[match(ids,catalogue$identifier)],ids)
     }
-  }
+  } else if (!paper && length(sky$star.colours)) stars.ink <- sky$star.colours
   line.ink <- ink
   if (!paper && length(sky$star.opacity)) {
     if (NROW(sky$stars)) {
@@ -654,13 +693,12 @@ sketchSky <- function(hor, jd=NULL, time=NULL, timezone, calendar,
       if (id=="moon" && !is.null(sky$lunar)) {
         theta <- seq(0,2*pi,length.out=193)
         radius <- if (is.null(sky$diameters)) .25 else sky$diameters[["moon"]]/2
-        x <- p[1]+shift
-        y <- p[2]
-        graphics::polygon(x+radius*cos(theta),y+radius*sin(theta),
-                          col=if (paper) "black" else if (!is.null(sky$light)) .sky_colour(sky$light,p[1],p[2],opaque=TRUE) else bg,border=NA)
+        limb <- .lunar_plot_path(p,radius*cos(theta),radius*sin(theta),shift)
+        dark <- if (paper) "black" else if (!is.null(sky$light)) .sky_colour(sky$light,p[1],p[2],opaque=TRUE) else bg
+        .lunar_plot_fill(limb,dark)
         lit <- .lunar_lit_polygon(sky$lunar$fraction,sky$lunar$angle,radius)
-        graphics::polygon(x+lit$x,y+lit$y,col=if (paper) "white" else "ivory",border=NA)
-        if (paper) graphics::lines(x+radius*cos(theta),y+radius*sin(theta),col="black",lwd=.5)
+        .lunar_plot_fill(.lunar_plot_path(p,lit$x,lit$y,shift),if (paper) "white" else "ivory")
+        if (paper) graphics::lines(limb$x,limb$y,col="black",lwd=.5)
       } else if (id %in% c("sun","moon")) {
         theta <- seq(0,2*pi,length.out=61)
         radius <- if(is.null(sky$diameters)) .26 else sky$diameters[[id]]/2

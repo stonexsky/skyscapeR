@@ -1,0 +1,141 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>spatial.equinox | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-spatial-equinox">spatial.equinox() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Estimate the spatial equinox from a site horizon</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Find the directions halfway between the two solstitial sunrise bearings and between the
+two solstitial sunset bearings on a particular horizon.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>spatial.equinox(
+  hor, parallax = 0.00224, year = skyscapeR.env$cur.year,
+  refraction = skyscapeR.env$refraction,
+  atm = skyscapeR.env$atm, temp = skyscapeR.env$temp
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>hor</code></td>
+<td>
+<p>A <em>skyscapeR.horizon</em> with finite, increasing azimuths covering
+0 to 360 degrees and matching endpoint altitudes.</p>
+</td></tr>
+<tr><td><code>parallax</code></td>
+<td>
+<p>Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.</p>
+</td></tr>
+<tr><td><code>year</code></td>
+<td>
+<p>One astronomical year, defaulting to the package's current-year
+setting. Historical labels such as <code>"3250 BC"</code> are accepted.</p>
+</td></tr>
+<tr><td><code>refraction</code></td>
+<td>
+<p>Whether to apply atmospheric refraction. Defaults to the
+package setting, normally TRUE.</p>
+</td></tr>
+<tr><td><code>atm</code></td>
+<td>
+<p>Atmospheric pressure in hPa. Defaults to the package setting.
+Zero requests an estimate from site elevation.</p>
+</td></tr>
+<tr><td><code>temp</code></td>
+<td>
+<p>Air temperature in degrees Celsius. Defaults to the package setting.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>A spatial midpoint is defined by the local terrain and need not coincide with the
+astronomical equinox. The function uses the positive and negative obliquity at
+the requested year as the geocentric solstitial declinations. Each fixed track
+is followed through one rotation from lower culmination to lower culmination.
+Horizontal solar parallax is applied to geometric altitude before atmospheric
+refraction. The terrain is interpolated linearly in azimuth.
+</p>
+<p>On the rising half of each track, the first emergence is selected; on the
+setting half, the final disappearance is selected. The circular midpoint of
+the two solstitial bearings is then found separately for sunrise and sunset.
+At each midpoint, refraction and horizontal parallax are inverted to recover
+the geocentric declination. Atmospheric settings are identical in both stages.
+</p>
+<p>Ruggles (1997) distinguishes the spatial midpoint of the solstitial horizon
+bearings from the midpoint in time between the solstices.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list containing azimuth and declination. Each contains rise and set
+values in degrees for the supplied horizon. Declinations are geocentric.
+An undefined side returns NA for both values, with a warning; the other side
+is retained when defined.
+</p>
+
+
+<h3>Crossing conventions and limitations</h3>
+
+<p>Both rising and setting tracks are considered in either hemisphere. The
+search uses the terrain-aware crossing machinery also used by
+<code>riseset</code>, including terrain vertices and interior extrema.
+Tangencies without a change of visibility are excluded. Multiple terrain
+crossings are resolved using the first-emergence/final-disappearance rule;
+this need not be the locally preferred observational definition of sunrise
+or sunset. Inspect complex skylines before interpretation.
+</p>
+<p>If either solstitial track lacks the required crossing, the corresponding
+midpoint is undefined. This includes polar non-rising/non-setting cases and
+complete terrain obstruction. Exactly opposite bearings have no unique
+circular midpoint and also return NA.
+</p>
+<p>These are fixed-declination solar-centre tracks, not a dated solar ephemeris
+or upper-limb calculation. The mean horizontal parallax is fixed, and the
+refraction model cannot represent local atmospheric anomalies. Results are
+limited by horizon resolution and atmospheric assumptions. Solar semidiameter
+is not included. The result is a spatial midpoint, not the Sun's rising or
+setting at the astronomical equinox.
+</p>
+
+
+<h3>Provenance</h3>
+
+<p>Structured results carry a <code>provenance</code> attribute. Read it with
+<code>attr(result, "provenance")</code>; its <code>packages</code> entry records the loaded
+skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+This attribute adds no list entries or table columns. Ordinary subsetting or
+transformations may discard attributes; save the original result for reference.
+It does not identify ephemeris files, catalogue revisions or a development
+commit. Retain those and the analysis script separately for exact reproduction.
+</p>
+
+
+<h3>References</h3>
+
+<p>Ruggles, C. L. N. (1997). Whose Equinox? Journal for the History of Astronomy 28, S45-S96. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1177/002182869702802205")}.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>jS</code>, <code>dS</code>, <code>eq</code>,
+<code>zenith</code>, <code>antizenith</code>, <code>findTargets</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>## Not run: 
+hor &lt;- createHWT(34.174051531543405, 110.81299818694872, name='Xipo, Lingbao')
+spatial.equinox(hor, year="3250 BC")
+
+## End(Not run)
+</code></pre>
+
+<p><a href="../function-methods.html#fn-spatial-equinox">spatial.equinox() method</a></p></body></html>

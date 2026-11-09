@@ -1,0 +1,194 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>riseset | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-riseset">riseset() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Find rising and setting times and bearings at a site</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Find when and where a star or Solar System body first rises above or sets below the horizon at
+an observing site.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>riseset(
+  loc,
+  date,
+  jd,
+  obj = "sun",
+  alt = 0,
+  timezone,
+  calendar,
+  dec,
+  refraction,
+  atm,
+  temp,
+  verbose = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>loc</code></td>
+<td>
+<p>Location, either a <em>skyscapeR.horizon</em> or a vector
+containing the latitude, longitude and elevation of location, in this order.</p>
+</td></tr>
+<tr><td><code>date</code></td>
+<td>
+<p>Either a string containing the date in the format &quot;YYYY/MM/DD&quot;
+(see <code>timestring</code>), or a numeric containing the julian date (see <code>time2jd</code>).
+Can also be a single year (&quot;YYYY&quot;) or a month (&quot;YYYY/MM&quot;) to calculate risings and settings for every day in the
+year or month, respectively. Not necessary if <em>jd</em> is given.</p>
+</td></tr>
+<tr><td><code>jd</code></td>
+<td>
+<p>A numeric containing the julian date (see <code>time2jd</code>) for which to
+calculate rising and settings. Only needed if <em>date</em> is not given.</p>
+</td></tr>
+<tr><td><code>obj</code></td>
+<td>
+<p>Solar System body, Western star name or fixed-star catalogue identifier (including M 45). Defaults to 'sun'.</p>
+</td></tr>
+<tr><td><code>alt</code></td>
+<td>
+<p>The altitude of the horizon to consider. Defaults to zero degrees.</p>
+</td></tr>
+<tr><td><code>timezone</code></td>
+<td>
+<p>Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See <code>time2jd</code> for named zones and offsets.</p>
+</td></tr>
+<tr><td><code>calendar</code></td>
+<td>
+<p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p>
+</td></tr>
+<tr><td><code>dec</code></td>
+<td>
+<p>Output declination: <em>geo</em> for the geocentric, or <em>topo</em> for the topocentric
+frame of reference. If not given the value set by <code>skyscapeR.vars</code> will be used instead.</p>
+</td></tr>
+<tr><td><code>refraction</code></td>
+<td>
+<p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
+</td></tr>
+<tr><td><code>atm</code></td>
+<td>
+<p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
+</td></tr>
+<tr><td><code>temp</code></td>
+<td>
+<p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
+</td></tr>
+<tr><td><code>verbose</code></td>
+<td>
+<p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The event is a crossing of the local horizon by the body's centre. A raised ridge can
+delay the first visible rise and an uneven horizon can give several appearances or
+disappearances. Choose the horizon model, atmosphere, calendar and time convention to
+match the observation.
+</p>
+<p>Events refer to the centre of the disc. For a Solar System body with a coordinate vector, alt is
+one constant horizon altitude and the Swiss Ephemeris rise/set solver is used.
+For stars, the daily track is evaluated against the supplied constant altitude or site skyline. With a horizon object, its profile is linearly interpolated in azimuth and
+compared with the body's topocentric altitude; do not supply alt as well.
+Refraction TRUE uses apparent altitude; FALSE uses geometric altitude. The
+constant-altitude solver likewise disables refraction only when FALSE.
+For a profile, search the 48 hours after each requested local midnight and
+return the first upward and first downward crossing separately. They need
+not enclose one continuous visibility interval or occur on the requested day.
+Missing crossings return NA fields. A one-minute base grid, quarter-step samples,
+azimuth turning points and recursively subdivided rapid azimuth motion bracket visits
+to the profile's corners. Each smooth segment is also searched for an interior altitude
+extremum, so short emergence/reoccultation pairs need not straddle time samples.
+A pure tangency without a sign change is not a rise or set. Horizon altitudes at
+0 and 360 degrees must agree. Root tolerance is 0.01 seconds; interior optimization
+uses relative seconds to avoid precision loss from large Julian dates.
+These settings are not a physical accuracy guarantee: finite precision, unresolved
+terrain and near-zenith azimuth singularities limit numerical completeness. The dec argument
+controls returned declination, not the topocentric event search.
+</p>
+<p>The Swiss Ephemeris manual documents the fixed-altitude rise/set calculation.
+</p>
+<p>Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-package</code> for setup.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list containing object, rise and set; rise/set are data frames
+with date, time, azimuth and declination columns. Missing events have NA fields.
+</p>
+
+
+<h3>Crossing is not first visibility</h3>
+
+<p>The result supplies geometry and time. It applies neither atmospheric extinction
+nor a twilight detection threshold and does not test whether the star can be
+seen. A centre exactly at the skyline can remain obscured in a plot or too faint
+to detect. Use <code>star.phases</code> to select a candidate season, then
+inspect moments after the crossing with <code>sketchSky</code> and
+<code>skyStep</code>. The extra time needed for clearance depends on track
+slope, latitude and terrain; a universal minute offset is inappropriate.
+</p>
+<p>A numerical root tolerance describes the solver, not observational timing
+accuracy. Uncertain terrain height, refraction and ancient Earth-rotation
+models can dominate it. Saved output contains formatted civil times rather
+than a complete record of the input atmosphere and horizon. Preserve the
+original call and convert date/time back with matching calendar and timezone.
+</p>
+
+
+<h3>Provenance</h3>
+
+<p>Structured results carry a <code>provenance</code> attribute. Read it with
+<code>attr(result, "provenance")</code>; its <code>packages</code> entry records the loaded
+skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+This attribute adds no list entries or table columns. Ordinary subsetting or
+transformations may discard attributes; save the original result for reference.
+It does not identify ephemeris files, catalogue revisions or a development
+commit. Retain those and the analysis script separately for exact reproduction.
+</p>
+
+
+<h3>References</h3>
+
+<p>Astrodienst. Swiss Ephemeris programmer's manual. <a href="https://www.astro.com/swisseph/swephprg.htm">https://www.astro.com/swisseph/swephprg.htm</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>swe_calc_ut</code>, <code>swe_azalt</code>, <code>body.position</code>, <code>star.phases</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>if (requireNamespace("swephRdata", quietly = TRUE)) {
+  # Rising and setting of the sun on june solstice 2018, from the location of London
+  riseset(obj='sun', date='2018/06/21', loc=c(51.5, 0.11, 100))
+  
+  ## Not run: 
+  # Horizon searches and multi-date calculations can exceed five seconds.
+  # Rising and setting of the moon on june solstice 2018, using a horizon profile
+  hor &lt;- malta_horizons[[1]]
+  riseset(obj='moon', date='2018/06/21', loc=hor)
+  
+  # Rising and setting of the sun throughout February 1999, from the location of London
+  riseset(obj='sun', date='1999/02', loc=c(51.5, 0.11, 100))
+  
+  # Rising and setting of the sun throughout 3001 BC, from the location of London
+  riseset(obj='sun', date=-3000, loc=c(51.5, 0.11, 100))
+  
+## End(Not run)
+}
+</code></pre>
+
+<p><a href="../function-methods.html#fn-riseset">riseset() method</a></p></body></html>

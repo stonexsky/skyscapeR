@@ -1,0 +1,150 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>body.position | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-body-position">body.position() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Find the equatorial and horizontal position of a celestial body</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Locate a Solar System body in equatorial coordinates at a specified instant, or
+determine where it appears in the observer's sky.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>body.position(
+  time,
+  obj = "sun",
+  loc = NULL,
+  timezone,
+  calendar,
+  dec,
+  refraction,
+  atm,
+  temp,
+  verbose = T
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>time</code></td>
+<td>
+<p>Either a string containing the date and time in the format &quot;YYYY/MM/DD HH:MM:SS&quot;
+(see <code>timestring</code>), or a numeric containing the julian date (see <code>time2jd</code>).</p>
+</td></tr>
+<tr><td><code>obj</code></td>
+<td>
+<p>String containing name of the solar system body of interest. Can be
+any of the planets (inc. Pluto), the Moon, the Sun or the Ecliptic. Defaults to 'sun'.</p>
+</td></tr>
+<tr><td><code>loc</code></td>
+<td>
+<p>Observer location: a numeric vector containing latitude and
+longitude in degrees and elevation in metres, in that order, or a
+<em>skyscapeR.horizon</em> object whose metadata supplies those coordinates.
+Required for topocentric coordinates and for horizontal output in either
+frame. With no location, only geocentric equatorial coordinates are returned.</p>
+</td></tr>
+<tr><td><code>timezone</code></td>
+<td>
+<p>Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See <code>time2jd</code> for named zones and offsets.</p>
+</td></tr>
+<tr><td><code>calendar</code></td>
+<td>
+<p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p>
+</td></tr>
+<tr><td><code>dec</code></td>
+<td>
+<p>Output declination: <em>geo</em> for the geocentric, or <em>topo</em> for the topocentric
+frame of reference. If not given the value set by <code>skyscapeR.vars</code> will be used instead.</p>
+</td></tr>
+<tr><td><code>refraction</code></td>
+<td>
+<p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
+</td></tr>
+<tr><td><code>atm</code></td>
+<td>
+<p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
+</td></tr>
+<tr><td><code>temp</code></td>
+<td>
+<p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
+</td></tr>
+<tr><td><code>verbose</code></td>
+<td>
+<p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>An alignment comparison needs an epoch, a reference frame and, for a local sightline, a
+site. Character times are converted to UT Julian dates using the selected calendar and
+timezone; numeric times are already UT Julian dates. Swiss Ephemeris supplies right
+ascension and declination. Without a site the function uses the geocentric frame. With a
+site it can use a topocentric position and convert to local azimuth and altitude. A
+vector of times is evaluated one instant at a time and returned in input order.
+</p>
+<p>Only the horizon object's location is used; its altitude profile is not used
+to determine whether the body is visible above the terrain. With a location,
+horizontal altitude is apparent when refraction is TRUE and geometric when
+FALSE. Azimuth is measured clockwise from north.
+</p>
+<p>The Swiss Ephemeris manual documents planetary coordinates and reference frames.
+</p>
+<p>Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-package</code> for setup.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list containing an <code>equatorial</code> data frame with columns
+<code>RA</code> and <code>Dec</code>, in degrees. When <code>loc</code> is supplied, the list
+also contains a <code>horizontal</code> data frame with columns <code>az</code> and
+<code>alt</code>, in degrees. Each data frame has one row per input time.
+</p>
+
+
+<h3>Provenance</h3>
+
+<p>Structured results carry a <code>provenance</code> attribute. Read it with
+<code>attr(result, "provenance")</code>; its <code>packages</code> entry records the loaded
+skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+This attribute adds no list entries or table columns. Ordinary subsetting or
+transformations may discard attributes; save the original result for reference.
+It does not identify ephemeris files, catalogue revisions or a development
+commit. Retain those and the analysis script separately for exact reproduction.
+</p>
+
+
+<h3>References</h3>
+
+<p>Astrodienst. Swiss Ephemeris programmer's manual. <a href="https://www.astro.com/swisseph/swephprg.htm">https://www.astro.com/swisseph/swephprg.htm</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>swe_calc_ut</code>, <code>timestring</code>, <code>time2jd</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>if (requireNamespace("swephRdata", quietly = TRUE)) {
+  # Position of the sun at noon GMT on Christmas day 2018:
+  body.position(obj='sun', time='2018/12/25 12:00:00', timezone='GMT')
+  
+  # Declination of the moon at same time
+  body.position(obj='moon', time='2018/12/25 12:00:00', timezone='GMT')$equatorial$Dec
+  
+  # Geometric position using a horizon object's observer location:
+  hor &lt;- createHor(az=c(0,360), alt=c(2,2), loc=c(51.5,-0.1,25))
+  body.position(obj='sun', time='2018/12/25 12:00:00', timezone='UTC',
+  loc=hor, refraction=FALSE)$horizontal
+}
+</code></pre>
+
+<p><a href="../function-methods.html#fn-body-position">body.position() method</a></p></body></html>
