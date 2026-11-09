@@ -222,8 +222,8 @@ Save the external PNG alongside the RDS. If you move them, use \code{\link{relin
 to reconnect the image. A rendering failure returns the numerical horizon with a warning.
 Plotting also falls back to the numerical horizon if the image is missing or has changed.
 }
-
 \section{Accuracy, uncertainty and reproducibility}{
+
 H01 compared 334 bearings at 31 observing setups.
 At the surveyed bearings, \code{createHor()} reproduced the observed terrain skyline to within half a degree in 91.9\% of cases.
 See the \href{https://stonexsky.github.io/skyscapeR/manual/#h01-field-validation}{H01 field validation in the skyscapeR technical manual} for the survey protocol, station results and limitations.
@@ -250,6 +250,7 @@ Save the DEM provenance, observer location and datum, constructor arguments,
 feature objects, returned horizon and external PNG. Rebuilding from the same
 source is distinct from merely replotting the saved horizon.
 }
+
 \examples{
 \dontrun{
 observer <- terra::vect("observer.gpkg") # one point with a CRS

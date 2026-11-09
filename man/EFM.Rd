@@ -75,8 +75,8 @@ with Figure 3 of Silva and Pimenta, request geocentric declinations with
 \code{skyscapeR.vars(dec="geo")}. Event selection uses topocentric bearings
 in either output frame.
 }
-
 \section{Comparison with the original simulations}{
+
 With the corrected preceding-sunset pairing, 2,562 of 2,568 moonsets in
 the supplied 1620--2047 series at latitudes 0, 60 N and 60 S agree within
 0.02 degrees in lunar declination. The comparison uses a level horizon,
@@ -99,6 +99,7 @@ recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for s
 }
 
 \section{Scope of the event model}{
+
 The illumination fraction is a selection criterion, not a naked-eye detection
 model. The calculation does not include weather, sky brightness or extinction.
 It uses centre crossings rather than the first appearance of the upper limb.
@@ -110,6 +111,7 @@ Preserve all inputs when comparing series.
 }
 
 \section{Provenance}{
+
 Structured results carry a \code{provenance} attribute. Read it with
 \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
 skyscapeR and swephR versions, with NA when a namespace version is unavailable.
@@ -118,6 +120,7 @@ transformations may discard attributes; save the original result for reference.
 It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
 }
+
 \examples{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
   # Spring Full Moon at latitude 35 degrees north in the year 2018

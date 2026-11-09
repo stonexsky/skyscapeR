@@ -5,9 +5,12 @@
 \title{Estimate the spatial equinox from a site horizon}
 \usage{
 spatial.equinox(
-  hor, parallax = 0.00224, year = skyscapeR.env$cur.year,
+  hor,
+  parallax = 0.00224,
+  year = skyscapeR.env$cur.year,
   refraction = skyscapeR.env$refraction,
-  atm = skyscapeR.env$atm, temp = skyscapeR.env$temp
+  atm = skyscapeR.env$atm,
+  temp = skyscapeR.env$temp
 )
 }
 \arguments{
@@ -18,10 +21,13 @@ spatial.equinox(
 
 \item{year}{One astronomical year, defaulting to the package's current-year
 setting. Historical labels such as \code{"3250 BC"} are accepted.}
+
 \item{refraction}{Whether to apply atmospheric refraction. Defaults to the
 package setting, normally TRUE.}
+
 \item{atm}{Atmospheric pressure in hPa. Defaults to the package setting.
 Zero requests an estimate from site elevation.}
+
 \item{temp}{Air temperature in degrees Celsius. Defaults to the package setting.}
 }
 \value{
@@ -51,8 +57,8 @@ the geocentric declination. Atmospheric settings are identical in both stages.
 Ruggles (1997) distinguishes the spatial midpoint of the solstitial horizon
 bearings from the midpoint in time between the solstices.
 }
-
 \section{Crossing conventions and limitations}{
+
 Both rising and setting tracks are considered in either hemisphere. The
 search uses the terrain-aware crossing machinery also used by
 \code{\link{riseset}}, including terrain vertices and interior extrema.
@@ -75,6 +81,7 @@ setting at the astronomical equinox.
 }
 
 \section{Provenance}{
+
 Structured results carry a \code{provenance} attribute. Read it with
 \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
 skyscapeR and swephR versions, with NA when a namespace version is unavailable.
@@ -83,6 +90,7 @@ transformations may discard attributes; save the original result for reference.
 It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
 }
+
 \examples{
 \dontrun{
 hor <- createHWT(34.174051531543405, 110.81299818694872, name='Xipo, Lingbao')
