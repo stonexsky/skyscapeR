@@ -136,7 +136,9 @@ Direct light fades towards the horizon as its path through the atmosphere
 lengthens. The coefficient \code{k} sets the loss per airmass. The model
 uses Rozenberg's airmass approximation (Krisciunas and Schaefer 1991);
 uncertainty is greatest close to the skyline. The twilight colours are
-illustrative (Lee 1994, 2015).
+illustrative (Lee 1994, 2015). Above the geometric horizon, the display blends
+gradually into a clear daylight blue, reaching its full daytime palette and
+exposure at a solar altitude of 15 degrees.
 }
 
 \section{Milky Way and clusters}{
@@ -171,11 +173,6 @@ Record site, horizon, epoch, calendar, timezone, extinction
 and display switches when reporting a reconstruction.
 }
 
-\section{Validation}{
-
-W02 verified the reconstructed Gacrux bearing and altitude at the same instant and viewpoint using direct equatorial coordinates and spherical geometry. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
-}
-
 \section{Provenance}{
 
 Structured results carry a \code{provenance} attribute. Read it with
@@ -185,6 +182,10 @@ This attribute adds no list entries or table columns. Ordinary subsetting or
 transformations may discard attributes; save the original result for reference.
 It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
+}
+
+\section{Validation}{
+W02 verified the reconstructed Gacrux bearing and altitude at the same instant and viewpoint using direct equatorial coordinates and spherical geometry. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
 }
 
 \examples{

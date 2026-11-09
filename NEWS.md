@@ -3,6 +3,10 @@
 This development version is being tested ahead of the 2.0 release. For detailed
 migration instructions and positional-argument changes, see the README.
 
+## Development build 2.0.9010
+
+* Natural daylight sketches now show a clear blue upper sky with paler colours towards the horizon and Sun. The daytime palette and display exposure blend in over solar altitudes of 0 to 15 degrees.
+
 ## Development build 2.0.9009
 
 * Two-epoch solar and lunar overlays use annual limits and the supplied observing site. Stellar aliases work for dated ranges. Candidate screening compares unrounded values, retains closed stellar band contacts within 0.0000001° and uses the search period for tropical solar targets.

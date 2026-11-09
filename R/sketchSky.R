@@ -87,7 +87,9 @@
 #' lengthens. The coefficient \code{k} sets the loss per airmass. The model
 #' uses Rozenberg's airmass approximation (Krisciunas and Schaefer 1991);
 #' uncertainty is greatest close to the skyline. The twilight colours are
-#' illustrative (Lee 1994, 2015).
+#' illustrative (Lee 1994, 2015). Above the geometric horizon, the display blends
+#' gradually into a clear daylight blue, reaching its full daytime palette and
+#' exposure at a solar altitude of 15 degrees.
 #' @section Milky Way and clusters:
 #' The Milky Way is traced from the diffuse light in Deep Star Maps 2020.
 #' Within the smoothed envelope, retained dark patches have at least 10 percent
@@ -510,6 +512,13 @@ sketchSky <- function(hor, jd=NULL, time=NULL, timezone, calendar,
   ifelse(alt<0,0,fade^2*(3-2*fade))
 }
 
+# Fade in the daylight display only after sunrise.
+.daylight_weight <- function(light) {
+  if (is.null(light$sun)) return(0)
+  t <- min(1,max(0,light$sun[2]/15))
+  t^2*(3-2*t)
+}
+
 .sky_colour <- function(light,az,alt,opaque=FALSE) {
   level <- log10(.sky_luminance(light,az,alt)/60)
   palette <- grDevices::colorRamp(c("#546789","#708BAE","#A8CCE7","lightblue"))
@@ -527,6 +536,19 @@ sketchSky <- function(hor, jd=NULL, time=NULL, timezone, calendar,
     lab[,2] <- lab[,2]+24*warm+17*belt
     lab[,3] <- lab[,3]+58*warm+12*belt-7*twilight*sin(h*pi/180)
     channel <- 255*grDevices::convertColor(lab,"Lab","sRGB")
+  }
+  day <- .daylight_weight(light)
+  if (day > 0) {
+    # Illustrative clear-sky colours, paler near the horizon and the Sun.
+    rad <- pi/180
+    h <- pmin(90,pmax(0,alt))*rad
+    sun.h <- light$sun[2]*rad
+    cosine <- sin(h)*sin(sun.h)+cos(h)*cos(sun.h)*cos((az-light$sun[1])*rad)
+    haze <- exp(-h/(18*rad))
+    glow <- 0.65*pmax(0,cosine)^8
+    pale <- 1-(1-haze)*(1-glow)
+    daylight <- grDevices::colorRamp(c("#367FD1","#BEDCF3"))(pale)
+    channel <- (1-day)*channel+day*daylight
   }
   alpha <- 1-10^(-level*.28)
   if (opaque) {

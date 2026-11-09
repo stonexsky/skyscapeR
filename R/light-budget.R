@@ -234,7 +234,15 @@
 
 .shared_pixels <- function(field,sky) {
   # Preserve the previous neutral sRGB tone curve in linear display luminance.
-  adaptation <- max(1,.sky_luminance(sky$light,0,90)/60)^.75
+  zenith <- .sky_luminance(sky$light,0,90)
+  adaptation <- max(1,zenith/60)^.75
+  day <- .daylight_weight(sky$light)
+  if (day > 0) {
+    # Place the daylight zenith at 60% on the display tone curve.
+    zenith.flux <- zenith*3600^2/(34.08*exp(20.7233))
+    daylight <- zenith.flux/(.04*sinh(.60*asinh(2500)))
+    adaptation <- exp((1-day)*log(adaptation)+day*log(daylight))
+  }
   lum <- as.vector(field$radiance)
   grey <- pmin(1,asinh(lum/(.04*adaptation))/asinh(2500))
   y <- ifelse(grey<=.04045,grey/12.92,((grey+.055)/1.055)^2.4)
