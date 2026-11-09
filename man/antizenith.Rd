@@ -4,7 +4,12 @@
 \alias{antizenith}
 \title{Estimate solar declination at the anti-zenith}
 \usage{
-antizenith(loc, parallax = 0.00224, altitude = 0)
+antizenith(
+  loc,
+  parallax = 0.00224,
+  altitude = -90,
+  year = skyscapeR.env$cur.year
+)
 }
 \arguments{
 \item{loc}{This can be either the latitude of the
@@ -12,7 +17,9 @@ location, or a \emph{skyscapeR.horizon} object.}
 
 \item{parallax}{Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.}
 
-\item{altitude}{Altitude of the sun. Defaults to 0 degrees.}
+\item{altitude}{Altitude used in the approximate parallax correction. Defaults to -90 degrees.}
+
+\item{year}{Astronomical year used to determine the tropical latitude limit.}
 }
 \value{
 Solar declination in degrees with the requested parallax correction, or NULL when the latitude falls outside the solstitial limits used by the function.
@@ -23,11 +30,17 @@ where the Sun can attain that declination.
 }
 \details{
 The direction opposite the zenith corresponds geometrically to minus the site latitude.
-The function checks the site against the default-epoch solstitial latitude band,
-then subtracts the approximate solar parallax correction from the negative latitude. It
+The function checks the latitude against the obliquity of the requested epoch.
+At the geometric anti-zenith the altitude is minus 90 degrees and parallax vanishes.
+An explicitly supplied altitude invokes the approximate correction at that altitude. It
 returns NULL outside that band. This is a target declination for comparison with
 orientations, not an observable solar transit below ground.
 }
+\section{Validation}{
+
+A05 verified the geometric anti-zenith declination and tropical-boundary eligibility at two epochs. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+}
+
 \examples{
 # Anti-zenith sun declination for Mexico City:
 antizenith(19.419)

@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>plot.skyscapeR.horizon | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-plot-skyscaper-horizon">plot.skyscapeR.horizon() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Plot a site horizon and celestial targets</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>plot.skyscapeR.horizon | skyscapeR 2.0.9008</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-plot-skyscaper-horizon">plot.skyscapeR.horizon() method</a></nav><h2 id='plot.skyscapeR.horizon'>Plot a site horizon and celestial targets</h2><span id='topic+plot.skyscapeR.horizon'></span>
 
 <h3>Description</h3>
 
@@ -34,71 +34,71 @@ plot(
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code>x</code></td>
+<tr><td><code id="plot.skyscapeR.horizon_:_x">x</code></td>
 <td>
 <p>Object of <em>skyscapeR.horizon</em> format.</p>
 </td></tr>
-<tr><td><code>show.az</code></td>
+<tr><td><code id="plot.skyscapeR.horizon_:_show.az">show.az</code></td>
 <td>
 <p>Logical that controls whether to display azimuth values or cardinal
 directions. Defaults to TRUE when xrange is supplied.</p>
 </td></tr>
-<tr><td><code>xrange</code></td>
+<tr><td><code id="plot.skyscapeR.horizon_:_xrange">xrange</code></td>
 <td>
 <p>Azimuth range for plotting.</p>
 </td></tr>
-<tr><td><code>yrange</code></td>
+<tr><td><code id="plot.skyscapeR.horizon_:_yrange">yrange</code></td>
 <td>
 <p>Altitude range for plotting. By default one degree of altitude occupies the same distance as one degree of azimuth on the device.</p>
 </td></tr>
-<tr><td><code>obj</code></td>
+<tr><td><code id="plot.skyscapeR.horizon_:_obj">obj</code></td>
 <td>
 <p>A <em>skyscapeR.object</em> from <code>skyObject</code>, or
 a list of these objects. Each group retains its own epochs and styles
 for displaying the paths of celestial objects.</p>
 </td></tr>
-<tr><td><code>col.ground</code></td>
+<tr><td><code id="plot.skyscapeR.horizon_:_col.ground">col.ground</code></td>
 <td>
 <p>Silhouette colour. NULL uses a dark muted foreground for natural skies, pale grey-green for publication colour or grey for monochrome.</p>
 </td></tr>
-<tr><td><code>col.sky</code></td>
+<tr><td><code id="plot.skyscapeR.horizon_:_col.sky">col.sky</code></td>
 <td>
 <p>Earlier name for a solid sky colour. Prefer sky.</p>
 </td></tr>
-<tr><td><code>use.image</code></td>
+<tr><td><code id="plot.skyscapeR.horizon_:_use.image">use.image</code></td>
 <td>
 <p>Use an attached external panorama PNG when available. Default TRUE.
 Missing or changed files warn and fall back to the numerical silhouette.</p>
 </td></tr>
-<tr><td><code>...</code></td>
+<tr><td><code id="plot.skyscapeR.horizon_:_...">...</code></td>
 <td>
 <p>Additional arguments to be passed to <em>plot</em>.</p>
 </td></tr>
-<tr><td><code>show.skyline</code></td>
+<tr><td><code id="plot.skyscapeR.horizon_:_show.skyline">show.skyline</code></td>
 <td>
 <p>Draw the numerical skyline. By default the line appears only without a panorama PNG.</p>
 </td></tr>
-<tr><td><code>sky</code></td>
+<tr><td><code id="plot.skyscapeR.horizon_:_sky">sky</code></td>
 <td>
 <p>A colour string or a background from <code>sketchSky</code> or <code>stellariumSky</code>.</p>
 </td></tr>
-<tr><td><code>xlim</code></td>
+<tr><td><code id="plot.skyscapeR.horizon_:_xlim">xlim</code></td>
 <td>
 <p>Earlier name for xrange.</p>
 </td></tr>
-<tr><td><code>ylim</code></td>
+<tr><td><code id="plot.skyscapeR.horizon_:_ylim">ylim</code></td>
 <td>
 <p>Earlier name for yrange.</p>
 </td></tr>
-<tr><td><code>fastLoad</code></td>
+<tr><td><code id="plot.skyscapeR.horizon_:_fastLoad">fastLoad</code></td>
 <td>
 <p>Use a sampled PNG for quick plots. New photographic imports store a preview. For older horizons the first preview loads the image. The numerical skyline and celestial tracks retain their precision.</p>
 </td></tr>
-<tr><td><code>show.legend</code></td>
+<tr><td><code id="plot.skyscapeR.horizon_:_show.legend">show.legend</code></td>
 <td>
 <p>Display the key for celestial tracks. The angular axes are always drawn.</p>
 </td></tr>
-<tr><td><code>style</code></td>
+<tr><td><code id="plot.skyscapeR.horizon_:_style">style</code></td>
 <td>
 <p>Frame and silhouette style. A sketch supplies its stored style by default. Without a
 sketch the default is <code>"publication-colour"</code>. Other choices are <code>"natural"</code> and
@@ -148,6 +148,12 @@ comparing styles, epochs or constellation traditions.
 </p>
 
 
+<h3>Validation</h3>
+
+<p>W01 checked the skyline ordinate and azimuth viewport on flat and raised profiles, including natural and publication sky overlays. See the <a href="../numerical-validation.html#w01-plot-geometry">W01 check in the technical manual</a>.
+</p>
+
+
 <h3>See Also</h3>
 
 <p><code>downloadHWT</code>, <code>skyObject</code>
@@ -169,4 +175,4 @@ targets &lt;- skyObject('solar extremes', epoch=c("4001 BC", "2001 BC"), col='re
 plot(hor, obj=targets)
 </code></pre>
 
-<p><a href="../function-methods.html#fn-plot-skyscaper-horizon">plot.skyscapeR.horizon() method</a></p></body></html>
+</body></html>

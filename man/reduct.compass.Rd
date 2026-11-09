@@ -55,6 +55,11 @@ used to calculate celestial declination. Supply one site and date for the whole
 survey or one location row and/or date per bearing, in measurement order.
 A supplied correction can likewise be shared or paired with each bearing.
 }
+\section{Validation}{
+
+W02 checked north-crossing magnetic readings against the supplied corrections before passing true bearings into a skyline analysis. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
+}
+
 \examples{
 loc <- c(35,-7, 100)
 mag.az <- c(89.5, 105, 109.5)

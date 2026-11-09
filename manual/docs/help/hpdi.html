@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>hpdi | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-hpdi">hpdi() method</a></nav><p><strong>Validation on 2.0.9005.</strong> Known tied, truncated and disjoint test distributions returned the expected interval endpoints and achieved the requested minimum discrete mass. <a href="../numerical-validation.html#d01-density-checks">D01 study</a>.</p><p>skyscapeR 2.0.9004</p><h2>Find highest-density intervals for an orientation distribution</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>hpdi | skyscapeR 2.0.9006</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-hpdi">hpdi() method</a></nav><h2 id='hpdi'>Find highest-density intervals for an orientation distribution</h2><span id='topic+hpdi'></span>
 
 <h3>Description</h3>
 
@@ -16,12 +16,12 @@ orientation distribution at its highest densities.
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code>x</code></td>
+<tr><td><code id="hpdi_:_x">x</code></td>
 <td>
 <p>A <em>skyscapeR.spd</em> or <em>skyscapeR.pdf</em> object,
 or one data frame/list with numeric components <code>x</code> and <code>y</code>.</p>
 </td></tr>
-<tr><td><code>mass</code></td>
+<tr><td><code id="hpdi_:_mass">mass</code></td>
 <td>
 <p>Probability mass, greater than zero and at most one.
 Default is 0.954.</p>
@@ -67,6 +67,14 @@ and one row per contiguous region, sorted by start.
 </p>
 
 
+<h3>Validation</h3>
+
+<p>Known tied, truncated and disjoint test distributions returned the expected interval endpoints and achieved the requested minimum discrete mass. See <a href="../numerical-validation.html#d01-density-checks">D01 validation in the technical manual</a>.
+</p>
+<p>In D02 the default transformation grid split the middle 80 percent highest-density region of a three-mode ridge case; a finer grid recovered the three reference regions. See the <a href="../numerical-validation.html#d02-bearing-propagation">D02 check in the technical manual</a>.
+</p>
+
+
 <h3>References</h3>
 
 <p>Hyndman, R. J. (1996). Computing and Graphing Highest Density Regions. The American Statistician 50, 120-126. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1080/00031305.1996.10474359")}.
@@ -93,4 +101,4 @@ Az &lt;- az.pdf(az=c(90,120), unc=2, verbose=FALSE)
 hpdi(Az)
 </code></pre>
 
-<p><a href="../function-methods.html#fn-hpdi">hpdi() method</a></p></body></html>
+</body></html>

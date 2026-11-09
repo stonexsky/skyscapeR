@@ -66,6 +66,8 @@ original unadjusted values. Interpret local regions alongside the whole-curve te
 \section{Validation}{
 
 The tested public fits plotted the stored local interval midpoints and significance symbols. A wrapped interval has start greater than end. A plot spanning the full turn displays its two visible segments with the same adjusted probability. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+
+W01 checked clipped local intervals, the pointwise envelope and the global probability label against the stored fit. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
 }
 
 \examples{

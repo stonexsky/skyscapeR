@@ -57,6 +57,13 @@ the geocentric declination. Atmospheric settings are identical in both stages.
 Ruggles (1997) distinguishes the spatial midpoint of the solstitial horizon
 bearings from the midpoint in time between the solstices.
 }
+\section{Validation}{
+
+H07 checked that partial photographs are rejected and that a full photographic profile can be used. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
+
+In A05, rising and setting midpoints matched independent track intersections on flat, eastern-ridge and western-ridge skylines; missing polar crossings were identified. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+}
+
 \section{Crossing conventions and limitations}{
 
 Both rising and setting tracks are considered in either hemisphere. The

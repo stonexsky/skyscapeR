@@ -32,6 +32,11 @@ are rounded to two decimal places. Supply bearings within the profile coverage; 
 beyond the measured range is an extrapolation. Distinguish this lookup from the linear
 interpolation used inside coordtrans.
 }
+\section{Validation}{
+
+In H07, lookup at each edge of a north-crossing panorama returned its measured altitude and lookup beyond either edge returned NA. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
+}
+
 \examples{
 hor <- createHor(c(0,90,180,270,360), c(0,5,3,1,0),
                  alt.unc=c(0.1,0.2,0.3,0.2,0.1), loc=c(40,-8,100))

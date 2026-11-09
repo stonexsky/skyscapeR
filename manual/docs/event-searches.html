@@ -370,6 +370,7 @@ div.csl-indent {
 </header>
 
 
+<p><a href="./numerical-validation.html#a05-solar-limits">A05</a> tests civil dates, solstitial branches and independent east and west solutions for spatial equinoxes.</p>
 <p><strong>Implementation.</strong> skyscapeR 2.0.9004, <code>R/horizon-events.R</code>, <code>R/mechanics.R</code>, <code>R/events.R</code> and <code>R/misc.R</code>. A point on a track, a terrain crossing, a midpoint bearing, a date and a sampled extreme are five different outputs. Their numerical precision and their archaeological interpretation depend on different assumptions.</p>
 <table class="caption-top table">
 <thead>
@@ -408,7 +409,7 @@ div.csl-indent {
 </tbody>
 </table>
 <p>Terrain crossing searches assume a complete skyline. A <a href="photographic-horizons.html#partial-photo-consumers">partial photographic profile can yield events outside its observed sector</a>.</p>
-<p>The <a href="./a02-ephemeris.html#lunar-bearings-at-the-skyline">A02 lunar skyline comparison</a> quantifies how ephemeris conventions affect crossing times and azimuths. A04 will test the event solver itself.</p>
+<p>The <a href="./a02-ephemeris.html#lunar-bearings-at-the-skyline">A02 lunar skyline comparison</a> quantifies how ephemeris conventions affect crossing times and azimuths. <a href="./numerical-validation.html#a04-stellar-crossings">A04</a> checks crossing times, bearings and event order against analytic tracks and independent root searches, including JPL solar and lunar centre crossings.</p>
 <section id="event-track" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="event-track"><span class="header-section-number">9.1</span> Sampling a diurnal track</h2>
 <p>For a fixed declination, <a href="function-methods.html#fn-orbit"><code>orbit()</code></a> samples right ascension across a full turn, using <code>res</code> in degrees (default 0.25°). It transforms the sampled positions to horizontal coordinates for the supplied observer and atmosphere, retains altitudes above −20° and sorts the output by azimuth. The horizon object supplies the site; the function does not test each point for terrain clearance. Azimuth-sorted points do not give a time ordering or a local rise time. A fixed-declination track is useful for asking which part of the astronomical path could meet a ridge. A moving Solar System body on a particular morning requires its ephemeris.</p>

@@ -37,6 +37,11 @@ The calculation uses no terrain or solar limb model.
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
+\section{Validation}{
+
+The JPL comparison in A05 matched all tested civil-day passages, including paired dates near a solstice. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+}
+
 \section{Provenance}{
 
 Structured results carry a \code{provenance} attribute. Read it with

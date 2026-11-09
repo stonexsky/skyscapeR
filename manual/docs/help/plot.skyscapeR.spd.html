@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>plot.skyscapeR.spd | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-plot-skyscaper-spd">plot.skyscapeR.spd() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Plot a summed orientation density</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>plot.skyscapeR.spd | skyscapeR 2.0.9008</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-plot-skyscaper-spd">plot.skyscapeR.spd() method</a></nav><h2 id='plot.skyscapeR.spd'>Plot a summed orientation density</h2><span id='topic+plot.skyscapeR.spd'></span>
 
 <h3>Description</h3>
 
@@ -29,51 +29,51 @@ plot(
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code>x</code></td>
+<tr><td><code id="plot.skyscapeR.spd_:_x">x</code></td>
 <td>
 <p>A <em>skyscapeR.spd</em> object created with <code>spd</code></p>
 </td></tr>
-<tr><td><code>xrange</code></td>
+<tr><td><code id="plot.skyscapeR.spd_:_xrange">xrange</code></td>
 <td>
 <p>Range of x-axis to plot.</p>
 </td></tr>
-<tr><td><code>yrange</code></td>
+<tr><td><code id="plot.skyscapeR.spd_:_yrange">yrange</code></td>
 <td>
 <p>Range of y-axis to plot.</p>
 </td></tr>
-<tr><td><code>title</code></td>
+<tr><td><code id="plot.skyscapeR.spd_:_title">title</code></td>
 <td>
 <p>Title to add to the plot.</p>
 </td></tr>
-<tr><td><code>col</code></td>
+<tr><td><code id="plot.skyscapeR.spd_:_col">col</code></td>
 <td>
 <p>Observed density colour. NULL uses the current style.</p>
 </td></tr>
-<tr><td><code>shading</code></td>
+<tr><td><code id="plot.skyscapeR.spd_:_shading">shading</code></td>
 <td>
 <p>Logical to control whether to color the entire distribution. Defaults to TRUE</p>
 </td></tr>
-<tr><td><code>...</code></td>
+<tr><td><code id="plot.skyscapeR.spd_:_...">...</code></td>
 <td>
 <p>Additional arguments to be passed to <em>plot</em>.</p>
 </td></tr>
-<tr><td><code>obj</code></td>
+<tr><td><code id="plot.skyscapeR.spd_:_obj">obj</code></td>
 <td>
 <p>A skyObject or list of target groups for a density or significance plot. Declination plots show single epochs as lines and epoch ranges as bands. Azimuth plots use each group's site latitude to mark rising and setting boundary bearings at a geometric level horizon.</p>
 </td></tr>
-<tr><td><code>xlim</code></td>
+<tr><td><code id="plot.skyscapeR.spd_:_xlim">xlim</code></td>
 <td>
 <p>Earlier name for xrange.</p>
 </td></tr>
-<tr><td><code>ylim</code></td>
+<tr><td><code id="plot.skyscapeR.spd_:_ylim">ylim</code></td>
 <td>
 <p>Earlier name for yrange.</p>
 </td></tr>
-<tr><td><code>show.legend</code></td>
+<tr><td><code id="plot.skyscapeR.spd_:_show.legend">show.legend</code></td>
 <td>
 <p>Show the observed-curve and celestial-target key when target overlays are supplied.</p>
 </td></tr>
-<tr><td><code>style</code></td>
+<tr><td><code id="plot.skyscapeR.spd_:_style">style</code></td>
 <td>
 <p>Analytical display style, either <code>"publication-colour"</code> (default) or
 <code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p>
@@ -97,6 +97,12 @@ object. Assess departures from a specified null using a significance test.
 </p>
 
 
+<h3>Validation</h3>
+
+<p>In W01 the drawn line matched the stored coordinates and heights of the summed density. See the <a href="../numerical-validation.html#w01-plot-geometry">W01 check in the technical manual</a>.
+</p>
+
+
 <h3>See Also</h3>
 
 <p><code>spd</code>, <code>plot.skyscapeR.pdf</code>
@@ -109,4 +115,4 @@ object. Assess departures from a specified null using a significance test.
 plot(spd(az))
 </code></pre>
 
-<p><a href="../function-methods.html#fn-plot-skyscaper-spd">plot.skyscapeR.spd() method</a></p></body></html>
+</body></html>

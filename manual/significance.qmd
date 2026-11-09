@@ -1,5 +1,7 @@
 # Testing orientation distributions {#sec-tests}
 
+[Specified-model calibration and Maltese reconstructions](numerical-validation.qmd#s02-specified-models).
+
 **Implementation.** skyscapeR 2.0.9004, `R/statistics.R` and `R/model-simulation.R`. The procedures below operate on a summed probability density (SPD) of measured orientations. @silva2020 [§4] introduced the random-orientation test. @silvaloms2025 [“Methodology” and “Landscape tests”] extended the framework to specified landscape and astronomical hypotheses, including models particular to individual sites. The two functions answer different questions even when they score exactly the same observed curve.
 
 For the construction of the empirical and transformed measurement curves, see the [density chapter](orientation-densities.qmd).
@@ -10,7 +12,7 @@ See the [independent checks on build 2.0.9005](numerical-validation.qmd#s03-scor
 
 [`randomTest()`](function-methods.html#fn-randomtest) asks whether independent draws of structural bearings, with the observed sample size, measurement errors and site geometry, could produce departures at least as large as those observed. Randomness is specified in **azimuth**. A uniform distribution of bearings generally induces a non-uniform distribution of declinations. Even on a level horizon, the mapping from bearing to declination has turning points; terrain relief changes the mapping further [@silva2020, §§3–4].
 
-For each replicate, the code samples one centre per measurement with replacement from `seq(0, 360, by = source_spacing)`. It reconstructs a normal or uniform measurement density with that measurement's uncertainty, then applies the route selected by the input. The discretisation matters: if the grid includes both endpoints, two entries denote north. The source spacing determines the draw grid; `.res` determines the comparison grid. These are different numerical choices.
+Each replicate samples one centre per measurement, uniformly with replacement on the source bearing grid in [0°, 360°). Build 2.0.9007 reconstructs each density with its source width, family, grid spacing and cutoff. On the shared-horizon route the observed and simulated azimuth sums use the same `.res` before transformation. [S01](numerical-validation.qmd#s01-uniform-orientation) reports false positives, power and the consequences for earlier fits.
 
 | Input | What is compared |
 |---|---|
@@ -26,7 +28,7 @@ The second route constructs one aggregate before transformation. The third prese
 
 The empirical PDF sets the coordinate system. Supply one table for a common model or one table per observation in matching order. A row gives a candidate angle and a nonnegative weight. Sampling probabilities are proportional to the weights. For a continuous density tabulated on an uneven grid, a cell's weight should approximate its *integrated mass*, for example density times represented cell width. Using its ordinate alone can favour a densely sampled sector for purely numerical reasons.
 
-Each replicate draws a centre for each observation. Directly constructed PDFs retain their normal or uniform uncertainty family, using the stored uncertainty unless overridden. For a declination PDF from [`coordtrans()`](function-methods.html#fn-coordtrans), the default instead translates each piecewise-linear measurement curve. If $f_i$ is the stored density and $m_i=\int x f_i(x)\,dx/\int f_i(x)\,dx$, a candidate $c_i$ produces the template $f_i(x-c_i+m_i)$. Its width, asymmetry and multiple peaks survive translation before grid interpolation. A positive-weight candidate that would push density outside ±90° causes an error. An explicit `unc` for transformed input selects a normal simulation density. A translated template assumes that the original shape applies at the new mean; a different skyline sector may produce a different shape. This is a modelling choice worth testing when the result depends on it.
+Each replicate draws a centre for each observation. Build 2.0.9008 also reuses the source grid and cutoff for directly constructed densities. Directly constructed PDFs retain their normal or uniform uncertainty family, using the stored uncertainty unless overridden. For a declination PDF from [`coordtrans()`](function-methods.html#fn-coordtrans), the default instead translates each piecewise-linear measurement curve. If $f_i$ is the stored density and $m_i=\int x f_i(x)\,dx/\int f_i(x)\,dx$, a candidate $c_i$ produces the template $f_i(x-c_i+m_i)$. Its width, asymmetry and multiple peaks survive translation before grid interpolation. A positive-weight candidate that would push density outside ±90° causes an error. An explicit `unc` for transformed input selects a normal simulation density. A translated template assumes that the original shape applies at the new mean; a different skyline sector may produce a different shape. This is a modelling choice worth testing when the result depends on it.
 
 ## Shared scoring algorithm {#score-tests}
 

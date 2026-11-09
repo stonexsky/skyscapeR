@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>hor2min.dec | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-hor2min-dec">hor2min.dec() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Find the southern declination limit of a horizon</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>hor2min.dec | skyscapeR 2.0.9009</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-hor2min-dec">hor2min.dec() method</a></nav><h2 id='hor2min.dec'>Find the southern declination limit of a horizon</h2><span id='topic+hor2min.dec'></span>
 
 <h3>Description</h3>
 
@@ -15,16 +15,16 @@
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code>hor</code></td>
+<tr><td><code id="hor2min.dec_:_hor">hor</code></td>
 <td>
 <p>Either a <em>skyscapeR.horizon</em> object or the latitude of the place.</p>
 </td></tr>
-<tr><td><code>alt</code></td>
+<tr><td><code id="hor2min.dec_:_alt">alt</code></td>
 <td>
 <p>Altitude of the horizon at southernmost point. Only necessary if no
 <em>skyscapeR.horizon</em> object is provided. Default is 0.</p>
 </td></tr>
-<tr><td><code>range</code></td>
+<tr><td><code id="hor2min.dec_:_range">range</code></td>
 <td>
 <p>Range of azimuths to check for minimum declination. Default is 25
 degrees either side of South</p>
@@ -48,6 +48,12 @@ search sector may miss a more extreme sightline elsewhere.
 </p>
 
 
+<h3>Validation</h3>
+
+<p>A05 recovered a limiting sightline within the southern search sector on a synthetic skyline with an interior trough. See the <a href="../numerical-validation.html#a05-solar-limits">A05 check in the technical manual</a>.
+</p>
+
+
 <h3>See Also</h3>
 
 <p><code>createHor</code>, <code>downloadHWT</code>, <code>createHWT</code>, <code>exportHor</code>, <code>hor2alt</code>, <code>hor2max.dec</code>
@@ -60,4 +66,4 @@ search sector may miss a more extreme sightline elsewhere.
 hor2min.dec(hor)
 </code></pre>
 
-<p><a href="../function-methods.html#fn-hor2min-dec">hor2min.dec() method</a></p></body></html>
+</body></html>

@@ -30,6 +30,11 @@ distinct from computing an instantaneous topocentric ephemeris.
 Ruggles gives an archaeological example of applying mean lunar parallax in a
 declination calculator.
 }
+\section{Validation}{
+
+A05 compared the returned correction with the signed spherical approximation in both hemispheres. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+}
+
 \examples{
 # Parallax correction for the moon, as seen from latitude 50ºN and at 0º altitude
 parallax.corr(0.952, 50, 0)

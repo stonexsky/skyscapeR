@@ -38,6 +38,11 @@ function subtracts the approximate parallax correction using latitude and target
 altitude. This obliquity-based target does not determine a solstice time or a sunrise or
 sunset bearing.
 }
+\section{Validation}{
+
+A05 checked the local December solar limit against annual obliquity and the specified parallax correction. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+}
+
 \examples{
 # December Solstice geocentric declination for year 4001 BC:
 dS(-4000)

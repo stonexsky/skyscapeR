@@ -1,5 +1,7 @@
 # Identifying celestial candidates and limiting declinations {#sec-celestial-targets}
 
+Build 2.0.9009 uses annual local solar and lunar limits for dated overlays and compares target ranges before rounding. [A08](numerical-validation.qmd#a08-target-ranges) reproduces the earlier range discrepancy and checks the correction.
+
 **Implementation.** skyscapeR 2.0.9004, `R/data-analysis.R`, `R/events.R`, `R/horizon.R`, `R/mechanics.R`, `R/misc.R` and `R/stars.R`. A field sightline defines a range of possible declinations. The relevant question is which celestial targets enter that band during the archaeological date range, and which could actually have been seen from that viewpoint. The first question can be computed before tackling the second. Silva & Lomsdalen (2025, table 5) illustrate this distinction when screening stellar candidates for the Maltese temples [@silvaloms2025].
 
 ## Construct the search band {#target-band}

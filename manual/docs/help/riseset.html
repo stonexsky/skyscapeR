@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>riseset | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-riseset">riseset() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Find rising and setting times and bearings at a site</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>riseset | skyscapeR 2.0.9008</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-riseset">riseset() method</a></nav><h2 id='riseset'>Find rising and setting times and bearings at a site</h2><span id='topic+riseset'></span>
 
 <h3>Description</h3>
 
@@ -29,57 +29,57 @@ an observing site.
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code>loc</code></td>
+<tr><td><code id="riseset_:_loc">loc</code></td>
 <td>
 <p>Location, either a <em>skyscapeR.horizon</em> or a vector
 containing the latitude, longitude and elevation of location, in this order.</p>
 </td></tr>
-<tr><td><code>date</code></td>
+<tr><td><code id="riseset_:_date">date</code></td>
 <td>
 <p>Either a string containing the date in the format &quot;YYYY/MM/DD&quot;
 (see <code>timestring</code>), or a numeric containing the julian date (see <code>time2jd</code>).
 Can also be a single year (&quot;YYYY&quot;) or a month (&quot;YYYY/MM&quot;) to calculate risings and settings for every day in the
 year or month, respectively. Not necessary if <em>jd</em> is given.</p>
 </td></tr>
-<tr><td><code>jd</code></td>
+<tr><td><code id="riseset_:_jd">jd</code></td>
 <td>
 <p>A numeric containing the julian date (see <code>time2jd</code>) for which to
 calculate rising and settings. Only needed if <em>date</em> is not given.</p>
 </td></tr>
-<tr><td><code>obj</code></td>
+<tr><td><code id="riseset_:_obj">obj</code></td>
 <td>
 <p>Solar System body, Western star name or fixed-star catalogue identifier (including M 45). Defaults to 'sun'.</p>
 </td></tr>
-<tr><td><code>alt</code></td>
+<tr><td><code id="riseset_:_alt">alt</code></td>
 <td>
 <p>The altitude of the horizon to consider. Defaults to zero degrees.</p>
 </td></tr>
-<tr><td><code>timezone</code></td>
+<tr><td><code id="riseset_:_timezone">timezone</code></td>
 <td>
 <p>Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See <code>time2jd</code> for named zones and offsets.</p>
 </td></tr>
-<tr><td><code>calendar</code></td>
+<tr><td><code id="riseset_:_calendar">calendar</code></td>
 <td>
 <p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p>
 </td></tr>
-<tr><td><code>dec</code></td>
+<tr><td><code id="riseset_:_dec">dec</code></td>
 <td>
 <p>Output declination: <em>geo</em> for the geocentric, or <em>topo</em> for the topocentric
 frame of reference. If not given the value set by <code>skyscapeR.vars</code> will be used instead.</p>
 </td></tr>
-<tr><td><code>refraction</code></td>
+<tr><td><code id="riseset_:_refraction">refraction</code></td>
 <td>
 <p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
 </td></tr>
-<tr><td><code>atm</code></td>
+<tr><td><code id="riseset_:_atm">atm</code></td>
 <td>
 <p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
 </td></tr>
-<tr><td><code>temp</code></td>
+<tr><td><code id="riseset_:_temp">temp</code></td>
 <td>
 <p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
 </td></tr>
-<tr><td><code>verbose</code></td>
+<tr><td><code id="riseset_:_verbose">verbose</code></td>
 <td>
 <p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p>
 </td></tr>
@@ -157,6 +157,16 @@ commit. Retain those and the analysis script separately for exact reproduction.
 </p>
 
 
+<h3>Validation</h3>
+
+<p>A02 tested sensitivity to ephemeris conventions using a separate solver on airless lunar-centre trajectories. Across 177 prehistoric skyline crossings, default azimuths differed from JPL Horizons by a median of 0.059 degrees and a maximum of 0.322 degrees. Matching delta T reduced the maximum to 0.027 degrees. See the <a href="../a02-ephemeris.html#a02-ephemeris-accuracy">A02 study in the skyscapeR technical manual</a>.
+</p>
+<p>A04 recovered the expected crossing counts and order on synthetic ridges, notches and grazing tracks; solar and lunar centre crossings at the Malta test site agreed with JPL Horizons within 0.85 seconds and 0.0041 degrees. See the <a href="../numerical-validation.html#a04-stellar-crossings">A04 check in the technical manual</a>.
+</p>
+<p>H07 verified that a partial panorama is rejected before searching for solar or stellar crossings on an unobserved skyline. See the <a href="../numerical-validation.html#h07-panorama-coverage">H07 check in the technical manual</a>.
+</p>
+
+
 <h3>References</h3>
 
 <p>Astrodienst. Swiss Ephemeris programmer's manual. <a href="https://www.astro.com/swisseph/swephprg.htm">https://www.astro.com/swisseph/swephprg.htm</a>.
@@ -169,8 +179,6 @@ commit. Retain those and the analysis script separately for exact reproduction.
 </p>
 
 
-<h3>Validation</h3>
-<p>A02 tested sensitivity to ephemeris conventions using a separate solver on airless lunar-centre trajectories. Across 177 prehistoric skyline crossings, default azimuths differed from JPL Horizons by a median of 0.059 degrees and a maximum of 0.322 degrees. Matching delta T reduced the maximum to 0.027 degrees. Validation of the riseset() event solver is scheduled under A04. See the <a href="../a02-ephemeris.html">A02 study in the skyscapeR technical manual</a>.</p>
 <h3>Examples</h3>
 
 <pre><code class='language-R'>if (requireNamespace("swephRdata", quietly = TRUE)) {
@@ -193,4 +201,4 @@ commit. Retain those and the analysis script separately for exact reproduction.
 }
 </code></pre>
 
-<p><a href="../function-methods.html#fn-riseset">riseset() method</a></p></body></html>
+</body></html>

@@ -47,6 +47,8 @@
 #' the stored declination limits. A zero-width interval is drawn as a line.
 #' @param show.obj.labels Logical to control whether to display celestial objects names.
 #' Defaults to TRUE.
+#' @section Validation:
+#' W01 checked compass bearings and the inner and outer edges of celestial year-range sectors against their spherical reference bearings. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
 #' @export
 #' @import utils stats
 #' @examples
@@ -222,6 +224,8 @@ plotAzimuth <- function(az, obj, show.obj.labels=TRUE, col=NULL, lty=1, lwd=1.5,
 #' a list of these objects. Each group retains its own epochs and styles
 #' for displaying the declination values of celestial objects.
 #' @param show.obj.label Logical. Label celestial overlays on the declination plot. Defaults to TRUE.
+#' @section Validation:
+#' W01 checked the endpoints and row labels of an azimuth interval spanning north. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
 #' @export
 #' @import utils stats graphics
 #' @seealso \code{\link{skyObject}}
@@ -327,6 +331,8 @@ plotBars <- function(val, unc, names, unit="Declination", obj, show.obj.label=TR
 #' @param col.sky Earlier name for a solid sky colour. Prefer sky.
 #' @param ... Additional arguments to be passed to \emph{plot}.
 #' @rdname plot.skyscapeR.horizon
+#' @section Validation:
+#' W01 checked the skyline ordinate and azimuth viewport on flat and raised profiles, including natural and publication sky overlays. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
 #' @export
 #' @import utils stats graphics grDevices
 #' @seealso \code{\link{downloadHWT}}, \code{\link{skyObject}}
@@ -527,6 +533,8 @@ plot.skyscapeR.horizon <- function(x, show.az=(!missing(xrange) || !missing(xlim
 #' plot(Dec)
 #' plot(Dec, index=1, az=Az, hor=hor)
 #' @rdname plot.skyscapeR.pdf
+#' @section Validation:
+#' In W01 the shaded components matched the two intervals returned by hpdi() for a bimodal density. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
 #' @export
 plot.skyscapeR.pdf <- function(x, index, hdr=0.954, show.az, xrange, col=NULL, ..., az, hor, xlim, show.legend=TRUE, style="publication-colour") {
   if (!missing(xlim)) {
@@ -707,6 +715,8 @@ plot.skyscapeR.pdf <- function(x, index, hdr=0.954, show.az, xrange, col=NULL, .
 #' @param ... Additional arguments to be passed to \emph{plot}.
 #' @param obj A skyObject or list of target groups for a density or significance plot. Declination plots show single epochs as lines and epoch ranges as bands. Azimuth plots use each group's site latitude to mark rising and setting boundary bearings at a geometric level horizon.
 #' @rdname plot.skyscapeR.spd
+#' @section Validation:
+#' In W01 the drawn line matched the stored coordinates and heights of the summed density. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
 #' @export
 plot.skyscapeR.spd <- function(x, xrange, yrange, title=NULL, col=NULL, shading=TRUE, ..., obj=NULL, xlim, ylim,
                                show.legend=TRUE, style="publication-colour") {
@@ -853,6 +863,8 @@ plot.skyscapeR.spd <- function(x, xrange, yrange, title=NULL, col=NULL, shading=
 #' @rdname plot.skyscapeR.sigTest
 #' @section Validation:
 #' The tested public fits plotted the stored local interval midpoints and significance symbols. A wrapped interval has start greater than end. A plot spanning the full turn displays its two visible segments with the same adjusted probability. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+#'
+#' W01 checked clipped local intervals, the pointwise envelope and the global probability label against the stored fit. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{randomTest}}, \code{\link{modelTest}}, \code{\link{print.skyscapeR.sigTest}}
 #' @examples
@@ -1006,6 +1018,8 @@ plot.skyscapeR.sigTest <- function(x, xrange, title=NULL, col=NULL, show.pval=TR
 #' cycle. This is not sorting by the dated heliacal event. Missing classes are
 #' placed last; omission retains input order.
 #' @rdname plot.skyscapeR.starphases
+#' @section Validation:
+#' W01 checked season boundaries, event positions, quarterly landmarks and star, site and epoch labels in linear and circular layouts. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{star.phases}}
 #' @examples
@@ -1344,6 +1358,8 @@ plot.skyscapeR.starphases <- function(x, y, show.labels=TRUE, show.legend=TRUE, 
 #' @param ... Additional arguments to be passed to \emph{print}.
 #' @section Validation:
 #' The tested public fits printed the stored global probability and local interval endpoints. A wrapped interval has start greater than end. A plot spanning the full turn displays its two visible segments with the same adjusted probability. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+#'
+#' W01 checked the reported wrapped interval endpoints and adjusted probabilities against a known fit. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{randomTest}}, \code{\link{modelTest}}, \code{\link{plot.skyscapeR.sigTest}}
 #' @examples

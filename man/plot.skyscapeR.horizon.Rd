@@ -83,6 +83,11 @@ solid lines of width 1.
 
 A horizon with an attached DEM, PeakFinder or photographic PNG displays the image by default. Add show.skyline = TRUE to inspect its numerical profile, or use.image = FALSE to draw the silhouette alone. With xrange supplied, azimuth labels default to degrees. A partial photograph initially opens on its recorded sector. An image-backed horizon or a supplied sky uses a 2:1 plot box. Copy the PNG with the saved horizon and use relinkHor() after moving it. With automatic altitude limits, a 30-degree azimuth sector shows 15 degrees of altitude.
 }
+\section{Validation}{
+
+W01 checked the skyline ordinate and azimuth viewport on flat and raised profiles, including natural and publication sky overlays. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
+}
+
 \section{Layers and coordinate consistency}{
 
 A reusable sky is calculated for its own stored location and instant. Pair it

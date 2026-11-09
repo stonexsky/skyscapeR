@@ -4,7 +4,7 @@
 \alias{zenith}
 \title{Estimate solar declination at the zenith}
 \usage{
-zenith(loc, parallax = 0.00224, altitude = 0)
+zenith(loc, parallax = 0.00224, altitude = 90, year = skyscapeR.env$cur.year)
 }
 \arguments{
 \item{loc}{This can be either the latitude of the
@@ -12,7 +12,9 @@ location, or a \emph{skyscapeR.horizon} object.}
 
 \item{parallax}{Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.}
 
-\item{altitude}{Altitude of the sun. Defaults to 0 degrees.}
+\item{altitude}{Altitude used in the approximate parallax correction. Defaults to 90 degrees.}
+
+\item{year}{Astronomical year used to determine the tropical latitude limit.}
 }
 \value{
 Solar declination in degrees with the requested parallax correction, or NULL when the latitude falls outside the solstitial limits used by the function.
@@ -23,11 +25,17 @@ latitude, where such a passage is possible.
 }
 \details{
 The geometric zenith has declination equal to the site latitude. The function
-first checks the latitude against its June and December solar limits at the default
-epoch. Within those limits it subtracts the supplied approximate solar parallax
-correction from the latitude. It returns NULL outside the permitted band. This supplies
+checks whether the latitude lies within the obliquity of the requested epoch.
+At the geometric zenith the altitude is 90 degrees and the parallax correction vanishes.
+An explicitly supplied altitude invokes the approximate correction at that altitude.
+The function returns NULL outside the permitted band. This supplies
 a declination criterion rather than the dates of the passages.
 }
+\section{Validation}{
+
+A05 verified the geometric zenith declination and tropical-boundary eligibility at two epochs. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+}
+
 \examples{
 # Zenith sun declination for Mexico City:
 zenith(19.419)

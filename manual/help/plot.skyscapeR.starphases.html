@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>plot.skyscapeR.starphases | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-plot-skyscaper-starphases">plot.skyscapeR.starphases() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Plot seasonal stellar visibility</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>plot.skyscapeR.starphases | skyscapeR 2.0.9008</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-plot-skyscaper-starphases">plot.skyscapeR.starphases() method</a></nav><h2 id='plot.skyscapeR.starphases'>Plot seasonal stellar visibility</h2><span id='topic+plot.skyscapeR.starphases'></span>
 
 <h3>Description</h3>
 
@@ -27,53 +27,53 @@ plot(
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code>x</code></td>
+<tr><td><code id="plot.skyscapeR.starphases_:_x">x</code></td>
 <td>
 <p>A star phase result.</p>
 </td></tr>
-<tr><td><code>y</code></td>
+<tr><td><code id="plot.skyscapeR.starphases_:_y">y</code></td>
 <td>
 <p>A second object of <em>skyscapeR.starphases</em> format or
 a list of <em>skyscapeR.starphases</em> objects for plotting (see Examples).</p>
 </td></tr>
-<tr><td><code>show.labels</code></td>
+<tr><td><code id="plot.skyscapeR.starphases_:_show.labels">show.labels</code></td>
 <td>
 <p>Logical. Mark annual events for a single result in either layout. Defaults to TRUE.</p>
 </td></tr>
-<tr><td><code>show.legend</code></td>
+<tr><td><code id="plot.skyscapeR.starphases_:_show.legend">show.legend</code></td>
 <td>
 <p>Show a legend for seasons present among the plotted
 stars (default TRUE). For circular plots FALSE also hides titles, site/epoch text and all layer or event callouts. The seasonal scale stays visible. Linear plots keep their data and event labels.</p>
 </td></tr>
-<tr><td><code>show.grid</code></td>
+<tr><td><code id="plot.skyscapeR.starphases_:_show.grid">show.grid</code></td>
 <td>
 <p>Draw monthly dividers through each ring or strip. Defaults to TRUE.
 Set FALSE to omit the monthly divisions and retain the seasonal axis.</p>
 </td></tr>
-<tr><td><code>sort.by</code></td>
+<tr><td><code id="plot.skyscapeR.starphases_:_sort.by">sort.by</code></td>
 <td>
 <p>Optional ordering by catalogue magnitude (<code>"mag"</code>), first R-only
 sample (<code>"rise"</code>) or first S-only sample (<code>"set"</code>) on the stored
 cycle. This is not sorting by the dated heliacal event. Missing classes are
 placed last; omission retains input order.</p>
 </td></tr>
-<tr><td><code>pal</code></td>
+<tr><td><code id="plot.skyscapeR.starphases_:_pal">pal</code></td>
 <td>
 <p>Five colours in the order RS (rise and set), R (rise only), S (set only),
 V (curtailed passage) and I (arising and lying hidden). The default uses five colours from the plot style. Monochrome adds textures to distinguish the classes. Supply all five even when only some
 seasons occur.</p>
 </td></tr>
-<tr><td><code>...</code></td>
+<tr><td><code id="plot.skyscapeR.starphases_:_...">...</code></td>
 <td>
 <p>Additional arguments to be passed to <em>plot</em>.</p>
 </td></tr>
-<tr><td><code>layout</code></td>
+<tr><td><code id="plot.skyscapeR.starphases_:_layout">layout</code></td>
 <td>
 <p><code>"auto"</code> and <code>"circular"</code> draw a single ring or concentric rings
 in input (or requested sort) order from the outside inward. Leaders connect the layer identifiers
 to their rings. Select <code>"linear"</code> for strips. Supply this argument by name.</p>
 </td></tr>
-<tr><td><code>style</code></td>
+<tr><td><code id="plot.skyscapeR.starphases_:_style">style</code></td>
 <td>
 <p>Analytical display style, either <code>"publication-colour"</code> (default) or
 <code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p>
@@ -120,8 +120,8 @@ has no event at that boundary. Entry into and exit from I mark acronycal
 setting and heliacal rising; entry into and exit from V mark acronycal rising
 and heliacal setting. Constant classifications have no transition labels.
 A single ring labels each event by name on two lines just outside the rim.
-Its short leader meets the ring at the event's model day. A single ring shows the star, epoch and site in its centre
-and labels the solstices and equinoxes outside its rim. Both layouts mark the event's model day,
+Its short leader meets the ring at the event's model day. A single ring shows the star, epoch and site in its centre. Rings for one star at several epochs show the star, designation and shared site in the centre, with a year for each ring. The circular layout
+labels the solstices and equinoxes outside its rim. Both layouts mark the event's model day,
 the last sample before entry into I or V, or the first after exit.
 The linear seasonal scale sits immediately below the lowest strip. Each quarter
 label aligns with its solstice or equinox across every row. Rising-event labels
@@ -129,6 +129,12 @@ sit close above a single strip and setting-event labels close below it, leaving
 room for the seasonal scale where needed. Both layouts use the same
 sequence and colours; the circular layout makes the cycle boundary explicit.
 Labels wrap and shrink to fit; crowded comparisons need a larger device.
+</p>
+
+
+<h3>Validation</h3>
+
+<p>W01 checked season boundaries, event positions, quarterly landmarks and star, site and epoch labels in linear and circular layouts. See the <a href="../numerical-validation.html#w01-plot-geometry">W01 check in the technical manual</a>.
 </p>
 
 
@@ -157,4 +163,4 @@ if (requireNamespace("swephRdata", quietly = TRUE)) {
 ## End(Not run)
 </code></pre>
 
-<p><a href="../function-methods.html#fn-plot-skyscaper-starphases">plot.skyscapeR.starphases() method</a></p></body></html>
+</body></html>

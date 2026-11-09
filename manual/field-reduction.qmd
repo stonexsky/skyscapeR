@@ -1,5 +1,7 @@
 # Reducing compass and theodolite observations {#sec-field-reduction}
 
+Build 2.0.9009 accepts a single site or a site per theodolite observation and reduces the final bearing modulo 360°. The earlier −558.77° control returns 161.23°. [W02 field controls](numerical-validation.qmd#w02-field-to-sky).
+
 **Implementation.** skyscapeR 2.0.9004, `R/data-reduction.R`, `R/misc.R` and `R/mechanics.R`. A compass gives a direction relative to magnetic north. A theodolite gives an angle on an instrument circle whose zero may be arbitrary. Reduction places each observation on a true-bearing scale before the skyline or celestial declination is evaluated. Retain the original readings; two corrected numbers alone cannot reveal an erroneous correction sign, solar limb or time convention [@ruggles1999].
 
 ## Magnetic reference and observation date {#field-compass}

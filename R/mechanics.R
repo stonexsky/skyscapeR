@@ -56,7 +56,7 @@ az2dec = function(az, loc, alt, refraction=skyscapeR.env$refraction, atm=skyscap
   if (class(loc)[1] == 'list') {
     georefs <- matrix(NA, ncol=3, nrow=NROW(loc))
     for (i in 1:NROW(loc)) { georefs[i,] <- loc[[i]]$metadata$georef } }
-  if (class(loc)[1] == 'numeric') {
+  if (is.numeric(loc) && is.null(dim(loc))) {
     if (length(loc) != 1 & length(loc) != NROW(az)) { stop('loc parameter needs to be of either length 1 or same length as az') }
     if (length(loc) == 1) { loc <- rep(loc, NROW(az)) }
     # if (length(loc) > 1) {
@@ -98,6 +98,8 @@ az2dec = function(az, loc, alt, refraction=skyscapeR.env$refraction, atm=skyscap
 #' @param year Year for which to calculate the obliquity. Historical labels such as \code{"3700 BC"} are accepted by \code{\link{astroYear}}.
 #' Defaults to present year as given by \emph{Sys.Date}
 #' @import swephR
+#' @section Validation:
+#' A05 checked the January true obliquity at modern and prehistoric test epochs against direct engine values. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @references Laskar, J. et al. (2004), A long-term numerical
 #' solution for the insolation quantities of the Earth, \emph{Astron.
@@ -354,7 +356,9 @@ moonphase <- function(time, timezone, calendar) {
 #' @section Validation:
 #' A02 tested sensitivity to ephemeris conventions using a separate solver on airless lunar-centre trajectories. Across 177 prehistoric skyline crossings, default azimuths differed from JPL Horizons by a median of 0.059 degrees and a maximum of 0.322 degrees. Matching delta T reduced the maximum to 0.027 degrees. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
 #'
-#' On three synthetic skylines with refraction disabled, Mintaka's rising and setting azimuths agreed with the spherical reference within 0.000022 degrees, and the circumpolar Polaris returned no crossing. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a04-stellar-crossings}{A04 check in the technical manual}.
+#' A04 recovered the expected crossing counts and order on synthetic ridges, notches and grazing tracks; solar and lunar centre crossings at the Malta test site agreed with JPL Horizons within 0.85 seconds and 0.0041 degrees. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a04-stellar-crossings}{A04 check in the technical manual}.
+#'
+#' H07 verified that a partial panorama is rejected before searching for solar or stellar crossings on an unobserved skyline. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
 #' @export
 #' @references Astrodienst. Swiss Ephemeris programmer's manual. \url{https://www.astro.com/swisseph/swephprg.htm}.
 #' @seealso \code{\link[swephR]{swe_calc_ut}}, \code{\link[swephR]{swe_azalt}}, \code{\link{body.position}}, \code{\link{star.phases}}
@@ -420,6 +424,7 @@ riseset <- function(loc, date, jd, obj = 'sun', alt=0, timezone, calendar, dec, 
   hor <- NULL
   if (inherits(loc,'skyscapeR.horizon')) {
     if (!missing(alt)) stop('Supply either a horizon profile or an explicit alt, not both.')
+    .require_full_skyline(loc)
     hor <- loc
     loc <- as.numeric(hor$metadata$georef)
   }
@@ -542,6 +547,8 @@ riseset <- function(loc, date, jd, obj = 'sun', alt=0, timezone, calendar, dec, 
 #' @param atm Atmospheric pressure in mbar. Defaults to the session setting in \code{\link{skyscapeR.vars}}.
 #' @param temp Air temperature in degrees Celsius. Defaults to the session setting in \code{\link{skyscapeR.vars}}.
 #' @import swephR
+#' @section Validation:
+#' In A08, coordinates on the two plotted solar-limit tracks recovered their source declinations by spherical inversion. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a08-target-ranges}{A08 check in the technical manual}.
 #' @export
 #' @examples
 #' # Visible path of sun on june solstice on year 4001 BC from London:
@@ -691,6 +698,8 @@ sunAz = function(loc, time, timezone, limb, alt=FALSE) {
 #' @param calendar Calendar for sampling and output. G for Gregorian or J for Julian. Defaults to the package calendar, initially Gregorian.
 #' @param verbose Logical. Display progress or informational messages. Default \code{TRUE}.
 #' @import swephR
+#' @section Validation:
+#' The JPL comparison in A05 matched all tested civil-day passages, including paired dates near a solstice. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @examples
 #' if (requireNamespace("swephRdata", quietly = TRUE)) {
@@ -800,6 +809,8 @@ solar.date <- function(dec, year, calendar, verbose=TRUE){
 #' @param loc This can be either the latitude of the location, or a \emph{skyscapeR.horizon} object.
 #' @param altitude Altitude of the celestial object. Defaults to 0 degrees.
 #' @import swephR
+#' @section Validation:
+#' A05 compared the returned correction with the signed spherical approximation in both hemispheres. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @examples
 #' # Parallax correction for the moon, as seen from latitude 50ºN and at 0º altitude

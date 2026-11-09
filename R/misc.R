@@ -50,31 +50,23 @@ veq2hor <- Vectorize(eq2hor, 'ra', SIMPLIFY=T)
 
 #' @noRd
 minmaxdec = function(name, from, to, loc=FALSE) {
-  xx <- seq(from, to, 100)
-  dd <- c()
-
-  # Stars
-  sefstars <- .read_star_catalogue()
-
-  if (sum(star.names$Western == name) | sum(as.character(sefstars$identifier) == name)) {
-    return(range(star(name, seq(from,to))$coord$Dec))
-  } else {
-    # Solar-Lunar targets
-    for (i in 1: NROW(xx)) {
-      dd[i] <- do.call(name, list(year=xx[i], loc=loc, verbose=F))
-    }
+  years <- seq.int(from,to)
+  if (name %in% c("jS","dS","nMjLX","nmnLX","sMjLX","smnLX")) {
+    return(range(do.call(name,list(year=years,loc=loc,verbose=FALSE))))
   }
-  ff <- splinefun(xx,dd)
-  xxz <- seq(from,to,0.01)
-  dd <- ff(xxz)
-  mm <- c(min(dd),max(dd))
-
-  return(mm)
+  stellar <- .try_target(star(name,years))
+  if (!inherits(stellar,"try-error")) return(range(stellar$coord$Dec))
+  values <- vapply(years,function(y) do.call(name,list(year=y,loc=loc,verbose=FALSE)),numeric(1))
+  range(values)
 }
+
+.stellar_band_tolerance <- 1e-7
 
 .stellar_dates <- function(years, declinations, band) {
   # Intersect each annual line segment with the closed declination band.
   if (length(years)==1L) return(paste(BC.AD(rep(years,2)),collapse=" - "))
+  # Account for numerical variation in otherwise identical stellar samples.
+  for (edge in band) declinations[abs(declinations-edge)<=.stellar_band_tolerance] <- edge
   a <- head(declinations,-1L)
   b <- tail(declinations,-1L)
   idx <- which(pmin(a,b)<=band[2] & pmax(a,b)>=band[1])
@@ -297,6 +289,8 @@ sampleList <- function(ll) {
 #' and one row per contiguous region, sorted by start.
 #' @section Validation:
 #' Known tied, truncated and disjoint test distributions returned the expected interval endpoints and achieved the requested minimum discrete mass. See \href{https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks}{D01 validation in the technical manual}.
+#'
+#' In D02 the default transformation grid split the middle 80 percent highest-density region of a three-mode ridge case; a finer grid recovered the three reference regions. See the \href{https://stonexsky.github.io/skyscapeR/manual/#d02-bearing-propagation}{D02 check in the technical manual}.
 #' @export
 #' @references Hyndman, R. J. (1996). Computing and Graphing Highest Density Regions. The American Statistician 50, 120-126. \doi{10.1080/00031305.1996.10474359}.
 #' @seealso \code{\link{az.pdf}}, \code{\link{dec.pdf}}, \code{\link{spd}}, \code{\link{plot.skyscapeR.pdf}}

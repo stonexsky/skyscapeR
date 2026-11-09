@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>coordtrans | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-coordtrans">coordtrans() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Transform azimuth densities into declination densities</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>coordtrans | skyscapeR 2.0.9008</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-coordtrans">coordtrans() method</a></nav><h2 id='coordtrans'>Transform azimuth densities into declination densities</h2><span id='topic+coordtrans'></span>
 
 <h3>Description</h3>
 
@@ -24,34 +24,34 @@ uncertainty in both direction and horizon altitude.
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code>pdf</code></td>
+<tr><td><code id="coordtrans_:_pdf">pdf</code></td>
 <td>
 <p>A <em>skyscapeR.pdf</em> object created with <code>az.pdf</code> or a <em>skyscapeR.spd</em> object created with <code>spd</code></p>
 </td></tr>
-<tr><td><code>hor</code></td>
+<tr><td><code id="coordtrans_:_hor">hor</code></td>
 <td>
 <p>A shared <code>skyscapeR.horizon</code> or, for individual azimuth PDFs, a list of horizons in measurement order.</p>
 </td></tr>
-<tr><td><code>xrange</code></td>
+<tr><td><code id="coordtrans_:_xrange">xrange</code></td>
 <td>
 <p>Array of values (min and max) for SPD when transforming a <em>skyscapeR.spd</em> object.</p>
 </td></tr>
-<tr><td><code>.res</code></td>
+<tr><td><code id="coordtrans_:_.res">.res</code></td>
 <td>
 <p>Spacing of the declination calculation grid, in degrees. Default 0.1.</p>
 </td></tr>
-<tr><td><code>.prec</code></td>
+<tr><td><code id="coordtrans_:_.prec">.prec</code></td>
 <td>
 <p>Azimuth integration spacing, in degrees. Default 0.1.
 Previously ignored; smaller values increase integration work. Must not exceed 540.</p>
 </td></tr>
-<tr><td><code>.output.res</code></td>
+<tr><td><code id="coordtrans_:_.output.res">.output.res</code></td>
 <td>
 <p>Spacing of the returned declination grid, in degrees.
 Default 0.01. Coarser spacing reduces output size. All spacings must be
 positive finite scalars, and the returned grid must contain at least two points.</p>
 </td></tr>
-<tr><td><code>verbose</code></td>
+<tr><td><code id="coordtrans_:_verbose">verbose</code></td>
 <td>
 <p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p>
 </td></tr>
@@ -113,6 +113,14 @@ transformation settings, format version and descriptive source labels.
 </p>
 
 
+<h3>Validation</h3>
+
+<p>In D02, declination quantiles agreed with direct propagation within 0.008 degrees across nine terrain and observer cases. Near the celestial pole the discrepancy reached 0.17 degrees on the fine grid; at the pole a zero conditional width prevented calculation. See the <a href="../numerical-validation.html#d02-bearing-propagation">D02 check in the technical manual</a>.
+</p>
+<p>For a partial photograph the stored positive bearing density must lie within its photographed sector. H07 verified agreement with a complete skyline on the covered north-crossing cases and rejection of uncovered densities. See the <a href="../numerical-validation.html#h07-panorama-coverage">H07 check in the technical manual</a>.
+</p>
+
+
 <h3>References</h3>
 
 <p>Silva, F (2020) A probabilistic framework and significance test for the analysis of structural orientations
@@ -138,4 +146,4 @@ Dec.coarse &lt;- coordtrans(Az, hor, .output.res=0.1)
 Dec.coarse$metadata$param
 </code></pre>
 
-<p><a href="../function-methods.html#fn-coordtrans">coordtrans() method</a></p></body></html>
+</body></html>

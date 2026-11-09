@@ -1,3 +1,16 @@
+.panorama_sector <- function(hor) {
+  if (!identical(hor$metadata$source$provider, "Panorama")) return(NULL)
+  coverage <- hor$metadata$source$coverage
+  if (length(coverage)!=2L || any(!is.finite(coverage)) || diff(coverage)<=0)
+    stop("Panorama has invalid azimuth coverage.")
+  if (diff(coverage)<360-1e-8) coverage else NULL
+}
+
+.require_full_skyline <- function(hor) {
+  if (!is.null(.panorama_sector(hor)))
+    stop("A full 360-degree skyline is required; the photographed sector has incomplete coverage.", call.=FALSE)
+}
+
 # Terrain vertices and interior extrema supplement the time grid. This helper
 # accepts a smooth astronomical position function for independent analytic tests.
 .horizon_profile <- function(az,altitude) {

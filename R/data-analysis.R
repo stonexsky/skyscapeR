@@ -9,13 +9,17 @@
 #' geocentric apparent solar longitudes of 0, 90, 180 and 270 degrees. Dates are UT
 #' civil days in the requested calendar. Different dates for the first and last year
 #' appear in endpoint order separated by a slash. Intermediate years can differ.
-#' The sunrise/set date ranges also use the two endpoint years.
+#' The sunrise/set date ranges also use the two endpoint years. Solar and lunar candidates
+#' are selected before display rounding. Zenith candidates use the period-specific tropical
+#' limit and require a reachable solar passage. For spatial equinoxes the reported range
+#' uses rising and setting solutions at the endpoint epochs, not an annual interior search.
 #' For each star passing the catalogue magnitude cut, the search computes its
 #' declination at noon UT on 1 January Gregorian of every astronomical year,
 #' including both endpoints. It tests overlap before rounding and linearly
 #' interpolates between annual samples to estimate entry and exit. Separate
 #' passages are reported separately, with boundaries rounded to the nearest year.
-#' Shorter variations within a sampling year are unresolved. Magnitude describes
+#' A contact within 0.0000001 degree of a stellar band edge is treated as a closed-boundary
+#' match. Shorter variations within a sampling year are unresolved. Magnitude describes
 #' catalogue brightness and does not model atmospheric visibility.
 #'
 #' Silva and Lomsdalen (2025, table 5) give an example of stellar target screening for the Maltese temples.
@@ -33,6 +37,8 @@
 #' @param dates Whether to display time period when identified celestial targets
 #' occur within declination range. Default is FALSE.
 #' @param calendar Calendar for civil dates. Use \code{"G"} for Gregorian or \code{"J"} for Julian.
+#' @section Validation:
+#' A08 verified closed-band membership, separate stellar passages, sampled contact, magnitude filtering and comparisons before display rounding. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a08-target-ranges}{A08 check in the technical manual}.
 #' @export
 #' @examples
 #' if (requireNamespace("swephRdata", quietly = TRUE)) {
@@ -93,26 +99,60 @@ findTargets <- function(decrange, year, loc=FALSE, max.mag=2.5, dates=FALSE,
   targets$solar[1,] <- c('june solstice', range(jS(seq(min(year), max(year),1), loc, verbose=FALSE)), labels[2], NA)
   targets$solar[2,] <- c('december solstice', range(dS(seq(min(year), max(year),1), loc, verbose=FALSE)), labels[4], NA)
   targets$solar[3,] <- c('astronomical equinox', 0, 0, labels[1], labels[3])
-  if (class(loc)[1] == 'skyscapeR.horizon') {
-    spatial <- unlist(lapply(unique(range(years)), function(y)
-      spatial.equinox(loc, year=y)$declination), use.names=FALSE)
-    spatial <- spatial[is.finite(spatial)]
-    if(length(spatial)) {
-      aux <- solar.date(range(spatial), mean(year), calendar, verbose=FALSE)
-      targets$solar[4,] <- c('spatial equinox', as.numeric(aux[1,]), paste(aux[2,1],'/',aux[2,2]), paste(aux[3,2],'/',aux[3,1]))
+  endpoints <- unique(range(years))
+  # A solar target at the limit may be reached once, twice, or not at all
+  # in the selected civil year. Retain only dates returned for that epoch.
+  target.days <- function(dec, y) {
+    z <- .try_target(solar.date(dec, y, calendar, verbose=FALSE))
+    if (inherits(z,"try-error")) return(character())
+    as.character(stats::na.omit(z[-1,1]))
+  }
+  endpoint.label <- function(x) {
+    x <- unique(x[!is.na(x) & nzchar(x)])
+    if (length(x)) paste(x,collapse=" / ") else NA_character_
+  }
+  if (inherits(loc,"skyscapeR.horizon")) {
+    spatial <- lapply(endpoints,function(y) unlist(spatial.equinox(loc,year=y)$declination))
+    limits <- unlist(spatial,use.names=FALSE)
+    if (any(is.finite(limits))) {
+      day.ranges <- lapply(seq_along(endpoints),function(i) {
+        vals <- spatial[[i]]
+        lapply(vals[is.finite(vals)],target.days,y=endpoints[i])
+      })
+      branches <- do.call(c,day.ranges)
+      targets$solar[4,] <- c("spatial equinox",range(limits,finite=TRUE),
+        endpoint.label(vapply(branches,function(z)z[1L],character(1))),
+        endpoint.label(unlist(lapply(branches,function(z)tail(z,-1L)))))
     }
   }
-  if(class(loc)[1] != 'logical') {
-    if (!is.null(zenith(loc))) {
-      aux <- solar.date(sort(as.numeric(zenith(loc))), mean(year), calendar, verbose=F)
-      targets$solar[5,] <- c('zenith sun', as.numeric(aux[1,]), NA, aux[2,], aux[3,])
-      aux <- solar.date(sort(as.numeric(antizenith(loc))), mean(year), calendar, verbose=F)
-      targets$solar[6,] <- c('antizenith sun', as.numeric(aux[1,]), NA, aux[2,], aux[3,])
+  if (!is.logical(loc)) {
+    lat <- extractLatitude(loc)
+    attainable <- years[obliquity(years)>=abs(lat)]
+    if (length(attainable)) {
+      for (target in c("zenith sun","antizenith sun")) {
+        decl <- if (target=="zenith sun") lat else -lat
+        first.passage <- function(epochs) {
+          for (y in epochs) {
+            passages <- target.days(decl,y)
+            if (length(passages)) return(passages)
+          }
+          character()
+        }
+        first <- first.passage(attainable)
+        if (!length(first)) next
+        last <- if (length(attainable)==1L) first else first.passage(rev(attainable))
+        dates.by.year <- list(first,last)
+        targets$solar[if(target=="zenith sun")5L else 6L,] <- c(target,decl,decl,
+          endpoint.label(vapply(dates.by.year,function(z)z[1L],character(1))),
+          endpoint.label(unlist(lapply(dates.by.year,function(z)tail(z,-1L)))))
+      }
     }
   }
 
-  aux1 <- .try_target(solar.date(seq(min(decrange),max(decrange),0.01), min(year), calendar, verbose=F))
-  aux2 <- .try_target(solar.date(seq(min(decrange),max(decrange),0.01), max(year), calendar, verbose=F))
+  samples <- unique(c(seq(min(decrange),max(decrange),0.01),max(decrange)))
+  aux1 <- .try_target(solar.date(samples, min(year), calendar, verbose=FALSE))
+  aux2 <- if (length(endpoints)==1L) aux1 else
+    .try_target(solar.date(samples, max(year), calendar, verbose=FALSE))
 
   ttt <- c()
   if (class(aux1)[1] != 'try-error') { ttt <- c(ttt, aux1[-1,,drop=FALSE]) }
@@ -141,50 +181,21 @@ findTargets <- function(decrange, year, loc=FALSE, max.mag=2.5, dates=FALSE,
   targets$solar[,2] <- as.numeric(targets$solar[,2])
   targets$solar[,3] <- as.numeric(targets$solar[,3])
 
-  targets$solar$min.dec <- round(targets$solar$min.dec,2)
-  targets$solar$max.dec <- round(targets$solar$max.dec,2)
-
-  targets$solar <- targets$solar[!is.na(targets$solar[,1]),,drop=FALSE]
-  for (i in seq_len(NROW(targets$solar))) {
-    if ((min(decrange) > max(targets$solar[i,c(2,3)], na.rm=T))  | (max(decrange) < min(targets$solar[i,c(2,3)], na.rm=T))) {
-      targets$solar[i,] <- c(NA,NA,NA,NA,NA)
-    }
+  filter.limits <- function(tab) {
+    keep <- !is.na(tab$name) & tab$min.dec <= max(decrange)+1e-10 &
+      tab$max.dec >= min(decrange)-1e-10
+    tab <- tab[which(keep), ,drop=FALSE]
+    if (!nrow(tab)) return(NULL)
+    tab$min.dec <- round(tab$min.dec,2)
+    tab$max.dec <- round(tab$max.dec,2)
+    rownames(tab) <- NULL
+    tab
   }
-  targets$solar <- targets$solar[!is.na(targets$solar[,1]),,drop=FALSE]
-  rownames(targets$solar) <- NULL
-  if (NROW(targets$solar) ==0) { targets$solar <- c() }
-
-
-
-  ## lunar
-  targets$lunar <- data.frame(name='Test', min.dec=12, max.dec=12, stringsAsFactors=F)
-
-  time <- seq(min(year), max(year),1)
-  aux <- sMjLX(time, loc)
-
-
-  targets$lunar[1,] <- c('southern major lunar extreme', range(sMjLX(seq(min(year), max(year),1), loc, verbose=FALSE)))
-  targets$lunar[2,] <- c('southern minor lunar extreme', range(smnLX(seq(min(year), max(year),1), loc, verbose=FALSE)))
-  targets$lunar[3,] <- c('northern minor lunar extreme', range(nmnLX(seq(min(year), max(year),1), loc, verbose=FALSE)))
-  targets$lunar[4,] <- c('northern major lunar extreme', range(nMjLX(seq(min(year), max(year),1), loc, verbose=FALSE)))
-  ## TODO add EFM distribution
-
-  targets$lunar[,2] <- as.numeric(targets$lunar[,2])
-  targets$lunar[,3] <- as.numeric(targets$lunar[,3])
-
-  targets$lunar$min.dec <- round(targets$lunar$min.dec,2)
-  targets$lunar$max.dec <- round(targets$lunar$max.dec,2)
-
-  for (i in seq_len(NROW(targets$lunar))) {
-    if ((targets$lunar$min.dec[i] < min(decrange) & targets$lunar$max.dec[i] < min(decrange)) | (targets$lunar$min.dec[i] > max(decrange) & targets$lunar$max.dec[i] > max(decrange))) {
-      targets$lunar[i,] <- c(NA,NA,NA)
-    }
-  }
-  targets$lunar <- targets$lunar[!is.na(targets$lunar[,1]),,drop=FALSE]
-  rownames(targets$lunar) <- NULL
-  if (NROW(targets$lunar) ==0) { targets$lunar <- c() }
-
-
+  targets$solar <- filter.limits(targets$solar)
+  lunar <- list("southern major lunar extreme"=sMjLX, "southern minor lunar extreme"=smnLX,
+                "northern minor lunar extreme"=nmnLX, "northern major lunar extreme"=nMjLX)
+  limits <- vapply(lunar,function(f)range(f(years,loc,verbose=FALSE)),numeric(2))
+  targets$lunar <- filter.limits(data.frame(name=names(lunar),min.dec=limits[1,],max.dec=limits[2,]))
 
   ## stellar
   ss <- .read_star_catalogue()
@@ -194,7 +205,7 @@ findTargets <- function(decrange, year, loc=FALSE, max.mag=2.5, dates=FALSE,
   for (i in seq_len(NROW(ss))) {
     d <- star(ss$identifier[i],years)$coord$Dec
     bounds <- range(d)
-    if (bounds[2]<min(decrange) || bounds[1]>max(decrange)) next
+    if (bounds[2]<min(decrange)-.stellar_band_tolerance || bounds[1]>max(decrange)+.stellar_band_tolerance) next
     interval <- if (dates) .stellar_dates(years,d,range(decrange)) else NA_character_
     targets$stellar[nrow(targets$stellar)+1L,] <- list(ss$name[i],ss$identifier[i],
       ss$magV[i],round(bounds[1],2),round(bounds[2],2),interval)

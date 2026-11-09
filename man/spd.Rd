@@ -48,6 +48,8 @@ truncation accuracy, but the returned trapezoidal area is one.
 \section{Validation}{
 
 The tested sums agreed with independently constructed density sums, and the normalised curves had unit trapezoidal area. See \href{https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks}{D01 validation in the technical manual}.
+
+For two bearings on a shared slope, the D02 comparison of summing before and after transformation gave an integrated absolute density difference of 0.00159 after normalisation. See the \href{https://stonexsky.github.io/skyscapeR/manual/#d02-bearing-propagation}{D02 check in the technical manual}.
 }
 
 \examples{

@@ -116,6 +116,10 @@ disk space per simulation per grid point. Temporary files are removed on return 
 \section{Validation}{
 
 In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+
+In S01, at a nominal 5 percent level the global rejection rate was 4.25 to 5.85 percent across the tested uniform-null settings with sufficient Monte Carlo resolution. Build 2.0.9007 uses the source azimuth density spacing and cutoff for simulations and matches the observed SPD spacing on the shared-horizon route. Refit earlier analyses that used different settings. See the \href{https://stonexsky.github.io/skyscapeR/manual/#s01-uniform-orientation}{S01 calibration in the technical manual}.
+
+The 500-simulation Ggantija-phase workflow in W02 reproduced the bundled global probability, local intervals and adjusted probabilities. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
 }
 
 \section{Study design and numerical checks}{

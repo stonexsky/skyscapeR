@@ -87,7 +87,9 @@ reconstruct them. See \code{\link{plot.skyscapeR.pdf}} and \code{\link{randomTes
 }
 \section{Validation}{
 
-On a constant skyline with refraction disabled, the median and endpoints of the central 95 percent declination interval agreed with direct Monte Carlo propagation within 0.0051 degrees, including for bearings distributed across north. See the \href{https://stonexsky.github.io/skyscapeR/manual/#d02-bearing-propagation}{D02 check in the technical manual}.
+In D02, declination quantiles agreed with direct propagation within 0.008 degrees across nine terrain and observer cases. Near the celestial pole the discrepancy reached 0.17 degrees on the fine grid; at the pole a zero conditional width prevented calculation. See the \href{https://stonexsky.github.io/skyscapeR/manual/#d02-bearing-propagation}{D02 check in the technical manual}.
+
+For a partial photograph the stored positive bearing density must lie within its photographed sector. H07 verified agreement with a complete skyline on the covered north-crossing cases and rejection of uncovered densities. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
 }
 
 \examples{

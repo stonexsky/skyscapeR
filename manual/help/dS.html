@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>dS | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-ds">dS() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Estimate solar declination at the December solstice</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>dS | skyscapeR 2.0.9009</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-ds">dS() method</a></nav><h2 id='dS'>Estimate solar declination at the December solstice</h2><span id='topic+dS'></span>
 
 <h3>Description</h3>
 
@@ -22,23 +22,23 @@ structural sightline.
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code>year</code></td>
+<tr><td><code id="dS_:_year">year</code></td>
 <td>
 <p>Astronomical year. The default is the current year in the package settings. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p>
 </td></tr>
-<tr><td><code>loc</code></td>
+<tr><td><code id="dS_:_loc">loc</code></td>
 <td>
 <p>Latitude in degrees north or a <code>skyscapeR.horizon</code> object. Omit this argument or use <code>FALSE</code> for geocentric declination.</p>
 </td></tr>
-<tr><td><code>parallax</code></td>
+<tr><td><code id="dS_:_parallax">parallax</code></td>
 <td>
 <p>Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.</p>
 </td></tr>
-<tr><td><code>altitude</code></td>
+<tr><td><code id="dS_:_altitude">altitude</code></td>
 <td>
 <p>Altitude of the sun. Defaults to 0 degrees.</p>
 </td></tr>
-<tr><td><code>verbose</code></td>
+<tr><td><code id="dS_:_verbose">verbose</code></td>
 <td>
 <p>Logical to control output of warnings and messages.
 Defaults to TRUE.</p>
@@ -62,6 +62,12 @@ sunset bearing.
 </p>
 
 
+<h3>Validation</h3>
+
+<p>A05 checked the local December solar limit against annual obliquity and the specified parallax correction. See the <a href="../numerical-validation.html#a05-solar-limits">A05 check in the technical manual</a>.
+</p>
+
+
 <h3>See Also</h3>
 
 <p><code>obliquity</code>, <code>jS</code>, <code>eq</code>,
@@ -79,4 +85,4 @@ dS(-4000)
 dS(-4000, loc=50)
 </code></pre>
 
-<p><a href="../function-methods.html#fn-ds">dS() method</a></p></body></html>
+</body></html>

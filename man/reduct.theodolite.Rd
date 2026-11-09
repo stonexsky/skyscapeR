@@ -59,13 +59,20 @@ true bearing of a structural axis.
 The observed difference between the instrument readings to the structure and to the Sun
 is added to the calculated solar azimuth at the observation time. The routine handles a
 circle-boundary difference, accounts for the selected solar limb through sunAz and
-rounds the reference bearing according to the input readings. An explicit altitude or a
+rounds the reference bearing according to the input readings. True bearings lie in
+[0, 360) degrees. A three-coordinate vector supplies one shared site; for multiple
+sites, supply a matrix with one latitude, longitude and elevation row per reading. An explicit altitude or a
 supplied horizon allows the corrected bearing to be converted to declination. Correct
 time, civil timezone, limb and site are all essential to the reduction.
 
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
+\section{Validation}{
+
+W02 recovered both independent circle-difference control bearings and retained each site row in a multi-site solar reduction. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
+}
+
 \examples{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
   lat <- ten(35,50,37.8)

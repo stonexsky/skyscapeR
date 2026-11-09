@@ -77,6 +77,11 @@ Supply the original sources in measurement order. Counts and structure are check
 but the function cannot verify their identity. The transformation curve uses the
 refraction, pressure and temperature recorded with the result.
 }
+\section{Validation}{
+
+In W01 the shaded components matched the two intervals returned by hpdi() for a bimodal density. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
+}
+
 \examples{
 Az <- az.pdf(az=c(87,93), unc=3, verbose=FALSE)
 hor <- createHor(c(0,360), c(2,2), loc=c(35,-8,25))

@@ -679,6 +679,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-obliquity" class="level3" data-number="15.1.6">
 <h3 data-number="15.1.6" class="anchored" data-anchor-id="fn-obliquity"><span class="header-section-number">15.1.6</span> <code>obliquity()</code></h3>
+<p>A05 checked the January true obliquity at modern and prehistoric test epochs against direct engine values. <a href="./numerical-validation.html#a05-solar-limits">A05 results</a>.</p>
 <p><a href="function-index.html#idx-obliquity">Function index</a></p>
 <p>The tilt changes over archaeological timescales. For each supplied astronomical year the
 calculation uses Gregorian 1 January at noon UT, requests the obliquity/nutation record
@@ -726,6 +727,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-parallax-corr" class="level3" data-number="15.1.7">
 <h3 data-number="15.1.7" class="anchored" data-anchor-id="fn-parallax-corr"><span class="header-section-number">15.1.7</span> <code>parallax.corr()</code></h3>
+<p>A05 compared the returned correction with the signed spherical approximation in both hemispheres. <a href="./numerical-validation.html#a05-solar-limits">A05 results</a>.</p>
 <p><a href="function-index.html#idx-parallax-corr">Function index</a></p>
 <p>The limiting-declination functions subtract this approximate correction from their
 geocentric target. The correction in degrees is the supplied parallax multiplied by the
@@ -1085,6 +1087,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-reduct-compass" class="level3" data-number="15.2.2">
 <h3 data-number="15.2.2" class="anchored" data-anchor-id="fn-reduct-compass"><span class="header-section-number">15.2.2</span> <code>reduct.compass()</code></h3>
+<p>W02 checked north-crossing magnetic readings against the supplied corrections before passing true bearings into a skyline analysis. <a href="./numerical-validation.html#w02-field-to-sky">W02 results</a>.</p>
 <p><a href="function-index.html#idx-reduct-compass">Function index</a></p>
 <p>Magnetic north differs from true north at the time and place of survey. Add the supplied
 magnetic declination to each magnetic bearing, or calculate it from the survey
@@ -1167,6 +1170,7 @@ is available. Optional identification columns are retained.
 </section>
 <section id="fn-reduct-theodolite" class="level3" data-number="15.2.3">
 <h3 data-number="15.2.3" class="anchored" data-anchor-id="fn-reduct-theodolite"><span class="header-section-number">15.2.3</span> <code>reduct.theodolite()</code></h3>
+<p>W02 recovered both independent circle-difference control bearings and retained each site row in a multi-site solar reduction. <a href="./numerical-validation.html#w02-field-to-sky">W02 results</a>.</p>
 <p><a href="function-index.html#idx-reduct-theodolite">Function index</a></p>
 <p>The observed difference between the instrument readings to the structure and to the Sun
 is added to the calculated solar azimuth at the observation time. The routine handles a
@@ -1778,6 +1782,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-exporthor" class="level3" data-number="15.3.5">
 <h3 data-number="15.3.5" class="anchored" data-anchor-id="fn-exporthor"><span class="header-section-number">15.3.5</span> <code>exportHor()</code></h3>
+<p>H07 checked that a partial photograph is rejected for both image and numerical landscape export. <a href="./numerical-validation.html#h07-panorama-coverage">H07 results</a>.</p>
 <p><a href="function-index.html#idx-exporthor">Function index</a></p>
 <p>A landscape lets the same terrain obstruction be used in a planetarium reconstruction.
 The export pairs the profile's azimuth and altitude samples in a polygonal horizon file
@@ -2021,6 +2026,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-hor2alt" class="level3" data-number="15.3.8">
 <h3 data-number="15.3.8" class="anchored" data-anchor-id="fn-hor2alt"><span class="header-section-number">15.3.8</span> <code>hor2alt()</code></h3>
+<p>In H07, lookup at each edge of a north-crossing panorama returned its measured altitude and lookup beyond either edge returned NA. <a href="./numerical-validation.html#h07-panorama-coverage">H07 results</a>.</p>
 <p><a href="function-index.html#idx-hor2alt">Function index</a></p>
 <p>For a horizon constructed from measurements or a DEM, cubic splines interpolate altitude and recorded uncertainty at the requested azimuth. For an imported photograph the function wraps bearings relative to the coverage origin, linearly interpolates its skyline and returns missing values outside its observed sector. Values are rounded to two decimal places. One bearing with uncertainty returns a numeric pair; multiple bearings with uncertainty return a matrix. Keep these routes distinct from the interpolation inside coordtrans().</p>
 <p><strong>Interpretation and limits.</strong> The returned extremum or altitude depends on the supplied skyline and the bearings searched. A sharp local notch can be missed between measurements; a wider numerical search cannot recover terrain absent from the profile.</p>
@@ -2178,6 +2184,7 @@ objects as features to createHor with a DEM.
 </section>
 <section id="fn-importpanorama" class="level3" data-number="15.3.10">
 <h3 data-number="15.3.10" class="anchored" data-anchor-id="fn-importpanorama"><span class="header-section-number">15.3.10</span> <code>importPanorama()</code></h3>
+<p>H07 verified lookup inside the photographed sector, including across north. Seasonal and event searches requiring a complete skyline reject partial photographs. <a href="./numerical-validation.html#h07-panorama-coverage">H07 results</a>.</p>
 <p><a href="function-index.html#idx-importpanorama">Function index</a></p>
 <p>Choose controls according to what you know:
 </p>
@@ -2349,6 +2356,7 @@ the external PNG path, checksum, angular bounds and calibration diagnostics.
 </section>
 <section id="fn-plot-skyscaper-horizon" class="level3" data-number="15.3.12">
 <h3 data-number="15.3.12" class="anchored" data-anchor-id="fn-plot-skyscaper-horizon"><span class="header-section-number">15.3.12</span> <code>plot.skyscapeR.horizon()</code></h3>
+<p>W01 checked the skyline ordinate and azimuth viewport on flat and raised profiles, including natural and publication sky overlays. <a href="./numerical-validation.html#w01-plot-geometry">W01 results</a>.</p>
 <p><a href="function-index.html#idx-plot-skyscaper-horizon">Function index</a></p>
 <p>A track meeting the horizon identifies a possible rise or set direction for that
 declination. The horizontal axis is true bearing and the vertical axis is angular
@@ -2521,10 +2529,10 @@ Implementation arguments, return value and documented modes
 <p>A target search inherits the uncertainty and coordinate conventions of the original sightline. An extreme found within a restricted bearing sector is conditional on the sector searched.</p>
 <section id="fn-antizenith" class="level3" data-number="15.4.1">
 <h3 data-number="15.4.1" class="anchored" data-anchor-id="fn-antizenith"><span class="header-section-number">15.4.1</span> <code>antizenith()</code></h3>
+<p>A05 verified the geometric anti-zenith declination and tropical-boundary eligibility at two epochs. <a href="./numerical-validation.html#a05-solar-limits">A05 results</a>.</p>
 <p><a href="function-index.html#idx-antizenith">Function index</a></p>
 <p>The direction opposite the zenith corresponds geometrically to minus the site latitude.
-The function checks the site against the default-epoch solstitial latitude band,
-then subtracts the approximate solar parallax correction from the negative latitude. It
+Build 2.0.9009 tests the site against the obliquity at the requested epoch. At the geometric anti-zenith, parallax vanishes. It
 returns NULL outside that band. This is a target declination for comparison with
 orientations, not an observable solar transit below ground.
 </p>
@@ -2629,6 +2637,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-findtargets" class="level3" data-number="15.4.3">
 <h3 data-number="15.4.3" class="anchored" data-anchor-id="fn-findtargets"><span class="header-section-number">15.4.3</span> <code>findTargets()</code></h3>
+<p>A08 verified closed-band membership, separate stellar passages, sampled contact, magnitude filtering and comparisons before display rounding. <a href="./numerical-validation.html#a08-target-ranges">A08 results</a>.</p>
 <p><a href="function-index.html#idx-findtargets">Function index</a></p>
 <p>The search tests overlap in declination. Solar and lunar limiting declinations are
 sampled across the years of the interval. Site coordinates enable zenith targets
@@ -2732,6 +2741,7 @@ crossings generate warnings; if all are undefined, the candidate is omitted.
 </section>
 <section id="fn-hor2max-dec" class="level3" data-number="15.4.4">
 <h3 data-number="15.4.4" class="anchored" data-anchor-id="fn-hor2max-dec"><span class="header-section-number">15.4.4</span> <code>hor2max.dec()</code></h3>
+<p>A05 recovered a limiting sightline within the northern search sector on a synthetic skyline with an interior crest. <a href="./numerical-validation.html#a05-solar-limits">A05 results</a>.</p>
 <p><a href="function-index.html#idx-hor2max-dec">Function index</a></p>
 <p>Terrain relief can shift the limiting sightline away from the meridian. The function
 samples bearings at 0.01-degree spacing within the specified half-width around 0
@@ -2777,6 +2787,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-hor2min-dec" class="level3" data-number="15.4.5">
 <h3 data-number="15.4.5" class="anchored" data-anchor-id="fn-hor2min-dec"><span class="header-section-number">15.4.5</span> <code>hor2min.dec()</code></h3>
+<p>A05 recovered a limiting sightline within the southern search sector on a synthetic skyline with an interior trough. <a href="./numerical-validation.html#a05-solar-limits">A05 results</a>.</p>
 <p><a href="function-index.html#idx-hor2min-dec">Function index</a></p>
 <p>Terrain relief can shift the limiting sightline away from the meridian. The function
 samples bearings at 0.01-degree spacing within the specified half-width around 180
@@ -2822,6 +2833,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-orbit" class="level3" data-number="15.4.6">
 <h3 data-number="15.4.6" class="anchored" data-anchor-id="fn-orbit"><span class="header-section-number">15.4.6</span> <code>orbit()</code></h3>
+<p>In A08, coordinates on the two plotted solar-limit tracks recovered their source declinations by spherical inversion. <a href="./numerical-validation.html#a08-target-ranges">A08 results</a>.</p>
 <p><a href="function-index.html#idx-orbit">Function index</a></p>
 <p>Latitude and declination determine where a diurnal track can meet the terrain. The
 function sweeps equatorial right ascension through 360 degrees at the requested angular
@@ -2887,8 +2899,7 @@ Implementation arguments, return value and documented modes
 <p>An overlay identifies which targets to compare before inspecting a distribution. Names
 may denote stars, solar or lunar limits, or fixed custom declinations. Group names
 expand into the individual limits. At one epoch, the function evaluates each target; for
-two endpoints it uses annual January stellar declinations. Solar and lunar limits
-retain century-spaced samples and spline interpolation. Styles and epoch travel with the object. Treat range endpoints as
+two endpoints it uses annual January stellar declinations. Solar and lunar limits in 2.0.9009 use annual samples at the supplied site, including both endpoints. Styles and epoch travel with the object. Treat range endpoints as
 model estimates and verify narrow or rapidly changing windows separately.
 A single object can contain several related targets. Pass a list of objects
 to plot(hor), plotBars or plotAzimuth to combine groups with independent
@@ -2971,12 +2982,12 @@ plotted site's coordinates are applied when drawing the horizon track.
 </section>
 <section id="fn-skyobject" class="level3" data-number="15.4.8">
 <h3 data-number="15.4.8" class="anchored" data-anchor-id="fn-skyobject"><span class="header-section-number">15.4.8</span> <code>skyObject()</code></h3>
+<p>A08 checked annual stellar, solar and lunar range endpoints, local corrections, identifier aliases and retention of target labels and line styles. <a href="./numerical-validation.html#a08-target-ranges">A08 results</a>.</p>
 <p><a href="function-index.html#idx-skyobject">Function index</a></p>
 <p>An overlay identifies which targets to compare before inspecting a distribution. Names
 may denote stars, solar or lunar limits, or fixed custom declinations. Group names
 expand into the individual limits. At one epoch, the function evaluates each target; for
-two endpoints it uses annual January stellar declinations. Solar and lunar limits
-retain century-spaced samples and spline interpolation. Styles and epoch travel with the object. Treat range endpoints as
+two endpoints it uses annual January stellar declinations. Solar and lunar limits in 2.0.9009 use annual samples at the supplied site, including both endpoints. Styles and epoch travel with the object. Treat range endpoints as
 model estimates and verify narrow or rapidly changing windows separately.
 A single object can contain several related targets. Pass a list of objects
 to plot(hor), plotBars or plotAzimuth to combine groups with independent
@@ -3059,6 +3070,8 @@ plotted site's coordinates are applied when drawing the horizon track.
 </section>
 <section id="fn-spatial-equinox" class="level3" data-number="15.4.9">
 <h3 data-number="15.4.9" class="anchored" data-anchor-id="fn-spatial-equinox"><span class="header-section-number">15.4.9</span> <code>spatial.equinox()</code></h3>
+<p>In A05, rising and setting midpoints matched independent track intersections on flat, eastern-ridge and western-ridge skylines; missing polar crossings were identified. <a href="./numerical-validation.html#a05-solar-limits">A05 results</a>.</p>
+<p>H07 checked that partial photographs are rejected and that a full photographic profile can be used. <a href="./numerical-validation.html#h07-panorama-coverage">H07 results</a>.</p>
 <p><a href="function-index.html#idx-spatial-equinox">Function index</a></p>
 <p>A spatial midpoint is defined by the local terrain and need not coincide with the
 astronomical equinox. The function uses the positive and negative obliquity at
@@ -3156,11 +3169,10 @@ setting at the astronomical equinox.
 </section>
 <section id="fn-zenith" class="level3" data-number="15.4.10">
 <h3 data-number="15.4.10" class="anchored" data-anchor-id="fn-zenith"><span class="header-section-number">15.4.10</span> <code>zenith()</code></h3>
+<p>A05 verified the geometric zenith declination and tropical-boundary eligibility at two epochs. <a href="./numerical-validation.html#a05-solar-limits">A05 results</a>.</p>
 <p><a href="function-index.html#idx-zenith">Function index</a></p>
 <p>The geometric zenith has declination equal to the site latitude. The function
-first checks the latitude against its June and December solar limits at the default
-epoch. Within those limits it subtracts the supplied approximate solar parallax
-correction from the latitude. It returns NULL outside the permitted band. This supplies
+checks the latitude against the obliquity of the requested epoch. At the geometric zenith, parallax vanishes. It returns NULL outside the permitted band. This supplies
 a declination criterion rather than the dates of the passages.
 </p>
 <p><a href="#fn-antizenith">Latitude, epoch and parallax assumptions</a>.</p>
@@ -3339,6 +3351,7 @@ use NA for observations and issue a warning. <code>settings</code> records conve
 </section>
 <section id="fn-ds" class="level3" data-number="15.5.2">
 <h3 data-number="15.5.2" class="anchored" data-anchor-id="fn-ds"><span class="header-section-number">15.5.2</span> <code>dS()</code></h3>
+<p>A05 checked the local December solar limit against annual obliquity and the specified parallax correction. <a href="./numerical-validation.html#a05-solar-limits">A05 results</a>.</p>
 <p><a href="function-index.html#idx-ds">Function index</a></p>
 <p>The December solstice is represented by the negative obliquity of the ecliptic for the
 requested epoch. The result is geocentric when no site is supplied. With a site, the
@@ -3534,6 +3547,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-eq" class="level3" data-number="15.5.4">
 <h3 data-number="15.5.4" class="anchored" data-anchor-id="fn-eq"><span class="header-section-number">15.5.4</span> <code>eq()</code></h3>
+<p>A05 checked the equinoctial declination reference separately from the dates of the astronomical equinoxes. <a href="./numerical-validation.html#a05-solar-limits">A05 results</a>.</p>
 <p><a href="function-index.html#idx-eq">Function index</a></p>
 <p>The geometric reference at an equinox is the celestial equator, with geocentric
 declination zero. Supplying a location subtracts the package's approximate parallax
@@ -3583,6 +3597,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-js" class="level3" data-number="15.5.5">
 <h3 data-number="15.5.5" class="anchored" data-anchor-id="fn-js"><span class="header-section-number">15.5.5</span> <code>jS()</code></h3>
+<p>A05 checked the local June solar limit against annual obliquity and the specified parallax correction. <a href="./numerical-validation.html#a05-solar-limits">A05 results</a>.</p>
 <p><a href="function-index.html#idx-js">Function index</a></p>
 <p>The June solstice is represented by the positive obliquity of the ecliptic for the
 requested epoch. The result is geocentric when no site is supplied. With a site, the
@@ -3877,7 +3892,9 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-riseset" class="level3" data-number="15.5.10">
 <h3 data-number="15.5.10" class="anchored" data-anchor-id="fn-riseset"><span class="header-section-number">15.5.10</span> <code>riseset()</code></h3>
-<p><strong>A02 validation.</strong> A02 tested sensitivity to ephemeris conventions using a separate solver on airless lunar-centre trajectories. Across 177 prehistoric skyline crossings, default azimuths differed from JPL Horizons by a median of 0.059 degrees and a maximum of 0.322 degrees. Matching delta T reduced the maximum to 0.027 degrees. Validation of the riseset() event solver is scheduled under A04. <a href="./a02-ephemeris.html">Lunar crossing results</a>.</p>
+<p>H07 verified that a partial panorama is rejected before searching for solar or stellar crossings on an unobserved skyline. <a href="./numerical-validation.html#h07-panorama-coverage">H07 results</a>.</p>
+<p>A04 recovered the expected crossing counts and order on synthetic ridges, notches and grazing tracks; solar and lunar centre crossings at the Malta test site agreed with JPL Horizons within 0.85 seconds and 0.0041 degrees. <a href="./numerical-validation.html#a04-stellar-crossings">A04 results</a>.</p>
+<p><strong>A02 validation.</strong> A02 tested sensitivity to ephemeris conventions using a separate solver on airless lunar-centre trajectories. Across 177 prehistoric skyline crossings, default azimuths differed from JPL Horizons by a median of 0.059 degrees and a maximum of 0.322 degrees. Matching delta T reduced the maximum to 0.027 degrees. <a href="./a02-ephemeris.html">Lunar crossing results</a>.</p>
 <p><a href="function-index.html#idx-riseset">Function index</a></p>
 <p>The event is a crossing of the local horizon by the body's centre. A raised ridge can
 delay the first visible rise and an uneven horizon can give several appearances or
@@ -4146,6 +4163,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-solar-date" class="level3" data-number="15.5.13">
 <h3 data-number="15.5.13" class="anchored" data-anchor-id="fn-solar-date"><span class="header-section-number">15.5.13</span> <code>solar.date()</code></h3>
+<p>The JPL comparison in A05 matched all tested civil-day passages, including paired dates near a solstice. <a href="./numerical-validation.html#a05-solar-limits">A05 results</a>.</p>
 <p><a href="function-index.html#idx-solar-date">Function index</a></p>
 <p>The Sun can pass the same declination on either side of a solstice. The search
 covers the selected civil year from midnight UT, including its first instant and
@@ -4208,6 +4226,7 @@ The function stops if all requested declinations are unreachable.
 <p>Catalogue epoch, atmosphere, skyline and a threshold-based visibility definition enter at different stages. A representative seasonal date is distinct from the time spent above the ridge on that morning.</p>
 <section id="fn-plot-skyscaper-starphases" class="level3" data-number="15.6.1">
 <h3 data-number="15.6.1" class="anchored" data-anchor-id="fn-plot-skyscaper-starphases"><span class="header-section-number">15.6.1</span> <code>plot.skyscapeR.starphases()</code></h3>
+<p>W01 checked season boundaries, event positions, quarterly landmarks and star, site and epoch labels in linear and circular layouts. <a href="./numerical-validation.html#w01-plot-geometry">W01 results</a>.</p>
 <p><a href="function-index.html#idx-plot-skyscaper-starphases">Function index</a></p>
 <p>Read each colour as a daily model classification: visible rising and setting, rising
 only, setting only, visible without a qualifying near-horizon passage, or invisible. The
@@ -4369,6 +4388,8 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-star-phases" class="level3" data-number="15.6.3">
 <h3 data-number="15.6.3" class="anchored" data-anchor-id="fn-star-phases"><span class="header-section-number">15.6.3</span> <code>star.phases()</code></h3>
+<p>W02 replayed the Gacrux heliacal-rising date at Skorba West and passed it to the crossing and sky-reconstruction calculations. <a href="./numerical-validation.html#w02-field-to-sky">W02 results</a>.</p>
+<p>Seasonal searches require full skyline coverage. H07 checked rejection of a partial photograph and successful calculation with the full profile. <a href="./numerical-validation.html#h07-panorama-coverage">H07 results</a>.</p>
 <p><a href="function-index.html#idx-star-phases">Function index</a></p>
 <p>Seasonal visibility depends on solar depression, stellar altitude, apparent magnitude
 and atmospheric extinction as well as terrain. The model holds the star's position fixed
@@ -4776,6 +4797,7 @@ instant use <code>sketchSky</code> with a georeferenced horizon.
 </section>
 <section id="fn-sketchsky" class="level3" data-number="15.7.3">
 <h3 data-number="15.7.3" class="anchored" data-anchor-id="fn-sketchsky"><span class="header-section-number">15.7.3</span> <code>sketchSky()</code></h3>
+<p>W02 verified the reconstructed Gacrux bearing and altitude at the same instant and viewpoint using direct equatorial coordinates and spherical geometry. <a href="./numerical-validation.html#w02-field-to-sky">W02 results</a>.</p>
 <p><a href="function-index.html#idx-sketchsky">Function index</a></p>
 <p>The function computes an object without drawing. Use
 <code>plot(hor, sky = sky, xrange = ..., yrange = ...)</code> to choose the sector.
@@ -5269,6 +5291,8 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-coordtrans" class="level3" data-number="15.8.2">
 <h3 data-number="15.8.2" class="anchored" data-anchor-id="fn-coordtrans"><span class="header-section-number">15.8.2</span> <code>coordtrans()</code></h3>
+<p>For a partial photograph the stored positive bearing density must lie within its photographed sector. H07 verified agreement with a complete skyline on the covered north-crossing cases and rejection of uncovered densities. <a href="./numerical-validation.html#h07-panorama-coverage">H07 results</a>.</p>
+<p>In D02, declination quantiles agreed with direct propagation within 0.008 degrees across nine terrain and observer cases. Near the celestial pole the discrepancy reached 0.17 degrees on the fine grid; at the pole a zero conditional width prevented calculation. <a href="./numerical-validation.html#d02-bearing-propagation">D02 results</a>.</p>
 <p><a href="function-index.html#idx-coordtrans">Function index</a></p>
 <p>A sightline has a distribution of possible bearings, and each bearing samples a
 potentially different part of the horizon. For every sampled bearing the function
@@ -5445,6 +5469,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-hpdi" class="level3" data-number="15.8.4">
 <h3 data-number="15.8.4" class="anchored" data-anchor-id="fn-hpdi"><span class="header-section-number">15.8.4</span> <code>hpdi()</code></h3>
+<p>In D02 the default transformation grid split the middle 80 percent highest-density region of a three-mode ridge case; a finer grid recovered the three reference regions. <a href="./numerical-validation.html#d02-bearing-propagation">D02 results</a>.</p>
 <p><strong>Validation on 2.0.9005.</strong> Known tied, truncated and disjoint test distributions returned the expected interval endpoints and achieved the requested minimum discrete mass. <a href="./numerical-validation.html#d01-density-checks">D01 results</a>.</p>
 <p><a href="function-index.html#idx-hpdi">Function index</a></p>
 <p>A distribution with several peaks can give several disjoint intervals. The mass
@@ -5502,6 +5527,7 @@ and one row per contiguous region, sorted by start.
 </section>
 <section id="fn-plot-skyscaper-pdf" class="level3" data-number="15.8.5">
 <h3 data-number="15.8.5" class="anchored" data-anchor-id="fn-plot-skyscaper-pdf"><span class="header-section-number">15.8.5</span> <code>plot.skyscapeR.pdf()</code></h3>
+<p>In W01 the shaded components matched the two intervals returned by hpdi() for a bimodal density. <a href="./numerical-validation.html#w01-plot-geometry">W01 results</a>.</p>
 <p><a href="function-index.html#idx-plot-skyscaper-pdf">Function index</a></p>
 <p>Individual curves reveal whether measurements overlap or have disjoint high-density
 regions. In the stacked view, each selected density is scaled by its own peak for
@@ -5601,6 +5627,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-plot-skyscaper-spd" class="level3" data-number="15.8.6">
 <h3 data-number="15.8.6" class="anchored" data-anchor-id="fn-plot-skyscaper-spd"><span class="header-section-number">15.8.6</span> <code>plot.skyscapeR.spd()</code></h3>
+<p>In W01 the drawn line matched the stored coordinates and heights of the summed density. <a href="./numerical-validation.html#w01-plot-geometry">W01 results</a>.</p>
 <p><a href="function-index.html#idx-plot-skyscaper-spd">Function index</a></p>
 <p>A peak can arise where several uncertain sightlines coincide. The horizontal axis uses
 the summed curve's stored coordinate and the vertical axis its density. Optional shading
@@ -5691,6 +5718,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-plotazimuth" class="level3" data-number="15.8.7">
 <h3 data-number="15.8.7" class="anchored" data-anchor-id="fn-plotazimuth"><span class="header-section-number">15.8.7</span> <code>plotAzimuth()</code></h3>
+<p>W01 checked compass bearings and the inner and outer edges of celestial year-range sectors against their spherical reference bearings. <a href="./numerical-validation.html#w01-plot-geometry">W01 results</a>.</p>
 <p><a href="function-index.html#idx-plotazimuth">Function index</a></p>
 <p>Measurements are drawn as spokes or rim ticks. North is at the top and
 bearings increase clockwise; repeated bearings can overplot. A data frame supplies the
@@ -5772,6 +5800,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-plotbars" class="level3" data-number="15.8.8">
 <h3 data-number="15.8.8" class="anchored" data-anchor-id="fn-plotbars"><span class="header-section-number">15.8.8</span> <code>plotBars()</code></h3>
+<p>W01 checked the endpoints and row labels of an azimuth interval spanning north. <a href="./numerical-validation.html#w01-plot-geometry">W01 results</a>.</p>
 <p><a href="function-index.html#idx-plotbars">Function index</a></p>
 <p>A row represents one measurement. Its horizontal bar spans the supplied value minus and
 plus its uncertainty, and an optional mark shows the centre. A scalar uncertainty is
@@ -5887,6 +5916,7 @@ confidence intervals. Use <code>az.pdf</code>, <code>coordtrans</code> and
 </section>
 <section id="fn-spd" class="level3" data-number="15.8.9">
 <h3 data-number="15.8.9" class="anchored" data-anchor-id="fn-spd"><span class="header-section-number">15.8.9</span> <code>spd()</code></h3>
+<p>For two bearings on a shared slope, the D02 comparison of summing before and after transformation gave an integrated absolute density difference of 0.00159 after normalisation. <a href="./numerical-validation.html#d02-bearing-propagation">D02 results</a>.</p>
 <p><strong>Verified on 2.0.9006.</strong> Broad azimuth SPDs were continuous at north and correctly interpolated across the final grid segment. <a href="./numerical-validation.html#d01-density-checks">D01 rerun</a>.</p>
 <p><strong>Validation on 2.0.9005.</strong> The tested sums agreed with independently constructed density sums, and the normalised curves had unit trapezoidal area. <a href="./numerical-validation.html#d01-density-checks">D01 results</a>.</p>
 <p><a href="function-index.html#idx-spd">Function index</a></p>
@@ -6078,6 +6108,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-modeltest" class="level3" data-number="15.9.2">
 <h3 data-number="15.9.2" class="anchored" data-anchor-id="fn-modeltest"><span class="header-section-number">15.9.2</span> <code>modelTest()</code></h3>
+<p>In S02, identical candidate bearings produced identical directly constructed observed and simulated densities on build 2.0.9008. Global rejection at the 5 percent level ranged from 4.35 to 5.50 percent under the six matched null designs. <a href="./numerical-validation.html#s02-specified-models">S02 results</a>.</p>
 <p><strong>Verified on 2.0.9006.</strong> The observed and simulated azimuth curves use the same circular cluster search. The original test matrix gave one interval from 346° to 15°. <a href="./numerical-validation.html#s03-scoring-checks">S03 rerun</a>.</p>
 <p><strong>Validation on 2.0.9005.</strong> Independent scoring reproduced the stored linear-grid probabilities. A north-crossing azimuth excess can split into two clusters; including both 0 and 360 degrees can also affect the global rank. <a href="./numerical-validation.html#s03-scoring-checks">S03 results</a>.</p>
 <p><a href="function-index.html#idx-modeltest">Function index</a></p>
@@ -6200,6 +6231,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-plot-skyscaper-sigtest" class="level3" data-number="15.9.3">
 <h3 data-number="15.9.3" class="anchored" data-anchor-id="fn-plot-skyscaper-sigtest"><span class="header-section-number">15.9.3</span> <code>plot.skyscapeR.sigTest()</code></h3>
+<p>W01 checked clipped local intervals, the pointwise envelope and the global probability label against the stored fit. <a href="./numerical-validation.html#w01-plot-geometry">W01 results</a>.</p>
 <p><strong>Verified on 2.0.9006.</strong> On a full-turn panel, a cluster crossing north can have two visible segments with one shared probability. <a href="./numerical-validation.html#s03-scoring-checks">S03 rerun</a>.</p>
 <p><strong>Validation on 2.0.9005.</strong> The tested public fits plotted the stored local interval midpoints and significance symbols. North-crossing intervals can appear separately. <a href="./numerical-validation.html#s03-scoring-checks">S03 results</a>.</p>
 <p><a href="function-index.html#idx-plot-skyscaper-sigtest">Function index</a></p>
@@ -6295,6 +6327,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-print-skyscaper-sigtest" class="level3" data-number="15.9.4">
 <h3 data-number="15.9.4" class="anchored" data-anchor-id="fn-print-skyscaper-sigtest"><span class="header-section-number">15.9.4</span> <code>print.skyscapeR.sigTest()</code></h3>
+<p>W01 checked the reported wrapped interval endpoints and adjusted probabilities against a known fit. <a href="./numerical-validation.html#w01-plot-geometry">W01 results</a>.</p>
 <p><strong>Verified on 2.0.9006.</strong> A single adjusted probability is printed for a range crossing north. <a href="./numerical-validation.html#s03-scoring-checks">S03 rerun</a>.</p>
 <p><strong>Validation on 2.0.9005.</strong> The tested public fits printed the stored global probability and local interval endpoints. North-crossing intervals can appear separately. <a href="./numerical-validation.html#s03-scoring-checks">S03 results</a>.</p>
 <p><a href="function-index.html#idx-print-skyscaper-sigtest">Function index</a></p>
@@ -6375,6 +6408,8 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-randomtest" class="level3" data-number="15.9.6">
 <h3 data-number="15.9.6" class="anchored" data-anchor-id="fn-randomtest"><span class="header-section-number">15.9.6</span> <code>randomTest()</code></h3>
+<p>The 500-simulation Ggantija-phase workflow in W02 reproduced the bundled global probability, local intervals and adjusted probabilities. <a href="./numerical-validation.html#w02-field-to-sky">W02 results</a>.</p>
+<p>In S01, at a nominal 5 percent level the global rejection rate was 4.25 to 5.85 percent across the tested uniform-null settings with sufficient Monte Carlo resolution. Build 2.0.9007 uses the source azimuth density spacing and cutoff for simulations and matches the observed SPD spacing on the shared-horizon route. Refit earlier analyses that used different settings. <a href="./numerical-validation.html#s01-uniform-orientation">S01 results</a>.</p>
 <p><strong>Verified on 2.0.9006.</strong> The global score counts north once. A qualifying excess across north is reported as one interval with start greater than end. <a href="./numerical-validation.html#s03-scoring-checks">S03 rerun</a>.</p>
 <p><strong>Validation on 2.0.9005.</strong> Independent scoring reproduced the stored linear-grid probabilities. A north-crossing azimuth excess can split into two clusters; including both 0 and 360 degrees can also affect the global rank. <a href="./numerical-validation.html#s03-scoring-checks">S03 results</a>.</p>
 <p><a href="function-index.html#idx-randomtest">Function index</a></p>

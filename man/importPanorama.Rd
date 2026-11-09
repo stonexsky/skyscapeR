@@ -52,6 +52,11 @@ Choose controls according to what you know:
 }
 The picker samples the overview. Choose Zoom and click two corners to display the selected region at native pixel detail, then choose Add control point. Full-turn plots cut the calibrated view at north. In scripted controls use \code{NA_real_} for each unknown angle. Levelling adjusts the near-horizon band. If an altitude shift takes image rows beyond the poles, only whole rows within the physical altitude range are kept. A one-point adjustment records the calibrated bounds and uses the original PNG. Keep it with the saved object. A tilt adjustment writes a levelled PNG in the working directory. Use a panorama with nominally linear angular axes and transparent sky above terrain in every column. A partial panorama supports altitude lookup within its photographed sector. Stellarium export requires a full turn.
 }
+\section{Validation}{
+
+H07 verified lookup inside the photographed sector, including across north. Seasonal and event searches requiring a complete skyline reject partial photographs. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
+}
+
 \section{Extraction method and limitations}{
 
 Sky detection uses the PNG alpha channel. In each image column the first pixel

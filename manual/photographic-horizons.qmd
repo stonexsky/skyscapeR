@@ -1,5 +1,7 @@
 # Calibrating photographic skylines and exchanging horizons {#sec-photographic}
 
+[Using a partial photographic skyline](numerical-validation.qmd#h07-panorama-coverage).
+
 **Implementation.** skyscapeR 2.0.9004, `R/importPanorama.R`, `R/peakfinder.R`, `R/exportPanorama.R`, `R/horizon.R` and `R/relinkHor.R`. A horizon object can carry both a numerical altitude profile and an image. A terrain crossing uses the former. Reproducing the drawn landscape can also require the latter. The [terrain chapter](horizons.qmd) describes the alternative construction of a profile from elevations and reconstructed features.
 
 ## From a masked panorama to angular samples {#photo-calibration}
@@ -45,9 +47,11 @@ The remaining error is consistent with rounding the generated edge to the neares
 
 ## When a partial panorama is passed to another calculation {#partial-photo-consumers}
 
-An imported photograph records its angular coverage separately from the numerical profile, whose rows are repeated across turns to make lookup across north possible. [`hor2alt()`](function-methods.html#fn-hor2alt) checks that coverage. [`coordtrans()`](function-methods.html#fn-coordtrans) interpolates the profile rows directly. Likewise, [`riseset()`](function-methods.html#fn-riseset) can accept those rows as a closed horizon and interpolate across the unphotographed gap. The profile solver used by [`star.phases()`](function-methods.html#fn-star-phases) also works from the rows. A finite result does not establish that the relevant terrain was observed.
+In builds through 2.0.9007, an imported photograph recorded its angular coverage separately from the numerical profile, whose rows are repeated across turns to make lookup across north possible. [`hor2alt()`](function-methods.html#fn-hor2alt) checks that coverage. [`coordtrans()`](function-methods.html#fn-coordtrans) interpolates the profile rows directly. Likewise, [`riseset()`](function-methods.html#fn-riseset) can accept those rows as a closed horizon and interpolate across the unphotographed gap. The profile solver used by [`star.phases()`](function-methods.html#fn-star-phases) also works from the rows. A finite result does not establish that the relevant terrain was observed.
 
 In the archived example, the photographed sector covers 330° through north to 30°. At 180°, the direct altitude lookup returns `NA`, yet transforming a uniform bearing of 180° ± 1° produces a finite declination curve. On 20 March 2026 the same partial profile produces a sunrise bearing of **92.48°**, outside the photograph. There is no field evidence for the terrain at that bearing in this example. Before transforming an orientation, check the *entire support* of its azimuth PDF against the photographed sector. For a daily or seasonal crossing search, supply a full skyline or complete the missing sector from an independently identified source. The script `object-coverage.R` and its output are in the example download above.
+
+Build 2.0.9008 checks the photographed sector before density transformation and full-sky searches. [H07](numerical-validation.qmd#h07-panorama-coverage) reproduces the earlier example and gives the corrected outcomes.
 
 **Related function entries**
 

@@ -62,15 +62,17 @@
 
 .model_curve <- function(draw, settings) {
   density <- if (settings$coord == "dec") dec.pdf else az.pdf
-  sim <- density(draw, settings$unc, pdf=settings$family, verbose=FALSE)
+  sim <- density(draw, settings$unc, pdf=settings$family, .res=settings$source.res,
+                 .cutoff=settings$source.cutoff, verbose=FALSE)
   spd(sim, xrange=settings$xrange, normalise=settings$normalise, .res=settings$resolution)$data$y
 }
 
 .random_curve <- function(draw, settings) {
-  sim <- az.pdf(pdf=settings$family, az=draw, unc=settings$unc, verbose=FALSE)
+  sim <- az.pdf(pdf=settings$family, az=draw, unc=settings$unc,
+                .res=settings$source.res, .cutoff=settings$source.cutoff, verbose=FALSE)
   if (settings$quick) {
     transform <- settings$transform
-    transformed <- coordtrans_unc(spd(sim), transform$hor, xrange=settings$xrange,
+    transformed <- coordtrans_unc(spd(sim, .res=settings$resolution), transform$hor, xrange=settings$xrange,
       refraction=transform$refraction, atm=transform$atm, temp=transform$temp, .res=transform$.res, verbose=FALSE)$data
     if (settings$normalise) return(.normalise_spd_area(transformed$x, transformed$y))
     return(transformed$y)
@@ -104,7 +106,10 @@
   if (workers>1) {
     cl <- parallel::makePSOCKcluster(workers)
     on.exit(if (!is.null(cl)) parallel::stopCluster(cl),add=TRUE)
-    invisible(parallel::clusterCall(cl, .libPaths, .libPaths()))
+    # Resolve .libPaths on each worker. Serialising the function itself
+    # can update a copy of its private library-path environment.
+    invisible(parallel::clusterCall(cl, base::do.call, ".libPaths",
+                                    list(.libPaths()), envir=baseenv()))
     if (!all(unlist(parallel::clusterCall(cl, requireNamespace, "skyscapeR", quietly=TRUE))))
       stop("Socket workers could not load skyscapeR.")
     parallel::clusterExport(cl, c("curve", "settings"), envir=environment())

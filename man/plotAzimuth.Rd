@@ -62,6 +62,11 @@ True.Azimuth column. For optional targets the function converts zero apparent al
 using the session atmosphere. It solves for rising and setting bearings on a level
 horizon and shows the part of each declination interval that reaches it.
 }
+\section{Validation}{
+
+W01 checked compass bearings and the inner and outer edges of celestial year-range sectors against their spherical reference bearings. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
+}
+
 \examples{
 # Plot some azimuth data:
 az <- c(120, 100, 93, 97, 88, 115, 112, 67)

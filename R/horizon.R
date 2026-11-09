@@ -261,6 +261,8 @@ createHor <- function(az, alt, loc, dem=NULL, loc.crs=NULL, name='', alt.unc=0.5
 #' @return Invisibly, the absolute path of the created ZIP archive.
 #' @seealso \code{\link{createHor}}, \code{\link{downloadHWT}}, \code{\link{plot.skyscapeR.horizon}}
 #' @references \href{https://stellarium.org/guide/}{Stellarium User Guide}, chapter on landscapes and texture sizes.
+#' @section Validation:
+#' H07 checked that a partial photograph is rejected for both image and numerical landscape export. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
 #' @export
 #' @import utils
 #' @examples
@@ -564,6 +566,8 @@ createHWT <- function(lat, lon, name, elevation=1.6, src='skyscapeR', max.wait=6
 #' containing altitude followed by uncertainty. With multiple azimuths, a
 #' numeric matrix with columns \code{alt} and \code{alt.unc}, one row per
 #' input azimuth in the supplied order. Values are rounded to two decimal places.
+#' @section Validation:
+#' In H07, lookup at each edge of a north-crossing panorama returned its measured altitude and lookup beyond either edge returned NA. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
 #' @export
 #' @import stats
 #' @seealso \code{\link{createHor}}, \code{\link{downloadHWT}}
@@ -612,6 +616,8 @@ hor2alt = function(hor, az, return.unc=F) {
 #' \emph{skyscapeR.horizon} object is provided. Default is 0.
 #' @param range Range of azimuths to check for minimum declination. Default is 25
 #' degrees either side of North.
+#' @section Validation:
+#' A05 recovered a limiting sightline within the northern search sector on a synthetic skyline with an interior crest. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @examples
 #' hor <- malta_horizons[[1]]
@@ -636,6 +642,8 @@ hor2max.dec = function(hor, alt=0, range=25) {
 #' \emph{skyscapeR.horizon} object is provided. Default is 0.
 #' @param range Range of azimuths to check for minimum declination. Default is 25
 #' degrees either side of South
+#' @section Validation:
+#' A05 recovered a limiting sightline within the southern search sector on a synthetic skyline with an interior trough. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @examples
 #' hor <- malta_horizons[[1]]

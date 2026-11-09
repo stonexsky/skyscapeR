@@ -105,6 +105,13 @@ Brady (2015) gives the archaeological context for the phase terminology.
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
+\section{Validation}{
+
+Seasonal searches require full skyline coverage. H07 checked rejection of a partial photograph and successful calculation with the full profile. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
+
+W02 replayed the Gacrux heliacal-rising date at Skorba West and passed it to the crossing and sky-reconstruction calculations. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
+}
+
 \section{Extinction and model scope}{
 
 The implementation uses Rozenberg's airmass approximation,

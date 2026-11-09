@@ -28,6 +28,11 @@ degrees. It calls az2dec at each bearing with the stored horizon, or with the su
 latitude and constant altitude, then returns the minimum sampled declination. A limited
 search sector may miss a more extreme sightline elsewhere.
 }
+\section{Validation}{
+
+A05 recovered a limiting sightline within the southern search sector on a synthetic skyline with an interior trough. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+}
+
 \examples{
 hor <- malta_horizons[[1]]
 hor2min.dec(hor)

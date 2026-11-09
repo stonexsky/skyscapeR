@@ -28,6 +28,8 @@
 #' plot(h, show.skyline = TRUE)
 #' }
 #' @seealso \code{\link{hor2alt}}, \code{\link{exportPanorama}}
+#' @section Validation:
+#' H07 verified lookup inside the photographed sector, including across north. Seasonal and event searches requiring a complete skyline reject partial photographs. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
 #' @export
 #' @section Extraction method and limitations:
 #' Sky detection uses the PNG alpha channel. In each image column the first pixel

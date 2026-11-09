@@ -39,9 +39,10 @@ on several orientation plots.
 An overlay identifies which targets to compare before inspecting a distribution. Names
 may denote stars, solar or lunar limits, or fixed custom declinations. Group names
 expand into the individual limits. At one epoch, the function evaluates each target; for
-two endpoints it uses annual January stellar declinations. Solar and lunar limits
-retain century-spaced samples and spline interpolation. Styles and epoch travel with the object. Treat range endpoints as
-model estimates and verify narrow or rapidly changing windows separately.
+two endpoints it takes the minimum and maximum over every integer year, including
+both endpoints. Stars use January barycentric declinations. Solar and lunar limits use
+the supplied site correction for each year. Styles and epochs travel with the object.
+Changes between annual samples remain unresolved.
 A single object can contain several related targets. Pass a list of objects
 to plot(hor), plotBars or plotAzimuth to combine groups with independent
 epochs, colours, line styles and labels. Groups are drawn in list order.
@@ -53,6 +54,11 @@ are recomputed merely by combining objects. The output class remains
 skyscapeR.object, so previously saved objects remain usable.
 sky.objects is a silent compatibility alias for skyObject.
 }
+\section{Validation}{
+
+A08 checked annual stellar, solar and lunar range endpoints, local corrections, identifier aliases and retention of target labels and line styles. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a08-target-ranges}{A08 check in the technical manual}.
+}
+
 \section{A reference track is not a dated orbit}{
 
 Each target represents a declination or declination range. A plotted track

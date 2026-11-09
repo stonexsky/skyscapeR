@@ -29,6 +29,8 @@ coordinate system of the fitted test.
 \section{Validation}{
 
 The tested public fits printed the stored global probability and local interval endpoints. A wrapped interval has start greater than end. A plot spanning the full turn displays its two visible segments with the same adjusted probability. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+
+W01 checked the reported wrapped interval endpoints and adjusted probabilities against a known fit. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
 }
 
 \examples{

@@ -3,6 +3,25 @@
 This development version is being tested ahead of the 2.0 release. For detailed
 migration instructions and positional-argument changes, see the README.
 
+## Development build 2.0.9009
+
+* Two-epoch solar and lunar overlays use annual limits and the supplied observing site. Stellar aliases work for dated ranges. Candidate screening compares unrounded values, retains closed stellar band contacts within 0.0000001° and uses the search period for tropical solar targets.
+* `zenith()` and `antizenith()` accept an epoch and default to the geometric overhead or underfoot altitude.
+* `reduct.theodolite()` preserves site rows, accepts a single location vector and returns a true bearing in [0°, 360°). Compass horizon lookups wrap the corrected bearing before interpolation.
+* The manual adds A05, A08 and W02 results and the README identifies affected analyses.
+
+## Development build 2.0.9008
+
+* `modelTest()` preserves the source grid and cutoff of directly constructed azimuth and declination densities. See the README for affected earlier fits.
+* Partial photographic skylines now reject out-of-coverage bearing densities and full-sky event or season searches. Within-sector densities, including bearings spanning north, remain usable.
+* The manual reports S02 calibration and Maltese applications, H07 panorama coverage checks and W01 numerical checks of plot geometry and labels.
+
+## Development build 2.0.9007
+
+* `randomTest()` now reconstructs simulated measurements with the source azimuth PDF's resolution and density cutoff. The shared-horizon route also applies the selected SPD spacing to observed and simulated bearings. Refit earlier analyses to obtain the corrected probabilities.
+
+* Socket workers now adopt the parent R library search path before loading skyscapeR, including when multiple builds are installed.
+
 ## Development build 2.0.9006
 
 * Azimuth PDFs retain fine-grid values across north and account for wide uncertainties over a complete turn. Declination PDF subsets retain their selected centres.

@@ -58,6 +58,11 @@ fills the area beneath the curve; changing colours or axis limits does not renor
 it. Whether its integral is one depends on the normalisation used when creating the
 object. Assess departures from a specified null using a significance test.
 }
+\section{Validation}{
+
+In W01 the drawn line matched the stored coordinates and heights of the summed density. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
+}
+
 \examples{
 az <- az.pdf(az = c(85, 92), unc = 2, verbose = FALSE)
 plot(spd(az))

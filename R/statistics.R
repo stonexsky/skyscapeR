@@ -189,6 +189,23 @@ coordtrans_unc <- function(pdf, hor, refraction, atm, temp, xrange, .res=0.1, .p
   for (k in 1:n) {
     horizon <- if (shared.horizon) hor else hor[[k]]
     curve <- .unwrap_north_pdf(pdf$data[[k]])
+    sector <- .panorama_sector(horizon)
+    if (!is.null(sector)) {
+      # A panorama stores shifted copies for north-wrap interpolation.
+      # Only the original photographed sector supplies terrain measurements.
+      relative <- (curve$x-sector[1]) %% 360
+      inside <- relative <= diff(sector)+1e-8
+      if (any(curve$y[!inside]>0))
+        stop("Distribution ", k, " extends outside the photographed sector coverage.", call.=FALSE)
+      if (any(!inside)) {
+        curve <- curve[inside, , drop=FALSE]
+        curve$x <- curve$x %% 360
+        curve <- curve[order(curve$x), , drop=FALSE]
+        curve <- .unwrap_north_pdf(curve[!duplicated(curve$x), , drop=FALSE])
+      }
+      if (nrow(curve)<2L || !any(curve$y>0))
+        stop("Insufficient bearing samples inside the photographed sector.", call.=FALSE)
+    }
     azs <- curve$x
     grid <- xx
     if (!identical(azs,pdf$data[[k]]$x)) {
@@ -345,7 +362,9 @@ coordtrans_unc <- function(pdf, hor, refraction, atm, temp, xrange, .res=0.1, .p
 #' SPD data are a single such data frame. Metadata include the coordinate type,
 #' transformation settings, format version and descriptive source labels.
 #' @section Validation:
-#' On a constant skyline with refraction disabled, the median and endpoints of the central 95 percent declination interval agreed with direct Monte Carlo propagation within 0.0051 degrees, including for bearings distributed across north. See the \href{https://stonexsky.github.io/skyscapeR/manual/#d02-bearing-propagation}{D02 check in the technical manual}.
+#' In D02, declination quantiles agreed with direct propagation within 0.008 degrees across nine terrain and observer cases. Near the celestial pole the discrepancy reached 0.17 degrees on the fine grid; at the pole a zero conditional width prevented calculation. See the \href{https://stonexsky.github.io/skyscapeR/manual/#d02-bearing-propagation}{D02 check in the technical manual}.
+#'
+#' For a partial photograph the stored positive bearing density must lie within its photographed sector. H07 verified agreement with a complete skyline on the covered north-crossing cases and rejection of uncovered densities. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
 #' @export
 #' @references Silva, F (2020) A probabilistic framework and significance test for the analysis of structural orientations
 #'  in skyscape archaeology \emph{Journal of Archaeological Science} 118, 105138. \doi{10.1016/j.jas.2020.105138}
@@ -411,6 +430,8 @@ coordtrans <- function(pdf, hor, xrange, .res=.1, .prec=.1, .output.res=.01, ver
 #' @param .res Resolution with which to output SPD. Default is 0.01 degrees.
 #' @section Validation:
 #' The tested sums agreed with independently constructed density sums, and the normalised curves had unit trapezoidal area. See \href{https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks}{D01 validation in the technical manual}.
+#'
+#' For two bearings on a shared slope, the D02 comparison of summing before and after transformation gave an integrated absolute density difference of 0.00159 after normalisation. See the \href{https://stonexsky.github.io/skyscapeR/manual/#d02-bearing-propagation}{D02 check in the technical manual}.
 #' @export
 #' @references Silva, F (2020) A probabilistic framework and significance test for the analysis of structural orientations
 #'  in skyscape archaeology \emph{Journal of Archaeological Science} 118, 105138. \doi{10.1016/j.jas.2020.105138}
@@ -586,6 +607,9 @@ randomTest_unc <- function(pdf, az, hor, nsims=1000, conf=.95, tails=2, normalis
   settings <- list(family=source$metadata$pdf, unc=source$metadata$unc,
                    coord=coord, quick=quick, xrange=xrange, resolution=.res,
                    normalise=normalise)
+  settings$source.res <- source$metadata$param$.res
+  settings$source.cutoff <- source$metadata$param$.cutoff
+  if (is.null(settings$source.cutoff)) settings$source.cutoff <- 1e-5
   if (coord == "dec") {
     if (verbose) .sky_message(sprintf("Using atmospheric refraction %s, pressure %g mbar and temperature %g C.",refraction,atm,temp))
     settings$transform <- list(hor=hor, refraction=refraction, atm=atm, temp=temp,
@@ -702,6 +726,10 @@ randomTest_unc <- function(pdf, az, hor, nsims=1000, conf=.95, tails=2, normalis
 #' No original PDFs or horizon objects are attached.
 #' @section Validation:
 #' In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+#'
+#' In S01, at a nominal 5 percent level the global rejection rate was 4.25 to 5.85 percent across the tested uniform-null settings with sufficient Monte Carlo resolution. Build 2.0.9007 uses the source azimuth density spacing and cutoff for simulations and matches the observed SPD spacing on the shared-horizon route. Refit earlier analyses that used different settings. See the \href{https://stonexsky.github.io/skyscapeR/manual/#s01-uniform-orientation}{S01 calibration in the technical manual}.
+#'
+#' The 500-simulation Ggantija-phase workflow in W02 reproduced the bundled global probability, local intervals and adjusted probabilities. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
 #' @export
 #' @references Silva, F. (2020). A probabilistic framework and significance test for the analysis of structural orientations in skyscape archaeology. \emph{Journal of Archaeological Science}, 118, 105138. \doi{10.1016/j.jas.2020.105138}.
 #'
@@ -796,6 +824,12 @@ modelTest_unc <- function(pdf, model, unc=NULL, nsims=1000, conf=.95, tails=2, n
     if (is.null(family)) family <- "normal"
     settings$family <- family
     settings$unc <- unc
+    # A directly constructed measurement retains its constructor settings.
+    # A transformed PDF with explicit uncertainty starts a new declination kernel.
+    direct <- !is.null(pdf$metadata$unc)
+    settings$source.res <- if (direct && !is.null(pdf$metadata$param$.res)) pdf$metadata$param$.res else 0.01
+    default.cutoff <- if (coord=="az") 1e-5 else 1e-4
+    settings$source.cutoff <- if (direct && !is.null(pdf$metadata$param$.cutoff)) pdf$metadata$param$.cutoff else default.cutoff
   }
   empirical <- spd(pdf, xrange=xrange, normalise=normalise, .res=.res)
   result <- .run_simulations(empirical$data, nsims, ncores, n, function(i) sampleList(model),
@@ -893,6 +927,8 @@ modelTest_unc <- function(pdf, model, unc=NULL, nsims=1000, conf=.95, tails=2, n
 #' North, B. V., Curtis, D. and Sham, P. C. (2002). A note on the calculation of empirical P values from Monte Carlo procedures. \emph{American Journal of Human Genetics}, 71, 439-441. \doi{10.1086/341527}.
 #' @section Validation:
 #' In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+#'
+#' In S02, identical candidate bearings produced identical directly constructed observed and simulated densities on build 2.0.9008. Global rejection at the 5 percent level ranged from 4.35 to 5.50 percent under the six matched null designs. See the \href{https://stonexsky.github.io/skyscapeR/manual/#s02-specified-models}{S02 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{az.pdf}}, \code{\link{dec.pdf}}, \code{\link{coordtrans}}, \code{\link{spd}}, \code{\link{randomTest}}, \code{\link{plot.skyscapeR.sigTest}}
 #' @examples

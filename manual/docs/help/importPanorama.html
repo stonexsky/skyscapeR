@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>importPanorama | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-importpanorama">importPanorama() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Import a sky-masked photographic panorama</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>importPanorama | skyscapeR 2.0.9008</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-importpanorama">importPanorama() method</a></nav><h2 id='importPanorama'>Import a sky-masked photographic panorama</h2><span id='topic+importPanorama'></span>
 
 <h3>Description</h3>
 
@@ -25,39 +25,39 @@
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code>file</code></td>
+<tr><td><code id="importPanorama_:_file">file</code></td>
 <td>
 <p>PNG with sky removed to transparency. Keep this file alongside saved horizon objects.</p>
 </td></tr>
-<tr><td><code>loc</code></td>
+<tr><td><code id="importPanorama_:_loc">loc</code></td>
 <td>
 <p>WGS84 latitude, longitude and optional elevation in metres.</p>
 </td></tr>
-<tr><td><code>az.lim</code></td>
+<tr><td><code id="importPanorama_:_az.lim">az.lim</code></td>
 <td>
 <p>True bearings of the left and right edges, increasing clockwise. A sector may cross north, e.g. c(330,30).</p>
 </td></tr>
-<tr><td><code>alt.lim</code></td>
+<tr><td><code id="importPanorama_:_alt.lim">alt.lim</code></td>
 <td>
 <p>Altitudes of the bottom and top edges in degrees. Set these explicitly for a cropped panorama.</p>
 </td></tr>
-<tr><td><code>name</code></td>
+<tr><td><code id="importPanorama_:_name">name</code></td>
 <td>
 <p>Site name.</p>
 </td></tr>
-<tr><td><code>calibrate</code></td>
+<tr><td><code id="importPanorama_:_calibrate">calibrate</code></td>
 <td>
 <p>Open the interactive graphics picker. Choose Zoom and click two corners to enlarge a region. Add a control by clicking a landmark and entering its true azimuth, altitude or both. Finish to apply the fit.</p>
 </td></tr>
-<tr><td><code>points</code></td>
+<tr><td><code id="importPanorama_:_points">points</code></td>
 <td>
 <p>Optional data frame with numeric x, y, az and alt. Pixel coordinates start at the upper-left image edge. Use NA for an unknown angle.</p>
 </td></tr>
-<tr><td><code>alpha.threshold</code></td>
+<tr><td><code id="importPanorama_:_alpha.threshold">alpha.threshold</code></td>
 <td>
 <p>Minimum opacity counted as terrain, from above zero to one.</p>
 </td></tr>
-<tr><td><code>alt.unc</code></td>
+<tr><td><code id="importPanorama_:_alt.unc">alt.unc</code></td>
 <td>
 <p>Assumed skyline altitude uncertainty in degrees.</p>
 </td></tr>
@@ -119,6 +119,12 @@ using functions, such as <code>sketchSky</code>, that require it.
 </p>
 
 
+<h3>Validation</h3>
+
+<p>H07 verified lookup inside the photographed sector, including across north. Seasonal and event searches requiring a complete skyline reject partial photographs. See the <a href="../numerical-validation.html#h07-panorama-coverage">H07 check in the technical manual</a>.
+</p>
+
+
 <h3>See Also</h3>
 
 <p><code>hor2alt</code>, <code>exportPanorama</code>
@@ -137,4 +143,4 @@ plot(h, show.skyline = TRUE)
 ## End(Not run)
 </code></pre>
 
-<p><a href="../function-methods.html#fn-importpanorama">importPanorama() method</a></p></body></html>
+</body></html>

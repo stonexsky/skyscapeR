@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>reduct.theodolite | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-reduct-theodolite">reduct.theodolite() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Reduce theodolite readings using a solar sight</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>reduct.theodolite | skyscapeR 2.0.9009</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-reduct-theodolite">reduct.theodolite() method</a></nav><h2 id='reduct.theodolite'>Reduce theodolite readings using a solar sight</h2><span id='topic+reduct.theodolite'></span>
 
 <h3>Description</h3>
 
@@ -28,53 +28,53 @@ true bearing of a structural axis.
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code>loc</code></td>
+<tr><td><code id="reduct.theodolite_:_loc">loc</code></td>
 <td>
 <p>Location, either a <em>skyscapeR.horizon</em> or a vector
 containing the latitude, longitude and elevation of location, in this order.</p>
 </td></tr>
-<tr><td><code>az</code></td>
+<tr><td><code id="reduct.theodolite_:_az">az</code></td>
 <td>
 <p>Array of azimuths. Use <code>ten</code> to convert to
 decimal degrees if necessary.</p>
 </td></tr>
-<tr><td><code>date</code></td>
+<tr><td><code id="reduct.theodolite_:_date">date</code></td>
 <td>
 <p>Date of measurements as a string in the format: 'YYYY/MM/DD'</p>
 </td></tr>
-<tr><td><code>time</code></td>
+<tr><td><code id="reduct.theodolite_:_time">time</code></td>
 <td>
 <p>Time of sun-sight measurement in the format: 'HH:MM:SS'</p>
 </td></tr>
-<tr><td><code>tz</code></td>
+<tr><td><code id="reduct.theodolite_:_tz">tz</code></td>
 <td>
 <p>Timezone of input either as a known acronym (e.g. &quot;GMT&quot;, &quot;CET&quot;) or
 a string with continent followed by country capital (e.g. &quot;Europe/London&quot;).</p>
 </td></tr>
-<tr><td><code>az.sun</code></td>
+<tr><td><code id="reduct.theodolite_:_az.sun">az.sun</code></td>
 <td>
 <p>Measured azimuth of the sun. Defaults to zero.</p>
 </td></tr>
-<tr><td><code>limb</code></td>
+<tr><td><code id="reduct.theodolite_:_limb">limb</code></td>
 <td>
 <p>Measured limb of the sun. Options are <em>left</em>, <em>right</em>.
 If missing the center of the sun will be used for calculations.</p>
 </td></tr>
-<tr><td><code>alt</code></td>
+<tr><td><code id="reduct.theodolite_:_alt">alt</code></td>
 <td>
 <p>Altitude, necessary for automatic declination calculation.
 If missing and <em>loc</em> is a <em>skyscapeR.horizon</em> object then the altitude
 will be automatically read from the horizon profile.</p>
 </td></tr>
-<tr><td><code>name</code></td>
+<tr><td><code id="reduct.theodolite_:_name">name</code></td>
 <td>
 <p>Names or labels to identify each measurement.</p>
 </td></tr>
-<tr><td><code>ID</code></td>
+<tr><td><code id="reduct.theodolite_:_ID">ID</code></td>
 <td>
 <p>IDs or codes to identify each measurement.</p>
 </td></tr>
-<tr><td><code>HWT.ID</code></td>
+<tr><td><code id="reduct.theodolite_:_HWT.ID">HWT.ID</code></td>
 <td>
 <p>HeyWhatsThat IDs relating to a previously generated
 horizon profile for measurement.</p>
@@ -87,7 +87,9 @@ horizon profile for measurement.</p>
 <p>The observed difference between the instrument readings to the structure and to the Sun
 is added to the calculated solar azimuth at the observation time. The routine handles a
 circle-boundary difference, accounts for the selected solar limb through sunAz and
-rounds the reference bearing according to the input readings. An explicit altitude or a
+rounds the reference bearing according to the input readings. True bearings lie in
+[0, 360) degrees. A three-coordinate vector supplies one shared site; for multiple
+sites, supply a matrix with one latitude, longitude and elevation row per reading. An explicit altitude or a
 supplied horizon allows the corrected bearing to be converted to declination. Correct
 time, civil timezone, limb and site are all essential to the reduction.
 </p>
@@ -99,6 +101,12 @@ recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-pa
 <h3>Value</h3>
 
 <p>A data frame with one row per observation. True.Azimuth is the corrected azimuth in degrees. The table also records the observed azimuth, solar azimuth, time and site coordinates. Where available it includes Altitude and Declination in degrees and the supplied identifiers.
+</p>
+
+
+<h3>Validation</h3>
+
+<p>W02 recovered both independent circle-difference control bearings and retained each site row in a multi-site solar reduction. See the <a href="../numerical-validation.html#w02-field-to-sky">W02 check in the technical manual</a>.
 </p>
 
 
@@ -138,4 +146,4 @@ Yale University Press.
 }
 </code></pre>
 
-<p><a href="../function-methods.html#fn-reduct-theodolite">reduct.theodolite() method</a></p></body></html>
+</body></html>

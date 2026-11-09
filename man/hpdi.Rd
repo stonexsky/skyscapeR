@@ -52,6 +52,8 @@ The discrete grid and tie rule above implement that principle for sampled curves
 \section{Validation}{
 
 Known tied, truncated and disjoint test distributions returned the expected interval endpoints and achieved the requested minimum discrete mass. See \href{https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks}{D01 validation in the technical manual}.
+
+In D02 the default transformation grid split the middle 80 percent highest-density region of a three-mode ridge case; a finer grid recovered the three reference regions. See the \href{https://stonexsky.github.io/skyscapeR/manual/#d02-bearing-propagation}{D02 check in the technical manual}.
 }
 
 \examples{

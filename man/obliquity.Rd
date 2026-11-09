@@ -24,6 +24,11 @@ from Swiss Ephemeris and returns its first element, the true obliquity in degree
 annual value is a reference for limiting declinations rather than a search for the
 instant of solstice.
 }
+\section{Validation}{
+
+A05 checked the January true obliquity at modern and prehistoric test epochs against direct engine values. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+}
+
 \examples{
 # Obliquity for year 4001 BC:
 obliquity("4001 BC")

@@ -4,7 +4,9 @@
 #' @details The observed difference between the instrument readings to the structure and to the Sun
 #' is added to the calculated solar azimuth at the observation time. The routine handles a
 #' circle-boundary difference, accounts for the selected solar limb through sunAz and
-#' rounds the reference bearing according to the input readings. An explicit altitude or a
+#' rounds the reference bearing according to the input readings. True bearings lie in
+#' [0, 360) degrees. A three-coordinate vector supplies one shared site; for multiple
+#' sites, supply a matrix with one latitude, longitude and elevation row per reading. An explicit altitude or a
 #' supplied horizon allows the corrected bearing to be converted to declination. Correct
 #' time, civil timezone, limb and site are all essential to the reduction.
 #'
@@ -29,6 +31,8 @@
 #' @param ID IDs or codes to identify each measurement.
 #' @param HWT.ID HeyWhatsThat IDs relating to a previously generated
 #' horizon profile for measurement.
+#' @section Validation:
+#' W02 recovered both independent circle-difference control bearings and retained each site row in a multi-site solar reduction. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{sunAz}}, \code{\link{ten}}
 #' @references Ruggles, C.L.N. (1999). \emph{Astronomy in Prehistoric Britain and Ireland}.
@@ -56,22 +60,24 @@
 reduct.theodolite = function(loc, az, date, time, tz, az.sun = 0, limb, alt, name, ID, HWT.ID) {
   if (class(loc)[1]=='skyscapeR.horizon') { hor <- loc; loc <- loc$metadata$georef } else { hor <- NULL }
 
-  if (NROW(loc) < NROW(az)*3) { loc <- matrix(loc,NROW(az),3, byrow=T) }
-  if (NROW(date) < NROW(az)) { date <- matrix(date,NROW(az),1, byrow=T) }
-  if (NROW(time) < NROW(az)) { time <- matrix(time,NROW(az),1, byrow=T) }
-  if (NROW(tz) < NROW(az)) { tz <- matrix(tz,NROW(az),1, byrow=T) }
-  if (NROW(az.sun) < NROW(az)) { az.sun <- matrix(az.sun,NROW(az),1, byrow=T) }
-  if (!missing(alt)) { if (NROW(alt) < NROW(az)) { alt <- matrix(alt,NROW(az),1, byrow=T) } }
-
+  n <- length(az)
+  if (is.null(dim(loc))) loc <- matrix(loc,nrow=1)
+  if (!n || ncol(loc)!=3L || !nrow(loc) %in% c(1L,n))
+    stop("Supply one latitude, longitude and elevation per site or one site shared by all readings.")
+  if (nrow(loc)==1L) loc <- loc[rep(1L,n),,drop=FALSE]
+  for (value in list(date,time,tz,az.sun)) {
+    if (!length(value) %in% c(1L,n)) stop("Pair the dates, times, timezones and solar readings with the target readings.")
+  }
+  date <- rep_len(date,n); time <- rep_len(time,n); tz <- rep_len(tz,n)
+  if (!missing(alt) && !length(alt) %in% c(1L,n)) stop("Supply one altitude or one per reading.")
   date <- as.Date(date, "%Y/%m/%d")
   time <- paste(date, time)
 
   diff <- az - az.sun
-  ind <- which(abs(diff)>180); if (length(ind)>0) { diff[ind] <- az[ind] - az.sun[ind]-360 }
 
   prec <- max(nchar(sub('.*\\.', '', as.character(az))))
   az.sun.corr <- round(sunAz(loc, time, tz, limb), prec)
-  az.corr <- az.sun.corr + diff
+  az.corr <- (az.sun.corr + diff) %% 360
 
   df <- c()
   if (!missing(ID)) { df$ID <- ID }
@@ -136,6 +142,8 @@ reduct.theodolite = function(loc, az, date, time, tz, az.sun = 0, limb, alt, nam
 #' magnetic azimuth, date, magnetic declination and true azimuth. Altitude and
 #' celestial declination are included when altitudes are supplied or a horizon
 #' is available. Optional identification columns are retained.
+#' @section Validation:
+#' W02 checked north-crossing magnetic readings against the supplied corrections before passing true bearings into a skyline analysis. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{mag.dec}}, \code{\link{az2dec}}, \code{\link{hor2alt}}
 #' @examples
@@ -198,7 +206,7 @@ reduct.compass = function(loc, mag.az, date, magdec, alt, name, ID, HWT.ID) {
     df$Declination <- dec
   } else if (class(hor)[1]=='skyscapeR.horizon') {
     .sky_message('Horizon profile found. Obtaining altitude values and calculating declination...')
-    alt <- hor2alt(hor, true.az)
+    alt <- hor2alt(hor, true.az %% 360)
     dec <- az2dec(true.az, hor, alt=alt)
     df$Altitude <- alt
     df$Declination <- dec

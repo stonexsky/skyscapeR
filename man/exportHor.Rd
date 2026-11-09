@@ -76,6 +76,11 @@ The ZIP is saved as name-horizon.zip in the calling working directory.
 Choose a new archive name each time. Names cannot contain path separators or line breaks.
 Export requires a working system ZIP command.
 }
+\section{Validation}{
+
+H07 checked that a partial photograph is rejected for both image and numerical landscape export. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
+}
+
 \examples{
 # Export a measured horizon from the example dataset.
 \dontrun{

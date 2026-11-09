@@ -79,6 +79,11 @@ For a two-year epoch range, celestial targets are displayed as bands
 covering their stored minimum and maximum declinations across the full plot
 height. Single-year targets are displayed as lines.
 }
+\section{Validation}{
+
+W01 checked the endpoints and row labels of an azimuth interval spanning north. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
+}
+
 \section{Coordinates and interpretation}{
 
 \code{unit} labels the measurement axis; it does not transform azimuths into

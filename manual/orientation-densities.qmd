@@ -1,8 +1,10 @@
 # From a measured orientation to a declination distribution {#sec-densities}
 
+[Coverage of bearing densities on partial photographs](numerical-validation.qmd#h07-panorama-coverage).
+
 **Implementation.** skyscapeR 2.0.9004, `R/statistics.R`, `R/dec-pdf.R`, `R/mechanics.R` and `R/misc.R`. A doorway admits a range of sightlines; each can meet a different altitude on the skyline. @silva2020 [§§2–3, figs. 1–5] represents uncertainty in the orientation as a probability density and transforms that density using the local horizon. The worked example follows one doorway from its measured angular opening to three distinct regions in declination.
 
-See the [independent checks on build 2.0.9005](numerical-validation.qmd#d01-density-checks) for results and limitations.
+[D01](numerical-validation.qmd#d01-density-checks) checks the input densities. [D02](numerical-validation.qmd#d02-bearing-propagation) compares the propagated density with independent integration and direct simulation on sloping, asymmetric and surveyed skylines. It documents grid-sensitive highest-density regions and the limits of the conditional Gaussian near the celestial pole.
 
 ## What does a measurement PDF represent? {#density-measurement}
 

@@ -64,6 +64,11 @@ from December solstice. Further results use concentric rings with one leader per
 optional sorting uses the stored apparent magnitude or seasonal onset. Changing the
 display does not recalculate the visibility thresholds. Use \code{plot(first, list(second, third))} to compare results.
 }
+\section{Validation}{
+
+W01 checked season boundaries, event positions, quarterly landmarks and star, site and epoch labels in linear and circular layouts. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
+}
+
 \section{Seasonal axis and comparison}{
 
 The axis is a 365-sample synthetic solar-longitude cycle anchored at December

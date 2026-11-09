@@ -44,13 +44,17 @@ and a horizon enables the spatial equinox. The named equinoxes and solstices use
 geocentric apparent solar longitudes of 0, 90, 180 and 270 degrees. Dates are UT
 civil days in the requested calendar. Different dates for the first and last year
 appear in endpoint order separated by a slash. Intermediate years can differ.
-The sunrise/set date ranges also use the two endpoint years.
+The sunrise/set date ranges also use the two endpoint years. Solar and lunar candidates
+are selected before display rounding. Zenith candidates use the period-specific tropical
+limit and require a reachable solar passage. For spatial equinoxes the reported range
+uses rising and setting solutions at the endpoint epochs, not an annual interior search.
 For each star passing the catalogue magnitude cut, the search computes its
 declination at noon UT on 1 January Gregorian of every astronomical year,
 including both endpoints. It tests overlap before rounding and linearly
 interpolates between annual samples to estimate entry and exit. Separate
 passages are reported separately, with boundaries rounded to the nearest year.
-Shorter variations within a sampling year are unresolved. Magnitude describes
+A contact within 0.0000001 degree of a stellar band edge is treated as a closed-boundary
+match. Shorter variations within a sampling year are unresolved. Magnitude describes
 catalogue brightness and does not model atmospheric visibility.
 
 Silva and Lomsdalen (2025, table 5) give an example of stellar target screening for the Maltese temples.
@@ -58,6 +62,11 @@ Silva and Lomsdalen (2025, table 5) give an example of stellar target screening 
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
+\section{Validation}{
+
+A08 verified closed-band membership, separate stellar passages, sampled contact, magnitude filtering and comparisons before display rounding. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a08-target-ranges}{A08 check in the technical manual}.
+}
+
 \section{Candidate selection and visibility}{
 
 A match is a declination overlap, not evidence that a celestial object was

@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>skyObject | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-sky-objects">sky.objects() method</a> · <a href="../function-methods.html#fn-skyobject">skyObject() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Prepare celestial targets for orientation plots</h2><span></span><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>skyObject | skyscapeR 2.0.9009</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-sky-objects">sky.objects() method</a> · <a href="../function-methods.html#fn-skyobject">skyObject() method</a></nav><h2 id='skyObject'>Prepare celestial targets for orientation plots</h2><span id='topic+skyObject'></span><span id='topic+sky.objects'></span>
 
 <h3>Description</h3>
 
@@ -18,35 +18,35 @@ sky.objects(names, year, loc = FALSE, col = "#A9542E", lty = 1, lwd = 1, epoch)
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code>names</code></td>
+<tr><td><code id="skyObject_:_names">names</code></td>
 <td>
 <p>Target names, star names or custom declinations in degrees. Use &quot;solar extremes&quot; for the solstices or &quot;lunar extremes&quot; for the four lunar extremes.</p>
 </td></tr>
-<tr><td><code>year</code></td>
+<tr><td><code id="skyObject_:_year">year</code></td>
 <td>
 <p>An astronomical year or a pair of year endpoints. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p>
 </td></tr>
-<tr><td><code>loc</code></td>
+<tr><td><code id="skyObject_:_loc">loc</code></td>
 <td>
 <p>This can be either a vector with the latitude and longitude of the
 location, or a <em>skyscapeR.horizon</em> object.</p>
 </td></tr>
-<tr><td><code>col</code></td>
+<tr><td><code id="skyObject_:_col">col</code></td>
 <td>
 <p>The color for plotting, and differentiating these objects.
 Defaults to ochre for all objects.</p>
 </td></tr>
-<tr><td><code>lty</code></td>
+<tr><td><code id="skyObject_:_lty">lty</code></td>
 <td>
 <p>Line type (see <code>par</code>) used for differentiation.
 Used for single-year tracks and year-range boundaries.</p>
 </td></tr>
-<tr><td><code>lwd</code></td>
+<tr><td><code id="skyObject_:_lwd">lwd</code></td>
 <td>
 <p>Line width (see <code>par</code>) used for differentiation.
 Used for single-year tracks and year-range boundaries.</p>
 </td></tr>
-<tr><td><code>epoch</code></td>
+<tr><td><code id="skyObject_:_epoch">epoch</code></td>
 <td>
 <p>Earlier argument name for <code>year</code>, retained for existing scripts.</p>
 </td></tr>
@@ -58,14 +58,15 @@ Used for single-year tracks and year-range boundaries.</p>
 <p>An overlay identifies which targets to compare before inspecting a distribution. Names
 may denote stars, solar or lunar limits, or fixed custom declinations. Group names
 expand into the individual limits. At one epoch, the function evaluates each target; for
-two endpoints it uses annual January stellar declinations. Solar and lunar limits
-retain century-spaced samples and spline interpolation. Styles and epoch travel with the object. Treat range endpoints as
-model estimates and verify narrow or rapidly changing windows separately.
+two endpoints it takes the minimum and maximum over every integer year, including
+both endpoints. Stars use January barycentric declinations. Solar and lunar limits use
+the supplied site correction for each year. Styles and epochs travel with the object.
+Changes between annual samples remain unresolved.
 A single object can contain several related targets. Pass a list of objects
 to plot(hor), plotBars or plotAzimuth to combine groups with independent
 epochs, colours, line styles and labels. Groups are drawn in list order.
 Horizon plots use the plotted horizon's location for every track. Compass
-plots use each group's stored location and a level horizon, drawing both
+plots use each group's stored location and a level horizon, shading the azimuth interval between the two
 declination boundaries for a year-range group. Declination plots need no
 location. No common epoch range is imposed and no astronomical positions
 are recomputed merely by combining objects. The output class remains
@@ -110,6 +111,12 @@ commit. Retain those and the analysis script separately for exact reproduction.
 </p>
 
 
+<h3>Validation</h3>
+
+<p>A08 checked annual stellar, solar and lunar range endpoints, local corrections, identifier aliases and retention of target labels and line styles. See the <a href="../numerical-validation.html#a08-target-ranges">A08 check in the technical manual</a>.
+</p>
+
+
 <h3>See Also</h3>
 
 <p><code>plot.skyscapeR.horizon</code>, <code>plotBars</code>,
@@ -136,4 +143,4 @@ groups &lt;- list(skyObject(12, "2001 BC", col="blue"),
 plotBars(c(-24,12,24), unc=1, obj=groups)
 </code></pre>
 
-<p><a href="../function-methods.html#fn-sky-objects">sky.objects() method</a> · <a href="../function-methods.html#fn-skyobject">skyObject() method</a></p></body></html>
+</body></html>

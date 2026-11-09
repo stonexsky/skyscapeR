@@ -89,6 +89,8 @@ disk space per simulation per grid point. Temporary files are removed on return 
 \section{Validation}{
 
 In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+
+In S02, identical candidate bearings produced identical directly constructed observed and simulated densities on build 2.0.9008. Global rejection at the 5 percent level ranged from 4.35 to 5.50 percent under the six matched null designs. See the \href{https://stonexsky.github.io/skyscapeR/manual/#s02-specified-models}{S02 check in the technical manual}.
 }
 
 \section{Model weights and interpretation}{

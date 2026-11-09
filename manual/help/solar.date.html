@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>solar.date | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-solar-date">solar.date() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Find dates when the Sun reaches a specified declination</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>solar.date | skyscapeR 2.0.9009</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-solar-date">solar.date() method</a></nav><h2 id='solar.date'>Find dates when the Sun reaches a specified declination</h2><span id='topic+solar.date'></span>
 
 <h3>Description</h3>
 
@@ -16,19 +16,19 @@ in a selected year.
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code>dec</code></td>
+<tr><td><code id="solar.date_:_dec">dec</code></td>
 <td>
 <p>One or more declinations in degrees.</p>
 </td></tr>
-<tr><td><code>year</code></td>
+<tr><td><code id="solar.date_:_year">year</code></td>
 <td>
 <p>Year for which to do calculations. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p>
 </td></tr>
-<tr><td><code>calendar</code></td>
+<tr><td><code id="solar.date_:_calendar">calendar</code></td>
 <td>
 <p>Calendar for sampling and output. G for Gregorian or J for Julian. Defaults to the package calendar, initially Gregorian.</p>
 </td></tr>
-<tr><td><code>verbose</code></td>
+<tr><td><code id="solar.date_:_verbose">verbose</code></td>
 <td>
 <p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p>
 </td></tr>
@@ -71,6 +71,12 @@ commit. Retain those and the analysis script separately for exact reproduction.
 </p>
 
 
+<h3>Validation</h3>
+
+<p>The JPL comparison in A05 matched all tested civil-day passages, including paired dates near a solstice. See the <a href="../numerical-validation.html#a05-solar-limits">A05 check in the technical manual</a>.
+</p>
+
+
 <h3>See Also</h3>
 
 <p><code>spatial.equinox</code>, <code>zenith</code>, <code>antizenith</code>, <code>findTargets</code>, <code>EFM</code>, <code>planet.extremes</code>
@@ -87,4 +93,4 @@ commit. Retain those and the analysis script separately for exact reproduction.
 }
 </code></pre>
 
-<p><a href="../function-methods.html#fn-solar-date">solar.date() method</a></p></body></html>
+</body></html>

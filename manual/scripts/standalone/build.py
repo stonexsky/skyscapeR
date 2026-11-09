@@ -2,10 +2,15 @@
 Usage (at the Quarto project root): python scripts/standalone/build.py OUTPUT.html
 """
 from pathlib import Path
-import sys,re,json,base64,gzip,mimetypes
+import sys,re,json,base64,gzip,mimetypes,shutil
 from urllib.parse import urlsplit,unquote
 from lxml import html,etree
 from copy import deepcopy
+if len(sys.argv) not in (2,3) or (len(sys.argv)==3 and sys.argv[2]!="--external-downloads"):
+ raise SystemExit("Usage: build.py OUTPUT.html [--external-downloads]")
+output=Path(sys.argv[1]).resolve()
+output.parent.mkdir(parents=True,exist_ok=True)
+external=len(sys.argv)==3
 here=Path(__file__).resolve().parent
 book=here.parents[1];docs=book/'docs'
 config=(book/'_quarto.yml').read_text()
@@ -56,6 +61,15 @@ appendix=elt('section',id='individual-function-help',**{'class':'level1 unnumber
 for f in help_files:
  sec=elt('section',id=help_id(f),**{'class':'level2'});sec.append(elt('h2',f.stem+'()' if (docs/'function-methods.html').read_text().find('id="fn-'+help_id(f)[5:]+'"')!=-1 else f.stem))
  h=html.fromstring(f.read_bytes(),parser=parser);body=h.xpath('//body')[0]
+ # Standalone help and methodological chapters may both embed the same Rd.
+ for node in body.xpath('.//*[@id]'):
+  old=node.get('id');new=old
+  while new in reserved:new=help_id(f)+'-'+new
+  reserved.add(new)
+  if new!=old:
+   node.set('id',new)
+   for a in body.xpath('.//a[@href=$ref]',ref='#'+old):a.set('href','#'+new)
+
  for el in list(body):
   if el.tag=='nav':
    el.tag='p'
@@ -78,7 +92,16 @@ def update(sec,page):
   elif not path:target=mapping.get(page,{}).get(fid,fid) or anchors.get(page,{}).get('id','individual-function-help')
   elif path.endswith(('.html','.qmd')) and Path(path).stem in anchors and '/' not in path:
    dest=Path(path).stem;target=mapping[dest].get(fid,fid) if fid else anchors[dest]['id']
-  elif (docs/path).is_file():a.set('download',Path(path).name);a.set('href',embed(docs/path));continue
+  elif (docs/path).is_file():
+   a.set('download',Path(path).name)
+   if external:
+    relative=Path('downloads')/path
+    destination=output.parent/relative
+    destination.parent.mkdir(parents=True,exist_ok=True)
+    shutil.copyfile(docs/path,destination)
+    a.set('href',relative.as_posix())
+   else:a.set('href',embed(docs/path))
+   continue
   else:raise ValueError((page,raw))
   a.set('href','#'+target)
 for page in pages:update(parts[page],page);main.append(parts[page])

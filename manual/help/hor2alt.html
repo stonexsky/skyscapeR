@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>hor2alt | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-hor2alt">hor2alt() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Interpolate horizon altitude at a bearing</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>hor2alt | skyscapeR 2.0.9008</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-hor2alt">hor2alt() method</a></nav><h2 id='hor2alt'>Interpolate horizon altitude at a bearing</h2><span id='topic+hor2alt'></span>
 
 <h3>Description</h3>
 
@@ -16,15 +16,15 @@ more true bearings.
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code>hor</code></td>
+<tr><td><code id="hor2alt_:_hor">hor</code></td>
 <td>
 <p>A <em>skyscapeR.horizon</em> object from which to retrieve horizon altitude.</p>
 </td></tr>
-<tr><td><code>az</code></td>
+<tr><td><code id="hor2alt_:_az">az</code></td>
 <td>
 <p>Array of azimuth(s) for which to retrieve horizon altitude(s).</p>
 </td></tr>
-<tr><td><code>return.unc</code></td>
+<tr><td><code id="hor2alt_:_return.unc">return.unc</code></td>
 <td>
 <p>Logical controlling whether to return altitude uncertainty.
 Default is <em>FALSE</em>.</p>
@@ -52,6 +52,12 @@ input azimuth in the supplied order. Values are rounded to two decimal places.
 </p>
 
 
+<h3>Validation</h3>
+
+<p>In H07, lookup at each edge of a north-crossing panorama returned its measured altitude and lookup beyond either edge returned NA. See the <a href="../numerical-validation.html#h07-panorama-coverage">H07 check in the technical manual</a>.
+</p>
+
+
 <h3>See Also</h3>
 
 <p><code>createHor</code>, <code>downloadHWT</code>
@@ -67,4 +73,4 @@ hor2alt(hor, 90, return.unc=TRUE)
 hor2alt(hor, c(90,180,270), return.unc=TRUE)
 </code></pre>
 
-<p><a href="../function-methods.html#fn-hor2alt">hor2alt() method</a></p></body></html>
+</body></html>

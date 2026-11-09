@@ -1,5 +1,7 @@
 # Following the package vignette {#sec-vignette-guide}
 
+[W02](numerical-validation.qmd#w02-field-to-sky) records the intermediate tables from the archived and 2.0.9009 Malta workflows, plus independent synthetic field controls.
+
 Use this guide alongside *skyscapeR: from field measurements to skyscape analysis*, the vignette in the archived 2.0.9004 source. Each entry follows a decision in that workflow to its technical explanation. In R, open the installed vignette with `vignette("skyscapeR", package="skyscapeR")` when vignettes are installed. The source is `vignettes/skyscapeR.Rmd` inside the package download in the [function methods catalogue](function-methods.qmd).
 
 The opening setup checks for spreadsheet and ephemeris dependencies. Conditional examples may be skipped when the vignette is built without those inputs. The [ephemeris chapter](ephemeris.qmd) identifies the backend and data required for reproducing ancient positions.

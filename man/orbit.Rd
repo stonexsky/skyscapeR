@@ -34,6 +34,11 @@ and atmosphere settings. It retains altitudes above -20 degrees and sorts the po
 azimuth. A horizon object supplies the location; the stored track itself includes no
 test of terrain obstruction or event times.
 }
+\section{Validation}{
+
+In A08, coordinates on the two plotted solar-limit tracks recovered their source declinations by spherical inversion. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a08-target-ranges}{A08 check in the technical manual}.
+}
+
 \section{Provenance}{
 
 Structured results carry a \code{provenance} attribute. Read it with

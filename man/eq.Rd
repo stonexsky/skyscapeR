@@ -29,6 +29,11 @@ declination zero. Supplying a location subtracts the package's approximate paral
 correction for the latitude and specified altitude. The result is a declination target
 in degrees; no equinox date, event time or horizon crossing is calculated.
 }
+\section{Validation}{
+
+A05 checked the equinoctial declination reference separately from the dates of the astronomical equinoxes. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+}
+
 \examples{
 # Equinoctial geocentric declination:
 eq()

@@ -18,9 +18,10 @@ events <- function(name) {
 #' @details An overlay identifies which targets to compare before inspecting a distribution. Names
 #' may denote stars, solar or lunar limits, or fixed custom declinations. Group names
 #' expand into the individual limits. At one epoch, the function evaluates each target; for
-#' two endpoints it uses annual January stellar declinations. Solar and lunar limits
-#' retain century-spaced samples and spline interpolation. Styles and epoch travel with the object. Treat range endpoints as
-#' model estimates and verify narrow or rapidly changing windows separately.
+#' two endpoints it takes the minimum and maximum over every integer year, including
+#' both endpoints. Stars use January barycentric declinations. Solar and lunar limits use
+#' the supplied site correction for each year. Styles and epochs travel with the object.
+#' Changes between annual samples remain unresolved.
 #' A single object can contain several related targets. Pass a list of objects
 #' to plot(hor), plotBars or plotAzimuth to combine groups with independent
 #' epochs, colours, line styles and labels. Groups are drawn in list order.
@@ -45,6 +46,8 @@ events <- function(name) {
 #' Used for single-year tracks and year-range boundaries.
 #' @param lwd Line width (see \code{\link{par}}) used for differentiation.
 #' Used for single-year tracks and year-range boundaries.
+#' @section Validation:
+#' A08 checked annual stellar, solar and lunar range endpoints, local corrections, identifier aliases and retention of target labels and line styles. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a08-target-ranges}{A08 check in the technical manual}.
 #' @export
 #' @examples
 #' # Create an object with solar targets for epoch range 4001-2001 BC:
@@ -94,22 +97,17 @@ skyObject = function(names, year, loc=FALSE, col = '#A9542E', lty = 1, lwd = 1, 
   if (length(names) > 1 & length(lty)==1) { lty <- rep(lty, length(names)) }
   if (length(names) > 1 & length(lwd)==1) { lwd <- rep(lwd, length(names)) }
 
-  i <- which(names=='solar extremes')
-  if (length(i)>0) {
-    names <- names[-i]
-    names <- c('December Solstice','June Solstice',names)
-    aux <- col[i]; col <- col[-i]; col <- c(rep(aux,2),col)
-    aux <- lty[i]; lty <- lty[-i]; lty <- c(rep(aux,2),lty)
-    aux <- lwd[i]; lwd <- lwd[-i]; lwd <- c(rep(aux,2),lwd)
-  }
-
-  i <- which(names=='lunar extremes')
-  if (length(i)>0) {
-    names <- names[-i]
-    names <- c('Major Lunar Extreme (southern)', 'Minor Lunar Extreme (southern)', 'Minor Lunar Extreme (northern)', 'Major Lunar Extreme (northern)',names)
-    aux <- col[i]; col <- col[-i]; col <- c(rep(aux,4),col)
-    aux <- lty[i]; lty <- lty[-i]; lty <- c(rep(aux,4),lty)
-    aux <- lwd[i]; lwd <- lwd[-i]; lwd <- c(rep(aux,4),lwd)
+  if (!length(names) || !length(year) %in% 1:2 || any(!is.finite(year)) ||
+      any(year!=floor(year))) stop("Supply targets and one epoch or two integer year endpoints.")
+  for (group in c("solar extremes", "lunar extremes")) {
+    i <- which(names==group)
+    if (!length(i)) next
+    members <- if (group=="solar extremes") c("December Solstice","June Solstice") else
+      c("Major Lunar Extreme (southern)", "Minor Lunar Extreme (southern)",
+        "Minor Lunar Extreme (northern)", "Major Lunar Extreme (northern)")
+    order <- c(rep(i,each=length(members)),setdiff(seq_along(names),i))
+    names <- c(rep(members,length(i)),names[-i])
+    col <- col[order]; lty <- lty[order]; lwd <- lwd[order]
   }
 
   N <- NROW(names)
@@ -176,7 +174,7 @@ skyObject = function(names, year, loc=FALSE, col = '#A9542E', lty = 1, lwd = 1, 
   # check min and max decs
   if (NROW(year)==2) {
     ind <- which(!colnames(tt) %in% c('Custom Dec','eq'))
-    for (i in ind) { tt[,i] <- minmaxdec(events(colnames(tt)[i]), from=min(year), to=max(year)) }
+    for (i in ind) { tt[,i] <- minmaxdec(events(colnames(tt)[i]), from=min(year), to=max(year), loc=loc) }
     rownames(tt) <- c('min','max')
   }
 
@@ -214,6 +212,8 @@ sky.objects <- skyObject
 #' @param altitude Altitude of the sun. Defaults to 0 degrees.
 #' @param verbose Logical to control output of warnings and messages.
 #' Defaults to TRUE.
+#' @section Validation:
+#' A05 checked the local December solar limit against annual obliquity and the specified parallax correction. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{obliquity}}, \code{\link{jS}}, \code{\link{eq}},
 #' \code{\link{zenith}}, \code{\link{antizenith}}, \code{\link{spatial.equinox}},
@@ -251,6 +251,8 @@ dS = function(year = skyscapeR.env$cur.year, loc = FALSE, parallax = 0.00224, al
 #' @param altitude Altitude of the sun. Defaults to 0 degrees.
 #' @param verbose Logical to control output of warnings and messages.
 #' Defaults to TRUE.
+#' @section Validation:
+#' A05 checked the local June solar limit against annual obliquity and the specified parallax correction. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{obliquity}}, \code{\link{dS}}, \code{\link{eq}},
 #' \code{\link{zenith}}, \code{\link{antizenith}}, \code{\link{spatial.equinox}},
@@ -286,6 +288,8 @@ jS = function(year = skyscapeR.env$cur.year, loc = FALSE, parallax = 0.00224, al
 #' @param altitude Altitude of the sun. Defaults to 0 degrees.
 #' @param verbose Logical to control output of warnings and messages.
 #' Defaults to TRUE. This affects messages only, not the calculated declination.
+#' @section Validation:
+#' A05 checked the equinoctial declination reference separately from the dates of the astronomical equinoxes. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{obliquity}}, \code{\link{jS}}, \code{\link{zenith}}, \code{\link{antizenith}}, \code{\link{spatial.equinox}}, \code{\link{parallax.corr}}, \code{\link{dS}}
 #' @examples
@@ -312,15 +316,19 @@ eq = function(loc=FALSE, parallax = 0.00224, altitude = 0, verbose=TRUE) {
 #' @description Determine the solar declination associated with an overhead passage at the observer's
 #' latitude, where such a passage is possible.
 #' @details The geometric zenith has declination equal to the site latitude. The function
-#' first checks the latitude against its June and December solar limits at the default
-#' epoch. Within those limits it subtracts the supplied approximate solar parallax
-#' correction from the latitude. It returns NULL outside the permitted band. This supplies
+#' checks whether the latitude lies within the obliquity of the requested epoch.
+#' At the geometric zenith the altitude is 90 degrees and the parallax correction vanishes.
+#' An explicitly supplied altitude invokes the approximate correction at that altitude.
+#' The function returns NULL outside the permitted band. This supplies
 #' a declination criterion rather than the dates of the passages.
 #' @return Solar declination in degrees with the requested parallax correction, or NULL when the latitude falls outside the solstitial limits used by the function.
 #' @param loc This can be either the latitude of the
 #' location, or a \emph{skyscapeR.horizon} object.
 #' @param parallax Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.
-#' @param altitude Altitude of the sun. Defaults to 0 degrees.
+#' @param altitude Altitude used in the approximate parallax correction. Defaults to 90 degrees.
+#' @param year Astronomical year used to determine the tropical latitude limit.
+#' @section Validation:
+#' A05 verified the geometric zenith declination and tropical-boundary eligibility at two epochs. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{jS}}, \code{\link{dS}}, \code{\link{eq}},
 #' \code{\link{antizenith}}, \code{\link{spatial.equinox}}, \code{\link{parallax.corr}}
@@ -330,33 +338,30 @@ eq = function(loc=FALSE, parallax = 0.00224, altitude = 0, verbose=TRUE) {
 #'
 #' # There is no zenith sun phenomenon in London:
 #' zenith(51.507)
-zenith = function(loc, parallax = 0.00224, altitude = 0) {
-  if (is(loc,'skyscapeR.horizon')) {
-    lat <- loc$metadata$georef[1]
-  } else { lat <- loc[1] }
-
-  if (lat > jS(loc=loc) | lat < dS(loc=loc)) {
-    return(NULL)
-  } else {
-    aux <- lat
-    aux <- aux - parallax.corr(parallax, loc, altitude)
-    return(aux)
-  }
+zenith = function(loc, parallax = 0.00224, altitude = 90, year = skyscapeR.env$cur.year) {
+  lat <- extractLatitude(loc)
+  if (length(year)!=1L) stop("Supply one epoch for the solar latitude limit.")
+  if (abs(lat)>obliquity(year)) return(NULL)
+  lat - parallax.corr(parallax, loc, altitude)
 }
 
 #' Estimate solar declination at the anti-zenith
 #' @description Determine the solar declination associated with the point directly beneath an observer,
 #' where the Sun can attain that declination.
 #' @details The direction opposite the zenith corresponds geometrically to minus the site latitude.
-#' The function checks the site against the default-epoch solstitial latitude band,
-#' then subtracts the approximate solar parallax correction from the negative latitude. It
+#' The function checks the latitude against the obliquity of the requested epoch.
+#' At the geometric anti-zenith the altitude is minus 90 degrees and parallax vanishes.
+#' An explicitly supplied altitude invokes the approximate correction at that altitude. It
 #' returns NULL outside that band. This is a target declination for comparison with
 #' orientations, not an observable solar transit below ground.
 #' @return Solar declination in degrees with the requested parallax correction, or NULL when the latitude falls outside the solstitial limits used by the function.
 #' @param loc This can be either the latitude of the
 #' location, or a \emph{skyscapeR.horizon} object.
 #' @param parallax Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.
-#' @param altitude Altitude of the sun. Defaults to 0 degrees.
+#' @param altitude Altitude used in the approximate parallax correction. Defaults to -90 degrees.
+#' @param year Astronomical year used to determine the tropical latitude limit.
+#' @section Validation:
+#' A05 verified the geometric anti-zenith declination and tropical-boundary eligibility at two epochs. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{jS}}, \code{\link{dS}}, \code{\link{eq}},
 #' \code{\link{zenith}}, \code{\link{spatial.equinox}}, \code{\link{parallax.corr}}
@@ -371,18 +376,11 @@ zenith = function(loc, parallax = 0.00224, altitude = 0) {
 #'
 #' # There is no anti-zenith solar phenomenon in London:
 #' antizenith(51.507)
-antizenith = function(loc, parallax = 0.00224, altitude = 0) {
-  if (is(loc,'skyscapeR.horizon')) {
-    lat <- loc$metadata$georef[1]
-  } else { lat <- loc[1] }
-
-  if (lat > jS(loc=loc) | lat < dS(loc=loc)) {
-    return(NULL)
-  } else {
-    aux <- -lat
-    aux <- aux - parallax.corr(parallax, loc, altitude)
-    return(aux)
-  }
+antizenith = function(loc, parallax = 0.00224, altitude = -90, year = skyscapeR.env$cur.year) {
+  lat <- extractLatitude(loc)
+  if (length(year)!=1L) stop("Supply one epoch for the solar latitude limit.")
+  if (abs(lat)>obliquity(year)) return(NULL)
+  -lat - parallax.corr(parallax, loc, altitude)
 }
 
 #' Estimate the spatial equinox from a site horizon
@@ -417,6 +415,10 @@ antizenith = function(loc, parallax = 0.00224, altitude = 0) {
 #' @param atm Atmospheric pressure in hPa. Defaults to the package setting.
 #' Zero requests an estimate from site elevation.
 #' @param temp Air temperature in degrees Celsius. Defaults to the package setting.
+#' @section Validation:
+#' H07 checked that partial photographs are rejected and that a full photographic profile can be used. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
+#'
+#' In A05, rising and setting midpoints matched independent track intersections on flat, eastern-ridge and western-ridge skylines; missing polar crossings were identified. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @references Ruggles, C. L. N. (1997). Whose Equinox? Journal for the History of Astronomy 28, S45-S96. \doi{10.1177/002182869702802205}.
 #' @seealso \code{\link{jS}}, \code{\link{dS}}, \code{\link{eq}},
@@ -460,6 +462,7 @@ spatial.equinox = function(hor, parallax = 0.00224,
                           atm = skyscapeR.env$atm, temp = skyscapeR.env$temp) {
   if (!inherits(hor,'skyscapeR.horizon'))
     stop('Full horizon profile required for spatial equinox calculation.')
+  .require_full_skyline(hor)
   if (is.character(year)) year <- astroYear(year)
   if (!is.numeric(year) || length(year)!=1L || !is.finite(year))
     stop('year must specify one finite astronomical year.')

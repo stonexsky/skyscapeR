@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>spatial.equinox | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-spatial-equinox">spatial.equinox() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Estimate the spatial equinox from a site horizon</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>spatial.equinox | skyscapeR 2.0.9009</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-spatial-equinox">spatial.equinox() method</a></nav><h2 id='spatial.equinox'>Estimate the spatial equinox from a site horizon</h2><span id='topic+spatial.equinox'></span>
 
 <h3>Description</h3>
 
@@ -10,9 +10,12 @@ two solstitial sunset bearings on a particular horizon.
 <h3>Usage</h3>
 
 <pre><code class='language-R'>spatial.equinox(
-  hor, parallax = 0.00224, year = skyscapeR.env$cur.year,
+  hor,
+  parallax = 0.00224,
+  year = skyscapeR.env$cur.year,
   refraction = skyscapeR.env$refraction,
-  atm = skyscapeR.env$atm, temp = skyscapeR.env$temp
+  atm = skyscapeR.env$atm,
+  temp = skyscapeR.env$temp
 )
 </code></pre>
 
@@ -20,31 +23,31 @@ two solstitial sunset bearings on a particular horizon.
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code>hor</code></td>
+<tr><td><code id="spatial.equinox_:_hor">hor</code></td>
 <td>
 <p>A <em>skyscapeR.horizon</em> with finite, increasing azimuths covering
 0 to 360 degrees and matching endpoint altitudes.</p>
 </td></tr>
-<tr><td><code>parallax</code></td>
+<tr><td><code id="spatial.equinox_:_parallax">parallax</code></td>
 <td>
 <p>Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.</p>
 </td></tr>
-<tr><td><code>year</code></td>
+<tr><td><code id="spatial.equinox_:_year">year</code></td>
 <td>
 <p>One astronomical year, defaulting to the package's current-year
 setting. Historical labels such as <code>"3250 BC"</code> are accepted.</p>
 </td></tr>
-<tr><td><code>refraction</code></td>
+<tr><td><code id="spatial.equinox_:_refraction">refraction</code></td>
 <td>
 <p>Whether to apply atmospheric refraction. Defaults to the
 package setting, normally TRUE.</p>
 </td></tr>
-<tr><td><code>atm</code></td>
+<tr><td><code id="spatial.equinox_:_atm">atm</code></td>
 <td>
 <p>Atmospheric pressure in hPa. Defaults to the package setting.
 Zero requests an estimate from site elevation.</p>
 </td></tr>
-<tr><td><code>temp</code></td>
+<tr><td><code id="spatial.equinox_:_temp">temp</code></td>
 <td>
 <p>Air temperature in degrees Celsius. Defaults to the package setting.</p>
 </td></tr>
@@ -116,6 +119,14 @@ commit. Retain those and the analysis script separately for exact reproduction.
 </p>
 
 
+<h3>Validation</h3>
+
+<p>H07 checked that partial photographs are rejected and that a full photographic profile can be used. See the <a href="../numerical-validation.html#h07-panorama-coverage">H07 check in the technical manual</a>.
+</p>
+<p>In A05, rising and setting midpoints matched independent track intersections on flat, eastern-ridge and western-ridge skylines; missing polar crossings were identified. See the <a href="../numerical-validation.html#a05-solar-limits">A05 check in the technical manual</a>.
+</p>
+
+
 <h3>References</h3>
 
 <p>Ruggles, C. L. N. (1997). Whose Equinox? Journal for the History of Astronomy 28, S45-S96. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1177/002182869702802205")}.
@@ -138,4 +149,4 @@ spatial.equinox(hor, year="3250 BC")
 ## End(Not run)
 </code></pre>
 
-<p><a href="../function-methods.html#fn-spatial-equinox">spatial.equinox() method</a></p></body></html>
+</body></html>

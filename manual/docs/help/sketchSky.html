@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>sketchSky | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-sketchsky">sketchSky() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Prepare a reusable sky sketch for a horizon plot</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>sketchSky | skyscapeR 2.0.9009</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-sketchsky">sketchSky() method</a></nav><h2 id='sketchSky'>Prepare a reusable sky sketch for a horizon plot</h2><span id='topic+sketchSky'></span>
 
 <h3>Description</h3>
 
@@ -28,28 +28,28 @@ without brightness-dependent visibility filtering.
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code>hor</code></td>
+<tr><td><code id="sketchSky_:_hor">hor</code></td>
 <td>
 <p>A <code>skyscapeR.horizon</code> with finite latitude, longitude and observer
 elevation in metres in <code>metadata$georef</code>. The numerical profile supplies the
 foreground when plotted. A panorama image is optional.</p>
 </td></tr>
-<tr><td><code>jd</code></td>
+<tr><td><code id="sketchSky_:_jd">jd</code></td>
 <td>
 <p>One finite UT Julian day. Supply exactly one of <code>jd</code> and <code>time</code>.</p>
 </td></tr>
-<tr><td><code>time</code></td>
+<tr><td><code id="sketchSky_:_time">time</code></td>
 <td>
 <p>A civil timestamp accepted by <code>time2jd</code>, or a POSIXt instant.</p>
 </td></tr>
-<tr><td><code>timezone</code>, <code>calendar</code></td>
+<tr><td><code id="sketchSky_:_timezone">timezone</code>, <code id="sketchSky_:_calendar">calendar</code></td>
 <td>
 <p>Civil timezone and calendar for character <code>time</code>, as
 in <code>time2jd</code>. Defaults are the session settings. A POSIXt value already
 identifies an instant; these arguments do not reinterpret it. Use UTC or a fixed
 offset for ancient civil dates.</p>
 </td></tr>
-<tr><td><code>display</code></td>
+<tr><td><code id="sketchSky_:_display">display</code></td>
 <td>
 <p>A named list of logical switches: <code>sun</code>, <code>moon</code>,
 <code>planets</code>, <code>stars</code>, <code>constellation.lines</code>, <code>milky.way</code>,
@@ -60,21 +60,21 @@ The additional <code>constellations</code> entry accepts names or an imported da
 frame, rather than a logical value. See Constellations below. A named logical
 vector is sufficient when supplying only switches.</p>
 </td></tr>
-<tr><td><code>style</code></td>
+<tr><td><code id="sketchSky_:_style">style</code></td>
 <td>
 <p>One of <code>"natural"</code>, <code>"publication-colour"</code> or
 <code>"publication-mono"</code>. Publication styles have a white background and dark
 guides. Colour uses muted stellar and planetary colours and a warm solar disc;
 mono uses black and white. Neither publication style predicts visibility.</p>
 </td></tr>
-<tr><td><code>max.mag</code></td>
+<tr><td><code id="sketchSky_:_max.mag">max.mag</code></td>
 <td>
 <p>Finite catalogue magnitude cutoff, default 6. Applied before
 extinction to star symbols and the integrated magnitudes of supported clusters.
 It does not limit constellation endpoints, the Sun, Moon or planets. Raising
 the cutoff includes additional stars only where the catalogue supplies them.</p>
 </td></tr>
-<tr><td><code>k</code></td>
+<tr><td><code id="sketchSky_:_k">k</code></td>
 <td>
 <p>Non-negative visual extinction coefficient in magnitudes per airmass
 for natural style. Defaults to <code>skyscapeR.vars()$k</code>, initially 0.2.
@@ -105,7 +105,7 @@ It stores <code>jd</code>, <code>loc</code>, <code>style</code>, <code>display</
 <code>star.opacity</code> retains an earlier symbol-opacity diagnostic; natural
 sketches draw from <code>light.budget</code>. <code>bodies</code>, <code>diameters</code>,
 <code>planet.size</code> and <code>lunar</code> describe selected Solar System bodies.
-<code>clusters</code> holds supported cluster footprints and opacity when applicable;
+<code>clusters</code> holds supported cluster footprints and opacity when applicable. The natural view uses the integrated Pleiades magnitude as the light budget within its projected footprint. When the plotted stars exceed that budget, their fluxes are scaled together to preserve their relative brightness. Any residual light uses a broad, tapered profile;
 <code>guides</code>, <code>light</code>, <code>background</code> and twilight fields support drawing.
 Components can be empty when a layer is disabled. No image file is written.
 </p>
@@ -124,7 +124,7 @@ Jupiter, Saturn and the Moon use apparent disc sizes and illuminated
 fractions from Swiss Ephemeris. A close view can therefore show the phase
 of Venus. Star colours follow catalogue spectral classes; the diffuse band
 has a neutral tint. Colour and projection influence the screen appearance.
-Publication styles use magnitude-scaled star and planet symbols on white.
+Publication styles use magnitude-scaled star and planet symbols on white. In publication colour, stellar hue identifies the leading catalogue spectral class O through M; other or missing classes use neutral grey.
 </p>
 <p>Azimuth increases clockwise from true north. Refraction, pressure and
 temperature come from <code>skyscapeR.vars</code> when the sky is calculated.
@@ -218,6 +218,12 @@ commit. Retain those and the analysis script separately for exact reproduction.
 </p>
 
 
+<h3>Validation</h3>
+
+<p>W02 verified the reconstructed Gacrux bearing and altitude at the same instant and viewpoint using direct equatorial coordinates and spherical geometry. See the <a href="../numerical-validation.html#w02-field-to-sky">W02 check in the technical manual</a>.
+</p>
+
+
 <h3>References</h3>
 
 <p>Patat, F., Ugolnikov, O. S. and Postylyakov, O. V. (2006).
@@ -292,4 +298,4 @@ plot(hor, sky = mono, xrange = sector)
 ## End(Not run)
 </code></pre>
 
-<p><a href="../function-methods.html#fn-sketchsky">sketchSky() method</a></p></body></html>
+</body></html>

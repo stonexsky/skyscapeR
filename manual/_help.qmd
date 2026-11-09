@@ -248,6 +248,14 @@ The same record remains available in <code>metadata$provenance</code>.
 </p>
 
 
+<h3>Validation</h3>
+
+<p>Seasonal searches require full skyline coverage. H07 checked rejection of a partial photograph and successful calculation with the full profile. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage">H07 check in the technical manual</a>.
+</p>
+<p>W02 replayed the Gacrux heliacal-rising date at Skorba West and passed it to the crossing and sky-reconstruction calculations. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky">W02 check in the technical manual</a>.
+</p>
+
+
 <h3>References</h3>
 
 <p>Crumey, A. (2014). Human contrast threshold and astronomical

@@ -306,6 +306,10 @@ calc.phase <- function(year, day, sun.coord, star, loc, arcus_visionis, alt.hor,
 #' @param temp Air temperature in degrees Celsius. Defaults to the session setting in \code{\link{skyscapeR.vars}}.
 #' @param solar.alt Solar altitude threshold in degrees. NULL uses
 #' -6 for a horizon, or alt.hor - 6 for coordinate input.
+#' @section Validation:
+#' Seasonal searches require full skyline coverage. H07 checked rejection of a partial photograph and successful calculation with the full profile. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
+#'
+#' W02 replayed the Gacrux heliacal-rising date at Skorba West and passed it to the crossing and sky-reconstruction calculations. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
 #' @export
 #' @references Crumey, A. (2014). Human contrast threshold and astronomical
 #' visibility. MNRAS 442, 2600-2619. \doi{10.1093/mnras/stu992}.
@@ -444,6 +448,7 @@ star.phases <- function(star, year, loc, alt.hor = 0, alt.rs = 10, solar.alt=NUL
   horizon <- NULL
   if(is(loc,'skyscapeR.horizon')) {
     if(!missing(alt.hor)) stop('Use either a horizon profile or alt.hor, not both.')
+    .require_full_skyline(loc)
     az <- loc$data$az; heights <- loc$data$alt
     horizon <- .horizon_profile(az,heights)
   }

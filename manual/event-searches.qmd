@@ -1,5 +1,7 @@
 # Terrain crossings and event searches {#sec-event-searches}
 
+[A05](numerical-validation.qmd#a05-solar-limits) tests civil dates, solstitial branches and independent east and west solutions for spatial equinoxes.
+
 **Implementation.** skyscapeR 2.0.9004, `R/horizon-events.R`, `R/mechanics.R`, `R/events.R` and `R/misc.R`. A point on a track, a terrain crossing, a midpoint bearing, a date and a sampled extreme are five different outputs. Their numerical precision and their archaeological interpretation depend on different assumptions.
 
 | Function | Quantity calculated | Search domain |
@@ -12,7 +14,7 @@
 
 Terrain crossing searches assume a complete skyline. A [partial photographic profile can yield events outside its observed sector](photographic-horizons.html#partial-photo-consumers).
 
-The [A02 lunar skyline comparison](a02-ephemeris.qmd#lunar-bearings-at-the-skyline) quantifies how ephemeris conventions affect crossing times and azimuths. A04 will test the event solver itself.
+The [A02 lunar skyline comparison](a02-ephemeris.qmd#lunar-bearings-at-the-skyline) quantifies how ephemeris conventions affect crossing times and azimuths. [A04](numerical-validation.qmd#a04-stellar-crossings) checks crossing times, bearings and event order against analytic tracks and independent root searches, including JPL solar and lunar centre crossings.
 
 ## Sampling a diurnal track {#event-track}
 

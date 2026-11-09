@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>findTargets | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-findtargets">findTargets() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Find celestial targets within declination and time ranges</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>findTargets | skyscapeR 2.0.9009</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../function-methods.html#fn-findtargets">findTargets() method</a></nav><h2 id='findTargets'>Find celestial targets within declination and time ranges</h2><span id='topic+findTargets'></span>
 
 <h3>Description</h3>
 
@@ -24,32 +24,32 @@ orientation range during a proposed period of use.
 <h3>Arguments</h3>
 
 <table>
-<tr><td><code>decrange</code></td>
+<tr><td><code id="findTargets_:_decrange">decrange</code></td>
 <td>
 <p>Range of declination to consider.</p>
 </td></tr>
-<tr><td><code>year</code></td>
+<tr><td><code id="findTargets_:_year">year</code></td>
 <td>
 <p>Temporal range to consider. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p>
 </td></tr>
-<tr><td><code>loc</code></td>
+<tr><td><code id="findTargets_:_loc">loc</code></td>
 <td>
 <p>FALSE for geocentric declinations, a vector of latitude, longitude and elevation, or a skyscapeR.horizon to also evaluate the local horizon.</p>
 </td></tr>
-<tr><td><code>max.mag</code></td>
+<tr><td><code id="findTargets_:_max.mag">max.mag</code></td>
 <td>
 <p>Maximum magnitude of stars to consider. Defaults to 2.5</p>
 </td></tr>
-<tr><td><code>dates</code></td>
+<tr><td><code id="findTargets_:_dates">dates</code></td>
 <td>
 <p>Whether to display time period when identified celestial targets
 occur within declination range. Default is FALSE.</p>
 </td></tr>
-<tr><td><code>calendar</code></td>
+<tr><td><code id="findTargets_:_calendar">calendar</code></td>
 <td>
 <p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p>
 </td></tr>
-<tr><td><code>timerange</code></td>
+<tr><td><code id="findTargets_:_timerange">timerange</code></td>
 <td>
 <p>Earlier argument name for <code>year</code>, retained for existing scripts.</p>
 </td></tr>
@@ -64,13 +64,17 @@ and a horizon enables the spatial equinox. The named equinoxes and solstices use
 geocentric apparent solar longitudes of 0, 90, 180 and 270 degrees. Dates are UT
 civil days in the requested calendar. Different dates for the first and last year
 appear in endpoint order separated by a slash. Intermediate years can differ.
-The sunrise/set date ranges also use the two endpoint years.
+The sunrise/set date ranges also use the two endpoint years. Solar and lunar candidates
+are selected before display rounding. Zenith candidates use the period-specific tropical
+limit and require a reachable solar passage. For spatial equinoxes the reported range
+uses rising and setting solutions at the endpoint epochs, not an annual interior search.
 For each star passing the catalogue magnitude cut, the search computes its
 declination at noon UT on 1 January Gregorian of every astronomical year,
 including both endpoints. It tests overlap before rounding and linearly
 interpolates between annual samples to estimate entry and exit. Separate
 passages are reported separately, with boundaries rounded to the nearest year.
-Shorter variations within a sampling year are unresolved. Magnitude describes
+A contact within 0.0000001 degree of a stellar band edge is treated as a closed-boundary
+match. Shorter variations within a sampling year are unresolved. Magnitude describes
 catalogue brightness and does not model atmospheric visibility.
 </p>
 <p>Silva and Lomsdalen (2025, table 5) give an example of stellar target screening for the Maltese temples.
@@ -126,6 +130,12 @@ commit. Retain those and the analysis script separately for exact reproduction.
 </p>
 
 
+<h3>Validation</h3>
+
+<p>A08 verified closed-band membership, separate stellar passages, sampled contact, magnitude filtering and comparisons before display rounding. See the <a href="../numerical-validation.html#a08-target-ranges">A08 check in the technical manual</a>.
+</p>
+
+
 <h3>References</h3>
 
 <p>Silva, F. and Lomsdalen, T. (2025). 'No easy way from the earth to the stars': a new statistical approach to the orientation of the Maltese temples. Archaeological and Anthropological Sciences 17, 96. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1007/s12520-025-02208-4")}.
@@ -155,4 +165,4 @@ commit. Retain those and the analysis script separately for exact reproduction.
 }
 </code></pre>
 
-<p><a href="../function-methods.html#fn-findtargets">findTargets() method</a></p></body></html>
+</body></html>

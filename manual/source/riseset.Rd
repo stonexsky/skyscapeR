@@ -116,7 +116,11 @@ It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
 }
 \section{Validation}{
-A02 tested sensitivity to ephemeris conventions using a separate solver on airless lunar-centre trajectories. Across 177 prehistoric skyline crossings, default azimuths differed from JPL Horizons by a median of 0.059 degrees and a maximum of 0.322 degrees. Matching delta T reduced the maximum to 0.027 degrees. Validation of the riseset() event solver is scheduled under A04. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
+A02 tested sensitivity to ephemeris conventions using a separate solver on airless lunar-centre trajectories. Across 177 prehistoric skyline crossings, default azimuths differed from JPL Horizons by a median of 0.059 degrees and a maximum of 0.322 degrees. Matching delta T reduced the maximum to 0.027 degrees. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
+
+A04 recovered the expected crossing counts and order on synthetic ridges, notches and grazing tracks; solar and lunar centre crossings at the Malta test site agreed with JPL Horizons within 0.85 seconds and 0.0041 degrees. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a04-stellar-crossings}{A04 check in the technical manual}.
+
+H07 verified that a partial panorama is rejected before searching for solar or stellar crossings on an unobserved skyline. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
 }
 \examples{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
