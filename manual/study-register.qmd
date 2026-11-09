@@ -19,6 +19,8 @@ A plausible image can conceal errors in its outline, brightness or response to a
 | **Flux. Does a point source retain its integrated light when the field of view changes?** | The 2.0.9004 release check recovered the modelled Sirius flux at 90°, 45° and 5° field widths (reported ratio 1 at each width). Additional checks compare Sirius, the cluster and a Carina field. Recovery of the input flux verifies the calculation. It does not by itself calibrate the absolute brightness of the night sky. |
 | **Extinction. Does the Milky Way dim by the specified altitude-dependent factor?** | The 2.0.9002 test compared the same skies with the band extinction coefficient set to 0 and 0.2. The script checked the band radiance against the expected multiplier. Model transmission at 0.2 was 0.149 at 5° altitude and 0.832 at 90°. This verifies application of the extinction law. It is not a set of atmospheric transmission measurements. |
 
+[Download the five archived sky-rendering scripts](archives/sky-rendering-validation-scripts.zip) for twilight, colour, zoom and shared lighting.
+
 The [heliacal-rising comparison](heliacal-rising.qmd) draws on the rendering model for a separate question about the timing of an event.
 
 ## Study records

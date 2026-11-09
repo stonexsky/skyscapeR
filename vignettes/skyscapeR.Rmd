@@ -29,6 +29,8 @@ knitr::opts_chunk$set(error = FALSE, collapse = TRUE, comment = "#>",
 ```
 
 
+This vignette walks through a skyscape analysis using field measurements. For installation instructions, see the [package README](https://github.com/stonexsky/skyscapeR/blob/development-2.0/README.md). For the algorithms, assumptions and validation results behind each function, see the [technical manual](https://stonexsky.github.io/skyscapeR/manual/).
+
 This workflow starts with a measured axis at each site. Its **azimuth** is its bearing clockwise from north. The **horizon altitude** is the vertical angle to the skyline in that direction. Together with the site latitude these determine **declination**, the angular distance north or south of the celestial equator. We first calculate it from field measurements, then investigate one Maltese doorway and finally compare a group of entrances.
 
 For help with any package function and its parameters, type `?` followed by its name in the R console, for example `?az2dec`.

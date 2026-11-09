@@ -2,6 +2,8 @@
 
 skyscapeR is an R package for studying the orientations of archaeological structures. Combine measured bearings, their uncertainties and local skylines to calculate declination distributions. Explore the sky above a site at a chosen epoch, or test whether orientations across sites fit a proposed explanation.
 
+Start with the [worked vignette](https://stonexsky.github.io/skyscapeR/) to analyse your own field observations. The [technical manual](https://stonexsky.github.io/skyscapeR/manual/) explains the methods behind each function and the evidence used to validate them.
+
 Version 2.0 is in development. [Report an issue with a reproducible example](https://github.com/stonexsky/skyscapeR/issues) or [read the migration guide](#migrating-from-skyscaper-12-to-20) before rerunning an earlier analysis.
 
 ## Install the development version

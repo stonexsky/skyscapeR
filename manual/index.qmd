@@ -2,6 +2,8 @@
 
 This technical manual explains how skyscapeR turns field observations into astronomical and statistical results, which choices affect their interpretation, and what evidence supports them. The **8 November 2026 draft** is organised around skyscapeR **2.0.9004**. Each validation study identifies the build on which its results were obtained.
 
+If you are new to skyscapeR, start with the [worked vignette](https://stonexsky.github.io/skyscapeR/), which follows field measurements through a complete analysis. The [package README](https://github.com/stonexsky/skyscapeR/blob/development-2.0/README.md) gives installation instructions and guidance on migrating to version 2.0.
+
 ## Finding a method
 
 If you know the function name, start with the [function index](function-index.qmd). It covers all 69 exported functions and seven registered S3 methods. If you are starting from an archaeological question, use the [annotated contents](contents-plan.qmd). Its nine proposed chapters follow the work from time conventions and field reduction through terrain modelling, celestial events, sky visualisation, orientation distributions and significance testing. Each chapter outline identifies the evidence already available and the questions still open.

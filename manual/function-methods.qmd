@@ -598,6 +598,7 @@ defined horizontal CRS. Missing samples and terrain beyond the raster edge are s
 ```{=html}
 <p>H01 compared 334 bearings at 31 observing setups.
 At the surveyed bearings, <code>createHor()</code> reproduced the observed terrain skyline to within half a degree in 91.9% of cases.
+See the <a href="https://stonexsky.github.io/skyscapeR/manual/#h01-field-validation">H01 field validation in the skyscapeR technical manual</a> for the survey protocol, station results and limitations.
 </p>
 <p>The numerical skyline is a maximum over sampled terrain, not an accuracy
 certificate for the DEM. Horizontal and vertical datum differences, observer
@@ -688,6 +689,7 @@ the light (0 to 1). Default 0.38. Use 1 for unshaded palette colours.</p></td></
 Set haze=0 and ambient=1 to inspect the colour mapping alone.</p></td></tr><tr><th scope="row"><code>image.dir</code></th><td><code>getwd()</code></td><td><p>Directory for the DEM PNG. Defaults to the working directory. Site names form the filename; different images with the same name receive a checksum suffix.</p></td></tr><tr><th scope="row"><code>attribution</code></th><td><code>&quot;User-supplied DEM&quot;</code></td><td><p>Credit for the DEM, included in plots and exports. The generic default credit is omitted from plots.</p></td></tr><tr><th scope="row"><code>license</code></th><td><code>&quot;See source DEM terms&quot;</code></td><td><p>Source licence or terms for the DEM, included in exports.</p></td></tr><tr><th scope="row"><code>ncores</code></th><td><code>NULL</code></td><td><p>Maximum DEM tracing workers. Defaults to half the available logical cores, rounded down with a minimum of one. The startup message reports used and available cores. Workers share file-backed DEM data and process separate bearings.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Announce the DEM radius, sampling and rendering stages.</p></td></tr><tr><th scope="row"><code>progress</code></th><td><code>interactive() &amp;&amp; verbose</code></td><td><p>Show a progress bar for each tracing stage. Default on in interactive verbose sessions.</p></td></tr></tbody></table><p>A dash means the signature supplies no default expression. The function may resolve an omitted value internally.</p><h5>Return value</h5><p>A skyscapeR.horizon list with metadata (site name and georeference) and a data frame named data. Its az, alt and alt.unc columns contain azimuth, horizon altitude and altitude uncertainty, all in degrees.
 </p><h5>Accuracy, uncertainty and reproducibility</h5><p>H01 compared 334 bearings at 31 observing setups.
 At the surveyed bearings, <code>createHor()</code> reproduced the observed terrain skyline to within half a degree in 91.9% of cases.
+See the <a href="https://stonexsky.github.io/skyscapeR/manual/#h01-field-validation">H01 field validation in the skyscapeR technical manual</a> for the survey protocol, station results and limitations.
 </p>
 <p>The numerical skyline is a maximum over sampled terrain, not an accuracy
 certificate for the DEM. Horizontal and vertical datum differences, observer
