@@ -1,6 +1,6 @@
 # swephR and the Swiss Ephemeris {#sec-ephemeris}
 
-**Scope.** This page records the astronomical dependency and its manufacturer's accuracy claim. The documented visibility and terrain studies address different quantities from the planetary and lunar position errors discussed here.
+**Scope.** This page records the astronomical dependency, the manufacturer's accuracy claim and the [A02 comparisons](a02-ephemeris.qmd) for build 2.0.9004. The documented visibility and terrain studies address different quantities from the planetary and lunar position errors discussed here.
 
 ## Which layer supplies the result?
 
@@ -24,10 +24,9 @@ For an archaeological horizon event, another question is where the body would ha
 
 | Question | Evidence in this edition |
 |---|---|
-| Which data generation is available in the inspected environment? | Version inspection and four file headers identifying DE431. This is a provenance check. |
-| How closely do those files reproduce the parent JPL positions at selected epochs? | The figure above is the supplier's claim. This edition contains no measured residuals for a matched DE431 comparison. |
-| How accurately can a local event be reconstructed? | The [heliacal-rising study](heliacal-rising.qmd) concerns agreement between two visibility models sharing an ephemeris. The [H01](study-register.qmd#h01-field-validation) field study concerns terrain altitude. Each has its own unit of error and scope. |
-
+| How closely did the file-backed calculations reproduce JPL? | [A02](a02-ephemeris.qmd) checked 1,080 geocentric directions against DE431 and DE441 using matching file generations. Maximum separation was 0.0065″. |
+| How did local lunar bearings compare with Horizons? | Across 177 prehistoric crossings, the median default azimuth difference was 0.059° and the maximum was 0.322°. Matching ΔT alone reduced the maximum to 0.027°. [Crossing protocol and results](a02-ephemeris.qmd#lunar-bearings-at-the-skyline). |
+| Which comparisons still require separate evidence? | The [heliacal-rising study](heliacal-rising.qmd) concerns visibility models, [H01](study-register.qmd#h01-field-validation) concerns terrain altitude, and A03 covers stellar catalogue positions. |
 
 **Related function entries**
 

@@ -250,8 +250,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span></a>
   </div>
 </li>
       </ul>
@@ -474,6 +480,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-body-position" class="level3" data-number="15.1.3">
 <h3 data-number="15.1.3" class="anchored" data-anchor-id="fn-body-position"><span class="header-section-number">15.1.3</span> <code>body.position()</code></h3>
+<p><strong>A02 validation.</strong> In A02, file-backed geocentric directions for ten bodies agreed with their matching JPL parent to within 0.0065 arcseconds across 1,080 comparisons. At the sampled prehistoric epochs the public topocentric convention differed from JPL Horizons by up to 0.70 degrees in local sky direction at a specified instant. <a href="./a02-ephemeris.html">Geocentric and local position results</a>.</p>
 <p><a href="function-index.html#idx-body-position">Function index</a></p>
 <p>An alignment comparison needs an epoch, a reference frame and, for a local sightline, a
 site. Character times are converted to UT Julian dates using the selected calendar and
@@ -3617,6 +3624,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-moonphase" class="level3" data-number="15.5.6">
 <h3 data-number="15.5.6" class="anchored" data-anchor-id="fn-moonphase"><span class="header-section-number">15.5.6</span> <code>moonphase()</code></h3>
+<p><strong>A02 validation.</strong> In A02, all 108 illuminated fractions agreed with the direct Swiss Ephemeris calculation across 54 epochs and two file generations. This checks the R interface. Observed lunar photometry was outside the study. <a href="./a02-ephemeris.html">Lunar illumination check</a>.</p>
 <p><a href="function-index.html#idx-moonphase">Function index</a></p>
 <p>Lunar illumination can be used to screen events for a nearly full Moon. The routine
 converts calendar input to UT Julian dates when needed and obtains the illuminated
@@ -3855,6 +3863,7 @@ Implementation arguments, return value and documented modes
 </section>
 <section id="fn-riseset" class="level3" data-number="15.5.10">
 <h3 data-number="15.5.10" class="anchored" data-anchor-id="fn-riseset"><span class="header-section-number">15.5.10</span> <code>riseset()</code></h3>
+<p><strong>A02 validation.</strong> A02 tested sensitivity to ephemeris conventions using a separate solver on airless lunar-centre trajectories. Across 177 prehistoric skyline crossings, default azimuths differed from JPL Horizons by a median of 0.059 degrees and a maximum of 0.322 degrees. Matching delta T reduced the maximum to 0.027 degrees. Validation of the riseset() event solver is scheduled under A04. <a href="./a02-ephemeris.html">Lunar crossing results</a>.</p>
 <p><a href="function-index.html#idx-riseset">Function index</a></p>
 <p>The event is a crossing of the local horizon by the body's centre. A raised ridge can
 delay the first visible rise and an uneven horizon can give several appearances or

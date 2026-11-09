@@ -12,6 +12,8 @@
 
 Terrain crossing searches assume a complete skyline. A [partial photographic profile can yield events outside its observed sector](photographic-horizons.html#partial-photo-consumers).
 
+The [A02 lunar skyline comparison](a02-ephemeris.qmd#lunar-bearings-at-the-skyline) quantifies how ephemeris conventions affect crossing times and azimuths. A04 will test the event solver itself.
+
 ## Sampling a diurnal track {#event-track}
 
 For a fixed declination, [`orbit()`](function-methods.html#fn-orbit) samples right ascension across a full turn, using `res` in degrees (default 0.25°). It transforms the sampled positions to horizontal coordinates for the supplied observer and atmosphere, retains altitudes above −20° and sorts the output by azimuth. The horizon object supplies the site; the function does not test each point for terrain clearance. Azimuth-sorted points do not give a time ordering or a local rise time. A fixed-declination track is useful for asking which part of the astronomical path could meet a ridge. A moving Solar System body on a particular morning requires its ephemeris.

@@ -46,7 +46,7 @@ A single object can contain several related targets. Pass a list of objects
 to plot(hor), plotBars or plotAzimuth to combine groups with independent
 epochs, colours, line styles and labels. Groups are drawn in list order.
 Horizon plots use the plotted horizon's location for every track. Compass
-plots use each group's stored location and a level horizon, drawing both
+plots use each group's stored location and a level horizon, shading the azimuth interval between the two
 declination boundaries for a year-range group. Declination plots need no
 location. No common epoch range is imposed and no astronomical positions
 are recomputed merely by combining objects. The output class remains

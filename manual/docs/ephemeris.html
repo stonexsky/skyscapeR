@@ -270,8 +270,14 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span></a>
   </div>
 </li>
       </ul>
@@ -320,7 +326,7 @@ div.csl-indent {
 </header>
 
 
-<p><strong>Scope.</strong> This page records the astronomical dependency and its manufacturer’s accuracy claim. The documented visibility and terrain studies address different quantities from the planetary and lunar position errors discussed here.</p>
+<p><strong>Scope.</strong> This page records the astronomical dependency, the manufacturer’s accuracy claim and the <a href="./a02-ephemeris.html">A02 comparisons</a> for build 2.0.9004. The documented visibility and terrain studies address different quantities from the planetary and lunar position errors discussed here.</p>
 <section id="which-layer-supplies-the-result" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="which-layer-supplies-the-result"><span class="header-section-number">2.1</span> Which layer supplies the result?</h2>
 <table class="caption-top table">
@@ -368,16 +374,16 @@ div.csl-indent {
 </thead>
 <tbody>
 <tr class="odd">
-<td>Which data generation is available in the inspected environment?</td>
-<td>Version inspection and four file headers identifying DE431. This is a provenance check.</td>
+<td>How closely did the file-backed calculations reproduce JPL?</td>
+<td><a href="./a02-ephemeris.html">A02</a> checked 1,080 geocentric directions against DE431 and DE441 using matching file generations. Maximum separation was 0.0065″.</td>
 </tr>
 <tr class="even">
-<td>How closely do those files reproduce the parent JPL positions at selected epochs?</td>
-<td>The figure above is the supplier’s claim. This edition contains no measured residuals for a matched DE431 comparison.</td>
+<td>How did local lunar bearings compare with Horizons?</td>
+<td>Across 177 prehistoric crossings, the median default azimuth difference was 0.059° and the maximum was 0.322°. Matching ΔT alone reduced the maximum to 0.027°. <a href="./a02-ephemeris.html#lunar-bearings-at-the-skyline">Crossing protocol and results</a>.</td>
 </tr>
 <tr class="odd">
-<td>How accurately can a local event be reconstructed?</td>
-<td>The <a href="./heliacal-rising.html">heliacal-rising study</a> concerns agreement between two visibility models sharing an ephemeris. The <a href="./study-register.html#h01-field-validation">H01</a> field study concerns terrain altitude. Each has its own unit of error and scope.</td>
+<td>Which comparisons still require separate evidence?</td>
+<td>The <a href="./heliacal-rising.html">heliacal-rising study</a> concerns visibility models, <a href="./study-register.html#h01-field-validation">H01</a> concerns terrain altitude, and A03 covers stellar catalogue positions.</td>
 </tr>
 </tbody>
 </table>

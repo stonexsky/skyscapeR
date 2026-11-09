@@ -55,9 +55,14 @@
   ticks[ticks >= min(limits) & ticks <= max(limits)]
 }
 
-.plot_axis <- function(side, at, labels=TRUE, theme, ...) {
+.plot_x_baseline <- function(pos=NULL, col=par("fg"), lwd=.65) {
+  axis(1, at=par("usr")[1:2], labels=FALSE, pos=pos, tcl=0, lwd=lwd, col=col)
+}
+
+.plot_axis <- function(side, at, labels=TRUE, theme, pos=NULL, ...) {
+  if (side == 1) .plot_x_baseline(pos, theme$muted)
   axis(side, at=at, labels=labels, las=1, col=theme$muted, col.axis=theme$muted,
-       lwd=.65, lwd.ticks=.65, tcl=-.19, ...)
+       pos=pos, lwd=if (side == 1) 0 else .65, lwd.ticks=.65, tcl=-.19, ...)
 }
 
 .angle_title <- function(coord) {

@@ -6,6 +6,47 @@ A result belongs to the build, inputs and settings that produced it. The tables 
 
 {{< include _h02-validation.qmd >}}
 
+## Ephemeris accuracy and lunar skyline crossings
+
+[A02](a02-ephemeris.qmd) reports the geocentric, local sky and lunar crossing comparisons for build 2.0.9004, with both reproducible archives.
+
+## Validation programme {#validation-programme}
+
+Status refers to the agreed protocol for this programme. Earlier studies and worked examples remain available for several planned checks. Each completed ID links to the result for its tested build.
+
+| ID | Question or quantity | Functions in scope | Status |
+|---|---|---|---|
+| [H01](#h01-field-validation) | How closely do DEM skylines agree with field theodolite readings? | `createHor()`, `hor2alt()` | Complete |
+| [H02](#h02-skyline-comparison) | How does createHor() compare with other skyline methods and field bearings? | `createHor()`, `createHWT()`, `importPeakFinder()` | Complete |
+| H03 | DEM ray tracing, curvature and convergence | `createHor()`, `hor2alt()` | Planned |
+| H04 | Reconstructed earthworks and synthetic panoramas | `horFeature()`, `createHor()`, `demPalettes()`, `plot.skyscapeR.horizon()` | Planned |
+| H05 | Calibrating a photographic horizon | `importPanorama()`, `hor2alt()`, `createHor()` | Planned |
+| H06 | Horizon providers, PNGs and Stellarium landscapes | `createHWT()`, `downloadHWT()`, `importPeakFinder()`, `importPanorama()`, `exportHor()`, `exportStellarium()`, `exportPanorama()`, `relinkHor()`, `plot.skyscapeR.horizon()` | Planned |
+| H07 | Passing incomplete horizons between functions | `importPanorama()`, `hor2alt()`, `coordtrans()`, `riseset()`, `star.phases()`, `spatial.equinox()`, `exportHor()` | Planned |
+| F01 | Compass and solar-sight reduction | `mag.dec()`, `reduct.compass()`, `reduct.theodolite()`, `sunAz()`, `ten()`, `az2dec()` | Planned |
+| A01 | Calendar, clock, angle and session conventions | `BC.AD()`, `astroYear()`, `time2jd()`, `jd2time()`, `timestring()`, `long.date()`, `ten()`, `skyscapeR.vars()` | Planned |
+| [A02](a02-ephemeris.qmd) | How closely do planetary positions and lunar skyline bearings agree with their JPL references? Includes a crossing sensitivity study relevant to riseset(). | `body.position()`, `moonphase()` | Complete |
+| A03 | Stellar propagation and reference frames | `star()`, `body.position()`, `obliquity()`, `parallax.corr()`, `orbit()` | Planned |
+| A04 | Crossings on flat and irregular skylines | `riseset()`, `orbit()`, `body.position()`, `hor2alt()`, `star.phases()` | Planned |
+| A05 | Solar dates and limiting declinations | `solar.date()`, `eq()`, `jS()`, `dS()`, `zenith()`, `antizenith()`, `obliquity()`, `parallax.corr()`, `spatial.equinox()`, `hor2max.dec()`, `hor2min.dec()`, `az2dec()` | Planned |
+| A06 | Moon, planets and extrema across an epoch | `moonphase()`, `nMjLX()`, `nmnLX()`, `sMjLX()`, `smnLX()`, `planet.extremes()`, `body.position()`, `skyObject()` | Planned |
+| A07 | Equinoctial full Moons and crescent crossovers | `EFM()`, `CC()`, `moonphase()`, `riseset()`, `body.position()` | Planned |
+| A08 | Target screening, dated bands and returned tracks | `findTargets()`, `skyObject()`, `sky.objects()`, `star()`, `solar.date()`, `hor2max.dec()`, `hor2min.dec()`, `orbit()` | Planned |
+| V01 | Stellar phases and dated visibility | `star.phases()`, `star()`, `riseset()`, `sketchSky()`, `skyRadiance()`, `plot.skyscapeR.starphases()` | Planned |
+| V02 | Milky Way outer boundary and internal structure | `sketchSky()`, `skyRadiance()`, `planisphere()` | Planned |
+| V03 | Twilight gradients and moonlight | `sketchSky()`, `skyRadiance()`, `body.position()` | Planned |
+| V04 | Flux, cluster glow and the Pleiades | `sketchSky()`, `skyRadiance()`, `skyStep()` | Planned |
+| V05 | Atmospheric extinction by altitude | `sketchSky()`, `skyRadiance()`, `star.phases()`, `skyscapeR.vars()` | Planned |
+| V06 | Planisphere, sky cultures and constellation geometry | `planisphere()`, `importConstellations()`, `sketchSky()`, `star()` | Planned |
+| V07 | Sky state, Stellarium capture and time stepping | `stellariumSky()`, `sketchSky()`, `skyStep()`, `skyscapeR.vars()`, `plot.skyscapeR.horizon()`, `time2jd()` | Planned |
+| D01 | Measurement PDFs, circular support and highest-density regions | `az.pdf()`, `dec.pdf()`, `hpdi()`, `spd()`, `subset.skyscapeR.pdf()` | Planned |
+| D02 | Azimuth-to-declination propagation | `az2dec()`, `coordtrans()`, `hor2alt()`, `az.pdf()`, `dec.pdf()`, `spd()`, `hpdi()` | Planned |
+| S01 | Uniform-orientation null model | `randomTest()`, `coordtrans()`, `az.pdf()`, `spd()`, `pval2stars()` | Planned |
+| S02 | Specified and site-specific nulls | `modelTest()`, `dec.pdf()`, `az.pdf()`, `spd()`, `coordtrans()` | Planned |
+| S03 | Shared scoring, local clusters and analytic probability helpers | `randomTest()`, `modelTest()`, `bernoulli.trial()`, `pval2stars()`, `print.skyscapeR.sigTest()`, `plot.skyscapeR.sigTest()` | Planned |
+| W01 | Graphical outputs encode the underlying data | `plotAzimuth()`, `plotBars()`, `plot.skyscapeR.horizon()`, `plot.skyscapeR.pdf()`, `plot.skyscapeR.spd()`, `plot.skyscapeR.sigTest()`, `plot.skyscapeR.starphases()`, `print.skyscapeR.sigTest()` | Planned |
+| W02 | End-to-end field-to-sky and group workflows | `reduct.compass()`, `reduct.theodolite()`, `createHor()`, `hor2alt()`, `az2dec()`, `az.pdf()`, `coordtrans()`, `spd()`, `randomTest()`, `modelTest()`, `findTargets()`, `skyObject()`, `star.phases()`, `riseset()`, `sketchSky()` | Planned |
+
 ## Lunar event selection
 
 The [historical crossover comparison](lunar-crossovers.html#crossover-archive) checks annual selections against the Silva & Pimenta (2012) simulation workbooks. It reports moonset pairing changes, SIM1 residuals and the separate unresolved 40° N series. The new worked examples use 2.0.9004 and do not replace the archived runs.
@@ -44,4 +85,4 @@ Each study should have a stable link. Each run should identify the exact source 
 
 ## Worked checks for the final methods chapters
 
-[Calendar and position calculations](astronomical-conventions.qmd), [synthetic instrument reductions](field-reduction.qmd) and the [known photographic skyline](photographic-horizons.qmd) have reproducible worked examples for 2.0.9004. Independent frame-matched positions, a surveyed baseline and photographic check bearings remain outstanding.
+[Calendar and position calculations](astronomical-conventions.qmd), [synthetic instrument reductions](field-reduction.qmd) and the [known photographic skyline](photographic-horizons.qmd) have reproducible worked examples for 2.0.9004. [A02](a02-ephemeris.qmd) now provides independent planetary and lunar position comparisons. Stellar reference-frame checks, a surveyed baseline and photographic check bearings remain outstanding.

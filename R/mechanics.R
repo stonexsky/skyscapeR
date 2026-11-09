@@ -207,6 +207,8 @@ body.position.vec <- Vectorize(body.position.unvec, 'time', SIMPLIFY = FALSE)
 #' also contains a \code{horizontal} data frame with columns \code{az} and
 #' \code{alt}, in degrees. Each data frame has one row per input time.
 #' @import swephR
+#' @section Validation:
+#' In A02, file-backed geocentric directions for ten bodies agreed with their matching JPL parent to within 0.0065 arcseconds across 1,080 comparisons. At the sampled prehistoric epochs the public topocentric convention differed from JPL Horizons by up to 0.70 degrees in local sky direction at a specified instant. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
 #' @export
 #' @references Astrodienst. Swiss Ephemeris programmer's manual. \url{https://www.astro.com/swisseph/swephprg.htm}.
 #' @seealso \code{\link[swephR]{swe_calc_ut}}, \code{\link{timestring}}, \code{\link{time2jd}}
@@ -268,6 +270,8 @@ body.position <- function(time, obj='sun', loc=NULL, timezone, calendar, dec, re
 #' @param timezone Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See \code{\link{time2jd}} for named zones and offsets.
 #' @param calendar Calendar for civil dates. Use \code{"G"} for Gregorian or \code{"J"} for Julian.
 #' @import swephR
+#' @section Validation:
+#' In A02, all 108 illuminated fractions agreed with the direct Swiss Ephemeris calculation across 54 epochs and two file generations. This checks the R interface. Observed lunar photometry was outside the study. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
 #' @export
 #' @seealso \code{\link[swephR]{swe_pheno_ut}}, \code{\link{EFM}}
 #' @examples
@@ -347,6 +351,8 @@ moonphase <- function(time, timezone, calendar) {
 #' @import swephR
 #' @return A list containing object, rise and set; rise/set are data frames
 #' with date, time, azimuth and declination columns. Missing events have NA fields.
+#' @section Validation:
+#' A02 tested sensitivity to ephemeris conventions using a separate solver on airless lunar-centre trajectories. Across 177 prehistoric skyline crossings, default azimuths differed from JPL Horizons by a median of 0.059 degrees and a maximum of 0.322 degrees. Matching delta T reduced the maximum to 0.027 degrees. Validation of the riseset() event solver is scheduled under A04. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
 #' @export
 #' @references Astrodienst. Swiss Ephemeris programmer's manual. \url{https://www.astro.com/swisseph/swephprg.htm}.
 #' @seealso \code{\link[swephR]{swe_calc_ut}}, \code{\link[swephR]{swe_azalt}}, \code{\link{body.position}}, \code{\link{star.phases}}

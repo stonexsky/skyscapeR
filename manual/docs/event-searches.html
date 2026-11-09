@@ -305,8 +305,14 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span></a>
   </div>
 </li>
       </ul>
@@ -396,6 +402,7 @@ div.csl-indent {
 </tbody>
 </table>
 <p>Terrain crossing searches assume a complete skyline. A <a href="photographic-horizons.html#partial-photo-consumers">partial photographic profile can yield events outside its observed sector</a>.</p>
+<p>The <a href="./a02-ephemeris.html#lunar-bearings-at-the-skyline">A02 lunar skyline comparison</a> quantifies how ephemeris conventions affect crossing times and azimuths. A04 will test the event solver itself.</p>
 <section id="event-track" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="event-track"><span class="header-section-number">9.1</span> Sampling a diurnal track</h2>
 <p>For a fixed declination, <a href="function-methods.html#fn-orbit"><code>orbit()</code></a> samples right ascension across a full turn, using <code>res</code> in degrees (default 0.25°). It transforms the sampled positions to horizontal coordinates for the supplied observer and atmosphere, retains altitudes above −20° and sorts the output by azimuth. The horizon object supplies the site; the function does not test each point for terrain clearance. Azimuth-sorted points do not give a time ordering or a local rise time. A fixed-declination track is useful for asking which part of the astronomical path could meet a ridge. A moving Solar System body on a particular morning requires its ephemeris.</p>

@@ -169,6 +169,8 @@ commit. Retain those and the analysis script separately for exact reproduction.
 </p>
 
 
+<h3>Validation</h3>
+<p>A02 tested sensitivity to ephemeris conventions using a separate solver on airless lunar-centre trajectories. Across 177 prehistoric skyline crossings, default azimuths differed from JPL Horizons by a median of 0.059 degrees and a maximum of 0.322 degrees. Matching delta T reduced the maximum to 0.027 degrees. Validation of the riseset() event solver is scheduled under A04. See the <a href="../a02-ephemeris.html">A02 study in the skyscapeR technical manual</a>.</p>
 <h3>Examples</h3>
 
 <pre><code class='language-R'>if (requireNamespace("swephRdata", quietly = TRUE)) {

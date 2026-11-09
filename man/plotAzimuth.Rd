@@ -24,7 +24,8 @@ plotAzimuth(
 a list of these objects. Each group retains its own epochs and styles
 for displaying the azimuths of celestial objects. Note that this assumes a single
 location per group and a flat horizon of zero degrees. For a year range,
-both stored declination boundaries are drawn as reference bearings.}
+the target colour fills the interval of rising or setting bearings between
+the stored declination limits. A zero-width interval is drawn as a line.}
 
 \item{show.obj.labels}{Logical to control whether to display celestial objects names.
 Defaults to TRUE.}
@@ -57,10 +58,9 @@ rise or set bearings.
 \details{
 Measurements are drawn as spokes or rim ticks. North is at the top and
 bearings increase clockwise; repeated bearings can overplot. A data frame supplies the
-True.Azimuth column. For optional targets the function uses the session atmosphere to compute a diurnal
-track and seeks a zero-altitude crossing in the eastern and western portions of the
-track. These reference bearings assume a level horizon and require the corresponding
-crossings to exist.
+True.Azimuth column. For optional targets the function converts zero apparent altitude to geometric altitude
+using the session atmosphere. It solves for rising and setting bearings on a level
+horizon and shows the part of each declination interval that reaches it.
 }
 \examples{
 # Plot some azimuth data:

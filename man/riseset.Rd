@@ -24,9 +24,9 @@ riseset(
 containing the latitude, longitude and elevation of location, in this order.}
 
 \item{date}{Either a string containing the date in the format "YYYY/MM/DD"
-(see \code{\link{timestring}}), or a numeric containing the julian date (see \code{\link{time2jd}}).
-Can also be a single year ("YYYY") or a month ("YYYY/MM") to calculate risings and settings for every day in the
-year or month, respectively. Not necessary if \emph{jd} is given.}
+ (see \code{\link{timestring}}), or a numeric containing the julian date (see \code{\link{time2jd}}).
+ Can also be a single year ("YYYY") or a month ("YYYY/MM") to calculate risings and settings for every day in the
+ year or month, respectively. Not necessary if \emph{jd} is given.}
 
 \item{jd}{A numeric containing the julian date (see \code{\link{time2jd}}) for which to
 calculate rising and settings. Only needed if \emph{date} is not given.}
@@ -89,8 +89,8 @@ The Swiss Ephemeris manual documents the fixed-altitude rise/set calculation.
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
-\section{Crossing is not first visibility}{
 
+\section{Crossing is not first visibility}{
 The result supplies geometry and time. It applies neither atmospheric extinction
 nor a twilight detection threshold and does not test whether the star can be
 seen. A centre exactly at the skyline can remain obscured in a plot or too faint
@@ -107,7 +107,6 @@ original call and convert date/time back with matching calendar and timezone.
 }
 
 \section{Provenance}{
-
 Structured results carry a \code{provenance} attribute. Read it with
 \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
 skyscapeR and swephR versions, with NA when a namespace version is unavailable.
@@ -116,7 +115,9 @@ transformations may discard attributes; save the original result for reference.
 It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
 }
-
+\section{Validation}{
+A02 tested sensitivity to ephemeris conventions using a separate solver on airless lunar-centre trajectories. Across 177 prehistoric skyline crossings, default azimuths differed from JPL Horizons by a median of 0.059 degrees and a maximum of 0.322 degrees. Matching delta T reduced the maximum to 0.027 degrees. Validation of the riseset() event solver is scheduled under A04. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
+}
 \examples{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
   # Rising and setting of the sun on june solstice 2018, from the location of London

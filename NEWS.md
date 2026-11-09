@@ -29,6 +29,12 @@ migration instructions and positional-argument changes, see the README.
 
 ## Analytical plots
 
+* In 2.0.9005, horizontal axes extend to the panel limits, including the local
+  significance panel. Tick positions and labels retain their existing spacing.
+* Compass plots show the rising and setting azimuth intervals of a year-range
+  target as translucent sectors. Only declinations that reach the level
+  horizon contribute. Single bearings retain the target line style.
+
 * Comparisons of one star across epochs place its name, designation and shared location inside the rings and label each ring by year. The vignette illustrates the epoch comparison with Aldebaran and identifies the Moon and Pleiades in its natural-style example. It uses 300-dpi figures, smaller compass plots, two illustrated Milky Way views and fifth-morning examples of heliacal rising.
 
 * `plotAzimuth()` supports spokes and rim ticks. Target lines can lie inside

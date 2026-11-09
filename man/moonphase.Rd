@@ -30,6 +30,9 @@ cannot distinguish waxing from waning.
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
+\section{Validation}{
+In A02, all 108 illuminated fractions agreed with the direct Swiss Ephemeris calculation across 54 epochs and two file generations. This checks the R interface. Observed lunar photometry was outside the study. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
+}
 \examples{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
   # Moonphase at noon GMT on Christmas day 2018:

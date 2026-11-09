@@ -5,15 +5,26 @@
                  names=colnames(channels))
 }
 
+# At a fixed horizon altitude, declination is monotonic in cos(azimuth).
+# Intersect in cosine space so a partly circumpolar interval ends at the meridian.
+.compass_intervals <- function(decs, latitude, altitude) {
+  rad <- pi/180
+  scale <- cos(latitude*rad)*cos(altitude*rad)
+  if (abs(scale) < 1e-14) return(NULL)
+  limits <- (sin(range(decs)*rad) - sin(latitude*rad)*sin(altitude*rad))/scale
+  if (limits[2] <= -1 || limits[1] >= 1) return(NULL)
+  east <- rev(acos(pmax(-1, pmin(1, limits))))/rad
+  rbind(rise=east, set=360-rev(east))
+}
+
 #' Plot orientation measurements on a compass grid
 #' @description Inspect the directions of structural axes on a compass and compare them with candidate
 #' rise or set bearings.
 #' @details Measurements are drawn as spokes or rim ticks. North is at the top and
 #' bearings increase clockwise; repeated bearings can overplot. A data frame supplies the
-#' True.Azimuth column. For optional targets the function uses the session atmosphere to compute a diurnal
-#' track and seeks a zero-altitude crossing in the eastern and western portions of the
-#' track. These reference bearings assume a level horizon and require the corresponding
-#' crossings to exist.
+#' True.Azimuth column. For optional targets the function converts zero apparent altitude to geometric altitude
+#' using the session atmosphere. It solves for rising and setting bearings on a level
+#' horizon and shows the part of each declination interval that reaches it.
 #' @seealso \code{\link{plotBars}}, \code{\link{orbit}}, \code{\link{sketchSky}}, \code{\link{planisphere}}
 #' @return Draws measured bearings and optional target directions on the active graphics device. North is at the top and azimuth increases clockwise.
 #' @param az Azimuths in degrees clockwise from north. Can be omitted if \emph{obj} is given.
@@ -32,7 +43,8 @@
 #' a list of these objects. Each group retains its own epochs and styles
 #' for displaying the azimuths of celestial objects. Note that this assumes a single
 #' location per group and a flat horizon of zero degrees. For a year range,
-#' both stored declination boundaries are drawn as reference bearings.
+#' the target colour fills the interval of rising or setting bearings between
+#' the stored declination limits. A zero-width interval is drawn as a line.
 #' @param show.obj.labels Logical to control whether to display celestial objects names.
 #' Defaults to TRUE.
 #' @export
@@ -64,26 +76,22 @@ plotAzimuth <- function(az, obj, show.obj.labels=TRUE, col=NULL, lty=1, lwd=1.5,
   for (group.index in seq_along(groups)) {
     g <- groups[[group.index]]
     site <- if (inherits(g$loc,"skyscapeR.horizon")) g$loc$metadata$georef else g$loc
-    if (!is.numeric(site) || length(site)<2L || any(!is.finite(site[1:2])))
+    if (!is.numeric(site) || length(site)<2L || any(!is.finite(head(site,3L))) || abs(site[1])>90)
       stop("Supply a site in each skyObject used on a compass.",call.=FALSE)
+    elevation <- if (length(site) >= 3L) site[3] else 0
+    pressure <- atmosphere$atm
+    if (pressure == 0) pressure <- 1013.25*(1-.0065*elevation/288)^5.255
+    altitude <- if (atmosphere$refraction) swephR::swe_refrac_extended(
+      0, elevation, pressure, atmosphere$temp, .0065, 1L)$return else 0
     for (i in seq_len(g$n)) {
-      # Resolve the two horizontal crossings independently. Some targets never cross.
-      for (dec in unique(g$decs[,i])) {
-        path <- do.call(orbit, c(list(dec, g$loc), atmosphere))
-        ok <- is.finite(path$az) & is.finite(path$alt)
-        if (sum(ok)<2L || length(unique(path$az[ok]))<2L) next
-        level <- splinefun(path$az[ok],path$alt[ok],ties=mean)
-        for (event in c("rise","set")) {
-          bounds <- if (event=="rise") c(min(path$az[ok]),180) else c(180,max(path$az[ok]))
-          if (diff(bounds)<=0 || prod(level(bounds))>0) next
-          bearing <- uniroot(level,bounds)$root
-          targets[[length(targets)+1L]] <- data.frame(az=bearing, event=event,
-            name=.target_name(.target_id(g,i)), group=group.index,
-            epoch=paste(vapply(g$epoch,function(t) as.character(BC.AD(t)),character(1)),collapse=" to "),
-            col=as.character(g$col[i]),
-            lty=as.character(g$lty[i]), lwd=g$lwd[i], stringsAsFactors=FALSE)
-        }
-      }
+      bounds <- .compass_intervals(g$decs[,i], site[1], altitude)
+      if (is.null(bounds)) next
+      targets[[length(targets)+1L]] <- data.frame(
+        lo=bounds[,1], hi=bounds[,2], az=rowMeans(bounds), event=rownames(bounds),
+        name=.target_name(.target_id(g,i)), group=group.index,
+        epoch=paste(vapply(g$epoch,function(t) as.character(BC.AD(t)),character(1)),collapse=" to "),
+        col=as.character(g$col[i]), lty=as.character(g$lty[i]), lwd=g$lwd[i],
+        stringsAsFactors=FALSE)
     }
   }
   refs <- do.call(rbind,targets)
@@ -104,6 +112,17 @@ plotAzimuth <- function(az, obj, show.obj.labels=TRUE, col=NULL, lty=1, lwd=1.5,
   }
   lim <- c(-radius,radius)
   plot.window(lim,c(-1.26,1.26),asp=1,xaxs="i",yaxs="i")
+  inside <- obj.position=="inside"
+  inner <- if (inside) .12 else 1.01
+  outer <- if (inside) .99 else 1.16
+  if (NROW(refs)) {
+    cols <- .plot_colour(refs$col,theme)
+    for (i in which(refs$hi > refs$lo)) {
+      arc <- seq(refs$lo[i], refs$hi[i], length.out=ceiling(refs$hi[i]-refs$lo[i])+1L)
+      polygon(rbind(.polar_xy(arc,outer), .polar_xy(rev(arc),inner)),
+              col=.with_alpha(cols[i],.34), border=NA)
+    }
+  }
   lines(.polar_xy(0:360),col=theme$muted,lwd=.8)
   at <- seq(0,345,15)
   a <- .polar_xy(at,ifelse(at%%45==0,.93,.97)); b <- .polar_xy(at)
@@ -116,15 +135,18 @@ plotAzimuth <- function(az, obj, show.obj.labels=TRUE, col=NULL, lty=1, lwd=1.5,
   }
   points(0,0,pch=16,cex=.36,col=theme$ink)
   if (NROW(refs)) {
-    inside <- obj.position=="inside"
-    a <- .polar_xy(refs$az,if (inside) .12 else 1.01)
-    b <- .polar_xy(refs$az,if (inside) .99 else 1.16)
     line.types <- .line_types(refs$lty)
-    cols <- .plot_colour(refs$col,theme)
-    segments(a[,1],a[,2],b[,1],b[,2],col=cols,lty=line.types,lwd=refs$lwd)
+    bounds <- c(refs$lo,refs$hi)
+    index <- rep(seq_len(nrow(refs)),2L)
+    keep <- c(rep(TRUE,nrow(refs)),refs$hi != refs$lo)
+    a <- .polar_xy(bounds[keep],inner)
+    b <- .polar_xy(bounds[keep],outer)
+    index <- index[keep]
+    segments(a[,1],a[,2],b[,1],b[,2],col=cols[index],lty=line.types[index],lwd=refs$lwd[index])
+    b <- .polar_xy(refs$az,outer)
     if (labelled) {
-      # Share one label for coincident/range boundaries with the same name and event.
-      side <- ifelse(sin(refs$az*pi/180)>=0,1,-1)
+      # Point each label to the midpoint of its range.
+      side <- ifelse(refs$event=="rise",1,-1)
       for (s in c(-1,1)) {
         ix <- which(side==s)
         if (!length(ix)) next
@@ -442,6 +464,7 @@ plot.skyscapeR.horizon <- function(x, show.az=(!missing(xrange) || !missing(xlim
   }
 
   .draw_horizon(x,col.ground,use.image,show.skyline,fastLoad)
+  .plot_x_baseline(lwd=.5)
 
   .plot_axis(2,.plot_ticks(yrange),theme=theme)
   mtext("Altitude (\u00b0)",side=2,line=2.25,cex=.86)

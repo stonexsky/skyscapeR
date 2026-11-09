@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./heliacal-rising.html" rel="next">
+<link href="./a02-ephemeris.html" rel="next">
 <link href="./vignette-guide.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -250,8 +250,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span></a>
   </div>
 </li>
       </ul>
@@ -274,11 +280,13 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#h01-field-validation" id="toc-h01-field-validation" class="nav-link active" data-scroll-target="#h01-field-validation"><span class="header-section-number">17.1</span> H01. Horizon altitude at surveyed bearings</a></li>
   <li><a href="#h02-skyline-comparison" id="toc-h02-skyline-comparison" class="nav-link" data-scroll-target="#h02-skyline-comparison"><span class="header-section-number">17.2</span> H02. How well does <code>createHor()</code> reproduce terrain skylines?</a></li>
-  <li><a href="#lunar-event-selection" id="toc-lunar-event-selection" class="nav-link" data-scroll-target="#lunar-event-selection"><span class="header-section-number">17.3</span> Lunar event selection</a></li>
-  <li><a href="#sky-rendering" id="toc-sky-rendering" class="nav-link" data-scroll-target="#sky-rendering"><span class="header-section-number">17.4</span> Sky rendering</a></li>
-  <li><a href="#study-records" id="toc-study-records" class="nav-link" data-scroll-target="#study-records"><span class="header-section-number">17.5</span> Study records</a></li>
-  <li><a href="#when-a-test-changes-the-package" id="toc-when-a-test-changes-the-package" class="nav-link" data-scroll-target="#when-a-test-changes-the-package"><span class="header-section-number">17.6</span> When a test changes the package</a></li>
-  <li><a href="#worked-checks-for-the-final-methods-chapters" id="toc-worked-checks-for-the-final-methods-chapters" class="nav-link" data-scroll-target="#worked-checks-for-the-final-methods-chapters"><span class="header-section-number">17.7</span> Worked checks for the final methods chapters</a></li>
+  <li><a href="#ephemeris-accuracy-and-lunar-skyline-crossings" id="toc-ephemeris-accuracy-and-lunar-skyline-crossings" class="nav-link" data-scroll-target="#ephemeris-accuracy-and-lunar-skyline-crossings"><span class="header-section-number">17.3</span> Ephemeris accuracy and lunar skyline crossings</a></li>
+  <li><a href="#validation-programme" id="toc-validation-programme" class="nav-link" data-scroll-target="#validation-programme"><span class="header-section-number">17.4</span> Validation programme</a></li>
+  <li><a href="#lunar-event-selection" id="toc-lunar-event-selection" class="nav-link" data-scroll-target="#lunar-event-selection"><span class="header-section-number">17.5</span> Lunar event selection</a></li>
+  <li><a href="#sky-rendering" id="toc-sky-rendering" class="nav-link" data-scroll-target="#sky-rendering"><span class="header-section-number">17.6</span> Sky rendering</a></li>
+  <li><a href="#study-records" id="toc-study-records" class="nav-link" data-scroll-target="#study-records"><span class="header-section-number">17.7</span> Study records</a></li>
+  <li><a href="#when-a-test-changes-the-package" id="toc-when-a-test-changes-the-package" class="nav-link" data-scroll-target="#when-a-test-changes-the-package"><span class="header-section-number">17.8</span> When a test changes the package</a></li>
+  <li><a href="#worked-checks-for-the-final-methods-chapters" id="toc-worked-checks-for-the-final-methods-chapters" class="nav-link" data-scroll-target="#worked-checks-for-the-final-methods-chapters"><span class="header-section-number">17.9</span> Worked checks for the final methods chapters</a></li>
   </ul>
 </nav>
     </div>
@@ -393,12 +401,212 @@ ul.task-list li input[type="checkbox"] {
 <p>Against field measurements, <code>createHor()</code> using SRTM had a mean absolute error of 0.328° across 344 bearings at eight Irish setups, lower than either HeyWhatsThat or PeakFinder on those bearings. Its accuracy varied by site. Using the same 1 m terrain product in England, <code>createHor()</code> had a mean absolute error of 0.032° at West Kennet and 0.823° at Rectory Farm. It was closest to the observations at West Kennet. Both online services were closer at Rectory Farm.</p>
 <p>The Maltese figure covers 20,059 directions with continuous 5 km terrain coverage. Xemxija is held out because its archived viewpoint is disputed. At Kunċizzjoni, the Horizon comparison uses the archived Horizon position for both programs. Only predictions made at the field position enter the field comparison. The Irish service comparison uses each provider’s delivered profile and terrain. <a href="https://chatgpt.com/library?file_id=libfile_22229cdbe57c81919dd8170e6c48dc45&amp;account_id=personal">H02 comparison report</a> · <a href="https://chatgpt.com/library?file_id=libfile_fd833a195a748191877d77d68dc7bd84&amp;account_id=personal">Data and code archive</a></p>
 </section>
-<section id="lunar-event-selection" class="level2" data-number="17.3">
-<h2 data-number="17.3" class="anchored" data-anchor-id="lunar-event-selection"><span class="header-section-number">17.3</span> Lunar event selection</h2>
+<section id="ephemeris-accuracy-and-lunar-skyline-crossings" class="level2" data-number="17.3">
+<h2 data-number="17.3" class="anchored" data-anchor-id="ephemeris-accuracy-and-lunar-skyline-crossings"><span class="header-section-number">17.3</span> Ephemeris accuracy and lunar skyline crossings</h2>
+<p><a href="./a02-ephemeris.html">A02</a> reports the geocentric, local sky and lunar crossing comparisons for build 2.0.9004, with both reproducible archives.</p>
+</section>
+<section id="validation-programme" class="level2" data-number="17.4">
+<h2 data-number="17.4" class="anchored" data-anchor-id="validation-programme"><span class="header-section-number">17.4</span> Validation programme</h2>
+<p>Status refers to the agreed protocol for this programme. Earlier studies and worked examples remain available for several planned checks. Each completed ID links to the result for its tested build.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Question or quantity</th>
+<th>Functions in scope</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="#h01-field-validation">H01</a></td>
+<td>How closely do DEM skylines agree with field theodolite readings?</td>
+<td><code>createHor()</code>, <code>hor2alt()</code></td>
+<td>Complete</td>
+</tr>
+<tr class="even">
+<td><a href="#h02-skyline-comparison">H02</a></td>
+<td>How does createHor() compare with other skyline methods and field bearings?</td>
+<td><code>createHor()</code>, <code>createHWT()</code>, <code>importPeakFinder()</code></td>
+<td>Complete</td>
+</tr>
+<tr class="odd">
+<td>H03</td>
+<td>DEM ray tracing, curvature and convergence</td>
+<td><code>createHor()</code>, <code>hor2alt()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="even">
+<td>H04</td>
+<td>Reconstructed earthworks and synthetic panoramas</td>
+<td><code>horFeature()</code>, <code>createHor()</code>, <code>demPalettes()</code>, <code>plot.skyscapeR.horizon()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="odd">
+<td>H05</td>
+<td>Calibrating a photographic horizon</td>
+<td><code>importPanorama()</code>, <code>hor2alt()</code>, <code>createHor()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="even">
+<td>H06</td>
+<td>Horizon providers, PNGs and Stellarium landscapes</td>
+<td><code>createHWT()</code>, <code>downloadHWT()</code>, <code>importPeakFinder()</code>, <code>importPanorama()</code>, <code>exportHor()</code>, <code>exportStellarium()</code>, <code>exportPanorama()</code>, <code>relinkHor()</code>, <code>plot.skyscapeR.horizon()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="odd">
+<td>H07</td>
+<td>Passing incomplete horizons between functions</td>
+<td><code>importPanorama()</code>, <code>hor2alt()</code>, <code>coordtrans()</code>, <code>riseset()</code>, <code>star.phases()</code>, <code>spatial.equinox()</code>, <code>exportHor()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="even">
+<td>F01</td>
+<td>Compass and solar-sight reduction</td>
+<td><code>mag.dec()</code>, <code>reduct.compass()</code>, <code>reduct.theodolite()</code>, <code>sunAz()</code>, <code>ten()</code>, <code>az2dec()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="odd">
+<td>A01</td>
+<td>Calendar, clock, angle and session conventions</td>
+<td><code>BC.AD()</code>, <code>astroYear()</code>, <code>time2jd()</code>, <code>jd2time()</code>, <code>timestring()</code>, <code>long.date()</code>, <code>ten()</code>, <code>skyscapeR.vars()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="even">
+<td><a href="./a02-ephemeris.html">A02</a></td>
+<td>How closely do planetary positions and lunar skyline bearings agree with their JPL references? Includes a crossing sensitivity study relevant to riseset().</td>
+<td><code>body.position()</code>, <code>moonphase()</code></td>
+<td>Complete</td>
+</tr>
+<tr class="odd">
+<td>A03</td>
+<td>Stellar propagation and reference frames</td>
+<td><code>star()</code>, <code>body.position()</code>, <code>obliquity()</code>, <code>parallax.corr()</code>, <code>orbit()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="even">
+<td>A04</td>
+<td>Crossings on flat and irregular skylines</td>
+<td><code>riseset()</code>, <code>orbit()</code>, <code>body.position()</code>, <code>hor2alt()</code>, <code>star.phases()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="odd">
+<td>A05</td>
+<td>Solar dates and limiting declinations</td>
+<td><code>solar.date()</code>, <code>eq()</code>, <code>jS()</code>, <code>dS()</code>, <code>zenith()</code>, <code>antizenith()</code>, <code>obliquity()</code>, <code>parallax.corr()</code>, <code>spatial.equinox()</code>, <code>hor2max.dec()</code>, <code>hor2min.dec()</code>, <code>az2dec()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="even">
+<td>A06</td>
+<td>Moon, planets and extrema across an epoch</td>
+<td><code>moonphase()</code>, <code>nMjLX()</code>, <code>nmnLX()</code>, <code>sMjLX()</code>, <code>smnLX()</code>, <code>planet.extremes()</code>, <code>body.position()</code>, <code>skyObject()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="odd">
+<td>A07</td>
+<td>Equinoctial full Moons and crescent crossovers</td>
+<td><code>EFM()</code>, <code>CC()</code>, <code>moonphase()</code>, <code>riseset()</code>, <code>body.position()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="even">
+<td>A08</td>
+<td>Target screening, dated bands and returned tracks</td>
+<td><code>findTargets()</code>, <code>skyObject()</code>, <code>sky.objects()</code>, <code>star()</code>, <code>solar.date()</code>, <code>hor2max.dec()</code>, <code>hor2min.dec()</code>, <code>orbit()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="odd">
+<td>V01</td>
+<td>Stellar phases and dated visibility</td>
+<td><code>star.phases()</code>, <code>star()</code>, <code>riseset()</code>, <code>sketchSky()</code>, <code>skyRadiance()</code>, <code>plot.skyscapeR.starphases()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="even">
+<td>V02</td>
+<td>Milky Way outer boundary and internal structure</td>
+<td><code>sketchSky()</code>, <code>skyRadiance()</code>, <code>planisphere()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="odd">
+<td>V03</td>
+<td>Twilight gradients and moonlight</td>
+<td><code>sketchSky()</code>, <code>skyRadiance()</code>, <code>body.position()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="even">
+<td>V04</td>
+<td>Flux, cluster glow and the Pleiades</td>
+<td><code>sketchSky()</code>, <code>skyRadiance()</code>, <code>skyStep()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="odd">
+<td>V05</td>
+<td>Atmospheric extinction by altitude</td>
+<td><code>sketchSky()</code>, <code>skyRadiance()</code>, <code>star.phases()</code>, <code>skyscapeR.vars()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="even">
+<td>V06</td>
+<td>Planisphere, sky cultures and constellation geometry</td>
+<td><code>planisphere()</code>, <code>importConstellations()</code>, <code>sketchSky()</code>, <code>star()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="odd">
+<td>V07</td>
+<td>Sky state, Stellarium capture and time stepping</td>
+<td><code>stellariumSky()</code>, <code>sketchSky()</code>, <code>skyStep()</code>, <code>skyscapeR.vars()</code>, <code>plot.skyscapeR.horizon()</code>, <code>time2jd()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="even">
+<td>D01</td>
+<td>Measurement PDFs, circular support and highest-density regions</td>
+<td><code>az.pdf()</code>, <code>dec.pdf()</code>, <code>hpdi()</code>, <code>spd()</code>, <code>subset.skyscapeR.pdf()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="odd">
+<td>D02</td>
+<td>Azimuth-to-declination propagation</td>
+<td><code>az2dec()</code>, <code>coordtrans()</code>, <code>hor2alt()</code>, <code>az.pdf()</code>, <code>dec.pdf()</code>, <code>spd()</code>, <code>hpdi()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="even">
+<td>S01</td>
+<td>Uniform-orientation null model</td>
+<td><code>randomTest()</code>, <code>coordtrans()</code>, <code>az.pdf()</code>, <code>spd()</code>, <code>pval2stars()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="odd">
+<td>S02</td>
+<td>Specified and site-specific nulls</td>
+<td><code>modelTest()</code>, <code>dec.pdf()</code>, <code>az.pdf()</code>, <code>spd()</code>, <code>coordtrans()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="even">
+<td>S03</td>
+<td>Shared scoring, local clusters and analytic probability helpers</td>
+<td><code>randomTest()</code>, <code>modelTest()</code>, <code>bernoulli.trial()</code>, <code>pval2stars()</code>, <code>print.skyscapeR.sigTest()</code>, <code>plot.skyscapeR.sigTest()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="odd">
+<td>W01</td>
+<td>Graphical outputs encode the underlying data</td>
+<td><code>plotAzimuth()</code>, <code>plotBars()</code>, <code>plot.skyscapeR.horizon()</code>, <code>plot.skyscapeR.pdf()</code>, <code>plot.skyscapeR.spd()</code>, <code>plot.skyscapeR.sigTest()</code>, <code>plot.skyscapeR.starphases()</code>, <code>print.skyscapeR.sigTest()</code></td>
+<td>Planned</td>
+</tr>
+<tr class="even">
+<td>W02</td>
+<td>End-to-end field-to-sky and group workflows</td>
+<td><code>reduct.compass()</code>, <code>reduct.theodolite()</code>, <code>createHor()</code>, <code>hor2alt()</code>, <code>az2dec()</code>, <code>az.pdf()</code>, <code>coordtrans()</code>, <code>spd()</code>, <code>randomTest()</code>, <code>modelTest()</code>, <code>findTargets()</code>, <code>skyObject()</code>, <code>star.phases()</code>, <code>riseset()</code>, <code>sketchSky()</code></td>
+<td>Planned</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="lunar-event-selection" class="level2" data-number="17.5">
+<h2 data-number="17.5" class="anchored" data-anchor-id="lunar-event-selection"><span class="header-section-number">17.5</span> Lunar event selection</h2>
 <p>The <a href="lunar-crossovers.html#crossover-archive">historical crossover comparison</a> checks annual selections against the Silva &amp; Pimenta (2012) simulation workbooks. It reports moonset pairing changes, SIM1 residuals and the separate unresolved 40° N series. The new worked examples use 2.0.9004 and do not replace the archived runs.</p>
 </section>
-<section id="sky-rendering" class="level2" data-number="17.4">
-<h2 data-number="17.4" class="anchored" data-anchor-id="sky-rendering"><span class="header-section-number">17.4</span> Sky rendering</h2>
+<section id="sky-rendering" class="level2" data-number="17.6">
+<h2 data-number="17.6" class="anchored" data-anchor-id="sky-rendering"><span class="header-section-number">17.6</span> Sky rendering</h2>
 <p>A plausible image can conceal errors in its outline, brightness or response to altitude. Each row concerns one quantity. A change to the outline can require repeating one study while leaving a recorded twilight comparison relevant.</p>
 <table class="caption-top table">
 <colgroup>
@@ -433,15 +641,15 @@ ul.task-list li input[type="checkbox"] {
 <p><a href="archives/sky-rendering-validation-scripts.zip">Download the five archived sky-rendering scripts</a> for twilight, colour, zoom and shared lighting.</p>
 <p>The <a href="./heliacal-rising.html">heliacal-rising comparison</a> draws on the rendering model for a separate question about the timing of an event.</p>
 </section>
-<section id="study-records" class="level2" data-number="17.5">
-<h2 data-number="17.5" class="anchored" data-anchor-id="study-records"><span class="header-section-number">17.5</span> Study records</h2>
+<section id="study-records" class="level2" data-number="17.7">
+<h2 data-number="17.7" class="anchored" data-anchor-id="study-records"><span class="header-section-number">17.7</span> Study records</h2>
 <p><a href="archives/study-register-evidence.zip">Download the sky-check outputs and code</a>. The H01 report and reproducible field archive are linked in the H01 section above.</p>
 <ul>
 <li><a href="https://chatgpt.com/library?file_id=libfile_95fe5213a7ec8191bda3065faa73ff1a&amp;account_id=personal">Sky-rendering development studies and code</a></li>
 </ul>
 </section>
-<section id="when-a-test-changes-the-package" class="level2" data-number="17.6">
-<h2 data-number="17.6" class="anchored" data-anchor-id="when-a-test-changes-the-package"><span class="header-section-number">17.6</span> When a test changes the package</h2>
+<section id="when-a-test-changes-the-package" class="level2" data-number="17.8">
+<h2 data-number="17.8" class="anchored" data-anchor-id="when-a-test-changes-the-package"><span class="header-section-number">17.8</span> When a test changes the package</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -474,9 +682,9 @@ ul.task-list li input[type="checkbox"] {
 </table>
 <p>Each study should have a stable link. Each run should identify the exact source revision or package archive checksum, the data and protocol versions, settings, metric, sample and dated outputs. The main text carries the conclusion a reader can use for the documented release. Earlier runs remain accessible in that study’s history.</p>
 </section>
-<section id="worked-checks-for-the-final-methods-chapters" class="level2" data-number="17.7">
-<h2 data-number="17.7" class="anchored" data-anchor-id="worked-checks-for-the-final-methods-chapters"><span class="header-section-number">17.7</span> Worked checks for the final methods chapters</h2>
-<p><a href="./astronomical-conventions.html">Calendar and position calculations</a>, <a href="./field-reduction.html">synthetic instrument reductions</a> and the <a href="./photographic-horizons.html">known photographic skyline</a> have reproducible worked examples for 2.0.9004. Independent frame-matched positions, a surveyed baseline and photographic check bearings remain outstanding.</p>
+<section id="worked-checks-for-the-final-methods-chapters" class="level2" data-number="17.9">
+<h2 data-number="17.9" class="anchored" data-anchor-id="worked-checks-for-the-final-methods-chapters"><span class="header-section-number">17.9</span> Worked checks for the final methods chapters</h2>
+<p><a href="./astronomical-conventions.html">Calendar and position calculations</a>, <a href="./field-reduction.html">synthetic instrument reductions</a> and the <a href="./photographic-horizons.html">known photographic skyline</a> have reproducible worked examples for 2.0.9004. <a href="./a02-ephemeris.html">A02</a> now provides independent planetary and lunar position comparisons. Stellar reference-frame checks, a surveyed baseline and photographic check bearings remain outstanding.</p>
 
 
 </section>
@@ -889,8 +1097,8 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./heliacal-rising.html" class="pagination-link" aria-label="Checking the date of heliacal rising">
-        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./a02-ephemeris.html" class="pagination-link" aria-label="A02 · Ephemeris accuracy and lunar skyline crossings">
+        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

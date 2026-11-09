@@ -12,3 +12,6 @@
 ^inst/doc/skyscapeR_files$
 ^docs$
 ^manual$
+(^|/)\.DS_Store$
+^build/partial\.rdb$
+^vignettes/skyscapeR\.(html|R)$

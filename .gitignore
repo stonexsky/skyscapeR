@@ -5,3 +5,7 @@
 dev/
 inst/doc
 /build/vignette.rds
+/build/partial.rdb
+.DS_Store
+/vignettes/skyscapeR.R
+/vignettes/skyscapeR.html

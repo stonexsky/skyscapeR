@@ -168,8 +168,9 @@ The analytical plots use a common publication palette. Select
 the sketch's style for the numerical foreground. A linked panorama keeps its source colours.
 
 `plotAzimuth(centre, obj = targets, marks = "rim", obj.position = "outside")`
-draws short reference lines beyond the measured bearings. With either inside or
-outside lines, the two-line target labels always sit outside the circle. The
+draws target bearings just beyond the rim. A single epoch gives a line. A year
+range gives a shaded band for each rising or setting interval. With either
+position, the two-line target labels always sit outside the circle. The
 second line identifies rise or set. Use `show.obj.labels = FALSE` for
 unlabelled references. On a compass, phase circle or planisphere,
 `show.legend = FALSE` also suppresses titles and callouts, leaving the

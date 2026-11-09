@@ -72,6 +72,20 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="manual.css">
+<!-- study-permalinks -->
+<script>
+const studyPages = {
+  '#a02-ephemeris-accuracy': 'a02-ephemeris.html',
+  '#h01-field-validation': 'study-register.html',
+  '#h02-skyline-comparison': 'study-register.html'
+};
+function openStudy() {
+  const page = studyPages[location.hash];
+  if (page) location.replace(page + location.hash);
+}
+openStudy();
+window.addEventListener('hashchange', openStudy);
+</script>
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -249,8 +263,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span></a>
   </div>
 </li>
       </ul>
@@ -312,7 +332,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="finding-the-evidence" class="level2">
 <h2 class="anchored" data-anchor-id="finding-the-evidence">Finding the evidence</h2>
-<p>For terrain horizons, <a href="./study-register.html#h01-field-validation">H01</a> measures field accuracy and <a href="./study-register.html#h02-skyline-comparison">H02</a> compares numerical skylines at matched viewpoints. For sky reconstruction, consult the <a href="./sky-rendering.html#milky-way-boundary-internal-structure-and-calibration">Milky Way tracing and calibration</a> and the <a href="./study-register.html#sky-rendering">sky-rendering studies</a>. The <a href="./heliacal-rising.html">heliacal-rising study</a> evaluates event timing. The <a href="./ephemeris.html">ephemeris chapter</a> distinguishes upstream precision claims from independent tests of this package.</p>
+<p>For astronomical positions and prehistoric lunar bearings, <a href="./a02-ephemeris.html">A02</a> compares skyscapeR with the parent JPL ephemerides and JPL Horizons. For terrain horizons, <a href="./study-register.html#h01-field-validation">H01</a> measures field accuracy and <a href="./study-register.html#h02-skyline-comparison">H02</a> compares numerical skylines at matched viewpoints. For sky reconstruction, consult the <a href="./sky-rendering.html#milky-way-boundary-internal-structure-and-calibration">Milky Way tracing and calibration</a> and the <a href="./study-register.html#sky-rendering">sky-rendering studies</a>. The <a href="./heliacal-rising.html">heliacal-rising study</a> evaluates event timing. The <a href="./ephemeris.html">ephemeris chapter</a> distinguishes upstream precision claims from independent tests of this package.</p>
 
 
 </section>

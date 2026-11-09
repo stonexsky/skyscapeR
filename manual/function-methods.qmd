@@ -60,6 +60,8 @@ instant.
 
 ### `body.position()` {#fn-body-position}
 
+**A02 validation.** In A02, file-backed geocentric directions for ten bodies agreed with their matching JPL parent to within 0.0065 arcseconds across 1,080 comparisons. At the sampled prehistoric epochs the public topocentric convention differed from JPL Horizons by up to 0.70 degrees in local sky direction at a specified instant. [Geocentric and local position results](a02-ephemeris.qmd).
+
 [Function index](function-index.html#idx-body-position)
 
 ```{=html}
@@ -1901,6 +1903,8 @@ Defaults to TRUE.</p></td></tr></tbody></table><h5>Return value</h5><p>Numeric d
 
 ### `moonphase()` {#fn-moonphase}
 
+**A02 validation.** In A02, all 108 illuminated fractions agreed with the direct Swiss Ephemeris calculation across 54 epochs and two file generations. This checks the R interface. Observed lunar photometry was outside the study. [Lunar illumination check](a02-ephemeris.qmd).
+
 [Function index](function-index.html#idx-moonphase)
 
 ```{=html}
@@ -2048,6 +2052,8 @@ latitude, longitude and elevation of the site, in this order.</p></td></tr><tr><
 **Implementation.** `R/events.R`. [Full function help](help/planet.extremes.html) · [Solar, lunar and planetary events outline](contents-plan.html#plan-events) · [Terrain crossings and event searches](event-searches.html#event-planets)
 
 ### `riseset()` {#fn-riseset}
+
+**A02 validation.** A02 tested sensitivity to ephemeris conventions using a separate solver on airless lunar-centre trajectories. Across 177 prehistoric skyline crossings, default azimuths differed from JPL Horizons by a median of 0.059 degrees and a maximum of 0.322 degrees. Matching delta T reduced the maximum to 0.027 degrees. Validation of the riseset() event solver is scheduled under A04. [Lunar crossing results](a02-ephemeris.qmd).
 
 [Function index](function-index.html#idx-riseset)
 
