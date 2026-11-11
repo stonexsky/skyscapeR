@@ -1,0 +1,43 @@
+# `plot.skyscapeR.pdf()` {#fn-plot-skyscaper-pdf}
+
+In W01 the shaded components matched the two intervals returned by hpdi() for a bimodal density. [W01 results](w01-plot-geometry.qmd).
+
+[Function index](function-index.html#idx-plot-skyscaper-pdf)
+
+```{=html}
+<p>Individual curves reveal whether measurements overlap or have disjoint high-density
+regions. In the stacked view, each selected density is scaled by its own peak for
+display and its highest-density regions are shaded using hpdi. Heights across different
+rows therefore do not measure relative probability mass. Use the linked panels for one
+transformed observation to inspect how its source azimuth distribution and horizon
+produce the declination distribution. Its annotation gives the measurement name
+and the highest-density declination interval or intervals containing the requested
+probability mass. Every disjoint component is listed in the HDR readout. Standalone curves have a fixed label column.
+</p>
+<p>With neither source input supplied, plot the distributions alone. With both
+<code>az</code> and <code>hor</code>, show the information, azimuth, transformation and
+declination panels. A single <code>index</code> is required for combined panels.
+Supplying only one source input is an error, as is supplying source inputs
+for an azimuth distribution. Source inputs must be named explicitly.
+</p>
+```
+
+**Interpretation and limits.** An interval bar, a bearing spoke and a density curve encode different features of a measurement. Retain individual measurement identities, especially where overplotting makes repeated orientations appear to be a single observation.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>x</code></th><td>—</td><td><p>A <em>skyscapeR.pdf</em> object created with either <code>az.pdf</code> or <code>coordtrans</code></p></td></tr><tr><th scope="row"><code>index</code></th><td>—</td><td><p>A value to indicate which distribution to plot, when only one is desired.</p></td></tr><tr><th scope="row"><code>hdr</code></th><td><code>0.954</code></td><td><p>High density region to highlight. Defaults to 0.954</p></td></tr><tr><th scope="row"><code>show.az</code></th><td>—</td><td><p>Deprecated and ignored, with a warning when supplied. Provide both
+<code>az</code> and <code>hor</code> for the combined panels, or omit both for distributions alone.</p></td></tr><tr><th scope="row"><code>xrange</code></th><td>—</td><td><p>Range of x-axis to plot.</p></td></tr><tr><th scope="row"><code>col</code></th><td><code>NULL</code></td><td><p>Fill colour for highest-density regions. NULL uses the current style.</p></td></tr><tr><th scope="row"><code>...</code></th><td>—</td><td><p>Additional arguments to be passed to <em>plot</em>.</p></td></tr><tr><th scope="row"><code>az</code></th><td>—</td><td><p>Original azimuth <em>skyscapeR.pdf</em>, in the same order and with
+the same number of distributions as <code>x</code>. Supply together with <code>hor</code>
+to show combined panels for a single declination distribution.</p></td></tr><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>Original horizon object, or a list of horizons in the same order
+and with the same length as the distributions in <code>x</code>. Supply with <code>az</code>.</p></td></tr><tr><th scope="row"><code>xlim</code></th><td>—</td><td><p>Earlier name for xrange.</p></td></tr><tr><th scope="row"><code>show.legend</code></th><td><code>TRUE</code></td><td><p>Show the HDR mass above stacked densities. The linked diagnostic always identifies
+its component panels and reports the numerical interval or intervals.</p></td></tr><tr><th scope="row"><code>style</code></th><td><code>&quot;publication-colour&quot;</code></td><td><p>Analytical display style, either <code>"publication-colour"</code> (default) or
+<code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p></td></tr></tbody></table><h5>Return value</h5><p>Draws the selected probability distributions and requested intervals on the active graphics device.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/plotting.R`. [Full function help](help/plot.skyscapeR.pdf.html) · [Uncertainty and orientation distributions outline](contents-plan.html#plan-density) · [What the orientation displays calculate](orientation-densities.html#orientation-displays) · [Give each opening a distribution](vignette-guide.html#workflow-give-each-opening-a-distribution)

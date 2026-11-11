@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>12&nbsp; Testing orientation distributions – skyscapeR technical manual</title>
+<title>Testing orientation distributions – skyscapeR technical manual</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -62,7 +62,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a33b4903dc4ac24f2ffbded35a86d5f2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -104,7 +104,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./significance.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Testing orientation distributions</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./significance.html"><span class="chapter-title">Testing orientation distributions</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -137,14 +137,12 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents-plan.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Methods by research question</span></span></a>
+  <a href="./contents-plan.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Methods by research question</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ephemeris.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">swephR and the Swiss Ephemeris</span></span></a>
+  <a href="./ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">swephR and the Swiss Ephemeris</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -158,132 +156,663 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./astronomical-conventions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Astronomical conventions and stellar positions</span></span></a>
+  <a href="./astronomical-conventions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Astronomical conventions and stellar positions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./field-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Reducing compass and theodolite observations</span></span></a>
+  <a href="./field-reduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Reducing compass and theodolite observations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./horizons.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Constructing a site horizon</span></span></a>
+  <a href="./horizons.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Constructing a site horizon</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./photographic-horizons.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Calibrating photographic skylines and exchanging horizons</span></span></a>
+  <a href="./photographic-horizons.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Calibrating photographic skylines and exchanging horizons</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./stellar-phases.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Seasonal stellar visibility</span></span></a>
+  <a href="./stellar-phases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Seasonal stellar visibility</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./orientation-densities.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">From a measured orientation to a declination distribution</span></span></a>
+  <a href="./orientation-densities.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">From a measured orientation to a declination distribution</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./event-searches.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Terrain crossings and event searches</span></span></a>
+  <a href="./event-searches.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Terrain crossings and event searches</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lunar-crossovers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Equinoctial full Moons and crescent crossovers</span></span></a>
+  <a href="./lunar-crossovers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Equinoctial full Moons and crescent crossovers</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./celestial-targets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Identifying celestial candidates and limiting declinations</span></span></a>
+  <a href="./celestial-targets.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Identifying celestial candidates and limiting declinations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./significance.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Testing orientation distributions</span></span></a>
+  <a href="./significance.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Testing orientation distributions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./sky-rendering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sky reconstruction and visual radiance</span></span></a>
+  <a href="./sky-rendering.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Sky reconstruction and visual radiance</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Function reference</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./function-index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Function index</span></span></a>
+  <a href="./function-index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Function index</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./function-methods.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Function methods and implementation notes</span></span></a>
+  <a href="./function-methods.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Function methods and implementation notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./vignette-guide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Following the package vignette</span></span></a>
+  <a href="./vignette-guide.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Following the package vignette</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Validation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Time, coordinates and ephemerides</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Studies by question and package build</span></span></a>
+  <a href="./fn-astroyear.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>astroYear()</code></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></span></a>
+  <a href="./fn-bc-ad.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>BC.AD()</code></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./numerical-validation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Calendar, density and significance checks</span></span></a>
+  <a href="./fn-body-position.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>body.position()</code></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span></a>
+  <a href="./fn-jd2time.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>jd2time()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-long-date.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>long.date()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-obliquity.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>obliquity()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-parallax-corr.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>parallax.corr()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-skyscaper-vars.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>skyscapeR.vars()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-ten.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>ten()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-time2jd.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>time2jd()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-timestring.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>timestring()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Reducing field observations</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-mag-dec.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>mag.dec()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-reduct-compass.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>reduct.compass()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-reduct-theodolite.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>reduct.theodolite()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-sunaz.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>sunAz()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Terrain horizons and panoramas</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-createhor.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>createHor()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-createhwt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>createHWT()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-dempalettes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>demPalettes()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-downloadhwt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>downloadHWT()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-exporthor.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>exportHor()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-exportpanorama.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>exportPanorama()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-exportstellarium.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>exportStellarium()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-hor2alt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>hor2alt()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-horfeature.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>horFeature()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-importpanorama.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>importPanorama()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-importpeakfinder.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>importPeakFinder()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-plot-skyscaper-horizon.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>plot.skyscapeR.horizon()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-relinkhor.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>relinkHor()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">From bearings to celestial targets</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-antizenith.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>antizenith()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-az2dec.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>az2dec()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-findtargets.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>findTargets()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-hor2max-dec.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>hor2max.dec()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-hor2min-dec.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>hor2min.dec()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-orbit.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>orbit()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-sky-objects.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>sky.objects()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-skyobject.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>skyObject()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-spatial-equinox.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>spatial.equinox()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-zenith.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>zenith()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Solar, lunar and planetary events</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-cc.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>CC()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-ds.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>dS()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-efm.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>EFM()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-eq.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>eq()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-js.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>jS()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-moonphase.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>moonphase()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-nmjlx.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>nMjLX()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-nmnlx.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>nmnLX()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-planet-extremes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>planet.extremes()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-riseset.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>riseset()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-smjlx.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>sMjLX()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-smnlx.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>smnLX()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-solar-date.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>solar.date()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Stellar positions and seasonal visibility</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-plot-skyscaper-starphases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>plot.skyscapeR.starphases()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-star.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>star()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-star-phases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>star.phases()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Sky brightness and visualisation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-importconstellations.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>importConstellations()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-planisphere.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>planisphere()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-sketchsky.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>sketchSky()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-skyradiance.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>skyRadiance()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-skystep.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>skyStep()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-stellariumsky.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>stellariumSky()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">Uncertainty and orientation distributions</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-az-pdf.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>az.pdf()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-coordtrans.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>coordtrans()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-dec-pdf.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>dec.pdf()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-hpdi.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>hpdi()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-plot-skyscaper-pdf.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>plot.skyscapeR.pdf()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-plot-skyscaper-spd.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>plot.skyscapeR.spd()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-plotazimuth.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>plotAzimuth()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-plotbars.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>plotBars()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-spd.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>spd()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-subset-skyscaper-pdf.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>subset.skyscapeR.pdf()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+ <span class="menu-text">Null models and significance</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-bernoulli-trial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>bernoulli.trial()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-modeltest.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>modelTest()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-plot-skyscaper-sigtest.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>plot.skyscapeR.sigTest()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-print-skyscaper-sigtest.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>print.skyscapeR.sigTest()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-pval2stars.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>pval2stars()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-randomtest.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>randomTest()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
+ <span class="menu-text">Validation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./numerical-validation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Calendar, density and significance checks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a01-calendar-checks.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A01 · Calendar, clock and angular conventions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a04-stellar-crossings.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A04 · Crossing times, bearings and event order</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a05-solar-limits.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A05 · Solar dates and limiting declinations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a08-target-ranges.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A08 · Target screening and dated bands</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./d01-density-checks.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">D01 · Measurement densities, sums and highest-density regions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./d02-bearing-propagation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">D02 · Bearing uncertainty on flat and irregular skylines</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h01-field-validation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H01. Horizon altitude at surveyed bearings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h07-panorama-coverage.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H07 · Coverage of partial photographic skylines</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s01-uniform-orientation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">S01 · Calibration of the uniform-orientation test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s02-specified-models.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">S02 · Specified and site-specific null models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s03-scoring-checks.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">S03 · Monte Carlo ranks, local clusters and reported probabilities</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./w01-plot-geometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">W01 · Geometry and labels in graphical outputs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./w02-field-to-sky.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">W02 · End-to-end field-to-sky replay</span></a>
   </div>
 </li>
       </ul>
@@ -301,25 +830,25 @@ div.csl-indent {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">Chapter contents</h2>
    
   <ul>
-  <li><a href="#meth-random" id="toc-meth-random" class="nav-link active" data-scroll-target="#meth-random"><span class="header-section-number">12.1</span> Random orientations</a></li>
-  <li><a href="#meth-model" id="toc-meth-model" class="nav-link" data-scroll-target="#meth-model"><span class="header-section-number">12.2</span> Specified orientation models</a></li>
-  <li><a href="#score-tests" id="toc-score-tests" class="nav-link" data-scroll-target="#score-tests"><span class="header-section-number">12.3</span> Shared scoring algorithm</a></li>
-  <li><a href="#sig-history" id="toc-sig-history" class="nav-link" data-scroll-target="#sig-history"><span class="header-section-number">12.4</span> What changed since the publications?</a></li>
-  <li><a href="#reading-a-fit" id="toc-reading-a-fit" class="nav-link" data-scroll-target="#reading-a-fit"><span class="header-section-number">12.5</span> Reading a fit</a></li>
-  <li><a href="#sig-output" id="toc-sig-output" class="nav-link" data-scroll-target="#sig-output"><span class="header-section-number">12.6</span> Reading the Ġgantija worked fit</a></li>
-  <li><a href="#strengths-limits-and-evidence" id="toc-strengths-limits-and-evidence" class="nav-link" data-scroll-target="#strengths-limits-and-evidence"><span class="header-section-number">12.7</span> Strengths, limits and evidence</a></li>
+  <li><a href="#meth-random" id="toc-meth-random" class="nav-link active" data-scroll-target="#meth-random">Random orientations</a></li>
+  <li><a href="#meth-model" id="toc-meth-model" class="nav-link" data-scroll-target="#meth-model">Specified orientation models</a></li>
+  <li><a href="#score-tests" id="toc-score-tests" class="nav-link" data-scroll-target="#score-tests">Shared scoring algorithm</a></li>
+  <li><a href="#sig-history" id="toc-sig-history" class="nav-link" data-scroll-target="#sig-history">What changed since the publications?</a></li>
+  <li><a href="#reading-a-fit" id="toc-reading-a-fit" class="nav-link" data-scroll-target="#reading-a-fit">Reading a fit</a></li>
+  <li><a href="#sig-output" id="toc-sig-output" class="nav-link" data-scroll-target="#sig-output">Reading the Ġgantija worked fit</a></li>
+  <li><a href="#strengths-limits-and-evidence" id="toc-strengths-limits-and-evidence" class="nav-link" data-scroll-target="#strengths-limits-and-evidence">Strengths, limits and evidence</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./significance.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Testing orientation distributions</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./significance.html"><span class="chapter-title">Testing orientation distributions</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-tests" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Testing orientation distributions</span></span></h1>
+<h1 class="title"><span id="sec-tests" class="quarto-section-identifier"><span class="chapter-title">Testing orientation distributions</span></span></h1>
 </div>
 
 
@@ -336,14 +865,14 @@ div.csl-indent {
 </header>
 
 
-<p><a href="./numerical-validation.html#s02-specified-models">Specified-model calibration and Maltese reconstructions</a>.</p>
+<p><a href="./s02-specified-models.html">Specified-model calibration and Maltese reconstructions</a>.</p>
 <p><strong>Implementation.</strong> skyscapeR 2.0.9004, <code>R/statistics.R</code> and <code>R/model-simulation.R</code>. The procedures below operate on a summed probability density (SPD) of measured orientations. <span class="citation" data-cites="silva2020">Silva (<a href="references.html#ref-silva2020" role="doc-biblioref">2020, sec. 4</a>)</span> introduced the random-orientation test. <span class="citation" data-cites="silvaloms2025">Silva and Lomsdalen (<a href="references.html#ref-silvaloms2025" role="doc-biblioref">2025</a>, “Methodology” and “Landscape tests”)</span> extended the framework to specified landscape and astronomical hypotheses, including models particular to individual sites. The two functions answer different questions even when they score exactly the same observed curve.</p>
 <p>For the construction of the empirical and transformed measurement curves, see the <a href="./orientation-densities.html">density chapter</a>.</p>
-<p>See the <a href="./numerical-validation.html#s03-scoring-checks">independent checks on build 2.0.9005</a> for results and limitations.</p>
-<section id="meth-random" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="meth-random"><span class="header-section-number">12.1</span> Random orientations</h2>
-<p><a href="function-methods.html#fn-randomtest"><code>randomTest()</code></a> asks whether independent draws of structural bearings, with the observed sample size, measurement errors and site geometry, could produce departures at least as large as those observed. Randomness is specified in <strong>azimuth</strong>. A uniform distribution of bearings generally induces a non-uniform distribution of declinations. Even on a level horizon, the mapping from bearing to declination has turning points; terrain relief changes the mapping further <span class="citation" data-cites="silva2020">(<a href="references.html#ref-silva2020" role="doc-biblioref">Silva 2020, secs 3–4</a>)</span>.</p>
-<p>Each replicate samples one centre per measurement, uniformly with replacement on the source bearing grid in [0°, 360°). Build 2.0.9007 reconstructs each density with its source width, family, grid spacing and cutoff. On the shared-horizon route the observed and simulated azimuth sums use the same <code>.res</code> before transformation. <a href="./numerical-validation.html#s01-uniform-orientation">S01</a> reports false positives, power and the consequences for earlier fits.</p>
+<p>See the <a href="./s03-scoring-checks.html">independent checks on build 2.0.9005</a> for results and limitations.</p>
+<section id="meth-random" class="level2">
+<h2 class="anchored" data-anchor-id="meth-random">Random orientations</h2>
+<p><a href="fn-randomtest.html"><code>randomTest()</code></a> asks whether independent draws of structural bearings, with the observed sample size, measurement errors and site geometry, could produce departures at least as large as those observed. Randomness is specified in <strong>azimuth</strong>. A uniform distribution of bearings generally induces a non-uniform distribution of declinations. Even on a level horizon, the mapping from bearing to declination has turning points; terrain relief changes the mapping further <span class="citation" data-cites="silva2020">(<a href="references.html#ref-silva2020" role="doc-biblioref">Silva 2020, secs 3–4</a>)</span>.</p>
+<p>Each replicate samples one centre per measurement, uniformly with replacement on the source bearing grid in [0°, 360°). Build 2.0.9007 reconstructs each density with its source width, family, grid spacing and cutoff. On the shared-horizon route the observed and simulated azimuth sums use the same <code>.res</code> before transformation. <a href="./s01-uniform-orientation.html">S01</a> reports false positives, power and the consequences for earlier fits.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -372,22 +901,22 @@ div.csl-indent {
 </table>
 <p>The second route constructs one aggregate before transformation. The third preserves the contribution of each site’s skyline and measurement uncertainty through the transformation. Report the route used: with differences in interpolation, truncation and site geometry, the two routes need not return identical curves. Optional normalisation gives each final SPD unit trapezoidal area. It cannot correct a misassigned horizon.</p>
 </section>
-<section id="meth-model" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="meth-model"><span class="header-section-number">12.2</span> Specified orientation models</h2>
-<p><a href="function-methods.html#fn-modeltest"><code>modelTest()</code></a> asks whether the observed curve is compatible with a proposed distribution. <span class="citation" data-cites="silvaloms2025">Silva and Lomsdalen (<a href="references.html#ref-silvaloms2025" role="doc-biblioref">2025</a>)</span> constructed site-specific slope-aspect models from terrain around the Maltese temples and a shared wind model from reversed wind-direction frequencies. The innovation of that paper was the capacity to test <strong>specified alternatives to uniform bearings</strong>, including site-specific ones. The general function accepts the resulting distributions; generating and justifying the landscape or astronomical model remains the analyst’s responsibility.</p>
+<section id="meth-model" class="level2">
+<h2 class="anchored" data-anchor-id="meth-model">Specified orientation models</h2>
+<p><a href="fn-modeltest.html"><code>modelTest()</code></a> asks whether the observed curve is compatible with a proposed distribution. <span class="citation" data-cites="silvaloms2025">Silva and Lomsdalen (<a href="references.html#ref-silvaloms2025" role="doc-biblioref">2025</a>)</span> constructed site-specific slope-aspect models from terrain around the Maltese temples and a shared wind model from reversed wind-direction frequencies. The innovation of that paper was the capacity to test <strong>specified alternatives to uniform bearings</strong>, including site-specific ones. The general function accepts the resulting distributions; generating and justifying the landscape or astronomical model remains the analyst’s responsibility.</p>
 <p>The empirical PDF sets the coordinate system. Supply one table for a common model or one table per observation in matching order. A row gives a candidate angle and a nonnegative weight. Sampling probabilities are proportional to the weights. For a continuous density tabulated on an uneven grid, a cell’s weight should approximate its <em>integrated mass</em>, for example density times represented cell width. Using its ordinate alone can favour a densely sampled sector for purely numerical reasons.</p>
-<p>Each replicate draws a centre for each observation. Build 2.0.9008 also reuses the source grid and cutoff for directly constructed densities. Directly constructed PDFs retain any of the <a href="./orientation-densities.html#measurement-families">six measurement families</a>. Both tests preserve each observation’s taper, Gaussian survey error or triangular asymmetry in simulations. For a direct triangle each candidate is a mode. Overriding <code>unc</code> in <code>modelTest()</code> rescales both sides of the triangle in proportion. For the softened uniform families the taper or survey-error SD remains fixed in degrees. For a declination PDF from <a href="function-methods.html#fn-coordtrans"><code>coordtrans()</code></a>, the default instead translates each piecewise-linear measurement curve. If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mi>i</mi></msub><annotation encoding="application/x-tex">f_i</annotation></semantics></math> is the stored density and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>i</mi></msub><mo>=</mo><mo>∫</mo><mi>x</mi><msub><mi>f</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><mi>d</mi><mi>x</mi><mi>/</mi><mo>∫</mo><msub><mi>f</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><mi>d</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">m_i=\int x f_i(x)\,dx/\int f_i(x)\,dx</annotation></semantics></math>, a candidate <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mi>i</mi></msub><annotation encoding="application/x-tex">c_i</annotation></semantics></math> produces the template <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>−</mo><msub><mi>c</mi><mi>i</mi></msub><mo>+</mo><msub><mi>m</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f_i(x-c_i+m_i)</annotation></semantics></math>. Its width, asymmetry and multiple peaks survive translation before grid interpolation. A positive-weight candidate that would push density outside ±90° causes an error. An explicit <code>unc</code> for transformed input selects a normal simulation density. A translated template assumes that the original shape applies at the new mean; a different skyline sector may produce a different shape. This is a modelling choice worth testing when the result depends on it.</p>
+<p>Each replicate draws a centre for each observation. Build 2.0.9008 also reuses the source grid and cutoff for directly constructed densities. Directly constructed PDFs retain any of the <a href="./orientation-densities.html#measurement-families">six measurement families</a>. Both tests preserve each observation’s taper, Gaussian survey error or triangular asymmetry in simulations. For a direct triangle each candidate is a mode. Overriding <code>unc</code> in <code>modelTest()</code> rescales both sides of the triangle in proportion. For the softened uniform families the taper or survey-error SD remains fixed in degrees. For a declination PDF from <a href="fn-coordtrans.html"><code>coordtrans()</code></a>, the default instead translates each piecewise-linear measurement curve. If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mi>i</mi></msub><annotation encoding="application/x-tex">f_i</annotation></semantics></math> is the stored density and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>i</mi></msub><mo>=</mo><mo>∫</mo><mi>x</mi><msub><mi>f</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><mi>d</mi><mi>x</mi><mi>/</mi><mo>∫</mo><msub><mi>f</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><mi>d</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">m_i=\int x f_i(x)\,dx/\int f_i(x)\,dx</annotation></semantics></math>, a candidate <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mi>i</mi></msub><annotation encoding="application/x-tex">c_i</annotation></semantics></math> produces the template <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>−</mo><msub><mi>c</mi><mi>i</mi></msub><mo>+</mo><msub><mi>m</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f_i(x-c_i+m_i)</annotation></semantics></math>. Its width, asymmetry and multiple peaks survive translation before grid interpolation. A positive-weight candidate that would push density outside ±90° causes an error. An explicit <code>unc</code> for transformed input selects a normal simulation density. A translated template assumes that the original shape applies at the new mean; a different skyline sector may produce a different shape. This is a modelling choice worth testing when the result depends on it.</p>
 </section>
-<section id="score-tests" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="score-tests"><span class="header-section-number">12.3</span> Shared scoring algorithm</h2>
+<section id="score-tests" class="level2">
+<h2 class="anchored" data-anchor-id="score-tests">Shared scoring algorithm</h2>
 <p>Let <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Y</mi><mn>0</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">Y_0(x)</annotation></semantics></math> be the observed SPD and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Y</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>Y</mi><mi>B</mi></msub></mrow><annotation encoding="application/x-tex">Y_1,\ldots,Y_B</annotation></semantics></math> the simulated SPDs on a common grid. At each <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>, all <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">B+1</annotation></semantics></math> values define the sample standard deviation <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">s(x)</annotation></semantics></math> and quantile bounds. For a two-tailed 95% envelope, the bounds <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>,</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">L,U</annotation></semantics></math> are the 2.5th and 97.5th percentiles. For an upper-tail 95% envelope, use the 95th percentile alone. The implementation calls R’s default sample quantile. Every curve is scored against these same bounds. For a two-tailed test the unsigned contribution is</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mi>j</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>Y</mi><mi>j</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>U</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>L</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><msub><mi>Y</mi><mi>j</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mi>s</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">d_j(x)=\frac{\max(Y_j(x)-U(x),0)+\max(L(x)-Y_j(x),0)}{s(x)}.</annotation></semantics></math></p>
-<p>Set the contribution to zero where all curves agree; omit the lower term in an upper-tail test. Only strict crossings contribute. If the simulations agree but the observation differs, pooling keeps the observed departure eligible and the fit records that angle in <code>constant.departures</code>. The global score is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mi>j</mi></msub><mo>=</mo><msub><mo>∑</mo><mi>x</mi></msub><msub><mi>d</mi><mi>j</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">T_j=\sum_x d_j(x)</annotation></semantics></math>. It is a grid sum: keep grid spacing fixed across curves. The defaults are 0.1° for <a href="function-methods.html#fn-randomtest"><code>randomTest()</code></a> and 0.01° for <a href="function-methods.html#fn-modeltest"><code>modelTest()</code></a>. Both default to 1,000 simulations, two tails, 95% pointwise coverage and no final normalisation.</p>
+<p>Set the contribution to zero where all curves agree; omit the lower term in an upper-tail test. Only strict crossings contribute. If the simulations agree but the observation differs, pooling keeps the observed departure eligible and the fit records that angle in <code>constant.departures</code>. The global score is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mi>j</mi></msub><mo>=</mo><msub><mo>∑</mo><mi>x</mi></msub><msub><mi>d</mi><mi>j</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">T_j=\sum_x d_j(x)</annotation></semantics></math>. It is a grid sum: keep grid spacing fixed across curves. The defaults are 0.1° for <a href="fn-randomtest.html"><code>randomTest()</code></a> and 0.01° for <a href="fn-modeltest.html"><code>modelTest()</code></a>. Both default to 1,000 simulations, two tails, 95% pointwise coverage and no final normalisation.</p>
 <p>For the global test let <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math> be the number of simulated scores greater than or equal to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mn>0</mn></msub><annotation encoding="application/x-tex">T_0</annotation></semantics></math>. The returned value is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>b</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>B</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">(b+1)/(B+1)</annotation></semantics></math> <span class="citation" data-cites="north2002 dufour2006">(<a href="references.html#ref-north2002" role="doc-biblioref">North, Curtis, and Sham 2002</a>; <a href="references.html#ref-dufour2006" role="doc-biblioref">Dufour 2006</a>)</span>. At <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mo>=</mo><mn>1000</mn></mrow><annotation encoding="application/x-tex">B=1000</annotation></semantics></math>, zero exceedances gives <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>1001</mn></mrow><annotation encoding="application/x-tex">1/1001</annotation></semantics></math>; complete ties give 1. Exchangeability requires that the observed and simulated datasets be processed comparably under the specified null. More simulations improve rank resolution. They cannot repair a null that ignores dependence among structures.</p>
-<p>For a local result, find contiguous crossings of the same bound with at least two grid points spanning at least 0.5°. Sum the departures within each observed cluster. Repeat the cluster search in every simulation and retain its <strong>largest</strong> cluster score, or zero if none qualifies. Compare each observed cluster with these simulated maxima using the same inclusive rank. A two-tailed search includes both signs. The global test uses all departures, including those too narrow for local reporting. The local correction accounts for searching this grid under the complete null; it does not locate an individual significant endpoint or adjust for comparing many archaeological subsets <span class="citation" data-cites="maris2007 sassen2019">(<a href="references.html#ref-maris2007" role="doc-biblioref">Maris and Oostenveld 2007</a>; <a href="references.html#ref-sassen2019" role="doc-biblioref">Sassenhagen and Draschkow 2019</a>)</span>. Through 2.0.9005, north-crossing clusters were split at the stored seam. Build 2.0.9006 joins adjacent excesses or deficits across north in both the observations and simulations, and excludes a duplicate north direction from the global score. A reported interval with start greater than end crosses north clockwise. See the <a href="./numerical-validation.html#s03-scoring-checks">fixed-input S03 replay</a>.</p>
+<p>For a local result, find contiguous crossings of the same bound with at least two grid points spanning at least 0.5°. Sum the departures within each observed cluster. Repeat the cluster search in every simulation and retain its <strong>largest</strong> cluster score, or zero if none qualifies. Compare each observed cluster with these simulated maxima using the same inclusive rank. A two-tailed search includes both signs. The global test uses all departures, including those too narrow for local reporting. The local correction accounts for searching this grid under the complete null; it does not locate an individual significant endpoint or adjust for comparing many archaeological subsets <span class="citation" data-cites="maris2007 sassen2019">(<a href="references.html#ref-maris2007" role="doc-biblioref">Maris and Oostenveld 2007</a>; <a href="references.html#ref-sassen2019" role="doc-biblioref">Sassenhagen and Draschkow 2019</a>)</span>. Through 2.0.9005, north-crossing clusters were split at the stored seam. Build 2.0.9006 joins adjacent excesses or deficits across north in both the observations and simulations, and excludes a duplicate north direction from the global score. A reported interval with start greater than end crosses north clockwise. See the <a href="./s03-scoring-checks.html">fixed-input S03 replay</a>.</p>
 </section>
-<section id="sig-history" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="sig-history"><span class="header-section-number">12.4</span> What changed since the publications?</h2>
+<section id="sig-history" class="level2">
+<h2 class="anchored" data-anchor-id="sig-history">What changed since the publications?</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -426,14 +955,14 @@ div.csl-indent {
 </table>
 <p>The accompanying 2020 code also permuted the measurement uncertainties in the random draws and excluded observed intervals of width at most five times its declination-grid spacing. Version 2.0.9004 retains the observation-to-uncertainty pairing and applies a fixed angular minimum to both observed and simulated clusters. Standardisation itself was already present in 2020; symmetric pooling and searching each simulated curve are the substantive changes. The source comparison uses the <a href="https://github.com/stonexsky/probSkyscapeArch/blob/07d9b84a43cdd2641f9557b704ef4b5927366254/src.R#L300">archived 2020 implementation, lines 300–382</a>. These comparisons concern the published algorithms and the archived current source. They do not establish that the conclusions of either paper change. That would require replaying the corresponding data, models and historical implementation. The build’s NEWS instructs users to refit when seeking current local and global inference <span class="citation" data-cites="silva2020 silvaloms2025">(<a href="references.html#ref-silva2020" role="doc-biblioref">Silva 2020</a>; <a href="references.html#ref-silvaloms2025" role="doc-biblioref">Silva and Lomsdalen 2025</a>)</span>.</p>
 </section>
-<section id="reading-a-fit" class="level2" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="reading-a-fit"><span class="header-section-number">12.5</span> Reading a fit</h2>
+<section id="reading-a-fit" class="level2">
+<h2 class="anchored" data-anchor-id="reading-a-fit">Reading a fit</h2>
 <p>Consider 999 simulations and an observed global score exceeded or tied by 9 simulated curves. The global p-value is 10/1000 = 0.010. For an observed excess over a particular declination interval, suppose 49 simulations have a cluster <em>anywhere</em> on the searched grid at least that large. Its adjusted local p-value is 50/1000 = 0.050. Comparing only at the observed declinations would answer the different question addressed by the original fixed-interval calculation. These counts are illustrative.</p>
 <p>For reproducible comparisons set the seed before fitting and specify the same comparison grid and tail across runs. Read <code>metadata$global.pval</code> for the dataset-wide test and <code>metadata$local.pval</code> for the local intervals. Save <code>metadata$inference</code> and <code>metadata$local.inference</code> with the result. In this build they identify the pooled and maximum-cluster algorithms. The returned envelope and constant-simulation departures are retained in <code>data</code>.</p>
 </section>
-<section id="sig-output" class="level2" data-number="12.6">
-<h2 data-number="12.6" class="anchored" data-anchor-id="sig-output"><span class="header-section-number">12.6</span> Reading the Ġgantija worked fit</h2>
-<p>The vignette loads a saved <a href="function-methods.html#fn-randomtest"><code>randomTest()</code></a> fit with 500 simulations, then uses <a href="function-methods.html#fn-plot-skyscaper-sigtest"><code>plot.skyscapeR.sigTest()</code></a> with <code>show.local=TRUE</code>. Its global p-value is 0.004. In the local table the excess from −33.7° to −28.6° has adjusted p = 0.004, the smaller excess near −49° has adjusted p = 0.557, and the deficit row contains no cluster. The plotted excess and deficit rows share the angular axis with the observed curve; <code>show.pval</code> independently controls display of the global value. <a href="function-methods.html#fn-print-skyscaper-sigtest"><code>print.skyscapeR.sigTest()</code></a> and <a href="function-methods.html#fn-pval2stars"><code>pval2stars()</code></a> summarise these stored probabilities. The open circle marks the larger p-value. Overlaying a Gacrux band or selecting the significant positive interval for <a href="function-methods.html#fn-findtargets"><code>findTargets()</code></a> does not recompute the test or assign a probability to Gacrux as the intended target <span class="citation" data-cites="silva2020 silvaloms2025">(<a href="references.html#ref-silva2020" role="doc-biblioref">Silva 2020</a>; <a href="references.html#ref-silvaloms2025" role="doc-biblioref">Silva and Lomsdalen 2025</a>)</span>.</p>
+<section id="sig-output" class="level2">
+<h2 class="anchored" data-anchor-id="sig-output">Reading the Ġgantija worked fit</h2>
+<p>The vignette loads a saved <a href="fn-randomtest.html"><code>randomTest()</code></a> fit with 500 simulations, then uses <a href="fn-plot-skyscaper-sigtest.html"><code>plot.skyscapeR.sigTest()</code></a> with <code>show.local=TRUE</code>. Its global p-value is 0.004. In the local table the excess from −33.7° to −28.6° has adjusted p = 0.004, the smaller excess near −49° has adjusted p = 0.557, and the deficit row contains no cluster. The plotted excess and deficit rows share the angular axis with the observed curve; <code>show.pval</code> independently controls display of the global value. <a href="fn-print-skyscaper-sigtest.html"><code>print.skyscapeR.sigTest()</code></a> and <a href="fn-pval2stars.html"><code>pval2stars()</code></a> summarise these stored probabilities. The open circle marks the larger p-value. Overlaying a Gacrux band or selecting the significant positive interval for <a href="fn-findtargets.html"><code>findTargets()</code></a> does not recompute the test or assign a probability to Gacrux as the intended target <span class="citation" data-cites="silva2020 silvaloms2025">(<a href="references.html#ref-silva2020" role="doc-biblioref">Silva 2020</a>; <a href="references.html#ref-silvaloms2025" role="doc-biblioref">Silva and Lomsdalen 2025</a>)</span>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="figures/significance-clusters.png" class="img-fluid figure-img" alt="The observed curve crosses the upper envelope twice. The smaller excess has adjusted p 0.557 and the larger one p 0.004."></p>
@@ -441,13 +970,13 @@ div.csl-indent {
 </figure>
 </div>
 </section>
-<section id="strengths-limits-and-evidence" class="level2" data-number="12.7">
-<h2 data-number="12.7" class="anchored" data-anchor-id="strengths-limits-and-evidence"><span class="header-section-number">12.7</span> Strengths, limits and evidence</h2>
+<section id="strengths-limits-and-evidence" class="level2">
+<h2 class="anchored" data-anchor-id="strengths-limits-and-evidence">Strengths, limits and evidence</h2>
 <p>For a simple count in predefined angular bins, R’s <code>chisq.test()</code> accepts category counts and hypothesised probabilities <span class="citation" data-cites="rchisq">(<a href="references.html#ref-rchisq" role="doc-biblioref">R Core Team, n.d.</a>)</span>. Here the objects being compared are whole measurement-density curves. A doorway spanning a range of bearings can contribute across that range, and a declination null can incorporate the site’s skyline. These are methodological advantages for that question. A small global p-value rejects the specified model; it gives neither the identity of a celestial target nor a probability for intentionality.</p>
 <p>Neither routine automatically simulates shared construction episodes, uncertainty in fitted model parameters or selection of sites after inspecting the data. If the null is fitted to the same orientations, its fitting step may need to be repeated within simulations. Interpret interval boundaries as descriptions of the observed excursions. Retain the input PDFs, site order, model tables, seed, grid, inference metadata and package revision. Sampling takes place in the caller so that the same seed can be used across worker counts.</p>
 <p>The archived package audit checks a saved Ġgantija result and the plotting of local findings. It checks reproducibility of a recorded result, not the family-wise rejection rate over independent datasets. The outstanding validation is to measure rejection rates under known generating models, varying sample size, horizon heterogeneity, the north seam and grid spacing. No historical or new significance fits were run for this manual revision.</p>
 <p><strong>Related function entries</strong></p>
-<p><a href="function-methods.html#fn-az-pdf"><code>az.pdf()</code></a>, <a href="function-methods.html#fn-coordtrans"><code>coordtrans()</code></a>, <a href="function-methods.html#fn-dec-pdf"><code>dec.pdf()</code></a>, <a href="function-methods.html#fn-modeltest"><code>modelTest()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-sigtest"><code>plot.skyscapeR.sigTest()</code></a>, <a href="function-methods.html#fn-print-skyscaper-sigtest"><code>print.skyscapeR.sigTest()</code></a>, <a href="function-methods.html#fn-pval2stars"><code>pval2stars()</code></a>, <a href="function-methods.html#fn-randomtest"><code>randomTest()</code></a>, <a href="function-methods.html#fn-spd"><code>spd()</code></a>.</p>
+<p><a href="fn-az-pdf.html"><code>az.pdf()</code></a>, <a href="fn-coordtrans.html"><code>coordtrans()</code></a>, <a href="fn-dec-pdf.html"><code>dec.pdf()</code></a>, <a href="fn-modeltest.html"><code>modelTest()</code></a>, <a href="fn-plot-skyscaper-sigtest.html"><code>plot.skyscapeR.sigTest()</code></a>, <a href="fn-print-skyscaper-sigtest.html"><code>print.skyscapeR.sigTest()</code></a>, <a href="fn-pval2stars.html"><code>pval2stars()</code></a>, <a href="fn-randomtest.html"><code>randomTest()</code></a>, <a href="fn-spd.html"><code>spd()</code></a>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -879,12 +1408,12 @@ Silva, Fabio, and Tore Lomsdalen. 2025. <span>‘<span>“No Easy Way from the E
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./celestial-targets.html" class="pagination-link" aria-label="Identifying celestial candidates and limiting declinations">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Identifying celestial candidates and limiting declinations</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Identifying celestial candidates and limiting declinations</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./sky-rendering.html" class="pagination-link" aria-label="Sky reconstruction and visual radiance">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sky reconstruction and visual radiance</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-title">Sky reconstruction and visual radiance</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

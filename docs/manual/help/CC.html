@@ -1,0 +1,223 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CC | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-cc.html">CC() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Crescent crossovers of the Sun and Moon</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Identify the first observable seasonal reversal in the relative
+rising or setting positions of the Sun and a lunar crescent. These events can
+be compared with archaeological orientations and need not occur close to a solstice.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>CC(
+  year,
+  loc,
+  season = "winter",
+  crescent = "first",
+  simulation = "SIM1",
+  timezone = skyscapeR.env$timezone,
+  calendar = skyscapeR.env$calendar,
+  refraction = skyscapeR.env$refraction,
+  atm = skyscapeR.env$atm,
+  temp = skyscapeR.env$temp
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>year</code></td>
+<td>
+<p>One integer year, two ascending endpoints, or a vector of years. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p>
+</td></tr>
+<tr><td><code>loc</code></td>
+<td>
+<p>Latitude, longitude and elevation (degrees, degrees, metres), or
+a <code>skyscapeR.horizon</code> object.</p>
+</td></tr>
+<tr><td><code>season</code></td>
+<td>
+<p>Either <code>"winter"</code> (default) or <code>"summer"</code>.</p>
+</td></tr>
+<tr><td><code>crescent</code></td>
+<td>
+<p>Either <code>"first"</code> (default, waxing/set) or
+<code>"last"</code> (waning/rise).</p>
+</td></tr>
+<tr><td><code>simulation</code></td>
+<td>
+<p><code>"SIM1"</code> (default) or <code>"SIM2"</code>; see Details.</p>
+</td></tr>
+<tr><td><code>timezone</code></td>
+<td>
+<p>Output and observing-day timezone. Defaults to package settings.
+Use UTC or a fixed offset before 1900.</p>
+</td></tr>
+<tr><td><code>calendar</code></td>
+<td>
+<p><code>"G"</code> for Gregorian or <code>"J"</code> for Julian dates.
+Defaults to package settings.</p>
+</td></tr>
+<tr><td><code>refraction</code></td>
+<td>
+<p>Logical; use atmospheric refraction. Defaults to package settings.</p>
+</td></tr>
+<tr><td><code>atm</code></td>
+<td>
+<p>Atmospheric pressure in mbar. Defaults to package settings.</p>
+</td></tr>
+<tr><td><code>temp</code></td>
+<td>
+<p>Air temperature in degrees Celsius. Defaults to package settings.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Crescent crossovers describe a change in the relative horizon positions
+of the luminaries across successive lunations. First (waxing) crescents are
+compared at sunset and moonset; last (waning) crescents at sunrise and moonrise.
+The method follows Silva and Pimenta (2012), sections 2.1&ndash;2.2. Seasons use the
+paper's northern-hemisphere names: summer means the June-solstice crossover,
+winter the December-solstice crossover, also for southern-hemisphere locations.
+</p>
+<p>For each conjunction, days are searched forwards for the first crescent and
+backwards for the last crescent. Visibility is evaluated at sunset or sunrise,
+respectively, using Caldwell and Laney's criterion: lower-limb lunar altitude
+plus one third of the Sun&ndash;Moon angular separation must be at least 11.3 degrees.
+The lower-limb altitude is topocentric. The arc of light is the geocentric
+Sun&ndash;Moon separation, as explicitly defined by Caldwell and Laney; it excludes
+atmospheric refraction. The lower limb is calculated from the instantaneous lunar distance
+and a lunar radius of 1737.4 km. With refraction enabled, the centre altitude is
+apparent and the angular radius is subtracted from it. This is an empirical
+visibility prediction, not a guarantee under actual weather or extinction.
+</p>
+<p>SIM1 tests only the first qualifying evening or last qualifying morning of
+each lunation. SIM2 also tests the following evening or preceding morning,
+respectively. The original visibility day is preferred if it already meets
+the crossover condition. Dates are searched within eight civil days of
+conjunction and must remain crescent (elongation below 90 degrees).
+</p>
+<p>Each body's own centre-disc horizon event supplies its azimuth. The shortest
+signed difference Moon minus Sun is negative after a June crossover and positive
+after a December crossover, for both event types, with bearings clockwise from
+north. The starting conjunction is two lunations before the last conjunction
+at or before the solstice (the beginning of the lunation containing it).
+This can start nearly three synodic months before the solstice; it is not
+equivalent to starting at the first conjunction after solstice minus two
+synodic months. From there,
+successive lunations are searched for the first eligible crescent with the
+required strict ordering; exact equality does not qualify. The preceding
+eligible difference is retained for inspection but is not an additional
+selection condition in the published algorithm. Missing lunations are skipped.
+Conjunctions are searched until 150 days after the solstice; failure gives NA.
+Later qualifying lunations are counted in diagnostics but do not replace the
+first. Observations may fall in the next calendar year.
+</p>
+<p>A coordinate vector uses a zero-altitude astronomical horizon. A horizon object
+uses its horizon for both rise/set events and a separate lower-limb clearance
+check at the visibility assessment. The visibility formula still uses altitude
+above the astronomical horizontal, not altitude above the terrain. This horizon
+extension was not calibrated in the original paper. Events use the existing
+centre-disc convention of <code>riseset</code>, including for the Sun.
+</p>
+<p>Swiss Ephemeris supplies apparent astronomical positions (light-time and
+aberration corrections), with atmospheric refraction controlled separately.
+Returned declinations are geocentric and without atmospheric refraction, as in
+Figure 4 of the paper. Individual event selections do not yet reproduce every original simulation.
+The starting-window convention and differences in the 40-degree N series
+remain under validation. Agreement of a smoothed distribution does not imply
+agreement of every year's selected crescent. Inspect the returned dates,
+visibility margins and azimuth differences before interpreting a particular
+event; the cause of all discrepancies is not established.
+Years use astronomical numbering (0 is 1 BCE). Two ascending year endpoints
+expand inclusively; longer vectors are evaluated as supplied. The year labels
+the Gregorian year of the solstice, so a selected observation may occur in an
+adjacent calendar year. The calendar argument controls date display and civil-day parsing.
+No PNG or copy of the input horizon is stored in the output.
+</p>
+<p>Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-package</code> for setup.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list with <code>Event</code>, paired <code>Moon</code> and <code>Sun</code> data
+frames (year, date, time, azimuth, declination, UT Julian date), and a
+<code>diagnostics</code> data frame. Diagnostics include status, solstice and
+conjunction JDs, visibility-assessment JD, illuminated fraction, lower-limb
+altitude, elongation, visibility margin, signed azimuth difference, preceding
+difference, number of qualifying lunations, and day offset (0 for SIM1's day, 1 for SIM2's additional day).
+All angles are degrees. Missing results retain the requested year,
+use NA for observations and issue a warning. <code>settings</code> records conventions.
+</p>
+
+
+<h3>Comparison with the original simulations</h3>
+
+<p>For SIM1, 5,024 of 5,136 events in the supplied 1620&ndash;2047 series at
+latitudes 0, 60 N and 60 S agree within 0.02 degrees in lunar declination.
+This comparison uses a level horizon, longitude 0, elevation 400 m, UTC,
+Gregorian dates, refraction, pressure 1013.25 mbar and temperature 15 degrees
+Celsius. The original 40-degree N series has additional systematic offsets.
+Of the 112 discrepancies outside that series, inferred matching dates suggest
+differences in the lunation search window and first/last crescent selection.
+Some lie close to the visibility threshold. Alternative window and solar-limb
+conventions improve some cases but disrupt others that already agree, so no
+replacement convention has been adopted. The exact original settings remain
+unresolved; the paper does not specify all atmospheric inputs. Inspect the
+diagnostics before interpreting individual events. Agreement with simulation
+tables is not independent observational validation, and these SIM1 counts do
+not establish the accuracy of SIM2.
+</p>
+
+
+<h3>Provenance</h3>
+
+<p>Structured results carry a <code>provenance</code> attribute. Read it with
+<code>attr(result, "provenance")</code>; its <code>packages</code> entry records the loaded
+skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+This attribute adds no list entries or table columns. Ordinary subsetting or
+transformations may discard attributes; save the original result for reference.
+It does not identify ephemeris files, catalogue revisions or a development
+commit. Retain those and the analysis script separately for exact reproduction.
+</p>
+
+
+<h3>References</h3>
+
+<p>Silva, F. and Pimenta, F. (2012). The Crossover of the Sun and the
+Moon. Journal for the History of Astronomy 43(2), 191&ndash;208.
+\Sexpr[results=rd]{tools:::Rd_expr_doi("10.1177/002182861204300204")}.
+</p>
+<p>Caldwell, J. and Laney, C. D. (2001). First visibility of the lunar crescent.
+African Skies 5, 15&ndash;23. The authors' online version defines dalt and arcl:
+<a href="https://astronomycenter.net/pdf/saao_2001.pdf">https://astronomycenter.net/pdf/saao_2001.pdf</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>EFM</code>, <code>moonphase</code>,
+<code>riseset</code>, <code>body.position</code>, <code>createHor</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>if (requireNamespace("swephRdata", quietly = TRUE)) {
+  CC(year=2026, loc=c(40, 0, 400), timezone="UTC")
+  ## Not run: 
+  CC(year=c(2000, 2018), loc=c(40, 0, 400), season="summer", crescent="last",
+  simulation="SIM2", timezone="UTC")
+  CC(year=-2999, loc=c(40, 0, 400), timezone="UTC")
+  
+## End(Not run)
+}
+</code></pre>
+
+<p><a href="../fn-cc.html">CC() method</a></p></body></html>

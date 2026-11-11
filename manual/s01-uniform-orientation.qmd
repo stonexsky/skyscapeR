@@ -1,0 +1,26 @@
+# S01 · Calibration of the uniform-orientation test {#s01-uniform-orientation}
+
+How frequently does [`randomTest()`](help/randomTest.html) reject when orientations have been independently drawn from its stated uniform-bearing model? How frequently does it detect a cluster of known strength and width? We fixed the survey geometry, measurement widths, sample size and bearing support before drawing each dataset.
+
+**Implementation check.** In 2.0.9006 the simulated PDFs used the constructor’s default spacing and cutoff. The shared-horizon simulation also summed the bearings at the default SPD spacing, whereas the observed sum used the requested spacing. With identical centres of 30° and 120°, widths of 22° and 32°, a 30° source grid, a 0.0001 source cutoff and a 2° test spacing, maximum absolute observed–simulated density differences were 0.00203 for azimuth, 0.02020 for the shared skyline and 0.17537 for site-paired declinations. On 2.0.9007 all three differences were zero. The correction can affect probabilities calculated with non-default source settings and the shared-horizon route whenever its selected SPD spacing differed from the simulation default. Refit affected analyses from their original inputs. The 2.0.9007 socket worker setup also resolves the parent library path on each worker. In a two-library installation, the corrected serial and two-worker results agreed exactly on all three routes.
+
+**Design.** We ran 2,000 independent outer datasets in each of 13 null settings and four cluster alternatives. Every outer dataset had fresh Monte Carlo reference draws. Normal and uniform measurement families, sample sizes of 2 to 24, one and two tails, different grid widths and 9, 19, 39 or 99 simulations were represented. For each outer fit we recorded the global probability and the smallest maximum-cluster-adjusted probability across the reported intervals, assigning one when there was no interval. The preselected thresholds were 1%, 5% and 10%. Finite ranks have spacing $1/(B+1)$, with inclusive ranking for ties.
+
+To make repeated calculations feasible we reused deterministic package-generated densities for each permitted bearing, width and site. For the shared route we tabulated the entire transform for every ordered input pair. A separate implementation scored the pooled observed and simulated curves. In 16 public-interface replays, all reconstructed curves agreed within $8\times10^{-15}$ in density and all global and minimum local probabilities agreed exactly. The shared-route design uses two observations and six or twelve possible directions. Its calibration applies to those designs.
+
+**Null results.** Entries give the rejection percentage at the nominal 5% level, with pointwise 95% Wilson intervals over datasets. A local rejection means at least one adjusted interval crossed the threshold.
+
+| Null setting | Global rejection | Any local rejection |
+|:---|---:|---:|
+| Azimuth, 12 bearings on a 6° grid | 4.50% (3.68–5.50) | 4.25% (3.45–5.23) |
+| Azimuth, 12 bearings on a 0.01° grid | 5.35% (4.45–6.42) | 4.90% (4.04–5.94) |
+| Two bearings, shared level skyline | 4.95% (4.08–5.99) | 4.75% (3.90–5.77) |
+| Two bearings, shared rough skyline | 5.50% (4.58–6.59) | 5.70% (4.77–6.80) |
+| Two bearings, shared rough skyline, 12 directions | 5.15% (4.26–6.21) | 5.10% (4.22–6.15) |
+| 12 bearings paired with two different skylines | 4.25% (3.45–5.23) | 4.80% (3.95–5.83) |
+
+Across all null settings in which a 5% rejection was attainable, global rates ranged from 4.25% to 5.85% and any-local rates from 4.25% to 5.85%. With nine simulations the smallest possible probability was 0.10, so no dataset could reject at 0.05. Results at 0.01 and 0.10, counts, confidence intervals, and every individual rank are in the reproduction archive.
+
+**Power.** With twelve measurements and 39 simulations, injecting three bearings from a 24° standard-deviation cluster centred at north gave 9.30% global rejection. Injecting six at that width gave 30.35%. Narrowing the six-bearing cluster to 6° raised global rejection to 92.40% and any-local rejection to 93.70%. With site-paired transformations the same narrow injection gave 63.20% global rejection and 69.75% any-local rejection. These estimates describe the specified support, widths, horizons and alternatives. Each null result assumes independent orientations with the stated measurement model.
+
+[Download the S01 reproduction scripts and all results](archives/S01-reproduction.zip). [Installable source tested in S01](archives/skyscapeR_2.0.9007.tar.gz), SHA-256 `5bfe20d6a5a440da8b732700d19eb2e7741032f1923622bfc0abdf999b366767`.

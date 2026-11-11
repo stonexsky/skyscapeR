@@ -1,0 +1,31 @@
+# `planet.extremes()` {#fn-planet-extremes}
+
+[Function index](function-index.html#idx-planet-extremes)
+
+```{=html}
+<p>An epoch alone does not specify the planet's position in its cycle. The search extends
+three quarters of the package's planet-specific period on either side of the epoch,
+rounds the limiting years, and samples at daily intervals from noon UT on 1 January of
+the start year to the corresponding date in the end year. Each sample uses body.position
+and the requested site if supplied. The returned extrema are the range of these samples;
+finer extrema can fall between sampled instants.
+</p>
+<p>Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-package</code> for setup.
+</p>
+```
+
+[Illumination and detection](fn-moonphase.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>obj</code></th><td>—</td><td><p>Planet name, with this capitalisation: Mercury, Venus, Mars, Jupiter or Saturn.</p></td></tr><tr><th scope="row"><code>year</code></th><td>—</td><td><p>Year for which to do calculations. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr><tr><th scope="row"><code>loc</code></th><td><code>NULL</code></td><td><p>This can be either a <em>skyscapeR.horizon</em> object, or a vector with the
+latitude, longitude and elevation of the site, in this order.</p></td></tr><tr><th scope="row"><code>epoch</code></th><td>—</td><td><p>Earlier argument name for <code>year</code>, retained for existing scripts.</p></td></tr></tbody></table><h5>Return value</h5><p>A list containing planet, min.dec and max.dec. The two declinations are extrema of daily samples and are expressed in degrees.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/events.R`. [Full function help](help/planet.extremes.html) · [Solar, lunar and planetary events outline](contents-plan.html#plan-events) · [Terrain crossings and event searches](event-searches.html#event-planets)

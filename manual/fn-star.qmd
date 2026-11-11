@@ -1,0 +1,42 @@
+# `star()` {#fn-star}
+
+[Function index](function-index.html#idx-star)
+
+```{=html}
+<p>A historical comparison requires a stellar coordinate for the epoch under study. The
+function resolves a Western common name through star.names or accepts a catalogue
+identifier and checks it against Swiss Ephemeris. It evaluates equatorial coordinates at
+noon UT on 1 January of each supplied astronomical year in the Gregorian calendar. The
+magnitude is a catalogue value. These outputs can feed horizon transformations or
+visibility estimates, which additionally require observer and atmosphere information.
+</p>
+<p>The Swiss Ephemeris manual documents fixed-star positions and catalogue magnitudes.
+</p>
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>Astrodienst. Swiss Ephemeris programmer's manual. <a href="https://www.astro.com/swisseph/swephprg.htm">https://www.astro.com/swisseph/swephprg.htm</a>.
+</p>
+
+
+
+```
+
+</details>
+
+**Interpretation and limits.** A named catalogue entry identifies a data source as well as a target. Preserve the resolved designation, epoch and catalogue version, especially for a multiple star or integrated cluster.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>string</code></th><td>—</td><td><p>This can be either the traditional name for the star or its Bayer designation.</p></td></tr><tr><th scope="row"><code>year</code></th><td><code>skyscapeR.env$cur.year</code></td><td><p>Year for which to calculate the coordinates. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.
+Defaults to current year.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.star list with name, Bayer designation, apparent magnitude (app.mag) and a coord data frame. Each row contains year, right ascension (RA) and declination (Dec), both angles in degrees.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/stars.R`. [Full function help](help/star.html) · [Stellar visibility](stellar-phases.html#sec-stellar) · [Sky reconstruction](sky-rendering.html#sec-sketch) · [Ephemeris](ephemeris.html#sec-ephemeris) · [Stellar positions and seasonal visibility outline](contents-plan.html#plan-stars) · [Identifying celestial candidates and limiting declinations](celestial-targets.html#target-screen) · [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-star)

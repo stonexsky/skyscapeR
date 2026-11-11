@@ -1,0 +1,46 @@
+# `reduct.compass()` {#fn-reduct-compass}
+
+W02 checked north-crossing magnetic readings against the supplied corrections before passing true bearings into a skyline analysis. [W02 results](w02-field-to-sky.qmd).
+
+[Function index](function-index.html#idx-reduct-compass)
+
+```{=html}
+<p>Magnetic north differs from true north at the time and place of survey. Add the supplied
+magnetic declination to each magnetic bearing, or calculate it from the survey
+coordinates and date with mag.dec. Corrected bearings are rounded using the input
+bearing representation. With an explicit altitude or a measured horizon, the corrected
+bearing also enters the conversion to declination.
+</p>
+<p>Supply either a measurement date or a known magnetic declination.
+If both are given, the supplied magnetic declination is used and the date is
+retained in the output. Explicit altitude values take precedence over a
+horizon profile. Otherwise, each measurement's corrected true azimuth is
+used to retrieve its horizon altitude; the same altitude is reported and
+used to calculate celestial declination. Supply one site and date for the whole
+survey or one location row and/or date per bearing, in measurement order.
+A supplied correction can likewise be shared or paired with each bearing.
+</p>
+```
+
+[Source and date of the magnetic correction](fn-mag-dec.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>Location, either a <em>skyscapeR.horizon</em> or a vector
+containing the latitude, longitude and elevation of location, in this order.</p></td></tr><tr><th scope="row"><code>mag.az</code></th><td>—</td><td><p>Array of magnetic azimuth measurements.</p></td></tr><tr><th scope="row"><code>date</code></th><td>—</td><td><p>Date of measurements as a string in the format: 'YYYY/MM/DD'.
+Only necessary if <em>magdec</em> is not given. When omitted, the output
+Date column contains missing values (NA).</p></td></tr><tr><th scope="row"><code>magdec</code></th><td>—</td><td><p>Magnetic declination, if known.</p></td></tr><tr><th scope="row"><code>alt</code></th><td>—</td><td><p>Altitude, necessary for automatic declination calculation.
+If missing and <em>loc</em> is a <em>skyscapeR.horizon</em> object then the altitude
+will be automatically read from the horizon profile.</p></td></tr><tr><th scope="row"><code>name</code></th><td>—</td><td><p>Names or labels to identify each measurement.</p></td></tr><tr><th scope="row"><code>ID</code></th><td>—</td><td><p>IDs or codes to identify each measurement.</p></td></tr><tr><th scope="row"><code>HWT.ID</code></th><td>—</td><td><p>HeyWhatsThat IDs relating to a previously generated
+horizon profile for measurement.</p></td></tr></tbody></table><h5>Return value</h5><p>A data frame with one row per measurement, including location,
+magnetic azimuth, date, magnetic declination and true azimuth. Altitude and
+celestial declination are included when altitudes are supplied or a horizon
+is available. Optional identification columns are retained.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/data-reduction.R`. [Full function help](help/reduct.compass.html) · [Reducing field observations outline](contents-plan.html#plan-survey) · [Reducing field observations](field-reduction.html#field-compass) · [Reduce compass readings to true azimuth](vignette-guide.html#workflow-reduce-compass-readings-to-true-azimuth)

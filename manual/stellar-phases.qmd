@@ -1,8 +1,8 @@
 # Seasonal stellar visibility {#sec-stellar}
 
-**Function** [`star.phases()`](function-methods.html#fn-star-phases) · **Package** skyscapeR 2.0.9004
+**Function** [`star.phases()`](fn-star-phases.html) · **Package** skyscapeR 2.0.9004
 
-At an archaeological site, a star can rise above a ridge while the sky is still too bright to see it. [`star.phases()`](function-methods.html#fn-star-phases) asks on which mornings or evenings the terrain, darkness and stellar brightness allow an opportunity to observe it. Its heliacal-rising date is the return of such an opportunity after a season of invisibility.
+At an archaeological site, a star can rise above a ridge while the sky is still too bright to see it. [`star.phases()`](fn-star-phases.html) asks on which mornings or evenings the terrain, darkness and stellar brightness allow an opportunity to observe it. Its heliacal-rising date is the return of such an opportunity after a season of invisibility.
 
 A seasonal search needs the skyline across the stellar track. See [partial photographic horizons](photographic-horizons.html#partial-photo-consumers) before supplying a sector image.
 
@@ -37,7 +37,7 @@ A second pass restricts eligible intervals to $h\leq\texttt{alt.rs}$ and checks 
 
 The 2.0 development NEWS records changes to handling southern, circumpolar and obstructed tracks. A completely obstructed star now returns an all-invisible result. An always-clear star can still enter different seasonal phases. The separate `metadata$horizon.status` field lets the analyst distinguish these cases. An earlier analysis involving a star close to the circumpolar limit or a raised skyline is a priority for recalculation.
 
-The output also distinguishes the schematic day of the seasonal cycle from `metadata$events$date.julian`. Use the latter when passing an event to [`riseset()`](function-methods.html#fn-riseset) for a terrain crossing. The crossing gives a starting time from which to examine the changing dawn sky.
+The output also distinguishes the schematic day of the seasonal cycle from `metadata$events$date.julian`. Use the latter when passing an event to [`riseset()`](fn-riseset.html) for a terrain crossing. The crossing gives a starting time from which to examine the changing dawn sky.
 
 **Evidence for the date.** The [heliacal-rising comparison](heliacal-rising.qmd) quantifies agreement for this event under a specified set of observing assumptions. Other phase transitions require their own evidence.
 
@@ -45,7 +45,7 @@ See the [event-search chapter](event-searches.qmd) for the crossing solver and a
 
 ## Comparing the same season across stars and epochs {#phase-comparisons}
 
-[`plot.skyscapeR.starphases()`](function-methods.html#fn-plot-skyscaper-starphases) places a result and any further results on a common seasonal axis beginning at December solstice. A single cycle can be drawn as a ring or a strip. Multiple results occupy concentric rings from the outside inward, or aligned strips in the linear layout. The month divisions are a shared seasonal reference. Use the saved event date for a historical calendar comparison. Ordering results by star or epoch and holding the skyline and visibility thresholds fixed makes it possible to attribute changes in the boundaries to the chosen comparison. The plot reads the classifications already calculated by [`star.phases()`](function-methods.html#fn-star-phases). Adding a ring does not refit the visibility model.
+[`plot.skyscapeR.starphases()`](fn-plot-skyscaper-starphases.html) places a result and any further results on a common seasonal axis beginning at December solstice. A single cycle can be drawn as a ring or a strip. Multiple results occupy concentric rings from the outside inward, or aligned strips in the linear layout. The month divisions are a shared seasonal reference. Use the saved event date for a historical calendar comparison. Ordering results by star or epoch and holding the skyline and visibility thresholds fixed makes it possible to attribute changes in the boundaries to the chosen comparison. The plot reads the classifications already calculated by [`star.phases()`](fn-star-phases.html). Adding a ring does not refit the visibility model.
 
 ## Full package help
 
@@ -59,4 +59,4 @@ The following help page is generated from the archived 2.0.9004 package document
 
 **Related function entries**
 
-[`createHor()`](function-methods.html#fn-createhor), [`plot.skyscapeR.starphases()`](function-methods.html#fn-plot-skyscaper-starphases), [`riseset()`](function-methods.html#fn-riseset), [`sketchSky()`](function-methods.html#fn-sketchsky), [`skyStep()`](function-methods.html#fn-skystep), [`star()`](function-methods.html#fn-star), [`star.phases()`](function-methods.html#fn-star-phases).
+[`createHor()`](fn-createhor.html), [`plot.skyscapeR.starphases()`](fn-plot-skyscaper-starphases.html), [`riseset()`](fn-riseset.html), [`sketchSky()`](fn-sketchsky.html), [`skyStep()`](fn-skystep.html), [`star()`](fn-star.html), [`star.phases()`](fn-star-phases.html).

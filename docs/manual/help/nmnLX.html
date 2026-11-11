@@ -1,0 +1,90 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>nmnLX | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-nmnlx.html">nmnLX() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Estimate northern minor lunar standstill declination</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Estimate the northern declination limit of a minor lunar standstill for comparison with
+a proposed alignment.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>nmnLX(
+  year = skyscapeR.env$cur.year,
+  loc = FALSE,
+  parallax = 0.952,
+  altitude = 0,
+  verbose = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>year</code></td>
+<td>
+<p>Astronomical year. The default is the current year in the package settings. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p>
+</td></tr>
+<tr><td><code>loc</code></td>
+<td>
+<p>Latitude in degrees north or a <code>skyscapeR.horizon</code> object. Omit this argument or use <code>FALSE</code> for geocentric declination.</p>
+</td></tr>
+<tr><td><code>parallax</code></td>
+<td>
+<p>Mean horizontal parallax in degrees. The default is 0.952 degrees for the Moon.</p>
+</td></tr>
+<tr><td><code>altitude</code></td>
+<td>
+<p>Altitude of the Moon. Defaults to 0 degrees.</p>
+</td></tr>
+<tr><td><code>verbose</code></td>
+<td>
+<p>Logical to control output of warnings and messages.
+Defaults to TRUE.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>A minor standstill defines a limiting lunar declination at the epoch of interest. The
+model uses the obliquity minus a fixed 5.145 + 0.145 degrees, then applies the positive
+sign for the northern limit. With a location it subtracts the parallax correction for
+latitude and altitude. The default lunar parallax is 0.952 degrees. This approximation
+defines a target limit; it does not search a time series for an actual lunar event.
+</p>
+<p>Sprajc (2016) describes the limits set by obliquity and the mean lunar
+inclination. This package also includes the fixed 0.145-degree term above.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Numeric declination in degrees. With loc = FALSE the result is geocentric. Supplying a location applies the parallax correction for the chosen altitude.
+</p>
+
+
+<h3>References</h3>
+
+<p>Šprajc, I. (2016). Lunar alignments in Mesoamerican architecture. Anthropological Notebooks 22(3), 61-85.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>smnLX</code>, <code>nMjLX</code>, <code>sMjLX</code>,
+<code>parallax.corr</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'># Northern minor Lunar Extreme geocentric declination for year 2501 BC:
+nmnLX(-2500)
+
+# Topocentric declination for same year and latitude of 50 degrees N:
+nmnLX(-2500, loc=50)
+</code></pre>
+
+<p><a href="../fn-nmnlx.html">nmnLX() method</a></p></body></html>

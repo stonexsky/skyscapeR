@@ -1,0 +1,42 @@
+# `downloadHWT()` {#fn-downloadhwt}
+
+[Function index](function-index.html#idx-downloadhwt)
+
+```{=html}
+<p>A panorama describes the horizon seen from a particular observer location. The
+optional httr2 package retrieves site metadata and 0.125-degree horizon bins over
+HTTPS. Site elevation above sea level is reported in metres, converting feet
+when necessary. Validated profiles are cached by panorama identifier for the R
+session. Read-only downloads allow up to three attempts for transient HTTP
+failures, with a 30-second limit per request. For each bin, the distance and
+angular altitude determine a height difference. The mean angular change for
+height offsets of plus and minus 9.73 metres estimates altitude uncertainty.
+</p>
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p><a href="https://www.heywhatsthat.com/">HeyWhatsThat.com</a>
+</p>
+
+
+
+```
+
+</details>
+
+[Checking the provider’s viewpoint](fn-createhwt.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>HWTID</code></th><td>—</td><td><p>This is the 8 character ID attributed by
+<em>HeyWhatsThat.com</em></p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.horizon list containing site metadata and horizon samples. The data columns az, alt and alt.unc are in degrees. Retrieval requires access to the HeyWhatsThat service.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/horizon.R`. [Full function help](help/downloadHWT.html) · [Terrain horizons and panoramas outline](contents-plan.html#plan-terrain) · [Field reduction and survey identifiers](field-reduction.html#field-solar)

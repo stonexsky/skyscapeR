@@ -1,0 +1,29 @@
+# `pval2stars()` {#fn-pval2stars}
+
+**Validation on 2.0.9005.** All tested symbol thresholds, their equality cases and the legacy printed bound agreed with their stated probability ranges. [S03 results](s03-scoring-checks.qmd).
+
+[Function index](function-index.html#idx-pval2stars)
+
+```{=html}
+<p>Use a symbol for compact plot labels while retaining the numeric p-value for
+interpretation. The cut points are 0.001, 0.01, 0.05 and 0.1, with symbols ***, **, *, +
+and an open circle in order of increasing p. An equality belongs to the interval ending at that cut
+point. For legacy strings beginning with a less-than sign and space, the function
+classifies the printed bound. It does not calculate a test or adjust for multiple
+comparisons.
+</p>
+```
+
+[Interpreting the global and adjusted local results](fn-plot-skyscaper-sigtest.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>p.value</code></th><td>—</td><td><p>p-value</p></td></tr></tbody></table><h5>Return value</h5><p>A character vector of significance symbols: ***, **, *, + or an open circle, using cut points 0.001, 0.01, 0.05 and 0.1.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/misc.R`. [Full function help](help/pval2stars.html) · [Significance tests](significance.html#sec-tests) · [Null models and significance outline](contents-plan.html#plan-null) · [Reading the Ġgantija fit](significance.html#sig-output)

@@ -1,0 +1,37 @@
+# `skyStep()` {#fn-skystep}
+
+[Function index](function-index.html#idx-skystep)
+
+```{=html}
+<p>Add the signed increment in minutes divided by 1440 to the saved Julian date. A native sketch is recalculated locally using the saved display selection, style, extinction and magnitude limit, and the current session atmosphere. A Stellarium capture is repeated using its saved external capture settings. The function plots the new view and invisibly returns its sky object. Assign that return value to continue the sequence from the new instant. The remote connection is needed only for the capture branch.</p>
+```
+
+**Interpretation and limits.** Preserve the sky object or captured image and the settings of the system that produced it. Stepping through several instants is informative near a terrain crossing; a screen capture alone carries no per-pixel naked-eye detection threshold.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>Site horizon with latitude, longitude and elevation in metres.</p></td></tr><tr><th scope="row"><code>sky</code></th><td>—</td><td><p>A background returned by sketchSky(), stellariumSky() or skyStep().</p></td></tr><tr><th scope="row"><code>minutes</code></th><td><code>1</code></td><td><p>Signed elapsed minutes from the captured instant. Fractions are allowed.</p></td></tr><tr><th scope="row"><code>...</code></th><td>—</td><td><p>Arguments passed to plot(hor, sky=...), such as xrange.</p></td></tr></tbody></table><h5>Return value</h5><p>stellariumSky() returns a skyscapeR.sky object with the native raster, PNG path, Julian day, observer location and capture settings. skyStep() invisibly returns the updated sky of the same kind.
+</p><h5>Reproducibility and stepping</h5><p>A Stellarium capture reflects the installed Stellarium version, its catalogues,
+selected sky culture and current settings for switches not explicitly supplied.
+It is an external rendered image, not the package's twilight or extinction
+model. Record those settings when comparing it with <code>sketchSky</code>.
+The external application and a working local Remote Control connection are
+required for every new capture, but not for replotting a saved raster.
+</p><h5>Atmospheric settings when using skyStep</h5><p>For a sketch, <code>skyStep</code> retains calendar, <code>max.mag</code>, <code>k</code>, style
+and display selections. Refraction, pressure and temperature are read again
+from <code>skyscapeR.vars</code>; the previous object's atmosphere is not
+restored automatically. Changing these session settings between the original
+sketch and a step changes the atmosphere as well as the time. Keep them fixed
+for a time-only comparison, including when resuming a saved sketch in another
+R session. This behaviour is intentional. Stellarium captures instead use
+the external application's atmospheric settings.
+Each call draws immediately and returns the new object invisibly. Save it with
+<code>sky &lt;- skyStep(hor, sky, minutes = 10)</code> before taking the next step.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/skybox.R`. [Full function help](help/stellariumSky.html) · [Stellar visibility](stellar-phases.html#sec-stellar) · [Sky reconstruction](sky-rendering.html#sec-sketch) · [Sky brightness and visualisation outline](contents-plan.html#plan-light) · [Terrain crossings and event searches](event-searches.html#event-ridge) · [Display styles, capture and stepping time](sky-rendering.html#sky-step-capture) · [Watch the cluster rise later in the season](vignette-guide.html#workflow-watch-the-cluster-rise-later-in-the-season) · [Compare constellation patterns](vignette-guide.html#workflow-compare-constellation-patterns) · [Capture a sky from Stellarium](vignette-guide.html#workflow-capture-a-sky-from-stellarium)

@@ -1,0 +1,32 @@
+# `jd2time()` {#fn-jd2time}
+
+**Validation on 2.0.9005.** Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. [A01 results](a01-calendar-checks.qmd).
+
+[Function index](function-index.html#idx-jd2time)
+
+```{=html}
+<p>An instant is specified by its UT Julian date. To label it consistently, choose the
+calendar and the offset or civil timezone appropriate to the record. The conversion
+rounds to the nearest second, applies the offset at the rounded instant, handles day
+rollover and converts the day number with Swiss Ephemeris.
+</p>
+<p>Fixed offsets may be numeric hours east of UTC (for example 5.5), or
+strings such as <code>"UTC+05:30"</code>, <code>"UTC-02"</code> or <code>"GMT+01"</code>.
+Offsets must lie between -14 and +14 hours. UTC, GMT and the empty string
+mean zero offset; an empty string does not select the system timezone.
+</p>
+```
+
+**Interpretation and limits.** For an ancient event near local midnight, retain the UT Julian day alongside the printed date. Round-tripping a civil label tests conversion conventions; it cannot establish the prehistoric difference between terrestrial and rotational time.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>jd</code></th><td>—</td><td><p>Finite numeric vector of UT Julian dates.</p></td></tr><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>Timezone name or fixed offset; defaults to the value in <code>skyscapeR.vars()</code>. See Details.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>Output calendar: G or Gregorian, J or Julian. Defaults to the package calendar setting, initially Gregorian.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>F</code></td><td><p>Logical; display a conversion message. Default is FALSE.</p></td></tr></tbody></table><h5>Return value</h5><p>A character vector in YYYY/MM/DD HH:MM:SS format. Years are signed as needed and are not padded to four digits.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/dates.R`. [Full function help](help/jd2time.html) · [Time, coordinates and ephemerides outline](contents-plan.html#plan-time) · [Equinoctial full Moons and crescent crossovers](lunar-crossovers.html#crossover-efm) · [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-time)

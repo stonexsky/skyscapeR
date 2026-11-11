@@ -1,0 +1,30 @@
+# `hor2min.dec()` {#fn-hor2min-dec}
+
+A05 recovered a limiting sightline within the southern search sector on a synthetic skyline with an interior trough. [A05 results](a05-solar-limits.qmd).
+
+[Function index](function-index.html#idx-hor2min-dec)
+
+```{=html}
+<p>Terrain relief can shift the limiting sightline away from the meridian. The function
+samples bearings at 0.01-degree spacing within the specified half-width around 180
+degrees. It calls az2dec at each bearing with the stored horizon, or with the supplied
+latitude and constant altitude, then returns the minimum sampled declination. A limited
+search sector may miss a more extreme sightline elsewhere.
+</p>
+```
+
+[Sensitivity to the sampled skyline](fn-hor2alt.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>Either a <em>skyscapeR.horizon</em> object or the latitude of the place.</p></td></tr><tr><th scope="row"><code>alt</code></th><td><code>0</code></td><td><p>Altitude of the horizon at southernmost point. Only necessary if no
+<em>skyscapeR.horizon</em> object is provided. Default is 0.</p></td></tr><tr><th scope="row"><code>range</code></th><td><code>25</code></td><td><p>Range of azimuths to check for minimum declination. Default is 25
+degrees either side of South</p></td></tr></tbody></table><h5>Return value</h5><p>One numeric value in degrees, the smallest declination sampled across the specified azimuth range around south.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/horizon.R`. [Full function help](help/hor2min.dec.html) · [From bearings to celestial targets outline](contents-plan.html#plan-targets) · [Identifying celestial candidates and limiting declinations](celestial-targets.html#target-band)

@@ -1,8 +1,8 @@
 # Constructing a site horizon {#sec-horizon}
 
-**Function** [`createHor()`](function-methods.html#fn-createhor) · **Package** skyscapeR 2.0.9004
+**Function** [`createHor()`](fn-createhor.html) · **Package** skyscapeR 2.0.9004
 
-A skyline is the altitude of the obstruction at each bearing from a particular viewpoint. [`createHor()`](function-methods.html#fn-createhor) builds this profile from observations or predicts it from a digital elevation model (DEM). Both routes return the same kind of horizon object. The evidence between adjacent bearings is quite different.
+A skyline is the altitude of the obstruction at each bearing from a particular viewpoint. [`createHor()`](fn-createhor.html) builds this profile from observations or predicts it from a digital elevation model (DEM). Both routes return the same kind of horizon object. The evidence between adjacent bearings is quite different.
 
 ## From field measurements
 
@@ -30,11 +30,11 @@ Here $P$ is pressure in mbar, $T$ is temperature in °C, and $g$ is the vertical
 
 ![The two-ridge example viewed due east. For this geometric illustration, the maximum viewing angle occurs on the near face of the farther ridge. The production calculation also applies the selected curvature and refraction model.](figures/terrain-ray.png){fig-alt="Elevation along a ray and the corresponding angles at the observer, with the maximum marked."}
 
-For search distance $D$ and requested radial step $s$, the ordinary numerical rays use $n=\max(2,\lceil D/s\rceil)$ samples at $d_i=iD/n$. The default $s$ is half the smaller local raster-cell dimension. The base bearing grid similarly uses $\lceil 360/\texttt{az.step}\rceil$ equally spaced rays, supplemented for reconstructed features. Bilinear sampling can smooth a narrow crest. A denser output grid cannot recover a crest absent from the terrain data. If the ray has missing coverage, its largest available angle can underestimate the skyline. The source metadata records incomplete bearings. When examining a disputed foresight, inspect that bearing and the winning ridge distance before pooling errors across a station. [H01](study-register.qmd#h01-field-validation) gives per-station errors and compares DEMs over common bearings in Ireland.
+For search distance $D$ and requested radial step $s$, the ordinary numerical rays use $n=\max(2,\lceil D/s\rceil)$ samples at $d_i=iD/n$. The default $s$ is half the smaller local raster-cell dimension. The base bearing grid similarly uses $\lceil 360/\texttt{az.step}\rceil$ equally spaced rays, supplemented for reconstructed features. Bilinear sampling can smooth a narrow crest. A denser output grid cannot recover a crest absent from the terrain data. If the ray has missing coverage, its largest available angle can underestimate the skyline. The source metadata records incomplete bearings. When examining a disputed foresight, inspect that bearing and the winning ridge distance before pooling errors across a station. [H01](h01-field-validation.qmd) gives per-station errors and compares DEMs over common bearings in Ireland.
 
 ## Generating a terrain panorama {#sec-dem-panorama}
 
-The DEM route through [`createHor()`](function-methods.html#fn-createhor) produces two outputs: the numerical skyline in `h$data` and a shaded image of the terrain visible **below** it. A measured series of azimuths and altitudes supplies no distances, slopes or intervening surfaces from which to render that foreground. To make a panorama, supply a single-band DEM with elevations in metres, observer coordinates in the specified reference system, and an output directory. The R packages `terra` and `png` are required for this example.
+The DEM route through [`createHor()`](fn-createhor.html) produces two outputs: the numerical skyline in `h$data` and a shaded image of the terrain visible **below** it. A measured series of azimuths and altitudes supplies no distances, slopes or intervening surfaces from which to render that foreground. To make a panorama, supply a single-band DEM with elevations in metres, observer coordinates in the specified reference system, and an output directory. The R packages `terra` and `png` are required for this example.
 
 ```r
 library(skyscapeR)
@@ -62,27 +62,27 @@ For a survey, replace the synthetic surface with `rast("survey-dtm.tif")`, enter
 
 ### From terrain rays to image pixels
 
-The output is a 2:1 equirectangular RGBA PNG covering 0–360° clockwise from north and −90° to +90° altitude. Column centres are displaced half a pixel from the north seam. The renderer interpolates the numerical skyline to each column to fix the upper edge and leaves sky pixels transparent. Along each column it traces near to far, tracking the greatest elevation angle encountered. For a row below the skyline, the first terrain segment that reaches its viewing angle supplies the visible surface. More distant terrain below that line is hidden. The renderer interpolates surface properties between samples. A reconstructed [`horFeature()`](function-methods.html#fn-horfeature) can change the foreground colours or relief even when a distant ridge still determines the upper edge.
+The output is a 2:1 equirectangular RGBA PNG covering 0–360° clockwise from north and −90° to +90° altitude. Column centres are displaced half a pixel from the north seam. The renderer interpolates the numerical skyline to each column to fix the upper edge and leaves sky pixels transparent. Along each column it traces near to far, tracking the greatest elevation angle encountered. For a row below the skyline, the first terrain segment that reaches its viewing angle supplies the visible surface. More distant terrain below that line is hidden. The renderer interpolates surface properties between samples. A reconstructed [`horFeature()`](fn-horfeature.html) can change the foreground colours or relief even when a distant ridge still determines the upper edge.
 
 | Setting | What changes |
 |---|---|
 | `az.step`, `distance.step`, `max.distance` | The bearings, radial sampling and outer limit used to calculate the numerical skyline. The outer limit also bounds the rendered terrain. |
 | `width` | The number of panorama columns. Height is half the width. The default 4096 × 2048 has an angular pixel width of about 5.27 arcminutes. |
 | `panorama.distance.step`, `panorama.acuity` | The radial spacing for the image. With the default adaptive rule, the effective angle is the larger of one PNG pixel and the requested acuity (default one arcminute). At distance $d$, the proposed step is the larger of the near step (normally one local DEM cell) and $d\tan\theta$, with $\theta$ the effective angle. A narrow ridge can fall between samples. Supply a fixed step in metres to check a critical feature, or `NULL` to reuse the numerical ray spacing. |
-| `terrain.palette`, `land_cols`, `sea_cols`, `sea_level` | Colour the surface by elevation. Inspect the available ramps with [`demPalettes()`](function-methods.html#fn-dempalettes). A sea-level threshold can colour low-lying dry ground as water. Use `sea_level=NULL` where that interpretation is inappropriate. |
+| `terrain.palette`, `land_cols`, `sea_cols`, `sea_level` | Colour the surface by elevation. Inspect the available ramps with [`demPalettes()`](fn-dempalettes.html). A sea-level threshold can colour low-lying dry ground as water. Use `sea_level=NULL` where that interpretation is inappropriate. |
 | `lighting`, `light.azimuth`, `light.altitude`, `ambient`, `haze` | Relief mode blends observer-facing and directional illumination. Directional mode uses the selected light direction. The hillshade has no cast shadows. For an inspection of the palette alone, set `ambient=1, haze=0`. The default illumination is illustrative and does not reconstruct illumination at a dated solar event. |
 
 The example wrote a 1024 × 512 PNG. Its adaptive grid used 100 radial samples, with an effective angular target of 21.09 arcminutes. Inspect `h$metadata$image$sampling` for the values used on another DEM. Increasing image width alone leaves the numerical bearing grid unchanged. When a narrow bank or notch matters, check both grids.
 
 ### Keeping and reusing the image
 
-`panorama=TRUE` is the DEM default. `image.dir` defaults to the working directory, and `h$metadata$image$path` identifies the actual file. An image-rendering failure can return a valid numerical horizon with a warning and no image metadata. Save the PNG alongside `saveRDS(h, "two-ridges.rds")`; the RDS stores its path and checksum. After moving the files, assign the result of [`relinkHor()`](function-methods.html#fn-relinkhor). [`plot.skyscapeR.horizon()`](function-methods.html#fn-plot-skyscaper-horizon) displays the terrain, [`sketchSky()`](function-methods.html#fn-sketchsky) places a sky above it, and [`exportStellarium()`](function-methods.html#fn-exportstellarium) packages it for Stellarium. The [interchange section](photographic-horizons.html#photo-interchange) describes that export.
+`panorama=TRUE` is the DEM default. `image.dir` defaults to the working directory, and `h$metadata$image$path` identifies the actual file. An image-rendering failure can return a valid numerical horizon with a warning and no image metadata. Save the PNG alongside `saveRDS(h, "two-ridges.rds")`; the RDS stores its path and checksum. After moving the files, assign the result of [`relinkHor()`](fn-relinkhor.html). [`plot.skyscapeR.horizon()`](fn-plot-skyscaper-horizon.html) displays the terrain, [`sketchSky()`](fn-sketchsky.html) places a sky above it, and [`exportStellarium()`](fn-exportstellarium.html) packages it for Stellarium. The [interchange section](photographic-horizons.html#photo-interchange) describes that export.
 
 [Download the runnable example, full-sphere PNG, eastern view and run log](archives/dem-panorama-example.zip). The terrain is synthetic and illustrates rendering and occlusion. The field comparisons in the [study register](study-register.qmd) evaluate skyline altitudes.
 
 ## Reconstructing features on a DEM {#sec-terrain-features}
 
-A bank can be visible from a monument without forming its skyline. To distinguish those possibilities, pass a [`horFeature()`](function-methods.html#fn-horfeature) object, or an ordered list of them, in the `features` argument to [`createHor()`](function-methods.html#fn-createhor). This route requires a DEM. A profile supplied as measured bearing–altitude pairs contains no terrain distances at which to place the earthwork.
+A bank can be visible from a monument without forming its skyline. To distinguish those possibilities, pass a [`horFeature()`](fn-horfeature.html) object, or an ordered list of them, in the `features` argument to [`createHor()`](fn-createhor.html). This route requires a DEM. A profile supplied as measured bearing–altitude pairs contains no terrain distances at which to place the earthwork.
 
 ### Footprint, height and viewpoint
 
@@ -122,7 +122,7 @@ vapply(list(bare = bare, raised = raised), function(h) {
 
 To model a chalk-coloured cursus enclosure, a zero-height polygon in area mode can supply the interior colour, with a raised boundary bank later in the list. This lets the interior and bank have different colours while only the bank adds relief. Save the feature objects with the DEM provenance, viewpoint and settings. The returned `metadata$features` summarises the layers and records checksums; rebuilding the geometry requires the saved features. Save the external PNG as well when a panorama was requested.
 
-The rules above follow the 2.0.9004 implementation in `R/horizon-features.R` and `R/dem-horizon.R`. The example illustrates the geometry of an assumed bank. [H01](study-register.qmd#h01-field-validation) tests terrain skylines. Reconstructed earthworks need independent measurements of their geometry.
+The rules above follow the 2.0.9004 implementation in `R/horizon-features.R` and `R/dem-horizon.R`. The example illustrates the geometry of an assumed bank. [H01](h01-field-validation.qmd) tests terrain skylines. Reconstructed earthworks need independent measurements of their geometry.
 
 ## Choices that affect a sightline
 
@@ -139,7 +139,7 @@ The 2.0 development documentation records the DEM construction route, terrestria
 
 []{#comparison-with-provider-profiles}
 
-The [H01 field comparison](study-register.qmd#h01-field-validation) quantifies error at surveyed bearings. [H02](study-register.qmd#h02-skyline-comparison) compares independently computed profiles at matched viewpoints. The English controls hold the terrain product, observer setup and search radius fixed. Delivered online profiles can also differ in their input terrain and effective observer height.
+The [H01 field comparison](h01-field-validation.qmd) quantifies error at surveyed bearings. [H02](h02-skyline-comparison.qmd) compares independently computed profiles at matched viewpoints. The English controls hold the terrain product, observer setup and search radius fixed. Delivered online profiles can also differ in their input terrain and effective observer height.
 
 ## Full package help
 
@@ -152,6 +152,6 @@ The [H01 field comparison](study-register.qmd#h01-field-validation) quantifies e
 
 **Related function entries**
 
-[`createHor()`](function-methods.html#fn-createhor), [`hor2alt()`](function-methods.html#fn-hor2alt), [`horFeature()`](function-methods.html#fn-horfeature), [`plot.skyscapeR.horizon()`](function-methods.html#fn-plot-skyscaper-horizon), [`relinkHor()`](function-methods.html#fn-relinkhor).
+[`createHor()`](fn-createhor.html), [`hor2alt()`](fn-hor2alt.html), [`horFeature()`](fn-horfeature.html), [`plot.skyscapeR.horizon()`](fn-plot-skyscaper-horizon.html), [`relinkHor()`](fn-relinkhor.html).
 
 For control-point fitting, mask sampling and landscape export, see [photographic horizons](photographic-horizons.qmd).

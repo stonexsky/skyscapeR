@@ -1,0 +1,60 @@
+# `az.pdf()` {#fn-az-pdf}
+
+**Verified on 2.0.9006.** Periodic azimuth densities passed the fine-grid and wide-width D01 checks. [D01 rerun](d01-density-checks.qmd).
+
+**Validation on 2.0.9005.** The analytic density checks in D01 found a folding error near north at 0.005-degree spacing and omitted periodic tails in the two 100-degree-width cases. [D01 results](d01-density-checks.qmd).
+
+[Function index](function-index.html#idx-az-pdf)
+
+```{=html}
+<p>Azimuth is circular. Curves wrap across north before the density-height
+cutoff is applied. For an asymmetric triangle, the clockwise arc from <code>lower</code>
+to <code>upper</code> must include <code>az</code> and be shorter than a full turn.
+For example, limits 358 and 3 enclose a mode of 0. For the four new families,
+the field interval (including both cosine tapers, if used) spans at most one
+turn. An aperture convolved with Gaussian survey error can still have tails
+across the full circle. The grid starts at zero and ends before 360. Each
+measurement is retained separately. Trimming does not renormalise the stored
+ordinates. Choose a grid fine enough to resolve the narrowest shoulder.
+</p>
+```
+
+[Field examples and comparison of all six profiles](orientation-densities.qmd#measurement-families).
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>Silva, F (2020) A probabilistic framework and significance test for the analysis of structural orientations
+in skyscape archaeology <em>Journal of Archaeological Science</em> 118, 105138. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/j.jas.2020.105138")}
+</p>
+
+
+
+```
+
+</details>
+
+**Interpretation and limits.** A reported uncertainty enters differently as the standard deviation of a normal density and as the half-width of a uniform density. Record which interpretation the measurement supports before combining sites.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>az</code></th><td>—</td><td><p>True bearings clockwise from north, in degrees. For triangular, the preferred bearing (mode).</p></td></tr><tr><th scope="row"><code>unc</code></th><td><code>NULL</code></td><td><p>One width or one per observation. Standard deviation for normal,
+outer half-width for uniform, Epanechnikov or symmetric triangular, and core
+half-width for tapered uniform or uniform convolved with normal. Omit when
+supplying triangular limits. See 'Choosing a measurement model'.</p></td></tr><tr><th scope="row"><code>pdf</code></th><td><code>&quot;normal&quot;</code></td><td><p>One measurement family per call. See 'Choosing a measurement model'
+for all six names. The default is <code>"normal"</code>. The historical abbreviations
+<code>"n"</code> and <code>"u"</code> are accepted and names are case-insensitive.</p></td></tr><tr><th scope="row"><code>name</code></th><td>—</td><td><p>Optional labels in the same order as the measurements.</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.01</code></td><td><p>Spacing of the output bearing grid in degrees. Default 0.01.</p></td></tr><tr><th scope="row"><code>.cutoff</code></th><td><code>1e-05</code></td><td><p>Minimum density retained on the output grid. Default <code>1e-5</code>.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p></td></tr><tr><th scope="row"><code>taper</code></th><td><code>NULL</code></td><td><p>Outer extension on each side of a tapered uniform core, in degrees.
+Required for <code>"tapered_uniform"</code>. Zero gives a uniform density.</p></td></tr><tr><th scope="row"><code>survey.sd</code></th><td><code>0.5</code></td><td><p>Standard deviation of independent bearing or declination
+error, in degrees, for <code>"uniform_normal"</code>. Defaults to 0.5 degrees per observation. Zero gives a uniform density.</p></td></tr><tr><th scope="row"><code>lower</code></th><td><code>NULL</code></td><td><p>The two bounding directions of a triangular model, in degrees.
+Supply both and omit <code>unc</code>. Each bound, <code>taper</code> and <code>survey.sd</code>
+may be a scalar or a vector in measurement order.</p></td></tr><tr><th scope="row"><code>upper</code></th><td><code>NULL</code></td><td><p>The two bounding directions of a triangular model, in degrees.
+Supply both and omit <code>unc</code>. Each bound, <code>taper</code> and <code>survey.sd</code>
+may be a scalar or a vector in measurement order.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.pdf list. The data component contains one data frame per measurement, in input order, with azimuth x in degrees and density y. The metadata record the measurements, names, uncertainties, distribution type and numerical settings.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/statistics.R` and `R/measurement-density.R`. [Full function help](help/az.pdf.html) · [Significance tests](significance.html#sec-tests) · [Uncertainty and orientation distributions outline](contents-plan.html#plan-density) · [From a measured orientation to a declination distribution](orientation-densities.html#density-measurement) · [Give each opening a distribution](vignette-guide.html#workflow-give-each-opening-a-distribution)

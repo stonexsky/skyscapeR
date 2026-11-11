@@ -11,9 +11,10 @@ nsp <- readLines(file.path(w,"skyscapeR","NAMESPACE"))
 exports <- sub("^export\\((.*)\\)$","\\1",grep("^export",nsp,value=TRUE))
 methods <- sub("^S3method\\(([^,]+),(.+)\\)$","\\1.\\2",grep("^S3method",nsp,value=TRUE))
 read_text <- function(file) paste(readLines(file,warn=FALSE),collapse="\n")
-catalogue <- read_text("function-methods.qmd")
-entries <- strsplit(catalogue, "\n### `", fixed=TRUE)[[1]][-1]
-names(entries) <- sub("\\(\\).*","",sub("\n.*","",entries))
+entry_files <- Sys.glob("fn-*.qmd")
+entries <- vapply(entry_files, read_text, character(1))
+titles <- vapply(entry_files, function(path) readLines(path, n=1L), character(1))
+names(entries) <- sub("^# `", "", sub("[(][)].*$", "", titles))
 api <- c(exports, methods)
 stopifnot(setequal(names(entries),api), length(entries)==length(api))
 formal_count <- 0L
@@ -58,7 +59,7 @@ guide_parts <- strsplit(guide,"\n### ",fixed=TRUE)[[1]][-1]
 stopifnot(!in_chunk, identical(sub(" \\{#.*","",sub("\n.*","",guide_parts)),titles))
 for(i in seq_along(titles)) {
   for(n in sections[[titles[i]]]) {
-    link <- paste0("function-methods.html#fn-",gsub(".","-",tolower(n),fixed=TRUE),")")
+    link <- paste0("fn-",gsub(".","-",tolower(n),fixed=TRUE),".html)")
     if (!grepl(link,guide_parts[i],fixed=TRUE)) stop("Vignette route missing for ",n," in ",titles[i])
   }
 }

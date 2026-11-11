@@ -1,0 +1,127 @@
+# `createHor()` {#fn-createhor}
+
+[Function index](function-index.html#idx-createhor) · [H01 field validation](h01-field-validation.qmd) · [H02 skyline comparison](h02-skyline-comparison.qmd)
+
+```{=html}
+<p><strong>Measured bearings.</strong> To evaluate sightlines between measured bearings, the constructor repeats the azimuths
+one turn in each direction, removes duplicate azimuth entries and linearly interpolates
+altitude and altitude uncertainty onto a 0.01-degree grid from -90 to 450 degrees.
+Scalar uncertainty is repeated. Optional smoothing applies a running mean over the
+specified number of grid samples to both series, with zero fill at the outer ends.
+Latitude, longitude and elevation identify the observer; omitted elevation defaults to
+zero. Interpolation cannot recover narrow features between measurements.
+</p>
+<p><strong>Observer and DEM coverage.</strong> For a DEM, supply a point with a CRS, projected x and y with loc.crs, or WGS84 latitude and longitude.
+The optional third coordinate is ground elevation in metres in the DEM's vertical
+datum. Otherwise ground elevation is bilinearly sampled at the site. Observer
+elevation in the returned georeference is ground elevation plus eye.height.
+A terrain model represents bare earth. A surface model includes the objects
+represented in its elevations. Use a single continuous band in metres with a
+defined horizontal CRS. Missing samples and terrain beyond the raster edge are skipped. A warning and the incomplete.bearings metadata identify incomplete coverage. Each bearing needs at least one usable sample.
+</p>
+```
+
+**Accuracy, uncertainty and reproducibility.**
+
+```{=html}
+<p>H01 compared 334 bearings at 31 observing setups.
+At the surveyed bearings, <code>createHor()</code> reproduced the observed terrain skyline to within half a degree in 91.9% of cases.
+See the <a href="https://stonexsky.github.io/skyscapeR/manual/#h01-field-validation">H01 field validation in the skyscapeR technical manual</a> for the survey protocol, station results and limitations.
+</p>
+<p>With the same 1 m terrain, <code>createHor()</code> reproduced Horizon’s skylines to a mean absolute difference of 0.004 degrees at each of two English sites. Against field measurements at 344 Irish bearings, <code>createHor()</code> using SRTM had a mean absolute error of 0.328 degrees, lower than either HeyWhatsThat or PeakFinder on that sample. Field accuracy varied by site. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#h02-skyline-comparison">H02 comparison in the skyscapeR technical manual</a>.
+</p>
+<p>The numerical skyline is a maximum over sampled terrain, not an accuracy
+certificate for the DEM. Horizontal and vertical datum differences, observer
+height, missing raster values, vegetation and buildings can exceed the sampling
+error. DEM elevations and a supplied observer ground elevation must use a
+compatible vertical datum. No geoid conversion or vertical-datum correction is
+performed automatically. Refine the angular and distance sampling and expand
+the radius until the relevant sightlines are stable. Compare with surveyed
+bearings and altitudes where available.
+</p>
+<p><code>alt.unc</code> is supplied by the user and is not estimated from DEM resolution,
+control residuals or atmospheric variability. Smoothing a measured profile can
+remove narrow notches or peaks. Adaptive panorama sampling and illustrative
+lighting concern the image; they do not increase numerical horizon precision.
+The terrestrial refraction approximation assumes the supplied atmosphere and
+cannot reproduce all near-ground gradients or mirage conditions.
+</p>
+<p>Save the DEM provenance, observer location and datum, constructor arguments,
+feature objects, returned horizon and external PNG. Rebuilding from the same
+source is distinct from merely replotting the saved horizon.
+</p>
+
+
+
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>Patat, F. (2011). Horizon synthesis for archaeo-astronomical purposes. Astronomische Nachrichten 332, 743-749. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1002/asna.201111570")}.
+</p>
+
+
+
+```
+
+</details>
+
+**Interpretation and limits.** A feature height is additional relief on the supplied surface. A bank can be visible below the terrain skyline, so inspect the numerical profile and panorama separately. The [H01](h01-field-validation.qmd) field residuals quantify agreement at surveyed terrain bearings. Reconstructed features need their own reference measurements.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>az</code></th><td>—</td><td><p>Array of azimuth values</p></td></tr><tr><th scope="row"><code>alt</code></th><td>—</td><td><p>Array of altitude values.</p></td></tr><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>Observer location. For DEMs, pass a single CRS-bearing terra SpatVector point directly as loc, or a numeric latitude and longitude. Ground elevation is read from the DEM unless supplied as a third numeric value. Measured horizons take latitude, longitude and elevation.</p></td></tr><tr><th scope="row"><code>dem</code></th><td><code>NULL</code></td><td><p>Optional single-band terra SpatRaster or local raster filename.
+Supply dem in place of az and alt. Requires the optional terra package.</p></td></tr><tr><th scope="row"><code>loc.crs</code></th><td><code>NULL</code></td><td><p>CRS for numeric DEM observer coordinates in x,y order (easting, northing or longitude, latitude). Without it, numeric loc uses latitude, longitude in WGS84. A single terra SpatVector point carries its own CRS. An optional third numeric coordinate is ground elevation in metres.</p></td></tr><tr><th scope="row"><code>name</code></th><td><code>&quot;&quot;</code></td><td><p>Name of site.</p></td></tr><tr><th scope="row"><code>alt.unc</code></th><td><code>0.5</code></td><td><p>Either a single value or an array of altitude
+uncertainty.</p></td></tr><tr><th scope="row"><code>smooth</code></th><td><code>F</code></td><td><p>Logical to control whether to smooth horizon profile using rolling mean.
+Defaults to FALSE</p></td></tr><tr><th scope="row"><code>.scale</code></th><td><code>1000</code></td><td><p>Number of samples in the rolling mean when smooth = TRUE. The grid spacing is 0.01 degrees, so 1000 samples span approximately 10 degrees.</p></td></tr><tr><th scope="row"><code>eye.height</code></th><td><code>1.6</code></td><td><p>Observer height above the selected ground elevation in metres.</p></td></tr><tr><th scope="row"><code>max.distance</code></th><td><code>10000</code></td><td><p>DEM search radius in metres, default 10000. Include any
+distant terrain that could form the horizon within the DEM coverage.</p></td></tr><tr><th scope="row"><code>az.step</code></th><td><code>0.25</code></td><td><p>Maximum spacing of numerical DEM rays in degrees. The default
+is 0.25. An equal number of steps fills the circle.</p></td></tr><tr><th scope="row"><code>distance.step</code></th><td><code>NULL</code></td><td><p>Maximum spacing of samples along each ray in metres.
+By default use half the smaller native cell dimension estimated at the site.</p></td></tr><tr><th scope="row"><code>features</code></th><td><code>NULL</code></td><td><p>Optional <code>horFeature</code> object or list of such
+objects describing reconstructed or highlighted structures. Requires dem.
+Elevations are additive, with the largest positive and deepest negative
+contributions combined at overlaps. Later footprints take colour precedence.
+Features affect both numerical horizon and visible terrain. Their geometry
+is kept out of the returned horizon; save the feature objects separately.</p></td></tr><tr><th scope="row"><code>curvature</code></th><td><code>TRUE</code></td><td><p>Apply Earth curvature to DEM sightlines. Default TRUE.</p></td></tr><tr><th scope="row"><code>refraction.k</code></th><td><code>NULL</code></td><td><p>Default NULL applies Patat when curvature is enabled. Set zero for geometric curvature without terrestrial refraction, or supply a coefficient below one for the effective-radius model.</p></td></tr><tr><th scope="row"><code>atm</code></th><td><code>skyscapeR.env$atm</code></td><td><p>Ground atmospheric pressure in millibars for Patat terrestrial refraction.</p></td></tr><tr><th scope="row"><code>temp</code></th><td><code>skyscapeR.env$temp</code></td><td><p>Ground air temperature in degrees Celsius.</p></td></tr><tr><th scope="row"><code>tempgrad</code></th><td><code>-10</code></td><td><p>Vertical temperature gradient in kelvins per kilometre (default -10).</p></td></tr><tr><th scope="row"><code>panorama</code></th><td><code>TRUE</code></td><td><p>Render an external terrain PNG for a DEM. Default TRUE.
+Set FALSE for the numerical horizon alone.</p></td></tr><tr><th scope="row"><code>width</code></th><td><code>4096</code></td><td><p>DEM panorama width in pixels, an even integer from 32 to 81920.
+Default 4096 by 2048 pixels. Height is half the width. Widths above 8192 are assembled from temporary image tiles. Both dimensions grow with width, so a tenfold increase generates 100 times as many pixels.</p></td></tr><tr><th scope="row"><code>panorama.distance.step</code></th><td><code>&quot;adaptive&quot;</code></td><td><p>The default, "adaptive", starts at one local DEM cell and increases radial
+spacing with distance using the larger of the requested angular acuity and
+one horizontal PNG pixel. This transverse footprint is a proxy for radial
+detail. A narrow ridge may fall between samples. Use a positive number for
+fixed spacing in metres or NULL to reuse distance.step. The numerical horizon
+uses distance.step independently. Inspect metadata$image$sampling for the
+effective angle, sample count and actual step range. On large DEM-only panoramas, the renderer checks near terrain against a conservative upper bound for the remaining terrain on each ray. It skips distant samples only where all remaining elevations are hidden and keeps neighbours for surface shading. Terrain with added archaeological features uses the full sampling path.</p></td></tr><tr><th scope="row"><code>panorama.acuity</code></th><td><code>1</code></td><td><p>Angular detail target in arcminutes for adaptive PNG sampling. Defaults to 1 (nominal 20/20 acuity). Larger values coarsen distant terrain.</p></td></tr><tr><th scope="row"><code>terrain.palette</code></th><td><code>&quot;temperate&quot;</code></td><td><p>Named land/water pair from <code>demPalettes</code>.
+Options are temperate (default), standalone, arid, alpine, coastal and relief.</p></td></tr><tr><th scope="row"><code>land_cols</code></th><td><code>NULL</code></td><td><p>Opaque R colour names or hex colours in increasing
+elevation order. NULL inherits the respective ramp from terrain.palette.
+Supply either vector to override just that ramp. One colour gives a uniform base. Colours interpolate in Lab space.</p></td></tr><tr><th scope="row"><code>sea_cols</code></th><td><code>NULL</code></td><td><p>Opaque R colour names or hex colours in increasing
+elevation order. NULL inherits the respective ramp from terrain.palette.
+Supply either vector to override just that ramp. One colour gives a uniform base. Colours interpolate in Lab space.</p></td></tr><tr><th scope="row"><code>sea_level</code></th><td><code>0</code></td><td><p>DEM elevation in metres at or below which the sea colour
+ramp is used. Default 0. A level water surface uses the shallow colour. This is an elevation threshold. Use NULL to apply
+the land palette over the whole visible elevation range, including depressions.
+The temperate land ramp starts at the lowest visible land level or sea threshold, whichever is higher. Other palettes with a threshold start at sea_level. The ramp ends at the highest
+visible elevation. The sea ramp starts at the lowest visible elevation.</p></td></tr><tr><th scope="row"><code>n_sea</code></th><td><code>3L</code></td><td><p>Number of entries reserved for the sea ramp, leaving at least
+two land colours. Default 3.</p></td></tr><tr><th scope="row"><code>palette_n</code></th><td><code>256L</code></td><td><p>Total number of palette entries, from 4 to 65536. Default
+256.</p></td></tr><tr><th scope="row"><code>lighting</code></th><td><code>c(&quot;relief&quot;, &quot;directional&quot;)</code></td><td><p>Relief lighting (default) blends a light at the observer (75 percent)
+with the directional source (25 percent). It shades both sides of a slope and
+lifts deep shadows. Choose "directional"
+for one-sided hillshade. Lighting affects the PNG only.</p></td></tr><tr><th scope="row"><code>light.azimuth</code></th><td><code>315</code></td><td><p>Direction towards the illustrative light
+source in degrees clockwise from true north and above the horizon. Defaults
+are 315 and 45 degrees. Hillshading uses upward surface normals in metric
+east, north and vertical coordinates. This is local illumination without
+cast shadows from other terrain.</p></td></tr><tr><th scope="row"><code>light.altitude</code></th><td><code>45</code></td><td><p>Direction towards the illustrative light
+source in degrees clockwise from true north and above the horizon. Defaults
+are 315 and 45 degrees. Hillshading uses upward surface normals in metric
+east, north and vertical coordinates. This is local illumination without
+cast shadows from other terrain.</p></td></tr><tr><th scope="row"><code>ambient</code></th><td><code>0.38</code></td><td><p>Fraction of illumination retained on slopes facing away from
+the light (0 to 1). Default 0.38. Use 1 for unshaded palette colours.</p></td></tr><tr><th scope="row"><code>haze</code></th><td><code>0.65</code></td><td><p>Maximum fraction of distance haze (0 to 1). Default 0.65.
+Set haze=0 and ambient=1 to inspect the colour mapping alone.</p></td></tr><tr><th scope="row"><code>image.dir</code></th><td><code>getwd()</code></td><td><p>Directory for the DEM PNG. Defaults to the working directory. Site names form the filename; different images with the same name receive a checksum suffix.</p></td></tr><tr><th scope="row"><code>attribution</code></th><td><code>&quot;User-supplied DEM&quot;</code></td><td><p>Credit for the DEM, included in plots and exports. The generic default credit is omitted from plots.</p></td></tr><tr><th scope="row"><code>license</code></th><td><code>&quot;See source DEM terms&quot;</code></td><td><p>Source licence or terms for the DEM, included in exports.</p></td></tr><tr><th scope="row"><code>ncores</code></th><td><code>NULL</code></td><td><p>Maximum DEM tracing workers. Defaults to half the available logical cores, rounded down with a minimum of one. The startup message reports used and available cores. Workers share file-backed DEM data and process separate bearings.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Announce the DEM radius, sampling and rendering stages.</p></td></tr><tr><th scope="row"><code>progress</code></th><td><code>interactive() &amp;&amp; verbose</code></td><td><p>Show a progress bar for each tracing stage. Default on in interactive verbose sessions.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.horizon list with metadata (site name and georeference) and a data frame named data. Its az, alt and alt.unc columns contain azimuth, horizon altitude and altitude uncertainty, all in degrees.
+</p>
+
+
+```
+
+</details>
+
+**Implementation.** `R/horizon.R`. [Full function help](help/createHor.html) · [Terrain horizons](horizons.html#sec-horizon) · [Stellar visibility](stellar-phases.html#sec-stellar) · [Sky reconstruction](sky-rendering.html#sec-sketch) · [Terrain horizons and panoramas outline](contents-plan.html#plan-terrain) · [From a measured orientation to a declination distribution](orientation-densities.html#density-notch) · [Terrain crossings and event searches](event-searches.html#event-ridge) · [Identifying celestial candidates and limiting declinations](celestial-targets.html#target-band) · [Photographic calibration and interchange](photographic-horizons.html#photo-example) · [Generating a terrain panorama](horizons.html#sec-dem-panorama) · [Importing site horizons](vignette-guide.html#workflow-importing-site-horizons)

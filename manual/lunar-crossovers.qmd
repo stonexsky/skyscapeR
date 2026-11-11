@@ -4,7 +4,7 @@
 
 ## Equinoctial full Moons {#crossover-efm}
 
-[`EFM()`](function-methods.html#fn-efm) searches chronological local civil dates from 60 days before to 65 days after the astronomical March or September equinox. It evaluates the illuminated fraction at the lunar centre crossing and requires at least `min.phase` (default 0.99). Let $D=A_{\mathrm{Moon}}-A_{\mathrm{Sun}}$, using topocentric bearings clockwise from true north. The 2.0.9004 EFM implementation applies the strict comparisons below to the two bearings directly.
+[`EFM()`](fn-efm.html) searches chronological local civil dates from 60 days before to 65 days after the astronomical March or September equinox. It evaluates the illuminated fraction at the lunar centre crossing and requires at least `min.phase` (default 0.99). Let $D=A_{\mathrm{Moon}}-A_{\mathrm{Sun}}$, using topocentric bearings clockwise from true north. The 2.0.9004 EFM implementation applies the strict comparisons below to the two bearings directly.
 
 | EFM | Moonrise condition | Moonset condition |
 |---|---|---|
@@ -27,7 +27,7 @@ The equinox anchors the search; it does not identify the nearest full Moon or re
 
 ## First and last crescents {#crossover-cc}
 
-[`CC()`](function-methods.html#fn-cc) first locates the relevant solstice and conjunctions. The initial lunation is **two conjunctions before the last conjunction at or before the solstice**. Its distance from the solstice depends on the Moon's phase at that solstice. This operationalises a starting window described in synodic months in the paper; a fixed subtraction of two mean synodic months need not start on the same lunation. Successive conjunctions are considered through 150 days after solstice.
+[`CC()`](fn-cc.html) first locates the relevant solstice and conjunctions. The initial lunation is **two conjunctions before the last conjunction at or before the solstice**. Its distance from the solstice depends on the Moon's phase at that solstice. This operationalises a starting window described in synodic months in the paper; a fixed subtraction of two mean synodic months need not start on the same lunation. Successive conjunctions are considered through 150 days after solstice.
 
 For each conjunction the algorithm searches forwards for the first waxing evening or backwards for the last waning morning, up to eight civil days from the conjunction date. It assesses visibility at sunset for waxing crescents and at sunrise for waning crescents. In degrees, the adopted Caldwell–Laney margin is
 
@@ -77,4 +77,4 @@ The strength of the package implementation is access to the selected event pair,
 
 **Related function entries**
 
-[`EFM()`](function-methods.html#fn-efm), [`CC()`](function-methods.html#fn-cc), [`moonphase()`](function-methods.html#fn-moonphase), [`riseset()`](function-methods.html#fn-riseset), [`time2jd()`](function-methods.html#fn-time2jd), [`jd2time()`](function-methods.html#fn-jd2time), [`skyscapeR.vars()`](function-methods.html#fn-skyscaper-vars).
+[`EFM()`](fn-efm.html), [`CC()`](fn-cc.html), [`moonphase()`](fn-moonphase.html), [`riseset()`](fn-riseset.html), [`time2jd()`](fn-time2jd.html), [`jd2time()`](fn-jd2time.html), [`skyscapeR.vars()`](fn-skyscaper-vars.html).

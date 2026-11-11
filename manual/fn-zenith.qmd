@@ -1,0 +1,27 @@
+# `zenith()` {#fn-zenith}
+
+A05 verified the geometric zenith declination and tropical-boundary eligibility at two epochs. [A05 results](a05-solar-limits.qmd).
+
+[Function index](function-index.html#idx-zenith)
+
+```{=html}
+<p>The geometric zenith has declination equal to the site latitude. The function
+checks the latitude against the obliquity of the requested epoch. At the geometric zenith, parallax vanishes. It returns NULL outside the permitted band. This supplies
+a declination criterion rather than the dates of the passages.
+</p>
+```
+
+[Latitude, epoch and parallax assumptions](fn-antizenith.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>This can be either the latitude of the
+location, or a <em>skyscapeR.horizon</em> object.</p></td></tr><tr><th scope="row"><code>parallax</code></th><td><code>0.00224</code></td><td><p>Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>90</code></td><td><p>Altitude in degrees used for the approximate parallax correction. The geometric default is 90 degrees.</p></td></tr><tr><th scope="row"><code>year</code></th><td><code>skyscapeR.env$cur.year</code></td><td><p>Astronomical year used to calculate the obliquity and hence the tropical latitude limit.</p></td></tr></tbody></table><h5>Return value</h5><p>Solar declination in degrees with the requested parallax correction, or NULL when the latitude falls outside the solstitial limits used by the function.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/events.R`. [Full function help](help/zenith.html) · [From bearings to celestial targets outline](contents-plan.html#plan-targets) · [Identifying celestial candidates and limiting declinations](celestial-targets.html#target-limits)

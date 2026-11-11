@@ -1,0 +1,76 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>hor2alt | skyscapeR 2.0.9008</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-hor2alt.html">hor2alt() method</a></nav><h2 id='hor2alt'>Interpolate horizon altitude at a bearing</h2><span id='topic+hor2alt'></span>
+
+<h3>Description</h3>
+
+<p>Estimate the altitude of the local horizon, and optionally its uncertainty, at one or
+more true bearings.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>hor2alt(hor, az, return.unc = F)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="hor2alt_:_hor">hor</code></td>
+<td>
+<p>A <em>skyscapeR.horizon</em> object from which to retrieve horizon altitude.</p>
+</td></tr>
+<tr><td><code id="hor2alt_:_az">az</code></td>
+<td>
+<p>Array of azimuth(s) for which to retrieve horizon altitude(s).</p>
+</td></tr>
+<tr><td><code id="hor2alt_:_return.unc">return.unc</code></td>
+<td>
+<p>Logical controlling whether to return altitude uncertainty.
+Default is <em>FALSE</em>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>A measured axis rarely falls exactly on a stored horizon sample. Separate cubic splines
+interpolate altitude and its recorded uncertainty as functions of azimuth, and results
+are rounded to two decimal places. Supply bearings within the profile coverage; a spline
+beyond the measured range is an extrapolation. Distinguish this lookup from the linear
+interpolation used inside coordtrans.
+</p>
+
+
+<h3>Value</h3>
+
+<p>With <code>return.unc = FALSE</code>, a numeric vector of altitudes.
+With <code>return.unc = TRUE</code> and one azimuth, an unnamed numeric vector
+containing altitude followed by uncertainty. With multiple azimuths, a
+numeric matrix with columns <code>alt</code> and <code>alt.unc</code>, one row per
+input azimuth in the supplied order. Values are rounded to two decimal places.
+</p>
+
+
+<h3>Validation</h3>
+
+<p>In H07, lookup at each edge of a north-crossing panorama returned its measured altitude and lookup beyond either edge returned NA. See the <a href="../h07-panorama-coverage.html">H07 check in the technical manual</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>createHor</code>, <code>downloadHWT</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>hor &lt;- createHor(c(0,90,180,270,360), c(0,5,3,1,0),
+                 alt.unc=c(0.1,0.2,0.3,0.2,0.1), loc=c(40,-8,100))
+hor2alt(hor, 90)
+hor2alt(hor, 90, return.unc=TRUE)
+hor2alt(hor, c(90,180,270), return.unc=TRUE)
+</code></pre>
+
+</body></html>

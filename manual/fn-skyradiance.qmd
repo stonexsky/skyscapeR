@@ -1,0 +1,33 @@
+# `skyRadiance()` {#fn-skyradiance}
+
+[Function index](function-index.html#idx-skyradiance)
+
+```{=html}
+<p>Direct light includes stars, residual cluster light, planetary discs
+and the illuminated lunar disc. The Milky Way uses the accepted tracing and
+a provisional Carina surface-brightness calibration. Stars remain unresolved
+as the view is enlarged. See <code>sketchSky</code> for sources, assumptions
+and interpretation.
+</p>
+```
+
+[Linear flux, solid angle and display colour](fn-sketchsky.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>sky</code></th><td>—</td><td><p>A natural sketch from <code>sketchSky</code>.</p></td></tr><tr><th scope="row"><code>xrange</code></th><td><code>c(0, 360)</code></td><td><p>Increasing true azimuth limits in degrees. A sector may cross
+north, for example c(340,380).</p></td></tr><tr><th scope="row"><code>yrange</code></th><td><code>c(0, 90)</code></td><td><p>Increasing altitude limits within -90 to 90 degrees.</p></td></tr><tr><th scope="row"><code>size</code></th><td><code>c(720, 180)</code></td><td><p>Positive integer column and row counts, up to 1600 by 1000.</p></td></tr></tbody></table><h5>Return value</h5><p>A list containing azimuth and altitude pixel centres, total radiance,
+direct light (stars, residual cluster light, planets and lunar disc), and
+Milky Way radiance. Matrices are in magnitude-zero flux units per square
+degree, ordered from high to low altitude and increasing azimuth. Multiply
+by area (square degrees per pixel by row) and sum to obtain flux. The
+difference between total and the two source matrices is the atmospheric
+background. The Sun contributes to the background; its disc is a plot overlay.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/light-budget.R`. [Full function help](help/skyRadiance.html) · [Sky reconstruction](sky-rendering.html#sec-sketch) · [Sky brightness and visualisation outline](contents-plan.html#plan-light) · [Display styles, capture and stepping time](sky-rendering.html#sky-step-capture)

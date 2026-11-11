@@ -1,0 +1,28 @@
+# `antizenith()` {#fn-antizenith}
+
+A05 verified the geometric anti-zenith declination and tropical-boundary eligibility at two epochs. [A05 results](a05-solar-limits.qmd).
+
+[Function index](function-index.html#idx-antizenith)
+
+```{=html}
+<p>The direction opposite the zenith corresponds geometrically to minus the site latitude.
+Build 2.0.9009 tests the site against the obliquity at the requested epoch. At the geometric anti-zenith, parallax vanishes. It
+returns NULL outside that band. This is a target declination for comparison with
+orientations, not an observable solar transit below ground.
+</p>
+```
+
+**Interpretation and limits.** Record the site's latitude and the epoch and parallax assumptions used for a solar limit. A returned limit is a geometrical target; an observer still needs an independent reason to regard it as culturally significant.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>This can be either the latitude of the
+location, or a <em>skyscapeR.horizon</em> object.</p></td></tr><tr><th scope="row"><code>parallax</code></th><td><code>0.00224</code></td><td><p>Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>-90</code></td><td><p>Altitude in degrees used for the approximate parallax correction. The geometric default is -90 degrees.</p></td></tr><tr><th scope="row"><code>year</code></th><td><code>skyscapeR.env$cur.year</code></td><td><p>Astronomical year used to calculate the obliquity and hence the tropical latitude limit.</p></td></tr></tbody></table><h5>Return value</h5><p>Solar declination in degrees with the requested parallax correction, or NULL when the latitude falls outside the solstitial limits used by the function.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/events.R`. [Full function help](help/antizenith.html) · [From bearings to celestial targets outline](contents-plan.html#plan-targets) · [Identifying celestial candidates and limiting declinations](celestial-targets.html#target-limits)

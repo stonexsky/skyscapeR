@@ -1,0 +1,82 @@
+# `riseset()` {#fn-riseset}
+
+H07 verified that a partial panorama is rejected before searching for solar or stellar crossings on an unobserved skyline. [H07 results](h07-panorama-coverage.qmd).
+
+A04 recovered the expected crossing counts and order on synthetic ridges, notches and grazing tracks; solar and lunar centre crossings at the Malta test site agreed with JPL Horizons within 0.85 seconds and 0.0041 degrees. [A04 results](a04-stellar-crossings.qmd).
+
+**A02 validation.** A02 tested sensitivity to ephemeris conventions using a separate solver on airless lunar-centre trajectories. Across 177 prehistoric skyline crossings, default azimuths differed from JPL Horizons by a median of 0.059 degrees and a maximum of 0.322 degrees. Matching delta T reduced the maximum to 0.027 degrees. [Lunar crossing results](a02-ephemeris.qmd).
+
+[Function index](function-index.html#idx-riseset)
+
+```{=html}
+<p>The event is a crossing of the local horizon by the body's centre. A raised ridge can
+delay the first visible rise and an uneven horizon can give several appearances or
+disappearances. Choose the horizon model, atmosphere, calendar and time convention to
+match the observation.
+</p>
+<p>Events refer to the centre of the disc. For a Solar System body with a coordinate vector, alt is
+one constant horizon altitude and the Swiss Ephemeris rise/set solver is used.
+For stars, the daily track is evaluated against the supplied constant altitude or site skyline. With a horizon object, its profile is linearly interpolated in azimuth and
+compared with the body's topocentric altitude; do not supply alt as well.
+Refraction TRUE uses apparent altitude; FALSE uses geometric altitude. The
+constant-altitude solver likewise disables refraction only when FALSE.
+For a profile, search the 48 hours after each requested local midnight and
+return the first upward and first downward crossing separately. They need
+not enclose one continuous visibility interval or occur on the requested day.
+Missing crossings return NA fields. A one-minute base grid, quarter-step samples,
+azimuth turning points and recursively subdivided rapid azimuth motion bracket visits
+to the profile's corners. Each smooth segment is also searched for an interior altitude
+extremum, so short emergence/reoccultation pairs need not straddle time samples.
+A pure tangency without a sign change is not a rise or set. Horizon altitudes at
+0 and 360 degrees must agree. Root tolerance is 0.01 seconds; interior optimization
+uses relative seconds to avoid precision loss from large Julian dates.
+These settings are not a physical accuracy guarantee: finite precision, unresolved
+terrain and near-zenith azimuth singularities limit numerical completeness. The dec argument
+controls returned declination, not the topocentric event search.
+</p>
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>Astrodienst. Swiss Ephemeris programmer's manual. <a href="https://www.astro.com/swisseph/swephprg.htm">https://www.astro.com/swisseph/swephprg.htm</a>.
+</p>
+
+
+
+```
+
+</details>
+
+**Interpretation and limits.** An event time is conditional on the chosen event definition and clock. A centre crossing of terrain differs from first visibility of a limb; a recurring solar declination can admit more than one date.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>Location, either a <em>skyscapeR.horizon</em> or a vector
+containing the latitude, longitude and elevation of location, in this order.</p></td></tr><tr><th scope="row"><code>date</code></th><td>—</td><td><p>Either a string containing the date in the format "YYYY/MM/DD"
+(see <code>timestring</code>), or a numeric containing the julian date (see <code>time2jd</code>).
+Can also be a single year ("YYYY") or a month ("YYYY/MM") to calculate risings and settings for every day in the
+year or month, respectively. Not necessary if <em>jd</em> is given.</p></td></tr><tr><th scope="row"><code>jd</code></th><td>—</td><td><p>A numeric containing the julian date (see <code>time2jd</code>) for which to
+calculate rising and settings. Only needed if <em>date</em> is not given.</p></td></tr><tr><th scope="row"><code>obj</code></th><td><code>&quot;sun&quot;</code></td><td><p>Solar System body, Western star name or fixed-star catalogue identifier (including M 45). Defaults to 'sun'.</p></td></tr><tr><th scope="row"><code>alt</code></th><td><code>0</code></td><td><p>The altitude of the horizon to consider. Defaults to zero degrees.</p></td></tr><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See <code>time2jd</code> for named zones and offsets.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p></td></tr><tr><th scope="row"><code>dec</code></th><td>—</td><td><p>Output declination: <em>geo</em> for the geocentric, or <em>topo</em> for the topocentric
+frame of reference. If not given the value set by <code>skyscapeR.vars</code> will be used instead.</p></td></tr><tr><th scope="row"><code>refraction</code></th><td>—</td><td><p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>atm</code></th><td>—</td><td><p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>temp</code></th><td>—</td><td><p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p></td></tr></tbody></table><h5>Return value</h5><p>A list containing object, rise and set; rise/set are data frames
+with date, time, azimuth and declination columns. Missing events have NA fields.
+</p><h5>Crossing is not first visibility</h5><p>The result supplies geometry and time. It applies neither atmospheric extinction
+nor a twilight detection threshold and does not test whether the star can be
+seen. A centre exactly at the skyline can remain obscured in a plot or too faint
+to detect. Use <code>star.phases</code> to select a candidate season, then
+inspect moments after the crossing with <code>sketchSky</code> and
+<code>skyStep</code>. The extra time needed for clearance depends on track
+slope, latitude and terrain; a universal minute offset is inappropriate.
+</p><p>A numerical root tolerance describes the solver, not observational timing
+accuracy. Uncertain terrain height, refraction and ancient Earth-rotation
+models can dominate it. Saved output contains formatted civil times rather
+than a complete record of the input atmosphere and horizon. Preserve the
+original call and convert date/time back with matching calendar and timezone.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/mechanics.R`. [Full function help](help/riseset.html) · [Stellar visibility](stellar-phases.html#sec-stellar) · [Ephemeris](ephemeris.html#sec-ephemeris) · [Solar, lunar and planetary events outline](contents-plan.html#plan-events) · [Terrain crossings and event searches](event-searches.html#event-crossings) · [Equinoctial full Moons and crescent crossovers](lunar-crossovers.html#crossover-cc) · [Identifying celestial candidates and limiting declinations](celestial-targets.html#target-screen) · [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-frame) · [Equinoctial sunrise](vignette-guide.html#workflow-equinoctial-sunrise) · [The heliacal rising of the Pleiades](vignette-guide.html#workflow-the-heliacal-rising-of-the-pleiades) · [Watch the cluster rise later in the season](vignette-guide.html#workflow-watch-the-cluster-rise-later-in-the-season) · [Exploring celestial candidates](vignette-guide.html#workflow-exploring-celestial-candidates) · [Partial profile coverage](photographic-horizons.html#partial-photo-consumers)

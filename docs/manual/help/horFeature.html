@@ -1,0 +1,174 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>horFeature | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-horfeature.html">horFeature() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Reconstruct or highlight archaeological structures in a DEM horizon</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Explore how stones, poles and earthworks change the visible
+landscape and the horizon used in an orientation analysis. Describe one vector
+layer of structures, then pass one or several layers to <code>createHor</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>horFeature(
+  geometry,
+  type = c("stone", "pole", "bank", "ditch", "mound", "platform", "wall"),
+  height = 0,
+  height_field = NULL,
+  depth = 0,
+  depth_field = NULL,
+  width = NULL,
+  width_field = NULL,
+  diameter = NULL,
+  diameter_field = NULL,
+  profile = NULL,
+  use = NULL,
+  colour = NULL,
+  colour_field = NULL,
+  name = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>geometry</code></td>
+<td>
+<p>A vector filename (including a shapefile or GeoPackage), a
+terra SpatVector, or an object accepted by terra::vect, with a known CRS.
+A layer must contain one geometry family: points, lines or polygons.</p>
+</td></tr>
+<tr><td><code>type</code></td>
+<td>
+<p>Structure type: stone, pole, bank, ditch, mound, platform or wall.
+Stones and poles accept points or polygons; mounds and platforms require
+polygons; banks, ditches and walls accept lines or polygons.</p>
+</td></tr>
+<tr><td><code>height</code></td>
+<td>
+<p>Additional height in metres, nonnegative. Default 0. Ignored
+for ditches, which use depth. Positive height and depth cannot be combined.</p>
+</td></tr>
+<tr><td><code>height_field</code>, <code>depth_field</code>, <code>width_field</code>, <code>diameter_field</code>, <code>colour_field</code></td>
+<td>
+<p>Optional
+attribute column names supplying per-row settings. Do not also supply the
+corresponding common value. Numeric fields must be numeric, finite and meet
+the same bounds as common values. Colour fields must contain valid colours.</p>
+</td></tr>
+<tr><td><code>depth</code></td>
+<td>
+<p>Nonnegative ditch depth in metres. Default 0; only for ditches.</p>
+</td></tr>
+<tr><td><code>width</code></td>
+<td>
+<p>Total width in metres for lines or polygon boundaries.</p>
+</td></tr>
+<tr><td><code>diameter</code></td>
+<td>
+<p>Diameter in metres for point footprints.</p>
+</td></tr>
+<tr><td><code>profile</code></td>
+<td>
+<p>Either bell or flat. Defaults to bell for banks, ditches and
+mounds, and flat for stones, poles, platforms and walls.</p>
+</td></tr>
+<tr><td><code>use</code></td>
+<td>
+<p>For polygons, area or boundary. NULL chooses the type's default.</p>
+</td></tr>
+<tr><td><code>colour</code></td>
+<td>
+<p>One opaque R colour, or NULL for the terrain palette.</p>
+</td></tr>
+<tr><td><code>name</code></td>
+<td>
+<p>Descriptive label for the layer. Defaults to the structure type.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Reconstructions are explicit hypotheses about additional relief above
+the supplied terrain. Heights are added to the existing DEM, including any
+surviving remains already represented there. Ditch depths are subtracted.
+No original ground surface or historical height is inferred. Zero height or
+depth highlights a footprint without changing elevation.
+</p>
+<p>Every feature and multipart component is used. Points become circular
+footprints with the supplied diameter. Lines become strips with half the width
+on each side and round ends. Polygons use their whole area by default for
+stones, poles, mounds and platforms, and their boundary for banks, ditches and
+walls. Polygon holes remain holes in area mode; boundary mode includes their
+edges. Dimensions are metres in a local azimuthal equidistant projection.
+</p>
+<p>Flat profiles extrude the footprint with vertical sides and a top following
+the underlying DEM. Bell profiles use sin(pi * t / 2)^2, where t is distance
+inward from the footprint edge divided by the maximum inward distance of its
+component. For buffered points and lines the normalising distance is their
+radius or half width. Polygon mound components use an estimated largest
+inscribed radius, refined from an interior grid. Irregular mounds follow their
+footprint, may have multiple summits, and holes affect the surface. This is a
+compact rounded profile with zero slope at its edge and crest, not a Gaussian.
+</p>
+<p>Overlaps use the greatest positive and most negative displacement at each
+location, added together. Positive heights do not accumulate. Later features
+(then later rows within a layer) determine colour where footprints overlap.
+NULL colour restores the terrain palette there. Colours receive terrain
+shading and haze and are only drawn where the modified surface is visible.
+</p>
+<p>The renderer intersects footprint boundaries with individual rays, adding
+samples at vertical faces and across curved profiles without refining the
+entire DEM. Circles and round buffers use 128-sided approximations. Numerical
+rays also include feature edge and central bearings. PNG columns remain a
+finite angular grid; a structure narrower than a pixel can be missed. Increase
+width and refine az.step and distance.step to assess convergence. The returned
+horizon still has the package's 0.01-degree grid. These are terrain-attached
+solids with no overhangs, openings, leaning stones, cast shadows or textures.
+The observer elevation is unchanged by reconstruction, so supply loc's ground
+elevation explicitly if the observer should stand on a reconstructed feature.
+</p>
+<p>Save feature objects separately for reproducibility. They contain packed vector
+geometry and settings, but no DEM or PNG. The horizon stores compact settings,
+feature counts and a geometry checksum, with its PNG linked externally as usual.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A serialisable skyscapeR.horFeature object. Pass it or a list of these
+objects as features to createHor with a DEM.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>createHor</code>, <code>demPalettes</code>,
+<code>exportStellarium</code>, <code>plot.skyscapeR.horizon</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>if (requireNamespace("terra", quietly=TRUE)) {
+  points &lt;- terra::vect(data.frame(x=c(-1.75,-1.751), y=c(51.19,51.191),
+    h=c(2,3)), geom=c("x","y"), crs="EPSG:4326")
+  stones &lt;- horFeature(points, "stone", diameter=0.8,
+    height_field="h", colour="grey50")
+}
+## Not run: 
+banks &lt;- horFeature("banks.shp", "bank", width=6, height=1.2,
+  colour="#8A9B54")
+ditches &lt;- horFeature("ditches.shp", "ditch", width=4, depth=0.8,
+  colour="#A18467")
+hor &lt;- createHor(dem="site-dtm.tif", loc=c(51.19,-1.75),
+  max.distance=5000, features=list(stones, banks, ditches),
+  image.dir="horizons")
+plot(hor)
+
+## End(Not run)
+</code></pre>
+
+<p><a href="../fn-horfeature.html">horFeature() method</a></p></body></html>

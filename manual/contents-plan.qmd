@@ -10,7 +10,7 @@ The [astronomical conventions chapter](astronomical-conventions.qmd) traces a BC
 
 **Open question.** What positional differences remain against the matching JPL solution when epoch, time scale, origin and reference frame are held fixed?
 
-**Entry points.** [`BC.AD()`](function-methods.html#fn-bc-ad), [`astroYear()`](function-methods.html#fn-astroyear), [`jd2time()`](function-methods.html#fn-jd2time), [`time2jd()`](function-methods.html#fn-time2jd), [`long.date()`](function-methods.html#fn-long-date), [`timestring()`](function-methods.html#fn-timestring), [`ten()`](function-methods.html#fn-ten), [`skyscapeR.vars()`](function-methods.html#fn-skyscaper-vars), [`obliquity()`](function-methods.html#fn-obliquity), [`parallax.corr()`](function-methods.html#fn-parallax-corr), [`body.position()`](function-methods.html#fn-body-position).
+**Entry points.** [`BC.AD()`](fn-bc-ad.html), [`astroYear()`](fn-astroyear.html), [`jd2time()`](fn-jd2time.html), [`time2jd()`](fn-time2jd.html), [`long.date()`](fn-long-date.html), [`timestring()`](fn-timestring.html), [`ten()`](fn-ten.html), [`skyscapeR.vars()`](fn-skyscaper-vars.html), [`obliquity()`](fn-obliquity.html), [`parallax.corr()`](fn-parallax-corr.html), [`body.position()`](fn-body-position.html).
 
 [Ephemeris background](ephemeris.qmd).
 
@@ -22,17 +22,17 @@ The [field reduction chapter](field-reduction.qmd) follows a compass reading and
 
 **Open question.** Can an independently oriented baseline be recovered from repeat compass and solar-reference observations, including the transition across north?
 
-**Entry points.** [`mag.dec()`](function-methods.html#fn-mag-dec), [`reduct.compass()`](function-methods.html#fn-reduct-compass), [`reduct.theodolite()`](function-methods.html#fn-reduct-theodolite), [`sunAz()`](function-methods.html#fn-sunaz).
+**Entry points.** [`mag.dec()`](fn-mag-dec.html), [`reduct.compass()`](fn-reduct-compass.html), [`reduct.theodolite()`](fn-reduct-theodolite.html), [`sunAz()`](fn-sunaz.html).
 
 ## Terrain horizons and panoramas {#plan-terrain}
 
 The [terrain methods](horizons.qmd) explain how measured profiles, DEM skylines and reconstructed features enter a horizon object. The [photographic calibration and interchange chapter](photographic-horizons.qmd) traces a mask through control-point fitting, angular sampling and landscape export.
 
-**Existing evidence.** The [international H01 study](study-register.qmd#h01-field-validation) reports field agreement for DEM-derived skyline altitudes by observing setup and terrain product, including the effect of search distance. [H02](study-register.qmd#h02-skyline-comparison) compares independently computed skylines at matched viewpoints.
+**Existing evidence.** The [international H01 study](h01-field-validation.qmd) reports field agreement for DEM-derived skyline altitudes by observing setup and terrain product, including the effect of search distance. [H02](h02-skyline-comparison.qmd) compares independently computed skylines at matched viewpoints.
 
 **Open question.** How well are narrow features recovered between sampled bearings? How closely does a calibrated photographic skyline match surveyed points from the same viewpoint?
 
-**Entry points.** [`createHor()`](function-methods.html#fn-createhor), [`horFeature()`](function-methods.html#fn-horfeature), [`hor2alt()`](function-methods.html#fn-hor2alt), [`importPanorama()`](function-methods.html#fn-importpanorama), [`importPeakFinder()`](function-methods.html#fn-importpeakfinder), [`createHWT()`](function-methods.html#fn-createhwt), [`downloadHWT()`](function-methods.html#fn-downloadhwt), [`exportHor()`](function-methods.html#fn-exporthor), [`exportStellarium()`](function-methods.html#fn-exportstellarium), [`exportPanorama()`](function-methods.html#fn-exportpanorama), [`demPalettes()`](function-methods.html#fn-dempalettes), [`relinkHor()`](function-methods.html#fn-relinkhor), [`plot.skyscapeR.horizon()`](function-methods.html#fn-plot-skyscaper-horizon).
+**Entry points.** [`createHor()`](fn-createhor.html), [`horFeature()`](fn-horfeature.html), [`hor2alt()`](fn-hor2alt.html), [`importPanorama()`](fn-importpanorama.html), [`importPeakFinder()`](fn-importpeakfinder.html), [`createHWT()`](fn-createhwt.html), [`downloadHWT()`](fn-downloadhwt.html), [`exportHor()`](fn-exporthor.html), [`exportStellarium()`](fn-exportstellarium.html), [`exportPanorama()`](fn-exportpanorama.html), [`demPalettes()`](fn-dempalettes.html), [`relinkHor()`](fn-relinkhor.html), [`plot.skyscapeR.horizon()`](fn-plot-skyscaper-horizon.html).
 
 
 ## From bearings to celestial targets {#plan-targets}
@@ -43,7 +43,7 @@ The [candidate-screening chapter](celestial-targets.qmd) takes a measured bearin
 
 **Open question.** Where do high or asymmetric skylines change candidate membership, and how closely do the declination limits agree with independently calculated sightlines?
 
-**Entry points.** [`az2dec()`](function-methods.html#fn-az2dec), [`hor2max.dec()`](function-methods.html#fn-hor2max-dec), [`hor2min.dec()`](function-methods.html#fn-hor2min-dec), [`findTargets()`](function-methods.html#fn-findtargets), [`skyObject()`](function-methods.html#fn-skyobject), [`sky.objects()`](function-methods.html#fn-sky-objects), [`zenith()`](function-methods.html#fn-zenith), [`antizenith()`](function-methods.html#fn-antizenith), [`orbit()`](function-methods.html#fn-orbit), [`spatial.equinox()`](function-methods.html#fn-spatial-equinox).
+**Entry points.** [`az2dec()`](fn-az2dec.html), [`hor2max.dec()`](fn-hor2max-dec.html), [`hor2min.dec()`](fn-hor2min-dec.html), [`findTargets()`](fn-findtargets.html), [`skyObject()`](fn-skyobject.html), [`sky.objects()`](fn-sky-objects.html), [`zenith()`](fn-zenith.html), [`antizenith()`](fn-antizenith.html), [`orbit()`](fn-orbit.html), [`spatial.equinox()`](fn-spatial-equinox.html).
 
 ## Solar, lunar and planetary events {#plan-events}
 
@@ -53,7 +53,7 @@ The [event-search chapter](event-searches.qmd) distinguishes the first and last 
 
 **Open question.** Which discrepancies survive matching observing geometry, event definition and calendar? Can a reference calculation recover brief or repeated crossings of an uneven skyline?
 
-**Entry points.** [`riseset()`](function-methods.html#fn-riseset), [`dS()`](function-methods.html#fn-ds), [`jS()`](function-methods.html#fn-js), [`eq()`](function-methods.html#fn-eq), [`nMjLX()`](function-methods.html#fn-nmjlx), [`nmnLX()`](function-methods.html#fn-nmnlx), [`sMjLX()`](function-methods.html#fn-smjlx), [`smnLX()`](function-methods.html#fn-smnlx), [`solar.date()`](function-methods.html#fn-solar-date), [`moonphase()`](function-methods.html#fn-moonphase), [`planet.extremes()`](function-methods.html#fn-planet-extremes), [`EFM()`](function-methods.html#fn-efm), [`CC()`](function-methods.html#fn-cc).
+**Entry points.** [`riseset()`](fn-riseset.html), [`dS()`](fn-ds.html), [`jS()`](fn-js.html), [`eq()`](fn-eq.html), [`nMjLX()`](fn-nmjlx.html), [`nmnLX()`](fn-nmnlx.html), [`sMjLX()`](fn-smjlx.html), [`smnLX()`](fn-smnlx.html), [`solar.date()`](fn-solar-date.html), [`moonphase()`](fn-moonphase.html), [`planet.extremes()`](fn-planet-extremes.html), [`EFM()`](fn-efm.html), [`CC()`](fn-cc.html).
 
 ## Stellar positions and seasonal visibility {#plan-stars}
 
@@ -63,7 +63,7 @@ The [stellar-phases chapter](stellar-phases.qmd) follows a catalogue position th
 
 **Open question.** How well do first and last visibility dates agree with dated sightings under documented observing conditions? Which phase transitions are still untested?
 
-**Entry points.** [`star()`](function-methods.html#fn-star), [`star.phases()`](function-methods.html#fn-star-phases), [`plot.skyscapeR.starphases()`](function-methods.html#fn-plot-skyscaper-starphases).
+**Entry points.** [`star()`](fn-star.html), [`star.phases()`](fn-star-phases.html), [`plot.skyscapeR.starphases()`](fn-plot-skyscaper-starphases.html).
 
 
 ## Sky brightness and visualisation {#plan-light}
@@ -74,7 +74,7 @@ The [sky reconstruction chapter](sky-rendering.qmd) follows the direct, diffuse 
 
 **Open question.** Which independent observations constrain the outer Milky Way boundary and low-altitude surface brightness? How does performance change outside the twilight geometries already tested?
 
-**Entry points.** [`sketchSky()`](function-methods.html#fn-sketchsky), [`skyRadiance()`](function-methods.html#fn-skyradiance), [`planisphere()`](function-methods.html#fn-planisphere), [`importConstellations()`](function-methods.html#fn-importconstellations), [`stellariumSky()`](function-methods.html#fn-stellariumsky), [`skyStep()`](function-methods.html#fn-skystep).
+**Entry points.** [`sketchSky()`](fn-sketchsky.html), [`skyRadiance()`](fn-skyradiance.html), [`planisphere()`](fn-planisphere.html), [`importConstellations()`](fn-importconstellations.html), [`stellariumSky()`](fn-stellariumsky.html), [`skyStep()`](fn-skystep.html).
 
 [Sky-rendering evidence](study-register.qmd#sky-rendering).
 
@@ -86,7 +86,7 @@ The [orientation-density chapter](orientation-densities.qmd) shows how a measure
 
 **Open question.** Does the transformation preserve probability mass at north and near declination limits? Can multimodal examples recover the expected disjoint intervals?
 
-**Entry points.** [`az.pdf()`](function-methods.html#fn-az-pdf), [`dec.pdf()`](function-methods.html#fn-dec-pdf), [`coordtrans()`](function-methods.html#fn-coordtrans), [`spd()`](function-methods.html#fn-spd), [`hpdi()`](function-methods.html#fn-hpdi), [`subset.skyscapeR.pdf()`](function-methods.html#fn-subset-skyscaper-pdf), [`plot.skyscapeR.pdf()`](function-methods.html#fn-plot-skyscaper-pdf), [`plot.skyscapeR.spd()`](function-methods.html#fn-plot-skyscaper-spd), [`plotAzimuth()`](function-methods.html#fn-plotazimuth), [`plotBars()`](function-methods.html#fn-plotbars).
+**Entry points.** [`az.pdf()`](fn-az-pdf.html), [`dec.pdf()`](fn-dec-pdf.html), [`coordtrans()`](fn-coordtrans.html), [`spd()`](fn-spd.html), [`hpdi()`](fn-hpdi.html), [`subset.skyscapeR.pdf()`](fn-subset-skyscaper-pdf.html), [`plot.skyscapeR.pdf()`](fn-plot-skyscaper-pdf.html), [`plot.skyscapeR.spd()`](fn-plot-skyscaper-spd.html), [`plotAzimuth()`](fn-plotazimuth.html), [`plotBars()`](fn-plotbars.html).
 
 ## Null models and significance {#plan-null}
 
@@ -96,4 +96,4 @@ The [significance chapter](significance.qmd) documents the scientific hypothesis
 
 **Open question.** Under data generated by each specified null, how often does the test reject at its stated threshold? How does that rate change with sample size and repeated measurements?
 
-**Entry points.** [`randomTest()`](function-methods.html#fn-randomtest), [`modelTest()`](function-methods.html#fn-modeltest), [`bernoulli.trial()`](function-methods.html#fn-bernoulli-trial), [`pval2stars()`](function-methods.html#fn-pval2stars), [`plot.skyscapeR.sigTest()`](function-methods.html#fn-plot-skyscaper-sigtest), [`print.skyscapeR.sigTest()`](function-methods.html#fn-print-skyscaper-sigtest).
+**Entry points.** [`randomTest()`](fn-randomtest.html), [`modelTest()`](fn-modeltest.html), [`bernoulli.trial()`](fn-bernoulli-trial.html), [`pval2stars()`](fn-pval2stars.html), [`plot.skyscapeR.sigTest()`](fn-plot-skyscaper-sigtest.html), [`print.skyscapeR.sigTest()`](fn-print-skyscaper-sigtest.html).

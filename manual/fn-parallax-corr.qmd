@@ -1,0 +1,43 @@
+# `parallax.corr()` {#fn-parallax-corr}
+
+A05 compared the returned correction with the signed spherical approximation in both hemispheres. [A05 results](a05-solar-limits.qmd).
+
+[Function index](function-index.html#idx-parallax-corr)
+
+```{=html}
+<p>The limiting-declination functions subtract this approximate correction from their
+geocentric target. The correction in degrees is the supplied parallax multiplied by the
+cosine of altitude and sine of latitude, with the angular arguments evaluated in
+degrees. The sign therefore reverses between hemispheres. This scalar approximation is
+distinct from computing an instantaneous topocentric ephemeris.
+</p>
+<p>Ruggles gives an archaeological example of applying mean lunar parallax in a
+declination calculator.
+</p>
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>Ruggles, C. L. N. Basic declination calculator. <a href="https://web.cliveruggles.com/tools/declination-calculator">https://web.cliveruggles.com/tools/declination-calculator</a>.
+</p>
+
+
+
+```
+
+</details>
+
+[Obliquity and parallax conventions](fn-obliquity.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>parallax</code></th><td>—</td><td><p>Average parallax to correct (e.g. 0.00224 for the Sun, or 0.952 for the Moon)</p></td></tr><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>This can be either the latitude of the location, or a <em>skyscapeR.horizon</em> object.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>0</code></td><td><p>Altitude of the celestial object. Defaults to 0 degrees.</p></td></tr></tbody></table><h5>Return value</h5><p>Numeric declination correction in degrees. The sign depends on latitude.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/mechanics.R`. [Full function help](help/parallax.corr.html) · [Time, coordinates and ephemerides outline](contents-plan.html#plan-time) · [Identifying celestial candidates and limiting declinations](celestial-targets.html#target-limits) · [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-star)

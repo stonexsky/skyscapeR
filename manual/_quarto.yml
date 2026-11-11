@@ -2,46 +2,155 @@ project:
   type: book
   output-dir: docs
   pre-render: Rscript scripts/prepare.R
-  post-render: Rscript scripts/local-links.R
+  post-render: python3 scripts/manual-links.py
   resources:
-    - "archives/*"
-    - "study/*.csv"
-    - "help/*.html"
-    - ".nojekyll"
-
+  - archives/*
+  - study/*.csv
+  - help/*.html
+  - .nojekyll
 book:
-  title: "skyscapeR technical manual"
-  subtitle: "Methods and validation · illustrated draft of 9 November 2026"
+  title: skyscapeR technical manual
+  subtitle: 9 November 2026
   chapters:
-    - index.qmd
-    - contents-plan.qmd
-    - ephemeris.qmd
-    - part: "Methods"
-      chapters:
-        - astronomical-conventions.qmd
-        - field-reduction.qmd
-        - horizons.qmd
-        - photographic-horizons.qmd
-        - stellar-phases.qmd
-        - orientation-densities.qmd
-        - event-searches.qmd
-        - lunar-crossovers.qmd
-        - celestial-targets.qmd
-        - significance.qmd
-        - sky-rendering.qmd
-    - part: "Function reference"
-      chapters:
-        - function-index.qmd
-        - function-methods.qmd
-        - vignette-guide.qmd
-    - part: "Validation"
-      chapters:
-        - study-register.qmd
-        - a02-ephemeris.qmd
-        - numerical-validation.qmd
-        - heliacal-rising.qmd
-    - references.qmd
-
+  - index.qmd
+  - contents-plan.qmd
+  - ephemeris.qmd
+  - part: Methods
+    chapters:
+    - astronomical-conventions.qmd
+    - field-reduction.qmd
+    - horizons.qmd
+    - photographic-horizons.qmd
+    - stellar-phases.qmd
+    - orientation-densities.qmd
+    - event-searches.qmd
+    - lunar-crossovers.qmd
+    - celestial-targets.qmd
+    - significance.qmd
+    - sky-rendering.qmd
+  - part: Function reference
+    chapters:
+    - function-index.qmd
+    - function-methods.qmd
+    - vignette-guide.qmd
+  - part: Time, coordinates and ephemerides
+    chapters:
+    - fn-astroyear.qmd
+    - fn-bc-ad.qmd
+    - fn-body-position.qmd
+    - fn-jd2time.qmd
+    - fn-long-date.qmd
+    - fn-obliquity.qmd
+    - fn-parallax-corr.qmd
+    - fn-skyscaper-vars.qmd
+    - fn-ten.qmd
+    - fn-time2jd.qmd
+    - fn-timestring.qmd
+  - part: Reducing field observations
+    chapters:
+    - fn-mag-dec.qmd
+    - fn-reduct-compass.qmd
+    - fn-reduct-theodolite.qmd
+    - fn-sunaz.qmd
+  - part: Terrain horizons and panoramas
+    chapters:
+    - fn-createhor.qmd
+    - fn-createhwt.qmd
+    - fn-dempalettes.qmd
+    - fn-downloadhwt.qmd
+    - fn-exporthor.qmd
+    - fn-exportpanorama.qmd
+    - fn-exportstellarium.qmd
+    - fn-hor2alt.qmd
+    - fn-horfeature.qmd
+    - fn-importpanorama.qmd
+    - fn-importpeakfinder.qmd
+    - fn-plot-skyscaper-horizon.qmd
+    - fn-relinkhor.qmd
+  - part: From bearings to celestial targets
+    chapters:
+    - fn-antizenith.qmd
+    - fn-az2dec.qmd
+    - fn-findtargets.qmd
+    - fn-hor2max-dec.qmd
+    - fn-hor2min-dec.qmd
+    - fn-orbit.qmd
+    - fn-sky-objects.qmd
+    - fn-skyobject.qmd
+    - fn-spatial-equinox.qmd
+    - fn-zenith.qmd
+  - part: Solar, lunar and planetary events
+    chapters:
+    - fn-cc.qmd
+    - fn-ds.qmd
+    - fn-efm.qmd
+    - fn-eq.qmd
+    - fn-js.qmd
+    - fn-moonphase.qmd
+    - fn-nmjlx.qmd
+    - fn-nmnlx.qmd
+    - fn-planet-extremes.qmd
+    - fn-riseset.qmd
+    - fn-smjlx.qmd
+    - fn-smnlx.qmd
+    - fn-solar-date.qmd
+  - part: Stellar positions and seasonal visibility
+    chapters:
+    - fn-plot-skyscaper-starphases.qmd
+    - fn-star.qmd
+    - fn-star-phases.qmd
+  - part: Sky brightness and visualisation
+    chapters:
+    - fn-importconstellations.qmd
+    - fn-planisphere.qmd
+    - fn-sketchsky.qmd
+    - fn-skyradiance.qmd
+    - fn-skystep.qmd
+    - fn-stellariumsky.qmd
+  - part: Uncertainty and orientation distributions
+    chapters:
+    - fn-az-pdf.qmd
+    - fn-coordtrans.qmd
+    - fn-dec-pdf.qmd
+    - fn-hpdi.qmd
+    - fn-plot-skyscaper-pdf.qmd
+    - fn-plot-skyscaper-spd.qmd
+    - fn-plotazimuth.qmd
+    - fn-plotbars.qmd
+    - fn-spd.qmd
+    - fn-subset-skyscaper-pdf.qmd
+  - part: Null models and significance
+    chapters:
+    - fn-bernoulli-trial.qmd
+    - fn-modeltest.qmd
+    - fn-plot-skyscaper-sigtest.qmd
+    - fn-print-skyscaper-sigtest.qmd
+    - fn-pval2stars.qmd
+    - fn-randomtest.qmd
+  - part: Validation
+    chapters:
+    - study-register.qmd
+    - a02-ephemeris.qmd
+    - numerical-validation.qmd
+    - heliacal-rising.qmd
+    - a01-calendar-checks.qmd
+    - a04-stellar-crossings.qmd
+    - a05-solar-limits.qmd
+    - a08-target-ranges.qmd
+    - d01-density-checks.qmd
+    - d02-bearing-propagation.qmd
+    - h01-field-validation.qmd
+    - h02-skyline-comparison.qmd
+    - h07-panorama-coverage.qmd
+    - s01-uniform-orientation.qmd
+    - s02-specified-models.qmd
+    - s03-scoring-checks.qmd
+    - w01-plot-geometry.qmd
+    - w02-field-to-sky.qmd
+  - references.qmd
+  sidebar:
+    collapse-level: 1
+  search: true
 bibliography: references.bib
 format:
   html:
@@ -49,5 +158,7 @@ format:
     css: manual.css
     html-math-method: mathml
     toc: true
+    toc-title: Chapter contents
     fig-cap-location: bottom
+    number-sections: false
 lang: en-GB

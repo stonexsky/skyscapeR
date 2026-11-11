@@ -1,0 +1,24 @@
+# D02 · Bearing uncertainty on flat and irregular skylines {#d02-bearing-propagation}
+
+We tested [`coordtrans()`](help/coordtrans.html) at 50° N with a constant 2° skyline and refraction disabled. Bearings had a Gaussian standard deviation of 2° about centres of 90°, 359° and 0°. Independent Gaussian altitude errors had a standard deviation of 0.5°. For each centre, we transformed one million paired draws through the spherical altitude equation and compared the median and both endpoints of the equal-tailed 95% interval with the package density. We used the same seeded draws at each centre.
+
+At calculation and azimuth integration spacings of 0.1° and 0.05°, all 18 quantile comparisons fell within the specified 0.02° tolerance. The largest absolute discrepancy was 0.00505°, at the upper endpoint for a bearing centred on north on the coarser grid. All six returned densities integrated to one within 0.000001. The discrepancy includes Monte Carlo sampling variation. The extended study varied each numerical spacing separately. Ten configurations returned densities on five grids, and an eleventh tested the documented zero-width limit. The references were (1) direct spherical propagation of 524,288 scrambled Sobol draws and (2) independent quadrature over 8,192 bearing strata using the package’s endpoint-Gaussian implementation of the conditional-density method [@silva2020]. The refracted case shared the Swiss altitude correction to isolate propagation. The archive reports mass error, maximum CDF distance, quantiles, prominent modes and 80% highest-density regions.
+
+| Configuration | Largest fine-grid quantile difference from direct propagation |
+|:---|---:|
+| Eastern slope rising / falling clockwise | 0.00152° / 0.00241° |
+| Sloping skyline crossing north | 0.00089° |
+| Asymmetric ridge with multiple modes | 0.00082° |
+| Archived Kunċizzjoni terrain model | 0.00131° |
+| Surveyed Canrooska skyline | 0.00023° |
+| Refracted slope / doubled altitude uncertainty | 0.00754° / 0.00568° |
+| Observer at geographic north pole | 0.00057° |
+| Sightline near celestial pole | 0.17149° |
+
+The Canrooska input linearly interpolates [surveyed bearings and altitudes](https://mega-what.com/sites/Canrooska/sitedata.htm) at the stone row. The Kunċizzjoni input uses Tore Lomsdalen’s archived Horizon terrain model. Across nine configurations away from the celestial-pole limit, all three quantiles on all five grids agreed with direct propagation within 0.008°. The maximum CDF distance was 0.00411. For the summed-density check, transforming a normalised sum of two bearing PDFs gave area 0.99999947. The integrated absolute difference from summing the two individually transformed PDFs was 0.00159 after normalisation.
+
+**Grid sensitivity.** The ridge had three prominent modes near −0.77°, 3.87° and 9.89°. On the default grid, the 80% highest-density region split the middle band and returned four intervals. Reducing the calculation and azimuth integration steps to 0.05° and the output step to 0.005° recovered the three reference intervals. For this ridge, refining only the integration spacing reduced the largest quantile discrepancy from 0.00645° to 0.00245°. Refining only the calculation spacing reduced it to 0.00485°; refining only the output spacing gave 0.00642°.
+
+**Celestial-pole limit.** At latitude 50° N with a 47° northern skyline, the fine-grid result differed from direct propagation by up to 0.1715° in quantiles and 0.0589 in cumulative probability. Agreement with independent integration of the conditional Gaussian was within 0.00070° in quantiles. The discrepancy is therefore primarily in that approximation. At a 50° northern skyline, the transformed endpoints coincide for the central bearing. The function raised its documented zero-width error on every grid even though direct propagation had a central 95% interval of 87.071°–89.819°. These cases distinguish the celestial-pole geometry from a geographic-pole observer, for which a density was recovered.
+
+[Download the reproduction scripts, input checksums and results for A04 and D02](archives/skyscapeR-9006-A04-D02-validation.zip).

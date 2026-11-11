@@ -1,0 +1,14 @@
+# H07 · Coverage of partial photographic skylines {#h07-panorama-coverage}
+
+A photograph covering 330° through north to 30° supplies no terrain height at 180°. In the archived manual example, 2.0.9007 returned a finite declination distribution spanning −39.302° to −35.032° for a uniform bearing of 180° ± 1°, and a sunrise at 92.481° on 20 March 2026. Direct altitude lookup already returned a missing value at 180°. The shifted profile rows intended to support interpolation at north also allowed other consumers to interpolate across the missing sector.
+
+Build 2.0.9008 checks coverage at the point of use. In the archived example both the unsupported transformation and the sunrise search now give explicit coverage errors. The complete test suite also supplied an independent level mask with known edges.
+
+| Operation | Verified behaviour |
+|:---|:---|
+| `hor2alt()` | Both edges and bearings inside the photographed arc return finite values. Outside bearings return missing values. |
+| `coordtrans()` | Inside and north-wrapping densities agree with the complete level skyline. Positive density crossing an edge, or lying wholly outside, raises an error. Zero SPD tails outside coverage were accepted in the tested case. |
+| `riseset()`, `star.phases()`, `spatial.equinox()` | Full-sky searches reject a partial photograph. The corresponding full-profile controls run successfully. |
+| `exportHor()` | Partial photographs are rejected for both textured and numerical landscape export. Both modes accept the full photograph. |
+
+All 33 assertions and the archived replay passed. The results concern the recorded azimuth sector of an imported panorama. They do not calibrate the photograph's angular accuracy. [Download H07 fixtures, scripts and results](archives/H07-9008.zip).

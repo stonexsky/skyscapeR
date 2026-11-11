@@ -1,0 +1,31 @@
+# `moonphase()` {#fn-moonphase}
+
+**A02 validation.** In A02, all 108 illuminated fractions agreed with the direct Swiss Ephemeris calculation across 54 epochs and two file generations. This checks the R interface. Observed lunar photometry was outside the study. [Lunar illumination check](a02-ephemeris.qmd).
+
+[Function index](function-index.html#idx-moonphase)
+
+```{=html}
+<p>Lunar illumination can be used to screen events for a nearly full Moon. The routine
+converts calendar input to UT Julian dates when needed and obtains the illuminated
+fraction from the lunar phenomena calculation in Swiss Ephemeris. Values near zero
+indicate a nearly new Moon and values near one a nearly full Moon; the fraction alone
+cannot distinguish waxing from waning.
+</p>
+<p>Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-package</code> for setup.
+</p>
+```
+
+**Interpretation and limits.** Illuminated fraction alone supplies no brightness or atmospheric detection criterion. A planetary extreme is conditional on its sampled time window and cadence. Retain that window when comparing extremes between studies.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>time</code></th><td>—</td><td><p>One or more UT Julian dates, or local date-time strings in the form YYYY/MM/DD HH:MM:SS.</p></td></tr><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See <code>time2jd</code> for named zones and offsets.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p></td></tr></tbody></table><h5>Return value</h5><p>Numeric illuminated fraction of the lunar disc, one value per input time. At full illumination the fraction is 1.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/mechanics.R`. [Full function help](help/moonphase.html) · [Solar, lunar and planetary events outline](contents-plan.html#plan-events) · [Equinoctial full Moons and crescent crossovers](lunar-crossovers.html#crossover-efm)

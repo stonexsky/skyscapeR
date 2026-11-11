@@ -1,0 +1,73 @@
+# `spatial.equinox()` {#fn-spatial-equinox}
+
+In A05, rising and setting midpoints matched independent track intersections on flat, eastern-ridge and western-ridge skylines; missing polar crossings were identified. [A05 results](a05-solar-limits.qmd).
+
+H07 checked that partial photographs are rejected and that a full photographic profile can be used. [H07 results](h07-panorama-coverage.qmd).
+
+[Function index](function-index.html#idx-spatial-equinox)
+
+```{=html}
+<p>A spatial midpoint is defined by the local terrain and need not coincide with the
+astronomical equinox. The function uses the positive and negative obliquity at
+the requested year as the geocentric solstitial declinations. Each fixed track
+is followed through one rotation from lower culmination to lower culmination.
+Horizontal solar parallax is applied to geometric altitude before atmospheric
+refraction. The terrain is interpolated linearly in azimuth.
+</p>
+<p>On the rising half of each track, the first emergence is selected; on the
+setting half, the final disappearance is selected. The circular midpoint of
+the two solstitial bearings is then found separately for sunrise and sunset.
+At each midpoint, refraction and horizontal parallax are inverted to recover
+the geocentric declination. Atmospheric settings are identical in both stages.
+</p>
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>Ruggles, C. L. N. (1997). Whose Equinox? Journal for the History of Astronomy 28, S45-S96. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1177/002182869702802205")}.
+</p>
+
+
+
+```
+
+</details>
+
+[Idealised tracks and the spatial equinox](fn-orbit.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>A <em>skyscapeR.horizon</em> with finite, increasing azimuths covering
+0 to 360 degrees and matching endpoint altitudes.</p></td></tr><tr><th scope="row"><code>parallax</code></th><td><code>0.00224</code></td><td><p>Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.</p></td></tr><tr><th scope="row"><code>year</code></th><td><code>skyscapeR.env$cur.year</code></td><td><p>One astronomical year, defaulting to the package's current-year
+setting. Historical labels such as <code>"3250 BC"</code> are accepted.</p></td></tr><tr><th scope="row"><code>refraction</code></th><td><code>skyscapeR.env$refraction</code></td><td><p>Whether to apply atmospheric refraction. Defaults to the
+package setting, normally TRUE.</p></td></tr><tr><th scope="row"><code>atm</code></th><td><code>skyscapeR.env$atm</code></td><td><p>Atmospheric pressure in hPa. Defaults to the package setting.
+Zero requests an estimate from site elevation.</p></td></tr><tr><th scope="row"><code>temp</code></th><td><code>skyscapeR.env$temp</code></td><td><p>Air temperature in degrees Celsius. Defaults to the package setting.</p></td></tr></tbody></table><h5>Return value</h5><p>A list containing azimuth and declination. Each contains rise and set
+values in degrees for the supplied horizon. Declinations are geocentric.
+An undefined side returns NA for both values, with a warning; the other side
+is retained when defined.
+</p><h5>Crossing conventions and limitations</h5><p>Both rising and setting tracks are considered in either hemisphere. The
+search uses the terrain-aware crossing machinery also used by
+<code>riseset</code>, including terrain vertices and interior extrema.
+Tangencies without a change of visibility are excluded. Multiple terrain
+crossings are resolved using the first-emergence/final-disappearance rule;
+this need not be the locally preferred observational definition of sunrise
+or sunset. Inspect complex skylines before interpretation.
+</p><p>If either solstitial track lacks the required crossing, the corresponding
+midpoint is undefined. This includes polar non-rising/non-setting cases and
+complete terrain obstruction. Exactly opposite bearings have no unique
+circular midpoint and also return NA.
+</p><p>These are fixed-declination solar-centre tracks, not a dated solar ephemeris
+or upper-limb calculation. The mean horizontal parallax is fixed, and the
+refraction model cannot represent local atmospheric anomalies. Results are
+limited by horizon resolution and atmospheric assumptions. Solar semidiameter
+is not included. The result is a spatial midpoint, not the Sun's rising or
+setting at the astronomical equinox.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/events.R`. [Full function help](help/spatial.equinox.html) · [From bearings to celestial targets outline](contents-plan.html#plan-targets) · [Terrain crossings and event searches](event-searches.html#event-midpoint) · [Identifying celestial candidates and limiting declinations](celestial-targets.html#target-limits)

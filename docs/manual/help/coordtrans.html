@@ -1,0 +1,153 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>coordtrans | skyscapeR 2.0.9011</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}img{max-width:100%;height:auto}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-coordtrans.html">coordtrans() method</a></nav><h2 id='coordtrans'>Transform azimuth densities into declination densities</h2><span id='topic+coordtrans'></span>
+
+<h3>Description</h3>
+
+<p>Estimate which declinations a measured bearing could indicate after allowing for
+uncertainty in both direction and horizon altitude.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>coordtrans(
+  pdf,
+  hor,
+  xrange,
+  .res = 0.1,
+  .prec = 0.1,
+  .output.res = 0.01,
+  verbose = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="coordtrans_:_pdf">pdf</code></td>
+<td>
+<p>A <em>skyscapeR.pdf</em> object created with <code>az.pdf</code> or a <em>skyscapeR.spd</em> object created with <code>spd</code></p>
+</td></tr>
+<tr><td><code id="coordtrans_:_hor">hor</code></td>
+<td>
+<p>A shared <code>skyscapeR.horizon</code> or, for individual azimuth PDFs, a list of horizons in measurement order.</p>
+</td></tr>
+<tr><td><code id="coordtrans_:_xrange">xrange</code></td>
+<td>
+<p>Array of values (min and max) for SPD when transforming a <em>skyscapeR.spd</em> object.</p>
+</td></tr>
+<tr><td><code id="coordtrans_:_.res">.res</code></td>
+<td>
+<p>Spacing of the declination calculation grid, in degrees. Default 0.1.</p>
+</td></tr>
+<tr><td><code id="coordtrans_:_.prec">.prec</code></td>
+<td>
+<p>Azimuth integration spacing, in degrees. Default 0.1.
+Previously ignored; smaller values increase integration work. Must not exceed 540.</p>
+</td></tr>
+<tr><td><code id="coordtrans_:_.output.res">.output.res</code></td>
+<td>
+<p>Spacing of the returned declination grid, in degrees.
+Default 0.01. Coarser spacing reduces output size. All spacings must be
+positive finite scalars, and the returned grid must contain at least two points.</p>
+</td></tr>
+<tr><td><code id="coordtrans_:_verbose">verbose</code></td>
+<td>
+<p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>A sightline has a distribution of possible bearings, and each bearing samples a
+potentially different part of the horizon. For every sampled bearing the function
+interpolates horizon altitude and uncertainty, maps an altitude range to declination and
+approximates the conditional declination distribution by a Gaussian. It weights that
+distribution by the azimuth density and integrates the product by the trapezoidal rule.
+All six <code>az.pdf</code> families supply these bearing weights. The
+Gaussian approximation here describes uncertainty in horizon altitude at
+a fixed bearing. An asymmetric or bounded bearing model can therefore
+produce a declination curve with a different shape or several peaks.
+A shared horizon can serve several observations, or a supplied list can represent their
+individual sites.
+</p>
+<p>Density values are calculated at declination spacing <code>.res</code>, then
+linearly interpolated onto a grid with spacing <code>.output.res</code>. The upper
+calculation bound is evaluated explicitly if the step does not land on it,
+avoiding extrapolation at the tail. Linear interpolation preserves
+nonnegative calculated densities and avoids cubic-spline overshoot.
+Individual PDF outputs retain their existing area normalisation; SPD outputs
+retain their existing unnormalised transformation behaviour. Coarse
+calculation spacing can still miss narrow peaks; interpolation does not
+replace a resolution-convergence check. Azimuth integration uses a separate
+grid from -90 to 450 degrees with step <code>.prec</code>. For a distribution split across north, integration uses contiguous bearings around zero at the same spacing. The output grid starts
+at the lower bound and ends at the last full step within the upper bound.
+Refine the calculation grid to check that narrow features are resolved.
+Set atmospheric refraction, pressure and temperature with <code>skyscapeR.vars</code> before transforming. The values used are recorded in the returned PDF or SPD.
+All three spacings are stored in <code>metadata$param</code>.
+</p>
+<p>The Gaussian uncertainty approximation uses the midpoint of declinations
+obtained at horizon altitude plus/minus four altitude standard deviations,
+with standard deviation equal to the absolute endpoint separation divided
+by eight. Reversed bounds are supported. Horizon uncertainties must be
+finite and nonnegative, and the profile must cover all input azimuths.
+Zero transformed widths (including zero altitude uncertainty or coincident
+endpoint declinations) are unsupported and produce an error. Do not add
+arbitrary uncertainty to bypass it: these cases need a different treatment.
+Nonfinite transformed bounds/densities and PDF outputs with no positive
+finite area also error. Positive but very narrow widths still require
+convergence checks; no minimum uncertainty is imposed.
+</p>
+<p><strong>Keeping the inputs.</strong> Save the original azimuth distributions and horizons
+in measurement order if you plan to draw the transformation curves or run a
+declination test. The result stores the numerical distributions and settings.
+The names in <code>metadata$source.labels</code> describe the inputs but cannot
+reconstruct them. See <code>plot.skyscapeR.pdf</code> and <code>randomTest</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>skyscapeR.pdf</code> object for PDF input, or a <code>skyscapeR.spd</code>
+object for SPD input. Both contain <code>metadata</code> and <code>data</code>. PDF data
+are a list of data frames with declination <code>x</code> and density <code>y</code>;
+SPD data are a single such data frame. Metadata include the coordinate type,
+transformation settings, format version and descriptive source labels.
+</p>
+
+
+<h3>Validation</h3>
+
+<p>In D02, declination quantiles agreed with direct propagation within 0.008 degrees across nine terrain and observer cases. Near the celestial pole the discrepancy reached 0.17 degrees on the fine grid; at the pole a zero conditional width prevented calculation. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#d02-bearing-propagation">D02 check in the technical manual</a>.
+</p>
+<p>For a partial photograph the stored positive bearing density must lie within its photographed sector. H07 verified agreement with a complete skyline on the covered north-crossing cases and rejection of uncovered densities. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage">H07 check in the technical manual</a>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Silva, F (2020) A probabilistic framework and significance test for the analysis of structural orientations
+in skyscape archaeology <em>Journal of Archaeological Science</em> 118, 105138. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/j.jas.2020.105138")}
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="../help/az.pdf.html"><code>az.pdf</code></a>, <a href="../help/spd.html"><code>spd</code></a>, <a href="../help/hpdi.html"><code>hpdi</code></a>, <a href="../help/randomTest.html"><code>randomTest</code></a>, <a href="../help/dec.pdf.html"><code>dec.pdf</code></a>, <a href="../help/modelTest.html"><code>modelTest</code></a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>Az &lt;- az.pdf(az=c(87,93,90,110), unc=3)
+hor &lt;- createHor(az=c(0,360), alt=c(0,0), loc=c(35,-8,25)) # flat horizon
+Dec &lt;- coordtrans(Az, hor)
+head(Dec$data[[1]])
+Dec$metadata$source.labels
+# Reduce stored output size without changing the calculation spacing:
+Dec.coarse &lt;- coordtrans(Az, hor, .output.res=0.1)
+Dec.coarse$metadata$param
+</code></pre>
+
+</body></html>

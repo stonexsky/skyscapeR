@@ -1,0 +1,46 @@
+# `bernoulli.trial()` {#fn-bernoulli-trial}
+
+**Validation on 2.0.9005.** Exact and upper-tail probabilities agreed with independent binomial calculations for the tested counts up to 1,000, including zero hits. [S03 results](s03-scoring-checks.qmd).
+
+[Function index](function-index.html#idx-bernoulli-trial)
+
+```{=html}
+<p>Define a hit and the per-structure chance of a hit before counting the orientations. A
+single-count probability answers how often exactly that count arises; the upper tail
+answers how often a count at least that large arises.
+</p>
+<p>The binomial model assumes independent structures with the same
+target probability <code>p</code>. The upper-tail probability is a one-sided
+p-value under this model. Calculations use <code>stats::dbinom</code> and
+<code>stats::pbinom</code>, avoiding factorial overflow and subtraction from 1.
+At least zero hits has probability 1. With zero structures, zero hits has
+probability 1 for either type. Inputs are scalar; invalid inputs error.
+</p>
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>Ruggles, C (1999) <em>Astronomy in Prehistoric Britain and Ireland</em>. Yale University Press.
+</p>
+
+
+
+```
+
+</details>
+
+**Interpretation and limits.** The binomial formulation requires a defensible success probability and trial structure. Repeated structures at the same location may not act as independent trials. Delimit the target window before counting successes.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>n</code></th><td>—</td><td><p>Total number of structures: a single finite nonnegative integer.</p></td></tr><tr><th scope="row"><code>p</code></th><td>—</td><td><p>Target probability: a single finite number between 0 and 1.</p></td></tr><tr><th scope="row"><code>r</code></th><td>—</td><td><p>Number of hits: a single finite integer between 0 and n.</p></td></tr><tr><th scope="row"><code>type</code></th><td><code>&quot;tail&quot;</code></td><td><p>Either <code>"single"</code> for exactly r hits or <code>"tail"</code>
+for at least r hits (the default).</p></td></tr></tbody></table><h5>Return value</h5><p>A numeric probability between 0 and 1.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/statistics.R`. [Full function help](help/bernoulli.trial.html) · [Null models and significance outline](contents-plan.html#plan-null)

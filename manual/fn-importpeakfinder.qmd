@@ -1,0 +1,50 @@
+# `importPeakFinder()` {#fn-importpeakfinder}
+
+[Function index](function-index.html#idx-importpeakfinder)
+
+```{=html}
+<p>The numerical horizon describes angular obstruction at the observer's
+location. A separate vector drawing supplies foreground detail but does not
+explicitly record its vertical angular calibration. Both exports are therefore
+needed to create a calibrated panorama PNG. Calculations always use the numerical
+horizon, never the PNG. Terrain data do not include every tree or building.
+</p>
+<p>In PeakFinder choose Export, Horizon for Stellarium and save the ZIP. For an
+image also choose Export, SVG for printing, Silhouettes (Vector SVG), from 0
+to 360 degrees, preferably picture format 16:2. Use exactly the same viewpoint
+and observer height for both. Contours (Bitmap SVG) is not supported. The PNG
+is a white terrain silhouette with dark foreground ridge lines and transparent
+sky, without labels or shading. Only PeakFinder's untransformed M/L vector
+path format is supported; edited or future formats may require adaptation.
+</p>
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p><a href="https://www.peakfinder.com/">PeakFinder</a>, exported drawings
+attributed to PeakFinder under CC BY 4.0. Geometry conventions follow the
+<a href="https://stellarium.org/guide/">Stellarium User Guide</a>.
+</p>
+
+
+
+```
+
+</details>
+
+[Checking the provider’s viewpoint](fn-createhwt.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>file</code></th><td>—</td><td><p>Path to a PeakFinder Stellarium ZIP export.</p></td></tr><tr><th scope="row"><code>svg</code></th><td><code>NULL</code></td><td><p>Optional path to the matching full-circle Vector SVG export.</p></td></tr><tr><th scope="row"><code>elevation</code></th><td><code>NULL</code></td><td><p>Optional verified absolute observer elevation in metres.</p></td></tr><tr><th scope="row"><code>alt.unc</code></th><td><code>0.5</code></td><td><p>Assumed horizon altitude uncertainty in degrees, a nonnegative scalar.</p></td></tr><tr><th scope="row"><code>width</code></th><td><code>4096</code></td><td><p>PNG width in pixels, an integer from 512 to 8192. Default 4096.</p></td></tr><tr><th scope="row"><code>image.dir</code></th><td><code>getwd()</code></td><td><p>Directory for generated PNGs; defaults to the working directory.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.horizon containing a periodically extended numerical horizon,
+site and source metadata, and, on successful calibration, metadata$image with
+the external PNG path, checksum, angular bounds and calibration diagnostics.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/peakfinder.R`. [Full function help](help/importPeakFinder.html) · [Terrain horizons and panoramas outline](contents-plan.html#plan-terrain) · [Photographic calibration and interchange](photographic-horizons.html#photo-interchange) · [Importing site horizons](vignette-guide.html#workflow-importing-site-horizons)

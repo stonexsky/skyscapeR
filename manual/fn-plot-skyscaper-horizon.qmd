@@ -1,0 +1,51 @@
+# `plot.skyscapeR.horizon()` {#fn-plot-skyscaper-horizon}
+
+W01 checked the skyline ordinate and azimuth viewport on flat and raised profiles, including natural and publication sky overlays. [W01 results](w01-plot-geometry.qmd).
+
+[Function index](function-index.html#idx-plot-skyscaper-horizon)
+
+```{=html}
+<p>A track meeting the horizon identifies a possible rise or set direction for that
+declination. The horizontal axis is true bearing and the vertical axis is angular
+altitude. The function fills the terrain below the stored profile and can overlay
+diurnal tracks computed for the observing location. Refraction affects those tracks.
+Rescaling the display or changing its colours does not change the underlying horizon. Add lines or polygons in azimuth and altitude immediately after plotting. Set <code>par(mfrow=c(2,1))</code> before plotting to stack two horizons.
+</p>
+<p>For a two-year epoch range, draw tracks for the stored minimum and maximum
+declinations, using the session refraction setting for both tracks. Line
+styles are taken from the target object; older objects without them use
+solid lines of width 1.
+</p>
+```
+
+[Shading and numerical altitude](fn-dempalettes.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>x</code></th><td>—</td><td><p>Object of <em>skyscapeR.horizon</em> format.</p></td></tr><tr><th scope="row"><code>show.az</code></th><td><code>(!missing(xrange) || !missing(xlim))</code></td><td><p>Logical that controls whether to display azimuth values or cardinal
+directions. Defaults to TRUE when xrange is supplied.</p></td></tr><tr><th scope="row"><code>xrange</code></th><td>—</td><td><p>Azimuth range for plotting.</p></td></tr><tr><th scope="row"><code>yrange</code></th><td>—</td><td><p>Altitude range for plotting. By default one degree of altitude occupies the same distance as one degree of azimuth on the device.</p></td></tr><tr><th scope="row"><code>obj</code></th><td>—</td><td><p>A <em>skyscapeR.object</em> from <code>skyObject</code>, or
+a list of these objects. Each group retains its own epochs and styles
+for displaying the paths of celestial objects.</p></td></tr><tr><th scope="row"><code>col.ground</code></th><td><code>NULL</code></td><td><p>Silhouette colour. NULL uses a dark muted foreground for natural skies, pale grey-green for publication colour or grey for monochrome.</p></td></tr><tr><th scope="row"><code>col.sky</code></th><td>—</td><td><p>Earlier name for a solid sky colour. Prefer sky.</p></td></tr><tr><th scope="row"><code>use.image</code></th><td><code>TRUE</code></td><td><p>Use an attached external panorama PNG when available. Default TRUE.
+Missing or changed files warn and fall back to the numerical silhouette.</p></td></tr><tr><th scope="row"><code>...</code></th><td>—</td><td><p>Additional arguments to be passed to <em>plot</em>.</p></td></tr><tr><th scope="row"><code>show.skyline</code></th><td><code>NULL</code></td><td><p>Draw the numerical skyline. By default the line appears only without a panorama PNG.</p></td></tr><tr><th scope="row"><code>sky</code></th><td><code>NULL</code></td><td><p>A colour string or a background from <code>sketchSky</code> or <code>stellariumSky</code>.</p></td></tr><tr><th scope="row"><code>xlim</code></th><td>—</td><td><p>Earlier name for xrange.</p></td></tr><tr><th scope="row"><code>ylim</code></th><td>—</td><td><p>Earlier name for yrange.</p></td></tr><tr><th scope="row"><code>fastLoad</code></th><td><code>FALSE</code></td><td><p>Use a sampled PNG for quick plots. New photographic imports store a preview. For older horizons the first preview loads the image. The numerical skyline and celestial tracks retain their precision.</p></td></tr><tr><th scope="row"><code>show.legend</code></th><td><code>TRUE</code></td><td><p>Display the key for celestial tracks. The angular axes are always drawn.</p></td></tr><tr><th scope="row"><code>style</code></th><td><code>NULL</code></td><td><p>Frame and silhouette style. A sketch supplies its stored style by default. Without a
+sketch the default is <code>"publication-colour"</code>. Other choices are <code>"natural"</code> and
+<code>"publication-mono"</code>. Supplied panorama pixels and sky objects retain their own rendering.</p></td></tr></tbody></table><h5>Return value</h5><p>Draws the horizon and returns the session atmosphere invisibly in a list.
+</p><h5>Layers and coordinate consistency</h5><p>A reusable sky is calculated for its own stored location and instant. Pair it
+with the horizon used to create it; drawing a saved sky does not recalculate
+its positions for another observer. Celestial reference tracks from
+<code>skyObject</code> use the plotted horizon's location and session
+atmosphere. Keep that atmosphere consistent with the stored sketch when
+comparing a track with a disc or point symbol.
+</p><p>The foreground masks sky layers geometrically. It does not make the sky object
+an extinction or visibility calculation through the terrain. Image calibration
+and numerical skyline agreement remain the responsibility of the horizon
+source. Azimuth-altitude plotting is a cylindrical display, with increasing
+horizontal distortion towards the zenith. Retain consistent ranges when
+comparing styles, epochs or constellation traditions.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/plotting.R`. [Full function help](help/plot.skyscapeR.horizon.html) · [Terrain horizons](horizons.html#sec-horizon) · [Sky reconstruction](sky-rendering.html#sec-sketch) · [Terrain horizons and panoramas outline](contents-plan.html#plan-terrain) · [Photographic calibration and interchange](photographic-horizons.html#photo-interchange) · [Generating a terrain panorama](horizons.html#sec-dem-panorama) · [Display styles, capture and stepping time](sky-rendering.html#sky-step-capture) · [Importing site horizons](vignette-guide.html#workflow-importing-site-horizons) · [Equinoctial sunrise](vignette-guide.html#workflow-equinoctial-sunrise) · [The heliacal rising of the Pleiades](vignette-guide.html#workflow-the-heliacal-rising-of-the-pleiades) · [Watch the cluster rise later in the season](vignette-guide.html#workflow-watch-the-cluster-rise-later-in-the-season) · [Exploring celestial candidates](vignette-guide.html#workflow-exploring-celestial-candidates) · [Compare the three sky styles](vignette-guide.html#workflow-compare-the-three-sky-styles) · [Compare constellation patterns](vignette-guide.html#workflow-compare-constellation-patterns) · [Capture a sky from Stellarium](vignette-guide.html#workflow-capture-a-sky-from-stellarium)

@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Seasonal stellar visibility – skyscapeR technical manual</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./orientation-densities.html" rel="next">
+<link href="./photographic-horizons.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="manual.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./stellar-phases.html"><span class="chapter-title">Seasonal stellar visibility</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="index.html">skyscapeR technical manual</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About this edition</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./contents-plan.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Methods by research question</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">swephR and the Swiss Ephemeris</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Methods</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./astronomical-conventions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Astronomical conventions and stellar positions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./field-reduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Reducing compass and theodolite observations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./horizons.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Constructing a site horizon</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./photographic-horizons.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Calibrating photographic skylines and exchanging horizons</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./stellar-phases.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Seasonal stellar visibility</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./orientation-densities.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">From a measured orientation to a declination distribution</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./event-searches.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Terrain crossings and event searches</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lunar-crossovers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Equinoctial full Moons and crescent crossovers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./celestial-targets.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Identifying celestial candidates and limiting declinations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./significance.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Testing orientation distributions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sky-rendering.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Sky reconstruction and visual radiance</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Function reference</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./function-index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Function index</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./function-methods.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Function methods and implementation notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vignette-guide.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Following the package vignette</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Time, coordinates and ephemerides</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-astroyear.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>astroYear()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-bc-ad.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>BC.AD()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-body-position.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>body.position()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-jd2time.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>jd2time()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-long-date.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>long.date()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-obliquity.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>obliquity()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-parallax-corr.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>parallax.corr()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-skyscaper-vars.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>skyscapeR.vars()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-ten.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>ten()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-time2jd.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>time2jd()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-timestring.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>timestring()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Reducing field observations</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-mag-dec.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>mag.dec()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-reduct-compass.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>reduct.compass()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-reduct-theodolite.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>reduct.theodolite()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-sunaz.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>sunAz()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Terrain horizons and panoramas</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-createhor.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>createHor()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-createhwt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>createHWT()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-dempalettes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>demPalettes()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-downloadhwt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>downloadHWT()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-exporthor.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>exportHor()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-exportpanorama.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>exportPanorama()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-exportstellarium.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>exportStellarium()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-hor2alt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>hor2alt()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-horfeature.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>horFeature()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-importpanorama.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>importPanorama()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-importpeakfinder.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>importPeakFinder()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-plot-skyscaper-horizon.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>plot.skyscapeR.horizon()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-relinkhor.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>relinkHor()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">From bearings to celestial targets</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-antizenith.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>antizenith()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-az2dec.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>az2dec()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-findtargets.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>findTargets()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-hor2max-dec.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>hor2max.dec()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-hor2min-dec.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>hor2min.dec()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-orbit.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>orbit()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-sky-objects.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>sky.objects()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-skyobject.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>skyObject()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-spatial-equinox.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>spatial.equinox()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-zenith.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>zenith()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Solar, lunar and planetary events</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-cc.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>CC()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-ds.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>dS()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-efm.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>EFM()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-eq.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>eq()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-js.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>jS()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-moonphase.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>moonphase()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-nmjlx.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>nMjLX()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-nmnlx.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>nmnLX()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-planet-extremes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>planet.extremes()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-riseset.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>riseset()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-smjlx.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>sMjLX()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-smnlx.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>smnLX()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-solar-date.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>solar.date()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Stellar positions and seasonal visibility</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-plot-skyscaper-starphases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>plot.skyscapeR.starphases()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-star.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>star()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-star-phases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>star.phases()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Sky brightness and visualisation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-importconstellations.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>importConstellations()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-planisphere.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>planisphere()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-sketchsky.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>sketchSky()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-skyradiance.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>skyRadiance()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-skystep.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>skyStep()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-stellariumsky.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>stellariumSky()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">Uncertainty and orientation distributions</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-az-pdf.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>az.pdf()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-coordtrans.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>coordtrans()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-dec-pdf.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>dec.pdf()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-hpdi.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>hpdi()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-plot-skyscaper-pdf.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>plot.skyscapeR.pdf()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-plot-skyscaper-spd.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>plot.skyscapeR.spd()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-plotazimuth.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>plotAzimuth()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-plotbars.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>plotBars()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-spd.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>spd()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-subset-skyscaper-pdf.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>subset.skyscapeR.pdf()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+ <span class="menu-text">Null models and significance</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-bernoulli-trial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>bernoulli.trial()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-modeltest.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>modelTest()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-plot-skyscaper-sigtest.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>plot.skyscapeR.sigTest()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-print-skyscaper-sigtest.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>print.skyscapeR.sigTest()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-pval2stars.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>pval2stars()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-randomtest.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>randomTest()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
+ <span class="menu-text">Validation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./numerical-validation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Calendar, density and significance checks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a01-calendar-checks.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A01 · Calendar, clock and angular conventions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a04-stellar-crossings.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A04 · Crossing times, bearings and event order</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a05-solar-limits.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A05 · Solar dates and limiting declinations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a08-target-ranges.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A08 · Target screening and dated bands</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./d01-density-checks.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">D01 · Measurement densities, sums and highest-density regions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./d02-bearing-propagation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">D02 · Bearing uncertainty on flat and irregular skylines</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h01-field-validation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H01. Horizon altitude at surveyed bearings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h07-panorama-coverage.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H07 · Coverage of partial photographic skylines</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s01-uniform-orientation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">S01 · Calibration of the uniform-orientation test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s02-specified-models.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">S02 · Specified and site-specific null models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s03-scoring-checks.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">S03 · Monte Carlo ranks, local clusters and reported probabilities</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./w01-plot-geometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">W01 · Geometry and labels in graphical outputs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./w02-field-to-sky.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">W02 · End-to-end field-to-sky replay</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Chapter contents</h2>
+   
+  <ul>
+  <li><a href="#how-a-date-is-assigned" id="toc-how-a-date-is-assigned" class="nav-link active" data-scroll-target="#how-a-date-is-assigned">How a date is assigned</a>
+  <ul class="collapse">
+  <li><a href="#what-qualifies-as-a-visible-interval" id="toc-what-qualifies-as-a-visible-interval" class="nav-link" data-scroll-target="#what-qualifies-as-a-visible-interval">What qualifies as a visible interval?</a></li>
+  </ul></li>
+  <li><a href="#choices-that-can-change-the-interpretation" id="toc-choices-that-can-change-the-interpretation" class="nav-link" data-scroll-target="#choices-that-can-change-the-interpretation">Choices that can change the interpretation</a></li>
+  <li><a href="#changes-that-matter-for-earlier-analyses" id="toc-changes-that-matter-for-earlier-analyses" class="nav-link" data-scroll-target="#changes-that-matter-for-earlier-analyses">Changes that matter for earlier analyses</a></li>
+  <li><a href="#phase-comparisons" id="toc-phase-comparisons" class="nav-link" data-scroll-target="#phase-comparisons">Comparing the same season across stars and epochs</a></li>
+  <li><a href="#full-package-help" id="toc-full-package-help" class="nav-link" data-scroll-target="#full-package-help">Full package help</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./stellar-phases.html"><span class="chapter-title">Seasonal stellar visibility</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-stellar" class="quarto-section-identifier"><span class="chapter-title">Seasonal stellar visibility</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Function</strong> <a href="fn-star-phases.html"><code>star.phases()</code></a> · <strong>Package</strong> skyscapeR 2.0.9004</p>
+<p>At an archaeological site, a star can rise above a ridge while the sky is still too bright to see it. <a href="fn-star-phases.html"><code>star.phases()</code></a> asks on which mornings or evenings the terrain, darkness and stellar brightness allow an opportunity to observe it. Its heliacal-rising date is the return of such an opportunity after a season of invisibility.</p>
+<p>A seasonal search needs the skyline across the stellar track. See <a href="photographic-horizons.html#partial-photo-consumers">partial photographic horizons</a> before supplying a sector image.</p>
+<section id="how-a-date-is-assigned" class="level2">
+<h2 class="anchored" data-anchor-id="how-a-date-is-assigned">How a date is assigned</h2>
+<ol type="1">
+<li><strong>Construct the annual cycle.</strong> The function fixes the star’s position for the chosen year and samples 365 equally spaced solar longitudes. These steps describe progress through the seasons. Their spacing in elapsed civil time varies. The package maps the longitude of each event back to a representative local Julian-calendar date in the requested year.</li>
+<li><strong>Find intervals above the skyline.</strong> The stellar track is tested against the altitude of the horizon at the star’s bearing. A full profile can produce more than one interval of clearance. A track which just touches the ridge gives zero time above it. The solver refines terrain crossings separately from the sampling used for solar altitude.</li>
+<li><strong>Apply the visibility criteria together.</strong> A qualifying interval must last longer than zero, the Sun must be below the adopted solar-altitude threshold, and both a star–Sun altitude separation and an extinction test must be satisfied. If the catalogue magnitude is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>, the required altitude difference is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2.1</mn><mi>m</mi><mo>+</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">2.1m+10</annotation></semantics></math> degrees <span class="citation" data-cites="purrington1988">(<a href="references.html#ref-purrington1988" role="doc-biblioref">Purrington 1988, S74</a>)</span>. For a magnitude 1 star this is 12.1°. The package also adds <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mi>X</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>h</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">kX(h)</annotation></semantics></math> magnitudes of extinction, where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math> is the extinction coefficient and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>h</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">X(h)</annotation></semantics></math> is the airmass at stellar altitude <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math> <span class="citation" data-cites="schaefer1986 krisciunas1991">(<a href="references.html#ref-schaefer1986" role="doc-biblioref">Schaefer 1986</a>; <a href="references.html#ref-krisciunas1991" role="doc-biblioref">Krisciunas and Schaefer 1991</a>, eq. 14)</span>. Extinction depends on altitude above the horizontal, even if a ridge is much higher than that.</li>
+<li><strong>Classify the day and its transitions.</strong> Continuous intervals of visibility give the daily phase codes. A visible ascending or descending interval below <code>alt.rs</code> can qualify as rising or setting. The first transition out of an invisible season defines heliacal rising. Since the year is cyclic, a season that spans the December solstice continues across the end of the table.</li>
+</ol>
+<section id="what-qualifies-as-a-visible-interval" class="level3">
+<h3 class="anchored" data-anchor-id="what-qualifies-as-a-visible-interval">What qualifies as a visible interval?</h3>
+<p>In <code>R/stars.R</code>, the year-specific stellar coordinates are held fixed while the code constructs a reusable diurnal track on a reference day starting at 2000-01-01 00:00 UTC. The seasonal loop changes the solar coordinates. Thus the time nodes of this track have computational meaning; an archaeological observation date comes from mapping the selected solar longitude back to the requested year. For an irregular skyline, the solver locates crossings, combines them with one-minute nodes and the solar grid specified by <code>res</code>, and refines turning points in stellar altitude. It tests each segment midpoint for clearance above the skyline. Multiple unobstructed intervals on the same track remain eligible.</p>
+<p>For stellar altitude <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math>, solar altitude <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math>, stellar magnitude <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>, limiting magnitude <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math> and extinction coefficient <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>, the code uses <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>h</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>k</mi><mi>/</mi><mrow><mo stretchy="true" form="prefix">[</mo><mo>sin</mo><mi>h</mi><mo>+</mo><mn>0.025</mn><mo>exp</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>−</mi><mn>11</mn><mo>sin</mo><mi>h</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">E(h)=k/[\sin h+0.025\exp(-11\sin h)]</annotation></semantics></math> magnitudes. On terrain-clear segments it requires finite, nonnegative extinction, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>+</mo><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>h</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>≤</mo><mi>L</mi></mrow><annotation encoding="application/x-tex">m+E(h)\leq L</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo>&lt;</mo><mtext mathvariant="monospace">𝚜𝚘𝚕𝚊𝚛.𝚊𝚕𝚝</mtext></mrow><annotation encoding="application/x-tex">s&lt;\texttt{solar.alt}</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>−</mo><mi>s</mi><mo>≥</mo><mn>2.1</mn><mi>m</mi><mo>+</mo><mn>10</mn><mi>°</mi></mrow><annotation encoding="application/x-tex">h-s\geq 2.1m+10°</annotation></semantics></math>. The angular separation here is a <strong>difference in altitudes</strong>, even when star and Sun differ substantially in bearing <span class="citation" data-cites="purrington1988 krisciunas1991">(<a href="references.html#ref-purrington1988" role="doc-biblioref">Purrington 1988</a>; <a href="references.html#ref-krisciunas1991" role="doc-biblioref">Krisciunas and Schaefer 1991</a>)</span>. Threshold margins are interpolated linearly between segment endpoints. An interval survives only when its end is strictly later than its start. Two conditions satisfied at different moments within the same segment do not by themselves establish visibility.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/visibility-window.png" class="img-fluid figure-img" alt="Four time intervals and their common intersection. Extinction delays the beginning of visibility and the solar limit ends it."></p>
+<figcaption>Illustrative dawn track with time <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math> in minutes, stellar altitude <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>+</mo><mn>0.15</mn><mi>t</mi></mrow><annotation encoding="application/x-tex">1+0.15t</annotation></semantics></math> degrees, solar altitude <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mn>16</mn><mo>+</mo><mn>0.20</mn><mi>t</mi></mrow><annotation encoding="application/x-tex">-16+0.20t</annotation></semantics></math> degrees, magnitude 1, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>0.2</mn></mrow><annotation encoding="application/x-tex">k=0.2</annotation></semantics></math>, limiting magnitude 3 and a 4° ridge. Coloured segments satisfy each condition. Only their overlap qualifies as a visible interval.</figcaption>
+</figure>
+</div>
+<p>A second pass restricts eligible intervals to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>≤</mo><mtext mathvariant="monospace">𝚊𝚕𝚝.𝚛𝚜</mtext></mrow><annotation encoding="application/x-tex">h\leq\texttt{alt.rs}</annotation></semantics></math> and checks the sign of the stellar altitude change. A rising interval gives R, a descending interval S and both give RS. A day with visibility elsewhere but neither classified passage gives V. With no visible interval it gives I. Thus V can be the appropriate code even for a star which crosses the skyline twice. For a detection close to a threshold, record the adopted <code>res</code>, extinction and solar limit. Coarse solar interpolation and a very brief modelled opportunity have different implications for the assigned date.</p>
+</section>
+</section>
+<section id="choices-that-can-change-the-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="choices-that-can-change-the-interpretation">Choices that can change the interpretation</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Choice</th>
+<th>Consequence for the reader</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Supply a terrain profile or a single horizon altitude</td>
+<td>A profile allows the skyline to vary along the stellar track. The default solar threshold also depends on the input form. For a fair comparison set <code>solar.alt</code> explicitly to the same value in both runs.</td>
+</tr>
+<tr class="even">
+<td>Set extinction, limiting magnitude and refraction</td>
+<td>These assumptions change the visibility window. The default extinction coefficient, 0.2 magnitudes per airmass, represents a clear-sky baseline. Local observing conditions may differ.</td>
+</tr>
+<tr class="odd">
+<td>Use the altitude-difference rule for other kinds of events</td>
+<td>Purrington’s empirical relation covers dawn rising and dusk setting on the Sun’s side of the sky, down to about magnitude 3. The package extends the same threshold across relative azimuths. Opposite-horizon events and fainter stars therefore involve extrapolation <span class="citation" data-cites="purrington1988">(<a href="references.html#ref-purrington1988" role="doc-biblioref">Purrington 1988, S74–75</a>)</span>.</td>
+</tr>
+<tr class="even">
+<td>Count any positive-duration window</td>
+<td>A short break above an uneven skyline can qualify. A human observer may need longer to find the star. Moonlight, weather and an observer’s adaptation history also affect detection <span class="citation" data-cites="schaefer1987">(<a href="references.html#ref-schaefer1987" role="doc-biblioref">Schaefer 1987</a>)</span>.</td>
+</tr>
+<tr class="odd">
+<td>Enter a cluster such as M45</td>
+<td>The function applies the cluster’s integrated catalogue magnitude to a single target. Use an individual star to ask about the visibility of a particular Pleiad.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="changes-that-matter-for-earlier-analyses" class="level2">
+<h2 class="anchored" data-anchor-id="changes-that-matter-for-earlier-analyses">Changes that matter for earlier analyses</h2>
+<p>The 2.0 development NEWS records changes to handling southern, circumpolar and obstructed tracks. A completely obstructed star now returns an all-invisible result. An always-clear star can still enter different seasonal phases. The separate <code>metadata$horizon.status</code> field lets the analyst distinguish these cases. An earlier analysis involving a star close to the circumpolar limit or a raised skyline is a priority for recalculation.</p>
+<p>The output also distinguishes the schematic day of the seasonal cycle from <code>metadata$events$date.julian</code>. Use the latter when passing an event to <a href="fn-riseset.html"><code>riseset()</code></a> for a terrain crossing. The crossing gives a starting time from which to examine the changing dawn sky.</p>
+<p><strong>Evidence for the date.</strong> The <a href="./heliacal-rising.html">heliacal-rising comparison</a> quantifies agreement for this event under a specified set of observing assumptions. Other phase transitions require their own evidence.</p>
+<p>See the <a href="./event-searches.html">event-search chapter</a> for the crossing solver and an example of reoccultation on a rising track.</p>
+</section>
+<section id="phase-comparisons" class="level2">
+<h2 class="anchored" data-anchor-id="phase-comparisons">Comparing the same season across stars and epochs</h2>
+<p><a href="fn-plot-skyscaper-starphases.html"><code>plot.skyscapeR.starphases()</code></a> places a result and any further results on a common seasonal axis beginning at December solstice. A single cycle can be drawn as a ring or a strip. Multiple results occupy concentric rings from the outside inward, or aligned strips in the linear layout. The month divisions are a shared seasonal reference. Use the saved event date for a historical calendar comparison. Ordering results by star or epoch and holding the skyline and visibility thresholds fixed makes it possible to attribute changes in the boundaries to the chosen comparison. The plot reads the classifications already calculated by <a href="fn-star-phases.html"><code>star.phases()</code></a>. Adding a ring does not refit the visibility model.</p>
+</section>
+<section id="full-package-help" class="level2">
+<h2 class="anchored" data-anchor-id="full-package-help">Full package help</h2>
+<p>The following help page is generated from the archived 2.0.9004 package documentation.</p>
+<details>
+<summary>
+Read the complete <code>star.phases()</code> help page
+</summary>
+<h2 id="star.phases" class="anchored">Model seasonal changes in stellar visibility</h2><span id="topic+star.phases"></span>
+
+<h3 class="anchored">Description</h3>
+
+<p>Estimate the seasons in which a star's rising or setting could be visible in twilight at
+an archaeological site.
+</p>
+
+
+<h3 class="anchored">Usage</h3>
+
+<pre><code class="language-R">star.phases(
+  star,
+  year,
+  loc,
+  alt.hor = 0,
+  alt.rs = 10,
+  solar.alt = NULL,
+  k = skyscapeR.vars()$k,
+  limit = 6,
+  refraction,
+  atm,
+  temp,
+  res = 1/24/6
+)
+</code></pre>
+
+
+<h3 class="anchored">Arguments</h3>
+
+
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td><code id="star.phases_:_star">star</code></td>
+<td><p>Either the star name or a <em>skyscapeR.star</em> object.</p></td>
+</tr>
+<tr class="even">
+<td><code id="star.phases_:_year">year</code></td>
+<td><p>The year of interest. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="star.phases_:_loc">loc</code></td>
+<td><p>Location, either a <em>skyscapeR.horizon</em> or a vector containing the latitude, longitude and elevation of location, in this order.</p></td>
+</tr>
+<tr class="even">
+<td><code id="star.phases_:_alt.hor">alt.hor</code></td>
+<td><p>The altitude of the horizon to consider. Defaults to zero degrees.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="star.phases_:_alt.rs">alt.rs</code></td>
+<td><p>The maximum altitude of a star's first or last visibility for it to still be considered to be as rising or setting. Defaults to ten degrees.</p></td>
+</tr>
+<tr class="even">
+<td><code id="star.phases_:_solar.alt">solar.alt</code></td>
+<td><p>Solar altitude threshold in degrees. NULL uses -6 for a horizon, or alt.hor - 6 for coordinate input.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="star.phases_:_k">k</code></td>
+<td><p>Visual extinction in magnitudes per airmass (Schaefer 1986, p. S33). The package adopts 0.2 as a clear-sky baseline. Extinction varies with site and atmospheric conditions (Schaefer 1986, 1993). Defaults to the session value from skyscapeR.vars().</p></td>
+</tr>
+<tr class="even">
+<td><code id="star.phases_:_limit">limit</code></td>
+<td><p>The maximum magnitude of a star that can be visible with the naked eye. Defaults to 6.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="star.phases_:_refraction">refraction</code></td>
+<td><p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td>
+</tr>
+<tr class="even">
+<td><code id="star.phases_:_atm">atm</code></td>
+<td><p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="star.phases_:_temp">temp</code></td>
+<td><p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td>
+</tr>
+<tr class="even">
+<td><code id="star.phases_:_res">res</code></td>
+<td><p>Spacing of solar altitude samples in days, greater than zero and at most one. Default 1/144 day (ten minutes). Terrain crossings are refined separately.</p></td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h3 class="anchored">Details</h3>
+
+<p>Seasonal visibility depends on solar depression, stellar altitude, apparent magnitude
+and atmospheric extinction as well as terrain. The model holds the star's position fixed
+for the chosen year and samples a 365-day solar cycle with uniformly spaced ecliptic
+longitudes. It requires a star-Sun altitude separation of 2.1 times the catalogue
+magnitude plus 10 degrees, and compares extinction-adjusted magnitude with the limiting
+magnitude. A positive-duration overlap of visibility conditions determines the daily
+code. The stellar altitude trend within a visible interval below alt.rs determines
+rising or setting. Terrain reappearance of a descending star therefore contributes
+a setting phase. Disjoint runs are reported as separate seasons on the circular
+model year, including runs spanning the December-solstice reference.
+</p>
+<p>Both constant and varying horizons are evaluated on all 365 model days. A horizon
+object supplies the coordinates and piecewise-linear horizon. The profile must
+cover all bearings and close at north. Use alt.hor only with coordinate input.
+A fixed-coordinate stellar track is shared across model days. The terrain search
+uses the same corners, azimuth reversals, interior extrema and 0.01-second root
+tolerance as <code>riseset</code>, collecting all crossings during the model day.
+Visible windows can lie wholly between minute samples. A touch without clearance
+contributes no visible duration. Source terrain resolution and numerical tolerances
+limit the shortest resolvable window.
+</p>
+<p>Refraction selects apparent or geometric altitudes for both Sun and star.
+A stellar horizon affects obstruction at the star's azimuth. The solar darkness
+test uses altitude relative to the astronomical horizon, with default solar.alt
+of -6 for a profile and alt.hor - 6 for coordinates. Supply the same solar.alt
+to compare a constant profile and a raised scalar horizon. Extinction, the
+star-Sun separation and alt.rs use stellar altitude above the astronomical horizon.
+Solar altitude is interpolated between res samples. Stellar visibility margins
+are interpolated on a grid containing minute samples, solar samples, terrain
+crossings and stellar altitude extrema. Decrease res to assess borderline dates.
+Any positive-duration opportunity in this threshold model qualifies. Actual
+naked-eye detection over a very short interval depends on observing conditions.
+The synthetic solar year and solstice calendar mapping
+are conventions inherited from the phase model.
+</p>
+<p>Purrington (1988, p. S74, equation 1 and Fig. 2) fitted the altitude-difference
+rule to empirical data down to about magnitude 3. It describes rising at dawn and
+setting at dusk on the same side of the sky as the Sun. Purrington discusses a
+smaller separation for opposite-horizon events (p. S75). This function applies
+the same threshold at every relative azimuth. Schaefer (1987, section 4)
+examines how sky brightness and observing conditions affect heliacal visibility.
+Brady (2015) gives the archaeological context for the phase terminology.
+</p>
+<p>Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-package</code> for setup.
+</p>
+
+
+<h3 class="anchored">Value</h3>
+
+<p>A skyscapeR.starphases list. The data table gives each model day and its phase code: I for invisible, V for visible without a classified rise or set, R for rising, S for setting and RS for both. Metadata include the star, year, observer coordinates, phase type, season and event tables, refraction setting and solar altitude threshold. For a named horizon, <code>metadata$site.name</code> retains the site label for comparisons. The logical <code>metadata$horizon</code> records whether a horizon object was supplied. The separate <code>metadata$horizon.status</code> reports <code>"always above"</code>, <code>"always below"</code> or <code>"crosses"</code> relative to the supplied skyline. Event rows include solar.longitude in degrees on the synthetic cycle. The date.julian column gives the representative local Julian calendar date at the supplied longitude. Pass this date to <code>riseset</code> with <code>calendar = "J"</code> to time the skyline crossing. For a dawn sketch, advance from that crossing until the star clears the terrain while the sky is still dark enough. The phase date alone does not specify a visible instant.
+</p>
+
+
+<h3 class="anchored">Extinction and model scope</h3>
+
+<p>The implementation uses Rozenberg's airmass approximation,
+<i>X(h)=1/(\sin h+0.025\exp(-11\sin h))</i>, multiplying it by <code>k</code>
+and adding the result to the fixed catalogue magnitude. Here <code>h</code> is the
+stellar altitude selected by <code>refraction</code>, above the astronomical
+horizontal. This is distinct from the height above a ridge. The star-Sun
+altitude-separation rule uses the catalogue magnitude before extinction.
+</p>
+<p>The model does not calculate scattered moonlight, artificial light pollution,
+weather, an observer's adaptation history, or variable-star light curves.
+The same separation threshold is used at all relative azimuths. It is therefore
+a screening model for seasonal opportunities, not a probability of detection.
+Supplying an integrated cluster entry such as M45 treats its total magnitude as
+one target; cluster size, surface brightness and resolution into individual
+stars do not enter this calculation. It does not predict when each Pleiad is
+individually visible.
+</p>
+<p>Horizon status is determined from positive-duration clearance intervals along
+the same stellar track used for the phase calculation, with the supplied
+skyline and refraction setting. The same calculation applies in both
+hemispheres. A track with no clearance returns an ordinary all-I result,
+rather than raising an error. An always-clear track still undergoes the
+extinction and solar-darkness tests; never setting does not imply visibility.
+A star that never sets below a level horizontal can cross a raised ridge.
+Isolated tangencies do not count as intervals of clearance or obstruction.
+Numerical resolution and the supplied terrain profile limit this status.
+</p>
+<p>The separate metadata$horizon.status field is "always above", "always below"
+or "crosses", relative to the supplied skyline. Phase codes R and S describe
+the rising or descending part of a visible track below alt.rs; they do not
+require a physical skyline crossing that day. An always-clear star may thus
+have seasonal R/S codes. The type "circumpolar" is retained for an all-V
+result only when the track is always above the skyline; other all-V results
+are labelled "visible throughout cycle". Use horizon.status, not type, to
+distinguish clearance from seasonal visibility.
+</p>
+
+
+<h3 class="anchored">Dates and a subsequent sky sketch</h3>
+
+<p>Events follow adjacent-sample transitions around the closed cycle, including
+the December-solstice boundary. Entering and leaving I mark acronycal setting
+and heliacal rising; entering and leaving V mark acronycal rising and heliacal
+setting. A season continuing across the boundary creates no event there.
+Constant phase sequences have no transition events.
+</p>
+<p>The 365 model samples are equally spaced in solar longitude, not in elapsed
+civil time. Printed seasonal labels are anchored to the December solstice.
+<code>metadata$events$date.julian</code> instead solves for the event solar longitude
+in the requested year and converts it to a local mean-solar Julian-calendar
+date using longitude. It is a representative date, not an exact detection
+instant, and can differ from the synthetic <code>day</code> label.
+</p>
+<p>Pass the representative date to <code>riseset</code> with
+<code>calendar = "J"</code> and an explicit timezone. With UTC or a fixed offset,
+inspect neighbouring dates when local mean-solar and civil days differ.
+The returned rise is a skyline crossing. Follow it by a short time sequence
+with <code>sketchSky</code> and <code>skyStep</code> to inspect terrain
+clearance and the changing brightness of the local sky.
+</p>
+<p>A supplied <code>skyscapeR.star</code> is used as given. Recompute it for the requested
+year; the phase function does not update an existing object's coordinates.
+</p>
+
+
+<h3 class="anchored">How precise is a heliacal-rising date?</h3>
+
+<p>In 69 of 70 individual comparisons, the estimated first morning of visibility was within a week of the predicted heliacal-rising date.
+</p>
+
+
+<h3 class="anchored">Reproducing a saved result</h3>
+
+<p>Metadata retain the resolved star, year, observer coordinates, extinction,
+atmospheric settings and solar-altitude threshold, together with <code>limit</code>,
+<code>alt.rs</code>, <code>res</code> and <code>alt.hor</code>. The latter is NA when a terrain
+profile replaces the constant horizon. <code>metadata$horizon.profile</code> contains
+the numerical <code>az</code>/<code>alt</code> table used, or NULL for a constant horizon.
+Landscape images and DEMs are not copied into the result. Existing logical
+<code>horizon</code> and <code>skyline</code> fields are retained.
+</p>
+<p><code>metadata$provenance$packages</code> records the loaded skyscapeR and swephR
+versions; an unavailable version is NA, for example when sourcing functions
+outside a package namespace. Version strings do not uniquely identify
+development builds. Retain the original script, code revision and ephemeris
+files as well: the saved metadata do not identify or archive those files.
+Earlier saved results do not acquire these fields automatically.
+</p>
+
+
+<h3 class="anchored">Provenance</h3>
+
+<p>Structured results carry a <code>provenance</code> attribute. Read it with
+<code>attr(result, "provenance")</code>; its <code>packages</code> entry records the loaded
+skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+This attribute adds no list entries or table columns. Ordinary subsetting or
+transformations may discard attributes; save the original result for reference.
+It does not identify ephemeris files, catalogue revisions or a development
+commit. Retain those and the analysis script separately for exact reproduction.
+The same record remains available in <code>metadata$provenance</code>.
+</p>
+
+
+<h3 class="anchored">Validation</h3>
+
+<p>Seasonal searches require full skyline coverage. H07 checked rejection of a partial photograph and successful calculation with the full profile. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage">H07 check in the technical manual</a>.
+</p>
+<p>W02 replayed the Gacrux heliacal-rising date at Skorba West and passed it to the crossing and sky-reconstruction calculations. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky">W02 check in the technical manual</a>.
+</p>
+
+
+<h3 class="anchored">References</h3>
+
+<p>Crumey, A. (2014). Human contrast threshold and astronomical
+visibility. MNRAS 442, 2600-2619. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1093/mnras/stu992")}.
+</p>
+<p>Purrington, R. D. (1988). Heliacal Rising and Setting: Quantitative Aspects. Journal for the History of Astronomy 19, S72-S84. <a href="https://articles.adsabs.harvard.edu/pdf/1988JHAS...19...72P">https://articles.adsabs.harvard.edu/pdf/1988JHAS...19...72P</a>.
+</p>
+<p>Schaefer, B. E. (1986). Atmospheric Extinction Effects on Stellar Alignments. Journal for the History of Astronomy 17, S32-S42. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1177/002182868601701003")}.
+</p>
+<p>Schaefer, B. E. (1993). Astronomy and the Limits of Vision. Vistas in Astronomy 36, 311-361. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/0083-6656(93)90113-X")}.
+</p>
+<p>Schaefer, B. E. (1987). Heliacal Rise Phenomena. Journal for the History of Astronomy 18, S19-S33. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1177/002182868701801103")}.
+</p>
+<p>Brady, B. (2015). Star Phases: the Naked-eye Astronomy of the Old Kingdom Pyramid Texts. In F. Silva and N. Campion (eds), Skyscapes: The Role and Importance of the Sky in Archaeology. Oxbow Books, pp. 76-86.
+</p>
+<p>Krisciunas, K. and Schaefer, B. E. (1991). A model of the brightness
+of moonlight. PASP 103, 1033-1039 (equation 14 for extinction airmass).
+\Sexpr[results=rd]{tools:::Rd_expr_doi("10.1086/132921")}.
+</p>
+
+
+<h3 class="anchored">See Also</h3>
+
+<p><code>plot.skyscapeR.starphases</code>, <code>riseset</code>, <code>sketchSky</code>, <code>skyStep</code>, <code>star</code>
+</p>
+
+
+<h3 class="anchored">Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+if (requireNamespace("swephRdata", quietly = TRUE)) {
+  ss1 &lt;- star.phases('Aldebaran',-4000, c(35,-8,200))
+  
+  # One can then look at the star's phase type:
+  ss1$metadata$type
+  
+  # Date range of seasons:
+  ss1$metadata$seasons
+  
+  # Date range of phase-type events:
+  ss1$metadata$events
+  
+  # And plot them:
+  plot(ss1)
+  
+  # You can play with the parameters and see how predictions change:
+  ss1 &lt;- star.phases('Aldebaran',-4000, c(35,-8,200), alt.hor=2, alt.rs=5)
+  plot(ss1)
+}
+
+## End(Not run)
+</code></pre>
+</details>
+<p><strong>Related function entries</strong></p>
+<p><a href="fn-createhor.html"><code>createHor()</code></a>, <a href="fn-plot-skyscaper-starphases.html"><code>plot.skyscapeR.starphases()</code></a>, <a href="fn-riseset.html"><code>riseset()</code></a>, <a href="fn-sketchsky.html"><code>sketchSky()</code></a>, <a href="fn-skystep.html"><code>skyStep()</code></a>, <a href="fn-star.html"><code>star()</code></a>, <a href="fn-star-phases.html"><code>star.phases()</code></a>.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-krisciunas1991" class="csl-entry" role="listitem">
+Krisciunas, Kevin, and Bradley E. Schaefer. 1991. <span>‘A Model of the Brightness of Moonlight’</span>. <em>Publications of the Astronomical Society of the Pacific</em> 103: 1033–39. <a href="https://doi.org/10.1086/132921">https://doi.org/10.1086/132921</a>.
+</div>
+<div id="ref-purrington1988" class="csl-entry" role="listitem">
+Purrington, R. D. 1988. <span>‘Heliacal Rising and Setting: Quantitative Aspects’</span>. <em>Journal for the History of Astronomy</em> 19: S72–84. <a href="https://articles.adsabs.harvard.edu/pdf/1988JHAS...19...72P">https://articles.adsabs.harvard.edu/pdf/1988JHAS...19...72P</a>.
+</div>
+<div id="ref-schaefer1986" class="csl-entry" role="listitem">
+Schaefer, Bradley E. 1986. <span>‘Atmospheric Extinction Effects on Stellar Alignments’</span>. <em>Journal for the History of Astronomy</em> 17: S32–42. <a href="https://doi.org/10.1177/002182868601701003">https://doi.org/10.1177/002182868601701003</a>.
+</div>
+<div id="ref-schaefer1987" class="csl-entry" role="listitem">
+———. 1987. <span>‘Heliacal Rise Phenomena’</span>. <em>Journal for the History of Astronomy</em> 18: S19–33. <a href="https://doi.org/10.1177/002182868701801103">https://doi.org/10.1177/002182868701801103</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./photographic-horizons.html" class="pagination-link" aria-label="Calibrating photographic skylines and exchanging horizons">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Calibrating photographic skylines and exchanging horizons</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./orientation-densities.html" class="pagination-link" aria-label="From a measured orientation to a declination distribution">
+        <span class="nav-page-text"><span class="chapter-title">From a measured orientation to a declination distribution</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

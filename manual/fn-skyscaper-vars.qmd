@@ -1,0 +1,48 @@
+# `skyscapeR.vars()` {#fn-skyscaper-vars}
+
+**Validation on 2.0.9005.** Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. [A01 results](a01-calendar-checks.qmd).
+
+[Function index](function-index.html#idx-skyscaper-vars)
+
+```{=html}
+<p>The same observation can have different labels or apparent coordinates under different
+calendar, timezone, reference-frame or atmospheric choices. With no arguments the
+function returns a named snapshot. Supplied arguments update the package environment for
+subsequent calls in the current R session. Functions with their own explicit arguments
+or fixed UT sampling conventions may override these defaults. Record the settings with
+the survey data.
+</p>
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>Schaefer, B. E. (1986). Atmospheric Extinction Effects on Stellar Alignments. Journal for the History of Astronomy 17, S32-S42. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1177/002182868601701003")}.
+</p>
+<p>Schaefer, B. E. (1993). Astronomy and the Limits of Vision. Vistas in Astronomy 36, 311-361. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/0083-6656(93)90113-X")}.
+</p>
+<p>University of California, Davis. <em>Physics 157 Observing Guide</em>, Spring 2022, discussion of extinction coefficients.
+</p>
+
+
+
+```
+
+</details>
+
+**Interpretation and limits.** Save the resolved settings at the time of computation. Reproducing the written R call under another session's refraction, pressure or calendar defaults can produce a different result.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>Timezone name (for example "Europe/London") or fixed offset in hours east of UTC,
+or a string such as "UTC+02:00". Initially "Europe/London". Use UTC or a fixed
+offset for dates before 1900. See <code>time2jd</code> for details.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p></td></tr><tr><th scope="row"><code>refraction</code></th><td>—</td><td><p>Whether atmospheric refraction is to be taken into account. Default is TRUE.</p></td></tr><tr><th scope="row"><code>atm</code></th><td>—</td><td><p>Air pressure in mbar for the refraction calculation. Default is 1013.25 mbar.</p></td></tr><tr><th scope="row"><code>temp</code></th><td>—</td><td><p>Air temperature in degrees Celsius for the refraction calculation. Default is 15 degrees Celsius.</p></td></tr><tr><th scope="row"><code>dec</code></th><td>—</td><td><p>Output declination: <em>geo</em> for the geocentric, or <em>topo</em> for the topocentric
+frame of reference. Defaults to topocentric.</p></td></tr><tr><th scope="row"><code>k</code></th><td>—</td><td><p>Visual extinction in magnitudes per airmass, shared by natural sky sketches and stellar phase calculations. The initial value of 0.2 is a clear-sky baseline, consistent with the approximate V-band coefficient for Kitt Peak in the UC Davis Physics 157 Observing Guide. Extinction varies with site and atmospheric conditions (Schaefer 1986, 1993). Use zero to disable extinction.</p></td></tr></tbody></table><h5>Return value</h5><p>A named list of the current session settings, including the current year. Supplying an argument updates that setting for subsequent package calls in this R session.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/global_vars.R`. [Full function help](help/skyscapeR.vars.html) · [Sky reconstruction](sky-rendering.html#sec-sketch) · [Time, coordinates and ephemerides outline](contents-plan.html#plan-time) · [From a measured orientation to a declination distribution](orientation-densities.html#density-notch) · [Equinoctial full Moons and crescent crossovers](lunar-crossovers.html#crossover-example) · [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-time) · [Display styles, capture and stepping time](sky-rendering.html#sky-step-capture)

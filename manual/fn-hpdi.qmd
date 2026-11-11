@@ -1,0 +1,50 @@
+# `hpdi()` {#fn-hpdi}
+
+In D02 the default transformation grid split the middle 80 percent highest-density region of a three-mode ridge case; a finer grid recovered the three reference regions. [D02 results](d02-bearing-propagation.qmd).
+
+**Validation on 2.0.9005.** Known tied, truncated and disjoint test distributions returned the expected interval endpoints and achieved the requested minimum discrete mass. [D01 results](d01-density-checks.qmd).
+
+[Function index](function-index.html#idx-hpdi)
+
+```{=html}
+<p>A distribution with several peaks can give several disjoint intervals. The mass
+parameter applies to the selected regions together; the result describes concentration
+of the supplied density rather than significance against a null model.
+</p>
+<p>Uses the existing discrete density-threshold method: sort sampled
+densities, find the threshold reaching the requested fraction of their sum,
+and include all points tied at that threshold. Consequently, the selected
+mass can exceed the requested value. Densities need not sum to one.
+</p>
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>Hyndman, R. J. (1996). Computing and Graphing Highest Density Regions. The American Statistician 50, 120-126. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1080/00031305.1996.10474359")}.
+</p>
+
+
+
+```
+
+</details>
+
+**Interpretation and limits.** A summed curve depends on its inputs, grid and normalisation. Selecting a subset changes the archaeological population being summarised. A highest-density interval describes concentrated probability mass, with no null-model adjustment.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>x</code></th><td>—</td><td><p>A <em>skyscapeR.spd</em> or <em>skyscapeR.pdf</em> object,
+or one data frame/list with numeric components <code>x</code> and <code>y</code>.</p></td></tr><tr><th scope="row"><code>mass</code></th><td><code>0.954</code></td><td><p>Probability mass, greater than zero and at most one.
+Default is 0.954.</p></td></tr></tbody></table><h5>Return value</h5><p>For a PDF object, a list of interval matrices, one per distribution,
+even for a single distribution. For SPD or x/y input, one matrix.
+Each matrix has columns <code>start</code> and <code>end</code>, with ordered endpoints
+and one row per contiguous region, sorted by start.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/misc.R`. [Full function help](help/hpdi.html) · [Uncertainty and orientation distributions outline](contents-plan.html#plan-density) · [From a measured orientation to a declination distribution](orientation-densities.html#density-summary)

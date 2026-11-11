@@ -1,0 +1,89 @@
+# `randomTest()` {#fn-randomtest}
+
+The 500-simulation Ggantija-phase workflow in W02 reproduced the bundled global probability, local intervals and adjusted probabilities. [W02 results](w02-field-to-sky.qmd).
+
+In S01, at a nominal 5 percent level the global rejection rate was 4.25 to 5.85 percent across the tested uniform-null settings with sufficient Monte Carlo resolution. Build 2.0.9007 uses the source azimuth density spacing and cutoff for simulations and matches the observed SPD spacing on the shared-horizon route. Refit earlier analyses that used different settings. [S01 results](s01-uniform-orientation.qmd).
+
+**Verified on 2.0.9006.** The global score counts north once. A qualifying excess across north is reported as one interval with start greater than end. [S03 rerun](s03-scoring-checks.qmd).
+
+**Validation on 2.0.9005.** Independent scoring reproduced the stored linear-grid probabilities. A north-crossing azimuth excess can split into two clusters; including both 0 and 360 degrees can also affect the global rank. [S03 results](s03-scoring-checks.qmd).
+
+The null draw relocates each observation’s full measurement model, including triangular asymmetry, taper and independent survey error. [Measurement families](orientation-densities.qmd#measurement-families).
+
+[Function index](function-index.html#idx-randomtest)
+
+```{=html}
+<p>Following Silva (2020), the test combines the observed measurement densities into a summed probability density (SPD).
+For each simulated dataset, the function draws one azimuth per measurement with replacement
+from the uniform grid from 0 to 360 degrees at the source azimuth spacing. It applies the
+source density family and measurement uncertainties and constructs a comparable SPD.
+For a declination test, random azimuths are transformed using the site geometry; the
+resulting null distribution in declination depends on latitude and horizon.
+</p>
+<p>A new transformation takes its atmosphere from <code>skyscapeR.vars</code>. A saved declination PDF supplies its original settings. The fit records these in metadata$atmosphere for declination tests.
+</p>
+```
+
+**Study design and numerical checks.**
+
+```{=html}
+<p>The simulated null describes independently sampled orientations with the
+specified site geometry and measurement model. It does not automatically model
+shared construction episodes, correlated measurement errors, geographical
+clustering or selection of sites after inspecting their orientations. Such
+structure needs a justified sampling model or separate sensitivity analysis.
+</p>
+<p>The pointwise envelope is not a simultaneous confidence band. A significant
+global result rejects the specified random-orientation model; it does not
+identify a celestial target. Refine the comparison grid and increase
+<code>nsims</code> to assess borderline results, preserving the seed and inputs.
+More simulations improve Monte Carlo resolution, not the validity of the
+archaeological sampling design. Repeated searches over alternative subsets or
+models are not included in the within-fit local-cluster adjustment.
+</p>
+
+
+
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>Silva, F. (2020). A probabilistic framework and significance test for the analysis of structural orientations in skyscape archaeology. <em>Journal of Archaeological Science</em>, 118, 105138. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/j.jas.2020.105138")}.
+</p>
+<p>Silva, F. and Lomsdalen, T. (2025). ‘No easy way from the earth to the stars’: a new statistical approach to the orientation of the Maltese temples. <em>Archaeological and Anthropological Sciences</em>, 17, 96. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1007/s12520-025-02208-4")}.
+</p>
+<p>Maris, E. and Oostenveld, R. (2007). Nonparametric statistical testing of EEG- and MEG-data. <em>Journal of Neuroscience Methods</em>. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/j.jneumeth.2007.03.024")}.
+</p>
+<p>Sassenhagen, J. and Draschkow, D. (2019). Cluster-based permutation tests of MEG/EEG data do not establish significance of effect latency or location. <em>Psychophysiology</em>. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1111/psyp.13335")}.
+</p>
+<p>Dufour, J.-M. (2006). Monte Carlo tests with nuisance parameters: A general approach to finite-sample inference and nonstandard asymptotics. <em>Journal of Econometrics</em>, 133, 443-477. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/j.jeconom.2005.06.007")}.
+</p>
+<p>North, B. V., Curtis, D. and Sham, P. C. (2002). A note on the calculation of empirical P values from Monte Carlo procedures. <em>American Journal of Human Genetics</em>, 71, 439-441. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1086/341527")}.
+</p>
+
+
+
+```
+
+</details>
+
+[Reproducing a test under its null model](fn-modeltest.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>pdf</code></th><td>—</td><td><p>A <em>skyscapeR.pdf</em> object created with either <code>az.pdf</code> or <code>coordtrans</code></p></td></tr><tr><th scope="row"><code>az</code></th><td>—</td><td><p>Original azimuth <em>skyscapeR.pdf</em>; required only when <code>pdf</code>
+contains declination distributions. Must match its distribution count and
+order. Do not supply this argument when <code>pdf</code> already contains azimuths.</p></td></tr><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>For azimuth input, optionally supply one shared <em>skyscapeR.horizon</em>
+to test in declination. For declination input, required: the original shared
+horizon or an ordered list matching the distributions in <code>pdf</code>.</p></td></tr><tr><th scope="row"><code>nsims</code></th><td><code>1000</code></td><td><p>Number of simulations, at least two. Default is 1000.</p></td></tr><tr><th scope="row"><code>conf</code></th><td><code>0.95</code></td><td><p>Confidence level as a fraction. For example, 0.95 requests a 95 percent envelope.</p></td></tr><tr><th scope="row"><code>tails</code></th><td><code>2</code></td><td><p>1 for upper excesses, 2 for excesses and deficits (default).</p></td></tr><tr><th scope="row"><code>normalise</code></th><td><code>F</code></td><td><p>Logical to control whether to normalize SPDs. Default is FALSE</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.1</code></td><td><p>Resolution with which to output probability distribution(s). Default is 0.1 degrees.</p></td></tr><tr><th scope="row"><code>ncores</code></th><td><code>NULL</code></td><td><p>Worker count. By default use half the detected available logical cores, rounded down with a minimum of one. Set ncores=1 for serial execution. The simulation count and memory batch size can further limit workers. Verbose output reports the effective count.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>T</code></td><td><p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p></td></tr></tbody></table><h5>Return value</h5><p>A <em>skyscapeR.sigTest</em> list containing metadata (test settings,
+global and local p-values) and data (empirical SPD and null confidence envelope).
+No original PDFs or horizon objects are attached.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/statistics.R`. [Full function help](help/randomTest.html) · [Random orientations](significance.html#meth-random) · [Null models and significance outline](contents-plan.html#plan-null) · [From a measured orientation to a declination distribution](orientation-densities.html#density-summary) · [Reading the Ġgantija fit](significance.html#sig-output) · [Test random orientations](vignette-guide.html#workflow-test-random-orientations)

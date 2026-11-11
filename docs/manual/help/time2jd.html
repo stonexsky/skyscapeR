@@ -1,0 +1,97 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>time2jd | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-time2jd.html">time2jd() method</a></nav><p><strong>Validation on 2.0.9005.</strong> Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. <a href="../a01-calendar-checks.html">A01 study</a>.</p><p>skyscapeR 2.0.9004</p><h2>Convert local calendar date and time to a UT Julian date</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Place a dated field observation or historical event on the continuous UT Julian-date
+scale used in ephemeris calculations.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>time2jd(time, timezone, calendar, verbose = F)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>time</code></td>
+<td>
+<p>Character vector in YYYY/MM/DD format, optionally followed by HH:MM or HH:MM:SS. Fractional seconds are accepted. Omitted clock time means midnight.</p>
+</td></tr>
+<tr><td><code>timezone</code></td>
+<td>
+<p>Timezone name or fixed offset; defaults to the value in <code>skyscapeR.vars()</code>. See Details.</p>
+</td></tr>
+<tr><td><code>calendar</code></td>
+<td>
+<p>Calendar: G or Gregorian, J or Julian. Defaults to the package calendar setting, initially Gregorian.</p>
+</td></tr>
+<tr><td><code>verbose</code></td>
+<td>
+<p>Logical; display a conversion message. Default is FALSE.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Civil dates require both a calendar and a time convention to specify an instant. The
+function parses each supplied date and time, verifies that the calendar date exists by
+converting it to a Julian date and back, then applies the chosen offset or civil
+timezone to obtain UT. A date without a time uses local midnight. Astronomical year
+numbering includes year zero. An era label can also precede the month, for example
+<code>"3700 BCE/06/21"</code>.
+</p>
+<p>Fixed offsets may be numeric hours east of UTC (for example 5.5), or
+strings such as <code>"UTC+05:30"</code>, <code>"UTC-02"</code> or <code>"GMT+01"</code>.
+Offsets must lie between -14 and +14 hours. UTC, GMT and the empty string
+mean zero offset; an empty string does not select the system timezone.
+</p>
+<p>Named zones listed by <code>OlsonNames()</code>, such as <code>"Europe/London"</code>,
+use the installed timezone database for the actual Gregorian date, not a
+surrogate year. They are supported only for Gregorian years 1900-9999.
+Earlier dates require UTC or a fixed offset. For ancient-date workflows,
+set <code>skyscapeR.vars(timezone="UTC")</code> or provide timezone explicitly.
+The package's initial timezone remains Europe/London. Database versions
+may differ across systems; fixed offsets provide reproducible conversions.
+</p>
+<p>Gregorian and Julian calendars are proleptic: no automatic calendar reform
+is applied. Astronomical year numbering is used: 0 is 1 BCE, -1 is 2 BCE.
+Fixed-offset input dates support years from -100000 to 100000.
+A timezone offset represents civil clock time, not local solar time.
+These functions apply clock offsets to a UT Julian day; they do not apply
+leap-second, UTC-to-UT1 or TT corrections. Leap-second input is rejected.
+</p>
+<p>Ambiguous and nonexistent local times at clock transitions are rejected.
+For an ambiguous time, specify a fixed offset to identify the intended instant.
+Calendar dates and clock components are validated before conversion.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A numeric vector of UT Julian dates, in the same order as time.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>jd2time</code>, <code>timestring</code>, <code>BC.AD</code>, <code>skyscapeR.vars</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>time2jd("2000/01/01 12:00:00", "UTC") # 2451545
+# A positive offset crosses into the preceding UTC year:
+jd &lt;- time2jd("2020/01/01 00:30:00", "UTC+02")
+jd2time(jd, "UTC") # 2019/12/31 22:30:00
+# Ancient Julian-calendar date, with an explicit fixed offset:
+time2jd("-4000/06/21 06:00:00", "UTC+02", calendar="J")
+# A modern date uses that year's timezone rules:
+time2jd("2007/03/15 12:00:00", "America/New_York")
+</code></pre>
+
+<p><a href="../fn-time2jd.html">time2jd() method</a></p></body></html>

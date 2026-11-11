@@ -1,6 +1,6 @@
 # Checking the date of heliacal rising {#sec-rising}
 
-**Question.** How close is the seasonal date from [`star.phases()`](function-methods.html#fn-star-phases) to the first morning that a second visibility model puts the star above its detection threshold?
+**Question.** How close is the seasonal date from [`star.phases()`](fn-star-phases.html) to the first morning that a second visibility model puts the star above its detection threshold?
 
 **Finding.** In 69 of 70 comparable cases, the two dates fell within one week of each other. The comparison uses modelled visibility at dawn. Assessing accuracy against what people actually saw would require dated naked-eye observations.
 
@@ -12,7 +12,7 @@ Capella produced no heliacal-rising event in the ten site–epoch combinations. 
 
 ## Comparator and shared inputs
 
-The reference date comes from [`star.phases()`](function-methods.html#fn-star-phases). The comparator searches mornings around that date on a one-minute grid. It evaluates extinction-adjusted point-source flux against the local background radiance, applying the point-source contrast threshold of @crumey2014 [eqs. 32–33]. A minute above threshold qualifies. The search covered 24 days on either side of the reference date, extended to 64 days where necessary. The experiment therefore checks agreement near the selected event.
+The reference date comes from [`star.phases()`](fn-star-phases.html). The comparator searches mornings around that date on a one-minute grid. It evaluates extinction-adjusted point-source flux against the local background radiance, applying the point-source contrast threshold of @crumey2014 [eqs. 32–33]. A minute above threshold qualifies. The search covered 24 days on either side of the reference date, extended to 64 days where necessary. The experiment therefore checks agreement near the selected event.
 
 The two calculations share the site, ephemeris and stellar catalogue. The assumed central dark-sky limit was magnitude 6, extinction was 0.20 magnitudes per airmass, refraction was disabled and the Moon was hidden. The benchmark used the twilight and sky-brightness model in development build 2.0.9003. Its threshold is applied to radiance before display compression. It is a criterion used by this study.
 
@@ -37,4 +37,4 @@ For a full rerun, install the archived build in a separate R library. Unpack the
 
 **Related function entries**
 
-[`star.phases()`](function-methods.html#fn-star-phases).
+[`star.phases()`](fn-star-phases.html).

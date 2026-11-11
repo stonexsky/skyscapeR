@@ -1,0 +1,56 @@
+# `body.position()` {#fn-body-position}
+
+**A02 validation.** In A02, file-backed geocentric directions for ten bodies agreed with their matching JPL parent to within 0.0065 arcseconds across 1,080 comparisons. At the sampled prehistoric epochs the public topocentric convention differed from JPL Horizons by up to 0.70 degrees in local sky direction at a specified instant. [Geocentric and local position results](a02-ephemeris.qmd).
+
+[Function index](function-index.html#idx-body-position)
+
+```{=html}
+<p>An alignment comparison needs an epoch, a reference frame and, for a local sightline, a
+site. Character times are converted to UT Julian dates using the selected calendar and
+timezone; numeric times are already UT Julian dates. Swiss Ephemeris supplies right
+ascension and declination. Without a site the function uses the geocentric frame. With a
+site it can use a topocentric position and convert to local azimuth and altitude. A
+vector of times is evaluated one instant at a time and returned in input order.
+</p>
+<p>Only the horizon object's location is used; its altitude profile is not used
+to determine whether the body is visible above the terrain. With a location,
+horizontal altitude is apparent when refraction is TRUE and geometric when
+FALSE. Azimuth is measured clockwise from north.
+</p>
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>Astrodienst. Swiss Ephemeris programmer's manual. <a href="https://www.astro.com/swisseph/swephprg.htm">https://www.astro.com/swisseph/swephprg.htm</a>.
+</p>
+
+
+
+```
+
+</details>
+
+**Interpretation and limits.** Use the same instant, coordinate frame, observer, refraction and ephemeris files when comparing against another engine. Agreement in equatorial coordinates alone leaves the local horizontal conversion untested.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>time</code></th><td>—</td><td><p>Either a string containing the date and time in the format "YYYY/MM/DD HH:MM:SS"
+(see <code>timestring</code>), or a numeric containing the julian date (see <code>time2jd</code>).</p></td></tr><tr><th scope="row"><code>obj</code></th><td><code>&quot;sun&quot;</code></td><td><p>String containing name of the solar system body of interest. Can be
+any of the planets (inc. Pluto), the Moon, the Sun or the Ecliptic. Defaults to 'sun'.</p></td></tr><tr><th scope="row"><code>loc</code></th><td><code>NULL</code></td><td><p>Observer location: a numeric vector containing latitude and
+longitude in degrees and elevation in metres, in that order, or a
+<em>skyscapeR.horizon</em> object whose metadata supplies those coordinates.
+Required for topocentric coordinates and for horizontal output in either
+frame. With no location, only geocentric equatorial coordinates are returned.</p></td></tr><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See <code>time2jd</code> for named zones and offsets.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p></td></tr><tr><th scope="row"><code>dec</code></th><td>—</td><td><p>Output declination: <em>geo</em> for the geocentric, or <em>topo</em> for the topocentric
+frame of reference. If not given the value set by <code>skyscapeR.vars</code> will be used instead.</p></td></tr><tr><th scope="row"><code>refraction</code></th><td>—</td><td><p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>atm</code></th><td>—</td><td><p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>temp</code></th><td>—</td><td><p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>T</code></td><td><p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p></td></tr></tbody></table><h5>Return value</h5><p>A list containing an <code>equatorial</code> data frame with columns
+<code>RA</code> and <code>Dec</code>, in degrees. When <code>loc</code> is supplied, the list
+also contains a <code>horizontal</code> data frame with columns <code>az</code> and
+<code>alt</code>, in degrees. Each data frame has one row per input time.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/mechanics.R`. [Full function help](help/body.position.html) · [Sky reconstruction](sky-rendering.html#sec-sketch) · [Ephemeris](ephemeris.html#sec-ephemeris) · [Time, coordinates and ephemerides outline](contents-plan.html#plan-time) · [Terrain crossings and event searches](event-searches.html#event-ridge) · [Identifying celestial candidates and limiting declinations](celestial-targets.html#target-overlay) · [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-frame)

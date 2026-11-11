@@ -1,0 +1,42 @@
+# `importPanorama()` {#fn-importpanorama}
+
+H07 verified lookup inside the photographed sector, including across north. Seasonal and event searches requiring a complete skyline reject partial photographs. [H07 results](h07-panorama-coverage.qmd).
+
+[Function index](function-index.html#idx-importpanorama)
+
+```{=html}
+<p>Choose controls according to what you know:
+</p>
+<p>The picker samples the overview. Choose Zoom and click two corners to display the selected region at native pixel detail, then choose Add control point. Full-turn plots cut the calibrated view at north. In scripted controls use <code>NA_real_</code> for each unknown angle. Levelling adjusts the near-horizon band. If an altitude shift takes image rows beyond the poles, only whole rows within the physical altitude range are kept. A one-point adjustment records the calibrated bounds and uses the original PNG. Keep it with the saved object. A tilt adjustment writes a levelled PNG in the working directory. Use a panorama with nominally linear angular axes and transparent sky above terrain in every column. A partial panorama supports altitude lookup within its photographed sector. Stellarium export requires a full turn.
+</p>
+```
+
+[Retaining panorama calibration and provenance](fn-exporthor.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>file</code></th><td>—</td><td><p>PNG with sky removed to transparency. Keep this file alongside saved horizon objects.</p></td></tr><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>WGS84 latitude, longitude and optional elevation in metres.</p></td></tr><tr><th scope="row"><code>az.lim</code></th><td><code>c(0, 360)</code></td><td><p>True bearings of the left and right edges, increasing clockwise. A sector may cross north, e.g. c(330,30).</p></td></tr><tr><th scope="row"><code>alt.lim</code></th><td><code>c(-90, 90)</code></td><td><p>Altitudes of the bottom and top edges in degrees. Set these explicitly for a cropped panorama.</p></td></tr><tr><th scope="row"><code>name</code></th><td><code>tools::file_path_sans_ext(basename(file))</code></td><td><p>Site name.</p></td></tr><tr><th scope="row"><code>calibrate</code></th><td><code>FALSE</code></td><td><p>Open the interactive graphics picker. Choose Zoom and click two corners to enlarge a region. Add a control by clicking a landmark and entering its true azimuth, altitude or both. Finish to apply the fit.</p></td></tr><tr><th scope="row"><code>points</code></th><td><code>NULL</code></td><td><p>Optional data frame with numeric x, y, az and alt. Pixel coordinates start at the upper-left image edge. Use NA for an unknown angle.</p></td></tr><tr><th scope="row"><code>alpha.threshold</code></th><td><code>0.5</code></td><td><p>Minimum opacity counted as terrain, from above zero to one.</p></td></tr><tr><th scope="row"><code>alt.unc</code></th><td><code>0.5</code></td><td><p>Assumed skyline altitude uncertainty in degrees.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.horizon object with a numerical profile, external PNG reference, angular bounds and control points. Use saveRDS() to save the object. Copy the displayed panorama PNG with the RDS and use <code>relinkHor</code> to reconnect a moved horizon or list.
+</p><h5>Extraction method and limitations</h5><p>Sky detection uses the PNG alpha channel. In each image column the first pixel
+whose opacity reaches <code>alpha.threshold</code> defines the terrain edge. The
+function does not segment an ordinary opaque photograph by sky colour. Remove
+the sky to transparency beforehand and retain sky above terrain in every column.
+Trees, buildings and mask errors become part of the extracted skyline.
+</p><p>Calibration uses linear angular axes, origin shifts and, where supported by
+the controls, fitted scale or sinusoidal near-horizon tilt corrections.
+This is not a general camera/lens model or a full spherical photogrammetric
+adjustment. Wide-angle distortion, stitched-image parallax and inaccurate
+control measurements are not removed automatically. The supplied
+<code>alt.unc</code> is an assumed error, not an uncertainty estimated from the fit.
+Inspect independent field controls after calibration.
+</p><p>A partial panorama only supplies the photographed sector; it is unsuitable for
+functions requiring a closed full horizon. Supplying only latitude and longitude
+leaves observer elevation unknown. Add a finite measured elevation before
+using functions, such as <code>sketchSky</code>, that require it.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/importPanorama.R`. [Full function help](help/importPanorama.html) · [Terrain horizons and panoramas outline](contents-plan.html#plan-terrain) · [Photographic calibration and interchange](photographic-horizons.html#photo-calibration) · [Importing site horizons](vignette-guide.html#workflow-importing-site-horizons) · [Partial profile coverage](photographic-horizons.html#partial-photo-consumers)

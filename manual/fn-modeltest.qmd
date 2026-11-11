@@ -1,0 +1,80 @@
+# `modelTest()` {#fn-modeltest}
+
+In S02, identical candidate bearings produced identical directly constructed observed and simulated densities on build 2.0.9008. Global rejection at the 5 percent level ranged from 4.35 to 5.50 percent under the six matched null designs. [S02 results](s02-specified-models.qmd).
+
+**Verified on 2.0.9006.** The observed and simulated azimuth curves use the same circular cluster search. The original test matrix gave one interval from 346° to 15°. [S03 rerun](s03-scoring-checks.qmd).
+
+**Validation on 2.0.9005.** Independent scoring reproduced the stored linear-grid probabilities. A north-crossing azimuth excess can split into two clusters; including both 0 and 360 degrees can also affect the global rank. [S03 results](s03-scoring-checks.qmd).
+
+A directly measured triangular density follows the sampled mode, retaining its left/right proportions. Both softened uniform families preserve their second width in degrees. [Measurement families](orientation-densities.qmd#measurement-families).
+
+[Function index](function-index.html#idx-modeltest)
+
+```{=html}
+<p>A proposed topographical or astronomical explanation can predict some orientations more
+frequently than others. Testing that explanation requires simulating its predicted
+distribution at the sites under study.
+</p>
+<p>Silva and Lomsdalen (2025) extended the random-orientation framework of Silva (2020)
+to test specific hypotheses about temple orientations in Malta, including topographical and
+astronomical explanations. Here the hypothesis specifies the relative probability of each
+candidate orientation. A small global p-value is evidence against that particular model.
+</p>
+```
+
+**Model weights and interpretation.**
+
+```{=html}
+<p>Weights are discrete sampling probabilities up to proportionality. If a
+continuous model is evaluated on an uneven coordinate grid, density heights
+alone do not represent probability mass; construct weights that account for
+the bin widths before calling the function. Put site-specific model tables in
+the same order as the observed measurements.
+</p>
+<p>A large p-value does not prove the proposed explanation or measure its
+probability. The test asks whether the specified model is incompatible with
+the observed departure statistic. Alternative models can remain compatible.
+The simulations do not automatically represent dependence between sites,
+selection after viewing the data, or uncertainty in fitted model parameters.
+See <code>randomTest</code> for study-design and Monte Carlo limitations.
+</p>
+
+
+
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>Silva, F. (2020). A probabilistic framework and significance test for the analysis of structural orientations in skyscape archaeology. <em>Journal of Archaeological Science</em>, 118, 105138. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/j.jas.2020.105138")}.
+</p>
+<p>Silva, F. and Lomsdalen, T. (2025). ‘No easy way from the earth to the stars’: a new statistical approach to the orientation of the Maltese temples. <em>Archaeological and Anthropological Sciences</em>, 17, 96. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1007/s12520-025-02208-4")}.
+</p>
+<p>Maris, E. and Oostenveld, R. (2007). Nonparametric statistical testing of EEG- and MEG-data. <em>Journal of Neuroscience Methods</em>. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/j.jneumeth.2007.03.024")}.
+</p>
+<p>Sassenhagen, J. and Draschkow, D. (2019). Cluster-based permutation tests of MEG/EEG data do not establish significance of effect latency or location. <em>Psychophysiology</em>. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1111/psyp.13335")}.
+</p>
+<p>Dufour, J.-M. (2006). Monte Carlo tests with nuisance parameters: A general approach to finite-sample inference and nonstandard asymptotics. <em>Journal of Econometrics</em>, 133, 443-477. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/j.jeconom.2005.06.007")}.
+</p>
+<p>North, B. V., Curtis, D. and Sham, P. C. (2002). A note on the calculation of empirical P values from Monte Carlo procedures. <em>American Journal of Human Genetics</em>, 71, 439-441. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1086/341527")}.
+</p>
+
+
+
+```
+
+</details>
+
+**Interpretation and limits.** Preserve the generating model, measurement-to-site mapping, simulation seed, comparison grid and rank convention. A change in the null answers a different archaeological question even when the same observed curve is used.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>pdf</code></th><td>—</td><td><p>Empirical skyscapeR.pdf from <code>az.pdf</code>, <code>dec.pdf</code> or <code>coordtrans</code>. Its coordinate selects the simulation path.</p></td></tr><tr><th scope="row"><code>model</code></th><td>—</td><td><p>One shared data frame or an ordered list with one table per observation. The first column contains candidate coordinates in degrees and the second contains nonnegative discrete sampling weights, with at least one positive weight. On equally spaced grids, density heights can serve as weights.</p></td></tr><tr><th scope="row"><code>unc</code></th><td><code>NULL</code></td><td><p>Optional replacement width in degrees of the tested coordinate. Use a standard deviation for normal, half the total span for triangular, or the family-specific half-width documented in <code>az.pdf</code>. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.</p></td></tr><tr><th scope="row"><code>nsims</code></th><td><code>1000</code></td><td><p>Number of simulations, at least two. Default is 1000.</p></td></tr><tr><th scope="row"><code>conf</code></th><td><code>0.95</code></td><td><p>Confidence level as a fraction.</p></td></tr><tr><th scope="row"><code>tails</code></th><td><code>2</code></td><td><p>1 for upper excesses, 2 for excesses and deficits.</p></td></tr><tr><th scope="row"><code>normalise</code></th><td><code>FALSE</code></td><td><p>Scale each summed density to unit area before comparison.</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.01</code></td><td><p>Spacing of the empirical and simulated comparison grids in degrees. Default 0.01.</p></td></tr><tr><th scope="row"><code>ncores</code></th><td><code>NULL</code></td><td><p>Worker count. By default use half the detected available logical cores, rounded down with a minimum of one. Set ncores=1 for serial execution. The simulation count and memory batch size can further limit workers. Verbose output reports the effective count.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Display simulation progress.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.sigTest list with settings and global/local results in metadata, empirical density and null envelope in data.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/statistics.R`. [Full function help](help/modelTest.html) · [Specified orientation models](significance.html#meth-model) · [Null models and significance outline](contents-plan.html#plan-null) · [From a measured orientation to a declination distribution](orientation-densities.html#density-summary) · [Exploring celestial candidates](vignette-guide.html#workflow-exploring-celestial-candidates)

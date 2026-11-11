@@ -1,0 +1,30 @@
+# S02 · Specified and site-specific null models {#s02-specified-models}
+
+Can [`modelTest()`](help/modelTest.html) recover the expected false-positive rate when the proposed model gives different weights to candidate directions at different sites? The study used five unequally spaced candidate directions, weights interpreted as probability masses, eight observations and 39 fresh reference draws per fit. We tested azimuth densities, directly constructed declination densities and asymmetric templates shifted to candidate means.
+
+**Same-input comparison.** In 2.0.9007, simulated azimuth and declination PDFs used constructor defaults even when the input PDF had been constructed on a different grid or with a different cutoff. With a 0.5° source grid and 0.002 cutoff the largest observed–simulated density discrepancy was 0.0015831 in both fixtures. The same draws on 2.0.9008 gave zero discrepancy. Public fits agreed with independent assembly of their observed and simulated curves and with independently scored global and local ranks. An independent first-moment calculation also checked asymmetric template shifting, explicit replacement uncertainties and the pole-boundary error. Two actual horizon-transformed PDFs agreed with independent shifts to within floating-point precision.
+
+**Calibration.** Twelve conditions each used 2,000 independent outer datasets. The six matched null conditions give the following rejection rates at the 5% threshold; parentheses contain pointwise 95% Wilson intervals. Local rejection means that at least one adjusted cluster probability crossed the threshold.
+
+| Coordinate or template | Input model | Global rejection | Any local rejection |
+|:---|:---|---:|---:|
+| Azimuth | Common weights | 5.00% (4.13–6.04) | 5.05% (4.17–6.10) |
+| Azimuth | Site-specific weights | 4.55% (3.72–5.55) | 4.50% (3.68–5.50) |
+| Declination | Common weights | 5.50% (4.58–6.59) | 5.20% (4.31–6.26) |
+| Declination | Site-specific weights | 4.35% (3.54–5.33) | 4.05% (3.27–5.01) |
+| Shifted asymmetric template | Common weights | 5.35% (4.45–6.42) | 5.25% (4.36–6.32) |
+| Shifted asymmetric template | Site-specific weights | 5.35% (4.45–6.42) | 5.50% (4.58–6.59) |
+
+Concentrating four of eight observations on the fourth candidate increased global rejection to 48.0–57.8% across the three routes. Pairing the random quantiles of two observations while retaining the site's marginal model increased global rejection to 5.70–6.95% and any-local rejection to 6.25–7.85%. These dependent-site results measure sensitivity to a violated independence assumption. The minimum attainable p-value with 39 simulations is 0.025. The archive includes counts and uncertainty intervals at thresholds of 1%, 5% and 10%.
+
+**Maltese application.** We reconstructed the landscape hypotheses of Silva & Lomsdalen (2025) using the packaged observations for all 32 structures. All 64 entrance endpoints agreed with supplementary Table S1. We used normal measurement densities centred on the frame midpoints, with standard deviations equal to one quarter of the opening width. The terrain-aspect reconstruction uses the available 5 m Malta DTM, an eight-neighbour slope calculation and cell aspects within 30 m of each entrance. The wind reconstruction digitises the 12 frequency sectors in Galdies (2011), distributes each sector's mass uniformly within its bounds and rotates directions by 180°. The winter sunlight reconstruction samples apparent solar-centre azimuths at one-minute intervals between the autumn and spring equinoxes of 3000 BCE at the mean temple location. Each model used a 0.5° candidate grid.
+
+| Reconstructed hypothesis | Global p-value, 9,999 simulations |
+|:---|---:|
+| Site-specific terrain aspect | 0.0259 |
+| Protection from the wind | 0.0007 |
+| Exposure to winter sunlight | 0.0001 |
+
+These values belong to the reconstructed inputs and current scoring convention. The original simulation draws and exact historical model tables were unavailable in the retrieved supplement. The raster operator, wind digitisation, solar viewpoint and discretisation can affect the comparison. The archive contains the inputs, local intervals, and a 499-simulation public-interface replay verifying the longer run. [Published study and supplement](https://doi.org/10.1007/s12520-025-02208-4). [Source wind rose, Figure 19](https://nso.gov.mt/wp-content/uploads/The_Climate_of_Malta.pdf).
+
+[Download S02 scripts and results](archives/S02-9008.zip).

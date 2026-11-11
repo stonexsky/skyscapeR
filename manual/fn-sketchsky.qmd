@@ -1,0 +1,178 @@
+# `sketchSky()` {#fn-sketchsky}
+
+W02 verified the reconstructed Gacrux bearing and altitude at the same instant and viewpoint using direct equatorial coordinates and spherical geometry. [W02 results](w02-field-to-sky.qmd).
+
+[Function index](function-index.html#idx-sketchsky)
+
+```{=html}
+<p>The function computes an object without drawing. Use
+<code>plot(hor, sky = sky, xrange = ..., yrange = ...)</code> to choose the sector.
+Replotting the object changes framing without recalculating the instant. Use
+<code>skyStep</code> to recalculate at another time. Astronomical calculations
+require Swiss Ephemeris files covering the epoch; see
+<code>skyscapeR-package</code> for installation.
+</p>
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>Patat, F., Ugolnikov, O. S. and Postylyakov, O. V. (2006).
+UBVRI twilight sky brightness at ESO-Paranal. Astronomy and Astrophysics 455, 385-393.
+\Sexpr[results=rd]{tools:::Rd_expr_doi("10.1051/0004-6361:20064992")}.
+</p>
+<p>Koomen, M. J. et al. (1952). Measurements of the brightness
+of the twilight sky. JOSA 42, 353-356. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1364/JOSA.42.000353")}.
+</p>
+<p>van der Kruit, P. C. (2024). Pannekoek's Galaxy.
+Journal of Astronomical History and Heritage 27, 135-199.
+\Sexpr[results=rd]{tools:::Rd_expr_doi("10.3724/SP.J.1440-2807.2024.01.10")}.
+</p>
+<p>Krisciunas, K. and Schaefer, B. E. (1991). A model of the brightness
+of moonlight. PASP 103, 1033-1039. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1086/132921")}.
+</p>
+<p>Schaefer, B. E. (1986). Atmospheric Extinction Effects on Stellar
+Alignments. Journal for the History of Astronomy 17, S32-S42.
+\Sexpr[results=rd]{tools:::Rd_expr_doi("10.1177/002182868601701003")}.
+</p>
+<p>Schaefer, B. E. (1993). Astronomy and the Limits of Vision.
+Vistas in Astronomy 36, 311-361. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/0083-6656(93)90113-X")}.
+</p>
+<p>Lee, R. L., Jr. (1994). Twilight and daytime colors of the clear sky.
+Applied Optics 33, 4629-4638. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1364/AO.33.004629")}.
+</p>
+<p>Lee, R. L., Jr. (2015). Measuring and modeling twilight's Belt of
+Venus. Applied Optics 54, B194-B203. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1364/AO.54.00B194")}.
+</p>
+<p>Crumey, A. (2014). Human contrast threshold and astronomical
+visibility. MNRAS 442, 2600-2619. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1093/mnras/stu992")}.
+</p>
+<p>NASA/Goddard Space Flight Center Scientific Visualization Studio
+(2020). Deep Star Maps 2020. <a href="https://svs.gsfc.nasa.gov/4851/">https://svs.gsfc.nasa.gov/4851/</a>.
+</p>
+<p>Verga, M. and contributors. OpenNGC. Source of cluster angular
+sizes. <a href="https://github.com/mattiaverga/OpenNGC">https://github.com/mattiaverga/OpenNGC</a>. See installed COPYRIGHTS
+for data attribution and licences.
+</p>
+<p>Astrodienst. Swiss Ephemeris programmer's manual, fixed stars,
+horizontal coordinates and planetary phenomena.
+<a href="https://www.astro.com/swisseph/swephprg.htm">https://www.astro.com/swisseph/swephprg.htm</a>.
+</p>
+
+
+
+```
+
+</details>
+
+**Interpretation and limits.** For photometric claims work with the linear component matrices and pixel area. Changing the field of view or display mapping can change screen intensity even when integrated source flux is conserved.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>A <code>skyscapeR.horizon</code> with finite latitude, longitude and observer
+elevation in metres in <code>metadata$georef</code>. The numerical profile supplies the
+foreground when plotted. A panorama image is optional.</p></td></tr><tr><th scope="row"><code>jd</code></th><td><code>NULL</code></td><td><p>One finite UT Julian day. Supply exactly one of <code>jd</code> and <code>time</code>.</p></td></tr><tr><th scope="row"><code>time</code></th><td><code>NULL</code></td><td><p>A civil timestamp accepted by <code>time2jd</code>, or a POSIXt instant.</p></td></tr><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>Civil timezone and calendar for character <code>time</code>, as
+in <code>time2jd</code>. Defaults are the session settings. A POSIXt value already
+identifies an instant; these arguments do not reinterpret it. Use UTC or a fixed
+offset for ancient civil dates.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>Civil timezone and calendar for character <code>time</code>, as
+in <code>time2jd</code>. Defaults are the session settings. A POSIXt value already
+identifies an instant; these arguments do not reinterpret it. Use UTC or a fixed
+offset for ancient civil dates.</p></td></tr><tr><th scope="row"><code>display</code></th><td><code>list()</code></td><td><p>A named list of logical switches: <code>sun</code>, <code>moon</code>,
+<code>planets</code>, <code>stars</code>, <code>constellation.lines</code>, <code>milky.way</code>,
+<code>galactic.equator</code>, <code>ecliptic</code>, <code>equator</code>, <code>poles</code> and
+<code>zenith</code>. Sun, Moon and stars default to TRUE; other switches default to
+FALSE, except that the Milky Way follows <code>stars</code> unless explicitly set.
+The additional <code>constellations</code> entry accepts names or an imported data
+frame, rather than a logical value. See Constellations below. A named logical
+vector is sufficient when supplying only switches.</p></td></tr><tr><th scope="row"><code>style</code></th><td><code>c(&quot;natural&quot;, &quot;publication-colour&quot;, &quot;publication-mono&quot;)</code></td><td><p>One of <code>"natural"</code>, <code>"publication-colour"</code> or
+<code>"publication-mono"</code>. Publication styles have a white background and dark
+guides. Colour uses muted stellar and planetary colours and a warm solar disc;
+mono uses black and white. Neither publication style predicts visibility.</p></td></tr><tr><th scope="row"><code>max.mag</code></th><td><code>6</code></td><td><p>Finite catalogue magnitude cutoff, default 6. Applied before
+extinction to star symbols and the integrated magnitudes of supported clusters.
+It does not limit constellation endpoints, the Sun, Moon or planets. Raising
+the cutoff includes additional stars only where the catalogue supplies them.</p></td></tr><tr><th scope="row"><code>k</code></th><td><code>skyscapeR.vars()$k</code></td><td><p>Non-negative visual extinction coefficient in magnitudes per airmass
+for natural style. Defaults to <code>skyscapeR.vars()$k</code>, initially 0.2.
+This clear-sky baseline is an assumption, not an estimate of the site's weather.
+Zero removes extinction and the modelled lunar scattering. Publication styles
+do not apply extinction to symbols.</p></td></tr></tbody></table><h5>Return value</h5><p>An object of classes <code>skyscapeR.sketch</code> and <code>skyscapeR.sky</code>.
+It stores <code>jd</code>, <code>loc</code>, <code>style</code>, <code>display</code>, <code>settings</code>
+(calendar, magnitude cutoff and extinction), and <code>atmosphere</code>.
+<code>stars</code> and <code>coords</code> contain azimuth, altitude and symbol size;
+<code>star.opacity</code> retains an earlier symbol-opacity diagnostic; natural
+sketches draw from <code>light.budget</code>. <code>bodies</code>, <code>diameters</code>,
+<code>planet.size</code> and <code>lunar</code> describe selected Solar System bodies.
+<code>clusters</code> holds supported cluster footprints and opacity when applicable;
+<code>guides</code>, <code>light</code>, <code>background</code> and twilight fields support drawing.
+Components can be empty when a layer is disabled. No image file is written.
+</p><h5>Reading a natural sketch</h5><p>The sky is calculated for the specified instant. Stars, clusters, planets and
+the Moon contribute light on a common visual (V-band) magnitude scale.
+Diffuse Milky Way light and atmospheric background are measured per unit
+sky area. Their light is added before brightness is compressed for display.
+To inspect the values underlying a view, use <code>skyRadiance</code>.
+</p><p>Stars remain unresolved as the field is enlarged. Mercury, Venus, Mars,
+Jupiter, Saturn and the Moon use apparent disc sizes and illuminated
+fractions from Swiss Ephemeris. A close view can therefore show the phase
+of Venus. Star colours follow catalogue spectral classes; the diffuse band
+has a neutral tint. Colour and projection influence the screen appearance.
+Publication styles use magnitude-scaled star and planet symbols on white.
+</p><p>Azimuth increases clockwise from true north. Refraction, pressure and
+temperature come from <code>skyscapeR.vars</code> when the sky is calculated.
+The Sun and Moon switches control their contributions to sky illumination as
+well as their discs. Use <code>display = list(moon = FALSE)</code> for a moonless
+comparison. The terrain masks the drawn sky; a local ridge hiding the Moon
+can still leave scattered moonlight in the sky.
+</p><h5>Constellations</h5><p>Use <code>display = list(constellations = "Orion")</code> to select and enable line
+figures. <code>"modern"</code> selects all 88 Western figures, <code>"chinese"</code> the
+full Chinese set, and <code>"chinese_mansions"</code> the 28 lunar-mansion figures.
+Names and abbreviations are case-sensitive; for example <code>c("Ori", "Tau")</code>.
+Alternatively, supply a data frame from <code>importConstellations</code>.
+See <code>constellations</code> for sources and identifiers.
+</p><p>Supplying a selection enables lines unless <code>constellation.lines = FALSE</code>
+is also supplied. Setting <code>constellation.lines = TRUE</code> without a selection
+uses modern figures. Endpoint coordinates are calculated independently of the
+star-symbol magnitude cut. Lines therefore remain when their stars are faint,
+extincted, or switched off. A single-star figure is drawn as a ring. Normal
+plot clipping and the horizon foreground still apply. These are reference
+figures; their visibility is not an observing prediction.
+</p><h5>Twilight and extinction</h5><p>At twilight the sky brightens differently towards and away from the Sun.
+Zenith brightness uses the Paranal V-band observations of Patat et al.
+(2006) at solar depressions of 5 to 15 degrees. Sacramento Peak measurements
+supply earlier twilight levels and the directional variation (Koomen et al.
+1952). These clear-sky estimates depend on site conditions. Moonlight uses
+the scattering model of Krisciunas and Schaefer (1991), with its dependence
+on lunar phase, altitude and angular separation.
+</p><p>Direct light fades towards the horizon as its path through the atmosphere
+lengthens. The coefficient <code>k</code> sets the loss per airmass. The model
+uses Rozenberg's airmass approximation (Krisciunas and Schaefer 1991);
+uncertainty is greatest close to the skyline. The twilight colours are
+illustrative (Lee 1994, 2015).
+</p><h5>Milky Way and clusters</h5><p>The Milky Way is traced from the diffuse light in Deep Star Maps 2020.
+Within the smoothed envelope, retained dark patches have at least 10 percent
+local contrast; two bright tiers begin at 1.10 and 1.75 times the mean band
+tone after the dark patches are excluded. Retained patches cover at least
+10 square degrees. Natural sketches anchor the mean surface brightness
+of a four-degree field in Carina to 20.7 V magnitudes per square arcsecond
+(van der Kruit 2024). Brightness elsewhere is approximate. Atmospheric
+extinction can make the band difficult to follow down to its calculated
+horizon crossing. The Galactic equator is an optional geometric guide.
+</p><p>A supported cluster contributes its catalogue light across its angular
+extent. Light already assigned to plotted stars within that footprint is
+subtracted before the remaining glow is drawn. This accounts for projected
+overlap; it does not establish membership. Integrated cluster magnitude
+alone is insufficient to predict first detection (Crumey 2014).
+</p><h5>Using a sketch with a stellar phase date</h5><p>In 69 of 70 individual comparisons, the estimated first morning of visibility was within a week of the predicted heliacal-rising date.
+</p><p>Use <code>riseset</code> to locate the skyline crossing on each morning,
+then <code>skyStep</code> to follow the star as it climbs through a
+brightening sky. A plotted pixel does not establish naked-eye visibility.
+A quantitative test needs a point-source threshold and an assumed observer
+limit (Crumey 2014). See also <code>star.phases</code>.
+Record site, horizon, epoch, calendar, timezone, extinction
+and display switches when reporting a reconstruction.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/sketchSky.R`. [Full function help](help/sketchSky.html) · [Stellar visibility](stellar-phases.html#sec-stellar) · [Sky reconstruction](sky-rendering.html#sec-sketch) · [Sky brightness and visualisation outline](contents-plan.html#plan-light) · [Terrain crossings and event searches](event-searches.html#event-ridge) · [Identifying celestial candidates and limiting declinations](celestial-targets.html#target-screen) · [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-frame) · [Photographic calibration and interchange](photographic-horizons.html#photo-interchange) · [Generating a terrain panorama](horizons.html#sec-dem-panorama) · [Display styles, capture and stepping time](sky-rendering.html#sky-step-capture) · [Constellation selection and planisphere geometry](sky-rendering.html#sky-constellations) · [Equinoctial sunrise](vignette-guide.html#workflow-equinoctial-sunrise) · [The heliacal rising of the Pleiades](vignette-guide.html#workflow-the-heliacal-rising-of-the-pleiades) · [Watch the cluster rise later in the season](vignette-guide.html#workflow-watch-the-cluster-rise-later-in-the-season) · [Exploring celestial candidates](vignette-guide.html#workflow-exploring-celestial-candidates) · [Compare the three sky styles](vignette-guide.html#workflow-compare-the-three-sky-styles) · [Compare constellation patterns](vignette-guide.html#workflow-compare-constellation-patterns)

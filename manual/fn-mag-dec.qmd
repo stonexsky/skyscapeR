@@ -1,0 +1,40 @@
+# `mag.dec()` {#fn-mag-dec}
+
+[Function index](function-index.html#idx-mag-dec)
+
+```{=html}
+<p>Compass reduction depends on when and where the reading was taken. The function
+evaluates IGRF-14 through oce at sea level and returns east-positive declination.
+Supply a single site for several dates, a single date for several sites, or
+one date per site. Results follow input order. Other size combinations raise
+an error. The calendar date is converted to a decimal year using the actual
+length of that year at midnight UTC. Supported dates run from 1 January 1900
+through 1 January 2030 inclusive. Site elevation is ignored by this model call.
+</p>
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>Kelley, D. and Richards, C. oce: magneticField. <a href="https://dankelley.github.io/oce/reference/magneticField.html">https://dankelley.github.io/oce/reference/magneticField.html</a>.
+</p>
+
+
+
+```
+
+</details>
+
+**Interpretation and limits.** An externally supplied magnetic correction and a modelled IGRF value are alternative inputs. Keep the correction's sign, survey date and origin with the field data. Agreement with a regional magnetic model does not rule out local disturbance at the instrument.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>Latitude and longitude in degrees as a vector, matrix or data frame with one row per site, or a horizon object. An optional third column gives elevation.</p></td></tr><tr><th scope="row"><code>date</code></th><td>—</td><td><p>One or more survey dates as Date objects or YYYY/MM/DD strings.</p></td></tr></tbody></table><h5>Return value</h5><p>Numeric magnetic declination in degrees. Use it as the correction added to a magnetic bearing in <code>reduct.compass</code>.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/misc.R`. [Full function help](help/mag.dec.html) · [Reducing field observations outline](contents-plan.html#plan-survey) · [Reducing field observations](field-reduction.html#field-compass) · [Reduce compass readings to true azimuth](vignette-guide.html#workflow-reduce-compass-readings-to-true-azimuth)

@@ -1,0 +1,69 @@
+# `findTargets()` {#fn-findtargets}
+
+A08 verified closed-band membership, separate stellar passages, sampled contact, magnitude filtering and comparisons before display rounding. [A08 results](a08-target-ranges.qmd).
+
+[Function index](function-index.html#idx-findtargets)
+
+```{=html}
+<p>The search tests overlap in declination. Solar and lunar limiting declinations are
+sampled across the years of the interval. Site coordinates enable zenith targets
+and a horizon enables the spatial equinox. The named equinoxes and solstices use
+geocentric apparent solar longitudes of 0, 90, 180 and 270 degrees. Dates are UT
+civil days in the requested calendar. Different dates for the first and last year
+appear in endpoint order separated by a slash. Intermediate years can differ.
+The sunrise/set date ranges also use the two endpoint years.
+For each star passing the catalogue magnitude cut, the search computes its
+declination at noon UT on 1 January Gregorian of every astronomical year,
+including both endpoints. It tests overlap before rounding and linearly
+interpolates between annual samples to estimate entry and exit. Separate
+passages are reported separately, with boundaries rounded to the nearest year.
+Shorter variations within a sampling year are unresolved. Magnitude describes
+catalogue brightness and does not model atmospheric visibility.
+</p>
+<p>Silva and Lomsdalen (2025, table 5) give an example of stellar target screening for the Maltese temples.
+</p>
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>Silva, F. and Lomsdalen, T. (2025). 'No easy way from the earth to the stars': a new statistical approach to the orientation of the Maltese temples. Archaeological and Anthropological Sciences 17, 96. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1007/s12520-025-02208-4")}.
+</p>
+
+
+
+```
+
+</details>
+
+[Propagation of site and sightline uncertainty](fn-az2dec.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>decrange</code></th><td>—</td><td><p>Range of declination to consider.</p></td></tr><tr><th scope="row"><code>year</code></th><td>—</td><td><p>Temporal range to consider. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr><tr><th scope="row"><code>loc</code></th><td><code>FALSE</code></td><td><p>FALSE for geocentric declinations, a vector of latitude, longitude and elevation, or a skyscapeR.horizon to also evaluate the local horizon.</p></td></tr><tr><th scope="row"><code>max.mag</code></th><td><code>2.5</code></td><td><p>Maximum magnitude of stars to consider. Defaults to 2.5</p></td></tr><tr><th scope="row"><code>dates</code></th><td><code>FALSE</code></td><td><p>Whether to display time period when identified celestial targets
+occur within declination range. Default is FALSE.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td><code>skyscapeR.env$calendar</code></td><td><p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p></td></tr><tr><th scope="row"><code>timerange</code></th><td>—</td><td><p>Earlier argument name for <code>year</code>, retained for existing scripts.</p></td></tr></tbody></table><h5>Return value</h5><p>A list of candidate solar, lunar and stellar matches. The tables give target names and declination limits in degrees. Stellar matches also carry catalogue identifiers and visual magnitudes. Set dates to TRUE to request stellar date ranges. A category with no matches may be absent.
+</p><h5>Candidate selection and visibility</h5><p>A match is a declination overlap, not evidence that a celestial object was
+visible, deliberately observed or associated with the archaeological feature.
+The magnitude filter uses fixed catalogue values; it includes integrated
+magnitudes for non-stellar entries such as M45. It does not predict naked-eye
+visibility through extinction or twilight, or resolve the members of a cluster.
+</p><p>Choose the dating interval and measurement uncertainty from the archaeological
+and survey evidence. Then examine candidate stars with <code>star.phases</code>,
+<code>riseset</code> and <code>sketchSky</code>. For a statistically selected
+local declination band, candidate screening is exploratory; the significance
+of that band does not identify its cause. Physical plausibility and independent
+archaeological evidence are separate parts of the interpretation.
+</p><h5>Spatial equinox epochs</h5><p>When a horizon is supplied, the spatial equinox is evaluated at both endpoints
+of the requested year range (once for a single year), with the current atmospheric
+settings. The candidate interval spans the finite sunrise and sunset declinations
+at those endpoints. This is an endpoint envelope, not an exhaustive search for
+intermediate changes of terrain crossing over very long periods. Undefined
+crossings generate warnings; if all are undefined, the candidate is omitted.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/data-analysis.R`. [Full function help](help/findTargets.html) · [From bearings to celestial targets outline](contents-plan.html#plan-targets) · [Identifying celestial candidates and limiting declinations](celestial-targets.html#target-screen) · [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-star) · [Reading the Ġgantija fit](significance.html#sig-output) · [Which targets fit the measurement?](vignette-guide.html#workflow-which-targets-fit-the-measurement) · [Which objects fit the doorway?](vignette-guide.html#workflow-which-objects-fit-the-doorway) · [Exploring celestial candidates](vignette-guide.html#workflow-exploring-celestial-candidates)

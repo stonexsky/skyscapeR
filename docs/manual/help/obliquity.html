@@ -1,0 +1,69 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>obliquity | skyscapeR 2.0.9009</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-obliquity.html">obliquity() method</a></nav><h2 id='obliquity'>Calculate the obliquity of the ecliptic</h2><span id='topic+obliquity'></span>
+
+<h3>Description</h3>
+
+<p>Estimate the tilt of the ecliptic at a proposed epoch to set solar and lunar declination
+limits.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>obliquity(year = skyscapeR.env$cur.year)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="obliquity_:_year">year</code></td>
+<td>
+<p>Year for which to calculate the obliquity. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.
+Defaults to present year as given by <em>Sys.Date</em></p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The tilt changes over archaeological timescales. For each supplied astronomical year the
+calculation uses Gregorian 1 January at noon UT, requests the obliquity/nutation record
+from Swiss Ephemeris and returns its first element, the true obliquity in degrees. An
+annual value is a reference for limiting declinations rather than a search for the
+instant of solstice.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Numeric obliquity of the ecliptic in degrees, one value per astronomical year.
+</p>
+
+
+<h3>Validation</h3>
+
+<p>A05 checked the January true obliquity at modern and prehistoric test epochs against direct engine values. See the <a href="../a05-solar-limits.html">A05 check in the technical manual</a>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Laskar, J. et al. (2004), A long-term numerical
+solution for the insolation quantities of the Earth, <em>Astron.
+Astroph.</em>, 428, 261-285, doi:10.1051/0004-6361:20041335.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>swe_calc_ut</code>, <code>jS</code>, <code>dS</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'># Obliquity for year 4001 BC:
+obliquity("4001 BC")
+</code></pre>
+
+</body></html>

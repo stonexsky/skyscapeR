@@ -1,0 +1,15 @@
+# W01 · Geometry and labels in graphical outputs {#w01-plot-geometry}
+
+The study recorded the coordinates and labels passed to R's graphics routines while rendering the figures on real PNG devices. Independent fixtures specified the bearings, spherical bounds of rising and setting sectors, known skylines, disjoint density intervals, local probabilities and season boundaries. Numeric comparisons used an absolute tolerance of 0.0000001 in plotting coordinates.
+
+| Output | Quantities checked |
+|:---|:---|
+| Compass and bearing intervals | True-bearing spokes, cardinal labels, both edges of a dated celestial sector, same-target labels across epochs, and an opening spanning north |
+| Horizons | Flat and raised skyline ordinates, clipped azimuth range, and the foreground under natural, colour and monochrome sky overlays |
+| PDFs and SPDs | Separate shaded regions at the stored highest-density limits and exact summed-density curve coordinates |
+| Significance results | The envelope, global p-value, excess and deficit endpoints, and a single wrapped interval drawn in two segments on a full turn. Printing retains one interval and its adjusted probability. |
+| Stellar phases | Ring and strip season boundaries, individual transition leaders, quarterly landmarks and correct star, site and epoch labels |
+
+All 192 geometry and label assertions passed, along with direct checks of the printed output. The suite generated 50 renders. The main fixtures used 96 and 180 dpi, with additional label checks at 120 dpi. This is a numerical presentation check on specified fixtures, not a guarantee against label collisions with arbitrary inputs or device sizes. [Download W01 scripts, results and representative renders](archives/W01-9008.zip).
+
+All three studies used the [2.0.9008 source archive](archives/skyscapeR_2.0.9008.tar.gz), SHA-256 `de09a5ba2f6eb6ee4e702776dacd9ad0d6b4cd3bda9cdcd43825f9fc629d3902`.

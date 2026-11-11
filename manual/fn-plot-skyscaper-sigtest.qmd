@@ -1,0 +1,37 @@
+# `plot.skyscapeR.sigTest()` {#fn-plot-skyscaper-sigtest}
+
+W01 checked clipped local intervals, the pointwise envelope and the global probability label against the stored fit. [W01 results](w01-plot-geometry.qmd).
+
+**Verified on 2.0.9006.** On a full-turn panel, a cluster crossing north can have two visible segments with one shared probability. [S03 rerun](s03-scoring-checks.qmd).
+
+**Validation on 2.0.9005.** The tested public fits plotted the stored local interval midpoints and significance symbols. North-crossing intervals can appear separately. [S03 results](s03-scoring-checks.qmd).
+
+[Function index](function-index.html#idx-plot-skyscaper-sigtest)
+
+```{=html}
+<p>The observed curve and envelope use the azimuth or declination grid stored in the test
+result. The two-tailed display shades between its lower and upper pointwise bounds; the
+one-tailed display shades up to the upper bound from zero. Optional annotations show the
+stored global p-value and the local intervals, coloured by deficit or excess and
+labelled by p-value symbols. The observed and envelope curves jointly set the visible vertical range. The lower panel identifies adjusted and legacy unadjusted local results. The plot reads the fitted result without repeating the
+simulations. New local values use maximum-cluster adjustment under the complete null;
+cluster endpoints remain descriptive, not confidence limits. Legacy fits retain their
+original unadjusted values. Interpret local regions alongside the whole-curve test.
+</p>
+```
+
+**Interpretation and limits.** Keep the numerical global and adjusted local p-values with the output. Symbol thresholds and the placement of a band on the plot do not supply extra precision about its endpoints.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>x</code></th><td>—</td><td><p>A <em>skyscapeR.sigTest</em> object created with <code>randomTest</code></p></td></tr><tr><th scope="row"><code>xrange</code></th><td>—</td><td><p>Range of x-axis to plot.</p></td></tr><tr><th scope="row"><code>title</code></th><td><code>NULL</code></td><td><p>Title to add to the plot.</p></td></tr><tr><th scope="row"><code>col</code></th><td><code>NULL</code></td><td><p>Observed density colour. NULL uses the current style.</p></td></tr><tr><th scope="row"><code>show.pval</code></th><td><code>TRUE</code></td><td><p>Logical to control whether to print the global p-value. Default is TRUE.</p></td></tr><tr><th scope="row"><code>show.local</code></th><td><code>FALSE</code></td><td><p>Draw a separate panel on the same angular scale, with Excess and Deficit rows. Default FALSE. Symbols are ***, **, *, + and an open circle, with upper cutoffs 0.001, 0.01, 0.05 and 0.10. The open circle is centred at the same height as the stars and marks values above 0.10.</p></td></tr><tr><th scope="row"><code>pal</code></th><td><code>NULL</code></td><td><p>Deficit and excess colours in that order. NULL uses the current style.</p></td></tr><tr><th scope="row"><code>...</code></th><td>—</td><td><p>Additional arguments to be passed to <em>plot</em>.</p></td></tr><tr><th scope="row"><code>obj</code></th><td><code>NULL</code></td><td><p>A skyObject or list of target groups for a density or significance plot. Declination plots show single epochs as lines and epoch ranges as bands. Azimuth plots use each group's site latitude to mark rising and setting boundary bearings at a geometric level horizon.</p></td></tr><tr><th scope="row"><code>xlim</code></th><td>—</td><td><p>Earlier name for xrange.</p></td></tr><tr><th scope="row"><code>show.legend</code></th><td><code>TRUE</code></td><td><p>Display the density/envelope key and any local significance symbol key.
+<code>show.pval</code> independently controls the numeric global p-value.</p></td></tr><tr><th scope="row"><code>style</code></th><td><code>&quot;publication-colour&quot;</code></td><td><p>Analytical display style, either <code>"publication-colour"</code> (default) or
+<code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p></td></tr></tbody></table><h5>Return value</h5><p>Draws the empirical density and pointwise comparison envelope. Optional annotations display the global p-value and local regions.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/plotting.R`. [Full function help](help/plot.skyscapeR.sigTest.html) · [Significance tests](significance.html#sec-tests) · [Null models and significance outline](contents-plan.html#plan-null) · [Reading the Ġgantija fit](significance.html#sig-output) · [Test random orientations](vignette-guide.html#workflow-test-random-orientations) · [Exploring celestial candidates](vignette-guide.html#workflow-exploring-celestial-candidates)

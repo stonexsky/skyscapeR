@@ -1,0 +1,54 @@
+# `skyObject()` {#fn-skyobject}
+
+A08 checked annual stellar, solar and lunar range endpoints, local corrections, identifier aliases and retention of target labels and line styles. [A08 results](a08-target-ranges.qmd).
+
+[Function index](function-index.html#idx-skyobject)
+
+```{=html}
+<p>An overlay identifies which targets to compare before inspecting a distribution. Names
+may denote stars, solar or lunar limits, or fixed custom declinations. Group names
+expand into the individual limits. At one epoch, the function evaluates each target; for
+two endpoints it uses annual January stellar declinations. Solar and lunar limits in 2.0.9009 use annual samples at the supplied site, including both endpoints. Styles and epoch travel with the object. Treat range endpoints as
+model estimates and verify narrow or rapidly changing windows separately.
+A single object can contain several related targets. Pass a list of objects
+to plot(hor), plotBars or plotAzimuth to combine groups with independent
+epochs, colours, line styles and labels. Groups are drawn in list order.
+Horizon plots use the plotted horizon's location for every track. Compass
+plots use each group's stored location and a level horizon, drawing both
+declination boundaries for a year-range group. Declination plots need no
+location. No common epoch range is imposed and no astronomical positions
+are recomputed merely by combining objects. The output class remains
+skyscapeR.object, so previously saved objects remain usable.
+sky.objects is a silent compatibility alias for skyObject.
+</p>
+```
+
+[Choosing a target after viewing the distribution](fn-sky-objects.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>names</code></th><td>—</td><td><p>Target names, star names or custom declinations in degrees. Use "solar extremes" for the solstices or "lunar extremes" for the four lunar extremes.</p></td></tr><tr><th scope="row"><code>year</code></th><td>—</td><td><p>An astronomical year or a pair of year endpoints. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr><tr><th scope="row"><code>loc</code></th><td><code>FALSE</code></td><td><p>This can be either a vector with the latitude and longitude of the
+location, or a <em>skyscapeR.horizon</em> object.</p></td></tr><tr><th scope="row"><code>col</code></th><td><code>&quot;#A9542E&quot;</code></td><td><p>The color for plotting, and differentiating these objects.
+Defaults to ochre for all objects.</p></td></tr><tr><th scope="row"><code>lty</code></th><td><code>1</code></td><td><p>Line type (see <code>par</code>) used for differentiation.
+Used for single-year tracks and year-range boundaries.</p></td></tr><tr><th scope="row"><code>lwd</code></th><td><code>1</code></td><td><p>Line width (see <code>par</code>) used for differentiation.
+Used for single-year tracks and year-range boundaries.</p></td></tr><tr><th scope="row"><code>epoch</code></th><td>—</td><td><p>Earlier argument name for <code>year</code>, retained for existing scripts.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.object list. Columns of decs represent targets, in degrees. A single epoch produces one row. For a two-year range the rows are labelled min and max. The other fields record target count, epoch, location and plotting styles.
+</p><h5>A reference track is not a dated orbit</h5><p>Each target represents a declination or declination range. A plotted track
+holds that declination fixed while hour angle varies. It does not follow the
+changing declination of a moving Solar System body through a particular day.
+In particular, <code>skyObject("Equinox", year)</code> is an equinox reference;
+the Sun at sunrise or sunset on the equinox date need not lie at the same
+declination as at the equinox instant. A small offset from a solar disc in
+<code>sketchSky</code> can therefore be expected.
+</p><p>To compare with a particular instant, obtain its declination with
+<code>body.position</code> using the intended coordinate frame, and pass
+that numeric value to <code>skyObject</code>. Even that fixed-declination track is
+an approximation to a moving body's full daily orbit. Refraction and the
+plotted site's coordinates are applied when drawing the horizon track.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/events.R`. [Full function help](help/skyObject.html) · [From bearings to celestial targets outline](contents-plan.html#plan-targets) · [Identifying celestial candidates and limiting declinations](celestial-targets.html#target-overlay) · [Equinoctial sunrise](vignette-guide.html#workflow-equinoctial-sunrise) · [Start with the Ġgantija entrance bearings](vignette-guide.html#workflow-start-with-the-gantija-entrance-bearings) · [Exploring celestial candidates](vignette-guide.html#workflow-exploring-celestial-candidates)

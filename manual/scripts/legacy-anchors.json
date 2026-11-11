@@ -1,0 +1,3974 @@
+{
+ "about-this-edition": [
+  "index",
+  "about-this-edition"
+ ],
+ "finding-a-method": [
+  "index",
+  "finding-a-method"
+ ],
+ "finding-the-evidence": [
+  "index",
+  "finding-the-evidence"
+ ],
+ "sec-plan": [
+  "contents-plan",
+  "sec-plan"
+ ],
+ "plan-time": [
+  "contents-plan",
+  "plan-time"
+ ],
+ "plan-survey": [
+  "contents-plan",
+  "plan-survey"
+ ],
+ "plan-terrain": [
+  "contents-plan",
+  "plan-terrain"
+ ],
+ "plan-targets": [
+  "contents-plan",
+  "plan-targets"
+ ],
+ "plan-events": [
+  "contents-plan",
+  "plan-events"
+ ],
+ "plan-stars": [
+  "contents-plan",
+  "plan-stars"
+ ],
+ "plan-light": [
+  "contents-plan",
+  "plan-light"
+ ],
+ "plan-density": [
+  "contents-plan",
+  "plan-density"
+ ],
+ "plan-null": [
+  "contents-plan",
+  "plan-null"
+ ],
+ "sec-ephemeris": [
+  "ephemeris",
+  "sec-ephemeris"
+ ],
+ "which-layer-supplies-the-result": [
+  "ephemeris",
+  "which-layer-supplies-the-result"
+ ],
+ "what-the-quoted-accuracy-measures": [
+  "ephemeris",
+  "what-the-quoted-accuracy-measures"
+ ],
+ "validation-status": [
+  "ephemeris",
+  "validation-status"
+ ],
+ "refs": [
+  "ephemeris",
+  "refs"
+ ],
+ "ref-sweprog": [
+  "ephemeris",
+  "ref-sweprog"
+ ],
+ "ref-astrodienst": [
+  "ephemeris",
+  "ref-astrodienst"
+ ],
+ "ref-deltat": [
+  "ephemeris",
+  "ref-deltat"
+ ],
+ "ref-horizonsmanual": [
+  "ephemeris",
+  "ref-horizonsmanual"
+ ],
+ "ref-swephr": [
+  "ephemeris",
+  "ref-swephr"
+ ],
+ "sec-conventions": [
+  "astronomical-conventions",
+  "sec-conventions"
+ ],
+ "conventions-time": [
+  "astronomical-conventions",
+  "conventions-time"
+ ],
+ "astronomical-conventions-cb1": [
+  "astronomical-conventions",
+  "cb1"
+ ],
+ "astronomical-conventions-cb1-1": [
+  "astronomical-conventions",
+  "cb1-1"
+ ],
+ "astronomical-conventions-cb1-2": [
+  "astronomical-conventions",
+  "cb1-2"
+ ],
+ "astronomical-conventions-cb1-3": [
+  "astronomical-conventions",
+  "cb1-3"
+ ],
+ "conventions-frame": [
+  "astronomical-conventions",
+  "conventions-frame"
+ ],
+ "conventions-star": [
+  "astronomical-conventions",
+  "conventions-star"
+ ],
+ "astronomical-conventions-refs": [
+  "astronomical-conventions",
+  "refs"
+ ],
+ "astronomical-conventions-ref-sweprog": [
+  "astronomical-conventions",
+  "ref-sweprog"
+ ],
+ "astronomical-conventions-ref-deltat": [
+  "astronomical-conventions",
+  "ref-deltat"
+ ],
+ "ref-ianatz": [
+  "astronomical-conventions",
+  "ref-ianatz"
+ ],
+ "sec-field-reduction": [
+  "field-reduction",
+  "sec-field-reduction"
+ ],
+ "field-compass": [
+  "field-reduction",
+  "field-compass"
+ ],
+ "field-solar": [
+  "field-reduction",
+  "field-solar"
+ ],
+ "field-example": [
+  "field-reduction",
+  "field-example"
+ ],
+ "field-reduction-cb1": [
+  "field-reduction",
+  "cb1"
+ ],
+ "field-reduction-cb1-1": [
+  "field-reduction",
+  "cb1-1"
+ ],
+ "field-reduction-cb1-2": [
+  "field-reduction",
+  "cb1-2"
+ ],
+ "field-reduction-cb1-3": [
+  "field-reduction",
+  "cb1-3"
+ ],
+ "field-reduction-cb1-4": [
+  "field-reduction",
+  "cb1-4"
+ ],
+ "field-reduction-cb1-5": [
+  "field-reduction",
+  "cb1-5"
+ ],
+ "field-reduction-refs": [
+  "field-reduction",
+  "refs"
+ ],
+ "ref-ocefield": [
+  "field-reduction",
+  "ref-ocefield"
+ ],
+ "ref-igrf": [
+  "field-reduction",
+  "ref-igrf"
+ ],
+ "ref-ruggles1999": [
+  "field-reduction",
+  "ref-ruggles1999"
+ ],
+ "sec-horizon": [
+  "horizons",
+  "sec-horizon"
+ ],
+ "from-field-measurements": [
+  "horizons",
+  "from-field-measurements"
+ ],
+ "from-an-elevation-model": [
+  "horizons",
+  "from-an-elevation-model"
+ ],
+ "which-point-supplies-the-skyline": [
+  "horizons",
+  "which-point-supplies-the-skyline"
+ ],
+ "sec-dem-panorama": [
+  "horizons",
+  "sec-dem-panorama"
+ ],
+ "horizons-cb1": [
+  "horizons",
+  "cb1"
+ ],
+ "horizons-cb1-1": [
+  "horizons",
+  "cb1-1"
+ ],
+ "horizons-cb1-2": [
+  "horizons",
+  "cb1-2"
+ ],
+ "horizons-cb1-3": [
+  "horizons",
+  "cb1-3"
+ ],
+ "horizons-cb1-4": [
+  "horizons",
+  "cb1-4"
+ ],
+ "horizons-cb1-5": [
+  "horizons",
+  "cb1-5"
+ ],
+ "horizons-cb1-6": [
+  "horizons",
+  "cb1-6"
+ ],
+ "horizons-cb1-7": [
+  "horizons",
+  "cb1-7"
+ ],
+ "horizons-cb1-8": [
+  "horizons",
+  "cb1-8"
+ ],
+ "horizons-cb1-9": [
+  "horizons",
+  "cb1-9"
+ ],
+ "horizons-cb1-10": [
+  "horizons",
+  "cb1-10"
+ ],
+ "horizons-cb1-11": [
+  "horizons",
+  "cb1-11"
+ ],
+ "horizons-cb1-12": [
+  "horizons",
+  "cb1-12"
+ ],
+ "horizons-cb1-13": [
+  "horizons",
+  "cb1-13"
+ ],
+ "horizons-cb1-14": [
+  "horizons",
+  "cb1-14"
+ ],
+ "horizons-cb1-15": [
+  "horizons",
+  "cb1-15"
+ ],
+ "horizons-cb1-16": [
+  "horizons",
+  "cb1-16"
+ ],
+ "horizons-cb1-17": [
+  "horizons",
+  "cb1-17"
+ ],
+ "from-terrain-rays-to-image-pixels": [
+  "horizons",
+  "from-terrain-rays-to-image-pixels"
+ ],
+ "keeping-and-reusing-the-image": [
+  "horizons",
+  "keeping-and-reusing-the-image"
+ ],
+ "sec-terrain-features": [
+  "horizons",
+  "sec-terrain-features"
+ ],
+ "footprint-height-and-viewpoint": [
+  "horizons",
+  "footprint-height-and-viewpoint"
+ ],
+ "from-feature-to-skyline": [
+  "horizons",
+  "from-feature-to-skyline"
+ ],
+ "example-a-1.5-m-bank-across-a-sightline": [
+  "horizons",
+  "example-a-1.5-m-bank-across-a-sightline"
+ ],
+ "horizons-cb2": [
+  "horizons",
+  "cb2"
+ ],
+ "horizons-cb2-1": [
+  "horizons",
+  "cb2-1"
+ ],
+ "horizons-cb2-2": [
+  "horizons",
+  "cb2-2"
+ ],
+ "horizons-cb2-3": [
+  "horizons",
+  "cb2-3"
+ ],
+ "horizons-cb2-4": [
+  "horizons",
+  "cb2-4"
+ ],
+ "horizons-cb2-5": [
+  "horizons",
+  "cb2-5"
+ ],
+ "horizons-cb2-6": [
+  "horizons",
+  "cb2-6"
+ ],
+ "horizons-cb2-7": [
+  "horizons",
+  "cb2-7"
+ ],
+ "horizons-cb2-8": [
+  "horizons",
+  "cb2-8"
+ ],
+ "horizons-cb2-9": [
+  "horizons",
+  "cb2-9"
+ ],
+ "horizons-cb2-10": [
+  "horizons",
+  "cb2-10"
+ ],
+ "horizons-cb2-11": [
+  "horizons",
+  "cb2-11"
+ ],
+ "horizons-cb2-12": [
+  "horizons",
+  "cb2-12"
+ ],
+ "horizons-cb2-13": [
+  "horizons",
+  "cb2-13"
+ ],
+ "horizons-cb2-14": [
+  "horizons",
+  "cb2-14"
+ ],
+ "horizons-cb2-15": [
+  "horizons",
+  "cb2-15"
+ ],
+ "choices-that-affect-a-sightline": [
+  "horizons",
+  "choices-that-affect-a-sightline"
+ ],
+ "changes-and-evidence": [
+  "horizons",
+  "changes-and-evidence"
+ ],
+ "comparison-with-provider-profiles": [
+  "horizons",
+  "comparison-with-provider-profiles"
+ ],
+ "full-package-help": [
+  "horizons",
+  "full-package-help"
+ ],
+ "createHor": [
+  "horizons",
+  "createHor"
+ ],
+ "topic+createHor": [
+  "horizons",
+  "topic+createHor"
+ ],
+ "createHor_:_az": [
+  "horizons",
+  "createHor_:_az"
+ ],
+ "createHor_:_alt": [
+  "horizons",
+  "createHor_:_alt"
+ ],
+ "createHor_:_loc": [
+  "horizons",
+  "createHor_:_loc"
+ ],
+ "createHor_:_dem": [
+  "horizons",
+  "createHor_:_dem"
+ ],
+ "createHor_:_loc.crs": [
+  "horizons",
+  "createHor_:_loc.crs"
+ ],
+ "createHor_:_name": [
+  "horizons",
+  "createHor_:_name"
+ ],
+ "createHor_:_alt.unc": [
+  "horizons",
+  "createHor_:_alt.unc"
+ ],
+ "createHor_:_smooth": [
+  "horizons",
+  "createHor_:_smooth"
+ ],
+ "createHor_:_.scale": [
+  "horizons",
+  "createHor_:_.scale"
+ ],
+ "createHor_:_eye.height": [
+  "horizons",
+  "createHor_:_eye.height"
+ ],
+ "createHor_:_max.distance": [
+  "horizons",
+  "createHor_:_max.distance"
+ ],
+ "createHor_:_az.step": [
+  "horizons",
+  "createHor_:_az.step"
+ ],
+ "createHor_:_distance.step": [
+  "horizons",
+  "createHor_:_distance.step"
+ ],
+ "createHor_:_features": [
+  "horizons",
+  "createHor_:_features"
+ ],
+ "createHor_:_curvature": [
+  "horizons",
+  "createHor_:_curvature"
+ ],
+ "createHor_:_refraction.k": [
+  "horizons",
+  "createHor_:_refraction.k"
+ ],
+ "createHor_:_atm": [
+  "horizons",
+  "createHor_:_atm"
+ ],
+ "createHor_:_temp": [
+  "horizons",
+  "createHor_:_temp"
+ ],
+ "createHor_:_tempgrad": [
+  "horizons",
+  "createHor_:_tempgrad"
+ ],
+ "createHor_:_panorama": [
+  "horizons",
+  "createHor_:_panorama"
+ ],
+ "createHor_:_width": [
+  "horizons",
+  "createHor_:_width"
+ ],
+ "createHor_:_panorama.distance.step": [
+  "horizons",
+  "createHor_:_panorama.distance.step"
+ ],
+ "createHor_:_panorama.acuity": [
+  "horizons",
+  "createHor_:_panorama.acuity"
+ ],
+ "createHor_:_terrain.palette": [
+  "horizons",
+  "createHor_:_terrain.palette"
+ ],
+ "createHor_:_land_cols": [
+  "horizons",
+  "createHor_:_land_cols"
+ ],
+ "createHor_:_sea_cols": [
+  "horizons",
+  "createHor_:_sea_cols"
+ ],
+ "createHor_:_sea_level": [
+  "horizons",
+  "createHor_:_sea_level"
+ ],
+ "createHor_:_n_sea": [
+  "horizons",
+  "createHor_:_n_sea"
+ ],
+ "createHor_:_palette_n": [
+  "horizons",
+  "createHor_:_palette_n"
+ ],
+ "createHor_:_lighting": [
+  "horizons",
+  "createHor_:_lighting"
+ ],
+ "createHor_:_light.azimuth": [
+  "horizons",
+  "createHor_:_light.azimuth"
+ ],
+ "createHor_:_light.altitude": [
+  "horizons",
+  "createHor_:_light.altitude"
+ ],
+ "createHor_:_ambient": [
+  "horizons",
+  "createHor_:_ambient"
+ ],
+ "createHor_:_haze": [
+  "horizons",
+  "createHor_:_haze"
+ ],
+ "createHor_:_image.dir": [
+  "horizons",
+  "createHor_:_image.dir"
+ ],
+ "createHor_:_attribution": [
+  "horizons",
+  "createHor_:_attribution"
+ ],
+ "createHor_:_license": [
+  "horizons",
+  "createHor_:_license"
+ ],
+ "createHor_:_ncores": [
+  "horizons",
+  "createHor_:_ncores"
+ ],
+ "createHor_:_verbose": [
+  "horizons",
+  "createHor_:_verbose"
+ ],
+ "createHor_:_progress": [
+  "horizons",
+  "createHor_:_progress"
+ ],
+ "horizons-refs": [
+  "horizons",
+  "refs"
+ ],
+ "ref-patat2011": [
+  "horizons",
+  "ref-patat2011"
+ ],
+ "sec-photographic": [
+  "photographic-horizons",
+  "sec-photographic"
+ ],
+ "photo-calibration": [
+  "photographic-horizons",
+  "photo-calibration"
+ ],
+ "photo-example": [
+  "photographic-horizons",
+  "photo-example"
+ ],
+ "photo-interchange": [
+  "photographic-horizons",
+  "photo-interchange"
+ ],
+ "photo-routes": [
+  "photographic-horizons",
+  "photo-routes"
+ ],
+ "partial-photo-consumers": [
+  "photographic-horizons",
+  "partial-photo-consumers"
+ ],
+ "photographic-horizons-refs": [
+  "photographic-horizons",
+  "refs"
+ ],
+ "ref-stellarium": [
+  "photographic-horizons",
+  "ref-stellarium"
+ ],
+ "sec-stellar": [
+  "stellar-phases",
+  "sec-stellar"
+ ],
+ "how-a-date-is-assigned": [
+  "stellar-phases",
+  "how-a-date-is-assigned"
+ ],
+ "what-qualifies-as-a-visible-interval": [
+  "stellar-phases",
+  "what-qualifies-as-a-visible-interval"
+ ],
+ "choices-that-can-change-the-interpretation": [
+  "stellar-phases",
+  "choices-that-can-change-the-interpretation"
+ ],
+ "changes-that-matter-for-earlier-analyses": [
+  "stellar-phases",
+  "changes-that-matter-for-earlier-analyses"
+ ],
+ "phase-comparisons": [
+  "stellar-phases",
+  "phase-comparisons"
+ ],
+ "full-package-help-1": [
+  "stellar-phases",
+  "full-package-help-1"
+ ],
+ "star.phases": [
+  "stellar-phases",
+  "star.phases"
+ ],
+ "topic+star.phases": [
+  "stellar-phases",
+  "topic+star.phases"
+ ],
+ "star.phases_:_star": [
+  "stellar-phases",
+  "star.phases_:_star"
+ ],
+ "star.phases_:_year": [
+  "stellar-phases",
+  "star.phases_:_year"
+ ],
+ "star.phases_:_loc": [
+  "stellar-phases",
+  "star.phases_:_loc"
+ ],
+ "star.phases_:_alt.hor": [
+  "stellar-phases",
+  "star.phases_:_alt.hor"
+ ],
+ "star.phases_:_alt.rs": [
+  "stellar-phases",
+  "star.phases_:_alt.rs"
+ ],
+ "star.phases_:_solar.alt": [
+  "stellar-phases",
+  "star.phases_:_solar.alt"
+ ],
+ "star.phases_:_k": [
+  "stellar-phases",
+  "star.phases_:_k"
+ ],
+ "star.phases_:_limit": [
+  "stellar-phases",
+  "star.phases_:_limit"
+ ],
+ "star.phases_:_refraction": [
+  "stellar-phases",
+  "star.phases_:_refraction"
+ ],
+ "star.phases_:_atm": [
+  "stellar-phases",
+  "star.phases_:_atm"
+ ],
+ "star.phases_:_temp": [
+  "stellar-phases",
+  "star.phases_:_temp"
+ ],
+ "star.phases_:_res": [
+  "stellar-phases",
+  "star.phases_:_res"
+ ],
+ "stellar-phases-refs": [
+  "stellar-phases",
+  "refs"
+ ],
+ "ref-krisciunas1991": [
+  "stellar-phases",
+  "ref-krisciunas1991"
+ ],
+ "ref-purrington1988": [
+  "stellar-phases",
+  "ref-purrington1988"
+ ],
+ "ref-schaefer1986": [
+  "stellar-phases",
+  "ref-schaefer1986"
+ ],
+ "ref-schaefer1987": [
+  "stellar-phases",
+  "ref-schaefer1987"
+ ],
+ "sec-densities": [
+  "orientation-densities",
+  "sec-densities"
+ ],
+ "density-measurement": [
+  "orientation-densities",
+  "density-measurement"
+ ],
+ "measurement-families": [
+  "orientation-densities",
+  "measurement-families"
+ ],
+ "density-transform": [
+  "orientation-densities",
+  "density-transform"
+ ],
+ "density-notch": [
+  "orientation-densities",
+  "density-notch"
+ ],
+ "orientation-densities-cb1": [
+  "orientation-densities",
+  "cb1"
+ ],
+ "orientation-densities-cb1-1": [
+  "orientation-densities",
+  "cb1-1"
+ ],
+ "orientation-densities-cb1-2": [
+  "orientation-densities",
+  "cb1-2"
+ ],
+ "orientation-densities-cb1-3": [
+  "orientation-densities",
+  "cb1-3"
+ ],
+ "orientation-densities-cb1-4": [
+  "orientation-densities",
+  "cb1-4"
+ ],
+ "orientation-densities-cb1-5": [
+  "orientation-densities",
+  "cb1-5"
+ ],
+ "orientation-densities-cb1-6": [
+  "orientation-densities",
+  "cb1-6"
+ ],
+ "orientation-densities-cb1-7": [
+  "orientation-densities",
+  "cb1-7"
+ ],
+ "orientation-densities-cb1-8": [
+  "orientation-densities",
+  "cb1-8"
+ ],
+ "orientation-densities-cb1-9": [
+  "orientation-densities",
+  "cb1-9"
+ ],
+ "orientation-densities-cb1-10": [
+  "orientation-densities",
+  "cb1-10"
+ ],
+ "density-summary": [
+  "orientation-densities",
+  "density-summary"
+ ],
+ "orientation-displays": [
+  "orientation-densities",
+  "orientation-displays"
+ ],
+ "subset-dec-centres": [
+  "orientation-densities",
+  "subset-dec-centres"
+ ],
+ "orientation-densities-refs": [
+  "orientation-densities",
+  "refs"
+ ],
+ "orientation-densities-ref-sweprog": [
+  "orientation-densities",
+  "ref-sweprog"
+ ],
+ "ref-hyndman1996": [
+  "orientation-densities",
+  "ref-hyndman1996"
+ ],
+ "ref-silva2020": [
+  "orientation-densities",
+  "ref-silva2020"
+ ],
+ "sec-event-searches": [
+  "event-searches",
+  "sec-event-searches"
+ ],
+ "event-track": [
+  "event-searches",
+  "event-track"
+ ],
+ "event-crossings": [
+  "event-searches",
+  "event-crossings"
+ ],
+ "event-ridge": [
+  "event-searches",
+  "event-ridge"
+ ],
+ "event-searches-cb1": [
+  "event-searches",
+  "cb1"
+ ],
+ "event-searches-cb1-1": [
+  "event-searches",
+  "cb1-1"
+ ],
+ "event-searches-cb1-2": [
+  "event-searches",
+  "cb1-2"
+ ],
+ "event-searches-cb1-3": [
+  "event-searches",
+  "cb1-3"
+ ],
+ "event-searches-cb1-4": [
+  "event-searches",
+  "cb1-4"
+ ],
+ "event-searches-cb1-5": [
+  "event-searches",
+  "cb1-5"
+ ],
+ "event-searches-cb1-6": [
+  "event-searches",
+  "cb1-6"
+ ],
+ "event-midpoint": [
+  "event-searches",
+  "event-midpoint"
+ ],
+ "event-planets": [
+  "event-searches",
+  "event-planets"
+ ],
+ "interpretation-limits-and-reproduction": [
+  "event-searches",
+  "interpretation-limits-and-reproduction"
+ ],
+ "event-searches-refs": [
+  "event-searches",
+  "refs"
+ ],
+ "event-searches-ref-sweprog": [
+  "event-searches",
+  "ref-sweprog"
+ ],
+ "ref-ruggles1997": [
+  "event-searches",
+  "ref-ruggles1997"
+ ],
+ "sec-lunar-crossovers": [
+  "lunar-crossovers",
+  "sec-lunar-crossovers"
+ ],
+ "crossover-efm": [
+  "lunar-crossovers",
+  "crossover-efm"
+ ],
+ "lunar-crossovers-cb1": [
+  "lunar-crossovers",
+  "cb1"
+ ],
+ "lunar-crossovers-cb1-1": [
+  "lunar-crossovers",
+  "cb1-1"
+ ],
+ "lunar-crossovers-cb1-2": [
+  "lunar-crossovers",
+  "cb1-2"
+ ],
+ "lunar-crossovers-cb1-3": [
+  "lunar-crossovers",
+  "cb1-3"
+ ],
+ "crossover-cc": [
+  "lunar-crossovers",
+  "crossover-cc"
+ ],
+ "crossover-example": [
+  "lunar-crossovers",
+  "crossover-example"
+ ],
+ "lunar-crossovers-cb2": [
+  "lunar-crossovers",
+  "cb2"
+ ],
+ "lunar-crossovers-cb2-1": [
+  "lunar-crossovers",
+  "cb2-1"
+ ],
+ "lunar-crossovers-cb2-2": [
+  "lunar-crossovers",
+  "cb2-2"
+ ],
+ "lunar-crossovers-cb2-3": [
+  "lunar-crossovers",
+  "cb2-3"
+ ],
+ "crossover-archive": [
+  "lunar-crossovers",
+  "crossover-archive"
+ ],
+ "lunar-crossovers-refs": [
+  "lunar-crossovers",
+  "refs"
+ ],
+ "lunar-crossovers-ref-sweprog": [
+  "lunar-crossovers",
+  "ref-sweprog"
+ ],
+ "ref-caldwell2001": [
+  "lunar-crossovers",
+  "ref-caldwell2001"
+ ],
+ "ref-silvapimenta2012": [
+  "lunar-crossovers",
+  "ref-silvapimenta2012"
+ ],
+ "sec-celestial-targets": [
+  "celestial-targets",
+  "sec-celestial-targets"
+ ],
+ "target-band": [
+  "celestial-targets",
+  "target-band"
+ ],
+ "celestial-targets-cb1": [
+  "celestial-targets",
+  "cb1"
+ ],
+ "celestial-targets-cb1-1": [
+  "celestial-targets",
+  "cb1-1"
+ ],
+ "celestial-targets-cb1-2": [
+  "celestial-targets",
+  "cb1-2"
+ ],
+ "celestial-targets-cb1-3": [
+  "celestial-targets",
+  "cb1-3"
+ ],
+ "celestial-targets-cb1-4": [
+  "celestial-targets",
+  "cb1-4"
+ ],
+ "celestial-targets-cb1-5": [
+  "celestial-targets",
+  "cb1-5"
+ ],
+ "celestial-targets-cb1-6": [
+  "celestial-targets",
+  "cb1-6"
+ ],
+ "target-limits": [
+  "celestial-targets",
+  "target-limits"
+ ],
+ "target-screen": [
+  "celestial-targets",
+  "target-screen"
+ ],
+ "celestial-targets-cb2": [
+  "celestial-targets",
+  "cb2"
+ ],
+ "celestial-targets-cb2-1": [
+  "celestial-targets",
+  "cb2-1"
+ ],
+ "celestial-targets-cb2-2": [
+  "celestial-targets",
+  "cb2-2"
+ ],
+ "celestial-targets-cb2-3": [
+  "celestial-targets",
+  "cb2-3"
+ ],
+ "celestial-targets-cb2-4": [
+  "celestial-targets",
+  "cb2-4"
+ ],
+ "target-overlay": [
+  "celestial-targets",
+  "target-overlay"
+ ],
+ "celestial-targets-refs": [
+  "celestial-targets",
+  "refs"
+ ],
+ "celestial-targets-ref-sweprog": [
+  "celestial-targets",
+  "ref-sweprog"
+ ],
+ "celestial-targets-ref-ruggles1997": [
+  "celestial-targets",
+  "ref-ruggles1997"
+ ],
+ "celestial-targets-ref-silva2020": [
+  "celestial-targets",
+  "ref-silva2020"
+ ],
+ "ref-silvaloms2025": [
+  "celestial-targets",
+  "ref-silvaloms2025"
+ ],
+ "ref-sprajc2016": [
+  "celestial-targets",
+  "ref-sprajc2016"
+ ],
+ "sec-tests": [
+  "significance",
+  "sec-tests"
+ ],
+ "meth-random": [
+  "significance",
+  "meth-random"
+ ],
+ "meth-model": [
+  "significance",
+  "meth-model"
+ ],
+ "score-tests": [
+  "significance",
+  "score-tests"
+ ],
+ "sig-history": [
+  "significance",
+  "sig-history"
+ ],
+ "reading-a-fit": [
+  "significance",
+  "reading-a-fit"
+ ],
+ "sig-output": [
+  "significance",
+  "sig-output"
+ ],
+ "strengths-limits-and-evidence": [
+  "significance",
+  "strengths-limits-and-evidence"
+ ],
+ "significance-refs": [
+  "significance",
+  "refs"
+ ],
+ "ref-dufour2006": [
+  "significance",
+  "ref-dufour2006"
+ ],
+ "ref-maris2007": [
+  "significance",
+  "ref-maris2007"
+ ],
+ "ref-north2002": [
+  "significance",
+  "ref-north2002"
+ ],
+ "ref-rchisq": [
+  "significance",
+  "ref-rchisq"
+ ],
+ "ref-sassen2019": [
+  "significance",
+  "ref-sassen2019"
+ ],
+ "significance-ref-silva2020": [
+  "significance",
+  "ref-silva2020"
+ ],
+ "significance-ref-silvaloms2025": [
+  "significance",
+  "ref-silvaloms2025"
+ ],
+ "sec-sketch": [
+  "sky-rendering",
+  "sec-sketch"
+ ],
+ "meth-sketch": [
+  "sky-rendering",
+  "meth-sketch"
+ ],
+ "linear-radiance-and-the-rendered-pixel": [
+  "sky-rendering",
+  "linear-radiance-and-the-rendered-pixel"
+ ],
+ "twilight-and-moonlight": [
+  "sky-rendering",
+  "twilight-and-moonlight"
+ ],
+ "milky-way-boundary-internal-structure-and-calibration": [
+  "sky-rendering",
+  "milky-way-boundary-internal-structure-and-calibration"
+ ],
+ "reading-the-traced-boundary": [
+  "sky-rendering",
+  "reading-the-traced-boundary"
+ ],
+ "how-the-carina-field-fixes-the-intensity-scale": [
+  "sky-rendering",
+  "how-the-carina-field-fixes-the-intensity-scale"
+ ],
+ "sky-constellations": [
+  "sky-rendering",
+  "sky-constellations"
+ ],
+ "sky-step-capture": [
+  "sky-rendering",
+  "sky-step-capture"
+ ],
+ "comparative-strengths-and-outstanding-issues": [
+  "sky-rendering",
+  "comparative-strengths-and-outstanding-issues"
+ ],
+ "sky-rendering-refs": [
+  "sky-rendering",
+  "refs"
+ ],
+ "ref-crumey2014": [
+  "sky-rendering",
+  "ref-crumey2014"
+ ],
+ "ref-koomen1952": [
+  "sky-rendering",
+  "ref-koomen1952"
+ ],
+ "sky-rendering-ref-krisciunas1991": [
+  "sky-rendering",
+  "ref-krisciunas1991"
+ ],
+ "ref-kruit2024": [
+  "sky-rendering",
+  "ref-kruit2024"
+ ],
+ "ref-lee1994": [
+  "sky-rendering",
+  "ref-lee1994"
+ ],
+ "ref-lee2015": [
+  "sky-rendering",
+  "ref-lee2015"
+ ],
+ "ref-patat2006": [
+  "sky-rendering",
+  "ref-patat2006"
+ ],
+ "sky-rendering-ref-schaefer1986": [
+  "sky-rendering",
+  "ref-schaefer1986"
+ ],
+ "sky-rendering-ref-stellarium": [
+  "sky-rendering",
+  "ref-stellarium"
+ ],
+ "ref-deepstars": [
+  "sky-rendering",
+  "ref-deepstars"
+ ],
+ "sec-functions": [
+  "function-index",
+  "sec-functions"
+ ],
+ "idx-antizenith": [
+  "function-index",
+  "idx-antizenith"
+ ],
+ "idx-astroyear": [
+  "function-index",
+  "idx-astroyear"
+ ],
+ "idx-az-pdf": [
+  "function-index",
+  "idx-az-pdf"
+ ],
+ "idx-az2dec": [
+  "function-index",
+  "idx-az2dec"
+ ],
+ "idx-bc-ad": [
+  "function-index",
+  "idx-bc-ad"
+ ],
+ "idx-bernoulli-trial": [
+  "function-index",
+  "idx-bernoulli-trial"
+ ],
+ "idx-body-position": [
+  "function-index",
+  "idx-body-position"
+ ],
+ "idx-cc": [
+  "function-index",
+  "idx-cc"
+ ],
+ "idx-coordtrans": [
+  "function-index",
+  "idx-coordtrans"
+ ],
+ "idx-createhor": [
+  "function-index",
+  "idx-createhor"
+ ],
+ "idx-createhwt": [
+  "function-index",
+  "idx-createhwt"
+ ],
+ "idx-dec-pdf": [
+  "function-index",
+  "idx-dec-pdf"
+ ],
+ "idx-dempalettes": [
+  "function-index",
+  "idx-dempalettes"
+ ],
+ "idx-downloadhwt": [
+  "function-index",
+  "idx-downloadhwt"
+ ],
+ "idx-ds": [
+  "function-index",
+  "idx-ds"
+ ],
+ "idx-efm": [
+  "function-index",
+  "idx-efm"
+ ],
+ "idx-eq": [
+  "function-index",
+  "idx-eq"
+ ],
+ "idx-exporthor": [
+  "function-index",
+  "idx-exporthor"
+ ],
+ "idx-exportpanorama": [
+  "function-index",
+  "idx-exportpanorama"
+ ],
+ "idx-exportstellarium": [
+  "function-index",
+  "idx-exportstellarium"
+ ],
+ "idx-findtargets": [
+  "function-index",
+  "idx-findtargets"
+ ],
+ "idx-hor2alt": [
+  "function-index",
+  "idx-hor2alt"
+ ],
+ "idx-hor2max-dec": [
+  "function-index",
+  "idx-hor2max-dec"
+ ],
+ "idx-hor2min-dec": [
+  "function-index",
+  "idx-hor2min-dec"
+ ],
+ "idx-horfeature": [
+  "function-index",
+  "idx-horfeature"
+ ],
+ "idx-hpdi": [
+  "function-index",
+  "idx-hpdi"
+ ],
+ "idx-importconstellations": [
+  "function-index",
+  "idx-importconstellations"
+ ],
+ "idx-importpanorama": [
+  "function-index",
+  "idx-importpanorama"
+ ],
+ "idx-importpeakfinder": [
+  "function-index",
+  "idx-importpeakfinder"
+ ],
+ "idx-jd2time": [
+  "function-index",
+  "idx-jd2time"
+ ],
+ "idx-js": [
+  "function-index",
+  "idx-js"
+ ],
+ "idx-long-date": [
+  "function-index",
+  "idx-long-date"
+ ],
+ "idx-mag-dec": [
+  "function-index",
+  "idx-mag-dec"
+ ],
+ "idx-modeltest": [
+  "function-index",
+  "idx-modeltest"
+ ],
+ "idx-moonphase": [
+  "function-index",
+  "idx-moonphase"
+ ],
+ "idx-nmjlx": [
+  "function-index",
+  "idx-nmjlx"
+ ],
+ "idx-nmnlx": [
+  "function-index",
+  "idx-nmnlx"
+ ],
+ "idx-obliquity": [
+  "function-index",
+  "idx-obliquity"
+ ],
+ "idx-orbit": [
+  "function-index",
+  "idx-orbit"
+ ],
+ "idx-parallax-corr": [
+  "function-index",
+  "idx-parallax-corr"
+ ],
+ "idx-planet-extremes": [
+  "function-index",
+  "idx-planet-extremes"
+ ],
+ "idx-planisphere": [
+  "function-index",
+  "idx-planisphere"
+ ],
+ "idx-plot-skyscaper-horizon": [
+  "function-index",
+  "idx-plot-skyscaper-horizon"
+ ],
+ "idx-plot-skyscaper-pdf": [
+  "function-index",
+  "idx-plot-skyscaper-pdf"
+ ],
+ "idx-plot-skyscaper-sigtest": [
+  "function-index",
+  "idx-plot-skyscaper-sigtest"
+ ],
+ "idx-plot-skyscaper-spd": [
+  "function-index",
+  "idx-plot-skyscaper-spd"
+ ],
+ "idx-plot-skyscaper-starphases": [
+  "function-index",
+  "idx-plot-skyscaper-starphases"
+ ],
+ "idx-plotazimuth": [
+  "function-index",
+  "idx-plotazimuth"
+ ],
+ "idx-plotbars": [
+  "function-index",
+  "idx-plotbars"
+ ],
+ "idx-print-skyscaper-sigtest": [
+  "function-index",
+  "idx-print-skyscaper-sigtest"
+ ],
+ "idx-pval2stars": [
+  "function-index",
+  "idx-pval2stars"
+ ],
+ "idx-randomtest": [
+  "function-index",
+  "idx-randomtest"
+ ],
+ "idx-reduct-compass": [
+  "function-index",
+  "idx-reduct-compass"
+ ],
+ "idx-reduct-theodolite": [
+  "function-index",
+  "idx-reduct-theodolite"
+ ],
+ "idx-relinkhor": [
+  "function-index",
+  "idx-relinkhor"
+ ],
+ "idx-riseset": [
+  "function-index",
+  "idx-riseset"
+ ],
+ "idx-sketchsky": [
+  "function-index",
+  "idx-sketchsky"
+ ],
+ "idx-sky-objects": [
+  "function-index",
+  "idx-sky-objects"
+ ],
+ "idx-skyobject": [
+  "function-index",
+  "idx-skyobject"
+ ],
+ "idx-skyradiance": [
+  "function-index",
+  "idx-skyradiance"
+ ],
+ "idx-skyscaper-vars": [
+  "function-index",
+  "idx-skyscaper-vars"
+ ],
+ "idx-skystep": [
+  "function-index",
+  "idx-skystep"
+ ],
+ "idx-smjlx": [
+  "function-index",
+  "idx-smjlx"
+ ],
+ "idx-smnlx": [
+  "function-index",
+  "idx-smnlx"
+ ],
+ "idx-solar-date": [
+  "function-index",
+  "idx-solar-date"
+ ],
+ "idx-spatial-equinox": [
+  "function-index",
+  "idx-spatial-equinox"
+ ],
+ "idx-spd": [
+  "function-index",
+  "idx-spd"
+ ],
+ "idx-star": [
+  "function-index",
+  "idx-star"
+ ],
+ "idx-star-phases": [
+  "function-index",
+  "idx-star-phases"
+ ],
+ "idx-stellariumsky": [
+  "function-index",
+  "idx-stellariumsky"
+ ],
+ "idx-subset-skyscaper-pdf": [
+  "function-index",
+  "idx-subset-skyscaper-pdf"
+ ],
+ "idx-sunaz": [
+  "function-index",
+  "idx-sunaz"
+ ],
+ "idx-ten": [
+  "function-index",
+  "idx-ten"
+ ],
+ "idx-time2jd": [
+  "function-index",
+  "idx-time2jd"
+ ],
+ "idx-timestring": [
+  "function-index",
+  "idx-timestring"
+ ],
+ "idx-zenith": [
+  "function-index",
+  "idx-zenith"
+ ],
+ "related-data-and-reference-topics": [
+  "function-index",
+  "related-data-and-reference-topics"
+ ],
+ "sec-methods": [
+  "function-methods",
+  "sec-methods"
+ ],
+ "group-time": [
+  "function-methods",
+  "group-time"
+ ],
+ "fn-astroyear": [
+  "fn-astroyear",
+  "fn-astroyear"
+ ],
+ "fn-bc-ad": [
+  "fn-bc-ad",
+  "fn-bc-ad"
+ ],
+ "fn-body-position": [
+  "fn-body-position",
+  "fn-body-position"
+ ],
+ "fn-jd2time": [
+  "fn-jd2time",
+  "fn-jd2time"
+ ],
+ "fn-long-date": [
+  "fn-long-date",
+  "fn-long-date"
+ ],
+ "fn-obliquity": [
+  "fn-obliquity",
+  "fn-obliquity"
+ ],
+ "fn-parallax-corr": [
+  "fn-parallax-corr",
+  "fn-parallax-corr"
+ ],
+ "fn-skyscaper-vars": [
+  "fn-skyscaper-vars",
+  "fn-skyscaper-vars"
+ ],
+ "fn-ten": [
+  "fn-ten",
+  "fn-ten"
+ ],
+ "fn-time2jd": [
+  "fn-time2jd",
+  "fn-time2jd"
+ ],
+ "fn-timestring": [
+  "fn-timestring",
+  "fn-timestring"
+ ],
+ "group-survey": [
+  "function-methods",
+  "group-survey"
+ ],
+ "fn-mag-dec": [
+  "fn-mag-dec",
+  "fn-mag-dec"
+ ],
+ "fn-reduct-compass": [
+  "fn-reduct-compass",
+  "fn-reduct-compass"
+ ],
+ "fn-reduct-theodolite": [
+  "fn-reduct-theodolite",
+  "fn-reduct-theodolite"
+ ],
+ "fn-sunaz": [
+  "fn-sunaz",
+  "fn-sunaz"
+ ],
+ "group-terrain": [
+  "function-methods",
+  "group-terrain"
+ ],
+ "fn-createhor": [
+  "fn-createhor",
+  "fn-createhor"
+ ],
+ "fn-createhwt": [
+  "fn-createhwt",
+  "fn-createhwt"
+ ],
+ "fn-dempalettes": [
+  "fn-dempalettes",
+  "fn-dempalettes"
+ ],
+ "fn-downloadhwt": [
+  "fn-downloadhwt",
+  "fn-downloadhwt"
+ ],
+ "fn-exporthor": [
+  "fn-exporthor",
+  "fn-exporthor"
+ ],
+ "fn-exportpanorama": [
+  "fn-exportpanorama",
+  "fn-exportpanorama"
+ ],
+ "fn-exportstellarium": [
+  "fn-exportstellarium",
+  "fn-exportstellarium"
+ ],
+ "fn-hor2alt": [
+  "fn-hor2alt",
+  "fn-hor2alt"
+ ],
+ "fn-horfeature": [
+  "fn-horfeature",
+  "fn-horfeature"
+ ],
+ "fn-importpanorama": [
+  "fn-importpanorama",
+  "fn-importpanorama"
+ ],
+ "fn-importpeakfinder": [
+  "fn-importpeakfinder",
+  "fn-importpeakfinder"
+ ],
+ "fn-plot-skyscaper-horizon": [
+  "fn-plot-skyscaper-horizon",
+  "fn-plot-skyscaper-horizon"
+ ],
+ "fn-relinkhor": [
+  "fn-relinkhor",
+  "fn-relinkhor"
+ ],
+ "group-targets": [
+  "function-methods",
+  "group-targets"
+ ],
+ "fn-antizenith": [
+  "fn-antizenith",
+  "fn-antizenith"
+ ],
+ "fn-az2dec": [
+  "fn-az2dec",
+  "fn-az2dec"
+ ],
+ "fn-findtargets": [
+  "fn-findtargets",
+  "fn-findtargets"
+ ],
+ "fn-hor2max-dec": [
+  "fn-hor2max-dec",
+  "fn-hor2max-dec"
+ ],
+ "fn-hor2min-dec": [
+  "fn-hor2min-dec",
+  "fn-hor2min-dec"
+ ],
+ "fn-orbit": [
+  "fn-orbit",
+  "fn-orbit"
+ ],
+ "fn-sky-objects": [
+  "fn-sky-objects",
+  "fn-sky-objects"
+ ],
+ "fn-skyobject": [
+  "fn-skyobject",
+  "fn-skyobject"
+ ],
+ "fn-spatial-equinox": [
+  "fn-spatial-equinox",
+  "fn-spatial-equinox"
+ ],
+ "fn-zenith": [
+  "fn-zenith",
+  "fn-zenith"
+ ],
+ "group-events": [
+  "function-methods",
+  "group-events"
+ ],
+ "fn-cc": [
+  "fn-cc",
+  "fn-cc"
+ ],
+ "fn-ds": [
+  "fn-ds",
+  "fn-ds"
+ ],
+ "fn-efm": [
+  "fn-efm",
+  "fn-efm"
+ ],
+ "fn-eq": [
+  "fn-eq",
+  "fn-eq"
+ ],
+ "fn-js": [
+  "fn-js",
+  "fn-js"
+ ],
+ "fn-moonphase": [
+  "fn-moonphase",
+  "fn-moonphase"
+ ],
+ "fn-nmjlx": [
+  "fn-nmjlx",
+  "fn-nmjlx"
+ ],
+ "fn-nmnlx": [
+  "fn-nmnlx",
+  "fn-nmnlx"
+ ],
+ "fn-planet-extremes": [
+  "fn-planet-extremes",
+  "fn-planet-extremes"
+ ],
+ "fn-riseset": [
+  "fn-riseset",
+  "fn-riseset"
+ ],
+ "fn-smjlx": [
+  "fn-smjlx",
+  "fn-smjlx"
+ ],
+ "fn-smnlx": [
+  "fn-smnlx",
+  "fn-smnlx"
+ ],
+ "fn-solar-date": [
+  "fn-solar-date",
+  "fn-solar-date"
+ ],
+ "group-stars": [
+  "function-methods",
+  "group-stars"
+ ],
+ "fn-plot-skyscaper-starphases": [
+  "fn-plot-skyscaper-starphases",
+  "fn-plot-skyscaper-starphases"
+ ],
+ "fn-star": [
+  "fn-star",
+  "fn-star"
+ ],
+ "fn-star-phases": [
+  "fn-star-phases",
+  "fn-star-phases"
+ ],
+ "group-light": [
+  "function-methods",
+  "group-light"
+ ],
+ "fn-importconstellations": [
+  "fn-importconstellations",
+  "fn-importconstellations"
+ ],
+ "fn-planisphere": [
+  "fn-planisphere",
+  "fn-planisphere"
+ ],
+ "fn-sketchsky": [
+  "fn-sketchsky",
+  "fn-sketchsky"
+ ],
+ "fn-skyradiance": [
+  "fn-skyradiance",
+  "fn-skyradiance"
+ ],
+ "fn-skystep": [
+  "fn-skystep",
+  "fn-skystep"
+ ],
+ "fn-stellariumsky": [
+  "fn-stellariumsky",
+  "fn-stellariumsky"
+ ],
+ "group-density": [
+  "function-methods",
+  "group-density"
+ ],
+ "fn-az-pdf": [
+  "fn-az-pdf",
+  "fn-az-pdf"
+ ],
+ "fn-coordtrans": [
+  "fn-coordtrans",
+  "fn-coordtrans"
+ ],
+ "fn-dec-pdf": [
+  "fn-dec-pdf",
+  "fn-dec-pdf"
+ ],
+ "fn-hpdi": [
+  "fn-hpdi",
+  "fn-hpdi"
+ ],
+ "fn-plot-skyscaper-pdf": [
+  "fn-plot-skyscaper-pdf",
+  "fn-plot-skyscaper-pdf"
+ ],
+ "fn-plot-skyscaper-spd": [
+  "fn-plot-skyscaper-spd",
+  "fn-plot-skyscaper-spd"
+ ],
+ "fn-plotazimuth": [
+  "fn-plotazimuth",
+  "fn-plotazimuth"
+ ],
+ "fn-plotbars": [
+  "fn-plotbars",
+  "fn-plotbars"
+ ],
+ "fn-spd": [
+  "fn-spd",
+  "fn-spd"
+ ],
+ "fn-subset-skyscaper-pdf": [
+  "fn-subset-skyscaper-pdf",
+  "fn-subset-skyscaper-pdf"
+ ],
+ "group-null": [
+  "function-methods",
+  "group-null"
+ ],
+ "fn-bernoulli-trial": [
+  "fn-bernoulli-trial",
+  "fn-bernoulli-trial"
+ ],
+ "fn-modeltest": [
+  "fn-modeltest",
+  "fn-modeltest"
+ ],
+ "fn-plot-skyscaper-sigtest": [
+  "fn-plot-skyscaper-sigtest",
+  "fn-plot-skyscaper-sigtest"
+ ],
+ "fn-print-skyscaper-sigtest": [
+  "fn-print-skyscaper-sigtest",
+  "fn-print-skyscaper-sigtest"
+ ],
+ "fn-pval2stars": [
+  "fn-pval2stars",
+  "fn-pval2stars"
+ ],
+ "fn-randomtest": [
+  "fn-randomtest",
+  "fn-randomtest"
+ ],
+ "sec-vignette-guide": [
+  "vignette-guide",
+  "sec-vignette-guide"
+ ],
+ "field-data": [
+  "vignette-guide",
+  "field-data"
+ ],
+ "workflow-import-your-observations": [
+  "vignette-guide",
+  "workflow-import-your-observations"
+ ],
+ "workflow-reduce-compass-readings-to-true-azimuth": [
+  "vignette-guide",
+  "workflow-reduce-compass-readings-to-true-azimuth"
+ ],
+ "workflow-reduce-a-theodolite-survey-with-a-solar-sight": [
+  "vignette-guide",
+  "workflow-reduce-a-theodolite-survey-with-a-solar-sight"
+ ],
+ "workflow-convert-each-sightline-to-celestial-declination": [
+  "vignette-guide",
+  "workflow-convert-each-sightline-to-celestial-declination"
+ ],
+ "workflow-which-targets-fit-the-measurement": [
+  "vignette-guide",
+  "workflow-which-targets-fit-the-measurement"
+ ],
+ "one-site": [
+  "vignette-guide",
+  "one-site"
+ ],
+ "workflow-the-doorway-at-mnajdra-south": [
+  "vignette-guide",
+  "workflow-the-doorway-at-mnajdra-south"
+ ],
+ "workflow-importing-site-horizons": [
+  "vignette-guide",
+  "workflow-importing-site-horizons"
+ ],
+ "workflow-which-objects-fit-the-doorway": [
+  "vignette-guide",
+  "workflow-which-objects-fit-the-doorway"
+ ],
+ "workflow-equinoctial-sunrise": [
+  "vignette-guide",
+  "workflow-equinoctial-sunrise"
+ ],
+ "workflow-the-heliacal-rising-of-the-pleiades": [
+  "vignette-guide",
+  "workflow-the-heliacal-rising-of-the-pleiades"
+ ],
+ "workflow-watch-the-cluster-rise-later-in-the-season": [
+  "vignette-guide",
+  "workflow-watch-the-cluster-rise-later-in-the-season"
+ ],
+ "multiple-sites": [
+  "vignette-guide",
+  "multiple-sites"
+ ],
+ "workflow-start-with-the-gantija-entrance-bearings": [
+  "vignette-guide",
+  "workflow-start-with-the-gantija-entrance-bearings"
+ ],
+ "workflow-give-each-opening-a-distribution": [
+  "vignette-guide",
+  "workflow-give-each-opening-a-distribution"
+ ],
+ "workflow-test-random-orientations": [
+  "vignette-guide",
+  "workflow-test-random-orientations"
+ ],
+ "workflow-exploring-celestial-candidates": [
+  "vignette-guide",
+  "workflow-exploring-celestial-candidates"
+ ],
+ "other-tools": [
+  "vignette-guide",
+  "other-tools"
+ ],
+ "workflow-compare-the-three-sky-styles": [
+  "vignette-guide",
+  "workflow-compare-the-three-sky-styles"
+ ],
+ "workflow-compare-stellar-seasons": [
+  "vignette-guide",
+  "workflow-compare-stellar-seasons"
+ ],
+ "workflow-compare-constellation-patterns": [
+  "vignette-guide",
+  "workflow-compare-constellation-patterns"
+ ],
+ "workflow-explore-the-milky-way-and-reference-circles": [
+  "vignette-guide",
+  "workflow-explore-the-milky-way-and-reference-circles"
+ ],
+ "workflow-capture-a-sky-from-stellarium": [
+  "vignette-guide",
+  "workflow-capture-a-sky-from-stellarium"
+ ],
+ "workflow-equinoctial-full-moons-and-solstitial-crescent-crossovers": [
+  "vignette-guide",
+  "workflow-equinoctial-full-moons-and-solstitial-crescent-crossovers"
+ ],
+ "workflow-a-planisphere-for-the-site-s-latitude": [
+  "vignette-guide",
+  "workflow-a-planisphere-for-the-site-s-latitude"
+ ],
+ "workflow-other-questions-about-the-sky": [
+  "vignette-guide",
+  "workflow-other-questions-about-the-sky"
+ ],
+ "sec-register": [
+  "study-register",
+  "sec-register"
+ ],
+ "h01-field-validation": [
+  "h01-field-validation",
+  "h01-field-validation"
+ ],
+ "h02-skyline-comparison": [
+  "h02-skyline-comparison",
+  "h02-skyline-comparison"
+ ],
+ "ephemeris-accuracy-and-lunar-skyline-crossings": [
+  "study-register",
+  "ephemeris-accuracy-and-lunar-skyline-crossings"
+ ],
+ "validation-programme": [
+  "study-register",
+  "validation-programme"
+ ],
+ "lunar-event-selection": [
+  "study-register",
+  "lunar-event-selection"
+ ],
+ "sky-rendering": [
+  "study-register",
+  "sky-rendering"
+ ],
+ "study-records": [
+  "study-register",
+  "study-records"
+ ],
+ "when-a-test-changes-the-package": [
+  "study-register",
+  "when-a-test-changes-the-package"
+ ],
+ "worked-checks-for-the-final-methods-chapters": [
+  "study-register",
+  "worked-checks-for-the-final-methods-chapters"
+ ],
+ "a02-ephemeris-accuracy": [
+  "a02-ephemeris",
+  "accuracy"
+ ],
+ "geocentric-positions-and-the-r-interface": [
+  "a02-ephemeris",
+  "geocentric-positions-and-the-r-interface"
+ ],
+ "local-direction-at-a-specified-time": [
+  "a02-ephemeris",
+  "local-direction-at-a-specified-time"
+ ],
+ "lunar-bearings-at-the-skyline": [
+  "a02-ephemeris",
+  "lunar-bearings-at-the-skyline"
+ ],
+ "reproducing-a02": [
+  "a02-ephemeris",
+  "reproducing-a02"
+ ],
+ "a02-ephemeris-refs": [
+  "a02-ephemeris",
+  "refs"
+ ],
+ "a02-ephemeris-ref-sweprog": [
+  "a02-ephemeris",
+  "ref-sweprog"
+ ],
+ "a02-ephemeris-ref-astrodienst": [
+  "a02-ephemeris",
+  "ref-astrodienst"
+ ],
+ "a02-ephemeris-ref-horizonsmanual": [
+  "a02-ephemeris",
+  "ref-horizonsmanual"
+ ],
+ "numerical-validation": [
+  "numerical-validation",
+  "numerical-validation"
+ ],
+ "a01-calendar-checks": [
+  "a01-calendar-checks",
+  "a01-calendar-checks"
+ ],
+ "d01-density-checks": [
+  "d01-density-checks",
+  "d01-density-checks"
+ ],
+ "s03-scoring-checks": [
+  "s03-scoring-checks",
+  "s03-scoring-checks"
+ ],
+ "a04-stellar-crossings": [
+  "a04-stellar-crossings",
+  "a04-stellar-crossings"
+ ],
+ "d02-bearing-propagation": [
+  "d02-bearing-propagation",
+  "d02-bearing-propagation"
+ ],
+ "s01-uniform-orientation": [
+  "s01-uniform-orientation",
+  "s01-uniform-orientation"
+ ],
+ "s02-specified-models": [
+  "s02-specified-models",
+  "s02-specified-models"
+ ],
+ "h07-panorama-coverage": [
+  "h07-panorama-coverage",
+  "h07-panorama-coverage"
+ ],
+ "w01-plot-geometry": [
+  "w01-plot-geometry",
+  "w01-plot-geometry"
+ ],
+ "a05-solar-limits": [
+  "a05-solar-limits",
+  "a05-solar-limits"
+ ],
+ "a08-target-ranges": [
+  "a08-target-ranges",
+  "a08-target-ranges"
+ ],
+ "w02-field-to-sky": [
+  "w02-field-to-sky",
+  "w02-field-to-sky"
+ ],
+ "numerical-validation-refs": [
+  "w02-field-to-sky",
+  "refs"
+ ],
+ "numerical-validation-ref-silva2020": [
+  "w02-field-to-sky",
+  "ref-silva2020"
+ ],
+ "numerical-validation-ref-silvaloms2025": [
+  "w02-field-to-sky",
+  "ref-silvaloms2025"
+ ],
+ "sec-rising": [
+  "heliacal-rising",
+  "sec-rising"
+ ],
+ "sites-stars-and-epochs": [
+  "heliacal-rising",
+  "sites-stars-and-epochs"
+ ],
+ "comparator-and-shared-inputs": [
+  "heliacal-rising",
+  "comparator-and-shared-inputs"
+ ],
+ "results-and-their-scope": [
+  "heliacal-rising",
+  "results-and-their-scope"
+ ],
+ "reproduce-the-comparison": [
+  "heliacal-rising",
+  "reproduce-the-comparison"
+ ],
+ "heliacal-rising-refs": [
+  "heliacal-rising",
+  "refs"
+ ],
+ "heliacal-rising-ref-crumey2014": [
+  "heliacal-rising",
+  "ref-crumey2014"
+ ],
+ "references": [
+  "references",
+  "references"
+ ],
+ "references-refs": [
+  "references",
+  "refs"
+ ],
+ "references-ref-sweprog": [
+  "references",
+  "ref-sweprog"
+ ],
+ "references-ref-astrodienst": [
+  "references",
+  "ref-astrodienst"
+ ],
+ "references-ref-caldwell2001": [
+  "references",
+  "ref-caldwell2001"
+ ],
+ "references-ref-crumey2014": [
+  "references",
+  "ref-crumey2014"
+ ],
+ "references-ref-dufour2006": [
+  "references",
+  "ref-dufour2006"
+ ],
+ "references-ref-deltat": [
+  "references",
+  "ref-deltat"
+ ],
+ "references-ref-hyndman1996": [
+  "references",
+  "ref-hyndman1996"
+ ],
+ "references-ref-ianatz": [
+  "references",
+  "ref-ianatz"
+ ],
+ "references-ref-horizonsmanual": [
+  "references",
+  "ref-horizonsmanual"
+ ],
+ "references-ref-ocefield": [
+  "references",
+  "ref-ocefield"
+ ],
+ "references-ref-koomen1952": [
+  "references",
+  "ref-koomen1952"
+ ],
+ "references-ref-krisciunas1991": [
+  "references",
+  "ref-krisciunas1991"
+ ],
+ "references-ref-kruit2024": [
+  "references",
+  "ref-kruit2024"
+ ],
+ "references-ref-lee1994": [
+  "references",
+  "ref-lee1994"
+ ],
+ "references-ref-lee2015": [
+  "references",
+  "ref-lee2015"
+ ],
+ "references-ref-maris2007": [
+  "references",
+  "ref-maris2007"
+ ],
+ "references-ref-igrf": [
+  "references",
+  "ref-igrf"
+ ],
+ "references-ref-north2002": [
+  "references",
+  "ref-north2002"
+ ],
+ "references-ref-patat2011": [
+  "references",
+  "ref-patat2011"
+ ],
+ "references-ref-patat2006": [
+  "references",
+  "ref-patat2006"
+ ],
+ "references-ref-purrington1988": [
+  "references",
+  "ref-purrington1988"
+ ],
+ "references-ref-rchisq": [
+  "references",
+  "ref-rchisq"
+ ],
+ "references-ref-ruggles1999": [
+  "references",
+  "ref-ruggles1999"
+ ],
+ "references-ref-ruggles1997": [
+  "references",
+  "ref-ruggles1997"
+ ],
+ "references-ref-sassen2019": [
+  "references",
+  "ref-sassen2019"
+ ],
+ "references-ref-schaefer1986": [
+  "references",
+  "ref-schaefer1986"
+ ],
+ "references-ref-schaefer1987": [
+  "references",
+  "ref-schaefer1987"
+ ],
+ "references-ref-silva2020": [
+  "references",
+  "ref-silva2020"
+ ],
+ "references-ref-silvaloms2025": [
+  "references",
+  "ref-silvaloms2025"
+ ],
+ "references-ref-silvapimenta2012": [
+  "references",
+  "ref-silvapimenta2012"
+ ],
+ "references-ref-sprajc2016": [
+  "references",
+  "ref-sprajc2016"
+ ],
+ "references-ref-stellarium": [
+  "references",
+  "ref-stellarium"
+ ],
+ "references-ref-swephr": [
+  "references",
+  "ref-swephr"
+ ],
+ "references-ref-deepstars": [
+  "references",
+  "ref-deepstars"
+ ],
+ "individual-function-help": [
+  "function-index",
+  "individual-function-help"
+ ],
+ "help-bc-ad": [
+  "help/BC.AD",
+  "help-bc-ad"
+ ],
+ "help-cc": [
+  "help/CC",
+  "help-cc"
+ ],
+ "help-efm": [
+  "help/EFM",
+  "help-efm"
+ ],
+ "help-antizenith": [
+  "help/antizenith",
+  "help-antizenith"
+ ],
+ "antizenith": [
+  "help/antizenith",
+  "antizenith"
+ ],
+ "topic+antizenith": [
+  "help/antizenith",
+  "topic+antizenith"
+ ],
+ "antizenith_:_loc": [
+  "help/antizenith",
+  "antizenith_:_loc"
+ ],
+ "antizenith_:_parallax": [
+  "help/antizenith",
+  "antizenith_:_parallax"
+ ],
+ "antizenith_:_altitude": [
+  "help/antizenith",
+  "antizenith_:_altitude"
+ ],
+ "antizenith_:_year": [
+  "help/antizenith",
+  "antizenith_:_year"
+ ],
+ "help-astroyear": [
+  "help/astroYear",
+  "help-astroyear"
+ ],
+ "help-az-pdf": [
+  "help/az.pdf",
+  "help-az-pdf"
+ ],
+ "az.pdf": [
+  "help/az.pdf",
+  "az.pdf"
+ ],
+ "topic+az.pdf": [
+  "help/az.pdf",
+  "topic+az.pdf"
+ ],
+ "az.pdf_:_az": [
+  "help/az.pdf",
+  "az.pdf_:_az"
+ ],
+ "az.pdf_:_unc": [
+  "help/az.pdf",
+  "az.pdf_:_unc"
+ ],
+ "az.pdf_:_pdf": [
+  "help/az.pdf",
+  "az.pdf_:_pdf"
+ ],
+ "az.pdf_:_name": [
+  "help/az.pdf",
+  "az.pdf_:_name"
+ ],
+ "az.pdf_:_.res": [
+  "help/az.pdf",
+  "az.pdf_:_.res"
+ ],
+ "az.pdf_:_.cutoff": [
+  "help/az.pdf",
+  "az.pdf_:_.cutoff"
+ ],
+ "az.pdf_:_verbose": [
+  "help/az.pdf",
+  "az.pdf_:_verbose"
+ ],
+ "az.pdf_:_taper": [
+  "help/az.pdf",
+  "az.pdf_:_taper"
+ ],
+ "az.pdf_:_survey.sd": [
+  "help/az.pdf",
+  "az.pdf_:_survey.sd"
+ ],
+ "az.pdf_:_lower": [
+  "help/az.pdf",
+  "az.pdf_:_lower"
+ ],
+ "az.pdf_:_upper": [
+  "help/az.pdf",
+  "az.pdf_:_upper"
+ ],
+ "help-az2dec": [
+  "help/az2dec",
+  "help-az2dec"
+ ],
+ "help-bernoulli-trial": [
+  "help/bernoulli.trial",
+  "help-bernoulli-trial"
+ ],
+ "help-body-position": [
+  "help/body.position",
+  "help-body-position"
+ ],
+ "help-coordtrans": [
+  "help/coordtrans",
+  "help-coordtrans"
+ ],
+ "coordtrans": [
+  "help/coordtrans",
+  "coordtrans"
+ ],
+ "topic+coordtrans": [
+  "help/coordtrans",
+  "topic+coordtrans"
+ ],
+ "coordtrans_:_pdf": [
+  "help/coordtrans",
+  "coordtrans_:_pdf"
+ ],
+ "coordtrans_:_hor": [
+  "help/coordtrans",
+  "coordtrans_:_hor"
+ ],
+ "coordtrans_:_xrange": [
+  "help/coordtrans",
+  "coordtrans_:_xrange"
+ ],
+ "coordtrans_:_.res": [
+  "help/coordtrans",
+  "coordtrans_:_.res"
+ ],
+ "coordtrans_:_.prec": [
+  "help/coordtrans",
+  "coordtrans_:_.prec"
+ ],
+ "coordtrans_:_.output.res": [
+  "help/coordtrans",
+  "coordtrans_:_.output.res"
+ ],
+ "coordtrans_:_verbose": [
+  "help/coordtrans",
+  "coordtrans_:_verbose"
+ ],
+ "help-createhwt": [
+  "help/createHWT",
+  "help-createhwt"
+ ],
+ "help-createhor": [
+  "help/createHor",
+  "help-createhor"
+ ],
+ "help-ds": [
+  "help/dS",
+  "help-ds"
+ ],
+ "dS": [
+  "help/dS",
+  "dS"
+ ],
+ "topic+dS": [
+  "help/dS",
+  "topic+dS"
+ ],
+ "dS_:_year": [
+  "help/dS",
+  "dS_:_year"
+ ],
+ "dS_:_loc": [
+  "help/dS",
+  "dS_:_loc"
+ ],
+ "dS_:_parallax": [
+  "help/dS",
+  "dS_:_parallax"
+ ],
+ "dS_:_altitude": [
+  "help/dS",
+  "dS_:_altitude"
+ ],
+ "dS_:_verbose": [
+  "help/dS",
+  "dS_:_verbose"
+ ],
+ "help-dec-pdf": [
+  "help/dec.pdf",
+  "help-dec-pdf"
+ ],
+ "dec.pdf": [
+  "help/dec.pdf",
+  "dec.pdf"
+ ],
+ "topic+dec.pdf": [
+  "help/dec.pdf",
+  "topic+dec.pdf"
+ ],
+ "dec.pdf_:_dec": [
+  "help/dec.pdf",
+  "dec.pdf_:_dec"
+ ],
+ "dec.pdf_:_unc": [
+  "help/dec.pdf",
+  "dec.pdf_:_unc"
+ ],
+ "dec.pdf_:_pdf": [
+  "help/dec.pdf",
+  "dec.pdf_:_pdf"
+ ],
+ "dec.pdf_:_name": [
+  "help/dec.pdf",
+  "dec.pdf_:_name"
+ ],
+ "dec.pdf_:_.res": [
+  "help/dec.pdf",
+  "dec.pdf_:_.res"
+ ],
+ "dec.pdf_:_.cutoff": [
+  "help/dec.pdf",
+  "dec.pdf_:_.cutoff"
+ ],
+ "dec.pdf_:_verbose": [
+  "help/dec.pdf",
+  "dec.pdf_:_verbose"
+ ],
+ "dec.pdf_:_taper": [
+  "help/dec.pdf",
+  "dec.pdf_:_taper"
+ ],
+ "dec.pdf_:_survey.sd": [
+  "help/dec.pdf",
+  "dec.pdf_:_survey.sd"
+ ],
+ "dec.pdf_:_lower": [
+  "help/dec.pdf",
+  "dec.pdf_:_lower"
+ ],
+ "dec.pdf_:_upper": [
+  "help/dec.pdf",
+  "dec.pdf_:_upper"
+ ],
+ "help-dempalettes": [
+  "help/demPalettes",
+  "help-dempalettes"
+ ],
+ "help-downloadhwt": [
+  "help/downloadHWT",
+  "help-downloadhwt"
+ ],
+ "help-eq": [
+  "help/eq",
+  "help-eq"
+ ],
+ "eq": [
+  "help/eq",
+  "eq"
+ ],
+ "topic+eq": [
+  "help/eq",
+  "topic+eq"
+ ],
+ "eq_:_loc": [
+  "help/eq",
+  "eq_:_loc"
+ ],
+ "eq_:_parallax": [
+  "help/eq",
+  "eq_:_parallax"
+ ],
+ "eq_:_altitude": [
+  "help/eq",
+  "eq_:_altitude"
+ ],
+ "eq_:_verbose": [
+  "help/eq",
+  "eq_:_verbose"
+ ],
+ "help-exporthor": [
+  "help/exportHor",
+  "help-exporthor"
+ ],
+ "exportHor": [
+  "help/exportHor",
+  "exportHor"
+ ],
+ "topic+exportHor": [
+  "help/exportHor",
+  "topic+exportHor"
+ ],
+ "topic+exportStellarium": [
+  "help/exportHor",
+  "topic+exportStellarium"
+ ],
+ "exportHor_:_hor": [
+  "help/exportHor",
+  "exportHor_:_hor"
+ ],
+ "exportHor_:_name": [
+  "help/exportHor",
+  "exportHor_:_name"
+ ],
+ "exportHor_:_author": [
+  "help/exportHor",
+  "exportHor_:_author"
+ ],
+ "exportHor_:_description": [
+  "help/exportHor",
+  "exportHor_:_description"
+ ],
+ "exportHor_:_use.image": [
+  "help/exportHor",
+  "exportHor_:_use.image"
+ ],
+ "exportHor_:_peakfinder.layout": [
+  "help/exportHor",
+  "exportHor_:_peakfinder.layout"
+ ],
+ "exportHor_:_max.texture.width": [
+  "help/exportHor",
+  "exportHor_:_max.texture.width"
+ ],
+ "exportHor_:_ground_col": [
+  "help/exportHor",
+  "exportHor_:_ground_col"
+ ],
+ "exportHor_:_hor_col": [
+  "help/exportHor",
+  "exportHor_:_hor_col"
+ ],
+ "help-exportpanorama": [
+  "help/exportPanorama",
+  "help-exportpanorama"
+ ],
+ "help-findtargets": [
+  "help/findTargets",
+  "help-findtargets"
+ ],
+ "findTargets": [
+  "help/findTargets",
+  "findTargets"
+ ],
+ "topic+findTargets": [
+  "help/findTargets",
+  "topic+findTargets"
+ ],
+ "findTargets_:_decrange": [
+  "help/findTargets",
+  "findTargets_:_decrange"
+ ],
+ "findTargets_:_year": [
+  "help/findTargets",
+  "findTargets_:_year"
+ ],
+ "findTargets_:_loc": [
+  "help/findTargets",
+  "findTargets_:_loc"
+ ],
+ "findTargets_:_max.mag": [
+  "help/findTargets",
+  "findTargets_:_max.mag"
+ ],
+ "findTargets_:_dates": [
+  "help/findTargets",
+  "findTargets_:_dates"
+ ],
+ "findTargets_:_calendar": [
+  "help/findTargets",
+  "findTargets_:_calendar"
+ ],
+ "findTargets_:_timerange": [
+  "help/findTargets",
+  "findTargets_:_timerange"
+ ],
+ "help-hor2alt": [
+  "help/hor2alt",
+  "help-hor2alt"
+ ],
+ "hor2alt": [
+  "help/hor2alt",
+  "hor2alt"
+ ],
+ "topic+hor2alt": [
+  "help/hor2alt",
+  "topic+hor2alt"
+ ],
+ "hor2alt_:_hor": [
+  "help/hor2alt",
+  "hor2alt_:_hor"
+ ],
+ "hor2alt_:_az": [
+  "help/hor2alt",
+  "hor2alt_:_az"
+ ],
+ "hor2alt_:_return.unc": [
+  "help/hor2alt",
+  "hor2alt_:_return.unc"
+ ],
+ "help-hor2max-dec": [
+  "help/hor2max.dec",
+  "help-hor2max-dec"
+ ],
+ "hor2max.dec": [
+  "help/hor2max.dec",
+  "hor2max.dec"
+ ],
+ "topic+hor2max.dec": [
+  "help/hor2max.dec",
+  "topic+hor2max.dec"
+ ],
+ "hor2max.dec_:_hor": [
+  "help/hor2max.dec",
+  "hor2max.dec_:_hor"
+ ],
+ "hor2max.dec_:_alt": [
+  "help/hor2max.dec",
+  "hor2max.dec_:_alt"
+ ],
+ "hor2max.dec_:_range": [
+  "help/hor2max.dec",
+  "hor2max.dec_:_range"
+ ],
+ "help-hor2min-dec": [
+  "help/hor2min.dec",
+  "help-hor2min-dec"
+ ],
+ "hor2min.dec": [
+  "help/hor2min.dec",
+  "hor2min.dec"
+ ],
+ "topic+hor2min.dec": [
+  "help/hor2min.dec",
+  "topic+hor2min.dec"
+ ],
+ "hor2min.dec_:_hor": [
+  "help/hor2min.dec",
+  "hor2min.dec_:_hor"
+ ],
+ "hor2min.dec_:_alt": [
+  "help/hor2min.dec",
+  "hor2min.dec_:_alt"
+ ],
+ "hor2min.dec_:_range": [
+  "help/hor2min.dec",
+  "hor2min.dec_:_range"
+ ],
+ "help-horfeature": [
+  "help/horFeature",
+  "help-horfeature"
+ ],
+ "help-hpdi": [
+  "help/hpdi",
+  "help-hpdi"
+ ],
+ "hpdi": [
+  "help/hpdi",
+  "hpdi"
+ ],
+ "topic+hpdi": [
+  "help/hpdi",
+  "topic+hpdi"
+ ],
+ "hpdi_:_x": [
+  "help/hpdi",
+  "hpdi_:_x"
+ ],
+ "hpdi_:_mass": [
+  "help/hpdi",
+  "hpdi_:_mass"
+ ],
+ "help-importconstellations": [
+  "help/importConstellations",
+  "help-importconstellations"
+ ],
+ "help-importpanorama": [
+  "help/importPanorama",
+  "help-importpanorama"
+ ],
+ "importPanorama": [
+  "help/importPanorama",
+  "importPanorama"
+ ],
+ "topic+importPanorama": [
+  "help/importPanorama",
+  "topic+importPanorama"
+ ],
+ "importPanorama_:_file": [
+  "help/importPanorama",
+  "importPanorama_:_file"
+ ],
+ "importPanorama_:_loc": [
+  "help/importPanorama",
+  "importPanorama_:_loc"
+ ],
+ "importPanorama_:_az.lim": [
+  "help/importPanorama",
+  "importPanorama_:_az.lim"
+ ],
+ "importPanorama_:_alt.lim": [
+  "help/importPanorama",
+  "importPanorama_:_alt.lim"
+ ],
+ "importPanorama_:_name": [
+  "help/importPanorama",
+  "importPanorama_:_name"
+ ],
+ "importPanorama_:_calibrate": [
+  "help/importPanorama",
+  "importPanorama_:_calibrate"
+ ],
+ "importPanorama_:_points": [
+  "help/importPanorama",
+  "importPanorama_:_points"
+ ],
+ "importPanorama_:_alpha.threshold": [
+  "help/importPanorama",
+  "importPanorama_:_alpha.threshold"
+ ],
+ "importPanorama_:_alt.unc": [
+  "help/importPanorama",
+  "importPanorama_:_alt.unc"
+ ],
+ "help-importpeakfinder": [
+  "help/importPeakFinder",
+  "help-importpeakfinder"
+ ],
+ "help-js": [
+  "help/jS",
+  "help-js"
+ ],
+ "jS": [
+  "help/jS",
+  "jS"
+ ],
+ "topic+jS": [
+  "help/jS",
+  "topic+jS"
+ ],
+ "jS_:_year": [
+  "help/jS",
+  "jS_:_year"
+ ],
+ "jS_:_loc": [
+  "help/jS",
+  "jS_:_loc"
+ ],
+ "jS_:_parallax": [
+  "help/jS",
+  "jS_:_parallax"
+ ],
+ "jS_:_altitude": [
+  "help/jS",
+  "jS_:_altitude"
+ ],
+ "jS_:_verbose": [
+  "help/jS",
+  "jS_:_verbose"
+ ],
+ "help-jd2time": [
+  "help/jd2time",
+  "help-jd2time"
+ ],
+ "help-long-date": [
+  "help/long.date",
+  "help-long-date"
+ ],
+ "help-mag-dec": [
+  "help/mag.dec",
+  "help-mag-dec"
+ ],
+ "help-modeltest": [
+  "help/modelTest",
+  "help-modeltest"
+ ],
+ "modelTest": [
+  "help/modelTest",
+  "modelTest"
+ ],
+ "topic+modelTest": [
+  "help/modelTest",
+  "topic+modelTest"
+ ],
+ "modelTest_:_pdf": [
+  "help/modelTest",
+  "modelTest_:_pdf"
+ ],
+ "modelTest_:_model": [
+  "help/modelTest",
+  "modelTest_:_model"
+ ],
+ "modelTest_:_unc": [
+  "help/modelTest",
+  "modelTest_:_unc"
+ ],
+ "modelTest_:_nsims": [
+  "help/modelTest",
+  "modelTest_:_nsims"
+ ],
+ "modelTest_:_conf": [
+  "help/modelTest",
+  "modelTest_:_conf"
+ ],
+ "modelTest_:_tails": [
+  "help/modelTest",
+  "modelTest_:_tails"
+ ],
+ "modelTest_:_normalise": [
+  "help/modelTest",
+  "modelTest_:_normalise"
+ ],
+ "modelTest_:_.res": [
+  "help/modelTest",
+  "modelTest_:_.res"
+ ],
+ "modelTest_:_ncores": [
+  "help/modelTest",
+  "modelTest_:_ncores"
+ ],
+ "modelTest_:_verbose": [
+  "help/modelTest",
+  "modelTest_:_verbose"
+ ],
+ "help-moonphase": [
+  "help/moonphase",
+  "help-moonphase"
+ ],
+ "help-nmjlx": [
+  "help/nMjLX",
+  "help-nmjlx"
+ ],
+ "help-nmnlx": [
+  "help/nmnLX",
+  "help-nmnlx"
+ ],
+ "help-obliquity": [
+  "help/obliquity",
+  "help-obliquity"
+ ],
+ "obliquity": [
+  "help/obliquity",
+  "obliquity"
+ ],
+ "topic+obliquity": [
+  "help/obliquity",
+  "topic+obliquity"
+ ],
+ "obliquity_:_year": [
+  "help/obliquity",
+  "obliquity_:_year"
+ ],
+ "help-orbit": [
+  "help/orbit",
+  "help-orbit"
+ ],
+ "orbit": [
+  "help/orbit",
+  "orbit"
+ ],
+ "topic+orbit": [
+  "help/orbit",
+  "topic+orbit"
+ ],
+ "orbit_:_dec": [
+  "help/orbit",
+  "orbit_:_dec"
+ ],
+ "orbit_:_loc": [
+  "help/orbit",
+  "orbit_:_loc"
+ ],
+ "orbit_:_refraction": [
+  "help/orbit",
+  "orbit_:_refraction"
+ ],
+ "orbit_:_atm": [
+  "help/orbit",
+  "orbit_:_atm"
+ ],
+ "orbit_:_temp": [
+  "help/orbit",
+  "orbit_:_temp"
+ ],
+ "orbit_:_res": [
+  "help/orbit",
+  "orbit_:_res"
+ ],
+ "help-parallax-corr": [
+  "help/parallax.corr",
+  "help-parallax-corr"
+ ],
+ "parallax.corr": [
+  "help/parallax.corr",
+  "parallax.corr"
+ ],
+ "topic+parallax.corr": [
+  "help/parallax.corr",
+  "topic+parallax.corr"
+ ],
+ "parallax.corr_:_parallax": [
+  "help/parallax.corr",
+  "parallax.corr_:_parallax"
+ ],
+ "parallax.corr_:_loc": [
+  "help/parallax.corr",
+  "parallax.corr_:_loc"
+ ],
+ "parallax.corr_:_altitude": [
+  "help/parallax.corr",
+  "parallax.corr_:_altitude"
+ ],
+ "help-planet-extremes": [
+  "help/planet.extremes",
+  "help-planet-extremes"
+ ],
+ "help-planisphere": [
+  "help/planisphere",
+  "help-planisphere"
+ ],
+ "help-plot-skyscaper-horizon": [
+  "help/plot.skyscapeR.horizon",
+  "help-plot-skyscaper-horizon"
+ ],
+ "plot.skyscapeR.horizon": [
+  "help/plot.skyscapeR.horizon",
+  "plot.skyscapeR.horizon"
+ ],
+ "topic+plot.skyscapeR.horizon": [
+  "help/plot.skyscapeR.horizon",
+  "topic+plot.skyscapeR.horizon"
+ ],
+ "plot.skyscapeR.horizon_:_x": [
+  "help/plot.skyscapeR.horizon",
+  "plot.skyscapeR.horizon_:_x"
+ ],
+ "plot.skyscapeR.horizon_:_show.az": [
+  "help/plot.skyscapeR.horizon",
+  "plot.skyscapeR.horizon_:_show.az"
+ ],
+ "plot.skyscapeR.horizon_:_xrange": [
+  "help/plot.skyscapeR.horizon",
+  "plot.skyscapeR.horizon_:_xrange"
+ ],
+ "plot.skyscapeR.horizon_:_yrange": [
+  "help/plot.skyscapeR.horizon",
+  "plot.skyscapeR.horizon_:_yrange"
+ ],
+ "plot.skyscapeR.horizon_:_obj": [
+  "help/plot.skyscapeR.horizon",
+  "plot.skyscapeR.horizon_:_obj"
+ ],
+ "plot.skyscapeR.horizon_:_col.ground": [
+  "help/plot.skyscapeR.horizon",
+  "plot.skyscapeR.horizon_:_col.ground"
+ ],
+ "plot.skyscapeR.horizon_:_col.sky": [
+  "help/plot.skyscapeR.horizon",
+  "plot.skyscapeR.horizon_:_col.sky"
+ ],
+ "plot.skyscapeR.horizon_:_use.image": [
+  "help/plot.skyscapeR.horizon",
+  "plot.skyscapeR.horizon_:_use.image"
+ ],
+ "plot.skyscapeR.horizon_:_...": [
+  "help/plot.skyscapeR.horizon",
+  "plot.skyscapeR.horizon_:_..."
+ ],
+ "plot.skyscapeR.horizon_:_show.skyline": [
+  "help/plot.skyscapeR.horizon",
+  "plot.skyscapeR.horizon_:_show.skyline"
+ ],
+ "plot.skyscapeR.horizon_:_sky": [
+  "help/plot.skyscapeR.horizon",
+  "plot.skyscapeR.horizon_:_sky"
+ ],
+ "plot.skyscapeR.horizon_:_xlim": [
+  "help/plot.skyscapeR.horizon",
+  "plot.skyscapeR.horizon_:_xlim"
+ ],
+ "plot.skyscapeR.horizon_:_ylim": [
+  "help/plot.skyscapeR.horizon",
+  "plot.skyscapeR.horizon_:_ylim"
+ ],
+ "plot.skyscapeR.horizon_:_fastLoad": [
+  "help/plot.skyscapeR.horizon",
+  "plot.skyscapeR.horizon_:_fastLoad"
+ ],
+ "plot.skyscapeR.horizon_:_show.legend": [
+  "help/plot.skyscapeR.horizon",
+  "plot.skyscapeR.horizon_:_show.legend"
+ ],
+ "plot.skyscapeR.horizon_:_style": [
+  "help/plot.skyscapeR.horizon",
+  "plot.skyscapeR.horizon_:_style"
+ ],
+ "help-plot-skyscaper-pdf": [
+  "help/plot.skyscapeR.pdf",
+  "help-plot-skyscaper-pdf"
+ ],
+ "plot.skyscapeR.pdf": [
+  "help/plot.skyscapeR.pdf",
+  "plot.skyscapeR.pdf"
+ ],
+ "topic+plot.skyscapeR.pdf": [
+  "help/plot.skyscapeR.pdf",
+  "topic+plot.skyscapeR.pdf"
+ ],
+ "plot.skyscapeR.pdf_:_x": [
+  "help/plot.skyscapeR.pdf",
+  "plot.skyscapeR.pdf_:_x"
+ ],
+ "plot.skyscapeR.pdf_:_index": [
+  "help/plot.skyscapeR.pdf",
+  "plot.skyscapeR.pdf_:_index"
+ ],
+ "plot.skyscapeR.pdf_:_hdr": [
+  "help/plot.skyscapeR.pdf",
+  "plot.skyscapeR.pdf_:_hdr"
+ ],
+ "plot.skyscapeR.pdf_:_show.az": [
+  "help/plot.skyscapeR.pdf",
+  "plot.skyscapeR.pdf_:_show.az"
+ ],
+ "plot.skyscapeR.pdf_:_xrange": [
+  "help/plot.skyscapeR.pdf",
+  "plot.skyscapeR.pdf_:_xrange"
+ ],
+ "plot.skyscapeR.pdf_:_col": [
+  "help/plot.skyscapeR.pdf",
+  "plot.skyscapeR.pdf_:_col"
+ ],
+ "plot.skyscapeR.pdf_:_...": [
+  "help/plot.skyscapeR.pdf",
+  "plot.skyscapeR.pdf_:_..."
+ ],
+ "plot.skyscapeR.pdf_:_az": [
+  "help/plot.skyscapeR.pdf",
+  "plot.skyscapeR.pdf_:_az"
+ ],
+ "plot.skyscapeR.pdf_:_hor": [
+  "help/plot.skyscapeR.pdf",
+  "plot.skyscapeR.pdf_:_hor"
+ ],
+ "plot.skyscapeR.pdf_:_xlim": [
+  "help/plot.skyscapeR.pdf",
+  "plot.skyscapeR.pdf_:_xlim"
+ ],
+ "plot.skyscapeR.pdf_:_show.legend": [
+  "help/plot.skyscapeR.pdf",
+  "plot.skyscapeR.pdf_:_show.legend"
+ ],
+ "plot.skyscapeR.pdf_:_style": [
+  "help/plot.skyscapeR.pdf",
+  "plot.skyscapeR.pdf_:_style"
+ ],
+ "help-plot-skyscaper-sigtest": [
+  "help/plot.skyscapeR.sigTest",
+  "help-plot-skyscaper-sigtest"
+ ],
+ "plot.skyscapeR.sigTest": [
+  "help/plot.skyscapeR.sigTest",
+  "plot.skyscapeR.sigTest"
+ ],
+ "topic+plot.skyscapeR.sigTest": [
+  "help/plot.skyscapeR.sigTest",
+  "topic+plot.skyscapeR.sigTest"
+ ],
+ "plot.skyscapeR.sigTest_:_x": [
+  "help/plot.skyscapeR.sigTest",
+  "plot.skyscapeR.sigTest_:_x"
+ ],
+ "plot.skyscapeR.sigTest_:_xrange": [
+  "help/plot.skyscapeR.sigTest",
+  "plot.skyscapeR.sigTest_:_xrange"
+ ],
+ "plot.skyscapeR.sigTest_:_title": [
+  "help/plot.skyscapeR.sigTest",
+  "plot.skyscapeR.sigTest_:_title"
+ ],
+ "plot.skyscapeR.sigTest_:_col": [
+  "help/plot.skyscapeR.sigTest",
+  "plot.skyscapeR.sigTest_:_col"
+ ],
+ "plot.skyscapeR.sigTest_:_show.pval": [
+  "help/plot.skyscapeR.sigTest",
+  "plot.skyscapeR.sigTest_:_show.pval"
+ ],
+ "plot.skyscapeR.sigTest_:_show.local": [
+  "help/plot.skyscapeR.sigTest",
+  "plot.skyscapeR.sigTest_:_show.local"
+ ],
+ "plot.skyscapeR.sigTest_:_pal": [
+  "help/plot.skyscapeR.sigTest",
+  "plot.skyscapeR.sigTest_:_pal"
+ ],
+ "plot.skyscapeR.sigTest_:_...": [
+  "help/plot.skyscapeR.sigTest",
+  "plot.skyscapeR.sigTest_:_..."
+ ],
+ "plot.skyscapeR.sigTest_:_obj": [
+  "help/plot.skyscapeR.sigTest",
+  "plot.skyscapeR.sigTest_:_obj"
+ ],
+ "plot.skyscapeR.sigTest_:_xlim": [
+  "help/plot.skyscapeR.sigTest",
+  "plot.skyscapeR.sigTest_:_xlim"
+ ],
+ "plot.skyscapeR.sigTest_:_show.legend": [
+  "help/plot.skyscapeR.sigTest",
+  "plot.skyscapeR.sigTest_:_show.legend"
+ ],
+ "plot.skyscapeR.sigTest_:_style": [
+  "help/plot.skyscapeR.sigTest",
+  "plot.skyscapeR.sigTest_:_style"
+ ],
+ "help-plot-skyscaper-spd": [
+  "help/plot.skyscapeR.spd",
+  "help-plot-skyscaper-spd"
+ ],
+ "plot.skyscapeR.spd": [
+  "help/plot.skyscapeR.spd",
+  "plot.skyscapeR.spd"
+ ],
+ "topic+plot.skyscapeR.spd": [
+  "help/plot.skyscapeR.spd",
+  "topic+plot.skyscapeR.spd"
+ ],
+ "plot.skyscapeR.spd_:_x": [
+  "help/plot.skyscapeR.spd",
+  "plot.skyscapeR.spd_:_x"
+ ],
+ "plot.skyscapeR.spd_:_xrange": [
+  "help/plot.skyscapeR.spd",
+  "plot.skyscapeR.spd_:_xrange"
+ ],
+ "plot.skyscapeR.spd_:_yrange": [
+  "help/plot.skyscapeR.spd",
+  "plot.skyscapeR.spd_:_yrange"
+ ],
+ "plot.skyscapeR.spd_:_title": [
+  "help/plot.skyscapeR.spd",
+  "plot.skyscapeR.spd_:_title"
+ ],
+ "plot.skyscapeR.spd_:_col": [
+  "help/plot.skyscapeR.spd",
+  "plot.skyscapeR.spd_:_col"
+ ],
+ "plot.skyscapeR.spd_:_shading": [
+  "help/plot.skyscapeR.spd",
+  "plot.skyscapeR.spd_:_shading"
+ ],
+ "plot.skyscapeR.spd_:_...": [
+  "help/plot.skyscapeR.spd",
+  "plot.skyscapeR.spd_:_..."
+ ],
+ "plot.skyscapeR.spd_:_obj": [
+  "help/plot.skyscapeR.spd",
+  "plot.skyscapeR.spd_:_obj"
+ ],
+ "plot.skyscapeR.spd_:_xlim": [
+  "help/plot.skyscapeR.spd",
+  "plot.skyscapeR.spd_:_xlim"
+ ],
+ "plot.skyscapeR.spd_:_ylim": [
+  "help/plot.skyscapeR.spd",
+  "plot.skyscapeR.spd_:_ylim"
+ ],
+ "plot.skyscapeR.spd_:_show.legend": [
+  "help/plot.skyscapeR.spd",
+  "plot.skyscapeR.spd_:_show.legend"
+ ],
+ "plot.skyscapeR.spd_:_style": [
+  "help/plot.skyscapeR.spd",
+  "plot.skyscapeR.spd_:_style"
+ ],
+ "help-plot-skyscaper-starphases": [
+  "help/plot.skyscapeR.starphases",
+  "help-plot-skyscaper-starphases"
+ ],
+ "plot.skyscapeR.starphases": [
+  "help/plot.skyscapeR.starphases",
+  "plot.skyscapeR.starphases"
+ ],
+ "topic+plot.skyscapeR.starphases": [
+  "help/plot.skyscapeR.starphases",
+  "topic+plot.skyscapeR.starphases"
+ ],
+ "plot.skyscapeR.starphases_:_x": [
+  "help/plot.skyscapeR.starphases",
+  "plot.skyscapeR.starphases_:_x"
+ ],
+ "plot.skyscapeR.starphases_:_y": [
+  "help/plot.skyscapeR.starphases",
+  "plot.skyscapeR.starphases_:_y"
+ ],
+ "plot.skyscapeR.starphases_:_show.labels": [
+  "help/plot.skyscapeR.starphases",
+  "plot.skyscapeR.starphases_:_show.labels"
+ ],
+ "plot.skyscapeR.starphases_:_show.legend": [
+  "help/plot.skyscapeR.starphases",
+  "plot.skyscapeR.starphases_:_show.legend"
+ ],
+ "plot.skyscapeR.starphases_:_show.grid": [
+  "help/plot.skyscapeR.starphases",
+  "plot.skyscapeR.starphases_:_show.grid"
+ ],
+ "plot.skyscapeR.starphases_:_sort.by": [
+  "help/plot.skyscapeR.starphases",
+  "plot.skyscapeR.starphases_:_sort.by"
+ ],
+ "plot.skyscapeR.starphases_:_pal": [
+  "help/plot.skyscapeR.starphases",
+  "plot.skyscapeR.starphases_:_pal"
+ ],
+ "plot.skyscapeR.starphases_:_...": [
+  "help/plot.skyscapeR.starphases",
+  "plot.skyscapeR.starphases_:_..."
+ ],
+ "plot.skyscapeR.starphases_:_layout": [
+  "help/plot.skyscapeR.starphases",
+  "plot.skyscapeR.starphases_:_layout"
+ ],
+ "plot.skyscapeR.starphases_:_style": [
+  "help/plot.skyscapeR.starphases",
+  "plot.skyscapeR.starphases_:_style"
+ ],
+ "help-plotazimuth": [
+  "help/plotAzimuth",
+  "help-plotazimuth"
+ ],
+ "plotAzimuth": [
+  "help/plotAzimuth",
+  "plotAzimuth"
+ ],
+ "topic+plotAzimuth": [
+  "help/plotAzimuth",
+  "topic+plotAzimuth"
+ ],
+ "plotAzimuth_:_az": [
+  "help/plotAzimuth",
+  "plotAzimuth_:_az"
+ ],
+ "plotAzimuth_:_obj": [
+  "help/plotAzimuth",
+  "plotAzimuth_:_obj"
+ ],
+ "plotAzimuth_:_show.obj.labels": [
+  "help/plotAzimuth",
+  "plotAzimuth_:_show.obj.labels"
+ ],
+ "plotAzimuth_:_col": [
+  "help/plotAzimuth",
+  "plotAzimuth_:_col"
+ ],
+ "plotAzimuth_:_lty": [
+  "help/plotAzimuth",
+  "plotAzimuth_:_lty"
+ ],
+ "plotAzimuth_:_lwd": [
+  "help/plotAzimuth",
+  "plotAzimuth_:_lwd"
+ ],
+ "plotAzimuth_:_marks": [
+  "help/plotAzimuth",
+  "plotAzimuth_:_marks"
+ ],
+ "plotAzimuth_:_obj.position": [
+  "help/plotAzimuth",
+  "plotAzimuth_:_obj.position"
+ ],
+ "plotAzimuth_:_show.legend": [
+  "help/plotAzimuth",
+  "plotAzimuth_:_show.legend"
+ ],
+ "plotAzimuth_:_style": [
+  "help/plotAzimuth",
+  "plotAzimuth_:_style"
+ ],
+ "help-plotbars": [
+  "help/plotBars",
+  "help-plotbars"
+ ],
+ "plotBars": [
+  "help/plotBars",
+  "plotBars"
+ ],
+ "topic+plotBars": [
+  "help/plotBars",
+  "topic+plotBars"
+ ],
+ "plotBars_:_val": [
+  "help/plotBars",
+  "plotBars_:_val"
+ ],
+ "plotBars_:_unc": [
+  "help/plotBars",
+  "plotBars_:_unc"
+ ],
+ "plotBars_:_names": [
+  "help/plotBars",
+  "plotBars_:_names"
+ ],
+ "plotBars_:_unit": [
+  "help/plotBars",
+  "plotBars_:_unit"
+ ],
+ "plotBars_:_obj": [
+  "help/plotBars",
+  "plotBars_:_obj"
+ ],
+ "plotBars_:_show.obj.label": [
+  "help/plotBars",
+  "plotBars_:_show.obj.label"
+ ],
+ "plotBars_:_xrange": [
+  "help/plotBars",
+  "plotBars_:_xrange"
+ ],
+ "plotBars_:_yrange": [
+  "help/plotBars",
+  "plotBars_:_yrange"
+ ],
+ "plotBars_:_sort": [
+  "help/plotBars",
+  "plotBars_:_sort"
+ ],
+ "plotBars_:_shade": [
+  "help/plotBars",
+  "plotBars_:_shade"
+ ],
+ "plotBars_:_mark": [
+  "help/plotBars",
+  "plotBars_:_mark"
+ ],
+ "plotBars_:_col": [
+  "help/plotBars",
+  "plotBars_:_col"
+ ],
+ "plotBars_:_geometry": [
+  "help/plotBars",
+  "plotBars_:_geometry"
+ ],
+ "plotBars_:_show.legend": [
+  "help/plotBars",
+  "plotBars_:_show.legend"
+ ],
+ "plotBars_:_style": [
+  "help/plotBars",
+  "plotBars_:_style"
+ ],
+ "help-print-skyscaper-sigtest": [
+  "help/print.skyscapeR.sigTest",
+  "help-print-skyscaper-sigtest"
+ ],
+ "print.skyscapeR.sigTest": [
+  "help/print.skyscapeR.sigTest",
+  "print.skyscapeR.sigTest"
+ ],
+ "topic+print.skyscapeR.sigTest": [
+  "help/print.skyscapeR.sigTest",
+  "topic+print.skyscapeR.sigTest"
+ ],
+ "print.skyscapeR.sigTest_:_x": [
+  "help/print.skyscapeR.sigTest",
+  "print.skyscapeR.sigTest_:_x"
+ ],
+ "print.skyscapeR.sigTest_:_...": [
+  "help/print.skyscapeR.sigTest",
+  "print.skyscapeR.sigTest_:_..."
+ ],
+ "help-pval2stars": [
+  "help/pval2stars",
+  "help-pval2stars"
+ ],
+ "help-randomtest": [
+  "help/randomTest",
+  "help-randomtest"
+ ],
+ "randomTest": [
+  "help/randomTest",
+  "randomTest"
+ ],
+ "topic+randomTest": [
+  "help/randomTest",
+  "topic+randomTest"
+ ],
+ "randomTest_:_pdf": [
+  "help/randomTest",
+  "randomTest_:_pdf"
+ ],
+ "randomTest_:_az": [
+  "help/randomTest",
+  "randomTest_:_az"
+ ],
+ "randomTest_:_hor": [
+  "help/randomTest",
+  "randomTest_:_hor"
+ ],
+ "randomTest_:_nsims": [
+  "help/randomTest",
+  "randomTest_:_nsims"
+ ],
+ "randomTest_:_conf": [
+  "help/randomTest",
+  "randomTest_:_conf"
+ ],
+ "randomTest_:_tails": [
+  "help/randomTest",
+  "randomTest_:_tails"
+ ],
+ "randomTest_:_normalise": [
+  "help/randomTest",
+  "randomTest_:_normalise"
+ ],
+ "randomTest_:_.res": [
+  "help/randomTest",
+  "randomTest_:_.res"
+ ],
+ "randomTest_:_ncores": [
+  "help/randomTest",
+  "randomTest_:_ncores"
+ ],
+ "randomTest_:_verbose": [
+  "help/randomTest",
+  "randomTest_:_verbose"
+ ],
+ "help-reduct-compass": [
+  "help/reduct.compass",
+  "help-reduct-compass"
+ ],
+ "reduct.compass": [
+  "help/reduct.compass",
+  "reduct.compass"
+ ],
+ "topic+reduct.compass": [
+  "help/reduct.compass",
+  "topic+reduct.compass"
+ ],
+ "reduct.compass_:_loc": [
+  "help/reduct.compass",
+  "reduct.compass_:_loc"
+ ],
+ "reduct.compass_:_mag.az": [
+  "help/reduct.compass",
+  "reduct.compass_:_mag.az"
+ ],
+ "reduct.compass_:_date": [
+  "help/reduct.compass",
+  "reduct.compass_:_date"
+ ],
+ "reduct.compass_:_magdec": [
+  "help/reduct.compass",
+  "reduct.compass_:_magdec"
+ ],
+ "reduct.compass_:_alt": [
+  "help/reduct.compass",
+  "reduct.compass_:_alt"
+ ],
+ "reduct.compass_:_name": [
+  "help/reduct.compass",
+  "reduct.compass_:_name"
+ ],
+ "reduct.compass_:_ID": [
+  "help/reduct.compass",
+  "reduct.compass_:_ID"
+ ],
+ "reduct.compass_:_HWT.ID": [
+  "help/reduct.compass",
+  "reduct.compass_:_HWT.ID"
+ ],
+ "help-reduct-theodolite": [
+  "help/reduct.theodolite",
+  "help-reduct-theodolite"
+ ],
+ "reduct.theodolite": [
+  "help/reduct.theodolite",
+  "reduct.theodolite"
+ ],
+ "topic+reduct.theodolite": [
+  "help/reduct.theodolite",
+  "topic+reduct.theodolite"
+ ],
+ "reduct.theodolite_:_loc": [
+  "help/reduct.theodolite",
+  "reduct.theodolite_:_loc"
+ ],
+ "reduct.theodolite_:_az": [
+  "help/reduct.theodolite",
+  "reduct.theodolite_:_az"
+ ],
+ "reduct.theodolite_:_date": [
+  "help/reduct.theodolite",
+  "reduct.theodolite_:_date"
+ ],
+ "reduct.theodolite_:_time": [
+  "help/reduct.theodolite",
+  "reduct.theodolite_:_time"
+ ],
+ "reduct.theodolite_:_tz": [
+  "help/reduct.theodolite",
+  "reduct.theodolite_:_tz"
+ ],
+ "reduct.theodolite_:_az.sun": [
+  "help/reduct.theodolite",
+  "reduct.theodolite_:_az.sun"
+ ],
+ "reduct.theodolite_:_limb": [
+  "help/reduct.theodolite",
+  "reduct.theodolite_:_limb"
+ ],
+ "reduct.theodolite_:_alt": [
+  "help/reduct.theodolite",
+  "reduct.theodolite_:_alt"
+ ],
+ "reduct.theodolite_:_name": [
+  "help/reduct.theodolite",
+  "reduct.theodolite_:_name"
+ ],
+ "reduct.theodolite_:_ID": [
+  "help/reduct.theodolite",
+  "reduct.theodolite_:_ID"
+ ],
+ "reduct.theodolite_:_HWT.ID": [
+  "help/reduct.theodolite",
+  "reduct.theodolite_:_HWT.ID"
+ ],
+ "help-relinkhor": [
+  "help/relinkHor",
+  "help-relinkhor"
+ ],
+ "help-riseset": [
+  "help/riseset",
+  "help-riseset"
+ ],
+ "riseset": [
+  "help/riseset",
+  "riseset"
+ ],
+ "topic+riseset": [
+  "help/riseset",
+  "topic+riseset"
+ ],
+ "riseset_:_loc": [
+  "help/riseset",
+  "riseset_:_loc"
+ ],
+ "riseset_:_date": [
+  "help/riseset",
+  "riseset_:_date"
+ ],
+ "riseset_:_jd": [
+  "help/riseset",
+  "riseset_:_jd"
+ ],
+ "riseset_:_obj": [
+  "help/riseset",
+  "riseset_:_obj"
+ ],
+ "riseset_:_alt": [
+  "help/riseset",
+  "riseset_:_alt"
+ ],
+ "riseset_:_timezone": [
+  "help/riseset",
+  "riseset_:_timezone"
+ ],
+ "riseset_:_calendar": [
+  "help/riseset",
+  "riseset_:_calendar"
+ ],
+ "riseset_:_dec": [
+  "help/riseset",
+  "riseset_:_dec"
+ ],
+ "riseset_:_refraction": [
+  "help/riseset",
+  "riseset_:_refraction"
+ ],
+ "riseset_:_atm": [
+  "help/riseset",
+  "riseset_:_atm"
+ ],
+ "riseset_:_temp": [
+  "help/riseset",
+  "riseset_:_temp"
+ ],
+ "riseset_:_verbose": [
+  "help/riseset",
+  "riseset_:_verbose"
+ ],
+ "help-smjlx": [
+  "help/sMjLX",
+  "help-smjlx"
+ ],
+ "help-sketchsky": [
+  "help/sketchSky",
+  "help-sketchsky"
+ ],
+ "sketchSky": [
+  "help/sketchSky",
+  "sketchSky"
+ ],
+ "topic+sketchSky": [
+  "help/sketchSky",
+  "topic+sketchSky"
+ ],
+ "sketchSky_:_hor": [
+  "help/sketchSky",
+  "sketchSky_:_hor"
+ ],
+ "sketchSky_:_jd": [
+  "help/sketchSky",
+  "sketchSky_:_jd"
+ ],
+ "sketchSky_:_time": [
+  "help/sketchSky",
+  "sketchSky_:_time"
+ ],
+ "sketchSky_:_timezone": [
+  "help/sketchSky",
+  "sketchSky_:_timezone"
+ ],
+ "sketchSky_:_calendar": [
+  "help/sketchSky",
+  "sketchSky_:_calendar"
+ ],
+ "sketchSky_:_display": [
+  "help/sketchSky",
+  "sketchSky_:_display"
+ ],
+ "sketchSky_:_style": [
+  "help/sketchSky",
+  "sketchSky_:_style"
+ ],
+ "sketchSky_:_max.mag": [
+  "help/sketchSky",
+  "sketchSky_:_max.mag"
+ ],
+ "sketchSky_:_k": [
+  "help/sketchSky",
+  "sketchSky_:_k"
+ ],
+ "help-skyobject": [
+  "help/skyObject",
+  "help-skyobject"
+ ],
+ "skyObject": [
+  "help/skyObject",
+  "skyObject"
+ ],
+ "topic+skyObject": [
+  "help/skyObject",
+  "topic+skyObject"
+ ],
+ "topic+sky.objects": [
+  "help/skyObject",
+  "topic+sky.objects"
+ ],
+ "skyObject_:_names": [
+  "help/skyObject",
+  "skyObject_:_names"
+ ],
+ "skyObject_:_year": [
+  "help/skyObject",
+  "skyObject_:_year"
+ ],
+ "skyObject_:_loc": [
+  "help/skyObject",
+  "skyObject_:_loc"
+ ],
+ "skyObject_:_col": [
+  "help/skyObject",
+  "skyObject_:_col"
+ ],
+ "skyObject_:_lty": [
+  "help/skyObject",
+  "skyObject_:_lty"
+ ],
+ "skyObject_:_lwd": [
+  "help/skyObject",
+  "skyObject_:_lwd"
+ ],
+ "skyObject_:_epoch": [
+  "help/skyObject",
+  "skyObject_:_epoch"
+ ],
+ "help-skyradiance": [
+  "help/skyRadiance",
+  "help-skyradiance"
+ ],
+ "help-skyscaper-vars": [
+  "help/skyscapeR.vars",
+  "help-skyscaper-vars"
+ ],
+ "help-smnlx": [
+  "help/smnLX",
+  "help-smnlx"
+ ],
+ "help-solar-date": [
+  "help/solar.date",
+  "help-solar-date"
+ ],
+ "solar.date": [
+  "help/solar.date",
+  "solar.date"
+ ],
+ "topic+solar.date": [
+  "help/solar.date",
+  "topic+solar.date"
+ ],
+ "solar.date_:_dec": [
+  "help/solar.date",
+  "solar.date_:_dec"
+ ],
+ "solar.date_:_year": [
+  "help/solar.date",
+  "solar.date_:_year"
+ ],
+ "solar.date_:_calendar": [
+  "help/solar.date",
+  "solar.date_:_calendar"
+ ],
+ "solar.date_:_verbose": [
+  "help/solar.date",
+  "solar.date_:_verbose"
+ ],
+ "help-spatial-equinox": [
+  "help/spatial.equinox",
+  "help-spatial-equinox"
+ ],
+ "spatial.equinox": [
+  "help/spatial.equinox",
+  "spatial.equinox"
+ ],
+ "topic+spatial.equinox": [
+  "help/spatial.equinox",
+  "topic+spatial.equinox"
+ ],
+ "spatial.equinox_:_hor": [
+  "help/spatial.equinox",
+  "spatial.equinox_:_hor"
+ ],
+ "spatial.equinox_:_parallax": [
+  "help/spatial.equinox",
+  "spatial.equinox_:_parallax"
+ ],
+ "spatial.equinox_:_year": [
+  "help/spatial.equinox",
+  "spatial.equinox_:_year"
+ ],
+ "spatial.equinox_:_refraction": [
+  "help/spatial.equinox",
+  "spatial.equinox_:_refraction"
+ ],
+ "spatial.equinox_:_atm": [
+  "help/spatial.equinox",
+  "spatial.equinox_:_atm"
+ ],
+ "spatial.equinox_:_temp": [
+  "help/spatial.equinox",
+  "spatial.equinox_:_temp"
+ ],
+ "help-spd": [
+  "help/spd",
+  "help-spd"
+ ],
+ "spd": [
+  "help/spd",
+  "spd"
+ ],
+ "topic+spd": [
+  "help/spd",
+  "topic+spd"
+ ],
+ "spd_:_pdf": [
+  "help/spd",
+  "spd_:_pdf"
+ ],
+ "spd_:_xrange": [
+  "help/spd",
+  "spd_:_xrange"
+ ],
+ "spd_:_normalise": [
+  "help/spd",
+  "spd_:_normalise"
+ ],
+ "spd_:_.res": [
+  "help/spd",
+  "spd_:_.res"
+ ],
+ "spd_:_.cutoff": [
+  "help/spd",
+  "spd_:_.cutoff"
+ ],
+ "help-star": [
+  "help/star",
+  "help-star"
+ ],
+ "help-star-phases": [
+  "help/star.phases",
+  "help-star-phases"
+ ],
+ "help-star-phases-star.phases": [
+  "help/star.phases",
+  "star.phases"
+ ],
+ "help-star-phases-topic+star.phases": [
+  "help/star.phases",
+  "topic+star.phases"
+ ],
+ "help-star-phases-star.phases_:_star": [
+  "help/star.phases",
+  "star.phases_:_star"
+ ],
+ "help-star-phases-star.phases_:_year": [
+  "help/star.phases",
+  "star.phases_:_year"
+ ],
+ "help-star-phases-star.phases_:_loc": [
+  "help/star.phases",
+  "star.phases_:_loc"
+ ],
+ "help-star-phases-star.phases_:_alt.hor": [
+  "help/star.phases",
+  "star.phases_:_alt.hor"
+ ],
+ "help-star-phases-star.phases_:_alt.rs": [
+  "help/star.phases",
+  "star.phases_:_alt.rs"
+ ],
+ "help-star-phases-star.phases_:_solar.alt": [
+  "help/star.phases",
+  "star.phases_:_solar.alt"
+ ],
+ "help-star-phases-star.phases_:_k": [
+  "help/star.phases",
+  "star.phases_:_k"
+ ],
+ "help-star-phases-star.phases_:_limit": [
+  "help/star.phases",
+  "star.phases_:_limit"
+ ],
+ "help-star-phases-star.phases_:_refraction": [
+  "help/star.phases",
+  "star.phases_:_refraction"
+ ],
+ "help-star-phases-star.phases_:_atm": [
+  "help/star.phases",
+  "star.phases_:_atm"
+ ],
+ "help-star-phases-star.phases_:_temp": [
+  "help/star.phases",
+  "star.phases_:_temp"
+ ],
+ "help-star-phases-star.phases_:_res": [
+  "help/star.phases",
+  "star.phases_:_res"
+ ],
+ "help-stellariumsky": [
+  "help/stellariumSky",
+  "help-stellariumsky"
+ ],
+ "help-subset-skyscaper-pdf": [
+  "help/subset.skyscapeR.pdf",
+  "help-subset-skyscaper-pdf"
+ ],
+ "help-sunaz": [
+  "help/sunAz",
+  "help-sunaz"
+ ],
+ "help-ten": [
+  "help/ten",
+  "help-ten"
+ ],
+ "help-time2jd": [
+  "help/time2jd",
+  "help-time2jd"
+ ],
+ "help-timestring": [
+  "help/timestring",
+  "help-timestring"
+ ],
+ "help-zenith": [
+  "help/zenith",
+  "help-zenith"
+ ],
+ "zenith": [
+  "help/zenith",
+  "zenith"
+ ],
+ "topic+zenith": [
+  "help/zenith",
+  "topic+zenith"
+ ],
+ "zenith_:_loc": [
+  "help/zenith",
+  "zenith_:_loc"
+ ],
+ "zenith_:_parallax": [
+  "help/zenith",
+  "zenith_:_parallax"
+ ],
+ "zenith_:_altitude": [
+  "help/zenith",
+  "zenith_:_altitude"
+ ],
+ "zenith_:_year": [
+  "help/zenith",
+  "zenith_:_year"
+ ]
+}

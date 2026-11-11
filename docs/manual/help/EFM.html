@@ -1,0 +1,187 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EFM | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-efm.html">EFM() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Find equinoctial full moonrises and moonsets</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Identify the near-full Moon whose rising or setting position crosses that of the Sun
+around the spring or autumn equinox.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>EFM(
+  year,
+  loc,
+  season = "spring",
+  rise = TRUE,
+  min.phase = 0.99,
+  timezone,
+  calendar,
+  refraction,
+  atm,
+  temp
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>year</code></td>
+<td>
+<p>Astronomical year or years. Can be either a single value (the year), Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.
+two values (range of years), or a vector of years.</p>
+</td></tr>
+<tr><td><code>loc</code></td>
+<td>
+<p>This can be either a <em>skyscapeR.horizon</em> object, or a vector with the
+latitude, longitude and elevation of the site, in this order.</p>
+</td></tr>
+<tr><td><code>season</code></td>
+<td>
+<p>Either 'spring' or 'autumn'. Default is 'spring'.</p>
+</td></tr>
+<tr><td><code>rise</code></td>
+<td>
+<p>Logical to choose whether to calculate Equinoctial Full
+Moon rises or sets. Defaults to <em>TRUE</em>.</p>
+</td></tr>
+<tr><td><code>min.phase</code></td>
+<td>
+<p>Minimum illuminated fraction of the Moon, from 0 to 1. The default 0.99 means 99 percent illumination.</p>
+</td></tr>
+<tr><td><code>timezone</code></td>
+<td>
+<p>Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See <code>time2jd</code> for named zones and offsets.</p>
+</td></tr>
+<tr><td><code>calendar</code></td>
+<td>
+<p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p>
+</td></tr>
+<tr><td><code>refraction</code></td>
+<td>
+<p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
+</td></tr>
+<tr><td><code>atm</code></td>
+<td>
+<p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
+</td></tr>
+<tr><td><code>temp</code></td>
+<td>
+<p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Silva and Pimenta (2012) identify the crossover by the first near-full
+Moon on the seasonal side of the Sun. Spring and autumn refer to the March
+and September equinoxes. At spring moonrise the lunar azimuth must exceed
+the solar azimuth, and at spring moonset it must be smaller. Autumn reverses
+both inequalities. Bearings are topocentric, clockwise from north.
+</p>
+<p>The search runs chronologically from 60 days before to 65 days after the
+astronomical equinox. Moonrise is paired with the first sunrise on the same
+local civil date. Moonset is paired with the most recent sunset before it,
+considering the first solar centre crossing on the current and preceding
+local civil dates. A candidate without such a sunset is skipped. Local-day
+boundaries account for timezone changes, including daylight saving time.
+A coordinate vector
+specifies a level horizon. A horizon object supplies the horizon for both
+bodies. Illumination is tested at the lunar event itself. A date qualifies
+as soon as the illumination and strict bearing conditions both hold. A
+lower illumination threshold can select an earlier lunation. If no date
+qualifies the function reports the year and event and stops.
+</p>
+<p>Dates and clock times use the supplied timezone and calendar. Changing
+the timezone can change which events share a civil date. Declinations use
+the package coordinate setting (topocentric by default). For comparison
+with Figure 3 of Silva and Pimenta, request geocentric declinations with
+<code>skyscapeR.vars(dec="geo")</code>. Event selection uses topocentric bearings
+in either output frame.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list with an Event label and Moon and Sun data frames. Each row gives year, date, time, azimuth and declination for the selected rising or setting event. Angles are in degrees.
+</p>
+
+
+<h3>Comparison with the original simulations</h3>
+
+<p>With the corrected preceding-sunset pairing, 2,562 of 2,568 moonsets in
+the supplied 1620&ndash;2047 series at latitudes 0, 60 N and 60 S agree within
+0.02 degrees in lunar declination. The comparison uses a level horizon,
+longitude 0, elevation 400 m, UTC, Gregorian dates, geocentric declinations,
+refraction, pressure 1013.25 mbar, temperature 15 degrees Celsius and the
+default illumination threshold. Five remaining cases lie just above the
+0.99 illumination boundary; one lies about 0.002 degrees beyond the azimuth
+crossover boundary. The original series selects the following morning in
+each case. Thresholds have not been tuned to reproduce those selections.
+</p>
+<p>The original 40-degree N series retains systematic coordinate differences.
+Diagnostic comparisons suggest a different coordinate-conversion or timing
+convention, but the original settings have not been established. Agreement
+with these simulation tables is not independent observational validation.
+The paper does not specify all atmospheric settings; the values above describe
+this comparison, not confirmed settings of the original simulations.
+</p>
+<p>Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-package</code> for setup.
+</p>
+
+
+<h3>Scope of the event model</h3>
+
+<p>The illumination fraction is a selection criterion, not a naked-eye detection
+model. The calculation does not include weather, sky brightness or extinction.
+It uses centre crossings rather than the first appearance of the upper limb.
+Only the first qualifying event is returned, so changes in illumination
+threshold, civil-day convention or horizon can change the selected lunation.
+Remaining differences from the original simulations are described above.
+Numerical precision does not establish agreement with a published distribution.
+Preserve all inputs when comparing series.
+</p>
+
+
+<h3>Provenance</h3>
+
+<p>Structured results carry a <code>provenance</code> attribute. Read it with
+<code>attr(result, "provenance")</code>; its <code>packages</code> entry records the loaded
+skyscapeR and swephR versions, with NA when a namespace version is unavailable.
+This attribute adds no list entries or table columns. Ordinary subsetting or
+transformations may discard attributes; save the original result for reference.
+It does not identify ephemeris files, catalogue revisions or a development
+commit. Retain those and the analysis script separately for exact reproduction.
+</p>
+
+
+<h3>References</h3>
+
+<p>Silva, F. and Pimenta, F. (2012). The Crossover of the Sun and the Moon. Journal for the History of Astronomy 43. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1177/002182861204300204")}.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>CC</code>, <code>spatial.equinox</code>, <code>zenith</code>, <code>antizenith</code>, <code>solar.date</code>, <code>findTargets</code>, <code>planet.extremes</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>if (requireNamespace("swephRdata", quietly = TRUE)) {
+  # Spring Full Moon at latitude 35 degrees north in the year 2018
+  EFM(year=2018, loc=c(35,-8,100))
+  
+  # Autumn Full Moons over a 3 year period
+  ## Not run: 
+  EFM(season='autumn', year=c(2018,2020), loc=c(35,-8,100))
+  
+## End(Not run)
+}
+</code></pre>
+
+<p><a href="../fn-efm.html">EFM() method</a></p></body></html>

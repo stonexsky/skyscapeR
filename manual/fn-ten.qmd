@@ -1,0 +1,29 @@
+# `ten()` {#fn-ten}
+
+**Validation on 2.0.9005.** Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. [A01 results](a01-calendar-checks.qmd).
+
+[Function index](function-index.html#idx-ten)
+
+```{=html}
+<p>The sign applies to the whole angle. The magnitude is the sum of absolute degrees,
+minutes divided by 60 and seconds divided by 3600. With numeric components the first
+nonzero component sets the sign and later components must be nonnegative. A string may
+contain one to three colon- or space-separated components and an optional leading sign.
+A string such as "-0:30" preserves the negative sign even when degrees are zero.
+</p>
+```
+
+[Preserving the original field representation](fn-long-date.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>dd</code></th><td>—</td><td><p>Degrees as a finite numeric scalar, or a single character string
+containing an angle, for example <code>"-8:30:00"</code>.</p></td></tr><tr><th scope="row"><code>mm</code></th><td><code>0</code></td><td><p>Arcminutes as a finite numeric scalar. Defaults to zero.</p></td></tr><tr><th scope="row"><code>ss</code></th><td><code>0</code></td><td><p>Arcseconds as a finite numeric scalar. Defaults to zero.</p></td></tr></tbody></table><h5>Return value</h5><p>A numeric scalar giving the angle in signed decimal degrees.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/misc.R`. [Full function help](help/ten.html) · [Time, coordinates and ephemerides outline](contents-plan.html#plan-time) · [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-time) · [Reduce a theodolite survey with a solar sight](vignette-guide.html#workflow-reduce-a-theodolite-survey-with-a-solar-sight)

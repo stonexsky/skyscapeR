@@ -1,0 +1,14 @@
+# A05 · Solar dates and limiting declinations {#a05-solar-limits}
+
+A05 distinguishes the civil day on which the Sun reaches a declination, the instant of a named season, and the direction of a crossing at a particular site. We tested each quantity against its own reference. All 121 assertions passed on 2.0.9009.
+
+| Quantity | Reference and result |
+|:---|:---|
+| Solar civil dates | A six-hour [JPL Horizons](https://ssd.jpl.nasa.gov/horizons/) geocentric apparent-of-date table supplied 12 crossings at six declinations in 2000. [`solar.date()`](help/solar.date.html) matched every UT civil day. As a separate diagnostic, solving against the package's underlying solar ephemeris gave differences of at most 2.65 seconds from the interpolated JPL roots. The largest occurred close to the June turning point. |
+| Calendar branches | Independent bracketing on a quarter-day grid checked 2000 CE and 3250 BCE in Gregorian and Julian calendars. At the maximum declination a tangency gave one passage, an immediately lower target gave two, and an unreachable target gave none. A civil-year boundary fixture gave three passages. |
+| Named seasons | The four named season dates matched the [US Naval Observatory 2000 record](https://aa.usno.navy.mil/data/Earth_Seasons). Underlying apparent-longitude roots differed by at most 26 seconds from the minute-rounded reference. The public labels report civil days. |
+| Northern and southern terrain limits | The direct spherical reference searched a dense grid throughout each specified sector. An interior crest gave a maximum of 48.5884° and an interior trough gave a minimum of −47.7023°. Both functions agreed within 0.00028°. The tests also covered level terrain at four latitudes. |
+| Spatial equinox | An independent hour-angle track and sign-bracketed roots checked northern and southern sites, a flat horizon and separate east and west ridges. Rising and setting midpoints and derived declinations agreed within 0.000003°. The high-latitude case correctly lacked the pair of crossings needed for a midpoint. These checks disabled refraction and parallax to isolate geometry. |
+| Zenith and anti-zenith | At geometric overhead and underfoot the parallax correction vanishes. Build 2.0.9009 uses the obliquity of the supplied year for tropical eligibility. The fixtures include both tropical boundaries, modern and prehistoric epochs, and an unreachable polar site. |
+
+The prehistoric date checks use an independent root search with the same Swiss ephemeris. The JPL and USNO comparisons apply to the modern cases tested. [Download the A05 scripts, reference data and results](archives/A05-9009.zip).

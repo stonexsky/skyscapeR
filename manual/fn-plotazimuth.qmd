@@ -1,0 +1,38 @@
+# `plotAzimuth()` {#fn-plotazimuth}
+
+W01 checked compass bearings and the inner and outer edges of celestial year-range sectors against their spherical reference bearings. [W01 results](w01-plot-geometry.qmd).
+
+[Function index](function-index.html#idx-plotazimuth)
+
+```{=html}
+<p>Measurements are drawn as spokes or rim ticks. North is at the top and
+bearings increase clockwise; repeated bearings can overplot. A data frame supplies the
+True.Azimuth column. For optional targets the function uses the session atmosphere to compute a diurnal
+track and seeks a zero-altitude crossing in the eastern and western portions of the
+track. These reference bearings assume a level horizon and require the corresponding
+crossings to exist.
+</p>
+```
+
+[The quantity represented on the angular axis](fn-plot-skyscaper-pdf.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>az</code></th><td>—</td><td><p>Azimuths in degrees clockwise from north. Can be omitted if <em>obj</em> is given.</p></td></tr><tr><th scope="row"><code>obj</code></th><td>—</td><td><p>A <em>skyscapeR.object</em> from <code>skyObject</code>, or
+a list of these objects. Each group retains its own epochs and styles
+for displaying the azimuths of celestial objects. Note that this assumes a single
+location per group and a flat horizon of zero degrees. For a year range,
+both stored declination boundaries are drawn as reference bearings.</p></td></tr><tr><th scope="row"><code>show.obj.labels</code></th><td><code>TRUE</code></td><td><p>Logical to control whether to display celestial objects names.
+Defaults to TRUE.</p></td></tr><tr><th scope="row"><code>col</code></th><td><code>NULL</code></td><td><p>Single color or color palette to use for plotting measurements.</p></td></tr><tr><th scope="row"><code>lty</code></th><td><code>1</code></td><td><p>Line type to plot measurements. Defaults to 1.</p></td></tr><tr><th scope="row"><code>lwd</code></th><td><code>1.5</code></td><td><p>Line width for measured bearings. Defaults to 1.5.</p></td></tr><tr><th scope="row"><code>marks</code></th><td><code>c(&quot;spokes&quot;, &quot;rim&quot;)</code></td><td><p>Draw measured orientations as equal-length <code>"spokes"</code> (default) or short <code>"rim"</code> ticks.</p></td></tr><tr><th scope="row"><code>obj.position</code></th><td><code>c(&quot;inside&quot;, &quot;outside&quot;)</code></td><td><p>Draw target reference lines <code>"inside"</code> the circle or just <code>"outside"</code> its rim.
+In both positions labels lie outside the circle. The first line names the target and the second gives rise or set.
+Range endpoints share a label. Non-crossing targets have no reference bearing.</p></td></tr><tr><th scope="row"><code>show.legend</code></th><td><code>TRUE</code></td><td><p>With TRUE, show the count and enabled target labels. FALSE centres the bare compass,
+including its cardinal scale, measured bearings and target lines.</p></td></tr><tr><th scope="row"><code>style</code></th><td><code>&quot;publication-colour&quot;</code></td><td><p>Analytical display style, either <code>"publication-colour"</code> (default) or
+<code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p></td></tr></tbody></table><h5>Return value</h5><p>Draws measured bearings and optional target directions on the active graphics device. North is at the top and azimuth increases clockwise.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/plotting.R`. [Full function help](help/plotAzimuth.html) · [Uncertainty and orientation distributions outline](contents-plan.html#plan-density) · [What the orientation displays calculate](orientation-densities.html#orientation-displays) · [Start with the Ġgantija entrance bearings](vignette-guide.html#workflow-start-with-the-gantija-entrance-bearings)

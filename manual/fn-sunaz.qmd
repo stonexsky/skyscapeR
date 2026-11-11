@@ -1,0 +1,34 @@
+# `sunAz()` {#fn-sunaz}
+
+[Function index](function-index.html#idx-sunaz)
+
+```{=html}
+<p>A solar reference requires the observer position, timestamp, timezone and the part of
+the disc that was sighted. Times are parsed using R's civil-time routines and converted
+to UT Julian dates. Swiss Ephemeris supplies the topocentric solar position and its
+horizontal coordinates using 1013.25 mbar and 15 degrees Celsius. The returned bearing
+is measured clockwise from north. Sighting the left or right limb applies a fixed minus
+or plus 16 arcminutes in azimuth. Optional altitude is the geometric centre altitude.
+</p>
+<p>Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-package</code> for setup.
+</p>
+```
+
+[The time and limb of the solar reference](fn-reduct-theodolite.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>Location, either a <em>skyscapeR.horizon</em> or a vector
+containing the latitude, longitude and elevation of location, in this order.</p></td></tr><tr><th scope="row"><code>time</code></th><td>—</td><td><p>String containing the date and time in the following format:
+"YYYY-MM-DD HH:MM:SS"</p></td></tr><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See <code>time2jd</code> for named zones and offsets.</p></td></tr><tr><th scope="row"><code>limb</code></th><td>—</td><td><p>Measured limb of the sun. Options are <em>left</em>, <em>right</em>.
+If missing the center of the sun will be output.</p></td></tr><tr><th scope="row"><code>alt</code></th><td><code>FALSE</code></td><td><p>Logical that triggers output of altitude of the sun at exact time.
+Default is FALSE.</p></td></tr></tbody></table><h5>Return value</h5><p>Solar azimuth in degrees clockwise from north, one value per observation. With alt = TRUE, a data frame with columns az and alt is returned. The altitude is geometric and is expressed in degrees.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/mechanics.R`. [Full function help](help/sunAz.html) · [Reducing field observations outline](contents-plan.html#plan-survey) · [Reducing field observations](field-reduction.html#field-solar) · [Reduce a theodolite survey with a solar sight](vignette-guide.html#workflow-reduce-a-theodolite-survey-with-a-solar-sight)

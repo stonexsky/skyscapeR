@@ -1,0 +1,33 @@
+# `print.skyscapeR.sigTest()` {#fn-print-skyscaper-sigtest}
+
+W01 checked the reported wrapped interval endpoints and adjusted probabilities against a known fit. [W01 results](w01-plot-geometry.qmd).
+
+**Verified on 2.0.9006.** A single adjusted probability is printed for a range crossing north. [S03 rerun](s03-scoring-checks.qmd).
+
+**Validation on 2.0.9005.** The tested public fits printed the stored global probability and local interval endpoints. North-crossing intervals can appear separately. [S03 results](s03-scoring-checks.qmd).
+
+[Function index](function-index.html#idx-print-skyscaper-sigtest)
+
+```{=html}
+<p>Start with the stored global Monte Carlo result, then examine the direction, limits and
+local p-value of each reported interval. The summary gives the tail setting, confidence
+level and number of simulations. It counts unequal observations at constant null density
+separately and reports when there are no local regions. The method formats a saved
+result on the console without recomputing it. Read interval coordinates in the units and
+coordinate system of the fitted test.
+</p>
+```
+
+[Interpreting the global and adjusted local results](fn-plot-skyscaper-sigtest.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>x</code></th><td>—</td><td><p>Object of <em>skyscapeR.sigTest</em> format.</p></td></tr><tr><th scope="row"><code>...</code></th><td>—</td><td><p>Additional arguments to be passed to <em>print</em>.</p></td></tr></tbody></table><h5>Return value</h5><p>Prints the test summary and global and local results to the console.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/plotting.R`. [Full function help](help/print.skyscapeR.sigTest.html) · [Significance tests](significance.html#sec-tests) · [Null models and significance outline](contents-plan.html#plan-null) · [Reading the Ġgantija fit](significance.html#sig-output)

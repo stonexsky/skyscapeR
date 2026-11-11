@@ -1,0 +1,9 @@
+# H02. How well does `createHor()` reproduce terrain skylines? {#h02-skyline-comparison}
+
+**Research question.** How closely does `createHor()` reproduce a skyline calculated independently from the same terrain, and how accurately does it predict horizon altitude at surveyed bearings?
+
+**Outcome.** On the same 1 m terrain, `createHor()` reproduced Horizon’s skylines with a mean absolute difference of 0.004° at each of the two English control sites. On the covered directions at 30 Maltese viewpoints, its mean absolute difference from Horizon was 0.062°.
+
+Against field measurements, `createHor()` using SRTM had a mean absolute error of 0.328° across 344 bearings at eight Irish setups, lower than either HeyWhatsThat or PeakFinder on those bearings. Its accuracy varied by site. Using the same 1 m terrain product in England, `createHor()` had a mean absolute error of 0.032° at West Kennet and 0.823° at Rectory Farm. It was closest to the observations at West Kennet. Both online services were closer at Rectory Farm.
+
+The Maltese figure covers 20,059 directions with continuous 5 km terrain coverage. Xemxija is held out because its archived viewpoint is disputed. At Kunċizzjoni, the Horizon comparison uses the archived Horizon position for both programs. Only predictions made at the field position enter the field comparison. The Irish service comparison uses each provider’s delivered profile and terrain. [H02 comparison report](https://chatgpt.com/library?file_id=libfile_22229cdbe57c81919dd8170e6c48dc45&account_id=personal) · [Data and code archive](https://chatgpt.com/library?file_id=libfile_fd833a195a748191877d77d68dc7bd84&account_id=personal)

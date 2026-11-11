@@ -1,0 +1,26 @@
+# `astroYear()` {#fn-astroyear}
+
+**Validation on 2.0.9005.** Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. [A01 results](a01-calendar-checks.qmd).
+
+[Function index](function-index.html#idx-astroyear)
+
+```{=html}
+<p>Astronomical years include zero. Historical BC or BCE years convert
+by subtracting the historical year from one. AD and CE years keep their value.
+Era labels are case-insensitive and follow a positive whole year.
+</p>
+```
+
+**Interpretation and limits.** When an excavation report gives 1 BC, the corresponding astronomical year is zero. Convert the year once before computing an ephemeris. An off-by-one year can survive a round trip through calendar formatting if both ends use the same mistaken convention.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>x</code></th><td>—</td><td><p>Numeric astronomical years, character integer years, or historical labels.</p></td></tr></tbody></table><h5>Return value</h5><p>Numeric astronomical years in input order.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/dates.R`. [Full function help](help/astroYear.html) · [Time, coordinates and ephemerides outline](contents-plan.html#plan-time) · [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-time)

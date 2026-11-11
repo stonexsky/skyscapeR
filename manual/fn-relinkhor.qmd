@@ -1,0 +1,22 @@
+# `relinkHor()` {#fn-relinkhor}
+
+[Function index](function-index.html#idx-relinkhor)
+
+```{=html}
+<p>A saved horizon records the checksum of its displayed PNG. Copy that PNG with the RDS, including the levelled copy for a calibrated photograph. Matching checks file contents, so a renamed file can be recovered and different panoramas with the same filename can be distinguished. For identical copies, the original basename is preferred, then the first matching candidate. A skyline-only horizon passes through unchanged. If any required image cannot be verified, the function stops before returning a result. Assign the returned object and use saveRDS() to keep the updated paths. The original PeakFinder archive used for native-layout export is separate.
+</p>
+```
+
+[Retaining panorama calibration and provenance](fn-exporthor.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>A skyscapeR.horizon object or a list of horizon objects.</p></td></tr><tr><th scope="row"><code>path</code></th><td>—</td><td><p>A directory containing the moved PNGs, or a character vector of PNG filenames in any order.</p></td></tr><tr><th scope="row"><code>recursive</code></th><td><code>FALSE</code></td><td><p>Search subdirectories when path names a directory. Defaults to FALSE.</p></td></tr></tbody></table><h5>Return value</h5><p>The horizon or list, retaining its names, order and metadata with updated absolute PNG paths.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/relinkHor.R`. [Full function help](help/relinkHor.html) · [Terrain horizons](horizons.html#sec-horizon) · [Terrain horizons and panoramas outline](contents-plan.html#plan-terrain) · [Photographic calibration and interchange](photographic-horizons.html#photo-interchange) · [Generating a terrain panorama](horizons.html#sec-dem-panorama)

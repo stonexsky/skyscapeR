@@ -1,0 +1,50 @@
+# `exportHor()` {#fn-exporthor}
+
+H07 checked that a partial photograph is rejected for both image and numerical landscape export. [H07 results](h07-panorama-coverage.qmd).
+
+[Function index](function-index.html#idx-exporthor)
+
+```{=html}
+<p>A landscape lets the same terrain obstruction be used in a planetarium reconstruction.
+The export pairs the profile's azimuth and altitude samples in a polygonal horizon file
+and records the site, appearance and attribution in a Stellarium configuration. The
+export describes the horizon geometry; the altitude-uncertainty series remains in the R
+object.
+</p>
+<p>DEM and SVG panoramas use a spherical landscape with the PNG rotated -90
+degrees for Stellarium's east-origin mapping. A new PeakFinder import also
+records the original ZIP location. If native tiles are requested and that archive still matches its checksum
+and contains the supported calibrated eight-tile landscape, Stellarium uses
+those original textures and their angular settings instead. The export also
+includes the skyscapeR numerical profile and SVG-derived PNG.
+exportStellarium is an alias for exportHor.
+</p>
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p><a href="https://stellarium.org/guide/">Stellarium User Guide</a>, chapter on landscapes and texture sizes.
+</p>
+
+
+
+```
+
+</details>
+
+**Interpretation and limits.** Retain the original photograph and angular controls. Re-encoding a panorama or successfully relinking its image does not independently verify its north direction, its vertical calibration or the coordinate assigned to the observer.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>Horizon data in <em>skyscapeR.horizon</em> format.</p></td></tr><tr><th scope="row"><code>name</code></th><td>—</td><td><p>Horizon name to be displayed in <em>Stellarium</em>, if different
+from one in <em>skyscapeR.horizon</em> object.</p></td></tr><tr><th scope="row"><code>author</code></th><td><code>&quot;skyscapeR&quot;</code></td><td><p>Author, to be included in <em>landscape.ini</em> file.</p></td></tr><tr><th scope="row"><code>description</code></th><td>—</td><td><p>Description, to be included in <em>landscape.ini</em> file.</p></td></tr><tr><th scope="row"><code>use.image</code></th><td><code>TRUE</code></td><td><p>Include a valid external panorama PNG when available. Default TRUE.
+Missing or changed files warn and use a polygonal horizon instead.</p></td></tr><tr><th scope="row"><code>peakfinder.layout</code></th><td><code>c(&quot;single&quot;, &quot;native&quot;)</code></td><td><p>Single spherical PNG (default) or original native tiles. Textured DEM and PeakFinder exports use their PNG silhouette.</p></td></tr><tr><th scope="row"><code>max.texture.width</code></th><td><code>4096</code></td><td><p>Maximum exported DEM or photographic panorama width in pixels. The default is 4096. Use max.texture.width=2048 for a smaller texture, or Inf to keep the original dimensions. Stellarium supports textures only up to the graphics hardware limit. PNG compression does not reduce the decoded texture dimensions. Larger exports are at your own risk and may fail to load or crash Stellarium. This setting does not resize PeakFinder textures.</p></td></tr><tr><th scope="row"><code>ground_col</code></th><td>—</td><td><p>Color of ground. Defaults to <em>Stellarium</em>'s default.</p></td></tr><tr><th scope="row"><code>hor_col</code></th><td>—</td><td><p>Colour of a polygonal horizon line. Textured DEM and PeakFinder landscapes omit this line.</p></td></tr></tbody></table><h5>Return value</h5><p>Invisibly, the absolute path of the created ZIP archive.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/horizon.R`. [Full function help](help/exportHor.html) · [Terrain horizons and panoramas outline](contents-plan.html#plan-terrain) · [Photographic calibration and interchange](photographic-horizons.html#photo-interchange) · [Bearing lookup and export layouts](photographic-horizons.html#photo-routes)

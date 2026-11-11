@@ -1,0 +1,68 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>mag.dec | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-mag-dec.html">mag.dec() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Estimate magnetic declination at a site</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Estimate the correction between magnetic north and true north for the location and date
+of a field survey.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>mag.dec(loc, date)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>loc</code></td>
+<td>
+<p>Latitude and longitude in degrees as a vector, matrix or data frame with one row per site, or a horizon object. An optional third column gives elevation.</p>
+</td></tr>
+<tr><td><code>date</code></td>
+<td>
+<p>One or more survey dates as Date objects or YYYY/MM/DD strings.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Compass reduction depends on when and where the reading was taken. The function
+evaluates IGRF-14 through oce at sea level and returns east-positive declination.
+Supply a single site for several dates, a single date for several sites, or
+one date per site. Results follow input order. Other size combinations raise
+an error. The calendar date is converted to a decimal year using the actual
+length of that year at midnight UTC. Supported dates run from 1 January 1900
+through 1 January 2030 inclusive. Site elevation is ignored by this model call.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Numeric magnetic declination in degrees. Use it as the correction added to a magnetic bearing in <code>reduct.compass</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Kelley, D. and Richards, C. oce: magneticField. <a href="https://dankelley.github.io/oce/reference/magneticField.html">https://dankelley.github.io/oce/reference/magneticField.html</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>magneticField</code>, <code>reduct.compass</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'># Magnetic Declination for London on April 1st 2016:
+loc &lt;- c( 51.5074, -0.1278 )
+mag.dec( loc, "2016/04/01" )
+mag.dec(c(40, -8), c("2010/01/01", "2026/01/01"))
+</code></pre>
+
+<p><a href="../fn-mag-dec.html">mag.dec() method</a></p></body></html>

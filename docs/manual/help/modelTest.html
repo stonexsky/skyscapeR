@@ -1,0 +1,195 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>modelTest | skyscapeR 2.0.9011</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}img{max-width:100%;height:auto}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-modeltest.html">modelTest() method</a></nav><h2 id='modelTest'>Test orientations against a specified null model</h2><span id='topic+modelTest'></span>
+
+<h3>Description</h3>
+
+<p>Use a Monte Carlo significance test to assess whether the measured orientations of a group of structures are compatible with a
+specified null model in azimuth or declination. The model can be shared across sites or
+specific to each site.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>modelTest(
+  pdf,
+  model,
+  unc = NULL,
+  nsims = 1000,
+  conf = 0.95,
+  tails = 2,
+  normalise = FALSE,
+  .res = 0.01,
+  ncores = NULL,
+  verbose = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="modelTest_:_pdf">pdf</code></td>
+<td>
+<p>Empirical skyscapeR.pdf from <code>az.pdf</code>, <code>dec.pdf</code> or <code>coordtrans</code>. Its coordinate selects the simulation path.</p>
+</td></tr>
+<tr><td><code id="modelTest_:_model">model</code></td>
+<td>
+<p>One shared data frame or an ordered list with one table per observation. The first column contains candidate coordinates in degrees and the second contains nonnegative discrete sampling weights, with at least one positive weight. On equally spaced grids, density heights can serve as weights.</p>
+</td></tr>
+<tr><td><code id="modelTest_:_unc">unc</code></td>
+<td>
+<p>Optional replacement width in degrees of the tested coordinate. Use a standard deviation for normal, half the total span for triangular, or the family-specific half-width documented in <code>az.pdf</code>. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.</p>
+</td></tr>
+<tr><td><code id="modelTest_:_nsims">nsims</code></td>
+<td>
+<p>Number of simulations, at least two. Default is 1000.</p>
+</td></tr>
+<tr><td><code id="modelTest_:_conf">conf</code></td>
+<td>
+<p>Confidence level as a fraction.</p>
+</td></tr>
+<tr><td><code id="modelTest_:_tails">tails</code></td>
+<td>
+<p>1 for upper excesses, 2 for excesses and deficits.</p>
+</td></tr>
+<tr><td><code id="modelTest_:_normalise">normalise</code></td>
+<td>
+<p>Scale each summed density to unit area before comparison.</p>
+</td></tr>
+<tr><td><code id="modelTest_:_.res">.res</code></td>
+<td>
+<p>Spacing of the empirical and simulated comparison grids in degrees. Default 0.01.</p>
+</td></tr>
+<tr><td><code id="modelTest_:_ncores">ncores</code></td>
+<td>
+<p>Worker count. By default use half the detected available logical cores, rounded down with a minimum of one. Set ncores=1 for serial execution. The simulation count and memory batch size can further limit workers. Verbose output reports the effective count.</p>
+</td></tr>
+<tr><td><code id="modelTest_:_verbose">verbose</code></td>
+<td>
+<p>Display simulation progress.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>A proposed topographical or astronomical explanation can predict some orientations more
+frequently than others. Testing that explanation requires simulating its predicted
+distribution at the sites under study.
+</p>
+<p>Silva and Lomsdalen (2025) extended the random-orientation framework of Silva (2020)
+to test specific hypotheses about temple orientations in Malta, including topographical and
+astronomical explanations. Here the hypothesis specifies the relative probability of each
+candidate orientation. A small global p-value is evidence against that particular model.
+</p>
+<p>The input PDF determines the coordinate of the test. Express the model coordinates and
+uncertainties in that same coordinate. Each simulation draws one centre per observation
+according to the weights in its model table. The function constructs an azimuth or declination
+density around each centre and sums these densities on the same comparison grid as the
+observed SPD. The observed measurement curves are used as supplied.
+</p>
+<p><strong>Measurement uncertainty.</strong> Direct measurement PDFs reuse the family selected in
+<code>az.pdf</code> or <code>dec.pdf</code>, including the observation's
+taper, survey error and triangular asymmetry. A direct triangular model is
+positioned by its mode. Overriding <code>unc</code> rescales its two sides in
+proportion; for the two softened uniform families the taper or survey-error
+SD stays fixed in degrees.
+For declinations from <code>coordtrans</code>, omit <code>unc</code> to use each observation's own density as a template.
+A model draw represents the expected mean declination for that observation. The function calculates the
+density-weighted mean of its piecewise-linear curve and adds (draw minus mean) to every declination.
+For example, a curve with mean -17.6 degrees shifts by -4.4 degrees for a draw of -22 degrees.
+The shift preserves the curve's width, asymmetry and peaks before interpolation onto the comparison grid.
+It requires only the stored declination curve and assumes its shape applies at the modelled mean.
+A positive-weight candidate that would shift density beyond -90 or +90 degrees raises an error.
+An explicit <code>unc</code> selects a normal density around each simulated centre for transformed input.
+With <code>normalise=TRUE</code>, each final SPD has unit area.
+</p>
+<p><strong>Reading the result.</strong> The global p-value compares the departure of the entire
+observed curve with departures under the specified model. Local results use the largest
+qualifying cluster per simulation to adjust for searching the grid. Boundaries describe
+where departures were observed. The envelope is pointwise. Both tests use inclusive
+Monte Carlo ranks, with minimum p-value 1/(nsims + 1).
+See <code>randomTest</code> for the shared scoring rules, width threshold, treatment
+of ties and zero variance, and assumptions behind the adjustment. When a model was
+fitted to the same observations, its fitting procedure must be accounted for separately.
+</p>
+<p><strong>Running simulations.</strong> With a fixed seed, sampling in the calling session gives the same result for different worker
+counts. For grids larger than 16 MiB, allow about eight bytes of temporary
+disk space per simulation per grid point. Temporary files are removed on return or error.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A skyscapeR.sigTest list with settings and global/local results in metadata, empirical density and null envelope in data.
+</p>
+
+
+<h3>Validation</h3>
+
+<p>In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See <a href="https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks">S03 validation in the technical manual</a>.
+</p>
+<p>In S02, identical candidate bearings produced identical directly constructed observed and simulated densities on build 2.0.9008. Global rejection at the 5 percent level ranged from 4.35 to 5.50 percent under the six matched null designs. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#s02-specified-models">S02 check in the technical manual</a>.
+</p>
+
+
+<h3>Model weights and interpretation</h3>
+
+<p>Weights are discrete sampling probabilities up to proportionality. If a
+continuous model is evaluated on an uneven coordinate grid, density heights
+alone do not represent probability mass; construct weights that account for
+the bin widths before calling the function. Put site-specific model tables in
+the same order as the observed measurements.
+</p>
+<p>A large p-value does not prove the proposed explanation or measure its
+probability. The test asks whether the specified model is incompatible with
+the observed departure statistic. Alternative models can remain compatible.
+The simulations do not automatically represent dependence between sites,
+selection after viewing the data, or uncertainty in fitted model parameters.
+See <code>randomTest</code> for study-design and Monte Carlo limitations.
+</p>
+
+
+<h3>References</h3>
+
+<p>Silva, F. (2020). A probabilistic framework and significance test for the analysis of structural orientations in skyscape archaeology. <em>Journal of Archaeological Science</em>, 118, 105138. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/j.jas.2020.105138")}.
+</p>
+<p>Silva, F. and Lomsdalen, T. (2025). ‘No easy way from the earth to the stars’: a new statistical approach to the orientation of the Maltese temples. <em>Archaeological and Anthropological Sciences</em>, 17, 96. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1007/s12520-025-02208-4")}.
+</p>
+<p>Maris, E. and Oostenveld, R. (2007). Nonparametric statistical testing of EEG- and MEG-data. <em>Journal of Neuroscience Methods</em>. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/j.jneumeth.2007.03.024")}.
+</p>
+<p>Sassenhagen, J. and Draschkow, D. (2019). Cluster-based permutation tests of MEG/EEG data do not establish significance of effect latency or location. <em>Psychophysiology</em>. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1111/psyp.13335")}.
+</p>
+<p>Dufour, J.-M. (2006). Monte Carlo tests with nuisance parameters: A general approach to finite-sample inference and nonstandard asymptotics. <em>Journal of Econometrics</em>, 133, 443-477. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/j.jeconom.2005.06.007")}.
+</p>
+<p>North, B. V., Curtis, D. and Sham, P. C. (2002). A note on the calculation of empirical P values from Monte Carlo procedures. <em>American Journal of Human Genetics</em>, 71, 439-441. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1086/341527")}.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="../help/az.pdf.html"><code>az.pdf</code></a>, <a href="../help/dec.pdf.html"><code>dec.pdf</code></a>, <a href="../help/coordtrans.html"><code>coordtrans</code></a>, <a href="../help/spd.html"><code>spd</code></a>, <a href="../help/randomTest.html"><code>randomTest</code></a>, <a href="../help/plot.skyscapeR.sigTest.html"><code>plot.skyscapeR.sigTest</code></a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>d &lt;- dec.pdf(dec = c(-18, 12), unc = c(0.8, 1.4))
+m &lt;- list(data.frame(x = -20:-16, w = 1), data.frame(x = 10:14, w = 1))
+set.seed(42)
+fit &lt;- modelTest(d, m, nsims = 10, .res = 0.5,
+                 verbose = FALSE)
+print(fit)
+## Not run: 
+set.seed(42)
+fit &lt;- modelTest(d, m, nsims = 5000, ncores = 2)
+# For transformed observations, model coordinates specify mean declinations.
+Az &lt;- az.pdf(az = c(87, 110), unc = 2)
+hor &lt;- createHor(az = c(0, 360), alt = c(0, 0), alt.unc = 0.1, loc = c(35, -8))
+Dec &lt;- coordtrans(Az, hor)
+fit &lt;- modelTest(Dec, data.frame(x = c(-22, 18), w = c(1, 1)))
+
+## End(Not run)
+</code></pre>
+
+</body></html>

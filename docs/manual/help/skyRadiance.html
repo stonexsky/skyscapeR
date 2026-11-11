@@ -1,0 +1,60 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>skyRadiance | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-skyradiance.html">skyRadiance() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Inspect the linear light field of a natural sky</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Samples a natural sketch before display compression or masking by local
+terrain. One integrated flux unit is a magnitude-zero V-band source.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>skyRadiance(sky, xrange = c(0, 360), yrange = c(0, 90), size = c(720, 180))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>sky</code></td>
+<td>
+<p>A natural sketch from <code>sketchSky</code>.</p>
+</td></tr>
+<tr><td><code>xrange</code></td>
+<td>
+<p>Increasing true azimuth limits in degrees. A sector may cross
+north, for example c(340,380).</p>
+</td></tr>
+<tr><td><code>yrange</code></td>
+<td>
+<p>Increasing altitude limits within -90 to 90 degrees.</p>
+</td></tr>
+<tr><td><code>size</code></td>
+<td>
+<p>Positive integer column and row counts, up to 1600 by 1000.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Direct light includes stars, residual cluster light, planetary discs
+and the illuminated lunar disc. The Milky Way uses the accepted tracing and
+a provisional Carina surface-brightness calibration. Stars remain unresolved
+as the view is enlarged. See <code>sketchSky</code> for sources, assumptions
+and interpretation.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list containing azimuth and altitude pixel centres, total radiance,
+direct light (stars, residual cluster light, planets and lunar disc), and
+Milky Way radiance. Matrices are in magnitude-zero flux units per square
+degree, ordered from high to low altitude and increasing azimuth. Multiply
+by area (square degrees per pixel by row) and sum to obtain flux. The
+difference between total and the two source matrices is the atmospheric
+background. The Sun contributes to the background; its disc is a plot overlay.
+</p>
+
+<p><a href="../fn-skyradiance.html">skyRadiance() method</a></p></body></html>

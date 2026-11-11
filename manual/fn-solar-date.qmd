@@ -1,0 +1,36 @@
+# `solar.date()` {#fn-solar-date}
+
+The JPL comparison in A05 matched all tested civil-day passages, including paired dates near a solstice. [A05 results](a05-solar-limits.qmd).
+
+[Function index](function-index.html#idx-solar-date)
+
+```{=html}
+<p>The Sun can pass the same declination on either side of a solstice. The search
+covers the selected civil year from midnight UT, including its first instant and
+excluding the start of the next year. Daily geocentric apparent solar declinations
+bracket the annual turning points. The function refines each extremum against the
+ephemeris and solves separately on either side, then reports the civil day of each
+crossing. A tangency gives one date. Two crossings can share a calendar day.
+The calculation uses no terrain or solar limb model.
+</p>
+<p>Astronomical positions require Swiss Ephemeris files covering the epoch. We
+recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-package</code> for setup.
+</p>
+```
+
+[Event definition and clock convention](fn-riseset.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>dec</code></th><td>—</td><td><p>One or more declinations in degrees.</p></td></tr><tr><th scope="row"><code>year</code></th><td>—</td><td><p>Year for which to do calculations. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>Calendar for sampling and output. G for Gregorian or J for Julian. Defaults to the package calendar, initially Gregorian.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p></td></tr></tbody></table><h5>Return value</h5><p>A character matrix with one column per reachable input, in input order. The rows
+are Dec, Date1 and Date2, with Date3 added if three passages fall in one civil
+year. Dates are chronological day/month labels. Unused date cells are missing.
+The function stops if all requested declinations are unreachable.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/mechanics.R`. [Full function help](help/solar.date.html) · [Solar, lunar and planetary events outline](contents-plan.html#plan-events) · [Terrain crossings and event searches](event-searches.html#event-midpoint) · [Identifying celestial candidates and limiting declinations](celestial-targets.html#target-screen)

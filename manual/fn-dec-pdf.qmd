@@ -1,0 +1,58 @@
+# `dec.pdf()` {#fn-dec-pdf}
+
+**Verified on 2.0.9006.** Declination subsets retained the selected centres in all four cases. [D01 rerun](d01-density-checks.qmd).
+
+**Validation on 2.0.9005.** The sampled declination densities agreed with analytic references at the tested bounds and cutoffs. Subsetting curves can leave stale input centres in metadata$dec. [D01 results](d01-density-checks.qmd).
+
+[Function index](function-index.html#idx-dec-pdf)
+
+```{=html}
+<p>Use this constructor when both the measurement and its uncertainty
+are already expressed in declination. All six families have the same parameter
+meaning as in <code>az.pdf</code>. The doorway examples in 'Choosing a
+measurement model' illustrate their shapes. When starting from measured bearings
+and site horizons, use <code>coordtrans</code> to propagate the bearing model.
+Direct declinations are linear. A triangle must satisfy lower &lt;= dec &lt;= upper.
+The sampled curve is clipped to physical declinations from -90 to +90 degrees
+and trimmed at <code>.cutoff</code>. The retained area can consequently be less than one.
+</p>
+```
+
+[Field examples and comparison of all six profiles](orientation-densities.qmd#measurement-families).
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>Silva, F. (2020). A probabilistic framework and significance test for the analysis of structural orientations in skyscape archaeology. Journal of Archaeological Science 118, 105138. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/j.jas.2020.105138")}.
+</p>
+
+
+
+```
+
+</details>
+
+[Distribution shape and the meaning of uncertainty](fn-az-pdf.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>dec</code></th><td>—</td><td><p>Measured declinations between -90 and +90 degrees. For triangular, the modal declination.</p></td></tr><tr><th scope="row"><code>unc</code></th><td><code>NULL</code></td><td><p>One width or one per observation. Standard deviation for normal,
+outer half-width for uniform, Epanechnikov or symmetric triangular, and core
+half-width for tapered uniform or uniform convolved with normal. Omit when
+supplying triangular limits. See 'Choosing a measurement model'.</p></td></tr><tr><th scope="row"><code>pdf</code></th><td><code>&quot;normal&quot;</code></td><td><p>One measurement family per call. See 'Choosing a measurement model'
+for all six names. The default is <code>"normal"</code>. The historical abbreviations
+<code>"n"</code> and <code>"u"</code> are accepted and names are case-insensitive.</p></td></tr><tr><th scope="row"><code>name</code></th><td>—</td><td><p>Optional measurement labels in input order.</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.01</code></td><td><p>Grid spacing in degrees. Default 0.01.</p></td></tr><tr><th scope="row"><code>.cutoff</code></th><td><code>1e-04</code></td><td><p>Minimum retained density height. Default 0.0001.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical. Report completion.</p></td></tr><tr><th scope="row"><code>taper</code></th><td><code>NULL</code></td><td><p>Outer extension on each side of a tapered uniform core, in degrees.
+Required for <code>"tapered_uniform"</code>. Zero gives a uniform density.</p></td></tr><tr><th scope="row"><code>survey.sd</code></th><td><code>0.5</code></td><td><p>Standard deviation of independent bearing or declination
+error, in degrees, for <code>"uniform_normal"</code>. Defaults to 0.5 degrees per observation. Zero gives a uniform density.</p></td></tr><tr><th scope="row"><code>lower</code></th><td><code>NULL</code></td><td><p>The two bounding directions of a triangular model, in degrees.
+Supply both and omit <code>unc</code>. Each bound, <code>taper</code> and <code>survey.sd</code>
+may be a scalar or a vector in measurement order.</p></td></tr><tr><th scope="row"><code>upper</code></th><td><code>NULL</code></td><td><p>The two bounding directions of a triangular model, in degrees.
+Supply both and omit <code>unc</code>. Each bound, <code>taper</code> and <code>survey.sd</code>
+may be a scalar or a vector in measurement order.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.pdf list with one x/y data frame per observation. Metadata record coord = "dec", the input measurements, family, uncertainties, labels and numerical settings.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/dec-pdf.R` and `R/measurement-density.R`. [Full function help](help/dec.pdf.html) · [Significance tests](significance.html#sec-tests) · [Uncertainty and orientation distributions outline](contents-plan.html#plan-density) · [From a measured orientation to a declination distribution](orientation-densities.html#density-measurement) · [Subsetting declination centres](orientation-densities.html#subset-dec-centres)

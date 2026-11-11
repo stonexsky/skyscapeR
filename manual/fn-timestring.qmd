@@ -1,0 +1,28 @@
+# `timestring()` {#fn-timestring}
+
+**Validation on 2.0.9005.** Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. [A01 results](a01-calendar-checks.qmd).
+
+[Function index](function-index.html#idx-timestring)
+
+```{=html}
+<p>Survey records often store year, month, day and clock time separately. This formatter
+pads the month, day and clock components to two characters and joins them as
+year/month/day and hours:minutes:seconds. Omitted time is noon. Formatting alone does
+not supply a timezone or check that the date exists; use time2jd to validate and convert
+it.
+</p>
+```
+
+[Preserving the original field representation](fn-long-date.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>year</code></th><td>—</td><td><p>Year. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr><tr><th scope="row"><code>month</code></th><td>—</td><td><p>Month</p></td></tr><tr><th scope="row"><code>day</code></th><td>—</td><td><p>Day</p></td></tr><tr><th scope="row"><code>hour</code></th><td><code>12</code></td><td><p>Hour</p></td></tr><tr><th scope="row"><code>minute</code></th><td><code>0</code></td><td><p>Minute</p></td></tr><tr><th scope="row"><code>second</code></th><td><code>0</code></td><td><p>Second</p></td></tr></tbody></table><h5>Return value</h5><p>A character date-time string in the slash-separated format accepted by <code>time2jd</code>.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/dates.R`. [Full function help](help/timestring.html) · [Time, coordinates and ephemerides outline](contents-plan.html#plan-time) · [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-time)

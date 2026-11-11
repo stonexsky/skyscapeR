@@ -1,11 +1,15 @@
 # skyscapeR technical manual
 
-Open `docs/index.html` for the chapter-based edition. Run `quarto render` from this directory to rebuild it. The pre-render script converts the versioned R help pages and calculates the heliacal-rising summary from its archived data.
+Open `docs/index.html` for the prebuilt Quarto book. The methods guide groups chapters by research question. The function index links to individual methodological entries and versioned R help. The validation register links to study reports, results and reproduction archives.
 
-For the self-contained single-page edition, render the book first and run `python scripts/standalone/build.py /path/to/manual/index.html` with Python and lxml installed. The output embeds its figures, help pages and study downloads. The hosted vignette remains at the site root; the technical manual is in the `manual/` subdirectory.
+## Editing and rebuilding
 
-The methods guide organises the book by archaeological question. The function reference gives the implementation files, formal arguments and links to individual help pages. The validation register includes H01, H02, A02, the sky-rendering studies and the validation programme. Some study links lead to access-controlled review copies; a public release should use archival links available to its readers.
+Edit the relevant chapter at the project root. Function pages use the `fn-` prefix. Validation pages use their study ID in the filename. Register new chapters in `_quarto.yml`. Keep existing filenames and heading identifiers stable so published links continue to work.
 
-Run `Rscript scripts/check-coverage.R` with the documented skyscapeR version installed to check the catalogue against the package namespace, formal argument lists and calls in the vignette. Scientific illustrations, their data sources and reproduction instructions are under `figures/` and `scripts/illustrations/`.
+From this directory, run `quarto render` with Quarto, Rscript and Python 3 available. The pre-render step regenerates the versioned help excerpts and the stellar visibility results table. The post-render step preserves links from the former single-page edition. The prebuilt edition includes the archived excerpts and table.
 
-For the GitHub Pages single-page edition, run `python scripts/standalone/build.py /path/to/repo/docs/manual/index.html --external-downloads` after rendering the book. Keep the resulting `downloads/` directory beside that index. This stores study downloads as ordinary files and keeps the HTML within GitHub's individual-file size limit. Omitting the option produces the self-contained offline edition with embedded downloads.
+To check the function catalogue against an installed version of skyscapeR, run `Rscript scripts/check-coverage.R`.
+
+## GitHub Pages
+
+Copy the contents of this project's rendered `docs/` into the repository's `docs/manual/` directory. The repository's `docs/index.html` is the vignette. See the upload instructions distributed with this edition.

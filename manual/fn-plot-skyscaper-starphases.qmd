@@ -1,0 +1,67 @@
+# `plot.skyscapeR.starphases()` {#fn-plot-skyscaper-starphases}
+
+W01 checked season boundaries, event positions, quarterly landmarks and star, site and epoch labels in linear and circular layouts. [W01 results](w01-plot-geometry.qmd).
+
+[Function index](function-index.html#idx-plot-skyscaper-starphases)
+
+```{=html}
+<p>Read each colour as a daily model classification: visible rising and setting, rising
+only, setting only, visible without a qualifying near-horizon passage, or invisible. The
+function plots the stored phase sequence on a 365-day scale and can label seasons or
+display a legend. A single result defaults to a circular view, advancing clockwise
+from December solstice. Further results use concentric rings with one leader per displayed layer;
+optional sorting uses the stored apparent magnitude or seasonal onset. Changing the
+display does not recalculate the visibility thresholds. Use <code>plot(first, list(second, third))</code> to compare results.
+</p>
+```
+
+**Interpretation and limits.** Track clearance, seasonal visibility and the representative Julian date are different outputs. Month and phase labels organise the cycle; deciding whether a star could be detected requires a time interval above the actual skyline.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>x</code></th><td>—</td><td><p>A star phase result.</p></td></tr><tr><th scope="row"><code>y</code></th><td>—</td><td><p>A second object of <em>skyscapeR.starphases</em> format or
+a list of <em>skyscapeR.starphases</em> objects for plotting (see Examples).</p></td></tr><tr><th scope="row"><code>show.labels</code></th><td><code>TRUE</code></td><td><p>Logical. Mark annual events for a single result in either layout. Defaults to TRUE.</p></td></tr><tr><th scope="row"><code>show.legend</code></th><td><code>TRUE</code></td><td><p>Show a legend for seasons present among the plotted
+stars (default TRUE). For circular plots FALSE also hides titles, site/epoch text and all layer or event callouts. The seasonal scale stays visible. Linear plots keep their data and event labels.</p></td></tr><tr><th scope="row"><code>show.grid</code></th><td><code>TRUE</code></td><td><p>Draw monthly dividers through each ring or strip. Defaults to TRUE.
+Set FALSE to omit the monthly divisions and retain the seasonal axis.</p></td></tr><tr><th scope="row"><code>sort.by</code></th><td>—</td><td><p>Optional ordering by catalogue magnitude (<code>"mag"</code>), first R-only
+sample (<code>"rise"</code>) or first S-only sample (<code>"set"</code>) on the stored
+cycle. This is not sorting by the dated heliacal event. Missing classes are
+placed last; omission retains input order.</p></td></tr><tr><th scope="row"><code>pal</code></th><td>—</td><td><p>Five colours in the order RS (rise and set), R (rise only), S (set only),
+V (curtailed passage) and I (arising and lying hidden). The default uses five colours from the plot style. Monochrome adds textures to distinguish the classes. Supply all five even when only some
+seasons occur.</p></td></tr><tr><th scope="row"><code>...</code></th><td>—</td><td><p>Additional arguments to be passed to <em>plot</em>.</p></td></tr><tr><th scope="row"><code>layout</code></th><td><code>c(&quot;auto&quot;, &quot;linear&quot;, &quot;circular&quot;)</code></td><td><p><code>"auto"</code> and <code>"circular"</code> draw a single ring or concentric rings
+in input (or requested sort) order from the outside inward. Leaders connect the layer identifiers
+to their rings. Select <code>"linear"</code> for strips. Supply this argument by name.</p></td></tr><tr><th scope="row"><code>style</code></th><td><code>&quot;publication-colour&quot;</code></td><td><p>Analytical display style, either <code>"publication-colour"</code> (default) or
+<code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p></td></tr></tbody></table><h5>Return value</h5><p>Draws on the active graphics device and returns NULL invisibly.
+</p><h5>Seasonal axis and comparison</h5><p>The axis is a 365-sample synthetic solar-longitude cycle anchored at December
+solstice. Equinoxes and solstices mark quarter-cycle positions. The monthly
+dividers mark twelve equal intervals of 30 degrees in solar longitude,
+beginning at December solstice. For calendar dates use the underlying result's
+<code>metadata$events$date.julian</code>, as described in <code>star.phases</code>.
+</p><p>Objects may represent different stars, epochs, sites or model assumptions.
+Shared star, epoch and site appear once. Different epochs of the same star label individual rings or rows. Mixed comparisons identify both star and year. Hold the site,
+extinction and other inputs fixed for a controlled epoch comparison, or
+state their differences in the figure caption. Names on the supplied list can
+override the displayed star names. The legend contains only the union of
+season classes present in the plotted objects.
+</p><p>Event annotations use transitions between adjacent samples, including the last
+and first samples of the cycle. A season continuing through December solstice
+has no event at that boundary. Entry into and exit from I mark acronycal
+setting and heliacal rising; entry into and exit from V mark acronycal rising
+and heliacal setting. Constant classifications have no transition labels.
+A single ring labels each event by name on two lines just outside the rim.
+Its short leader meets the ring at the event's model day. A single ring shows the star, epoch and site in its centre
+and labels the solstices and equinoxes outside its rim. Both layouts mark the event's model day,
+the last sample before entry into I or V, or the first after exit.
+The linear seasonal scale sits immediately below the lowest strip. Each quarter
+label aligns with its solstice or equinox across every row. Rising-event labels
+sit close above a single strip and setting-event labels close below it, leaving
+room for the seasonal scale where needed. Both layouts use the same
+sequence and colours; the circular layout makes the cycle boundary explicit.
+Labels wrap and shrink to fit; crowded comparisons need a larger device.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/plotting.R`. [Full function help](help/plot.skyscapeR.starphases.html) · [Stellar visibility](stellar-phases.html#sec-stellar) · [Stellar positions and seasonal visibility outline](contents-plan.html#plan-stars) · [Comparing seasons](stellar-phases.html#phase-comparisons) · [The heliacal rising of the Pleiades](vignette-guide.html#workflow-the-heliacal-rising-of-the-pleiades) · [Compare stellar seasons](vignette-guide.html#workflow-compare-stellar-seasons)

@@ -1,0 +1,28 @@
+# `hor2alt()` {#fn-hor2alt}
+
+In H07, lookup at each edge of a north-crossing panorama returned its measured altitude and lookup beyond either edge returned NA. [H07 results](h07-panorama-coverage.qmd).
+
+[Function index](function-index.html#idx-hor2alt)
+
+```{=html}
+<p>For a horizon constructed from measurements or a DEM, cubic splines interpolate altitude and recorded uncertainty at the requested azimuth. For an imported photograph the function wraps bearings relative to the coverage origin, linearly interpolates its skyline and returns missing values outside its observed sector. Values are rounded to two decimal places. One bearing with uncertainty returns a numeric pair; multiple bearings with uncertainty return a matrix. Keep these routes distinct from the interpolation inside coordtrans().</p>
+```
+
+**Interpretation and limits.** The returned extremum or altitude depends on the supplied skyline and the bearings searched. A sharp local notch can be missed between measurements; a wider numerical search cannot recover terrain absent from the profile.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>A <em>skyscapeR.horizon</em> object from which to retrieve horizon altitude.</p></td></tr><tr><th scope="row"><code>az</code></th><td>—</td><td><p>Array of azimuth(s) for which to retrieve horizon altitude(s).</p></td></tr><tr><th scope="row"><code>return.unc</code></th><td><code>F</code></td><td><p>Logical controlling whether to return altitude uncertainty.
+Default is <em>FALSE</em>.</p></td></tr></tbody></table><h5>Return value</h5><p>With <code>return.unc = FALSE</code>, a numeric vector of altitudes.
+With <code>return.unc = TRUE</code> and one azimuth, an unnamed numeric vector
+containing altitude followed by uncertainty. With multiple azimuths, a
+numeric matrix with columns <code>alt</code> and <code>alt.unc</code>, one row per
+input azimuth in the supplied order. Values are rounded to two decimal places.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/horizon.R`. [Full function help](help/hor2alt.html) · [Terrain horizons](horizons.html#sec-horizon) · [Terrain horizons and panoramas outline](contents-plan.html#plan-terrain) · [Reducing field observations](field-reduction.html#field-compass) · [Photographic calibration and interchange](photographic-horizons.html#photo-calibration) · [Bearing lookup and export layouts](photographic-horizons.html#photo-routes) · [Importing site horizons](vignette-guide.html#workflow-importing-site-horizons) · [Partial profile coverage](photographic-horizons.html#partial-photo-consumers)

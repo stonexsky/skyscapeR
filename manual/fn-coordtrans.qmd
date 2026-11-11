@@ -1,0 +1,69 @@
+# `coordtrans()` {#fn-coordtrans}
+
+For a partial photograph the stored positive bearing density must lie within its photographed sector. H07 verified agreement with a complete skyline on the covered north-crossing cases and rejection of uncovered densities. [H07 results](h07-panorama-coverage.qmd).
+
+In D02, declination quantiles agreed with direct propagation within 0.008 degrees across nine terrain and observer cases. Near the celestial pole the discrepancy reached 0.17 degrees on the fine grid; at the pole a zero conditional width prevented calculation. [D02 results](d02-bearing-propagation.qmd).
+
+The integration uses the full bearing density from any of the six measurement families. [Measurement families](orientation-densities.qmd#measurement-families).
+
+[Function index](function-index.html#idx-coordtrans)
+
+```{=html}
+<p>A sightline has a distribution of possible bearings, and each bearing samples a
+potentially different part of the horizon. For every sampled bearing the function
+interpolates horizon altitude and uncertainty, maps an altitude range to declination and
+approximates the conditional declination distribution by a Gaussian. It weights that
+distribution by the azimuth density and integrates the product by the trapezoidal rule.
+A shared horizon can serve several observations, or a supplied list can represent their
+individual sites.
+</p>
+<p>Density values are calculated at declination spacing <code>.res</code>, then
+linearly interpolated onto a grid with spacing <code>.output.res</code>. The upper
+calculation bound is evaluated explicitly if the step does not land on it,
+avoiding extrapolation at the tail. Linear interpolation preserves
+nonnegative calculated densities and avoids cubic-spline overshoot.
+Individual PDF outputs retain their existing area normalisation; SPD outputs
+retain their existing unnormalised transformation behaviour. Coarse
+calculation spacing can still miss narrow peaks; interpolation does not
+replace a resolution-convergence check. Azimuth integration uses a separate
+grid from -90 to 450 degrees with step <code>.prec</code>. For a distribution split across north, integration uses contiguous bearings around zero at the same spacing. The output grid starts
+at the lower bound and ends at the last full step within the upper bound.
+Refine the calculation grid to check that narrow features are resolved.
+Set atmospheric refraction, pressure and temperature with <code>skyscapeR.vars</code> before transforming. The values used are recorded in the returned PDF or SPD.
+All three spacings are stored in <code>metadata$param</code>.
+</p>
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>Silva, F (2020) A probabilistic framework and significance test for the analysis of structural orientations
+in skyscape archaeology <em>Journal of Archaeological Science</em> 118, 105138. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/j.jas.2020.105138")}
+</p>
+
+
+
+```
+
+</details>
+
+**Interpretation and limits.** A transformed density inherits the latitude and skyline for its own bearing. Replacing it with a symmetric curve can erase an asymmetric or multimodal distribution created by the terrain.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>pdf</code></th><td>—</td><td><p>A <em>skyscapeR.pdf</em> object created with <code>az.pdf</code> or a <em>skyscapeR.spd</em> object created with <code>spd</code></p></td></tr><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>A shared <code>skyscapeR.horizon</code> or, for individual azimuth PDFs, a list of horizons in measurement order.</p></td></tr><tr><th scope="row"><code>xrange</code></th><td>—</td><td><p>Array of values (min and max) for SPD when transforming a <em>skyscapeR.spd</em> object.</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.1</code></td><td><p>Spacing of the declination calculation grid, in degrees. Default 0.1.</p></td></tr><tr><th scope="row"><code>.prec</code></th><td><code>0.1</code></td><td><p>Azimuth integration spacing, in degrees. Default 0.1.
+Previously ignored; smaller values increase integration work. Must not exceed 540.</p></td></tr><tr><th scope="row"><code>.output.res</code></th><td><code>0.01</code></td><td><p>Spacing of the returned declination grid, in degrees.
+Default 0.01. Coarser spacing reduces output size. All spacings must be
+positive finite scalars, and the returned grid must contain at least two points.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p></td></tr></tbody></table><h5>Return value</h5><p>A <code>skyscapeR.pdf</code> object for PDF input, or a <code>skyscapeR.spd</code>
+object for SPD input. Both contain <code>metadata</code> and <code>data</code>. PDF data
+are a list of data frames with declination <code>x</code> and density <code>y</code>;
+SPD data are a single such data frame. Metadata include the coordinate type,
+transformation settings, format version and descriptive source labels.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/statistics.R`. [Full function help](help/coordtrans.html) · [Significance tests](significance.html#sec-tests) · [Uncertainty and orientation distributions outline](contents-plan.html#plan-density) · [From a measured orientation to a declination distribution](orientation-densities.html#density-transform) · [Bearing lookup and export layouts](photographic-horizons.html#photo-routes) · [Give each opening a distribution](vignette-guide.html#workflow-give-each-opening-a-distribution) · [Partial profile coverage](photographic-horizons.html#partial-photo-consumers)

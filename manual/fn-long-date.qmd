@@ -1,0 +1,28 @@
+# `long.date()` {#fn-long-date}
+
+**Validation on 2.0.9005.** Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. [A01 results](a01-calendar-checks.qmd).
+
+[Function index](function-index.html#idx-long-date)
+
+```{=html}
+<p>A season or event table may need a day/month label without an epoch. The first two
+characters are the month number and characters four and five the day number; the
+separator occupies position three. The month is looked up in R's English month
+abbreviations. This formatting step does not validate a calendar date or convert between
+calendars.
+</p>
+```
+
+**Interpretation and limits.** These are representation changes. Preserve the original field string so the conversion can be inspected, especially for negative angles smaller than one degree or a date recorded without its clock or timezone.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>date</code></th><td>—</td><td><p>date in 'MM-DD' format</p></td></tr></tbody></table><h5>Return value</h5><p>Character month-and-day labels such as "21 Jun", derived from the supplied month and day.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/dates.R`. [Full function help](help/long.date.html) · [Time, coordinates and ephemerides outline](contents-plan.html#plan-time) · [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-time)

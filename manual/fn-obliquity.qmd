@@ -1,0 +1,43 @@
+# `obliquity()` {#fn-obliquity}
+
+A05 checked the January true obliquity at modern and prehistoric test epochs against direct engine values. [A05 results](a05-solar-limits.qmd).
+
+[Function index](function-index.html#idx-obliquity)
+
+```{=html}
+<p>The tilt changes over archaeological timescales. For each supplied astronomical year the
+calculation uses Gregorian 1 January at noon UT, requests the obliquity/nutation record
+from Swiss Ephemeris and returns its first element, the true obliquity in degrees. An
+annual value is a reference for limiting declinations rather than a search for the
+instant of solstice.
+</p>
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>Laskar, J. et al. (2004), A long-term numerical
+solution for the insolation quantities of the Earth, <em>Astron.
+Astroph.</em>, 428, 261-285, doi:10.1051/0004-6361:20041335.
+</p>
+
+
+
+```
+
+</details>
+
+**Interpretation and limits.** Separate the annual obliquity reference from the approximate local parallax correction. A limiting declination used as a target has a different meaning from a position calculated for an observed instant.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>year</code></th><td><code>skyscapeR.env$cur.year</code></td><td><p>Year for which to calculate the obliquity. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.
+Defaults to present year as given by <em>Sys.Date</em></p></td></tr></tbody></table><h5>Return value</h5><p>Numeric obliquity of the ecliptic in degrees, one value per astronomical year.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/mechanics.R`. [Full function help](help/obliquity.html) · [Time, coordinates and ephemerides outline](contents-plan.html#plan-time) · [Identifying celestial candidates and limiting declinations](celestial-targets.html#target-limits) · [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-star)

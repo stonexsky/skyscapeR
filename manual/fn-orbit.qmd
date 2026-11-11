@@ -1,0 +1,30 @@
+# `orbit()` {#fn-orbit}
+
+In A08, coordinates on the two plotted solar-limit tracks recovered their source declinations by spherical inversion. [A08 results](a08-target-ranges.qmd).
+
+[Function index](function-index.html#idx-orbit)
+
+```{=html}
+<p>Latitude and declination determine where a diurnal track can meet the terrain. The
+function sweeps equatorial right ascension through 360 degrees at the requested angular
+step and converts each position to horizontal coordinates with the selected refraction
+and atmosphere settings. It retains altitudes above -20 degrees and sorts the points by
+azimuth. A horizon object supplies the location; the stored track itself includes no
+test of terrain obstruction or event times.
+</p>
+```
+
+**Interpretation and limits.** An orbit is sampled from an idealised fixed-declination track. A spatial equinox uses site-specific solstitial crossing geometry. State which eastern or western skyline feature supports an archaeological interpretation of the midpoint.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>dec</code></th><td>—</td><td><p>Declination of object.</p></td></tr><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>Location, either a <em>skyscapeR.horizon</em> or a vector
+containing the latitude and longitude of location, in this order.</p></td></tr><tr><th scope="row"><code>refraction</code></th><td>—</td><td><p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>atm</code></th><td>—</td><td><p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>temp</code></th><td>—</td><td><p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td></tr><tr><th scope="row"><code>res</code></th><td><code>0.25</code></td><td><p>The resolution (in degrees of RA) with which to calculate the path.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.orbit list with az and alt vectors in degrees, ordered by azimuth, plus the input declination (dec) and location (georef). The sampled track retains altitudes above -20 degrees.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/mechanics.R`. [Full function help](help/orbit.html) · [From bearings to celestial targets outline](contents-plan.html#plan-targets) · [Terrain crossings and event searches](event-searches.html#event-track) · [What the orientation displays calculate](orientation-densities.html#orientation-displays)

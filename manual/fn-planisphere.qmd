@@ -1,0 +1,75 @@
+# `planisphere()` {#fn-planisphere}
+
+[Function index](function-index.html#idx-planisphere)
+
+```{=html}
+<p>The default star layer draws individual Pleiades members and omits integrated clusters and other nonstellar entries. The full catalogue remains available for target searches and phase calculations.
+</p>
+<p>The chart compares the accessible part of the celestial sphere with a catalogue sky at
+the chosen year. Catalogue stars are filtered by magnitude and by the implemented
+declinations that rise above a level geometric horizon. Northern latitudes use
+the north celestial pole; southern latitudes use the south celestial pole.
+Polar distance sets radius, and right ascension sets angle with opposite
+handedness for the two poles. Magnitude controls symbol size, and hour labels
+are placed every three hours. The optional ecliptic uses daily solar positions over a
+year, using geocentric coordinates without atmospheric refraction. The plot is
+not an instantaneous view
+through a site's measured horizon. The Milky Way uses the same diffuse-light tracing as sketchSky(), with dark cutouts and two brighter tiers referenced to the whole-band mean. Source: NASA/Goddard SVS and ESA/Gaia/DPAC, Deep Star Maps 2020. It is a fixed sky map rotated to the requested epoch with Swiss Ephemeris precession and nutation. Its width is illustrative. It does not predict visibility or reconstruct the Galaxy’s internal evolution.
+</p>
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>NASA/Goddard Space Flight Center Scientific Visualization Studio (2020).
+Deep Star Maps 2020. <a href="https://svs.gsfc.nasa.gov/4851/">https://svs.gsfc.nasa.gov/4851/</a>.
+</p>
+<p>Astrodienst. Swiss Ephemeris programmer's manual.
+<a href="https://www.astro.com/swisseph/swephprg.htm">https://www.astro.com/swisseph/swephprg.htm</a>.
+</p>
+
+
+
+```
+
+</details>
+
+[Catalogue endpoints and cultural figures](fn-importconstellations.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>year</code></th><td>—</td><td><p>The epoch (year) for which the planisphere is calculated. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr><tr><th scope="row"><code>lat</code></th><td>—</td><td><p>Observer latitude in degrees north, between -90 and 90.</p></td></tr><tr><th scope="row"><code>max.mag</code></th><td><code>6</code></td><td><p>Faintest catalogue magnitude drawn as a star symbol (default 6). This does not filter constellation line endpoints.</p></td></tr><tr><th scope="row"><code>show.ecliptic</code></th><td><code>TRUE</code></td><td><p>Whether to display the ecliptic (TRUE or FALSE).</p></td></tr><tr><th scope="row"><code>col.ecliptic</code></th><td><code>&quot;#A9542E&quot;</code></td><td><p>Colour of the ecliptic line (default ochre).</p></td></tr><tr><th scope="row"><code>show.equator</code></th><td><code>TRUE</code></td><td><p>Whether to display the celestial equator (TRUE or FALSE).</p></td></tr><tr><th scope="row"><code>col.equator</code></th><td><code>&quot;#597575&quot;</code></td><td><p>Colour of the celestial equator (default muted grey-green).</p></td></tr><tr><th scope="row"><code>star.col</code></th><td><code>&quot;#23383A&quot;</code></td><td><p>Colour of the star symbols (default dark grey-green).</p></td></tr><tr><th scope="row"><code>epoch</code></th><td>—</td><td><p>Earlier argument name for <code>year</code>, retained for existing scripts.</p></td></tr><tr><th scope="row"><code>show.milky.way</code></th><td><code>TRUE</code></td><td><p>Draw the Milky Way behind the stars (default TRUE). Set to FALSE for a chart without the band.</p></td></tr><tr><th scope="row"><code>show.galactic.equator</code></th><td><code>FALSE</code></td><td><p>Draw the Galactic equator as a dash-dot line. Default FALSE.</p></td></tr><tr><th scope="row"><code>constellations</code></th><td><code>NULL</code></td><td><p>Optional constellation selection: a bundled set such as
+<code>"modern"</code>, <code>"chinese"</code> or <code>"chinese_mansions"</code>, figure names
+or identifiers, or a table from <code>importConstellations</code>.
+The default <code>NULL</code> draws no constellation lines.</p></td></tr><tr><th scope="row"><code>col.constellations</code></th><td><code>&quot;#638582&quot;</code></td><td><p>Colour of the constellation lines (default muted teal).</p></td></tr><tr><th scope="row"><code>show.legend</code></th><td><code>TRUE</code></td><td><p>Show chart pole, latitude, epoch, magnitude limit and the enabled layer key.
+FALSE centres the bare chart, keeping its data and right-ascension ticks.</p></td></tr><tr><th scope="row"><code>style</code></th><td><code>&quot;publication-colour&quot;</code></td><td><p>Analytical display style, either <code>"publication-colour"</code> (default) or
+<code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p></td></tr></tbody></table><h5>Return value</h5><p>Draws the polar chart on the active graphics device and invisibly returns the saved xpd, mar and pty graphics settings.
+</p><h5>Constellation patterns</h5><p>Constellation segments follow the shorter great-circle arc between catalogue
+endpoints at the requested epoch. They use the same polar projection as the
+stars and are clipped to the chart's accessible sky. Faint endpoints remain
+available for line drawing even when no star symbol is shown. Missing catalogue
+endpoints generate a warning and their segments are omitted. These are line
+figures; repeated endpoints mark single-star figures with small rings. They
+are not constellation boundaries or lunar-mansion sectors. See
+<code>constellations</code> for sources, licences and historical limitations.
+</p><h5>Projection and visibility limits</h5><p>This is a polar azimuthal equidistant chart. For latitude at or above zero,
+radius is 90 minus declination and right ascension increases clockwise from
+the top. For negative latitude, radius is 90 plus declination and right
+ascension increases anticlockwise. The chart radius is 180 minus absolute
+latitude; a non-round cutoff is retained exactly. All layers use this same
+projection. At the equator the north-polar convention is used.
+</p><p>Stars are included when their upper culmination is strictly above a level
+geometric horizon; stars that only touch it are excluded. This is potential
+annual access to that part of the sky, not visibility at any particular time.
+There is no date/time of night, local terrain, atmospheric extinction,
+moonlight or twilight detection model. Magnitudes are fixed catalogue values,
+and point size is a graphical brightness indicator. For a particular site and
+instant use <code>sketchSky</code> with a georeferenced horizon.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/planetarium.R`. [Full function help](help/planisphere.html) · [Sky brightness and visualisation outline](contents-plan.html#plan-light) · [Constellation selection and planisphere geometry](sky-rendering.html#sky-constellations) · [A planisphere for the site's latitude](vignette-guide.html#workflow-a-planisphere-for-the-site-s-latitude)

@@ -1,0 +1,55 @@
+# `horFeature()` {#fn-horfeature}
+
+[Function index](function-index.html#idx-horfeature)
+
+```{=html}
+<p>Reconstructions are explicit hypotheses about additional relief above
+the supplied terrain. Heights are added to the existing DEM, including any
+surviving remains already represented there. Ditch depths are subtracted.
+No original ground surface or historical height is inferred. Zero height or
+depth highlights a footprint without changing elevation.
+</p>
+<p>Every feature and multipart component is used. Points become circular
+footprints with the supplied diameter. Lines become strips with half the width
+on each side and round ends. Polygons use their whole area by default for
+stones, poles, mounds and platforms, and their boundary for banks, ditches and
+walls. Polygon holes remain holes in area mode; boundary mode includes their
+edges. Dimensions are metres in a local azimuthal equidistant projection.
+</p>
+```
+
+[Feature heights and the scope of terrain validation](fn-createhor.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>geometry</code></th><td>—</td><td><p>A vector filename (including a shapefile or GeoPackage), a
+terra SpatVector, or an object accepted by terra::vect, with a known CRS.
+A layer must contain one geometry family: points, lines or polygons.</p></td></tr><tr><th scope="row"><code>type</code></th><td><code>c(&quot;stone&quot;, &quot;pole&quot;, &quot;bank&quot;, &quot;ditch&quot;, &quot;mound&quot;, &quot;platform&quot;, &quot;wall&quot;)</code></td><td><p>Structure type: stone, pole, bank, ditch, mound, platform or wall.
+Stones and poles accept points or polygons; mounds and platforms require
+polygons; banks, ditches and walls accept lines or polygons.</p></td></tr><tr><th scope="row"><code>height</code></th><td><code>0</code></td><td><p>Additional height in metres, nonnegative. Default 0. Ignored
+for ditches, which use depth. Positive height and depth cannot be combined.</p></td></tr><tr><th scope="row"><code>height_field</code></th><td><code>NULL</code></td><td><p>Optional
+attribute column names supplying per-row settings. Do not also supply the
+corresponding common value. Numeric fields must be numeric, finite and meet
+the same bounds as common values. Colour fields must contain valid colours.</p></td></tr><tr><th scope="row"><code>depth</code></th><td><code>0</code></td><td><p>Nonnegative ditch depth in metres. Default 0; only for ditches.</p></td></tr><tr><th scope="row"><code>depth_field</code></th><td><code>NULL</code></td><td><p>Optional
+attribute column names supplying per-row settings. Do not also supply the
+corresponding common value. Numeric fields must be numeric, finite and meet
+the same bounds as common values. Colour fields must contain valid colours.</p></td></tr><tr><th scope="row"><code>width</code></th><td><code>NULL</code></td><td><p>Total width in metres for lines or polygon boundaries.</p></td></tr><tr><th scope="row"><code>width_field</code></th><td><code>NULL</code></td><td><p>Optional
+attribute column names supplying per-row settings. Do not also supply the
+corresponding common value. Numeric fields must be numeric, finite and meet
+the same bounds as common values. Colour fields must contain valid colours.</p></td></tr><tr><th scope="row"><code>diameter</code></th><td><code>NULL</code></td><td><p>Diameter in metres for point footprints.</p></td></tr><tr><th scope="row"><code>diameter_field</code></th><td><code>NULL</code></td><td><p>Optional
+attribute column names supplying per-row settings. Do not also supply the
+corresponding common value. Numeric fields must be numeric, finite and meet
+the same bounds as common values. Colour fields must contain valid colours.</p></td></tr><tr><th scope="row"><code>profile</code></th><td><code>NULL</code></td><td><p>Either bell or flat. Defaults to bell for banks, ditches and
+mounds, and flat for stones, poles, platforms and walls.</p></td></tr><tr><th scope="row"><code>use</code></th><td><code>NULL</code></td><td><p>For polygons, area or boundary. NULL chooses the type's default.</p></td></tr><tr><th scope="row"><code>colour</code></th><td><code>NULL</code></td><td><p>One opaque R colour, or NULL for the terrain palette.</p></td></tr><tr><th scope="row"><code>colour_field</code></th><td><code>NULL</code></td><td><p>Optional
+attribute column names supplying per-row settings. Do not also supply the
+corresponding common value. Numeric fields must be numeric, finite and meet
+the same bounds as common values. Colour fields must contain valid colours.</p></td></tr><tr><th scope="row"><code>name</code></th><td><code>NULL</code></td><td><p>Descriptive label for the layer. Defaults to the structure type.</p></td></tr></tbody></table><h5>Return value</h5><p>A serialisable skyscapeR.horFeature object. Pass it or a list of these
+objects as features to createHor with a DEM.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/horizon-features.R`. [Full function help](help/horFeature.html) · [Reconstructing features on a DEM](horizons.html#sec-terrain-features) · [Terrain horizons and panoramas outline](contents-plan.html#plan-terrain) · [Generating a terrain panorama](horizons.html#sec-dem-panorama)

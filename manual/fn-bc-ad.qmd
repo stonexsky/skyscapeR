@@ -1,0 +1,28 @@
+# `BC.AD()` {#fn-bc-ad}
+
+**Validation on 2.0.9005.** Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. [A01 results](a01-calendar-checks.qmd).
+
+[Function index](function-index.html#idx-bc-ad)
+
+```{=html}
+<p>Astronomical dating includes a year zero, whereas historical BC and AD labels run
+directly from 1 BC to AD 1. Positive years retain their number and receive AD. For zero
+or a negative year, subtract the astronomical year from one and append BC. The
+conversion works element by element and changes only the label, not the calendar or
+instant.
+</p>
+```
+
+[Year zero and round-trip checks](fn-astroyear.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>year</code></th><td>—</td><td><p>Numeric astronomical year or vector of years. Year zero is 1 BC. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr></tbody></table><h5>Return value</h5><p>Character labels for astronomical years. Year 0 is 1 BC and year -1 is 2 BC.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/dates.R`. [Full function help](help/BC.AD.html) · [Time, coordinates and ephemerides outline](contents-plan.html#plan-time) · [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-time)

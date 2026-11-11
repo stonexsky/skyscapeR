@@ -1,0 +1,135 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>importPeakFinder | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-importpeakfinder.html">importPeakFinder() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Import a PeakFinder horizon and optional landscape drawing</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Bring a terrain-derived horizon into orientation and visibility
+calculations, optionally retaining foreground ridge lines for visual interpretation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>importPeakFinder(
+  file,
+  svg = NULL,
+  elevation = NULL,
+  alt.unc = 0.5,
+  width = 4096,
+  image.dir = getwd()
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>file</code></td>
+<td>
+<p>Path to a PeakFinder Stellarium ZIP export.</p>
+</td></tr>
+<tr><td><code>svg</code></td>
+<td>
+<p>Optional path to the matching full-circle Vector SVG export.</p>
+</td></tr>
+<tr><td><code>elevation</code></td>
+<td>
+<p>Optional verified absolute observer elevation in metres.</p>
+</td></tr>
+<tr><td><code>alt.unc</code></td>
+<td>
+<p>Assumed horizon altitude uncertainty in degrees, a nonnegative scalar.</p>
+</td></tr>
+<tr><td><code>width</code></td>
+<td>
+<p>PNG width in pixels, an integer from 512 to 8192. Default 4096.</p>
+</td></tr>
+<tr><td><code>image.dir</code></td>
+<td>
+<p>Directory for generated PNGs; defaults to the working directory.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The numerical horizon describes angular obstruction at the observer's
+location. A separate vector drawing supplies foreground detail but does not
+explicitly record its vertical angular calibration. Both exports are therefore
+needed to create a calibrated panorama PNG. Calculations always use the numerical
+horizon, never the PNG. Terrain data do not include every tree or building.
+</p>
+<p>In PeakFinder choose Export, Horizon for Stellarium and save the ZIP. For an
+image also choose Export, SVG for printing, Silhouettes (Vector SVG), from 0
+to 360 degrees, preferably picture format 16:2. Use exactly the same viewpoint
+and observer height for both. Contours (Bitmap SVG) is not supported. The PNG
+is a white terrain silhouette with dark foreground ridge lines and transparent
+sky, without labels or shading. Only PeakFinder's untransformed M/L vector
+path format is supported; edited or future formats may require adaptation.
+</p>
+<p>Azimuth ruler positions calibrate horizontal coordinates. The upper envelope
+of the vector paths is fitted to y = intercept + slope * tan(altitude) using
+the ZIP horizon. Values at 0.01 degrees are excluded as potentially clipped.
+Calibration needs at least 20 matches spanning 180 degrees and 0.5 degrees
+of altitude relief. RMS and maximum angular residuals must not exceed 0.05
+and 0.2 degrees. These are compatibility checks, not estimates of terrain
+accuracy. For low-relief, clipped profiles the importer can instead measure the alpha edge of the eight calibrated, north-first Stellarium textures. It checks coverage, concurrence with unclipped heights, and agreement with the SVG before using the texture-derived numerical horizon. Cropped or ambiguous tiles cannot supply this calibration. Calibration failure,
+unsupported SVGs or mismatched sites produce a warning and a horizon-only object.
+</p>
+<p>Vector vertices are transformed to linear azimuth and altitude coordinates
+and rendered to a PNG. Its lower extent is -90 degrees (solid terrain below
+the drawing), preventing transparent holes when exported to Stellarium. The
+default width is 4096 pixels, about 0.088 degrees per pixel horizontally;
+the numerical horizon retains its own sampling. No image array is stored in
+the returned object. PNGs are read on demand as compact native rasters.
+</p>
+<p>The default image directory is the working directory. A supplied directory
+is useful for project files. The object records an absolute PNG path and MD5
+checksum. Saving it with saveRDS does not bundle the PNG. When moving a project,
+copy the PNG too and reconnect it with <code>relinkHor</code>. Missing or
+modified images trigger a warning and ordinary horizon plotting/export.
+Repeating an import with the same files and rendering settings reuses the PNG filename.
+</p>
+<p>PeakFinder exports can report an elevation of 0 m plus eye height even at a
+mountain site. A warning flags this; use elevation to supply a verified absolute
+observer elevation. This override does not recalculate the downloaded horizon.
+The default altitude uncertainty of 0.5 degrees is an explicit working assumption,
+not a measured PeakFinder error estimate. Supply an appropriate value for research.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A skyscapeR.horizon containing a periodically extended numerical horizon,
+site and source metadata, and, on successful calibration, metadata$image with
+the external PNG path, checksum, angular bounds and calibration diagnostics.
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="https://www.peakfinder.com/">PeakFinder</a>, exported drawings
+attributed to PeakFinder under CC BY 4.0. Geometry conventions follow the
+<a href="https://stellarium.org/guide/">Stellarium User Guide</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>createHor</code>, <code>downloadHWT</code>,
+<code>plot.skyscapeR.horizon</code>, <code>exportStellarium</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>## Not run: 
+hor &lt;- importPeakFinder("landscape.zip") # warns that no PNG was created
+hor &lt;- importPeakFinder("landscape.zip", svg="panorama.svg",
+                       image.dir="project-data/horizons", elevation=850)
+plot(hor)
+exportStellarium(hor, name="PeakFinder example")
+
+## End(Not run)
+</code></pre>
+
+<p><a href="../fn-importpeakfinder.html">importPeakFinder() method</a></p></body></html>

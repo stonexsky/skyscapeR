@@ -1,0 +1,82 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>bernoulli.trial | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-bernoulli-trial.html">bernoulli.trial() method</a></nav><p><strong>Validation on 2.0.9005.</strong> Exact and upper-tail probabilities agreed with independent binomial calculations for the tested counts up to 1,000, including zero hits. <a href="../s03-scoring-checks.html">S03 study</a>.</p><p>skyscapeR 2.0.9004</p><h2>Calculate binomial probabilities for aligned structures</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Assess how often a specified number of independent structures would face a target by
+chance, given the chance for one structure.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>bernoulli.trial(n, p, r, type = "tail")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>n</code></td>
+<td>
+<p>Total number of structures: a single finite nonnegative integer.</p>
+</td></tr>
+<tr><td><code>p</code></td>
+<td>
+<p>Target probability: a single finite number between 0 and 1.</p>
+</td></tr>
+<tr><td><code>r</code></td>
+<td>
+<p>Number of hits: a single finite integer between 0 and n.</p>
+</td></tr>
+<tr><td><code>type</code></td>
+<td>
+<p>Either <code>"single"</code> for exactly r hits or <code>"tail"</code>
+for at least r hits (the default).</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Define a hit and the per-structure chance of a hit before counting the orientations. A
+single-count probability answers how often exactly that count arises; the upper tail
+answers how often a count at least that large arises.
+</p>
+<p>The binomial model assumes independent structures with the same
+target probability <code>p</code>. The upper-tail probability is a one-sided
+p-value under this model. Calculations use <code>stats::dbinom</code> and
+<code>stats::pbinom</code>, avoiding factorial overflow and subtraction from 1.
+At least zero hits has probability 1. With zero structures, zero hits has
+probability 1 for either type. Inputs are scalar; invalid inputs error.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A numeric probability between 0 and 1.
+</p>
+
+
+<h3>References</h3>
+
+<p>Ruggles, C (1999) <em>Astronomy in Prehistoric Britain and Ireland</em>. Yale University Press.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>randomTest</code>, <code>modelTest</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'># At least 10 out of 30 structures, with targets covering 20% of the horizon:
+bernoulli.trial(30, 0.2, 10)
+# Exactly 10 hits:
+bernoulli.trial(30, 0.2, 10, type="single")
+bernoulli.trial(30, 0.2, 0) # Always 1
+bernoulli.trial(1000, 0.2, 250) # No factorial overflow
+</code></pre>
+
+<p><a href="../fn-bernoulli-trial.html">bernoulli.trial() method</a></p></body></html>

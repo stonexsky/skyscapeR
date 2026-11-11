@@ -1,0 +1,45 @@
+# `createHWT()` {#fn-createhwt}
+
+[Function index](function-index.html#idx-createhwt)
+
+```{=html}
+<p>A digital horizon supplies estimated angular obstruction around the site. The
+optional httr2 package submits one HTTPS request for a panorama. Once the
+service returns its identifier, the function waits two minutes before the first readiness check, then polls at intervals
+of up to 15 seconds. The polling deadline defaults to 600 seconds. If the wait
+expires, use the identifier with downloadHWT once the panorama is ready.
+Individual requests have a timeout of at most 30 seconds. The initial submission
+and final download are separate from the polling time allowance. Once ready,
+the profile is downloaded and assigned the supplied name. Terrain-derived
+profiles need field verification where vegetation or structures affect visibility.
+</p>
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p><a href="https://www.heywhatsthat.com/">HeyWhatsThat.com</a>
+</p>
+
+
+
+```
+
+</details>
+
+**Interpretation and limits.** Separate where a provider actually placed its viewpoint from the coordinate in the request. Record the downloaded profile, reference direction and acquisition date. A provider comparison can mix terrain-source and algorithm differences.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>lat</code></th><td>—</td><td><p>The latitude of the location.</p></td></tr><tr><th scope="row"><code>lon</code></th><td>—</td><td><p>The longitude of the location.</p></td></tr><tr><th scope="row"><code>name</code></th><td>—</td><td><p>Name assigned to the returned horizon profile.</p></td></tr><tr><th scope="row"><code>elevation</code></th><td><code>1.6</code></td><td><p>The elevation of the observer above
+ground level in meters. Default is 1.6 meters (eye level).</p></td></tr><tr><th scope="row"><code>src</code></th><td><code>&quot;skyscapeR&quot;</code></td><td><p>Request source ID for <em>HeyWhatsThat</em>. Default is
+'skyscapeR'. Only change this if you have been given a source ID by the
+creator of <em>HeyWhatsThat</em>.</p></td></tr><tr><th scope="row"><code>max.wait</code></th><td><code>600</code></td><td><p>Maximum seconds to wait for panorama readiness after submission. Default 600.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical switch to control output. Default is <em>TRUE</em>.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.horizon object for the requested panorama, as returned by <code>downloadHWT</code>. This function submits a remote request and waits for the calculated profile.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/horizon.R`. [Full function help](help/createHWT.html) · [Terrain horizons and panoramas outline](contents-plan.html#plan-terrain) · [Importing site horizons](vignette-guide.html#workflow-importing-site-horizons)

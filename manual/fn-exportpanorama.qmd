@@ -1,0 +1,29 @@
+# `exportPanorama()` {#fn-exportpanorama}
+
+[Function index](function-index.html#idx-exportpanorama)
+
+```{=html}
+<p>The left edge is true north. Azimuth increases clockwise through east,
+south and west. The top is the zenith, the middle is zero altitude and the
+bottom is the nadir. Image exports preserve the calibrated angular bounds and
+sample source pixels by nearest neighbour. Sky and areas outside photographic
+coverage are transparent. For a numerical skyline, the ground extends to the
+nadir over the measured azimuth sector. A missing or modified image triggers
+a warning and the numerical silhouette is exported instead.
+</p>
+```
+
+[Retaining panorama calibration and provenance](fn-exporthor.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>A skyscapeR.horizon object.</p></td></tr><tr><th scope="row"><code>file</code></th><td>—</td><td><p>Destination PNG filename. Choose a new filename for each export.</p></td></tr><tr><th scope="row"><code>width</code></th><td><code>4096</code></td><td><p>Even output width in pixels. Height is half the width. Default 4096.</p></td></tr><tr><th scope="row"><code>use.image</code></th><td><code>TRUE</code></td><td><p>Use the attached terrain or photographic texture when available.
+Set FALSE to export the numerical skyline as a silhouette.</p></td></tr><tr><th scope="row"><code>col.ground</code></th><td><code>&quot;darkgreen&quot;</code></td><td><p>Fill colour for a numerical silhouette.</p></td></tr></tbody></table><h5>Return value</h5><p>The absolute PNG path, invisibly.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/exportPanorama.R`. [Full function help](help/exportPanorama.html) · [Terrain horizons and panoramas outline](contents-plan.html#plan-terrain) · [Photographic calibration and interchange](photographic-horizons.html#photo-interchange) · [Bearing lookup and export layouts](photographic-horizons.html#photo-routes)

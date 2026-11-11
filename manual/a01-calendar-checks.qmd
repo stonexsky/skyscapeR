@@ -1,0 +1,11 @@
+# A01 · Calendar, clock and angular conventions {#a01-calendar-checks}
+
+**Question.** Can a civil date or historical era label be placed on the correct UT Julian date and converted back with the intended clock, calendar and sign?
+
+**Outcome.** All 499 assertions passed. The test compared 240 absolute Julian dates and independently checked 240 returned civil strings. The maximum difference in the Julian-date comparisons was 0.000021 seconds, below the 0.0001-second tolerance. The remaining 19 assertions covered era parsing and formatting, angular signs, clock changes, invalid inputs, midnight rounding and session settings.
+
+We computed the Julian day number by integer Gregorian or Julian calendar arithmetic, with the day starting at noon, then applied the stated clock offset. Reference anchors included J2000 noon (JD 2451545.0), the Unix epoch at midnight (JD 2440587.5) and the Julian epoch at noon (JD 0). Ten dates from astronomical year −4712 to CE 2024, four times of day, both proleptic calendars and three fixed offsets (−03:30, UTC and +05:45) formed the crossed grid. The inverse checks supplied reference JDs directly to the package. The [JPL J2000 definition](https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/cspice/j2000_c.html) supplies an external anchor.
+
+The London checks included the missing and repeated 01:30 local times on the 2024 clock-change dates; both produced errors, as documented. Year zero, Julian leap-year behaviour, a negative sub-degree angle, a date rounded across midnight, argument overrides and restoration of session timezone were also exercised. These checks cover civil-time conversion; they provide no constraint on prehistoric ΔT or the accuracy of every historical timezone database entry.
+
+[Download A01 code, fixtures and all 499 results](archives/A01-verification.zip). [Calendar and angle methods](astronomical-conventions.qmd) · [Validation programme](study-register.qmd#validation-programme).

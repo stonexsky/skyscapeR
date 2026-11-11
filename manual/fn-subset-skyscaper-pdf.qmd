@@ -1,0 +1,24 @@
+# `subset.skyscapeR.pdf()` {#fn-subset-skyscaper-pdf}
+
+**Verified on 2.0.9006.** Selecting, reordering, duplicating or dropping all declination PDFs now retains matching centre metadata. [D01 rerun](d01-density-checks.qmd).
+
+**Validation on 2.0.9005.** Declination PDF subsets retained the original centre metadata in four tests, although curve order and labels followed the selection. [D01 results](d01-density-checks.qmd).
+
+[Function index](function-index.html#idx-subset-skyscaper-pdf)
+
+```{=html}
+<p>This registered S3 method has no separate package help topic. The implementation subsets the name, azimuth, uncertainty and horizon metadata and the corresponding entries in the list of measurement curves using the same index. It returns the modified object.</p>
+```
+
+[Subsetting and normalising densities](fn-hpdi.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>x</code></th><td>—</td><td>A skyscapeR.pdf holding the source measurement curves.</td></tr><tr><th scope="row"><code>subset</code></th><td>—</td><td>An R index applied to curves and paired metadata. Logical and integer selection follow ordinary list indexing.</td></tr><tr><th scope="row"><code>...</code></th><td>—</td><td>Accepted by S3 dispatch and unused by this implementation.</td></tr></tbody></table><h5>Return value</h5><p>The selected PDF object, retaining its class.</p>
+```
+
+</details>
+
+**Implementation.** `R/misc.R`. [Full function help](help/subset.skyscapeR.pdf.html) · [Uncertainty and orientation distributions outline](contents-plan.html#plan-density) · [What the orientation displays calculate](orientation-densities.html#orientation-displays) · [Subsetting declination centres](orientation-densities.html#subset-dec-centres)

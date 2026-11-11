@@ -1,0 +1,50 @@
+# `importConstellations()` {#fn-importconstellations}
+
+[Function index](function-index.html#idx-importconstellations)
+
+```{=html}
+<p>Each non-comment line contains a unique figure identifier, the number
+of segments, then two Hipparcos numbers per segment. Endpoints describe
+separate pairs, not one continuous polygon. Blank lines and comments beginning
+with a hash are ignored. Non-negative segment counts and positive integer HIP identifiers are validated.
+Zero-segment records are retained with an empty HIP field and skipped when drawn.
+Repeated endpoints represent a single-star figure, drawn as a small ring.
+This supports Stellarium's legacy constellationship.fab format, not the JSON
+sky-culture format introduced in Stellarium 25.1. Only lines are imported,
+not artwork, labels, boundaries or star positions. Endpoint stars must be in
+skyscapeR's stellar catalogue; unavailable stars produce warnings when drawn.
+The import does not modify the bundled catalogue or register global names.
+Save the returned object with saveRDS(), or load the file in each script.
+Respect the source sky culture's attribution and redistribution terms.
+</p>
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>Stellarium User Guide, Adding Sky Cultures (legacy editions) and
+Sky Cultures (current editions): <a href="https://stellarium.org/guide/">https://stellarium.org/guide/</a>.
+Legacy example: <a href="https://github.com/Stellarium/stellarium/blob/v0.22.2/skycultures/western/constellationship.fab">https://github.com/Stellarium/stellarium/blob/v0.22.2/skycultures/western/constellationship.fab</a>.
+</p>
+
+
+
+```
+
+</details>
+
+**Interpretation and limits.** A drawn figure expresses a chosen connection between catalogue stars. Endpoints, projection and cultural attribution must be documented separately from any claim that the figure was visible together at a particular instant.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>file</code></th><td>—</td><td><p>Path to a Stellarium legacy constellationship.fab text file.</p></td></tr><tr><th scope="row"><code>set</code></th><td><code>&quot;custom&quot;</code></td><td><p>Label for this collection, default "custom".</p></td></tr></tbody></table><h5>Return value</h5><p>A data frame with the same columns as <code>constellations</code>, accepted by
+the <code>display$constellations</code> setting of <code>sketchSky</code> or the
+<code>constellations</code> argument of <code>planisphere</code>. Subset rows to select individual figures.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/importConstellations.R`. [Full function help](help/importConstellations.html) · [Sky reconstruction](sky-rendering.html#sec-sketch) · [Sky brightness and visualisation outline](contents-plan.html#plan-light) · [Constellation selection and planisphere geometry](sky-rendering.html#sky-constellations) · [Compare constellation patterns](vignette-guide.html#workflow-compare-constellation-patterns)

@@ -1,0 +1,34 @@
+# `time2jd()` {#fn-time2jd}
+
+**Validation on 2.0.9005.** Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. [A01 results](a01-calendar-checks.qmd).
+
+[Function index](function-index.html#idx-time2jd)
+
+```{=html}
+<p>Civil dates require both a calendar and a time convention to specify an instant. The
+function parses each supplied date and time, verifies that the calendar date exists by
+converting it to a Julian date and back, then applies the chosen offset or civil
+timezone to obtain UT. A date without a time uses local midnight. Astronomical year
+numbering includes year zero. An era label can also precede the month, for example
+<code>"3700 BCE/06/21"</code>.
+</p>
+<p>Fixed offsets may be numeric hours east of UTC (for example 5.5), or
+strings such as <code>"UTC+05:30"</code>, <code>"UTC-02"</code> or <code>"GMT+01"</code>.
+Offsets must lie between -14 and +14 hours. UTC, GMT and the empty string
+mean zero offset; an empty string does not select the system timezone.
+</p>
+```
+
+[Civil dates near local midnight](fn-jd2time.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>time</code></th><td>—</td><td><p>Character vector in YYYY/MM/DD format, optionally followed by HH:MM or HH:MM:SS. Fractional seconds are accepted. Omitted clock time means midnight.</p></td></tr><tr><th scope="row"><code>timezone</code></th><td>—</td><td><p>Timezone name or fixed offset; defaults to the value in <code>skyscapeR.vars()</code>. See Details.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td>—</td><td><p>Calendar: G or Gregorian, J or Julian. Defaults to the package calendar setting, initially Gregorian.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>F</code></td><td><p>Logical; display a conversion message. Default is FALSE.</p></td></tr></tbody></table><h5>Return value</h5><p>A numeric vector of UT Julian dates, in the same order as time.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/dates.R`. [Full function help](help/time2jd.html) · [Sky reconstruction](sky-rendering.html#sec-sketch) · [Ephemeris](ephemeris.html#sec-ephemeris) · [Time, coordinates and ephemerides outline](contents-plan.html#plan-time) · [Equinoctial full Moons and crescent crossovers](lunar-crossovers.html#crossover-efm) · [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-time) · [The heliacal rising of the Pleiades](vignette-guide.html#workflow-the-heliacal-rising-of-the-pleiades) · [Exploring celestial candidates](vignette-guide.html#workflow-exploring-celestial-candidates)

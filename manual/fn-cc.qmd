@@ -1,0 +1,90 @@
+# `CC()` {#fn-cc}
+
+[Function index](function-index.html#idx-cc)
+
+```{=html}
+<p>Crescent crossovers describe a change in the relative horizon positions
+of the luminaries across successive lunations. First (waxing) crescents are
+compared at sunset and moonset; last (waning) crescents at sunrise and moonrise.
+The method follows Silva and Pimenta (2012), sections 2.1–2.2. Seasons use the
+paper's northern-hemisphere names: summer means the June-solstice crossover,
+winter the December-solstice crossover, also for southern-hemisphere locations.
+</p>
+<p>For each conjunction, days are searched forwards for the first crescent and
+backwards for the last crescent. Visibility is evaluated at sunset or sunrise,
+respectively, using Caldwell and Laney's criterion: lower-limb lunar altitude
+plus one third of the Sun–Moon angular separation must be at least 11.3 degrees.
+The lower-limb altitude is topocentric. The arc of light is the geocentric
+Sun–Moon separation, as explicitly defined by Caldwell and Laney; it excludes
+atmospheric refraction. The lower limb is calculated from the instantaneous lunar distance
+and a lunar radius of 1737.4 km. With refraction enabled, the centre altitude is
+apparent and the angular radius is subtracted from it. This is an empirical
+visibility prediction, not a guarantee under actual weather or extinction.
+</p>
+```
+
+**Comparison with the original simulations.**
+
+```{=html}
+<p>For SIM1, 5,024 of 5,136 events in the supplied 1620–2047 series at
+latitudes 0, 60 N and 60 S agree within 0.02 degrees in lunar declination.
+This comparison uses a level horizon, longitude 0, elevation 400 m, UTC,
+Gregorian dates, refraction, pressure 1013.25 mbar and temperature 15 degrees
+Celsius. The original 40-degree N series has additional systematic offsets.
+Of the 112 discrepancies outside that series, inferred matching dates suggest
+differences in the lunation search window and first/last crescent selection.
+Some lie close to the visibility threshold. Alternative window and solar-limb
+conventions improve some cases but disrupt others that already agree, so no
+replacement convention has been adopted. The exact original settings remain
+unresolved; the paper does not specify all atmospheric inputs. Inspect the
+diagnostics before interpreting individual events. Agreement with simulation
+tables is not independent observational validation, and these SIM1 counts do
+not establish the accuracy of SIM2.
+</p>
+
+
+
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>Silva, F. and Pimenta, F. (2012). The Crossover of the Sun and the
+Moon. Journal for the History of Astronomy 43(2), 191–208.
+\Sexpr[results=rd]{tools:::Rd_expr_doi("10.1177/002182861204300204")}.
+</p>
+<p>Caldwell, J. and Laney, C. D. (2001). First visibility of the lunar crescent.
+African Skies 5, 15–23. The authors' online version defines dalt and arcl:
+<a href="https://astronomycenter.net/pdf/saao_2001.pdf">https://astronomycenter.net/pdf/saao_2001.pdf</a>.
+</p>
+
+
+
+```
+
+</details>
+
+**Interpretation and limits.** The event-selection rules include ordered conditions across solar and lunar events. Use the recorded diagnostics to identify the first condition that differs when comparing with the Silva and Pimenta simulations. A similar terminal azimuth does not establish identical event selection.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>year</code></th><td>—</td><td><p>One integer year, two ascending endpoints, or a vector of years. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr><tr><th scope="row"><code>loc</code></th><td>—</td><td><p>Latitude, longitude and elevation (degrees, degrees, metres), or
+a <code>skyscapeR.horizon</code> object.</p></td></tr><tr><th scope="row"><code>season</code></th><td><code>&quot;winter&quot;</code></td><td><p>Either <code>"winter"</code> (default) or <code>"summer"</code>.</p></td></tr><tr><th scope="row"><code>crescent</code></th><td><code>&quot;first&quot;</code></td><td><p>Either <code>"first"</code> (default, waxing/set) or
+<code>"last"</code> (waning/rise).</p></td></tr><tr><th scope="row"><code>simulation</code></th><td><code>&quot;SIM1&quot;</code></td><td><p><code>"SIM1"</code> (default) or <code>"SIM2"</code>; see Details.</p></td></tr><tr><th scope="row"><code>timezone</code></th><td><code>skyscapeR.env$timezone</code></td><td><p>Output and observing-day timezone. Defaults to package settings.
+Use UTC or a fixed offset before 1900.</p></td></tr><tr><th scope="row"><code>calendar</code></th><td><code>skyscapeR.env$calendar</code></td><td><p><code>"G"</code> for Gregorian or <code>"J"</code> for Julian dates.
+Defaults to package settings.</p></td></tr><tr><th scope="row"><code>refraction</code></th><td><code>skyscapeR.env$refraction</code></td><td><p>Logical; use atmospheric refraction. Defaults to package settings.</p></td></tr><tr><th scope="row"><code>atm</code></th><td><code>skyscapeR.env$atm</code></td><td><p>Atmospheric pressure in mbar. Defaults to package settings.</p></td></tr><tr><th scope="row"><code>temp</code></th><td><code>skyscapeR.env$temp</code></td><td><p>Air temperature in degrees Celsius. Defaults to package settings.</p></td></tr></tbody></table><h5>Return value</h5><p>A list with <code>Event</code>, paired <code>Moon</code> and <code>Sun</code> data
+frames (year, date, time, azimuth, declination, UT Julian date), and a
+<code>diagnostics</code> data frame. Diagnostics include status, solstice and
+conjunction JDs, visibility-assessment JD, illuminated fraction, lower-limb
+altitude, elongation, visibility margin, signed azimuth difference, preceding
+difference, number of qualifying lunations, and day offset (0 for SIM1's day, 1 for SIM2's additional day).
+All angles are degrees. Missing results retain the requested year,
+use NA for observations and issue a warning. <code>settings</code> records conventions.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/crescent-crossovers.R`. [Full function help](help/CC.html) · [Solar, lunar and planetary events outline](contents-plan.html#plan-events) · [Equinoctial full Moons and crescent crossovers](lunar-crossovers.html#crossover-cc) · [Identifying celestial candidates and limiting declinations](celestial-targets.html#target-screen) · [Equinoctial full Moons and solstitial crescent crossovers](vignette-guide.html#workflow-equinoctial-full-moons-and-solstitial-crescent-crossovers)

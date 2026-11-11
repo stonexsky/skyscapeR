@@ -1,0 +1,78 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>zenith | skyscapeR 2.0.9009</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-zenith.html">zenith() method</a></nav><h2 id='zenith'>Estimate solar declination at the zenith</h2><span id='topic+zenith'></span>
+
+<h3>Description</h3>
+
+<p>Determine the solar declination associated with an overhead passage at the observer's
+latitude, where such a passage is possible.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>zenith(loc, parallax = 0.00224, altitude = 90, year = skyscapeR.env$cur.year)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="zenith_:_loc">loc</code></td>
+<td>
+<p>This can be either the latitude of the
+location, or a <em>skyscapeR.horizon</em> object.</p>
+</td></tr>
+<tr><td><code id="zenith_:_parallax">parallax</code></td>
+<td>
+<p>Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.</p>
+</td></tr>
+<tr><td><code id="zenith_:_altitude">altitude</code></td>
+<td>
+<p>Altitude used in the approximate parallax correction. Defaults to 90 degrees.</p>
+</td></tr>
+<tr><td><code id="zenith_:_year">year</code></td>
+<td>
+<p>Astronomical year used to determine the tropical latitude limit.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The geometric zenith has declination equal to the site latitude. The function
+checks whether the latitude lies within the obliquity of the requested epoch.
+At the geometric zenith the altitude is 90 degrees and the parallax correction vanishes.
+An explicitly supplied altitude invokes the approximate correction at that altitude.
+The function returns NULL outside the permitted band. This supplies
+a declination criterion rather than the dates of the passages.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Solar declination in degrees with the requested parallax correction, or NULL when the latitude falls outside the solstitial limits used by the function.
+</p>
+
+
+<h3>Validation</h3>
+
+<p>A05 verified the geometric zenith declination and tropical-boundary eligibility at two epochs. See the <a href="../a05-solar-limits.html">A05 check in the technical manual</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>jS</code>, <code>dS</code>, <code>eq</code>,
+<code>antizenith</code>, <code>spatial.equinox</code>, <code>parallax.corr</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'># Zenith sun declination for Mexico City:
+zenith(19.419)
+
+# There is no zenith sun phenomenon in London:
+zenith(51.507)
+</code></pre>
+
+</body></html>

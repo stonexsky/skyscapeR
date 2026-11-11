@@ -1,0 +1,56 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BC.AD | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-bc-ad.html">BC.AD() method</a></nav><p><strong>Validation on 2.0.9005.</strong> Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. <a href="../a01-calendar-checks.html">A01 study</a>.</p><p>skyscapeR 2.0.9004</p><h2>Convert an astronomical year to a BC or AD label</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Label an astronomical year in historical BC or AD notation when reporting an epoch.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>BC.AD(year)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>year</code></td>
+<td>
+<p>Numeric astronomical year or vector of years. Year zero is 1 BC. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Astronomical dating includes a year zero, whereas historical BC and AD labels run
+directly from 1 BC to AD 1. Positive years retain their number and receive AD. For zero
+or a negative year, subtract the astronomical year from one and append BC. The
+conversion works element by element and changes only the label, not the calendar or
+instant.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Character labels for astronomical years. Year 0 is 1 BC and year -1 is 2 BC.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>time2jd</code>, <code>jd2time</code>, <code>timestring</code>, <code>long.date</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>BC.AD(100)
+BC.AD(0)
+BC.AD(-1)
+BC.AD(-99)
+BC.AD(-100)
+</code></pre>
+
+<p><a href="../fn-bc-ad.html">BC.AD() method</a></p></body></html>

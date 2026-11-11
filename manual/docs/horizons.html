@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; Constructing a site horizon – skyscapeR technical manual</title>
+<title>Constructing a site horizon – skyscapeR technical manual</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -97,7 +97,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a33b4903dc4ac24f2ffbded35a86d5f2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -139,7 +139,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./horizons.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Constructing a site horizon</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./horizons.html"><span class="chapter-title">Constructing a site horizon</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -172,14 +172,12 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents-plan.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Methods by research question</span></span></a>
+  <a href="./contents-plan.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Methods by research question</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ephemeris.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">swephR and the Swiss Ephemeris</span></span></a>
+  <a href="./ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">swephR and the Swiss Ephemeris</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -193,132 +191,663 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./astronomical-conventions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Astronomical conventions and stellar positions</span></span></a>
+  <a href="./astronomical-conventions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Astronomical conventions and stellar positions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./field-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Reducing compass and theodolite observations</span></span></a>
+  <a href="./field-reduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Reducing compass and theodolite observations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./horizons.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Constructing a site horizon</span></span></a>
+  <a href="./horizons.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Constructing a site horizon</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./photographic-horizons.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Calibrating photographic skylines and exchanging horizons</span></span></a>
+  <a href="./photographic-horizons.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Calibrating photographic skylines and exchanging horizons</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./stellar-phases.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Seasonal stellar visibility</span></span></a>
+  <a href="./stellar-phases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Seasonal stellar visibility</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./orientation-densities.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">From a measured orientation to a declination distribution</span></span></a>
+  <a href="./orientation-densities.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">From a measured orientation to a declination distribution</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./event-searches.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Terrain crossings and event searches</span></span></a>
+  <a href="./event-searches.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Terrain crossings and event searches</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lunar-crossovers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Equinoctial full Moons and crescent crossovers</span></span></a>
+  <a href="./lunar-crossovers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Equinoctial full Moons and crescent crossovers</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./celestial-targets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Identifying celestial candidates and limiting declinations</span></span></a>
+  <a href="./celestial-targets.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Identifying celestial candidates and limiting declinations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./significance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Testing orientation distributions</span></span></a>
+  <a href="./significance.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Testing orientation distributions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./sky-rendering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sky reconstruction and visual radiance</span></span></a>
+  <a href="./sky-rendering.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Sky reconstruction and visual radiance</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Function reference</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./function-index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Function index</span></span></a>
+  <a href="./function-index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Function index</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./function-methods.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Function methods and implementation notes</span></span></a>
+  <a href="./function-methods.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Function methods and implementation notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./vignette-guide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Following the package vignette</span></span></a>
+  <a href="./vignette-guide.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Following the package vignette</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Validation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Time, coordinates and ephemerides</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Studies by question and package build</span></span></a>
+  <a href="./fn-astroyear.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>astroYear()</code></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></span></a>
+  <a href="./fn-bc-ad.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>BC.AD()</code></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./numerical-validation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Calendar, density and significance checks</span></span></a>
+  <a href="./fn-body-position.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>body.position()</code></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Checking the date of heliacal rising</span></span></a>
+  <a href="./fn-jd2time.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>jd2time()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-long-date.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>long.date()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-obliquity.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>obliquity()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-parallax-corr.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>parallax.corr()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-skyscaper-vars.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>skyscapeR.vars()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-ten.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>ten()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-time2jd.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>time2jd()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-timestring.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>timestring()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Reducing field observations</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-mag-dec.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>mag.dec()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-reduct-compass.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>reduct.compass()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-reduct-theodolite.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>reduct.theodolite()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-sunaz.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>sunAz()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Terrain horizons and panoramas</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-createhor.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>createHor()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-createhwt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>createHWT()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-dempalettes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>demPalettes()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-downloadhwt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>downloadHWT()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-exporthor.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>exportHor()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-exportpanorama.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>exportPanorama()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-exportstellarium.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>exportStellarium()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-hor2alt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>hor2alt()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-horfeature.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>horFeature()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-importpanorama.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>importPanorama()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-importpeakfinder.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>importPeakFinder()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-plot-skyscaper-horizon.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>plot.skyscapeR.horizon()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-relinkhor.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>relinkHor()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">From bearings to celestial targets</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-antizenith.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>antizenith()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-az2dec.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>az2dec()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-findtargets.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>findTargets()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-hor2max-dec.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>hor2max.dec()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-hor2min-dec.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>hor2min.dec()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-orbit.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>orbit()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-sky-objects.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>sky.objects()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-skyobject.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>skyObject()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-spatial-equinox.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>spatial.equinox()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-zenith.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>zenith()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Solar, lunar and planetary events</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-cc.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>CC()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-ds.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>dS()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-efm.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>EFM()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-eq.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>eq()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-js.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>jS()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-moonphase.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>moonphase()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-nmjlx.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>nMjLX()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-nmnlx.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>nmnLX()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-planet-extremes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>planet.extremes()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-riseset.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>riseset()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-smjlx.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>sMjLX()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-smnlx.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>smnLX()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-solar-date.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>solar.date()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Stellar positions and seasonal visibility</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-plot-skyscaper-starphases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>plot.skyscapeR.starphases()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-star.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>star()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-star-phases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>star.phases()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Sky brightness and visualisation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-importconstellations.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>importConstellations()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-planisphere.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>planisphere()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-sketchsky.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>sketchSky()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-skyradiance.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>skyRadiance()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-skystep.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>skyStep()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-stellariumsky.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>stellariumSky()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">Uncertainty and orientation distributions</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-az-pdf.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>az.pdf()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-coordtrans.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>coordtrans()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-dec-pdf.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>dec.pdf()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-hpdi.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>hpdi()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-plot-skyscaper-pdf.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>plot.skyscapeR.pdf()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-plot-skyscaper-spd.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>plot.skyscapeR.spd()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-plotazimuth.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>plotAzimuth()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-plotbars.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>plotBars()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-spd.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>spd()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-subset-skyscaper-pdf.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>subset.skyscapeR.pdf()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+ <span class="menu-text">Null models and significance</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-bernoulli-trial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>bernoulli.trial()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-modeltest.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>modelTest()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-plot-skyscaper-sigtest.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>plot.skyscapeR.sigTest()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-print-skyscaper-sigtest.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>print.skyscapeR.sigTest()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-pval2stars.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>pval2stars()</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fn-randomtest.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>randomTest()</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
+ <span class="menu-text">Validation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./numerical-validation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Calendar, density and significance checks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a01-calendar-checks.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A01 · Calendar, clock and angular conventions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a04-stellar-crossings.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A04 · Crossing times, bearings and event order</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a05-solar-limits.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A05 · Solar dates and limiting declinations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a08-target-ranges.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A08 · Target screening and dated bands</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./d01-density-checks.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">D01 · Measurement densities, sums and highest-density regions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./d02-bearing-propagation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">D02 · Bearing uncertainty on flat and irregular skylines</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h01-field-validation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H01. Horizon altitude at surveyed bearings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h07-panorama-coverage.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H07 · Coverage of partial photographic skylines</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s01-uniform-orientation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">S01 · Calibration of the uniform-orientation test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s02-specified-models.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">S02 · Specified and site-specific null models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s03-scoring-checks.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">S03 · Monte Carlo ranks, local clusters and reported probabilities</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./w01-plot-geometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">W01 · Geometry and labels in graphical outputs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./w02-field-to-sky.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">W02 · End-to-end field-to-sky replay</span></a>
   </div>
 </li>
       </ul>
@@ -336,37 +865,37 @@ div.csl-indent {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">Chapter contents</h2>
    
   <ul>
-  <li><a href="#from-field-measurements" id="toc-from-field-measurements" class="nav-link active" data-scroll-target="#from-field-measurements"><span class="header-section-number">5.1</span> From field measurements</a></li>
-  <li><a href="#from-an-elevation-model" id="toc-from-an-elevation-model" class="nav-link" data-scroll-target="#from-an-elevation-model"><span class="header-section-number">5.2</span> From an elevation model</a>
+  <li><a href="#from-field-measurements" id="toc-from-field-measurements" class="nav-link active" data-scroll-target="#from-field-measurements">From field measurements</a></li>
+  <li><a href="#from-an-elevation-model" id="toc-from-an-elevation-model" class="nav-link" data-scroll-target="#from-an-elevation-model">From an elevation model</a>
   <ul class="collapse">
-  <li><a href="#which-point-supplies-the-skyline" id="toc-which-point-supplies-the-skyline" class="nav-link" data-scroll-target="#which-point-supplies-the-skyline"><span class="header-section-number">5.2.1</span> Which point supplies the skyline?</a></li>
+  <li><a href="#which-point-supplies-the-skyline" id="toc-which-point-supplies-the-skyline" class="nav-link" data-scroll-target="#which-point-supplies-the-skyline">Which point supplies the skyline?</a></li>
   </ul></li>
-  <li><a href="#sec-dem-panorama" id="toc-sec-dem-panorama" class="nav-link" data-scroll-target="#sec-dem-panorama"><span class="header-section-number">5.3</span> Generating a terrain panorama</a>
+  <li><a href="#sec-dem-panorama" id="toc-sec-dem-panorama" class="nav-link" data-scroll-target="#sec-dem-panorama">Generating a terrain panorama</a>
   <ul class="collapse">
-  <li><a href="#from-terrain-rays-to-image-pixels" id="toc-from-terrain-rays-to-image-pixels" class="nav-link" data-scroll-target="#from-terrain-rays-to-image-pixels"><span class="header-section-number">5.3.1</span> From terrain rays to image pixels</a></li>
-  <li><a href="#keeping-and-reusing-the-image" id="toc-keeping-and-reusing-the-image" class="nav-link" data-scroll-target="#keeping-and-reusing-the-image"><span class="header-section-number">5.3.2</span> Keeping and reusing the image</a></li>
+  <li><a href="#from-terrain-rays-to-image-pixels" id="toc-from-terrain-rays-to-image-pixels" class="nav-link" data-scroll-target="#from-terrain-rays-to-image-pixels">From terrain rays to image pixels</a></li>
+  <li><a href="#keeping-and-reusing-the-image" id="toc-keeping-and-reusing-the-image" class="nav-link" data-scroll-target="#keeping-and-reusing-the-image">Keeping and reusing the image</a></li>
   </ul></li>
-  <li><a href="#sec-terrain-features" id="toc-sec-terrain-features" class="nav-link" data-scroll-target="#sec-terrain-features"><span class="header-section-number">5.4</span> Reconstructing features on a DEM</a>
+  <li><a href="#sec-terrain-features" id="toc-sec-terrain-features" class="nav-link" data-scroll-target="#sec-terrain-features">Reconstructing features on a DEM</a>
   <ul class="collapse">
-  <li><a href="#footprint-height-and-viewpoint" id="toc-footprint-height-and-viewpoint" class="nav-link" data-scroll-target="#footprint-height-and-viewpoint"><span class="header-section-number">5.4.1</span> Footprint, height and viewpoint</a></li>
-  <li><a href="#from-feature-to-skyline" id="toc-from-feature-to-skyline" class="nav-link" data-scroll-target="#from-feature-to-skyline"><span class="header-section-number">5.4.2</span> From feature to skyline</a></li>
-  <li><a href="#example-a-1.5-m-bank-across-a-sightline" id="toc-example-a-1.5-m-bank-across-a-sightline" class="nav-link" data-scroll-target="#example-a-1.5-m-bank-across-a-sightline"><span class="header-section-number">5.4.3</span> Example: a 1.5 m bank across a sightline</a></li>
+  <li><a href="#footprint-height-and-viewpoint" id="toc-footprint-height-and-viewpoint" class="nav-link" data-scroll-target="#footprint-height-and-viewpoint">Footprint, height and viewpoint</a></li>
+  <li><a href="#from-feature-to-skyline" id="toc-from-feature-to-skyline" class="nav-link" data-scroll-target="#from-feature-to-skyline">From feature to skyline</a></li>
+  <li><a href="#example-a-1.5-m-bank-across-a-sightline" id="toc-example-a-1.5-m-bank-across-a-sightline" class="nav-link" data-scroll-target="#example-a-1.5-m-bank-across-a-sightline">Example: a 1.5 m bank across a sightline</a></li>
   </ul></li>
-  <li><a href="#choices-that-affect-a-sightline" id="toc-choices-that-affect-a-sightline" class="nav-link" data-scroll-target="#choices-that-affect-a-sightline"><span class="header-section-number">5.5</span> Choices that affect a sightline</a></li>
-  <li><a href="#changes-and-evidence" id="toc-changes-and-evidence" class="nav-link" data-scroll-target="#changes-and-evidence"><span class="header-section-number">5.6</span> Changes and evidence</a></li>
-  <li><a href="#full-package-help" id="toc-full-package-help" class="nav-link" data-scroll-target="#full-package-help"><span class="header-section-number">5.7</span> Full package help</a></li>
+  <li><a href="#choices-that-affect-a-sightline" id="toc-choices-that-affect-a-sightline" class="nav-link" data-scroll-target="#choices-that-affect-a-sightline">Choices that affect a sightline</a></li>
+  <li><a href="#changes-and-evidence" id="toc-changes-and-evidence" class="nav-link" data-scroll-target="#changes-and-evidence">Changes and evidence</a></li>
+  <li><a href="#full-package-help" id="toc-full-package-help" class="nav-link" data-scroll-target="#full-package-help">Full package help</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./horizons.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Constructing a site horizon</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./astronomical-conventions.html">Methods</a></li><li class="breadcrumb-item"><a href="./horizons.html"><span class="chapter-title">Constructing a site horizon</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-horizon" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Constructing a site horizon</span></span></h1>
+<h1 class="title"><span id="sec-horizon" class="quarto-section-identifier"><span class="chapter-title">Constructing a site horizon</span></span></h1>
 </div>
 
 
@@ -383,23 +912,23 @@ div.csl-indent {
 </header>
 
 
-<p><strong>Function</strong> <a href="function-methods.html#fn-createhor"><code>createHor()</code></a> · <strong>Package</strong> skyscapeR 2.0.9004</p>
-<p>A skyline is the altitude of the obstruction at each bearing from a particular viewpoint. <a href="function-methods.html#fn-createhor"><code>createHor()</code></a> builds this profile from observations or predicts it from a digital elevation model (DEM). Both routes return the same kind of horizon object. The evidence between adjacent bearings is quite different.</p>
-<section id="from-field-measurements" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="from-field-measurements"><span class="header-section-number">5.1</span> From field measurements</h2>
+<p><strong>Function</strong> <a href="fn-createhor.html"><code>createHor()</code></a> · <strong>Package</strong> skyscapeR 2.0.9004</p>
+<p>A skyline is the altitude of the obstruction at each bearing from a particular viewpoint. <a href="fn-createhor.html"><code>createHor()</code></a> builds this profile from observations or predicts it from a digital elevation model (DEM). Both routes return the same kind of horizon object. The evidence between adjacent bearings is quite different.</p>
+<section id="from-field-measurements" class="level2">
+<h2 class="anchored" data-anchor-id="from-field-measurements">From field measurements</h2>
 <p>Supply the measured bearings and altitudes in degrees, with the observer’s latitude, longitude and elevation. The constructor repeats the measurements on either side of north, removes duplicate bearings and linearly interpolates both altitude and the supplied altitude uncertainty. This gives a continuous profile across north on a 0.01° grid. The grid is convenient for evaluating a sightline at any bearing. A narrow notch between two measurements can still be absent from the result.</p>
 <p>For example, two measured points of equal altitude on opposite sides of a notch produce a level interpolated skyline between them. Record a foresight at the bottom of the notch if that feature matters to the interpretation. Repeated readings at the same bearing should be reduced to an estimate and uncertainty before calling the constructor. Optional smoothing averages over neighbouring samples and can lower a peak or fill a notch. With the default smoothing width of 1,000 samples, the window spans about 10°. Smoothing is off by default.</p>
 </section>
-<section id="from-an-elevation-model" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="from-an-elevation-model"><span class="header-section-number">5.2</span> From an elevation model</h2>
+<section id="from-an-elevation-model" class="level2">
+<h2 class="anchored" data-anchor-id="from-an-elevation-model">From an elevation model</h2>
 <ol type="1">
 <li><strong>Place the observer.</strong> The function samples the ground height at the site unless an elevation is supplied explicitly, then adds <code>eye.height</code>. Supply numeric latitude and longitude in that order for the default WGS84 route. When <code>loc.crs</code> is explicit, coordinates are in x, y order. A point object with its own coordinate reference system removes that ordering ambiguity. Ground height and DEM elevations must use compatible vertical datums.</li>
 <li><strong>Trace rays.</strong> A local azimuthal equidistant projection supplies distances and bearings clockwise from true north. Along each ray the function samples the source raster by bilinear interpolation, calculates the elevation angle to each terrain sample and keeps the maximum. A more distant ridge may set the horizon even if the near terrain rises steeply.</li>
 <li><strong>Correct the terrain angle.</strong> The default combines Earth curvature and terrestrial refraction using the pressure, temperature and vertical temperature gradient in Patat’s approximation <span class="citation" data-cites="patat2011">(<a href="references.html#ref-patat2011" role="doc-biblioref">Patat 2011</a>, eqs. 1–2)</span>. With an explicit <code>refraction.k</code>, the calculation uses an effective Earth radius. Zero retains geometric curvature. With <code>curvature = FALSE</code>, it uses the uncorrected height difference and distance. Refraction along a terrain sightline is a separate choice from astronomical refraction applied later to a star or the Sun.</li>
 <li><strong>Retain the profile and its provenance.</strong> Record the elevation product and date, horizontal and vertical reference systems, observer position and height, sampling settings, coverage and any reconstructed features. The optional panorama has its own sampling and lighting. Changing its pixel width cannot recover a ridge missed by the numerical rays.</li>
 </ol>
-<section id="which-point-supplies-the-skyline" class="level3" data-number="5.2.1">
-<h3 data-number="5.2.1" class="anchored" data-anchor-id="which-point-supplies-the-skyline"><span class="header-section-number">5.2.1</span> Which point supplies the skyline?</h3>
+<section id="which-point-supplies-the-skyline" class="level3">
+<h3 class="anchored" data-anchor-id="which-point-supplies-the-skyline">Which point supplies the skyline?</h3>
 <p>For an observer at elevation <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>z</mi><mi>o</mi></msub><annotation encoding="application/x-tex">z_o</annotation></semantics></math> (including eye height), the solver maximises the apparent terrain angle over finite samples along each ray. In the default Patat branch, with ground elevation <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>z</mi><mi>i</mi></msub><annotation encoding="application/x-tex">z_i</annotation></semantics></math>, horizontal distance <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>d</mi><mi>i</mi></msub><annotation encoding="application/x-tex">d_i</annotation></semantics></math>, and local Earth radius <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>, the candidate angle in radians is</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>=</mo><mo>arctan</mo><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><msub><mi>z</mi><mi>i</mi></msub><mo>−</mo><msub><mi>z</mi><mi>o</mi></msub></mrow><msub><mi>d</mi><mi>i</mi></msub></mfrac><mo>−</mo><mfrac><msub><mi>d</mi><mi>i</mi></msub><mrow><mn>2</mn><mi>R</mi></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>C</mi><mfrac><msub><mi>d</mi><mi>i</mi></msub><mi>R</mi></mfrac><mo>,</mo><mspace width="2.0em"></mspace><mi>C</mi><mo>=</mo><mfrac><mrow><mn>0.252</mn><mspace width="0.167em"></mspace><mi>P</mi><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mn>34.2</mn><mo>+</mo><mi>g</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>T</mi><mo>+</mo><mn>273.15</mn><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
 h_i=\arctan\!\left(\frac{z_i-z_o}{d_i}-\frac{d_i}{2R}\right)+C\frac{d_i}{R},
@@ -412,12 +941,12 @@ h_i=\arctan\!\left(\frac{z_i-z_o}{d_i}-\frac{d_i}{2R}\right)+C\frac{d_i}{R},
 <figcaption>The two-ridge example viewed due east. For this geometric illustration, the maximum viewing angle occurs on the near face of the farther ridge. The production calculation also applies the selected curvature and refraction model.</figcaption>
 </figure>
 </div>
-<p>For search distance <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math> and requested radial step <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math>, the ordinary numerical rays use <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo>,</mo><mo stretchy="false" form="prefix">⌈</mo><mi>D</mi><mi>/</mi><mi>s</mi><mo stretchy="false" form="postfix">⌉</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">n=\max(2,\lceil D/s\rceil)</annotation></semantics></math> samples at <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mi>i</mi></msub><mo>=</mo><mi>i</mi><mi>D</mi><mi>/</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">d_i=iD/n</annotation></semantics></math>. The default <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math> is half the smaller local raster-cell dimension. The base bearing grid similarly uses <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌈</mo><mn>360</mn><mi>/</mi><mtext mathvariant="monospace">𝚊𝚣.𝚜𝚝𝚎𝚙</mtext><mo stretchy="false" form="postfix">⌉</mo></mrow><annotation encoding="application/x-tex">\lceil 360/\texttt{az.step}\rceil</annotation></semantics></math> equally spaced rays, supplemented for reconstructed features. Bilinear sampling can smooth a narrow crest. A denser output grid cannot recover a crest absent from the terrain data. If the ray has missing coverage, its largest available angle can underestimate the skyline. The source metadata records incomplete bearings. When examining a disputed foresight, inspect that bearing and the winning ridge distance before pooling errors across a station. <a href="./study-register.html#h01-field-validation">H01</a> gives per-station errors and compares DEMs over common bearings in Ireland.</p>
+<p>For search distance <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math> and requested radial step <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math>, the ordinary numerical rays use <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo>,</mo><mo stretchy="false" form="prefix">⌈</mo><mi>D</mi><mi>/</mi><mi>s</mi><mo stretchy="false" form="postfix">⌉</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">n=\max(2,\lceil D/s\rceil)</annotation></semantics></math> samples at <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mi>i</mi></msub><mo>=</mo><mi>i</mi><mi>D</mi><mi>/</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">d_i=iD/n</annotation></semantics></math>. The default <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math> is half the smaller local raster-cell dimension. The base bearing grid similarly uses <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌈</mo><mn>360</mn><mi>/</mi><mtext mathvariant="monospace">𝚊𝚣.𝚜𝚝𝚎𝚙</mtext><mo stretchy="false" form="postfix">⌉</mo></mrow><annotation encoding="application/x-tex">\lceil 360/\texttt{az.step}\rceil</annotation></semantics></math> equally spaced rays, supplemented for reconstructed features. Bilinear sampling can smooth a narrow crest. A denser output grid cannot recover a crest absent from the terrain data. If the ray has missing coverage, its largest available angle can underestimate the skyline. The source metadata records incomplete bearings. When examining a disputed foresight, inspect that bearing and the winning ridge distance before pooling errors across a station. <a href="./h01-field-validation.html">H01</a> gives per-station errors and compares DEMs over common bearings in Ireland.</p>
 </section>
 </section>
-<section id="sec-dem-panorama" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="sec-dem-panorama"><span class="header-section-number">5.3</span> Generating a terrain panorama</h2>
-<p>The DEM route through <a href="function-methods.html#fn-createhor"><code>createHor()</code></a> produces two outputs: the numerical skyline in <code>h$data</code> and a shaded image of the terrain visible <strong>below</strong> it. A measured series of azimuths and altitudes supplies no distances, slopes or intervening surfaces from which to render that foreground. To make a panorama, supply a single-band DEM with elevations in metres, observer coordinates in the specified reference system, and an output directory. The R packages <code>terra</code> and <code>png</code> are required for this example.</p>
+<section id="sec-dem-panorama" class="level2">
+<h2 class="anchored" data-anchor-id="sec-dem-panorama">Generating a terrain panorama</h2>
+<p>The DEM route through <a href="fn-createhor.html"><code>createHor()</code></a> produces two outputs: the numerical skyline in <code>h$data</code> and a shaded image of the terrain visible <strong>below</strong> it. A measured series of azimuths and altitudes supplies no distances, slopes or intervening surfaces from which to render that foreground. To make a panorama, supply a single-band DEM with elevations in metres, observer coordinates in the specified reference system, and an output directory. The R packages <code>terra</code> and <code>png</code> are required for this example.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skyscapeR)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -442,9 +971,9 @@ h_i=\arctan\!\left(\frac{z_i-z_o}{d_i}-\frac{d_i}{2R}\right)+C\frac{d_i}{R},
 <figcaption>Eastern sector of the generated DEM panorama. The darker foreground rise obscures the lower part of the taller ridge. Only the upper terrain edge enters the skyline.</figcaption>
 </figure>
 </div>
-<section id="from-terrain-rays-to-image-pixels" class="level3" data-number="5.3.1">
-<h3 data-number="5.3.1" class="anchored" data-anchor-id="from-terrain-rays-to-image-pixels"><span class="header-section-number">5.3.1</span> From terrain rays to image pixels</h3>
-<p>The output is a 2:1 equirectangular RGBA PNG covering 0–360° clockwise from north and −90° to +90° altitude. Column centres are displaced half a pixel from the north seam. The renderer interpolates the numerical skyline to each column to fix the upper edge and leaves sky pixels transparent. Along each column it traces near to far, tracking the greatest elevation angle encountered. For a row below the skyline, the first terrain segment that reaches its viewing angle supplies the visible surface. More distant terrain below that line is hidden. The renderer interpolates surface properties between samples. A reconstructed <a href="function-methods.html#fn-horfeature"><code>horFeature()</code></a> can change the foreground colours or relief even when a distant ridge still determines the upper edge.</p>
+<section id="from-terrain-rays-to-image-pixels" class="level3">
+<h3 class="anchored" data-anchor-id="from-terrain-rays-to-image-pixels">From terrain rays to image pixels</h3>
+<p>The output is a 2:1 equirectangular RGBA PNG covering 0–360° clockwise from north and −90° to +90° altitude. Column centres are displaced half a pixel from the north seam. The renderer interpolates the numerical skyline to each column to fix the upper edge and leaves sky pixels transparent. Along each column it traces near to far, tracking the greatest elevation angle encountered. For a row below the skyline, the first terrain segment that reaches its viewing angle supplies the visible surface. More distant terrain below that line is hidden. The renderer interpolates surface properties between samples. A reconstructed <a href="fn-horfeature.html"><code>horFeature()</code></a> can change the foreground colours or relief even when a distant ridge still determines the upper edge.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -467,7 +996,7 @@ h_i=\arctan\!\left(\frac{z_i-z_o}{d_i}-\frac{d_i}{2R}\right)+C\frac{d_i}{R},
 </tr>
 <tr class="even">
 <td><code>terrain.palette</code>, <code>land_cols</code>, <code>sea_cols</code>, <code>sea_level</code></td>
-<td>Colour the surface by elevation. Inspect the available ramps with <a href="function-methods.html#fn-dempalettes"><code>demPalettes()</code></a>. A sea-level threshold can colour low-lying dry ground as water. Use <code>sea_level=NULL</code> where that interpretation is inappropriate.</td>
+<td>Colour the surface by elevation. Inspect the available ramps with <a href="fn-dempalettes.html"><code>demPalettes()</code></a>. A sea-level threshold can colour low-lying dry ground as water. Use <code>sea_level=NULL</code> where that interpretation is inappropriate.</td>
 </tr>
 <tr class="odd">
 <td><code>lighting</code>, <code>light.azimuth</code>, <code>light.altitude</code>, <code>ambient</code>, <code>haze</code></td>
@@ -477,28 +1006,28 @@ h_i=\arctan\!\left(\frac{z_i-z_o}{d_i}-\frac{d_i}{2R}\right)+C\frac{d_i}{R},
 </table>
 <p>The example wrote a 1024 × 512 PNG. Its adaptive grid used 100 radial samples, with an effective angular target of 21.09 arcminutes. Inspect <code>h$metadata$image$sampling</code> for the values used on another DEM. Increasing image width alone leaves the numerical bearing grid unchanged. When a narrow bank or notch matters, check both grids.</p>
 </section>
-<section id="keeping-and-reusing-the-image" class="level3" data-number="5.3.2">
-<h3 data-number="5.3.2" class="anchored" data-anchor-id="keeping-and-reusing-the-image"><span class="header-section-number">5.3.2</span> Keeping and reusing the image</h3>
-<p><code>panorama=TRUE</code> is the DEM default. <code>image.dir</code> defaults to the working directory, and <code>h$metadata$image$path</code> identifies the actual file. An image-rendering failure can return a valid numerical horizon with a warning and no image metadata. Save the PNG alongside <code>saveRDS(h, "two-ridges.rds")</code>; the RDS stores its path and checksum. After moving the files, assign the result of <a href="function-methods.html#fn-relinkhor"><code>relinkHor()</code></a>. <a href="function-methods.html#fn-plot-skyscaper-horizon"><code>plot.skyscapeR.horizon()</code></a> displays the terrain, <a href="function-methods.html#fn-sketchsky"><code>sketchSky()</code></a> places a sky above it, and <a href="function-methods.html#fn-exportstellarium"><code>exportStellarium()</code></a> packages it for Stellarium. The <a href="photographic-horizons.html#photo-interchange">interchange section</a> describes that export.</p>
+<section id="keeping-and-reusing-the-image" class="level3">
+<h3 class="anchored" data-anchor-id="keeping-and-reusing-the-image">Keeping and reusing the image</h3>
+<p><code>panorama=TRUE</code> is the DEM default. <code>image.dir</code> defaults to the working directory, and <code>h$metadata$image$path</code> identifies the actual file. An image-rendering failure can return a valid numerical horizon with a warning and no image metadata. Save the PNG alongside <code>saveRDS(h, "two-ridges.rds")</code>; the RDS stores its path and checksum. After moving the files, assign the result of <a href="fn-relinkhor.html"><code>relinkHor()</code></a>. <a href="fn-plot-skyscaper-horizon.html"><code>plot.skyscapeR.horizon()</code></a> displays the terrain, <a href="fn-sketchsky.html"><code>sketchSky()</code></a> places a sky above it, and <a href="fn-exportstellarium.html"><code>exportStellarium()</code></a> packages it for Stellarium. The <a href="photographic-horizons.html#photo-interchange">interchange section</a> describes that export.</p>
 <p><a href="archives/dem-panorama-example.zip">Download the runnable example, full-sphere PNG, eastern view and run log</a>. The terrain is synthetic and illustrates rendering and occlusion. The field comparisons in the <a href="./study-register.html">study register</a> evaluate skyline altitudes.</p>
 </section>
 </section>
-<section id="sec-terrain-features" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="sec-terrain-features"><span class="header-section-number">5.4</span> Reconstructing features on a DEM</h2>
-<p>A bank can be visible from a monument without forming its skyline. To distinguish those possibilities, pass a <a href="function-methods.html#fn-horfeature"><code>horFeature()</code></a> object, or an ordered list of them, in the <code>features</code> argument to <a href="function-methods.html#fn-createhor"><code>createHor()</code></a>. This route requires a DEM. A profile supplied as measured bearing–altitude pairs contains no terrain distances at which to place the earthwork.</p>
-<section id="footprint-height-and-viewpoint" class="level3" data-number="5.4.1">
-<h3 data-number="5.4.1" class="anchored" data-anchor-id="footprint-height-and-viewpoint"><span class="header-section-number">5.4.1</span> Footprint, height and viewpoint</h3>
+<section id="sec-terrain-features" class="level2">
+<h2 class="anchored" data-anchor-id="sec-terrain-features">Reconstructing features on a DEM</h2>
+<p>A bank can be visible from a monument without forming its skyline. To distinguish those possibilities, pass a <a href="fn-horfeature.html"><code>horFeature()</code></a> object, or an ordered list of them, in the <code>features</code> argument to <a href="fn-createhor.html"><code>createHor()</code></a>. This route requires a DEM. A profile supplied as measured bearing–altitude pairs contains no terrain distances at which to place the earthwork.</p>
+<section id="footprint-height-and-viewpoint" class="level3">
+<h3 class="anchored" data-anchor-id="footprint-height-and-viewpoint">Footprint, height and viewpoint</h3>
 <p>Supply vector geometry with a known coordinate reference system. Dimensions are in metres. A point stone or pole uses a circular footprint of the given diameter. A line becomes a strip of the specified total width, centred on the line. For a polygon, banks, ditches and walls follow the boundary by default; stones, poles, mounds and platforms occupy the area. Use <code>use = "area"</code> or <code>"boundary"</code> explicitly when the distinction matters. Interior rings are respected, including their edges in boundary mode.</p>
 <p>At each sample the reconstruction modifies the local DEM elevation. A bank adds height, a ditch subtracts depth, and a zero-height feature can colour a visible surface without raising it. If the DEM already contains 0.6 m of surviving bank and the hypothesis is a 1.5 m crest above the adjacent ground, the additional height at that crest is 0.9 m. Adding the full 1.5 m there would count the surviving relief twice. The viewpoint stays at its original elevation. To place the observer on a reconstructed platform, supply its hypothesised top elevation as the observer’s ground elevation, then add eye height.</p>
 <p>Banks, ditches and mounds default to a rounded profile. The displacement rises from zero at the edge according to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mo>sin</mo><mn>2</mn></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>π</mi><mi>t</mi><mi>/</mi><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\sin^2(\pi t/2)</annotation></semantics></math>, where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math> is the inward distance expressed as a fraction of the profile radius. For a line this radius is half its width. Stones, poles, platforms and walls default to a flat profile that follows the underlying terrain. Where features overlap, the greatest positive displacement and the deepest negative displacement are added. Two overlapping banks therefore contribute the taller bank at each sample. Later layers, and later rows within a layer, take colour precedence. This representation supports terrain-attached relief; a doorway through a bank requires a gap in its footprint.</p>
 </section>
-<section id="from-feature-to-skyline" class="level3" data-number="5.4.2">
-<h3 data-number="5.4.2" class="anchored" data-anchor-id="from-feature-to-skyline"><span class="header-section-number">5.4.2</span> From feature to skyline</h3>
+<section id="from-feature-to-skyline" class="level3">
+<h3 class="anchored" data-anchor-id="from-feature-to-skyline">From feature to skyline</h3>
 <p>The numerical calculation adds bearings at the edges and centre of raised or cut features and samples where rays intersect their footprints. It evaluates the modified surface against all other terrain along the same ray. A bank changes the skyline only where it exceeds the previous maximum elevation angle. A ditch can lower the skyline only where it cuts the terrain that previously set that maximum. A foreground feature below a distant ridge can therefore alter the <strong>panorama</strong> while leaving the <strong>skyline altitude</strong> effectively unchanged.</p>
 <p>Panorama columns trace the reconstructed surface independently. Colour is subject to visibility, shading and haze. A narrow feature can fall between columns even when the numerical rays detect it. Refine <code>az.step</code> and <code>distance.step</code> for a critical bearing and increase PNG <code>width</code> to check the depiction. The returned numerical profile is interpolated to the usual 0.01° grid.</p>
 </section>
-<section id="example-a-1.5-m-bank-across-a-sightline" class="level3" data-number="5.4.3">
-<h3 data-number="5.4.3" class="anchored" data-anchor-id="example-a-1.5-m-bank-across-a-sightline"><span class="header-section-number">5.4.3</span> Example: a 1.5 m bank across a sightline</h3>
+<section id="example-a-1.5-m-bank-across-a-sightline" class="level3">
+<h3 class="anchored" data-anchor-id="example-a-1.5-m-bank-across-a-sightline">Example: a 1.5 m bank across a sightline</h3>
 <p>This illustrative terrain is level at 100 m. A bank 100 m east of the observer crosses the due-east ray. The crest is 1.5 m above ground and the eye is 1 m above ground. With curvature disabled, the line to the crest has an altitude of approximately <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>arctan</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>0.5</mn><mi>/</mi><mn>100</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>0.29</mn><mi>°</mi></mrow><annotation encoding="application/x-tex">\arctan(0.5/100)=0.29°</annotation></semantics></math>. The returned skyline uses the maximum along the rounded bank, which can occur slightly nearer than its centre.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dem <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="at">xmin =</span> <span class="dv">499500</span>, <span class="at">xmax =</span> <span class="dv">500500</span>, <span class="at">ymin =</span> <span class="dv">5699500</span>,</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ymax =</span> <span class="dv">5700500</span>, <span class="at">resolution =</span> <span class="dv">5</span>, <span class="at">crs =</span> <span class="st">"EPSG:32630"</span>)</span>
@@ -516,11 +1045,11 @@ h_i=\arctan\!\left(\frac{z_i-z_o}{d_i}-\frac{d_i}{2R}\right)+C\frac{d_i}{R},
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">approx</span>(h<span class="sc">$</span>data<span class="sc">$</span>az, h<span class="sc">$</span>data<span class="sc">$</span>alt, <span class="at">xout =</span> <span class="dv">90</span>)<span class="sc">$</span>y</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>}, <span class="fu">numeric</span>(<span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>To model a chalk-coloured cursus enclosure, a zero-height polygon in area mode can supply the interior colour, with a raised boundary bank later in the list. This lets the interior and bank have different colours while only the bank adds relief. Save the feature objects with the DEM provenance, viewpoint and settings. The returned <code>metadata$features</code> summarises the layers and records checksums; rebuilding the geometry requires the saved features. Save the external PNG as well when a panorama was requested.</p>
-<p>The rules above follow the 2.0.9004 implementation in <code>R/horizon-features.R</code> and <code>R/dem-horizon.R</code>. The example illustrates the geometry of an assumed bank. <a href="./study-register.html#h01-field-validation">H01</a> tests terrain skylines. Reconstructed earthworks need independent measurements of their geometry.</p>
+<p>The rules above follow the 2.0.9004 implementation in <code>R/horizon-features.R</code> and <code>R/dem-horizon.R</code>. The example illustrates the geometry of an assumed bank. <a href="./h01-field-validation.html">H01</a> tests terrain skylines. Reconstructed earthworks need independent measurements of their geometry.</p>
 </section>
 </section>
-<section id="choices-that-affect-a-sightline" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="choices-that-affect-a-sightline"><span class="header-section-number">5.5</span> Choices that affect a sightline</h2>
+<section id="choices-that-affect-a-sightline" class="level2">
+<h2 class="anchored" data-anchor-id="choices-that-affect-a-sightline">Choices that affect a sightline</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -552,14 +1081,14 @@ h_i=\arctan\!\left(\frac{z_i-z_o}{d_i}-\frac{d_i}{2R}\right)+C\frac{d_i}{R},
 </tbody>
 </table>
 </section>
-<section id="changes-and-evidence" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="changes-and-evidence"><span class="header-section-number">5.6</span> Changes and evidence</h2>
+<section id="changes-and-evidence" class="level2">
+<h2 class="anchored" data-anchor-id="changes-and-evidence">Changes and evidence</h2>
 <p>The 2.0 development documentation records the DEM construction route, terrestrial refraction and external terrain panorama. An existing horizon interpolated from a survey and a new one derived from a DTM can differ even at the same nominal location. Record which route supplied the profile in a published analysis.</p>
 <p><span id="comparison-with-provider-profiles"></span></p>
-<p>The <a href="./study-register.html#h01-field-validation">H01 field comparison</a> quantifies error at surveyed bearings. <a href="./study-register.html#h02-skyline-comparison">H02</a> compares independently computed profiles at matched viewpoints. The English controls hold the terrain product, observer setup and search radius fixed. Delivered online profiles can also differ in their input terrain and effective observer height.</p>
+<p>The <a href="./h01-field-validation.html">H01 field comparison</a> quantifies error at surveyed bearings. <a href="./h02-skyline-comparison.html">H02</a> compares independently computed profiles at matched viewpoints. The English controls hold the terrain product, observer setup and search radius fixed. Delivered online profiles can also differ in their input terrain and effective observer height.</p>
 </section>
-<section id="full-package-help" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="full-package-help"><span class="header-section-number">5.7</span> Full package help</h2>
+<section id="full-package-help" class="level2">
+<h2 class="anchored" data-anchor-id="full-package-help">Full package help</h2>
 <details>
 <summary>
 Read the complete <code>createHor()</code> help page
@@ -913,7 +1442,7 @@ exportStellarium(terrain, name="Survey site")
 </code></pre>
 </details>
 <p><strong>Related function entries</strong></p>
-<p><a href="function-methods.html#fn-createhor"><code>createHor()</code></a>, <a href="function-methods.html#fn-hor2alt"><code>hor2alt()</code></a>, <a href="function-methods.html#fn-horfeature"><code>horFeature()</code></a>, <a href="function-methods.html#fn-plot-skyscaper-horizon"><code>plot.skyscapeR.horizon()</code></a>, <a href="function-methods.html#fn-relinkhor"><code>relinkHor()</code></a>.</p>
+<p><a href="fn-createhor.html"><code>createHor()</code></a>, <a href="fn-hor2alt.html"><code>hor2alt()</code></a>, <a href="fn-horfeature.html"><code>horFeature()</code></a>, <a href="fn-plot-skyscaper-horizon.html"><code>plot.skyscapeR.horizon()</code></a>, <a href="fn-relinkhor.html"><code>relinkHor()</code></a>.</p>
 <p>For control-point fitting, mask sampling and landscape export, see <a href="./photographic-horizons.html">photographic horizons</a>.</p>
 
 
@@ -1328,12 +1857,12 @@ Patat, Ferdinando. 2011. <span>‘Horizon Synthesis for Archaeo-Astronomical Pur
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./field-reduction.html" class="pagination-link" aria-label="Reducing compass and theodolite observations">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Reducing compass and theodolite observations</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Reducing compass and theodolite observations</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./photographic-horizons.html" class="pagination-link" aria-label="Calibrating photographic skylines and exchanging horizons">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Calibrating photographic skylines and exchanging horizons</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-title">Calibrating photographic skylines and exchanging horizons</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

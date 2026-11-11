@@ -1,0 +1,28 @@
+# `eq()` {#fn-eq}
+
+A05 checked the equinoctial declination reference separately from the dates of the astronomical equinoxes. [A05 results](a05-solar-limits.qmd).
+
+[Function index](function-index.html#idx-eq)
+
+```{=html}
+<p>The geometric reference at an equinox is the celestial equator, with geocentric
+declination zero. Supplying a location subtracts the package's approximate parallax
+correction for the latitude and specified altitude. The result is a declination target
+in degrees; no equinox date, event time or horizon crossing is calculated.
+</p>
+```
+
+[Seasonal reference declinations](fn-ds.qmd).
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>loc</code></th><td><code>FALSE</code></td><td><p>Latitude in degrees north or a <code>skyscapeR.horizon</code> object. Omit this argument or use <code>FALSE</code> for geocentric declination.</p></td></tr><tr><th scope="row"><code>parallax</code></th><td><code>0.00224</code></td><td><p>Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>0</code></td><td><p>Altitude of the sun. Defaults to 0 degrees.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical to control output of warnings and messages.
+Defaults to TRUE. This affects messages only, not the calculated declination.</p></td></tr></tbody></table><h5>Return value</h5><p>Numeric declination in degrees. With loc = FALSE the result is geocentric. Supplying a location applies the parallax correction for the chosen altitude.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/events.R`. [Full function help](help/eq.html) · [Solar, lunar and planetary events outline](contents-plan.html#plan-events) · [Identifying celestial candidates and limiting declinations](celestial-targets.html#target-limits)

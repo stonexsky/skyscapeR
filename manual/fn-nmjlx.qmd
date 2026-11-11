@@ -1,0 +1,42 @@
+# `nMjLX()` {#fn-nmjlx}
+
+[Function index](function-index.html#idx-nmjlx)
+
+```{=html}
+<p>A major standstill defines a limiting lunar declination at the epoch of interest. The
+model uses the obliquity plus a fixed 5.145 + 0.145 degrees, then applies the positive
+sign for the northern limit. With a location it subtracts the parallax correction for
+latitude and altitude. The default lunar parallax is 0.952 degrees. This approximation
+defines a target limit; it does not search a time series for an actual lunar event.
+</p>
+<p>Sprajc (2016) describes the limits set by obliquity and the mean lunar
+inclination. This package also includes the fixed 0.145-degree term above.
+</p>
+```
+
+<details><summary>Method references</summary>
+
+```{=html}
+<p>Šprajc, I. (2016). Lunar alignments in Mesoamerican architecture. Anthropological Notebooks 22(3), 61-85.
+</p>
+
+
+
+```
+
+</details>
+
+**Interpretation and limits.** A standstill envelope gives a target limit. To compare with a particular observed Moon, compute its topocentric position at the instant and test the local skyline separately.
+
+
+<details><summary>Implementation arguments, return value and documented modes</summary>
+
+```{=html}
+<table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>year</code></th><td><code>skyscapeR.env$cur.year</code></td><td><p>Astronomical year. The default is the current year in the package settings. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td></tr><tr><th scope="row"><code>loc</code></th><td><code>FALSE</code></td><td><p>Latitude in degrees north or a <code>skyscapeR.horizon</code> object. Omit this argument or use <code>FALSE</code> for geocentric declination.</p></td></tr><tr><th scope="row"><code>parallax</code></th><td><code>0.952</code></td><td><p>Mean horizontal parallax in degrees. The default is 0.952 degrees for the Moon.</p></td></tr><tr><th scope="row"><code>altitude</code></th><td><code>0</code></td><td><p>Altitude of the Moon. Defaults to 0 degrees.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical to control output of warnings and messages.
+Defaults to TRUE.</p></td></tr></tbody></table><h5>Return value</h5><p>Numeric declination in degrees. With loc = FALSE the result is geocentric. Supplying a location applies the parallax correction for the chosen altitude.
+</p>
+```
+
+</details>
+
+**Implementation.** `R/events.R`. [Full function help](help/nMjLX.html) · [Solar, lunar and planetary events outline](contents-plan.html#plan-events) · [Identifying celestial candidates and limiting declinations](celestial-targets.html#target-limits)

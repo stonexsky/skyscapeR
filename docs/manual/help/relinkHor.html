@@ -1,0 +1,57 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>relinkHor | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-relinkhor.html">relinkHor() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Reconnect saved horizons to moved panorama PNGs</h2><span></span>
+
+<h3>Description</h3>
+
+<p>Update the external PNG paths in one horizon or a list after moving a project.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>relinkHor(hor, path, recursive = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code>hor</code></td>
+<td>
+<p>A skyscapeR.horizon object or a list of horizon objects.</p>
+</td></tr>
+<tr><td><code>path</code></td>
+<td>
+<p>A directory containing the moved PNGs, or a character vector of PNG filenames in any order.</p>
+</td></tr>
+<tr><td><code>recursive</code></td>
+<td>
+<p>Search subdirectories when path names a directory. Defaults to FALSE.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>A saved horizon records the checksum of its displayed PNG. Copy that PNG with the RDS, including the levelled copy for a calibrated photograph. Matching checks file contents, so a renamed file can be recovered and different panoramas with the same filename can be distinguished. For identical copies, the original basename is preferred, then the first matching candidate. A skyline-only horizon passes through unchanged. If any required image cannot be verified, the function stops before returning a result. Assign the returned object and use saveRDS() to keep the updated paths. The original PeakFinder archive used for native-layout export is separate.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The horizon or list, retaining its names, order and metadata with updated absolute PNG paths.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>## Not run: 
+sites &lt;- readRDS("sites.rds")
+sites &lt;- relinkHor(sites, "panoramas", recursive = TRUE)
+saveRDS(sites, "sites.rds")
+# A single renamed image
+hh &lt;- relinkHor(hh, "photos/west-ridge.png")
+
+## End(Not run)
+</code></pre>
+
+<p><a href="../fn-relinkhor.html">relinkHor() method</a></p></body></html>

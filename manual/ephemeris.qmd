@@ -26,10 +26,10 @@ For an archaeological horizon event, another question is where the body would ha
 |---|---|
 | How closely did the file-backed calculations reproduce JPL? | [A02](a02-ephemeris.qmd) checked 1,080 geocentric directions against DE431 and DE441 using matching file generations. Maximum separation was 0.0065″. |
 | How did local lunar bearings compare with Horizons? | Across 177 prehistoric crossings, the median default azimuth difference was 0.059° and the maximum was 0.322°. Matching ΔT alone reduced the maximum to 0.027°. [Crossing protocol and results](a02-ephemeris.qmd#lunar-bearings-at-the-skyline). |
-| Which comparisons still require separate evidence? | The [heliacal-rising study](heliacal-rising.qmd) concerns visibility models, [H01](study-register.qmd#h01-field-validation) concerns terrain altitude, and A03 covers stellar catalogue positions. |
+| Which comparisons still require separate evidence? | The [heliacal-rising study](heliacal-rising.qmd) concerns visibility models, [H01](h01-field-validation.qmd) concerns terrain altitude, and A03 covers stellar catalogue positions. |
 
 **Related function entries**
 
-[`body.position()`](function-methods.html#fn-body-position), [`riseset()`](function-methods.html#fn-riseset), [`star()`](function-methods.html#fn-star), [`time2jd()`](function-methods.html#fn-time2jd).
+[`body.position()`](fn-body-position.html), [`riseset()`](fn-riseset.html), [`star()`](fn-star.html), [`time2jd()`](fn-time2jd.html).
 
 For worked calendar, reference-frame and fixed-star calculations, see [astronomical conventions and stellar positions](astronomical-conventions.qmd).

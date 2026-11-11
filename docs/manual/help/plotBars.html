@@ -1,0 +1,163 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>plotBars | skyscapeR 2.0.9008</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-plotbars.html">plotBars() method</a></nav><h2 id='plotBars'>Plot orientation intervals in declination</h2><span id='topic+plotBars'></span>
+
+<h3>Description</h3>
+
+<p>Compare central orientations and their angular uncertainties across observations,
+optionally against celestial target ranges.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>plotBars(
+  val,
+  unc,
+  names,
+  unit = "Declination",
+  obj,
+  show.obj.label = TRUE,
+  xrange,
+  yrange,
+  sort = FALSE,
+  shade = TRUE,
+  mark = TRUE,
+  col = NULL,
+  geometry = if (missing(shade)) "interval" else "bar",
+  show.legend = TRUE,
+  style = "publication-colour"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="plotBars_:_val">val</code></td>
+<td>
+<p>Array of declination or azimuth values.</p>
+</td></tr>
+<tr><td><code id="plotBars_:_unc">unc</code></td>
+<td>
+<p>Single value or array of measurement uncertainty</p>
+</td></tr>
+<tr><td><code id="plotBars_:_names">names</code></td>
+<td>
+<p>Array of names of measurements in <em>val</em></p>
+</td></tr>
+<tr><td><code id="plotBars_:_unit">unit</code></td>
+<td>
+<p>(Optional). Either 'Declination' or 'Azimuth'. Defaults to 'Declination'.</p>
+</td></tr>
+<tr><td><code id="plotBars_:_obj">obj</code></td>
+<td>
+<p>A <em>skyscapeR.object</em> from <code>skyObject</code>, or
+a list of these objects. Each group retains its own epochs and styles
+for displaying the declination values of celestial objects.</p>
+</td></tr>
+<tr><td><code id="plotBars_:_show.obj.label">show.obj.label</code></td>
+<td>
+<p>Logical. Label celestial overlays on the declination plot. Defaults to TRUE.</p>
+</td></tr>
+<tr><td><code id="plotBars_:_xrange">xrange</code></td>
+<td>
+<p>Array of limits for x-axis.</p>
+</td></tr>
+<tr><td><code id="plotBars_:_yrange">yrange</code></td>
+<td>
+<p>Array of limits for y-axis.</p>
+</td></tr>
+<tr><td><code id="plotBars_:_sort">sort</code></td>
+<td>
+<p>Logical to control whether to sort the measurements by their declination
+value. Defaults to <em>FALSE</em></p>
+</td></tr>
+<tr><td><code id="plotBars_:_shade">shade</code></td>
+<td>
+<p>Logical to control whether to shade a polygon of measurements. Defaults
+to <em>TRUE</em></p>
+</td></tr>
+<tr><td><code id="plotBars_:_mark">mark</code></td>
+<td>
+<p>Logical to control whether to mark the declination value. Defaults to
+<em>TRUE</em></p>
+</td></tr>
+<tr><td><code id="plotBars_:_col">col</code></td>
+<td>
+<p>Measurement colour. NULL uses the current style.</p>
+</td></tr>
+<tr><td><code id="plotBars_:_geometry">geometry</code></td>
+<td>
+<p>Use <code>"interval"</code> for sightline intervals with a centre point, or
+<code>"bar"</code> for filled or outlined rectangles. Explicitly supplying the older <code>shade</code>
+setting selects rectangles unless <code>geometry</code> is supplied.</p>
+</td></tr>
+<tr><td><code id="plotBars_:_show.legend">show.legend</code></td>
+<td>
+<p>Display target annotations when <code>show.obj.label</code> is also TRUE.</p>
+</td></tr>
+<tr><td><code id="plotBars_:_style">style</code></td>
+<td>
+<p>Analytical display style, either <code>"publication-colour"</code> (default) or
+<code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>A row represents one measurement. Its horizontal bar spans the supplied value minus and
+plus its uncertainty, and an optional mark shows the centre. A scalar uncertainty is
+reused for all rows. Sorting rearranges measurements, labels and widths together.
+Celestial overlays use the declination axis. The widths reflect the supplied
+uncertainties and acquire a probability interpretation only from the measurement model.
+</p>
+<p>For a two-year epoch range, celestial targets are displayed as bands
+covering their stored minimum and maximum declinations across the full plot
+height. Single-year targets are displayed as lines.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Draws orientation measurements and their uncertainties on the active graphics device.
+</p>
+
+
+<h3>Coordinates and interpretation</h3>
+
+<p><code>unit</code> labels the measurement axis; it does not transform azimuths into
+declinations. Celestial overlay values are declinations. Use them with
+declination measurements, or convert measurements first using the appropriate
+site and horizon. Bars show the supplied symmetric angular bounds, not fitted
+confidence intervals. Use <code>az.pdf</code>, <code>coordtrans</code> and
+<code>spd</code> when the full measurement distributions are needed.
+</p>
+
+
+<h3>Validation</h3>
+
+<p>W01 checked the endpoints and row labels of an azimuth interval spanning north. See the <a href="../w01-plot-geometry.html">W01 check in the technical manual</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>skyObject</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'># Plot some declination data:
+decs &lt;- c(10, 12, -5, 4)
+plotBars(decs, unc=5)
+
+# To visualize this data against the common solar and lunar targets:
+tt &lt;- skyObject(c('solar extremes','lunar extremes'), epoch=-2000, lty=c(2,3))
+plotBars(decs, unc=5, obj=tt)
+# Display a year-range target band:
+targets &lt;- skyObject('solar extremes', epoch=c("4001 BC", "2001 BC"), col='red')
+plotBars(c(-24,-23,23,24), unc=0.5, obj=targets)
+</code></pre>
+
+</body></html>
