@@ -28,6 +28,7 @@
 #' extinction to star symbols and the integrated magnitudes of supported clusters.
 #' It does not limit constellation endpoints, the Sun, Moon or planets. Raising
 #' the cutoff includes additional stars only where the catalogue supplies them.
+#' @param band.extinction Logical. Defaults to TRUE. Set to FALSE to disable Milky Way extinction in publication styles. Natural style already applies it.
 #' @param k Non-negative visual extinction coefficient in magnitudes per airmass
 #' for natural style. Defaults to \code{\link{skyscapeR.vars}()$k}, initially 0.2.
 #' This clear-sky baseline is an assumption, not an estimate of the site's weather.
@@ -91,7 +92,7 @@
 #' gradually into a clear daylight blue, reaching its full daytime palette and
 #' exposure at a solar altitude of 15 degrees.
 #' @section Milky Way and clusters:
-#' The Milky Way is traced from the diffuse light in Deep Star Maps 2020.
+#' The Milky Way is traced on a 0.1-degree Galactic grid from the 4096-pixel diffuse-light map in Deep Star Maps 2020.
 #' Within the smoothed envelope, retained dark patches have at least 10 percent
 #' local contrast; two bright tiers begin at 1.10 and 1.75 times the mean band
 #' tone after the dark patches are excluded. Retained patches cover at least
@@ -187,7 +188,8 @@
 #' It does not identify ephemeris files, catalogue revisions or a development
 #' commit. Retain those and the analysis script separately for exact reproduction.
 sketchSky <- function(hor, jd=NULL, time=NULL, timezone, calendar,
-                      display=list(), style=c("natural","publication-colour","publication-mono"), max.mag=6, k=skyscapeR.vars()$k) {
+                      display=list(), style=c("natural","publication-colour","publication-mono"), max.mag=6, k=skyscapeR.vars()$k, band.extinction=TRUE) {
+  if (!is.logical(band.extinction) || length(band.extinction)!=1L || is.na(band.extinction)) stop("band.extinction must be TRUE or FALSE.")
   style <- match.arg(style)
   shared <- style == "natural"
   if (!inherits(hor,"skyscapeR.horizon")) stop("Supply a georeferenced site horizon.")
@@ -389,8 +391,8 @@ sketchSky <- function(hor, jd=NULL, time=NULL, timezone, calendar,
       }))
     }
   }
-  .with_astronomy_provenance(structure(list(light.budget=if(shared) list(stars=star.flux[stars],bodies=body.flux,planet.discs=planet.discs) else NULL,clusters=clusters,light=light,planet.opacity=planet.opacity,star.opacity=opacity,milky.way.visibility=visibility,milky.way.frame=milky.way.frame,guides=guides,diameters=diameters,planet.size=planet.size,star.colours=star.colours,
-                 background=background, settings=list(calendar=calendar,max.mag=max.mag,k=k),
+  .with_astronomy_provenance(structure(list(publication.band.k=if(band.extinction) k else 0,light.budget=if(shared) list(stars=star.flux[stars],bodies=body.flux,planet.discs=planet.discs) else NULL,clusters=clusters,light=light,planet.opacity=planet.opacity,star.opacity=opacity,milky.way.visibility=visibility,milky.way.frame=milky.way.frame,guides=guides,diameters=diameters,planet.size=planet.size,star.colours=star.colours,
+                 background=background, settings=list(calendar=calendar,max.mag=max.mag,k=k,band.extinction=band.extinction),
                  jd=jd,loc=loc,display=c(as.list(flags),list(constellations=selection)),style=style,day=style=="natural" && flags["sun"] && solar[2]>0,twilight=twilight,atmosphere=atmosphere,
                  lunar=lunar,stars=coords[match(stars,ids),,drop=FALSE],edges=edges,coords=coords,bodies=bodies),
             class=c("skyscapeR.sketch","skyscapeR.sky")))
@@ -653,6 +655,7 @@ sketchSky <- function(hor, jd=NULL, time=NULL, timezone, calendar,
   visibility <- sky$milky.way.visibility
   if (is.null(visibility)) visibility <- 1  # sketches saved before twilight fading
   band.k <- if (is.null(sky$light)) 0 else sky$light$k
+  if (is.null(sky$light) && !is.null(sky$publication.band.k)) band.k <- sky$publication.band.k
   shared <- !is.null(sky$light.budget)
   if (shared) {
     .draw_shared_light(sky,box)

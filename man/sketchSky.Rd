@@ -13,7 +13,8 @@ sketchSky(
   display = list(),
   style = c("natural", "publication-colour", "publication-mono"),
   max.mag = 6,
-  k = skyscapeR.vars()$k
+  k = skyscapeR.vars()$k,
+  band.extinction = TRUE
 )
 }
 \arguments{
@@ -48,6 +49,8 @@ mono uses black and white. Neither publication style predicts visibility.}
 extinction to star symbols and the integrated magnitudes of supported clusters.
 It does not limit constellation endpoints, the Sun, Moon or planets. Raising
 the cutoff includes additional stars only where the catalogue supplies them.}
+
+\item{band.extinction}{Logical. Defaults to TRUE. Set to FALSE to disable Milky Way extinction in publication styles. Natural style already applies it.}
 
 \item{k}{Non-negative visual extinction coefficient in magnitudes per airmass
 for natural style. Defaults to \code{\link{skyscapeR.vars}()$k}, initially 0.2.
@@ -143,7 +146,7 @@ exposure at a solar altitude of 15 degrees.
 
 \section{Milky Way and clusters}{
 
-The Milky Way is traced from the diffuse light in Deep Star Maps 2020.
+The Milky Way is traced on a 0.1-degree Galactic grid from the 4096-pixel diffuse-light map in Deep Star Maps 2020.
 Within the smoothed envelope, retained dark patches have at least 10 percent
 local contrast; two bright tiers begin at 1.10 and 1.75 times the mean band
 tone after the dark patches are excluded. Retained patches cover at least
@@ -173,11 +176,6 @@ Record site, horizon, epoch, calendar, timezone, extinction
 and display switches when reporting a reconstruction.
 }
 
-\section{Validation}{
-
-W02 verified the reconstructed Gacrux bearing and altitude at the same instant and viewpoint using direct equatorial coordinates and spherical geometry. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
-}
-
 \section{Provenance}{
 
 Structured results carry a \code{provenance} attribute. Read it with
@@ -187,6 +185,10 @@ This attribute adds no list entries or table columns. Ordinary subsetting or
 transformations may discard attributes; save the original result for reference.
 It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
+}
+
+\section{Validation}{
+W02 verified the reconstructed Gacrux bearing and altitude at the same instant and viewpoint using direct equatorial coordinates and spherical geometry. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
 }
 
 \examples{

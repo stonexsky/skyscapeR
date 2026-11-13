@@ -85,7 +85,7 @@
   height
 }
 
-.dem_style <- function(terrain.palette, land_cols, sea_cols, sea_level, n_sea, az, alt, ambient, haze, palette_n) {
+.dem_style <- function(terrain.palette, land_cols, sea_cols, sea_level, n_sea, az, alt, ambient, haze, palette_n, contrast=.70) {
   scalar <- function(x) is.numeric(x) && length(x)==1L && is.finite(x)
   colours <- function(x) {
     if (!is.character(x) || !length(x) || anyNA(x)) return(FALSE)
@@ -102,10 +102,11 @@
   if (!scalar(n_sea) || n_sea!=floor(n_sea) || n_sea<2 || n_sea>65534 || (!is.null(sea_level) && n_sea>palette_n-2))
     stop("n_sea must reserve at least two colours for sea and two for land.")
   if (!scalar(az) || !scalar(alt) || alt<0 || alt>90 ||
+      !scalar(contrast) || contrast<0 || contrast>1 ||
       !scalar(ambient) || ambient<0 || ambient>1 || !scalar(haze) || haze<0 || haze>1)
-    stop("Supply finite lighting angles, altitude from 0 to 90, and ambient and haze from 0 to 1.")
+    stop("Supply finite lighting angles, altitude from 0 to 90, and ambient, contrast and haze from 0 to 1.")
   list(terrain.palette=terrain.palette,land_cols=land_cols,sea_cols=sea_cols,sea_level=sea_level,n_sea=as.integer(n_sea),palette_n=as.integer(palette_n),
-       light.azimuth=az%%360,light.altitude=alt,ambient=ambient,haze=haze)
+       light.azimuth=az%%360,light.altitude=alt,ambient=ambient,contrast=contrast,haze=haze)
 }
 
 .dem_ramp <- function(colours,n) {
@@ -168,7 +169,11 @@
   climbs <- rise>0
   weight[climbs] <- pmax(0,pmin(1,(rows[climbs]-angle[previous[climbs]])/rise[climbs]))
   interpolate <- function(value) value[previous]+weight*(value[index]-value[previous])
-  shade <- style$ambient+(1-style$ambient)*pmax(0,interpolate(light))
+  # Separate contrast from the shadow floor, as in the standalone mesh renderer.
+  # Older saved styles retain their recorded response when contrast is absent.
+  gain <- if (identical(style$lighting,"relief") && !is.null(style$contrast))
+    style$contrast else 1-style$ambient
+  shade <- pmin(1,style$ambient+gain*pmax(0,interpolate(light)))
   base <- .dem_colours(interpolate(height),terrain.range,style,land,sea)
   if (!is.null(feature.colour)) {
     colours <- feature.colour[index]

@@ -773,8 +773,18 @@ plot.skyscapeR.spd <- function(x, xrange, yrange, title=NULL, col=NULL, shading=
   360*seq(lo,hi)
 }
 
-.density_axis <- function(coord, limits, theme, pos=NULL) {
-  at <- .plot_ticks(limits)
+.density_axis <- function(coord, limits, theme, pos=NULL, detailed=FALSE) {
+  # More angular landmarks for significance plots; physical width limits crowding.
+  count <- if (detailed) max(4,min(18,floor(par("pin")[1]/.38))) else 5
+  at <- .plot_ticks(limits,n=count)
+  if (detailed && length(at)>1L) {
+    step <- min(diff(at))
+    subdivisions <- if (abs(step/10^(floor(log10(step)))-2)<1e-8) 4 else 5
+    minor.step <- step/subdivisions
+    minor <- seq(ceiling(min(limits)/minor.step),floor(max(limits)/minor.step))*minor.step
+    minor <- minor[vapply(minor,function(v) all(abs(at-v)>minor.step*1e-6),logical(1))]
+    axis(1,at=minor,labels=FALSE,pos=pos,tcl=-.10,lwd=0,lwd.ticks=.5,col=theme$muted)
+  }
   lab <- if (coord=="az") at%%360 else at
   .plot_axis(1,at,labels=lab,pos=pos,theme=theme)
 }
@@ -845,6 +855,7 @@ plot.skyscapeR.spd <- function(x, xrange, yrange, title=NULL, col=NULL, shading=
 #' simulations. New local values use maximum-cluster adjustment under the complete null;
 #' cluster endpoints remain descriptive, not confidence limits. Legacy fits retain their
 #' original unadjusted values. Interpret local regions alongside the whole-curve test.
+#' The x axis uses more closely spaced labelled angular ticks and shorter unlabelled subdivisions. Tick spacing adapts to the displayed range and physical plot width, including when the local significance panel is shown.
 #' @return Draws the empirical density and pointwise comparison envelope. Optional annotations display the global p-value and local regions.
 #' @param x A \emph{skyscapeR.sigTest} object created with \code{\link{randomTest}}
 #' @param xlim Earlier name for xrange.
@@ -920,7 +931,7 @@ plot.skyscapeR.sigTest <- function(x, xrange, title=NULL, col=NULL, show.pval=TR
     p <- if(p==0) paste("<",format(signif(1/(x$metadata$nsims+1),3))) else paste("=",format.pval(p,digits=2))
     mtext(paste("Global p",p),side=3,adj=1,line=if(show.legend) 2.0 else .55,cex=.86,font=2)
   }
-  if (!show.local) .density_axis(coord,limits,theme) else {
+  if (!show.local) .density_axis(coord,limits,theme,detailed=TRUE) else {
     # Lower panel uses the same x transform and its own space below the density plot.
     old <- par(xpd=NA); on.exit(par(old),add=TRUE)
     local <- x$metadata$local.pval
@@ -944,7 +955,7 @@ plot.skyscapeR.sigTest <- function(x, xrange, title=NULL, col=NULL, show.pval=TR
         .local_mark(mean(c(l,r)),row+yinch(min(.088,bottom*.083)),pval2stars(local[[4]][i]),theme$ink)
       }
     }
-    .density_axis(coord,limits,theme,pos=-yinch(bottom*.60))
+    .density_axis(coord,limits,theme,pos=-yinch(bottom*.60),detailed=TRUE)
     text(mean(limits),-yinch(bottom*(if (show.legend) .83 else .91)),.angle_title(coord),cex=.82)
     if (show.legend) .local_key(limits,-yinch(bottom*.936),theme)
 

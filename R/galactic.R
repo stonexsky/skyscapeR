@@ -127,7 +127,7 @@
   }
 }
 
-# Grid is indexed [Galactic longitude, latitude], centred on quarter degrees.
+# Grid is indexed [Galactic longitude, latitude], centred at uniform angular intervals.
 # 0 outside, 1 ordinary band, 2 dark cutout, 3 bright, 4 brightest.
 .milky_way_grid <- local({
   grid <- NULL
@@ -144,11 +144,14 @@
   gx <- component(1L); gy <- component(2L); gz <- component(3L)
   longitude <- atan2(gy,gx)*180/pi
   latitude <- atan2(gz,sqrt(gx^2+gy^2))*180/pi
-  col <- floor((longitude+180)*4+.5) %% 1440
-  row <- floor((latitude+60)*4+.5)
-  keep <- is.finite(row) & row>=0 & row<481
+  grid <- .milky_way_grid()
+  width <- nrow(grid)
+  cells.per.degree <- width/360
+  col <- floor((longitude+180)*cells.per.degree+.5) %% width
+  row <- floor((latitude+60)*cells.per.degree+.5)
+  keep <- is.finite(row) & row>=0 & row<ncol(grid) & is.finite(col)
   result <- integer(length(row))
-  result[keep] <- as.integer(.milky_way_grid()[1+col[keep]+1440*row[keep]])
+  result[keep] <- as.integer(grid[1+col[keep]+width*row[keep]])
   result
 }
 

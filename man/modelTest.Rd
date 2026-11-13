@@ -14,15 +14,27 @@ modelTest(
   normalise = FALSE,
   .res = 0.01,
   ncores = NULL,
-  verbose = TRUE
+  verbose = TRUE,
+  hor = NULL,
+  .transform.res = 0.1,
+  .prec = 0.1,
+  .output.res = 0.01
 )
 }
 \arguments{
-\item{pdf}{Empirical skyscapeR.pdf from \code{\link{az.pdf}}, \code{\link{dec.pdf}} or \code{\link{coordtrans}}. Its coordinate selects the simulation path.}
+\item{pdf}{Empirical skyscapeR.pdf from \code{\link{az.pdf}}, \code{\link{dec.pdf}} or \code{\link{coordtrans}}. Its coordinate and the optional hor select the simulation path.}
+
+\item{hor}{Optional shared skyscapeR.horizon or an ordered list matching the empirical observations. With azimuth inputs, selects a declination test using individual coordinate transformations. Omit for routes 1 and 2.}
+
+\item{.transform.res}{Internal declination transformation spacing, as .res in coordtrans. Default 0.1 degrees.}
+
+\item{.prec}{Azimuth integration spacing for route 3, as in coordtrans. Default 0.1 degrees.}
+
+\item{.output.res}{Stored declination PDF spacing for route 3, as in coordtrans. Default 0.01 degrees.}
 
 \item{model}{One shared data frame or an ordered list with one table per observation. The first column contains candidate coordinates in degrees and the second contains nonnegative discrete sampling weights, with at least one positive weight. On equally spaced grids, density heights can serve as weights.}
 
-\item{unc}{Optional replacement width in degrees of the tested coordinate. Use a standard deviation for normal, half the total span for triangular, or the family-specific half-width documented in \code{\link{az.pdf}}. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.}
+\item{unc}{Optional replacement width in degrees of the input coordinate (azimuth on route 3). Use a standard deviation for normal, half the total span for triangular, or the family-specific half-width documented in \code{\link{az.pdf}}. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.}
 
 \item{nsims}{Number of simulations, at least two. Default is 1000.}
 
@@ -56,8 +68,30 @@ to test specific hypotheses about temple orientations in Malta, including topogr
 astronomical explanations. Here the hypothesis specifies the relative probability of each
 candidate orientation. A small global p-value is evidence against that particular model.
 
-The input PDF determines the coordinate of the test. Express the model coordinates and
-uncertainties in that same coordinate. Each simulation draws one centre per observation
+\strong{Input routes.} There are three routes:
+\enumerate{
+\item \code{modelTest(Az, az.model)} compares azimuth inputs in azimuth.
+\item \code{modelTest(Dec, dec.model)} compares declination inputs in declination.
+\item \code{modelTest(Az, az.model, hor=hor)} compares azimuth inputs in declination.
+A shared horizon or an ordered list of one horizon per observation is accepted.
+Each observed azimuth density is transformed individually with \code{\link{coordtrans}}.
+Each simulation draws azimuth centres, reconstructs their measurement densities,
+and transforms each density through its corresponding horizon before summing.
+This propagates changes in width, asymmetry and peaks with azimuth, latitude and skyline.
+The function never shifts a fixed declination template on this route and does not
+transform the summed azimuth density as a shortcut.
+}
+Express model coordinates and uncertainties in the input coordinate. Supplying
+\code{hor} selects route 3 and requires azimuth empirical and model inputs.
+Transformation spacings are controlled by \code{.transform.res}, \code{.prec}
+and \code{.output.res}; \code{.res} controls only the final comparison grid.
+Atmospheric settings come from \code{\link{skyscapeR.vars}} and are recorded in the result.
+A uniform azimuth null matches the individual-transformation route of
+\code{\link{randomTest}} when candidate grids, measurement families, horizons,
+transformation settings and simulated draws match. Uniform declination weights
+generally describe a different null hypothesis.
+
+Each simulation draws one centre per observation
 according to the weights in its model table. The function constructs an azimuth or declination
 density around each centre and sums these densities on the same comparison grid as the
 observed SPD. The observed measurement curves are used as supplied.
@@ -68,7 +102,7 @@ taper, survey error and triangular asymmetry. A direct triangular model is
 positioned by its mode. Overriding \code{unc} rescales its two sides in
 proportion; for the two softened uniform families the taper or survey-error
 SD stays fixed in degrees.
-For declinations from \code{\link{coordtrans}}, omit \code{unc} to use each observation's own density as a template.
+On route 2, for declinations from \code{\link{coordtrans}}, omit \code{unc} to use each observation's own density as a template.
 A model draw represents the expected mean declination for that observation. The function calculates the
 density-weighted mean of its piecewise-linear curve and adds (draw minus mean) to every declination.
 For example, a curve with mean -17.6 degrees shifts by -4.4 degrees for a draw of -22 degrees.
@@ -91,6 +125,7 @@ fitted to the same observations, its fitting procedure must be accounted for sep
 counts. For grids larger than 16 MiB, allow about eight bytes of temporary
 disk space per simulation per grid point. Temporary files are removed on return or error.
 }
+
 \section{Validation}{
 
 In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
@@ -115,6 +150,7 @@ See \code{\link{randomTest}} for study-design and Monte Carlo limitations.
 }
 
 \examples{
+
 d <- dec.pdf(dec = c(-18, 12), unc = c(0.8, 1.4))
 m <- list(data.frame(x = -20:-16, w = 1), data.frame(x = 10:14, w = 1))
 set.seed(42)
@@ -127,10 +163,15 @@ fit <- modelTest(d, m, nsims = 5000, ncores = 2)
 # For transformed observations, model coordinates specify mean declinations.
 Az <- az.pdf(az = c(87, 110), unc = 2)
 hor <- createHor(az = c(0, 360), alt = c(0, 0), alt.unc = 0.1, loc = c(35, -8))
+# Route 3: both inputs in azimuth, test in declination.
+az.model <- data.frame(x = seq(0, 359.9, by = 0.1), w = 1)
+fit <- modelTest(Az, az.model, hor = hor, nsims = 100, ncores = 1)
+# Route 2: both inputs in declination, shift the transformed templates.
 Dec <- coordtrans(Az, hor)
 fit <- modelTest(Dec, data.frame(x = c(-22, 18), w = c(1, 1)))
 }
 }
+
 \references{
 Silva, F. (2020). A probabilistic framework and significance test for the analysis of structural orientations in skyscape archaeology. \emph{Journal of Archaeological Science}, 118, 105138. \doi{10.1016/j.jas.2020.105138}.
 

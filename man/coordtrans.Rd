@@ -70,6 +70,7 @@ at the lower bound and ends at the last full step within the upper bound.
 Refine the calculation grid to check that narrow features are resolved.
 Set atmospheric refraction, pressure and temperature with \code{\link{skyscapeR.vars}} before transforming. The values used are recorded in the returned PDF or SPD.
 All three spacings are stored in \code{metadata$param}.
+For a specified azimuth null tested in declination, use \code{\link{modelTest}} with azimuth inputs and \code{hor}. It repeats this individual transformation for each observed and simulated density; a direct declination model instead shifts or reconstructs declination densities.
 
 The Gaussian uncertainty approximation uses the midpoint of declinations
 obtained at horizon altitude plus/minus four altitude standard deviations,

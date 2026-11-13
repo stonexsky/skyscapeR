@@ -37,14 +37,15 @@ createHor(
   lighting = c("relief", "directional"),
   light.azimuth = 315,
   light.altitude = 45,
-  ambient = 0.38,
+  ambient = 0.4,
   haze = 0.65,
   image.dir = getwd(),
   attribution = "User-supplied DEM",
   license = "See source DEM terms",
   ncores = NULL,
   verbose = TRUE,
-  progress = interactive() && verbose
+  progress = interactive() && verbose,
+  contrast = 0.7
 )
 }
 \arguments{
@@ -134,7 +135,9 @@ two land colours. Default 3.}
 
 \item{lighting}{Relief lighting (default) blends a light at the observer (75 percent)
 with the directional source (25 percent). It shades both sides of a slope and
-lifts deep shadows. Choose "directional"
+lifts deep shadows. The standalone renderer brightness response is
+min(1, ambient + contrast * illumination), with illumination floored at 0.15.
+Terrain and visible horFeature surfaces use the same lighting. Choose "directional"
 for one-sided hillshade. Lighting affects the PNG only.}
 
 \item{light.azimuth, light.altitude}{Direction towards the illustrative light
@@ -144,7 +147,9 @@ east, north and vertical coordinates. This is local illumination without
 cast shadows from other terrain.}
 
 \item{ambient}{Fraction of illumination retained on slopes facing away from
-the light (0 to 1). Default 0.38. Use 1 for unshaded palette colours.}
+the light (0 to 1). Default 0.40. Use 1 for unshaded palette colours.}
+
+\item{contrast}{Relief-light contrast (0 to 1), default 0.70, following the standalone renderer. It controls slope detail independently of ambient brightness. Ignored for directional lighting, which retains ambient + (1 - ambient) * illumination. Regenerate existing panoramas to apply new settings.}
 
 \item{haze}{Maximum fraction of distance haze (0 to 1). Default 0.65.
 Set haze=0 and ambient=1 to inspect the colour mapping alone.}

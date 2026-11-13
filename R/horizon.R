@@ -75,10 +75,13 @@
 #' cast shadows from other terrain.
 #' @param lighting Relief lighting (default) blends a light at the observer (75 percent)
 #' with the directional source (25 percent). It shades both sides of a slope and
-#' lifts deep shadows. Choose "directional"
+#' lifts deep shadows. The standalone renderer brightness response is
+#' min(1, ambient + contrast * illumination), with illumination floored at 0.15.
+#' Terrain and visible horFeature surfaces use the same lighting. Choose "directional"
 #' for one-sided hillshade. Lighting affects the PNG only.
 #' @param ambient Fraction of illumination retained on slopes facing away from
-#' the light (0 to 1). Default 0.38. Use 1 for unshaded palette colours.
+#' the light (0 to 1). Default 0.40. Use 1 for unshaded palette colours.
+#' @param contrast Relief-light contrast (0 to 1), default 0.70, following the standalone renderer. It controls slope detail independently of ambient brightness. Ignored for directional lighting, which retains ambient + (1 - ambient) * illumination. Regenerate existing panoramas to apply new settings.
 #' @param haze Maximum fraction of distance haze (0 to 1). Default 0.65.
 #' Set haze=0 and ambient=1 to inspect the colour mapping alone.
 #' @param features Optional \code{\link{horFeature}} object or list of such
@@ -186,13 +189,13 @@ createHor <- function(az, alt, loc, dem=NULL, loc.crs=NULL, name='', alt.unc=0.5
                       width=4096, panorama.distance.step="adaptive", panorama.acuity=1,
                       terrain.palette="temperate", land_cols=NULL, sea_cols=NULL, sea_level=0,
                       n_sea=3L, palette_n=256L, lighting=c("relief","directional"),
-                      light.azimuth=315, light.altitude=45, ambient=.38, haze=.65,
-                      image.dir=getwd(), attribution="User-supplied DEM", license="See source DEM terms", ncores=NULL, verbose=TRUE, progress=interactive() && verbose) {
+                      light.azimuth=315, light.altitude=45, ambient=.40, haze=.65,
+                      image.dir=getwd(), attribution="User-supplied DEM", license="See source DEM terms", ncores=NULL, verbose=TRUE, progress=interactive() && verbose, contrast=.70) {
   if (!is.null(dem)) {
     if (!missing(az) || !missing(alt)) stop("Use either az/alt measurements or dem.")
     if (!identical(smooth,FALSE)) stop("DEM horizons use the sampled terrain profile. Set smooth=FALSE.")
     style <- if (isTRUE(panorama)) .dem_style(terrain.palette,land_cols,sea_cols,sea_level,n_sea,
-                                             light.azimuth,light.altitude,ambient,haze,palette_n)
+                                             light.azimuth,light.altitude,ambient,haze,palette_n,contrast)
     if (isTRUE(panorama)) style$lighting <- match.arg(lighting)
     return(.dem_horizon(dem,loc,name,alt.unc,max.distance,eye.height,az.step,distance.step,
                         curvature,refraction.k,panorama,image.dir,width,attribution,license,style,features,loc.crs,ncores,verbose,progress,atm,temp,tempgrad,panorama.distance.step,panorama.acuity))

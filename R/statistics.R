@@ -351,6 +351,7 @@ coordtrans_unc <- function(pdf, hor, refraction, atm, temp, xrange, .res=0.1, .p
 #' Refine the calculation grid to check that narrow features are resolved.
 #' Set atmospheric refraction, pressure and temperature with \code{\link{skyscapeR.vars}} before transforming. The values used are recorded in the returned PDF or SPD.
 #' All three spacings are stored in \code{metadata$param}.
+#' For a specified azimuth null tested in declination, use \code{\link{modelTest}} with azimuth inputs and \code{hor}. It repeats this individual transformation for each observed and simulated density; a direct declination model instead shifts or reconstructs declination densities.
 #'
 #' The Gaussian uncertainty approximation uses the midpoint of declinations
 #' obtained at horizon altitude plus/minus four altitude standard deviations,
@@ -805,11 +806,30 @@ randomTest <- compiler::cmpfun(randomTest_unc, options=list(enableJIT = 3))
 
 #' @noRd
 modelTest_unc <- function(pdf, model, unc=NULL, nsims=1000, conf=.95, tails=2, normalise=FALSE,
-                          .res=.01, ncores=NULL, verbose=TRUE) {
+                          .res=.01, ncores=NULL, verbose=TRUE, hor=NULL,
+                          .transform.res=.1, .prec=.1, .output.res=.01) {
   if (!inherits(pdf, "skyscapeR.pdf")) stop("Supply an empirical skyscapeR.pdf.")
   coord <- pdf$metadata$coord
   if (!identical(coord,"az") && !identical(coord,"dec"))
     stop("Supply an azimuth or declination skyscapeR.pdf.")
+  source <- pdf
+  transform <- !is.null(hor)
+  if (transform && coord != "az")
+    stop("With hor, supply both empirical pdf and model in azimuth. Omit hor for a direct declination test.")
+  if (transform) {
+    valid.horizon <- function(h) {
+      inherits(h, "skyscapeR.horizon") && is.numeric(h$metadata$georef) &&
+        length(h$metadata$georef)==3L && all(is.finite(h$metadata$georef)) &&
+        is.data.frame(h$data) && all(c("az","alt","alt.unc") %in% names(h$data)) &&
+        nrow(h$data)>=2L &&
+        all(vapply(h$data[c("az","alt","alt.unc")],is.numeric,logical(1))) &&
+        all(is.finite(as.matrix(h$data[c("az","alt","alt.unc")])))
+    }
+    if (!valid.horizon(hor) && !(is.list(hor) && length(hor)==length(pdf$data) &&
+        all(vapply(hor,valid.horizon,logical(1)))))
+      stop("hor must be a valid shared horizon or an ordered list matching pdf.")
+    coord <- "dec"
+  }
   n <- length(pdf$data)
   if (!n) stop("At least one observation is required.")
   if (!is.null(ncores) && (!is.numeric(ncores) || length(ncores)!=1L || !is.finite(ncores) ||
@@ -825,17 +845,18 @@ modelTest_unc <- function(pdf, model, unc=NULL, nsims=1000, conf=.95, tails=2, n
   if (is.data.frame(model)) model <- rep(list(model), n)
   if (!is.list(model) || length(model)!=n) stop("Supply one model table per observation.")
   xrange <- if (coord=="az") c(0,360) else c(-90,90)
+  model.range <- if (transform) c(0,360) else xrange
   for (i in seq_along(model)) {
     tab <- model[[i]]
     if (!is.data.frame(tab) || ncol(tab)<2L || !nrow(tab))
       stop("Model ", i, " must be a nonempty table of coordinates and weights.")
     x <- tab[[1L]]
     w <- tab[[2L]]
-    if (!is.numeric(x) || any(!is.finite(x) | x<xrange[1] | x>xrange[2]) ||
+    if (!is.numeric(x) || any(!is.finite(x) | x<model.range[1] | x>model.range[2]) ||
         !is.numeric(w) || any(!is.finite(w) | w<0) || !any(w>0))
       stop("Invalid coordinates or sampling weights in model ", i, ".")
   }
-  template <- coord=="dec" && is.null(pdf$metadata$unc) && is.null(unc)
+  template <- !transform && coord=="dec" && is.null(pdf$metadata$unc) && is.null(unc)
   settings <- list(coord=coord, xrange=xrange, normalise=normalise, resolution=.res)
   if (template) {
     family <- "shifted-template"
@@ -858,12 +879,20 @@ modelTest_unc <- function(pdf, model, unc=NULL, nsims=1000, conf=.95, tails=2, n
     # A transformed PDF with explicit uncertainty starts a new declination kernel.
     direct <- !is.null(pdf$metadata$unc)
     settings$source.res <- if (direct && !is.null(pdf$metadata$param$.res)) pdf$metadata$param$.res else 0.01
-    default.cutoff <- if (coord=="az") 1e-5 else 1e-4
+    default.cutoff <- if (source$metadata$coord=="az") 1e-5 else 1e-4
     settings$source.cutoff <- if (direct && !is.null(pdf$metadata$param$.cutoff)) pdf$metadata$param$.cutoff else default.cutoff
+  }
+  if (transform) {
+    settings$quick <- FALSE
+    settings$transform <- list(hor=hor, refraction=skyscapeR.env$refraction,
+      atm=skyscapeR.env$atm, temp=skyscapeR.env$temp,
+      .res=.transform.res, .prec=.prec, .output.res=.output.res)
+    # Use the same individual transformation for observations and every draw.
+    pdf <- do.call(coordtrans_unc, c(list(pdf=source, verbose=FALSE), settings$transform))
   }
   empirical <- spd(pdf, xrange=xrange, normalise=normalise, .res=.res)
   result <- .run_simulations(empirical$data, nsims, ncores, n, function(i) sampleList(model),
-    if (template) .shifted_model_curve else .model_curve, settings, conf, tails,
+    if (transform) .random_curve else if (template) .shifted_model_curve else .model_curve, settings, conf, tails,
     verbose)
 
   ## output
@@ -873,6 +902,12 @@ modelTest_unc <- function(pdf, model, unc=NULL, nsims=1000, conf=.95, tails=2, n
   out$metadata$shape <- settings$shape
   atmospheric <- intersect(c("refraction","atm","temp"), names(pdf$metadata$param))
   if (length(atmospheric)) out$metadata$source.atmosphere <- pdf$metadata$param[atmospheric]
+  out$metadata$input.coord <- source$metadata$coord
+  out$metadata$route <- if (transform) "az-to-dec" else if (coord=="az") "az" else "dec"
+  if (transform) {
+    out$metadata$atmosphere <- settings$transform[c("refraction","atm","temp")]
+    out$metadata$transformation <- settings$transform[c("refraction","atm","temp",".res",".prec",".output.res")]
+  }
   out$metadata$.res <- .res
   out$metadata$coord <- pdf$metadata$coord
   out$metadata$nsims <- nsims
@@ -905,8 +940,30 @@ modelTest_unc <- function(pdf, model, unc=NULL, nsims=1000, conf=.95, tails=2, n
 #' astronomical explanations. Here the hypothesis specifies the relative probability of each
 #' candidate orientation. A small global p-value is evidence against that particular model.
 #'
-#' The input PDF determines the coordinate of the test. Express the model coordinates and
-#' uncertainties in that same coordinate. Each simulation draws one centre per observation
+#' \strong{Input routes.} There are three routes:
+#' \enumerate{
+#' \item \code{modelTest(Az, az.model)} compares azimuth inputs in azimuth.
+#' \item \code{modelTest(Dec, dec.model)} compares declination inputs in declination.
+#' \item \code{modelTest(Az, az.model, hor=hor)} compares azimuth inputs in declination.
+#' A shared horizon or an ordered list of one horizon per observation is accepted.
+#' Each observed azimuth density is transformed individually with \code{\link{coordtrans}}.
+#' Each simulation draws azimuth centres, reconstructs their measurement densities,
+#' and transforms each density through its corresponding horizon before summing.
+#' This propagates changes in width, asymmetry and peaks with azimuth, latitude and skyline.
+#' The function never shifts a fixed declination template on this route and does not
+#' transform the summed azimuth density as a shortcut.
+#' }
+#' Express model coordinates and uncertainties in the input coordinate. Supplying
+#' \code{hor} selects route 3 and requires azimuth empirical and model inputs.
+#' Transformation spacings are controlled by \code{.transform.res}, \code{.prec}
+#' and \code{.output.res}; \code{.res} controls only the final comparison grid.
+#' Atmospheric settings come from \code{\link{skyscapeR.vars}} and are recorded in the result.
+#' A uniform azimuth null matches the individual-transformation route of
+#' \code{\link{randomTest}} when candidate grids, measurement families, horizons,
+#' transformation settings and simulated draws match. Uniform declination weights
+#' generally describe a different null hypothesis.
+#'
+#' Each simulation draws one centre per observation
 #' according to the weights in its model table. The function constructs an azimuth or declination
 #' density around each centre and sums these densities on the same comparison grid as the
 #' observed SPD. The observed measurement curves are used as supplied.
@@ -917,7 +974,7 @@ modelTest_unc <- function(pdf, model, unc=NULL, nsims=1000, conf=.95, tails=2, n
 #' positioned by its mode. Overriding \code{unc} rescales its two sides in
 #' proportion; for the two softened uniform families the taper or survey-error
 #' SD stays fixed in degrees.
-#' For declinations from \code{\link{coordtrans}}, omit \code{unc} to use each observation's own density as a template.
+#' On route 2, for declinations from \code{\link{coordtrans}}, omit \code{unc} to use each observation's own density as a template.
 #' A model draw represents the expected mean declination for that observation. The function calculates the
 #' density-weighted mean of its piecewise-linear curve and adds (draw minus mean) to every declination.
 #' For example, a curve with mean -17.6 degrees shifts by -4.4 degrees for a draw of -22 degrees.
@@ -939,7 +996,11 @@ modelTest_unc <- function(pdf, model, unc=NULL, nsims=1000, conf=.95, tails=2, n
 #' \strong{Running simulations.} With a fixed seed, sampling in the calling session gives the same result for different worker
 #' counts. For grids larger than 16 MiB, allow about eight bytes of temporary
 #' disk space per simulation per grid point. Temporary files are removed on return or error.
-#' @param pdf Empirical skyscapeR.pdf from \code{\link{az.pdf}}, \code{\link{dec.pdf}} or \code{\link{coordtrans}}. Its coordinate selects the simulation path.
+#' @param pdf Empirical skyscapeR.pdf from \code{\link{az.pdf}}, \code{\link{dec.pdf}} or \code{\link{coordtrans}}. Its coordinate and the optional hor select the simulation path.
+#' @param hor Optional shared skyscapeR.horizon or an ordered list matching the empirical observations. With azimuth inputs, selects a declination test using individual coordinate transformations. Omit for routes 1 and 2.
+#' @param .transform.res Internal declination transformation spacing, as .res in coordtrans. Default 0.1 degrees.
+#' @param .prec Azimuth integration spacing for route 3, as in coordtrans. Default 0.1 degrees.
+#' @param .output.res Stored declination PDF spacing for route 3, as in coordtrans. Default 0.01 degrees.
 #' @param model One shared data frame or an ordered list with one table per observation. The first column contains candidate coordinates in degrees and the second contains nonnegative discrete sampling weights, with at least one positive weight. On equally spaced grids, density heights can serve as weights.
 #' @param nsims Number of simulations, at least two. Default is 1000.
 #' @param conf Confidence level as a fraction.
@@ -948,7 +1009,7 @@ modelTest_unc <- function(pdf, model, unc=NULL, nsims=1000, conf=.95, tails=2, n
 #' @param ncores Worker count. By default use half the detected available logical cores, rounded down with a minimum of one. Set ncores=1 for serial execution. The simulation count and memory batch size can further limit workers. Verbose output reports the effective count.
 #' @param verbose Display simulation progress.
 #' @param .res Spacing of the empirical and simulated comparison grids in degrees. Default 0.01.
-#' @param unc Optional replacement width in degrees of the tested coordinate. Use a standard deviation for normal, half the total span for triangular, or the family-specific half-width documented in \code{\link{az.pdf}}. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.
+#' @param unc Optional replacement width in degrees of the input coordinate (azimuth on route 3). Use a standard deviation for normal, half the total span for triangular, or the family-specific half-width documented in \code{\link{az.pdf}}. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.
 #' @return A skyscapeR.sigTest list with settings and global/local results in metadata, empirical density and null envelope in data.
 #' @references Silva, F. (2020). A probabilistic framework and significance test for the analysis of structural orientations in skyscape archaeology. \emph{Journal of Archaeological Science}, 118, 105138. \doi{10.1016/j.jas.2020.105138}.
 #'
@@ -980,6 +1041,10 @@ modelTest_unc <- function(pdf, model, unc=NULL, nsims=1000, conf=.95, tails=2, n
 #' # For transformed observations, model coordinates specify mean declinations.
 #' Az <- az.pdf(az = c(87, 110), unc = 2)
 #' hor <- createHor(az = c(0, 360), alt = c(0, 0), alt.unc = 0.1, loc = c(35, -8))
+#' # Route 3: both inputs in azimuth, test in declination.
+#' az.model <- data.frame(x = seq(0, 359.9, by = 0.1), w = 1)
+#' fit <- modelTest(Az, az.model, hor = hor, nsims = 100, ncores = 1)
+#' # Route 2: both inputs in declination, shift the transformed templates.
 #' Dec <- coordtrans(Az, hor)
 #' fit <- modelTest(Dec, data.frame(x = c(-22, 18), w = c(1, 1)))
 #' }

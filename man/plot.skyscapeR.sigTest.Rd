@@ -54,6 +54,8 @@ Locate the orientations at which the observed summed density departs from the si
 comparison envelope. New tests use an envelope pooled from the observation and simulations.
 }
 \details{
+The x axis uses more closely spaced labelled angular ticks and shorter unlabelled subdivisions. Tick spacing adapts to the displayed range and physical plot width, including when the local significance panel is shown.
+
 The observed curve and envelope use the azimuth or declination grid stored in the test
 result. The two-tailed display shades between its lower and upper pointwise bounds; the
 one-tailed display shades up to the upper bound from zero. Optional annotations show the

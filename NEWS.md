@@ -3,6 +3,21 @@
 This development version is being tested ahead of the 2.0 release. For detailed
 migration instructions and positional-argument changes, see the README.
 
+## Development build 2.0.9015
+
+* DEM panoramas retain the 75/25 observer/directional relief-light blend and now use the standalone renderer brightness response with ambient 0.40 and independent contrast 0.70. Visible reconstructed features receive the same shading. Regenerate PNGs to apply these defaults. `contrast` adjusts relief detail; directional lighting retains its existing response formula.
+
+* Significance plots use denser labelled x-axis ticks and short minor ticks, adapting to the angular range and plot width in both standard and local-significance layouts.
+
+## Development build 2.0.9014
+
+* `modelTest(Az, az.model, hor = hor)` adds a third route: azimuth empirical and null inputs tested in declination using individual coordinate transformations for observations and simulations. It accepts a shared horizon or an ordered list and preserves each azimuth measurement family and shape. The help page explains all three routes, units, numerical settings and the distinction from shifting declination templates. Re-run earlier fits if an azimuth-defined null was intended.
+
+## Development build 2.0.9013
+
+* The Milky Way class grid is reconstructed at 0.1-degree spacing from the 4096 by 2048 diffuse map. Boundary locations, class areas and local radiance can differ from 2.0.9012.
+* Publication sketches now attenuate the Milky Way towards the horizon using `k` by default. Set `band.extinction = FALSE` to disable this. This setting carries through `skyStep()`.
+
 ## Development build 2.0.9012
 
 * The uniform opening convolved with normal survey error now uses a survey-error standard deviation of 0.5 degrees when omitted in `az.pdf()` and `dec.pdf()`. An explicit value or vector overrides this assumption.
