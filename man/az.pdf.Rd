@@ -120,6 +120,11 @@ standard deviations from 90.
 The 2.0.9011 family checks cover analytic profiles, circular rotation, soft-edge limits and simulation reuse. Build 2.0.9006 passed all 173 original D01 assertions, including 0.005-degree samples across north and the broad-width periodic density cases. See \href{https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks}{D01 validation in the technical manual}.
 }
 
+\section{Validation studies}{
+
+Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#pole-propagation}{D02 validation study}.
+}
+
 \examples{
 opening <- az.pdf(90, 2, pdf="uniform")
 axis <- az.pdf(90, 1, pdf="normal")

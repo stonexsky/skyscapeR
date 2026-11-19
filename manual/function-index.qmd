@@ -87,4 +87,4 @@ Choose the function name for its methodological entry, the chapter for its scien
 
 The package also documents `constellations`, `star.names`, `malta_entrances` and `malta_horizons`. These are data topics. Package-level help is available at `?skyscapeR`.
 
-The [package source archive](archives/skyscapeR_2.0.9016.tar.gz) supplies the namespace and vignette for the inventory check.
+The [package source archive](archives/skyscapeR_2.0.9017.tar.gz) supplies the namespace and vignette for the inventory check.

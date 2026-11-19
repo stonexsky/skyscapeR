@@ -1,6 +1,6 @@
 # About this edition {.unnumbered}
 
-This manual describes **skyscapeR 2.0**, development build 2.0.9016. It explains how a measured bearing becomes an astronomical result, which assumptions enter the calculation and how closely the result agrees with independent evidence.
+This manual describes **skyscapeR 2.0**, development build 2.0.9017. It explains how a measured bearing becomes an astronomical result, which assumptions enter the calculation and how closely the result agrees with independent evidence.
 
 ## Finding a method
 

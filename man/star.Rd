@@ -43,6 +43,11 @@ It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
 }
 
+\section{Validation studies}{
+
+Six stellar positions were compared with independently propagated catalogue directions from 3500 BCE to 2000 CE. \href{https://stonexsky.github.io/skyscapeR/manual/a03-stellar-positions.html#a03-stellar-positions}{A03 validation study}.
+}
+
 \examples{
 # M45 and M 45 identify the Pleiades.
 if (requireNamespace("swephRdata", quietly=TRUE)) star("M45", -4300)

@@ -108,15 +108,7 @@
 #' overlap; it does not establish membership. Integrated cluster magnitude
 #' alone is insufficient to predict first detection (Crumey 2014).
 #' @section Using a sketch with a stellar phase date:
-#' In 69 of 70 individual comparisons, the estimated first morning of visibility was within a week of the predicted heliacal-rising date.
-#'
-#' Use \code{\link{riseset}} to locate the skyline crossing on each morning,
-#' then \code{\link{skyStep}} to follow the star as it climbs through a
-#' brightening sky. A plotted pixel does not establish naked-eye visibility.
-#' A quantitative test needs a point-source threshold and an assumed observer
-#' limit (Crumey 2014). See also \code{\link{star.phases}}.
-#' Record site, horizon, epoch, calendar, timezone, extinction
-#' and display switches when reporting a reconstruction.
+#' Use \code{\link{riseset}} to locate the terrain crossing and \code{\link{skyStep}} to follow the star through twilight. For first morning or last evening, inspect adjacent dates as well. A rendered symbol alone cannot establish naked-eye detection.
 #' @return An object of classes \code{skyscapeR.sketch} and \code{skyscapeR.sky}.
 #' It stores \code{jd}, \code{loc}, \code{style}, \code{display}, \code{settings}
 #' (calendar, magnitude cutoff and extinction), and \code{atmosphere}.
@@ -187,6 +179,10 @@
 #' transformations may discard attributes; save the original result for reference.
 #' It does not identify ephemeris files, catalogue revisions or a development
 #' commit. Retain those and the analysis script separately for exact reproduction.
+#' @section Validation studies:
+#' Diffuse V-band brightness was compared with six fields outside the Carina calibration aperture. \href{https://stonexsky.github.io/skyscapeR/manual/v04-diffuse-photometry.html#v04-diffuse-photometry}{V04 validation study}.
+#' @section Observational validation:
+#' Across 56 recorded dates, heliacal rising fell within seven days of 22 of 23 first morning sightings. The median prediction was two days early. Acronycal setting fell within seven days of 21 of 33 last evening sightings. The median prediction was five days late. A week is a practical search window. Larger discrepancies occur, especially at dusk. These results apply to the two tested events. \href{https://stonexsky.github.io/skyscapeR/manual/heliacal-rising.html#v01-observations}{V01 observed dates and scientific checks}.
 sketchSky <- function(hor, jd=NULL, time=NULL, timezone, calendar,
                       display=list(), style=c("natural","publication-colour","publication-mono"), max.mag=6, k=skyscapeR.vars()$k, band.extinction=TRUE) {
   if (!is.logical(band.extinction) || length(band.extinction)!=1L || is.na(band.extinction)) stop("band.extinction must be TRUE or FALSE.")

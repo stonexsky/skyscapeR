@@ -366,7 +366,7 @@ source is distinct from merely replotting the saved horizon.
 
 <h3>References</h3>
 
-<p>Patat, F. (2011). Horizon synthesis for archaeo-astronomical purposes. Astronomische Nachrichten 332, 743-749. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1002/asna.201111570")}.
+<p>Patat, F. (2011). Horizon synthesis for archaeo-astronomical purposes. Astronomische Nachrichten 332, 743-749. <a href="https://doi.org/10.1002/asna.201111570">doi:10.1002/asna.201111570</a>.
 </p>
 
 

@@ -55,3 +55,11 @@ for name, ids in pages.items():
                     "follow(); window.addEventListener('hashchange', follow);})();\n</script>")
         text = text.replace('</head>', redirect + '\n</head>', 1)
     file.write_text(text)
+
+# Keep the retired guide's published URL usable without listing a chapter.
+(site / 'package-stress-tests.html').write_text(
+    '<!doctype html><html lang="en"><meta charset="utf-8">'
+    '<title>Validation studies by question</title>'
+    '<meta http-equiv="refresh" content="0;url=study-register.html">'
+    '<a href="study-register.html">Validation studies by question</a></html>'
+)

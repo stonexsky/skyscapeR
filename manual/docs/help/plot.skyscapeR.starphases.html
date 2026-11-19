@@ -1,4 +1,5 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>plot.skyscapeR.starphases | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-plot-skyscaper-starphases.html">plot.skyscapeR.starphases() method</a></nav><h2 id='plot.skyscapeR.starphases'>Plot seasonal stellar visibility</h2><span id='topic+plot.skyscapeR.starphases'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>plot.skyscapeR.starphases | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-plot-skyscaper-starphases.html">plot.skyscapeR.starphases() method</a></nav>
+<h2 id='plot.skyscapeR.starphases'>Plot seasonal stellar visibility</h2><span id='topic+plot.skyscapeR.starphases'></span>
 
 <h3>Description</h3>
 
@@ -101,7 +102,7 @@ display does not recalculate the visibility thresholds. Use <code>plot(first, li
 
 <h3>Validation</h3>
 
-<p>W01 checked season boundaries, event positions, quarterly landmarks and star, site and epoch labels in linear and circular layouts. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry">W01 check in the technical manual</a>.
+<p>W01 checked season boundaries, event positions, quarterly landmarks and star, site and epoch labels in linear and circular layouts. See the <a href="../#w01-plot-geometry">W01 check in the technical manual</a>.
 </p>
 
 
@@ -120,15 +121,11 @@ state their differences in the figure caption. Names on the supplied list can
 override the displayed star names. The legend contains only the union of
 season classes present in the plotted objects.
 </p>
-<p>Event annotations use transitions between adjacent samples, including the last
-and first samples of the cycle. A season continuing through December solstice
-has no event at that boundary. Entry into and exit from I mark acronycal
-setting and heliacal rising; entry into and exit from V mark acronycal rising
-and heliacal setting. Constant classifications have no transition labels.
+<p>Event annotations follow the event table. The Schaefer first-morning and last-evening markers use the solar longitude of the predicted local date. Passage bands and the two other markers follow the Purrington seasonal classification. See <a href="../heliacal-rising.html#v01-observations">V01 observed dates and scientific checks</a>.
 A single ring labels each event by name on two lines just outside the rim.
 Its short leader meets the ring at the event's model day. A single ring shows the star, epoch and site in its centre. Rings for one star at several epochs show the star, designation and shared site in the centre, with a year for each ring. The circular layout
 labels the solstices and equinoxes outside its rim. Both layouts mark the event's model day,
-the last sample before entry into I or V, or the first after exit.
+as recorded in the event table.
 The linear seasonal scale sits immediately below the lowest strip. Each quarter
 label aligns with its solstice or equinox across every row. Rising-event labels
 sit close above a single strip and setting-event labels close below it, leaving

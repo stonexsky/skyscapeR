@@ -77,9 +77,7 @@ obtained at horizon altitude plus/minus four altitude standard deviations,
 with standard deviation equal to the absolute endpoint separation divided
 by eight. Reversed bounds are supported. Horizon uncertainties must be
 finite and nonnegative, and the profile must cover all input azimuths.
-Zero transformed widths (including zero altitude uncertainty or coincident
-endpoint declinations) are unsupported and produce an error. Do not add
-arbitrary uncertainty to bypass it: these cases need a different treatment.
+For positive altitude uncertainties, direct quadrature is used if either transformed four-sigma endpoint reaches an absolute declination of 80 degrees or the endpoints coincide. It integrates the spherical transformation at 256 normal altitude quantiles. Bearing spacing is at most 0.025 degrees on this route and on skyline sections steeper than one degree of height per degree of bearing. The transform uses unrounded declinations internally. A zero altitude uncertainty remains unsupported.
 Nonfinite transformed bounds/densities and PDF outputs with no positive
 finite area also error. Positive but very narrow widths still require
 convergence checks; no minimum uncertainty is imposed.
@@ -92,9 +90,15 @@ reconstruct them. See \code{\link{plot.skyscapeR.pdf}} and \code{\link{randomTes
 }
 \section{Validation}{
 
-In D02, declination quantiles agreed with direct propagation within 0.008 degrees across nine terrain and observer cases. Near the celestial pole the discrepancy reached 0.17 degrees on the fine grid; at the pole a zero conditional width prevented calculation. See the \href{https://stonexsky.github.io/skyscapeR/manual/#d02-bearing-propagation}{D02 check in the technical manual}.
+See the study of spherical propagation below.
 
 For a partial photograph the stored positive bearing density must lie within its photographed sector. H07 verified agreement with a complete skyline on the covered north-crossing cases and rejection of uncovered densities. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
+}
+
+\section{Validation studies}{
+
+Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#pole-propagation}{D02 validation study}.
+The transformed-bearing null was tested with steep skylines, three measurement families and shared or site-specific candidate weights. \href{https://stonexsky.github.io/skyscapeR/manual/s02-specified-models.html#steep-null}{S02 validation study}.
 }
 
 \examples{

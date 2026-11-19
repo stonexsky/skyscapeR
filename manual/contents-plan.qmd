@@ -59,9 +59,9 @@ The [event-search chapter](event-searches.qmd) distinguishes the first and last 
 
 The [stellar-phases chapter](stellar-phases.qmd) follows a catalogue position through the epoch calculation, extinction and visibility tests. It distinguishes the phase on the schematic seasonal axis from the Julian date used for a sky reconstruction.
 
-**Existing evidence.** The worked heliacal-rising chapter compares two visibility models over seven stars with comparable dates. The models share ephemeris and site inputs.
+**Existing evidence.** The [visibility study](heliacal-rising.qmd#v01-observations) checks 56 observed seasonal events, 45 detection sessions and six Sirius dates. Its sky-model comparison covers eight stars at two sites over five epochs.
 
-**Open question.** How well do first and last visibility dates agree with dated sightings under documented observing conditions? Which phase transitions are still untested?
+**Open question.** How accurately can the opposite-horizon events be dated? Which observing conditions account for the larger last-evening residuals?
 
 **Entry points.** [`star()`](fn-star.html), [`star.phases()`](fn-star-phases.html), [`plot.skyscapeR.starphases()`](fn-plot-skyscaper-starphases.html).
 

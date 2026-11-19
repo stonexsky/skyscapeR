@@ -152,6 +152,8 @@ bernoulli.trial <- function(n,p,r, type='tail') {
 #' precise <- az.pdf(90, 2, pdf="uniform_normal", survey.sd=0.2)
 #' north <- az.pdf(0, pdf="triangular", lower=358, upper=3)
 #' plot(surveyed)
+#' @section Validation studies:
+#' Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#pole-propagation}{D02 validation study}.
 az.pdf <- function(az, unc=NULL, pdf='normal', name, .res=0.01, .cutoff=1e-5, verbose=TRUE,
                    taper=NULL, survey.sd=0.5, lower=NULL, upper=NULL) {
   if (!is.numeric(az) || !length(az) || any(!is.finite(az)))
@@ -240,14 +242,34 @@ coordtrans_unc <- function(pdf, hor, refraction, atm, temp, xrange, .res=0.1, .p
       stop(paste0('Distribution ', k, ': horizon altitude and uncertainty must be finite at every input azimuth; uncertainty must be nonnegative.'))
     }
 
-    aux1 <- az2dec(azs, horizon, fhor-4*fhor.unc, refraction=refraction, atm=atm, temp=temp)
-    aux2 <- az2dec(azs, horizon, fhor+4*fhor.unc, refraction=refraction, atm=atm, temp=temp)
+    aux1 <- .az2dec_position(azs, horizon, fhor-4*fhor.unc, refraction=refraction, atm=atm, temp=temp)
+    aux2 <- .az2dec_position(azs, horizon, fhor+4*fhor.unc, refraction=refraction, atm=atm, temp=temp)
 
     if (any(!is.finite(aux1)) || any(!is.finite(aux2))) {
       stop(paste0('Distribution ', k, ': transformed uncertainty bounds must be finite.'))
     }
     mean.dec <- (aux2+aux1)/2
     sd.dec <- abs(aux2-aux1)/8
+    steep <- any(abs(diff(fhor)) > diff(azs) + 1e-10)
+    if (steep && .prec > .025) {
+      grid <- seq(floor(min(azs)/.025)*.025, ceiling(max(azs)/.025)*.025, by=.025)
+    }
+    if (all(fhor.unc > 0) && any(pmax(abs(aux1), abs(aux2)) >= 80 | sd.dec == 0)) {
+      bounds <- if (missing(xrange)) c(-90,90) else xrange
+      direct <- .direct_declination(curve, profile, horizon, bounds, .prec, .res,
+                                    .output.res, refraction, atm, temp)
+      if (missing(xrange) && any(direct$y > 0)) {
+        occupied <- range(which(direct$y > 0))
+        direct <- direct[seq(max(1L,occupied[1]-1L),min(nrow(direct),occupied[2]+1L)), , drop=FALSE]
+      }
+      if (!is(pdf, 'skyscapeR.spd')) {
+        area <- .grid_area(direct$x, direct$y)
+        if (!is.finite(area) || area <= 0) stop("No probability mass within the requested declination range.")
+        direct$y <- direct$y / area
+      }
+      out[[k]] <- direct
+      next
+    }
     if (any(!is.finite(sd.dec)) || any(sd.dec == 0)) {
       stop(paste0('Distribution ', k, ': zero or nonfinite transformed uncertainty width. ',
                   'The Gaussian approximation cannot represent this case; check altitude uncertainties and transformation geometry. ',
@@ -358,9 +380,7 @@ coordtrans_unc <- function(pdf, hor, refraction, atm, temp, xrange, .res=0.1, .p
 #' with standard deviation equal to the absolute endpoint separation divided
 #' by eight. Reversed bounds are supported. Horizon uncertainties must be
 #' finite and nonnegative, and the profile must cover all input azimuths.
-#' Zero transformed widths (including zero altitude uncertainty or coincident
-#' endpoint declinations) are unsupported and produce an error. Do not add
-#' arbitrary uncertainty to bypass it: these cases need a different treatment.
+#' For positive altitude uncertainties, direct quadrature is used if either transformed four-sigma endpoint reaches an absolute declination of 80 degrees or the endpoints coincide. It integrates the spherical transformation at 256 normal altitude quantiles. Bearing spacing is at most 0.025 degrees on this route and on skyline sections steeper than one degree of height per degree of bearing. The transform uses unrounded declinations internally. A zero altitude uncertainty remains unsupported.
 #' Nonfinite transformed bounds/densities and PDF outputs with no positive
 #' finite area also error. Positive but very narrow widths still require
 #' convergence checks; no minimum uncertainty is imposed.
@@ -386,7 +406,7 @@ coordtrans_unc <- function(pdf, hor, refraction, atm, temp, xrange, .res=0.1, .p
 #' SPD data are a single such data frame. Metadata include the coordinate type,
 #' transformation settings, format version and descriptive source labels.
 #' @section Validation:
-#' In D02, declination quantiles agreed with direct propagation within 0.008 degrees across nine terrain and observer cases. Near the celestial pole the discrepancy reached 0.17 degrees on the fine grid; at the pole a zero conditional width prevented calculation. See the \href{https://stonexsky.github.io/skyscapeR/manual/#d02-bearing-propagation}{D02 check in the technical manual}.
+#' See the study of spherical propagation below.
 #'
 #' For a partial photograph the stored positive bearing density must lie within its photographed sector. H07 verified agreement with a complete skyline on the covered north-crossing cases and rejection of uncovered densities. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
 #' @export
@@ -402,6 +422,9 @@ coordtrans_unc <- function(pdf, hor, refraction, atm, temp, xrange, .res=0.1, .p
 #' # Reduce stored output size without changing the calculation spacing:
 #' Dec.coarse <- coordtrans(Az, hor, .output.res=0.1)
 #' Dec.coarse$metadata$param
+#' @section Validation studies:
+#' Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#pole-propagation}{D02 validation study}.
+#' The transformed-bearing null was tested with steep skylines, three measurement families and shared or site-specific candidate weights. \href{https://stonexsky.github.io/skyscapeR/manual/s02-specified-models.html#steep-null}{S02 validation study}.
 coordtrans <- function(pdf, hor, xrange, .res=.1, .prec=.1, .output.res=.01, verbose=TRUE) {
   result <- coordtrans_unc(pdf, hor, xrange=xrange, .res=.res, .prec=.prec,
                            .output.res=.output.res, verbose=verbose)
@@ -800,6 +823,8 @@ randomTest_unc <- function(pdf, az, hor, nsims=1000, conf=.95, tails=2, normalis
 #' More simulations improve Monte Carlo resolution, not the validity of the
 #' archaeological sampling design. Repeated searches over alternative subsets or
 #' models are not included in the within-fit local-cluster adjustment.
+#' @section Validation studies:
+#' Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#pole-propagation}{D02 validation study}.
 randomTest <- compiler::cmpfun(randomTest_unc, options=list(enableJIT = 3))
 
 
@@ -1061,6 +1086,9 @@ modelTest_unc <- function(pdf, model, unc=NULL, nsims=1000, conf=.95, tails=2, n
 #' The simulations do not automatically represent dependence between sites,
 #' selection after viewing the data, or uncertainty in fitted model parameters.
 #' See \code{\link{randomTest}} for study-design and Monte Carlo limitations.
+#' @section Validation studies:
+#' The transformed-bearing null was tested with steep skylines, three measurement families and shared or site-specific candidate weights. \href{https://stonexsky.github.io/skyscapeR/manual/s02-specified-models.html#steep-null}{S02 validation study}.
+#' Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#pole-propagation}{D02 validation study}.
 modelTest <- compiler::cmpfun(modelTest_unc, options=list(enableJIT = 3))
 
 

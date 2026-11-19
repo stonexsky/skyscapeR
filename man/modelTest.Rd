@@ -148,6 +148,12 @@ selection after viewing the data, or uncertainty in fitted model parameters.
 See \code{\link{randomTest}} for study-design and Monte Carlo limitations.
 }
 
+\section{Validation studies}{
+
+The transformed-bearing null was tested with steep skylines, three measurement families and shared or site-specific candidate weights. \href{https://stonexsky.github.io/skyscapeR/manual/s02-specified-models.html#steep-null}{S02 validation study}.
+Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#pole-propagation}{D02 validation study}.
+}
+
 \examples{
 d <- dec.pdf(dec = c(-18, 12), unc = c(0.8, 1.4))
 m <- list(data.frame(x = -20:-16, w = 1), data.frame(x = 10:14, w = 1))

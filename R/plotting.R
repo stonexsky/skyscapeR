@@ -363,6 +363,8 @@ plotBars <- function(val, unc, names, unit="Declination", obj, show.obj.label=TR
 #' source. Azimuth-altitude plotting is a cylindrical display, with increasing
 #' horizontal distortion towards the zenith. Retain consistent ranges when
 #' comparing styles, epochs or constellation traditions.
+#' @section Validation studies:
+#' Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. \href{https://stonexsky.github.io/skyscapeR/manual/h04-feature-resolution.html#h04-feature-resolution}{H04 validation study}.
 plot.skyscapeR.horizon <- function(x, show.az=(!missing(xrange) || !missing(xlim)), xrange, yrange, obj, col.ground=NULL, col.sky, use.image=TRUE, ..., show.skyline=NULL, sky=NULL, xlim, ylim, fastLoad=FALSE, show.legend=TRUE, style=NULL) {
   if (!missing(xlim)) {
     if (!missing(xrange)) stop("Supply only one of xrange and xlim.")
@@ -1062,15 +1064,11 @@ plot.skyscapeR.sigTest <- function(x, xrange, title=NULL, col=NULL, show.pval=TR
 #' override the displayed star names. The legend contains only the union of
 #' season classes present in the plotted objects.
 #'
-#' Event annotations use transitions between adjacent samples, including the last
-#' and first samples of the cycle. A season continuing through December solstice
-#' has no event at that boundary. Entry into and exit from I mark acronycal
-#' setting and heliacal rising; entry into and exit from V mark acronycal rising
-#' and heliacal setting. Constant classifications have no transition labels.
+#' Event annotations follow the event table. The Schaefer first-morning and last-evening markers use the solar longitude of the predicted local date. Passage bands and the two other markers follow the Purrington seasonal classification. See \href{https://stonexsky.github.io/skyscapeR/manual/heliacal-rising.html#v01-observations}{V01 observed dates and scientific checks}.
 #' A single ring labels each event by name on two lines just outside the rim.
 #' Its short leader meets the ring at the event's model day. A single ring shows the star, epoch and site in its centre. Rings for one star at several epochs show the star, designation and shared site in the centre, with a year for each ring. The circular layout
 #' labels the solstices and equinoxes outside its rim. Both layouts mark the event's model day,
-#' the last sample before entry into I or V, or the first after exit.
+#' as recorded in the event table.
 #' The linear seasonal scale sits immediately below the lowest strip. Each quarter
 #' label aligns with its solstice or equinox across every row. Rising-event labels
 #' sit close above a single strip and setting-event labels close below it, leaving
@@ -1143,6 +1141,9 @@ plot.skyscapeR.starphases <- function(x, y, show.labels=TRUE, show.legend=TRUE, 
 .phase_month_edges <- (0:12) * 365 / 12
 
 .phase_plot_events <- function(z) {
+  saved <- z$metadata$events
+  if ("model.day" %in% names(saved))
+    return(data.frame(event=saved$event, day=saved$model.day))
   events <- .phase_transitions(z$data$phase)
   events[order(events$day), , drop=FALSE]
 }

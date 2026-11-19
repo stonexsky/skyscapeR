@@ -732,11 +732,6 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
   </div>
 </li>
@@ -752,7 +747,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">First morning and last evening visibility</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -889,6 +884,7 @@ div.csl-indent {
 </header>
 
 
+<p>The stellar visibility study compares predicted seasonal dates and twilight contrast with recorded naked-eye observations. <a href="heliacal-rising.html#v01-observations">V01 observations and calibration</a>.</p>
 <p><strong>Implementation.</strong> skyscapeR 2.0, <code>R/sketchSky.R</code>, <code>R/light-budget.R</code> and <code>R/galactic.R</code>. A site reconstruction asks two distinct questions: where does a body appear relative to the skyline, and what light reaches the corresponding part of the sky? The plotting stage consumes their results. This distinction matters when a feature remains geometrically above the terrain but fades into the twilight background.</p>
 <section id="meth-sketch" class="level2">
 <h2 class="anchored" data-anchor-id="meth-sketch">Geometry and state</h2>

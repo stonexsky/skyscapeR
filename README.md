@@ -6,6 +6,7 @@ Start with the [worked vignette](https://stonexsky.github.io/skyscapeR/) to anal
 
 Version 2.0 is in development. [Report an issue with a reproducible example](https://github.com/stonexsky/skyscapeR/issues) or [read the migration guide](#migrating-from-skyscaper-12-to-20) before rerunning an earlier analysis.
 
+
 ## Install the development version
 
 In R 4.1 or later, install the 2.0 development branch:
@@ -59,6 +60,8 @@ Start at the **earliest affected step** below and rerun everything that used its
 If you used the experimental 2.0.9001–2.0.9003 builds, omit `light.model` from `sketchSky()` calls. Natural sketches now use the calibrated renderer automatically.
 
 ### Updating analyses from earlier 2.0 development builds
+
+Recalculate first-morning and last-evening dates and any downstream sketches with `star.phases()`. The default uses Schaefer for these two events. Specify `method = "purrington"` to reproduce the passage-transition calculation.
 
 **Updating to 2.0.9009.** Start with the earliest affected step in your analysis.
 

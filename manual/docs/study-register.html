@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./package-stress-tests.html" rel="next">
+<link href="./a02-ephemeris.html" rel="next">
 <link href="./fn-randomtest.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -717,11 +717,6 @@ follow(); window.addEventListener('hashchange', follow);})();
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
   </div>
 </li>
@@ -737,7 +732,7 @@ follow(); window.addEventListener('hashchange', follow);})();
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">First morning and last evening visibility</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -880,7 +875,7 @@ follow(); window.addEventListener('hashchange', follow);})();
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="./h01-field-validation.html">H01</a></td>
+<td><a href="./h01-field-validation.html#withheld-stations">H01</a></td>
 <td>How closely do DEM skylines agree with field theodolite readings?</td>
 <td><code>createHor()</code>, <code>hor2alt()</code></td>
 <td>Complete</td>
@@ -976,10 +971,10 @@ follow(); window.addEventListener('hashchange', follow);})();
 <td>Complete · verified</td>
 </tr>
 <tr class="odd">
-<td>V01</td>
+<td><a href="heliacal-rising.html#v01-observations">V01</a></td>
 <td>Stellar phases and dated visibility</td>
 <td><code>star.phases()</code>, <code>star()</code>, <code>riseset()</code>, <code>sketchSky()</code>, <code>skyRadiance()</code>, <code>plot.skyscapeR.starphases()</code></td>
-<td>Model-to-model comparison complete. Independent observation study open</td>
+<td>56 seasonal dates, 45 observing sessions, 6 Sirius sightings and 28 published reference calculations.</td>
 </tr>
 <tr class="even">
 <td>V02</td>
@@ -1024,7 +1019,7 @@ follow(); window.addEventListener('hashchange', follow);})();
 <td>Complete. Six measurement families checked</td>
 </tr>
 <tr class="odd">
-<td><a href="./d02-bearing-propagation.html">D02</a></td>
+<td><a href="./d02-bearing-propagation.html#pole-propagation">D02</a></td>
 <td>Azimuth-to-declination propagation</td>
 <td><code>az2dec()</code>, <code>coordtrans()</code>, <code>hor2alt()</code>, <code>az.pdf()</code>, <code>dec.pdf()</code>, <code>spd()</code>, <code>hpdi()</code></td>
 <td>Complete · grid sensitivity and celestial-pole limits quantified</td>
@@ -1036,7 +1031,7 @@ follow(); window.addEventListener('hashchange', follow);})();
 <td>Complete · calibrated</td>
 </tr>
 <tr class="odd">
-<td><a href="./s02-specified-models.html">S02</a></td>
+<td><a href="./s02-specified-models.html#steep-null">S02</a></td>
 <td>Specified and site-specific nulls</td>
 <td><code>modelTest()</code>, <code>dec.pdf()</code>, <code>az.pdf()</code>, <code>spd()</code>, <code>coordtrans()</code></td>
 <td>Matched-null designs and individual azimuth-to-declination calibration complete</td>
@@ -1069,7 +1064,7 @@ follow(); window.addEventListener('hashchange', follow);})();
 </section>
 <section id="next-tests" class="level2">
 <h2 class="anchored" data-anchor-id="next-tests">Results and priorities</h2>
-<p>The <a href="./package-stress-tests.html">five package validation studies</a> report completed tests of near-pole transformations, off-Carina photometry, withheld-station horizon errors, partly occluded features and stellar astrometry. D02 evaluates direct propagation near the celestial pole. The next empirical priority is fitting and testing diffuse brightness on independent, consistently masked V-band fields. For terrain uncertainty, the withheld-station coverage provides a baseline for models using station and survey characteristics.</p>
+<p>The next empirical priority is fitting and testing diffuse brightness on independent, consistently masked V-band fields. For terrain uncertainty, the withheld-station coverage provides a baseline for models using station and survey characteristics.</p>
 
 
 </section>
@@ -1482,8 +1477,8 @@ follow(); window.addEventListener('hashchange', follow);})();
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./package-stress-tests.html" class="pagination-link" aria-label="Guide to the five validation studies">
-        <span class="nav-page-text"><span class="chapter-title">Guide to the five validation studies</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./a02-ephemeris.html" class="pagination-link" aria-label="A02 · Ephemeris accuracy and lunar skyline crossings">
+        <span class="nav-page-text"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -247,7 +247,7 @@ segments(target[1] + 0.18, target[2] + 0.14,
 text(target[1] + 0.75, target[2] + 0.60, "Pleiades", adj = c(0, 0), col = "grey85", cex = 0.78)
 ```
 
-The illustrated morning is 1 May 3250 BCE. Look near azimuth 95.7° and altitude 4.9°, just above the skyline. At that instant the Sun is 10.9° below the horizon, compared with 8.6° at the equivalent point on the predicted morning. The solid lines bracket the doorway and the dashed line marks its centre. The phase calculation uses the Pleiades’ combined magnitude of 1.60. To examine an individual star, repeat the calculation for Alcyone (magnitude 2.87). Use the same five-day offset from Alcyone’s own prediction and view it sixteen minutes after its skyline crossing.
+The illustrated morning is 3 May 3250 BCE. Look near azimuth 95.7° and altitude 4.9°, just above the skyline. At that instant the Sun is 11.8° below the horizon, compared with 9.6° at the equivalent point on the predicted morning. The solid lines bracket the doorway and the dashed line marks its centre. The phase calculation uses the Pleiades’ combined magnitude of 1.60. To examine an individual star, repeat the calculation for Alcyone (magnitude 2.87). Use the same five-day offset from Alcyone’s own prediction and view it sixteen minutes after its skyline crossing.
 
 ```{r alcyone-dawn, eval=astronomy_examples}
 alcyone <- star.phases("Alcyone", year, hor)
@@ -386,7 +386,7 @@ segments(target[1] + 0.18, target[2] + 0.14,
 text(target[1] + 0.75, target[2] + 0.60, "Gacrux", adj = c(0, 0), col = "grey85", cex = 0.78)
 ```
 
-Here too the sketch uses the fifth morning after the predicted date, 17 October 3250 BCE. Look twenty minutes after the crossing, between the measured doorway edges at 128.55° and 138.07°.
+Here too the sketch uses the fifth morning after the predicted date, 19 October 3250 BCE. Look twenty minutes after the crossing, between the measured doorway edges at 128.55° and 138.07°.
 
 To test a particular explanation, `modelTest()` accepts an expected distribution, including a separate one for each site. Silva and Lomsdalen compared the orientations with expectations based on slope aspect, shelter from prevailing winds and exposure to winter sunlight. Each hypothesis gives a different set of expected directions against which to judge the observed concentration.
 

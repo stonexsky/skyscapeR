@@ -278,6 +278,10 @@
 #' as the view is enlarged. See \code{\link{sketchSky}} for sources, assumptions
 #' and interpretation.
 #' @export
+#' @section Validation studies:
+#' Diffuse V-band brightness was compared with six fields outside the Carina calibration aperture. \href{https://stonexsky.github.io/skyscapeR/manual/v04-diffuse-photometry.html#v04-diffuse-photometry}{V04 validation study}.
+#' @section Observational validation:
+#' Across 56 recorded dates, heliacal rising fell within seven days of 22 of 23 first morning sightings. The median prediction was two days early. Acronycal setting fell within seven days of 21 of 33 last evening sightings. The median prediction was five days late. A week is a practical search window. Larger discrepancies occur, especially at dusk. These results apply to the two tested events. \href{https://stonexsky.github.io/skyscapeR/manual/heliacal-rising.html#v01-observations}{V01 observed dates and scientific checks}.
 skyRadiance <- function(sky,xrange=c(0,360),yrange=c(0,90),size=c(720,180)) {
   if (!inherits(sky,"skyscapeR.sketch") || is.null(sky$light.budget))
     stop("Supply a current natural sketch from sketchSky().")

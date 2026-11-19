@@ -712,11 +712,6 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
   </div>
 </li>
@@ -732,7 +727,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">First morning and last evening visibility</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -853,51 +848,62 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Diffuse V-band brightness was compared with six fields outside the Carina calibration aperture. <a href="./v04-diffuse-photometry.html#v04-diffuse-photometry">V04 validation study</a>.</p>
+<p><a href="./heliacal-rising.html#v01-observations">Observational accuracy and validation</a>.</p>
 <p><a href="function-index.html#idx-skyradiance">Function index</a></p>
+<h2 id="skyRadiance" class="anchored">Inspect the linear light field of a natural sky</h2><span id="topic+skyRadiance"></span>
+
+<h3 class="anchored">Description</h3>
+
+<p>Samples a natural sketch before display compression or masking by local
+terrain. One integrated flux unit is a magnitude-zero V-band source.
+</p>
+
+
+<h3 class="anchored">Usage</h3>
+
+<pre><code class="language-R">skyRadiance(sky, xrange = c(0, 360), yrange = c(0, 90), size = c(720, 180))
+</code></pre>
+
+
+<h3 class="anchored">Arguments</h3>
+
+
+<table class="caption-top table" role="presentation">
+<tbody>
+<tr class="odd">
+<td><code id="skyRadiance_+3A_sky">sky</code></td>
+<td><p>A natural sketch from <code>sketchSky</code>.</p></td>
+</tr>
+<tr class="even">
+<td><code id="skyRadiance_+3A_xrange">xrange</code></td>
+<td><p>Increasing true azimuth limits in degrees. A sector may cross north, for example c(340,380).</p></td>
+</tr>
+<tr class="odd">
+<td><code id="skyRadiance_+3A_yrange">yrange</code></td>
+<td><p>Increasing altitude limits within -90 to 90 degrees.</p></td>
+</tr>
+<tr class="even">
+<td><code id="skyRadiance_+3A_size">size</code></td>
+<td><p>Positive integer column and row counts, up to 1600 by 1000.</p></td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h3 class="anchored">Details</h3>
+
 <p>Direct light includes stars, residual cluster light, planetary discs
 and the illuminated lunar disc. The Milky Way uses the accepted tracing and
 a provisional Carina surface-brightness calibration. Stars remain unresolved
 as the view is enlarged. See <code>sketchSky</code> for sources, assumptions
 and interpretation.
 </p>
-<p><a href="./fn-sketchsky.html">Linear flux, solid angle and display colour</a>.</p>
-<details>
-<summary>
-Implementation arguments, return value and documented modes
-</summary>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">Argument</th>
-<th data-quarto-table-cell-role="th">Formal default</th>
-<th data-quarto-table-cell-role="th">Behaviour in this interface</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th" scope="row"><code>sky</code></th>
-<td>—</td>
-<td><p>A natural sketch from <code>sketchSky</code>.</p></td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th" scope="row"><code>xrange</code></th>
-<td><code>c(0, 360)</code></td>
-<td><p>Increasing true azimuth limits in degrees. A sector may cross north, for example c(340,380).</p></td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th" scope="row"><code>yrange</code></th>
-<td><code>c(0, 90)</code></td>
-<td><p>Increasing altitude limits within -90 to 90 degrees.</p></td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th" scope="row"><code>size</code></th>
-<td><code>c(720, 180)</code></td>
-<td><p>Positive integer column and row counts, up to 1600 by 1000.</p></td>
-</tr>
-</tbody>
-</table>
-<h5 class="anchored">Return value</h5><p>A list containing azimuth and altitude pixel centres, total radiance,
+
+
+<h3 class="anchored">Value</h3>
+
+<p>A list containing azimuth and altitude pixel centres, total radiance,
 direct light (stars, residual cluster light, planets and lunar disc), and
 Milky Way radiance. Matrices are in magnitude-zero flux units per square
 degree, ordered from high to low altitude and increasing azimuth. Multiply
@@ -905,7 +911,18 @@ by area (square degrees per pixel by row) and sum to obtain flux. The
 difference between total and the two source matrices is the atmospheric
 background. The Sun contributes to the background; its disc is a plot overlay.
 </p>
-</details>
+
+
+<h3 class="anchored">Validation studies</h3>
+
+<p>Diffuse V-band brightness was compared with six fields outside the Carina calibration aperture. <a href="v04-diffuse-photometry.html#v04-diffuse-photometry">V04 validation study</a>.
+</p>
+
+
+<h3 class="anchored">Observational validation</h3>
+
+<p>Across 56 recorded dates, heliacal rising fell within seven days of 22 of 23 first morning sightings. The median prediction was two days early. Acronycal setting fell within seven days of 21 of 33 last evening sightings. The median prediction was five days late. A week is a practical search window. Larger discrepancies occur, especially at dusk. These results apply to the two tested events. <a href="heliacal-rising.html#v01-observations">V01 observed dates and scientific checks</a>.
+</p>
 <p><strong>Implementation.</strong> <code>R/light-budget.R</code>. <a href="help/skyRadiance.html">Full function help</a> · <a href="sky-rendering.html#sec-sketch">Sky reconstruction</a> · <a href="contents-plan.html#plan-light">Sky brightness and visualisation outline</a> · <a href="sky-rendering.html#sky-step-capture">Display styles, capture and stepping time</a></p>
 
 

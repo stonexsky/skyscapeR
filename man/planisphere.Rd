@@ -112,6 +112,12 @@ and point size is a graphical brightness indicator. For a particular site and
 instant use \code{\link{sketchSky}} with a georeferenced horizon.
 }
 
+\section{Validation studies}{
+
+Diffuse V-band brightness was compared with six fields outside the Carina calibration aperture. \href{https://stonexsky.github.io/skyscapeR/manual/v04-diffuse-photometry.html#v04-diffuse-photometry}{V04 validation study}.
+Six stellar positions were compared with independently propagated catalogue directions from 3500 BCE to 2000 CE. \href{https://stonexsky.github.io/skyscapeR/manual/a03-stellar-positions.html#a03-stellar-positions}{A03 validation study}.
+}
+
 \examples{
 \dontrun{
 if (requireNamespace("swephRdata", quietly = TRUE)) {

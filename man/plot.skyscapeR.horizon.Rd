@@ -105,6 +105,11 @@ horizontal distortion towards the zenith. Retain consistent ranges when
 comparing styles, epochs or constellation traditions.
 }
 
+\section{Validation studies}{
+
+Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. \href{https://stonexsky.github.io/skyscapeR/manual/h04-feature-resolution.html#h04-feature-resolution}{H04 validation study}.
+}
+
 \examples{
 # Plot a bundled Maltese horizon:
 hor <- malta_horizons[[1]]

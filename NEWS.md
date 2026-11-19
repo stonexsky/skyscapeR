@@ -1,3 +1,7 @@
+# skyscapeR 2.0.9017
+
+* `star.phases()` uses Schaefer for heliacal rising and acronycal setting. The event table records the method and plotted day.
+
 # skyscapeR 2.0.9016
 
 * `coordtrans()` retains full precision internally. Near a celestial pole it propagates altitude uncertainty through the spherical transformation directly. Steep skyline segments use finer bearing integration. Recompute affected declination densities and the SPDs, null tests and figures derived from them. See the D02 and S02 validation studies in the technical manual.

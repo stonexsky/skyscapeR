@@ -143,6 +143,11 @@ archaeological sampling design. Repeated searches over alternative subsets or
 models are not included in the within-fit local-cluster adjustment.
 }
 
+\section{Validation studies}{
+
+Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#pole-propagation}{D02 validation study}.
+}
+
 \examples{
 \dontrun{
 # significance test for azimuth

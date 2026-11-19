@@ -1,5 +1,7 @@
 # Sky reconstruction and visual radiance {#sec-sketch}
 
+The stellar visibility study compares predicted seasonal dates and twilight contrast with recorded naked-eye observations. [V01 observations and calibration](heliacal-rising.html#v01-observations).
+
 **Implementation.** skyscapeR 2.0, `R/sketchSky.R`, `R/light-budget.R` and `R/galactic.R`. A site reconstruction asks two distinct questions: where does a body appear relative to the skyline, and what light reaches the corresponding part of the sky? The plotting stage consumes their results. This distinction matters when a feature remains geometrically above the terrain but fades into the twilight background.
 
 ## Geometry and state {#meth-sketch}

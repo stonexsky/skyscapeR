@@ -100,6 +100,11 @@ Stellarium engine version. Record that version and its settings separately.
 A stepped sky carries the package versions from the new calculation or capture.
 }
 
+\section{Validation studies}{
+
+Diffuse V-band brightness was compared with six fields outside the Carina calibration aperture. \href{https://stonexsky.github.io/skyscapeR/manual/v04-diffuse-photometry.html#v04-diffuse-photometry}{V04 validation study}.
+}
+
 \examples{
 \dontrun{
 hor <- malta_horizons[[1]]

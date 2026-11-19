@@ -130,7 +130,6 @@ book:
   - part: Validation
     chapters:
     - study-register.qmd
-    - package-stress-tests.qmd
     - a02-ephemeris.qmd
     - a03-stellar-positions.qmd
     - numerical-validation.qmd

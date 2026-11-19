@@ -86,6 +86,8 @@
 #'   image.dir="horizons")
 #' plot(hor)
 #' }
+#' @section Validation studies:
+#' Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. \href{https://stonexsky.github.io/skyscapeR/manual/h04-feature-resolution.html#h04-feature-resolution}{H04 validation study}.
 horFeature <- function(geometry, type=c("stone","pole","bank","ditch","mound","platform","wall"),
                        height=0, height_field=NULL, depth=0, depth_field=NULL, width=NULL,
                        width_field=NULL, diameter=NULL, diameter_field=NULL, profile=NULL,

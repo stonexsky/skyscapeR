@@ -6,7 +6,7 @@ Each entry describes the quantity actually tested. H01/H02 and A02 retain the in
 
 | ID | Question or quantity | Functions in scope | Status |
 |---|---|---|---|
-| [H01](h01-field-validation.qmd) | How closely do DEM skylines agree with field theodolite readings? | `createHor()`, `hor2alt()` | Complete |
+| [H01](h01-field-validation.qmd#withheld-stations) | How closely do DEM skylines agree with field theodolite readings? | `createHor()`, `hor2alt()` | Complete |
 | [H02](h02-skyline-comparison.qmd) | How does createHor() compare with other skyline methods and field bearings? | `createHor()`, `createHWT()`, `importPeakFinder()` | Complete |
 | [H03](horizons.html#h03-scientific) | DEM ray tracing, curvature and convergence | `createHor()`, `hor2alt()` | Analytic convergence and two curvature controls complete |
 | [H04](h04-feature-resolution.qmd) | Reconstructed earthworks and synthetic panoramas | `horFeature()`, `createHor()`, `demPalettes()`, `plot.skyscapeR.horizon()` | LiDAR bank control and thin-wall occlusion tests complete |
@@ -22,7 +22,7 @@ Each entry describes the quantity actually tested. H01/H02 and A02 retain the in
 | [A06](celestial-targets.html#a06-scientific) | Moon, planets and extrema across an epoch | `moonphase()`, `nMjLX()`, `nmnLX()`, `sMjLX()`, `smnLX()`, `planet.extremes()`, `body.position()`, `skyObject()` | Four standstill limits and five planetary windows compared |
 | [A07](lunar-crossovers.html#a07-scientific) | Equinoctial full Moons and crescent crossovers | `EFM()`, `CC()`, `moonphase()`, `riseset()`, `body.position()` | 32 independent selections compared. One EFM threshold discrepancy |
 | [A08](a08-target-ranges.qmd) | Target screening, dated bands and returned tracks | `findTargets()`, `skyObject()`, `sky.objects()`, `star()`, `solar.date()`, `hor2max.dec()`, `hor2min.dec()`, `orbit()` | Complete · verified |
-| V01 | Stellar phases and dated visibility | `star.phases()`, `star()`, `riseset()`, `sketchSky()`, `skyRadiance()`, `plot.skyscapeR.starphases()` | Model-to-model comparison complete. Independent observation study open |
+| [V01](heliacal-rising.html#v01-observations) | Stellar phases and dated visibility | `star.phases()`, `star()`, `riseset()`, `sketchSky()`, `skyRadiance()`, `plot.skyscapeR.starphases()` | 56 seasonal dates, 45 observing sessions, 6 Sirius sightings and 28 published reference calculations. |
 | V02 | Milky Way outer boundary and internal structure | `sketchSky()`, `skyRadiance()`, `planisphere()` | Grid lookup and seam verified. Independent outline tracing pending |
 | V03 | Twilight gradients and moonlight | `sketchSky()`, `skyRadiance()`, `body.position()` | Twilight checked against 22 held-out measurements. Moonlight field comparison open |
 | [V04](v04-diffuse-photometry.qmd) | Flux, cluster glow and the Pleiades | `sketchSky()`, `skyRadiance()`, `skyStep()` | Flux recovery and Carina normalisation checked. Six independent fields compared |
@@ -30,9 +30,9 @@ Each entry describes the quantity actually tested. H01/H02 and A02 retain the in
 | V06 | Planisphere, sky cultures and constellation geometry | `planisphere()`, `importConstellations()`, `sketchSky()`, `star()` | Planned |
 | V07 | Sky state, Stellarium capture and time stepping | `stellariumSky()`, `sketchSky()`, `skyStep()`, `skyscapeR.vars()`, `plot.skyscapeR.horizon()`, `time2jd()` | Native time-step extinction setting verified. External capture study open |
 | [D01](d01-density-checks.qmd) | Measurement PDFs, circular support and highest-density regions | `az.pdf()`, `dec.pdf()`, `hpdi()`, `spd()`, `subset.skyscapeR.pdf()` | Complete. Six measurement families checked |
-| [D02](d02-bearing-propagation.qmd) | Azimuth-to-declination propagation | `az2dec()`, `coordtrans()`, `hor2alt()`, `az.pdf()`, `dec.pdf()`, `spd()`, `hpdi()` | Complete · grid sensitivity and celestial-pole limits quantified |
+| [D02](d02-bearing-propagation.qmd#pole-propagation) | Azimuth-to-declination propagation | `az2dec()`, `coordtrans()`, `hor2alt()`, `az.pdf()`, `dec.pdf()`, `spd()`, `hpdi()` | Complete · grid sensitivity and celestial-pole limits quantified |
 | [S01](s01-uniform-orientation.qmd) | Uniform-orientation null model | `randomTest()`, `coordtrans()`, `az.pdf()`, `spd()`, `pval2stars()` | Complete · calibrated |
-| [S02](s02-specified-models.qmd) | Specified and site-specific nulls | `modelTest()`, `dec.pdf()`, `az.pdf()`, `spd()`, `coordtrans()` | Matched-null designs and individual azimuth-to-declination calibration complete |
+| [S02](s02-specified-models.qmd#steep-null) | Specified and site-specific nulls | `modelTest()`, `dec.pdf()`, `az.pdf()`, `spd()`, `coordtrans()` | Matched-null designs and individual azimuth-to-declination calibration complete |
 | [S03](s03-scoring-checks.qmd) | Shared scoring, local clusters and analytic probability helpers | `randomTest()`, `modelTest()`, `bernoulli.trial()`, `pval2stars()`, `print.skyscapeR.sigTest()`, `plot.skyscapeR.sigTest()` | Complete |
 | [W01](w01-plot-geometry.qmd) | Graphical outputs encode the underlying data | `plotAzimuth()`, `plotBars()`, `plot.skyscapeR.horizon()`, `plot.skyscapeR.pdf()`, `plot.skyscapeR.spd()`, `plot.skyscapeR.sigTest()`, `plot.skyscapeR.starphases()`, `print.skyscapeR.sigTest()` | Complete · verified |
 | [W02](w02-field-to-sky.qmd) | End-to-end field-to-sky and group workflows | `reduct.compass()`, `reduct.theodolite()`, `createHor()`, `hor2alt()`, `az2dec()`, `az.pdf()`, `coordtrans()`, `spd()`, `randomTest()`, `modelTest()`, `findTargets()`, `skyObject()`, `star.phases()`, `riseset()`, `sketchSky()` | Complete · verified |
@@ -46,4 +46,4 @@ The [heliacal-rising study](heliacal-rising.qmd) gives the full comparison betwe
 
 ## Results and priorities {#next-tests}
 
-The [five package validation studies](package-stress-tests.qmd) report completed tests of near-pole transformations, off-Carina photometry, withheld-station horizon errors, partly occluded features and stellar astrometry. D02 evaluates direct propagation near the celestial pole. The next empirical priority is fitting and testing diffuse brightness on independent, consistently masked V-band fields. For terrain uncertainty, the withheld-station coverage provides a baseline for models using station and survey characteristics.
+The next empirical priority is fitting and testing diffuse brightness on independent, consistently masked V-band fields. For terrain uncertainty, the withheld-station coverage provides a baseline for models using station and survey characteristics.

@@ -107,6 +107,11 @@ Save feature objects separately for reproducibility. They contain packed vector
 geometry and settings, but no DEM or PNG. The horizon stores compact settings,
 feature counts and a geometry checksum, with its PNG linked externally as usual.
 }
+\section{Validation studies}{
+
+Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. \href{https://stonexsky.github.io/skyscapeR/manual/h04-feature-resolution.html#h04-feature-resolution}{H04 validation study}.
+}
+
 \examples{
 if (requireNamespace("terra", quietly=TRUE)) {
   points <- terra::vect(data.frame(x=c(-1.75,-1.751), y=c(51.19,51.191),
