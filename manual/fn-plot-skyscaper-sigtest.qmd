@@ -1,10 +1,11 @@
 # `plot.skyscapeR.sigTest()` {#fn-plot-skyscaper-sigtest}
 
+Labelled angular ticks and shorter minor ticks adapt to the displayed range and physical plot width in both the main and local-significance layouts. The plotted intervals and probabilities come from the stored fit.
+
 W01 checked clipped local intervals, the pointwise envelope and the global probability label against the stored fit. [W01 results](w01-plot-geometry.qmd).
 
-**Verified on 2.0.9006.** On a full-turn panel, a cluster crossing north can have two visible segments with one shared probability. [S03 rerun](s03-scoring-checks.qmd).
+On a full-turn panel, a cluster crossing north can have two visible segments with one shared probability. [S03 checks](s03-scoring-checks.qmd).
 
-**Validation on 2.0.9005.** The tested public fits plotted the stored local interval midpoints and significance symbols. North-crossing intervals can appear separately. [S03 results](s03-scoring-checks.qmd).
 
 [Function index](function-index.html#idx-plot-skyscaper-sigtest)
 
@@ -13,10 +14,9 @@ W01 checked clipped local intervals, the pointwise envelope and the global proba
 result. The two-tailed display shades between its lower and upper pointwise bounds; the
 one-tailed display shades up to the upper bound from zero. Optional annotations show the
 stored global p-value and the local intervals, coloured by deficit or excess and
-labelled by p-value symbols. The observed and envelope curves jointly set the visible vertical range. The lower panel identifies adjusted and legacy unadjusted local results. The plot reads the fitted result without repeating the
+labelled by p-value symbols. The observed and envelope curves jointly set the visible vertical range. The lower panel identifies adjusted local results. The plot reads the fitted result without repeating the
 simulations. New local values use maximum-cluster adjustment under the complete null;
-cluster endpoints remain descriptive, not confidence limits. Legacy fits retain their
-original unadjusted values. Interpret local regions alongside the whole-curve test.
+cluster endpoints remain descriptive, not confidence limits.  Interpret local regions alongside the whole-curve test.
 </p>
 ```
 

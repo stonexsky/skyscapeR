@@ -1,6 +1,6 @@
 # Seasonal stellar visibility {#sec-stellar}
 
-**Function** [`star.phases()`](fn-star-phases.html) · **Package** skyscapeR 2.0.9004
+**Function** [`star.phases()`](fn-star-phases.html) · **Package** skyscapeR
 
 At an archaeological site, a star can rise above a ridge while the sky is still too bright to see it. [`star.phases()`](fn-star-phases.html) asks on which mornings or evenings the terrain, darkness and stellar brightness allow an opportunity to observe it. Its heliacal-rising date is the return of such an opportunity after a season of invisibility.
 
@@ -35,7 +35,7 @@ A second pass restricts eligible intervals to $h\leq\texttt{alt.rs}$ and checks 
 
 ## Changes that matter for earlier analyses
 
-The 2.0 development NEWS records changes to handling southern, circumpolar and obstructed tracks. A completely obstructed star now returns an all-invisible result. An always-clear star can still enter different seasonal phases. The separate `metadata$horizon.status` field lets the analyst distinguish these cases. An earlier analysis involving a star close to the circumpolar limit or a raised skyline is a priority for recalculation.
+A completely obstructed star returns an all-invisible result. An always-clear star can still enter different seasonal phases. The separate `metadata$horizon.status` field lets the analyst distinguish these cases. An earlier analysis involving a star close to the circumpolar limit or a raised skyline is a priority for recalculation.
 
 The output also distinguishes the schematic day of the seasonal cycle from `metadata$events$date.julian`. Use the latter when passing an event to [`riseset()`](fn-riseset.html) for a terrain crossing. The crossing gives a starting time from which to examine the changing dawn sky.
 
@@ -49,7 +49,7 @@ See the [event-search chapter](event-searches.qmd) for the crossing solver and a
 
 ## Full package help
 
-The following help page is generated from the archived 2.0.9004 package documentation.
+The following help page is generated from the package documentation.
 
 <details><summary>Read the complete <code>star.phases()</code> help page</summary>
 

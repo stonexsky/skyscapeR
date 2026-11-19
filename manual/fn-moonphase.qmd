@@ -1,5 +1,7 @@
 # `moonphase()` {#fn-moonphase}
 
+A07 examines independent crossover selection and sensitivity to the illumination cutoff. [A07 study and results](lunar-crossovers.html#a07-scientific).
+
 **A02 validation.** In A02, all 108 illuminated fractions agreed with the direct Swiss Ephemeris calculation across 54 epochs and two file generations. This checks the R interface. Observed lunar photometry was outside the study. [Lunar illumination check](a02-ephemeris.qmd).
 
 [Function index](function-index.html#idx-moonphase)

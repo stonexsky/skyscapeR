@@ -79,6 +79,11 @@ leaves observer elevation unknown. Add a finite measured elevation before
 using functions, such as \code{\link{sketchSky}}, that require it.
 }
 
+\section{Scientific validation}{
+
+H05 examines bearing and altitude errors at withheld synthetic landmarks. \href{https://stonexsky.github.io/skyscapeR/manual/photographic-horizons.html#h05-scientific}{H05 scientific validation}.
+}
+
 \examples{
 \dontrun{
 # Known bearing at pixel (1240, 380) in a level, cropped panorama

@@ -45,6 +45,11 @@ Ephemeris horizontal transformation. Bearings are clockwise from north; the rout
 shifts them to the engine convention and rounds the returned declinations using the
 input bearing representation.
 }
+\section{Validation studies}{
+
+Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#pole-propagation}{D02 validation study}.
+}
+
 \examples{
 dec <- az2dec(az=92, loc=35, alt=2)
 

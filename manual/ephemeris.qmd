@@ -1,12 +1,12 @@
 # swephR and the Swiss Ephemeris {#sec-ephemeris}
 
-**Scope.** This page records the astronomical dependency, the manufacturer's accuracy claim and the [A02 comparisons](a02-ephemeris.qmd) for build 2.0.9004. The documented visibility and terrain studies address different quantities from the planetary and lunar position errors discussed here.
+**Scope.** This page records the astronomical dependency, the manufacturer's accuracy claim and the [A02 comparisons](a02-ephemeris.qmd). The documented visibility and terrain studies address different quantities from the planetary and lunar position errors discussed here.
 
 ## Which layer supplies the result?
 
 | Layer | Role in an analysis |
 |---|---|
-| skyscapeR | Chooses the body, date, site and calculation settings. In 2.0.9004 its file-backed planetary position routine checks for paired planetary and lunar file coverage at the epoch, requests Swiss files and checks the returned ephemeris flag and messages. A missing file can therefore stop a calculation. |
+| skyscapeR | Chooses the body, date, site and calculation settings. Its file-backed planetary position routine checks for paired planetary and lunar file coverage at the epoch, requests Swiss files and checks the returned ephemeris flag and messages. A missing file can therefore stop a calculation. |
 | swephR | Provides R bindings to the Swiss Ephemeris routines. The R package and the underlying engine have separate versions. The wrapper documentation describes the file-free Moshier option and the optional `swephRdata` distribution [@swephr]. |
 | Swiss Ephemeris and its data files | The engine reads the available numerical ephemeris and applies the requested transformations. The compressed planetary and lunar files identify their parent JPL solution. File generation and temporal coverage must be recorded for the position being compared [@astrodienst; @sweprog]. |
 

@@ -8,7 +8,7 @@
 
 Each residual combines the effects of the terrain model, observer position and height, numerical skyline calculation and field measurement. The surveys sample particular directions at each setup. Accuracy between those directions, including narrow peaks or notches, remains unmeasured. The station and terrain summaries below show how far the pooled result transfers across the tested conditions.
 
-The [horizon methods chapter](horizons.qmd#sec-horizon) describes the ray geometry, curvature and terrestrial refraction used by the tested build, **2.0.9004**. The screened field dataset contains 775 distinct bearings from 36 observing setups in six countries. Digitised measurements from Artegna form an additional comparison.
+The [horizon methods chapter](horizons.qmd#sec-horizon) describes the ray geometry, curvature and terrestrial refraction used by the terrain model. The screened field dataset contains 775 distinct bearings from 36 observing setups in six countries. Digitised measurements from Artegna form an additional comparison.
 
 **Field and numerical protocol.** Each observation retains the survey, observing position, target description, original table or figure, true azimuth and measured altitude. The analysis counts an exact repeated angular pair once within a setup. Where two distinct altitude readings have the same published bearing at the same setup, their mean contributes one residual. Coordinate provenance distinguishes an instrument fix, an adopted site coordinate and a shared coordinate for nearby setups. The run manifests record any assumed instrument height. No location or height was selected by minimising the field residuals.
 

@@ -10,7 +10,7 @@ project:
   - .nojekyll
 book:
   title: skyscapeR technical manual
-  subtitle: 9 November 2026
+  subtitle: 19 November 2026
   chapters:
   - index.qmd
   - contents-plan.qmd
@@ -130,9 +130,12 @@ book:
   - part: Validation
     chapters:
     - study-register.qmd
+    - package-stress-tests.qmd
     - a02-ephemeris.qmd
+    - a03-stellar-positions.qmd
     - numerical-validation.qmd
     - heliacal-rising.qmd
+    - v04-diffuse-photometry.qmd
     - a01-calendar-checks.qmd
     - a04-stellar-crossings.qmd
     - a05-solar-limits.qmd
@@ -141,6 +144,7 @@ book:
     - d02-bearing-propagation.qmd
     - h01-field-validation.qmd
     - h02-skyline-comparison.qmd
+    - h04-feature-resolution.qmd
     - h07-panorama-coverage.qmd
     - s01-uniform-orientation.qmd
     - s02-specified-models.qmd

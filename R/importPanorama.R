@@ -50,6 +50,8 @@
 #' functions requiring a closed full horizon. Supplying only latitude and longitude
 #' leaves observer elevation unknown. Add a finite measured elevation before
 #' using functions, such as \code{\link{sketchSky}}, that require it.
+#' @section Scientific validation:
+#' H05 examines bearing and altitude errors at withheld synthetic landmarks. \href{https://stonexsky.github.io/skyscapeR/manual/photographic-horizons.html#h05-scientific}{H05 scientific validation}.
 importPanorama <- function(file, loc, az.lim=c(0,360), alt.lim=c(-90,90),
                            name=tools::file_path_sans_ext(basename(file)), calibrate=FALSE,
                            points=NULL, alpha.threshold=0.5, alt.unc=0.5) {

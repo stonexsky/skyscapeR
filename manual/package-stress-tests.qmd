@@ -1,0 +1,10 @@
+# Guide to the five validation studies {#package-stress-tests}
+
+| Question | Study |
+|---|---|
+| How accurately do probability densities transform on a steep skyline or near a celestial pole? | [D02 · Direct propagation](d02-bearing-propagation.qmd#pole-propagation) |
+| How often does an azimuth model tested in declination reject under its own null? | [S02 · Steep-skyline calibration](s02-specified-models.qmd#steep-null) |
+| How accurately is diffuse brightness predicted outside Carina? | [V04 · Independent photometry](v04-diffuse-photometry.qmd) |
+| What horizon uncertainty carries over to an unsampled station? | [H01 · Withheld observing stations](h01-field-validation.qmd#withheld-stations) |
+| How finely can numerical and rendered horizons resolve a structure? | [H04 · Feature resolution](h04-feature-resolution.qmd) |
+| How do stellar positions compare with an independently propagated catalogue? | [A03 · Stellar astrometry](a03-stellar-positions.qmd) |

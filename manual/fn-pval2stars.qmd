@@ -1,6 +1,6 @@
 # `pval2stars()` {#fn-pval2stars}
 
-**Validation on 2.0.9005.** All tested symbol thresholds, their equality cases and the legacy printed bound agreed with their stated probability ranges. [S03 results](s03-scoring-checks.qmd).
+All tested symbol thresholds, their equality cases and the legacy printed bound agreed with their stated probability ranges. [S03 results](s03-scoring-checks.qmd).
 
 [Function index](function-index.html#idx-pval2stars)
 

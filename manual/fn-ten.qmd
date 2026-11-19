@@ -1,6 +1,6 @@
 # `ten()` {#fn-ten}
 
-**Validation on 2.0.9005.** Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. [A01 results](a01-calendar-checks.qmd).
+All 499 calendar, clock, era, angle and setting checks in A01 passed. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. [A01 results](a01-calendar-checks.qmd).
 
 [Function index](function-index.html#idx-ten)
 

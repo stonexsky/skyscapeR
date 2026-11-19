@@ -1,5 +1,7 @@
 # `plot.skyscapeR.horizon()` {#fn-plot-skyscaper-horizon}
 
+Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. [H04 validation study](h04-feature-resolution.qmd#h04-feature-resolution).
+
 W01 checked the skyline ordinate and azimuth viewport on flat and raised profiles, including natural and publication sky overlays. [W01 results](w01-plot-geometry.qmd).
 
 [Function index](function-index.html#idx-plot-skyscaper-horizon)
@@ -13,7 +15,7 @@ Rescaling the display or changing its colours does not change the underlying hor
 </p>
 <p>For a two-year epoch range, draw tracks for the stored minimum and maximum
 declinations, using the session refraction setting for both tracks. Line
-styles are taken from the target object; older objects without them use
+styles are taken from the target object; objects without stored styles use
 solid lines of width 1.
 </p>
 ```

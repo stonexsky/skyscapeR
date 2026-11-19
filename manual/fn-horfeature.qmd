@@ -1,5 +1,7 @@
 # `horFeature()` {#fn-horfeature}
 
+Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. [H04 validation study](h04-feature-resolution.qmd#h04-feature-resolution).
+
 [Function index](function-index.html#idx-horfeature)
 
 ```{=html}

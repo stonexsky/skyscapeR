@@ -149,8 +149,6 @@ cast shadows from other terrain.}
 \item{ambient}{Fraction of illumination retained on slopes facing away from
 the light (0 to 1). Default 0.40. Use 1 for unshaded palette colours.}
 
-\item{contrast}{Relief-light contrast (0 to 1), default 0.70, following the standalone renderer. It controls slope detail independently of ambient brightness. Ignored for directional lighting, which retains ambient + (1 - ambient) * illumination. Regenerate existing panoramas to apply new settings.}
-
 \item{haze}{Maximum fraction of distance haze (0 to 1). Default 0.65.
 Set haze=0 and ambient=1 to inspect the colour mapping alone.}
 
@@ -165,6 +163,8 @@ Set haze=0 and ambient=1 to inspect the colour mapping alone.}
 \item{verbose}{Announce the DEM radius, sampling and rendering stages.}
 
 \item{progress}{Show a progress bar for each tracing stage. Default on in interactive verbose sessions.}
+
+\item{contrast}{Relief-light contrast (0 to 1), default 0.70, following the standalone renderer. It controls slope detail independently of ambient brightness. Ignored for directional lighting, which retains ambient + (1 - ambient) * illumination. Regenerate existing panoramas to apply new settings.}
 }
 \value{
 A skyscapeR.horizon list with metadata (site name and georeference) and a data frame named data. Its az, alt and alt.unc columns contain azimuth, horizon altitude and altitude uncertainty, all in degrees.
@@ -254,6 +254,17 @@ cannot reproduce all near-ground gradients or mirage conditions.
 Save the DEM provenance, observer location and datum, constructor arguments,
 feature objects, returned horizon and external PNG. Rebuilding from the same
 source is distinct from merely replotting the saved horizon.
+}
+
+\section{Validation studies}{
+
+Intervals estimated from other observing groups covered 91.0 and 88.8 percent of bearings in two terrain-radius selections. \href{https://stonexsky.github.io/skyscapeR/manual/h01-field-validation.html#withheld-stations}{H01 validation study}.
+Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. \href{https://stonexsky.github.io/skyscapeR/manual/h04-feature-resolution.html#h04-feature-resolution}{H04 validation study}.
+}
+
+\section{Scientific validation}{
+
+H03 examines DEM sampling against an analytic ridge and a level spherical surface. \href{https://stonexsky.github.io/skyscapeR/manual/horizons.html#h03-scientific}{H03 scientific validation}.
 }
 
 \examples{

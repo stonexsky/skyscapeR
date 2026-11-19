@@ -207,6 +207,8 @@ mag2size <- function(mag) {
 #' loc <- c( 51.5074, -0.1278 )
 #' mag.dec( loc, "2016/04/01" )
 #' mag.dec(c(40, -8), c("2010/01/01", "2026/01/01"))
+#' @section Scientific validation:
+#' F01 examines magnetic and solar reductions against independent references. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 scientific validation}.
 mag.dec = function(loc, date) {
   if (inherits(loc, "skyscapeR.horizon")) loc <- loc$metadata$georef
   loc <- if (is.null(dim(loc))) matrix(loc,nrow=1L) else as.matrix(loc)

@@ -37,14 +37,15 @@ createHor(
   lighting = c("relief", "directional"),
   light.azimuth = 315,
   light.altitude = 45,
-  ambient = 0.38,
+  ambient = 0.4,
   haze = 0.65,
   image.dir = getwd(),
   attribution = "User-supplied DEM",
   license = "See source DEM terms",
   ncores = NULL,
   verbose = TRUE,
-  progress = interactive() && verbose
+  progress = interactive() && verbose,
+  contrast = 0.7
 )
 }
 \arguments{
@@ -134,7 +135,9 @@ two land colours. Default 3.}
 
 \item{lighting}{Relief lighting (default) blends a light at the observer (75 percent)
 with the directional source (25 percent). It shades both sides of a slope and
-lifts deep shadows. Choose "directional"
+lifts deep shadows. The standalone renderer brightness response is
+min(1, ambient + contrast * illumination), with illumination floored at 0.15.
+Terrain and visible horFeature surfaces use the same lighting. Choose "directional"
 for one-sided hillshade. Lighting affects the PNG only.}
 
 \item{light.azimuth, light.altitude}{Direction towards the illustrative light
@@ -144,7 +147,9 @@ east, north and vertical coordinates. This is local illumination without
 cast shadows from other terrain.}
 
 \item{ambient}{Fraction of illumination retained on slopes facing away from
-the light (0 to 1). Default 0.38. Use 1 for unshaded palette colours.}
+the light (0 to 1). Default 0.40. Use 1 for unshaded palette colours.}
+
+\item{contrast}{Relief-light contrast (0 to 1), default 0.70, following the standalone renderer. It controls slope detail independently of ambient brightness. Ignored for directional lighting, which retains ambient + (1 - ambient) * illumination. Regenerate existing panoramas to apply new settings.}
 
 \item{haze}{Maximum fraction of distance haze (0 to 1). Default 0.65.
 Set haze=0 and ambient=1 to inspect the colour mapping alone.}
@@ -163,6 +168,11 @@ Set haze=0 and ambient=1 to inspect the colour mapping alone.}
 }
 \value{
 A skyscapeR.horizon list with metadata (site name and georeference) and a data frame named data. Its az, alt and alt.unc columns contain azimuth, horizon altitude and altitude uncertainty, all in degrees.
+}
+\section{Validation studies}{
+Intervals estimated from other observing groups covered 91.0 and 88.8 percent of bearings in two terrain-radius selections. \href{https://stonexsky.github.io/skyscapeR/manual/h01-field-validation.html#withheld-stations}{H01 validation study}.
+
+Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. \href{https://stonexsky.github.io/skyscapeR/manual/h04-feature-resolution.html#h04-feature-resolution}{H04 validation study}.
 }
 \description{
 Build a continuous horizon profile from measurements of horizon altitude at known
@@ -222,8 +232,8 @@ Save the external PNG alongside the RDS. If you move them, use \code{\link{relin
 to reconnect the image. A rendering failure returns the numerical horizon with a warning.
 Plotting also falls back to the numerical horizon if the image is missing or has changed.
 }
-
 \section{Accuracy, uncertainty and reproducibility}{
+
 H01 compared 334 bearings at 31 observing setups.
 At the surveyed bearings, \code{createHor()} reproduced the observed terrain skyline to within half a degree in 91.9\% of cases.
 See the \href{https://stonexsky.github.io/skyscapeR/manual/#h01-field-validation}{H01 field validation in the skyscapeR technical manual} for the survey protocol, station results and limitations.
@@ -250,6 +260,7 @@ Save the DEM provenance, observer location and datum, constructor arguments,
 feature objects, returned horizon and external PNG. Rebuilding from the same
 source is distinct from merely replotting the saved horizon.
 }
+
 \examples{
 \dontrun{
 observer <- terra::vect("observer.gpkg") # one point with a CRS
@@ -276,4 +287,8 @@ Patat, F. (2011). Horizon synthesis for archaeo-astronomical purposes. Astronomi
 \code{\link{importPeakFinder}}, \code{\link{plot.skyscapeR.horizon}}
 
 \code{\link{createHWT}}, \code{\link{downloadHWT}}
+}
+
+\section{Scientific validation}{
+H03 examines DEM sampling against an analytic ridge and a level spherical surface. \href{https://stonexsky.github.io/skyscapeR/manual/horizons.html#h03-scientific}{H03 scientific validation}.
 }

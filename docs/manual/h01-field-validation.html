@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -707,12 +707,22 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -723,6 +733,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -763,6 +778,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -808,8 +828,14 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Chapter contents</h2>
+   
+  <ul>
+  <li><a href="#withheld-stations" id="toc-withheld-stations" class="nav-link active" data-scroll-target="#withheld-stations">Uncertainty at withheld observing stations</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -842,7 +868,7 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 <p>Each residual combines the effects of the terrain model, observer position and height, numerical skyline calculation and field measurement. The surveys sample particular directions at each setup. Accuracy between those directions, including narrow peaks or notches, remains unmeasured. The station and terrain summaries below show how far the pooled result transfers across the tested conditions.</p>
-<p>The <a href="./horizons.html#sec-horizon">horizon methods chapter</a> describes the ray geometry, curvature and terrestrial refraction used by the tested build, <strong>2.0.9004</strong>. The screened field dataset contains 775 distinct bearings from 36 observing setups in six countries. Digitised measurements from Artegna form an additional comparison.</p>
+<p>The <a href="./horizons.html#sec-horizon">horizon methods chapter</a> describes the ray geometry, curvature and terrestrial refraction used by the terrain model. The screened field dataset contains 775 distinct bearings from 36 observing setups in six countries. Digitised measurements from Artegna form an additional comparison.</p>
 <p><strong>Field and numerical protocol.</strong> Each observation retains the survey, observing position, target description, original table or figure, true azimuth and measured altitude. The analysis counts an exact repeated angular pair once within a setup. Where two distinct altitude readings have the same published bearing at the same setup, their mean contributes one residual. Coordinate provenance distinguishes an instrument fix, an adopted site coordinate and a shared coordinate for nearby setups. The run manifests record any assumed instrument height. No location or height was selected by minimising the field residuals.</p>
 <p>For each terrain product, the function traces the horizon at 0.25° azimuth spacing and the specified radial step. The validation script interpolates the numerical profile linearly at the recorded bearing. A sight is eligible at the stated radius when both bracketing rays have finite terrain samples to that distance. A signed residual is the predicted altitude minus the field altitude, in degrees. Positive values place the modelled horizon above the measured one. The pooled summary weights each distinct station–bearing combination equally. Several bearings can describe the same ridge, and the number of bearings per station varies.</p>
 <p><strong>Results by terrain selection.</strong> The table compares the two tested search distances in Wales and Tenerife under both Irish terrain selections. Other regions keep their original settings. Each 50 km sample is a subset of the corresponding 15 km sample.</p>
@@ -911,8 +937,48 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Interpretation and outstanding checks.</strong> Welsh results depend on complete native LiDAR coverage along the extended sightlines. Coastal gaps preclude native-resolution scoring at the two Maltese setups and along the Maeshowe sightlines under this rule. The report identifies the coarser product used at those stations. Tenerife retains the authors’ GPS locations and their refraction-corrected altitudes. A finer Spanish ground model is published regionally, but numerical tiles must be verified along the survey bearings before those statistics can be assigned to that resolution. At La Nariz the paper’s sanctuary coordinate and Murcia’s officially designated centre are 21.64 km apart. The predictions at both positions remain diagnostic. The test describes field agreement for these sites, inputs and settings. <a href="./h02-skyline-comparison.html">H02</a> compares the computed skylines. <a href="https://pnoa.ign.es/web/portal/pnoa-lidar/tercera-cobertura">Spanish terrain product status</a> · <a href="https://transparencia.carm.es/wres/transparencia/doc/Consejo_Gobierno/2023-11-09/punto_20_bic_santuario_iberico_moratalla.pdf">Murcia site designation</a></p>
 <p><strong>Records and reproduction.</strong> The report gives the signed residual distribution, error statistics and histograms for the pooled sample, each DEM source and resolution, and each observing setup. The archive contains the original row locators, coverage decisions, per-bearing predictions, R code, download recipes and terrain checksums. <a href="archives/H01-validation-results.html">Detailed H01 validation report</a> · <a href="archives/H01-field-comparison.zip">Download the H01 study and code</a></p>
 <p>Field sources include <a href="https://mega-what.com/">Wilson’s horizon surveys</a>, <a href="https://archaeologydataservice.ac.uk/library/browse/issue.xhtml?recordId=1255708">Humble’s Rectory Farm tables</a>, <a href="https://www.archaeocosmology.org/eng/VictorReijs-ReappearingSun-014-web.pdf">Reijs’s Orkney survey</a>, <a href="https://riull.ull.es/xmlui/handle/915/18640">Esteban and Delgado Cabrera’s Tenerife measurements</a>, <a href="https://www.astrosafor.net/Huygens/2023/151/huygens-151-10-19.pdf">Ocharan Ibarra and Esteban’s La Nariz tables</a>, <a href="https://www.um.edu.mt/library/oar/handle/123456789/104296">Lomsdalen’s Maltese total-station readings</a>, <a href="https://npshistory.com/publications/chcu/munro-2011.pdf">Munro’s Chaco field sheets</a>, and <a href="https://wuw.pl/data/include/cms/La_vida_bajo_Iwaniszewski_S_Moyano_Vasconcellos_R_Gilewski_M_red_2021.pdf">Leibowicz and colleagues’ Cachi survey</a>. The image-derived Italian comparison uses <a href="https://www.eso.org/~fpatat/science/arcaeo/doc/ast11570d-1c_743-749.pdf">Patat’s Figure 3</a>.</p>
+<section id="withheld-stations" class="level2">
+<h2 class="anchored" data-anchor-id="withheld-stations">Uncertainty at withheld observing stations</h2>
+<p>We withheld every bearing in an observing group together, pooling adjacent Gors Fawr and Ushnagh setups to reduce geographic leakage. From other groups using the same DEM product, we took the upper empirical 95th percentile of absolute altitude error as a candidate symmetric half-width. Where a product had no training group, we used the pooled training sample. All intervals were then evaluated at the withheld group. The two H01 terrain-radius selections overlap.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>H01 selection</th>
+<th style="text-align: right;">Held-out groups</th>
+<th style="text-align: right;">Bearings</th>
+<th style="text-align: right;">Within ±0.5°</th>
+<th style="text-align: right;">Within estimated 95% interval</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Shorter-radius selection</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">334</td>
+<td style="text-align: right;">307 (91.9%)</td>
+<td style="text-align: right;">304 (91.0%)</td>
+</tr>
+<tr class="even">
+<td>Longer-radius selection</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">215</td>
+<td style="text-align: right;">190 (88.4%)</td>
+<td style="text-align: right;">191 (88.8%)</td>
+</tr>
+</tbody>
+</table>
+<p>The estimated intervals undercovered in both samples. These folds inherit the original survey coordinates, instrument-height assumptions, coverage screening and mix of sightlines. A universal 95% accuracy claim for the default altitude uncertainty would exceed this evidence. In a Gaussian propagation model the default 0.5° is a standard deviation. Its nominal 95% half-width of 0.98° covered 326/334 and 207/215 bearings respectively. Neither aggregate proportion guarantees coverage at an individual station.</p>
+<p><a href="archives/five-package-tests.zip">Reproduction scripts, inputs and results</a>.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

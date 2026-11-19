@@ -1,0 +1,16 @@
+# A03 · Stellar positions at archaeological epochs {#a03-stellar-positions}
+
+We compared the public `star()` coordinates for six bright stars with an independently propagated HYG 4.1 catalogue extract. We advanced each J2000 Cartesian position with its three-dimensional space velocity, including radial motion, and rotated the direction into the true equator and equinox of date using ERFA long-term precession with frame bias and IAU 2006/2000A nutation. Both calculations used 1 January at noon on the proleptic Gregorian calendar. The reference neglects binary orbital motion and uses a Julian-year time interval. HYG and Swiss Ephemeris may share underlying catalogue observations. [HYG catalogue and field definitions](https://github.com/astronexus/HYG-Database/blob/main/hyg/README.md) · [ERFA long-term rotation](https://github.com/liberfa/erfa/blob/master/src/ltpb.c)
+
+| Star | 2000 CE | 200 CE | 2000 BCE | 3500 BCE |
+|---|---:|---:|---:|---:|
+| Arcturus | 0.02″ | 1.34″ | 2.58″ | 3.20″ |
+| Sirius | 0.06″ | 6.55″ | 31.74″ | 59.37″ |
+| Vega | 0.01″ | 2.43″ | 5.85″ | 8.50″ |
+| Aldebaran | 0.01″ | 1.41″ | 3.14″ | 4.40″ |
+| Regulus | 0.01″ | 1.78″ | 4.29″ | 6.32″ |
+| Spica | 0.01″ | 1.91″ | 4.27″ | 5.88″ |
+
+The largest separation was 0.0165° for Sirius in 3500 BCE. Arcturus has the largest proper motion in this sample and a much smaller residual. These comparisons constrain agreement between two astrometric reconstructions. They cannot establish where an ancient observer saw a star to arcsecond accuracy.
+
+[Reproduction scripts, inputs and results](archives/five-package-tests.zip).

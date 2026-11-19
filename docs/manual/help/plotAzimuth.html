@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>plotAzimuth | skyscapeR 2.0.9008</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-plotazimuth.html">plotAzimuth() method</a></nav><h2 id='plotAzimuth'>Plot orientation measurements on a compass grid</h2><span id='topic+plotAzimuth'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>plotAzimuth | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-plotazimuth.html">plotAzimuth() method</a></nav><h2 id='plotAzimuth'>Plot orientation measurements on a compass grid</h2><span id='topic+plotAzimuth'></span>
 
 <h3>Description</h3>
 
@@ -26,12 +26,12 @@ rise or set bearings.
 
 <h3>Arguments</h3>
 
-<table>
-<tr><td><code id="plotAzimuth_:_az">az</code></td>
+<table role = "presentation">
+<tr><td><code id="plotAzimuth_+3A_az">az</code></td>
 <td>
 <p>Azimuths in degrees clockwise from north. Can be omitted if <em>obj</em> is given.</p>
 </td></tr>
-<tr><td><code id="plotAzimuth_:_obj">obj</code></td>
+<tr><td><code id="plotAzimuth_+3A_obj">obj</code></td>
 <td>
 <p>A <em>skyscapeR.object</em> from <code>skyObject</code>, or
 a list of these objects. Each group retains its own epochs and styles
@@ -40,39 +40,39 @@ location per group and a flat horizon of zero degrees. For a year range,
 the target colour fills the interval of rising or setting bearings between
 the stored declination limits. A zero-width interval is drawn as a line.</p>
 </td></tr>
-<tr><td><code id="plotAzimuth_:_show.obj.labels">show.obj.labels</code></td>
+<tr><td><code id="plotAzimuth_+3A_show.obj.labels">show.obj.labels</code></td>
 <td>
 <p>Logical to control whether to display celestial objects names.
 Defaults to TRUE.</p>
 </td></tr>
-<tr><td><code id="plotAzimuth_:_col">col</code></td>
+<tr><td><code id="plotAzimuth_+3A_col">col</code></td>
 <td>
 <p>Single color or color palette to use for plotting measurements.</p>
 </td></tr>
-<tr><td><code id="plotAzimuth_:_lty">lty</code></td>
+<tr><td><code id="plotAzimuth_+3A_lty">lty</code></td>
 <td>
 <p>Line type to plot measurements. Defaults to 1.</p>
 </td></tr>
-<tr><td><code id="plotAzimuth_:_lwd">lwd</code></td>
+<tr><td><code id="plotAzimuth_+3A_lwd">lwd</code></td>
 <td>
 <p>Line width for measured bearings. Defaults to 1.5.</p>
 </td></tr>
-<tr><td><code id="plotAzimuth_:_marks">marks</code></td>
+<tr><td><code id="plotAzimuth_+3A_marks">marks</code></td>
 <td>
 <p>Draw measured orientations as equal-length <code>"spokes"</code> (default) or short <code>"rim"</code> ticks.</p>
 </td></tr>
-<tr><td><code id="plotAzimuth_:_obj.position">obj.position</code></td>
+<tr><td><code id="plotAzimuth_+3A_obj.position">obj.position</code></td>
 <td>
 <p>Draw target reference lines <code>"inside"</code> the circle or just <code>"outside"</code> its rim.
 In both positions labels lie outside the circle. The first line names the target and the second gives rise or set.
 Range endpoints share a label. Non-crossing targets have no reference bearing.</p>
 </td></tr>
-<tr><td><code id="plotAzimuth_:_show.legend">show.legend</code></td>
+<tr><td><code id="plotAzimuth_+3A_show.legend">show.legend</code></td>
 <td>
 <p>With TRUE, show the count and enabled target labels. FALSE centres the bare compass,
 including its cardinal scale, measured bearings and target lines.</p>
 </td></tr>
-<tr><td><code id="plotAzimuth_:_style">style</code></td>
+<tr><td><code id="plotAzimuth_+3A_style">style</code></td>
 <td>
 <p>Analytical display style, either <code>"publication-colour"</code> (default) or
 <code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p>
@@ -98,7 +98,7 @@ horizon and shows the part of each declination interval that reaches it.
 
 <h3>Validation</h3>
 
-<p>W01 checked compass bearings and the inner and outer edges of celestial year-range sectors against their spherical reference bearings. See the <a href="../w01-plot-geometry.html">W01 check in the technical manual</a>.
+<p>W01 checked compass bearings and the inner and outer edges of celestial year-range sectors against their spherical reference bearings. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry">W01 check in the technical manual</a>.
 </p>
 
 

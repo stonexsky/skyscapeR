@@ -1,0 +1,10 @@
+# H04 · Thin features and partial occlusion {#h04-feature-resolution}
+
+On flat 1 m terrain, a synthetic wall 4 m long and 8 m high stood at 50 or 150 m. The observer's eye height was 1.6 m. Half of the cases added a 6 m foreground wall across part of the distant feature. We crossed wall thicknesses of 1 and 4 m, sampling settings of 1°/1 m and 5°/5 m, and panorama widths of 360 and 720 pixels. For each of the 32 cases we compared the numerical skyline on an off-centre ray with a separate intersection calculation sampled every 2 cm.
+
+{{< include _feature-result.qmd >}}
+
+A separate eight-image experiment coloured the two walls differently and counted panorama columns containing the distant wall. At 150 m, partial occlusion left an analytic visible width of 0.573°. It occupied 1.0° at 360 pixels and 0.5° at 720 pixels. At 50 m the 1.717° opening occupied 2.0° at both resolutions. A sub-degree target can therefore appear materially wider in the panorama. These results apply to the tested pixel alignment and feature orientations.
+
+
+[Reproduction scripts, inputs and results](archives/five-package-tests.zip).

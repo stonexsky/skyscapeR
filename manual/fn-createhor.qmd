@@ -1,5 +1,13 @@
 # `createHor()` {#fn-createhor}
 
+H03 examines DEM sampling against an analytic ridge and a level spherical surface. [H03 study and results](horizons.html#h03-scientific).
+
+Intervals estimated from other observing groups covered 91.0 and 88.8 percent of bearings in two terrain-radius selections. [H01 validation study](h01-field-validation.qmd#withheld-stations).
+
+Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. [H04 validation study](h04-feature-resolution.qmd#h04-feature-resolution).
+
+Relief lighting blends 75% observer-facing and 25% directional illumination. With the blended illumination floored at 0.15, the relief brightness multiplier is `min(1, ambient + contrast * illumination)`, with defaults 0.40 and 0.70. Terrain and visible reconstructed features receive the same shading. Directional mode uses `ambient + (1 - ambient) * illumination`. The selected lighting is applied when the PNG is generated. The numerical skyline is calculated separately.
+
 [Function index](function-index.html#idx-createhor) · [H01 field validation](h01-field-validation.qmd) · [H02 skyline comparison](h02-skyline-comparison.qmd)
 
 ```{=html}
@@ -105,7 +113,9 @@ visible elevation. The sea ramp starts at the lowest visible elevation.</p></td>
 two land colours. Default 3.</p></td></tr><tr><th scope="row"><code>palette_n</code></th><td><code>256L</code></td><td><p>Total number of palette entries, from 4 to 65536. Default
 256.</p></td></tr><tr><th scope="row"><code>lighting</code></th><td><code>c(&quot;relief&quot;, &quot;directional&quot;)</code></td><td><p>Relief lighting (default) blends a light at the observer (75 percent)
 with the directional source (25 percent). It shades both sides of a slope and
-lifts deep shadows. Choose "directional"
+lifts deep shadows. The standalone renderer brightness response is
+min(1, ambient + contrast * illumination), with illumination floored at 0.15.
+Terrain and visible horFeature surfaces use the same lighting. Choose "directional"
 for one-sided hillshade. Lighting affects the PNG only.</p></td></tr><tr><th scope="row"><code>light.azimuth</code></th><td><code>315</code></td><td><p>Direction towards the illustrative light
 source in degrees clockwise from true north and above the horizon. Defaults
 are 315 and 45 degrees. Hillshading uses upward surface normals in metric
@@ -114,9 +124,9 @@ cast shadows from other terrain.</p></td></tr><tr><th scope="row"><code>light.al
 source in degrees clockwise from true north and above the horizon. Defaults
 are 315 and 45 degrees. Hillshading uses upward surface normals in metric
 east, north and vertical coordinates. This is local illumination without
-cast shadows from other terrain.</p></td></tr><tr><th scope="row"><code>ambient</code></th><td><code>0.38</code></td><td><p>Fraction of illumination retained on slopes facing away from
-the light (0 to 1). Default 0.38. Use 1 for unshaded palette colours.</p></td></tr><tr><th scope="row"><code>haze</code></th><td><code>0.65</code></td><td><p>Maximum fraction of distance haze (0 to 1). Default 0.65.
-Set haze=0 and ambient=1 to inspect the colour mapping alone.</p></td></tr><tr><th scope="row"><code>image.dir</code></th><td><code>getwd()</code></td><td><p>Directory for the DEM PNG. Defaults to the working directory. Site names form the filename; different images with the same name receive a checksum suffix.</p></td></tr><tr><th scope="row"><code>attribution</code></th><td><code>&quot;User-supplied DEM&quot;</code></td><td><p>Credit for the DEM, included in plots and exports. The generic default credit is omitted from plots.</p></td></tr><tr><th scope="row"><code>license</code></th><td><code>&quot;See source DEM terms&quot;</code></td><td><p>Source licence or terms for the DEM, included in exports.</p></td></tr><tr><th scope="row"><code>ncores</code></th><td><code>NULL</code></td><td><p>Maximum DEM tracing workers. Defaults to half the available logical cores, rounded down with a minimum of one. The startup message reports used and available cores. Workers share file-backed DEM data and process separate bearings.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Announce the DEM radius, sampling and rendering stages.</p></td></tr><tr><th scope="row"><code>progress</code></th><td><code>interactive() &amp;&amp; verbose</code></td><td><p>Show a progress bar for each tracing stage. Default on in interactive verbose sessions.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.horizon list with metadata (site name and georeference) and a data frame named data. Its az, alt and alt.unc columns contain azimuth, horizon altitude and altitude uncertainty, all in degrees.
+cast shadows from other terrain.</p></td></tr><tr><th scope="row"><code>ambient</code></th><td><code>0.4</code></td><td><p>Fraction of illumination retained on slopes facing away from
+the light (0 to 1). Default 0.40. Use 1 for unshaded palette colours.</p></td></tr><tr><th scope="row"><code>haze</code></th><td><code>0.65</code></td><td><p>Maximum fraction of distance haze (0 to 1). Default 0.65.
+Set haze=0 and ambient=1 to inspect the colour mapping alone.</p></td></tr><tr><th scope="row"><code>image.dir</code></th><td><code>getwd()</code></td><td><p>Directory for the DEM PNG. Defaults to the working directory. Site names form the filename; different images with the same name receive a checksum suffix.</p></td></tr><tr><th scope="row"><code>attribution</code></th><td><code>&quot;User-supplied DEM&quot;</code></td><td><p>Credit for the DEM, included in plots and exports. The generic default credit is omitted from plots.</p></td></tr><tr><th scope="row"><code>license</code></th><td><code>&quot;See source DEM terms&quot;</code></td><td><p>Source licence or terms for the DEM, included in exports.</p></td></tr><tr><th scope="row"><code>ncores</code></th><td><code>NULL</code></td><td><p>Maximum DEM tracing workers. Defaults to half the available logical cores, rounded down with a minimum of one. The startup message reports used and available cores. Workers share file-backed DEM data and process separate bearings.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Announce the DEM radius, sampling and rendering stages.</p></td></tr><tr><th scope="row"><code>progress</code></th><td><code>interactive() &amp;&amp; verbose</code></td><td><p>Show a progress bar for each tracing stage. Default on in interactive verbose sessions.</p></td></tr><tr><th scope="row"><code>contrast</code></th><td><code>0.7</code></td><td><p>Relief-light contrast (0 to 1), default 0.70, following the standalone renderer. It controls slope detail independently of ambient brightness. Ignored for directional lighting, which retains ambient + (1 - ambient) * illumination. Regenerate existing panoramas to apply new settings.</p></td></tr></tbody></table><h5>Return value</h5><p>A skyscapeR.horizon list with metadata (site name and georeference) and a data frame named data. Its az, alt and alt.unc columns contain azimuth, horizon altitude and altitude uncertainty, all in degrees.
 </p>
 
 

@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>spatial.equinox | skyscapeR 2.0.9009</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-spatial-equinox.html">spatial.equinox() method</a></nav><h2 id='spatial.equinox'>Estimate the spatial equinox from a site horizon</h2><span id='topic+spatial.equinox'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>spatial.equinox | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-spatial-equinox.html">spatial.equinox() method</a></nav><h2 id='spatial.equinox'>Estimate the spatial equinox from a site horizon</h2><span id='topic+spatial.equinox'></span>
 
 <h3>Description</h3>
 
@@ -22,32 +22,32 @@ two solstitial sunset bearings on a particular horizon.
 
 <h3>Arguments</h3>
 
-<table>
-<tr><td><code id="spatial.equinox_:_hor">hor</code></td>
+<table role = "presentation">
+<tr><td><code id="spatial.equinox_+3A_hor">hor</code></td>
 <td>
 <p>A <em>skyscapeR.horizon</em> with finite, increasing azimuths covering
 0 to 360 degrees and matching endpoint altitudes.</p>
 </td></tr>
-<tr><td><code id="spatial.equinox_:_parallax">parallax</code></td>
+<tr><td><code id="spatial.equinox_+3A_parallax">parallax</code></td>
 <td>
 <p>Mean horizontal parallax in degrees. The default is 0.00224 degrees for the Sun.</p>
 </td></tr>
-<tr><td><code id="spatial.equinox_:_year">year</code></td>
+<tr><td><code id="spatial.equinox_+3A_year">year</code></td>
 <td>
 <p>One astronomical year, defaulting to the package's current-year
 setting. Historical labels such as <code>"3250 BC"</code> are accepted.</p>
 </td></tr>
-<tr><td><code id="spatial.equinox_:_refraction">refraction</code></td>
+<tr><td><code id="spatial.equinox_+3A_refraction">refraction</code></td>
 <td>
 <p>Whether to apply atmospheric refraction. Defaults to the
 package setting, normally TRUE.</p>
 </td></tr>
-<tr><td><code id="spatial.equinox_:_atm">atm</code></td>
+<tr><td><code id="spatial.equinox_+3A_atm">atm</code></td>
 <td>
 <p>Atmospheric pressure in hPa. Defaults to the package setting.
 Zero requests an estimate from site elevation.</p>
 </td></tr>
-<tr><td><code id="spatial.equinox_:_temp">temp</code></td>
+<tr><td><code id="spatial.equinox_+3A_temp">temp</code></td>
 <td>
 <p>Air temperature in degrees Celsius. Defaults to the package setting.</p>
 </td></tr>
@@ -80,6 +80,14 @@ bearings from the midpoint in time between the solstices.
 values in degrees for the supplied horizon. Declinations are geocentric.
 An undefined side returns NA for both values, with a warning; the other side
 is retained when defined.
+</p>
+
+
+<h3>Validation</h3>
+
+<p>H07 checked that partial photographs are rejected and that a full photographic profile can be used. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage">H07 check in the technical manual</a>.
+</p>
+<p>In A05, rising and setting midpoints matched independent track intersections on flat, eastern-ridge and western-ridge skylines; missing polar crossings were identified. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits">A05 check in the technical manual</a>.
 </p>
 
 
@@ -116,14 +124,6 @@ This attribute adds no list entries or table columns. Ordinary subsetting or
 transformations may discard attributes; save the original result for reference.
 It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
-</p>
-
-
-<h3>Validation</h3>
-
-<p>H07 checked that partial photographs are rejected and that a full photographic profile can be used. See the <a href="../h07-panorama-coverage.html">H07 check in the technical manual</a>.
-</p>
-<p>In A05, rising and setting midpoints matched independent track intersections on flat, eastern-ridge and western-ridge skylines; missing polar crossings were identified. See the <a href="../a05-solar-limits.html">A05 check in the technical manual</a>.
 </p>
 
 

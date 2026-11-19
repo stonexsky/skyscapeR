@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>body.position | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-body-position.html">body.position() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Find the equatorial and horizontal position of a celestial body</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>body.position | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-body-position.html">body.position() method</a></nav><h2 id='body.position'>Find the equatorial and horizontal position of a celestial body</h2><span id='topic+body.position'></span>
 
 <h3>Description</h3>
 
@@ -26,18 +26,18 @@ determine where it appears in the observer's sky.
 
 <h3>Arguments</h3>
 
-<table>
-<tr><td><code>time</code></td>
+<table role = "presentation">
+<tr><td><code id="body.position_+3A_time">time</code></td>
 <td>
 <p>Either a string containing the date and time in the format &quot;YYYY/MM/DD HH:MM:SS&quot;
 (see <code>timestring</code>), or a numeric containing the julian date (see <code>time2jd</code>).</p>
 </td></tr>
-<tr><td><code>obj</code></td>
+<tr><td><code id="body.position_+3A_obj">obj</code></td>
 <td>
 <p>String containing name of the solar system body of interest. Can be
 any of the planets (inc. Pluto), the Moon, the Sun or the Ecliptic. Defaults to 'sun'.</p>
 </td></tr>
-<tr><td><code>loc</code></td>
+<tr><td><code id="body.position_+3A_loc">loc</code></td>
 <td>
 <p>Observer location: a numeric vector containing latitude and
 longitude in degrees and elevation in metres, in that order, or a
@@ -45,32 +45,32 @@ longitude in degrees and elevation in metres, in that order, or a
 Required for topocentric coordinates and for horizontal output in either
 frame. With no location, only geocentric equatorial coordinates are returned.</p>
 </td></tr>
-<tr><td><code>timezone</code></td>
+<tr><td><code id="body.position_+3A_timezone">timezone</code></td>
 <td>
 <p>Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See <code>time2jd</code> for named zones and offsets.</p>
 </td></tr>
-<tr><td><code>calendar</code></td>
+<tr><td><code id="body.position_+3A_calendar">calendar</code></td>
 <td>
 <p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p>
 </td></tr>
-<tr><td><code>dec</code></td>
+<tr><td><code id="body.position_+3A_dec">dec</code></td>
 <td>
 <p>Output declination: <em>geo</em> for the geocentric, or <em>topo</em> for the topocentric
 frame of reference. If not given the value set by <code>skyscapeR.vars</code> will be used instead.</p>
 </td></tr>
-<tr><td><code>refraction</code></td>
+<tr><td><code id="body.position_+3A_refraction">refraction</code></td>
 <td>
 <p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
 </td></tr>
-<tr><td><code>atm</code></td>
+<tr><td><code id="body.position_+3A_atm">atm</code></td>
 <td>
 <p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
 </td></tr>
-<tr><td><code>temp</code></td>
+<tr><td><code id="body.position_+3A_temp">temp</code></td>
 <td>
 <p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
 </td></tr>
-<tr><td><code>verbose</code></td>
+<tr><td><code id="body.position_+3A_verbose">verbose</code></td>
 <td>
 <p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p>
 </td></tr>
@@ -107,6 +107,12 @@ also contains a <code>horizontal</code> data frame with columns <code>az</code> 
 </p>
 
 
+<h3>Validation</h3>
+
+<p>In A02, file-backed geocentric directions for ten bodies agreed with their matching JPL parent to within 0.0065 arcseconds across 1,080 comparisons. At the sampled prehistoric epochs the public topocentric convention differed from JPL Horizons by up to 0.70 degrees in local sky direction at a specified instant. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#a02-ephemeris-accuracy">A02 study in the skyscapeR technical manual</a>.
+</p>
+
+
 <h3>Provenance</h3>
 
 <p>Structured results carry a <code>provenance</code> attribute. Read it with
@@ -131,8 +137,6 @@ commit. Retain those and the analysis script separately for exact reproduction.
 </p>
 
 
-<h3>Validation</h3>
-<p>In A02, file-backed geocentric directions for ten bodies agreed with their matching JPL parent to within 0.0065 arcseconds across 1,080 comparisons. At the sampled prehistoric epochs the public topocentric convention differed from JPL Horizons by up to 0.70 degrees in local sky direction at a specified instant. See the <a href="../a02-ephemeris.html">A02 study in the skyscapeR technical manual</a>.</p>
 <h3>Examples</h3>
 
 <pre><code class='language-R'>if (requireNamespace("swephRdata", quietly = TRUE)) {
@@ -149,4 +153,4 @@ commit. Retain those and the analysis script separately for exact reproduction.
 }
 </code></pre>
 
-<p><a href="../fn-body-position.html">body.position() method</a></p></body></html>
+</body></html>

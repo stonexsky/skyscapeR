@@ -50,13 +50,13 @@ extinction to star symbols and the integrated magnitudes of supported clusters.
 It does not limit constellation endpoints, the Sun, Moon or planets. Raising
 the cutoff includes additional stars only where the catalogue supplies them.}
 
-\item{band.extinction}{Logical. Defaults to TRUE. Set to FALSE to disable Milky Way extinction in publication styles. Natural style already applies it.}
-
 \item{k}{Non-negative visual extinction coefficient in magnitudes per airmass
 for natural style. Defaults to \code{\link{skyscapeR.vars}()$k}, initially 0.2.
 This clear-sky baseline is an assumption, not an estimate of the site's weather.
 Zero removes extinction and the modelled lunar scattering. Publication styles
 do not apply extinction to symbols.}
+
+\item{band.extinction}{Logical. Defaults to TRUE. Set to FALSE to disable Milky Way extinction in publication styles. Natural style already applies it.}
 }
 \value{
 An object of classes \code{skyscapeR.sketch} and \code{skyscapeR.sky}.
@@ -176,6 +176,11 @@ Record site, horizon, epoch, calendar, timezone, extinction
 and display switches when reporting a reconstruction.
 }
 
+\section{Validation}{
+
+W02 verified the reconstructed Gacrux bearing and altitude at the same instant and viewpoint using direct equatorial coordinates and spherical geometry. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
+}
+
 \section{Provenance}{
 
 Structured results carry a \code{provenance} attribute. Read it with
@@ -185,10 +190,6 @@ This attribute adds no list entries or table columns. Ordinary subsetting or
 transformations may discard attributes; save the original result for reference.
 It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
-}
-
-\section{Validation}{
-W02 verified the reconstructed Gacrux bearing and altitude at the same instant and viewpoint using direct equatorial coordinates and spherical geometry. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
 }
 
 \examples{

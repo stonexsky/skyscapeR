@@ -1,10 +1,10 @@
 # Equinoctial full Moons and crescent crossovers {#sec-lunar-crossovers}
 
-**Implementation.** skyscapeR 2.0.9004, `R/events.R` and `R/crescent-crossovers.R`. Silva & Pimenta (2012, §§2.1–2.2, figs. 3–4) defined families of observable events by comparing where the Moon and Sun rise or set across successive days and lunations. Their Alcyone Ephemeris 2.8 scripts recorded the first qualifying event for each year. skyscapeR implements the searches with Swiss Ephemeris, exposes the observing conventions, and can use a measured skyline [@silvapimenta2012; @sweprog]. A crossover is selected by the order of two **horizon bearings at their respective events**. The bodies need not be on the horizon together.
+**Implementation.** skyscapeR, `R/events.R` and `R/crescent-crossovers.R`. Silva & Pimenta (2012, §§2.1–2.2, figs. 3–4) defined families of observable events by comparing where the Moon and Sun rise or set across successive days and lunations. Their Alcyone Ephemeris 2.8 scripts recorded the first qualifying event for each year. skyscapeR implements the searches with Swiss Ephemeris, exposes the observing conventions, and can use a measured skyline [@silvapimenta2012; @sweprog]. A crossover is selected by the order of two **horizon bearings at their respective events**. The bodies need not be on the horizon together.
 
 ## Equinoctial full Moons {#crossover-efm}
 
-[`EFM()`](fn-efm.html) searches chronological local civil dates from 60 days before to 65 days after the astronomical March or September equinox. It evaluates the illuminated fraction at the lunar centre crossing and requires at least `min.phase` (default 0.99). Let $D=A_{\mathrm{Moon}}-A_{\mathrm{Sun}}$, using topocentric bearings clockwise from true north. The 2.0.9004 EFM implementation applies the strict comparisons below to the two bearings directly.
+[`EFM()`](fn-efm.html) searches chronological local civil dates from 60 days before to 65 days after the astronomical March or September equinox. It evaluates the illuminated fraction at the lunar centre crossing and requires at least `min.phase` (default 0.99). Let $D=A_{\mathrm{Moon}}-A_{\mathrm{Sun}}$, using topocentric bearings clockwise from true north. EFM applies the strict comparisons below to the two bearings directly.
 
 | EFM | Moonrise condition | Moonset condition |
 |---|---|---|
@@ -60,7 +60,7 @@ CC(2022, site, season = "summer", crescent = "first", simulation = "SIM2")
 
 ## Comparison with the 2012 simulations {#crossover-archive}
 
-The historical workbooks give annual solar and lunar declinations rather than event timestamps. Their coordinates can identify a likely neighbouring date or lunation, but cannot recover every setting in the original scripts. The comparison below concerns the archival 2.0 development analysis, 1620–2047, with a level horizon, longitude 0°, elevation 400 m, UTC, Gregorian dates, geocentric reported declinations, refraction on, 1013.25 mbar and 15 °C. These are the **reproduction settings**, not verified meteorological parameters of the original simulations.
+The historical workbooks give annual solar and lunar declinations rather than event timestamps. Their coordinates can identify a likely neighbouring date or lunation, but cannot recover every setting in the original scripts. The comparison below concerns the historical comparison, 1620–2047, with a level horizon, longitude 0°, elevation 400 m, UTC, Gregorian dates, geocentric reported declinations, refraction on, 1013.25 mbar and 15 °C. These are the **reproduction settings**, not verified meteorological parameters of the original simulations.
 
 | Comparison | Archived result | Scope |
 |---|---|---|
@@ -74,6 +74,24 @@ For the winter first crescent labelled 1708 at 60° N, the archived SIM1 run sel
 
 The strength of the package implementation is access to the selected event pair, inputs, terrain and diagnostic margins. Agreement with historical simulation tables measures implementation agreement. Estimating the probability of real crescent detection requires observations independent of the rule used to select it.
 
+
+
+## A07 · Independent selection of equinoctial and crescent crossovers {#a07-scientific}
+
+An independent search in Astronomy Engine selected UTC dates at 0°, 40° N, 60° N and 60° S, at longitude 0°, elevation 400 m, for 1913 and 2022. It searched a level horizon for spring and autumn EFM moonsets and summer first crescents under SIM1 and SIM2. The comparison used a geometric altitude of −0.56° for the setting centre as an approximation to the refracted horizon, independently calculated solar and lunar positions, and the documented illumination, visibility and bearing rules. Both searches started from the season, with no package event date supplied to the comparator.
+
+| Selection | Same lunar date |
+|---|---:|
+| Spring EFM moonset | 8/8 |
+| Autumn EFM moonset | 7/8 |
+| Summer first crescent, SIM1 | 8/8 |
+| Summer first crescent, SIM2 | 8/8 |
+
+At the equator in autumn 1913, the package selected **14 October**. Its illumination fraction of **0.990003** just exceeded the 0.99 cutoff. At that same moonset the independent calculation gave **0.989993**, and selected **15 October**, consistent with the lunar declination in the historical table. Across all 64 body positions evaluated at the package times, the largest absolute differences were **0.00207° in azimuth** and **0.00045° in geocentric declination**. For the 31 matching event pairs, setting times agreed within one second under the specified horizon conventions.
+
+Both engines selected the same dates at 40° N in this sample. That agreement does not resolve the original simulation settings. For example, in autumn 2022 the reproduced geocentric lunar declination was +0.245°, while the historical table gives −0.11°. The historical summer first-crescent coordinates for 2022 are much closer to the SIM2 selection than to SIM1. A single correction to all years or latitudes is unsupported. No threshold was fitted to these cases. Winter crescents, last crescents and eye-witness visibility lie outside this independent sample. [Independent ephemeris](https://github.com/cosinekitty/astronomy).
+
+[Download the study scripts, reference inputs and numerical results](archives/scientific-studies.zip).
 
 **Related function entries**
 

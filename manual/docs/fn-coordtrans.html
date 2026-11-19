@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -707,12 +707,22 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -723,6 +733,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -763,6 +778,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -833,8 +853,10 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. <a href="./d02-bearing-propagation.html#pole-propagation">D02 validation study</a>.</p>
+<p>The transformed-bearing null was tested with steep skylines, three measurement families and shared or site-specific candidate weights. <a href="./s02-specified-models.html#steep-null">S02 validation study</a>.</p>
+<p>When a null predicts bearings and the analysis compares declinations, <a href="./significance.html#meth-model">the third modelTest route</a> applies this transformation separately to every observed and simulated measurement.</p>
 <p>For a partial photograph the stored positive bearing density must lie within its photographed sector. H07 verified agreement with a complete skyline on the covered north-crossing cases and rejection of uncovered densities. <a href="./h07-panorama-coverage.html">H07 results</a>.</p>
-<p>In D02, declination quantiles agreed with direct propagation within 0.008 degrees across nine terrain and observer cases. Near the celestial pole the discrepancy reached 0.17 degrees on the fine grid; at the pole a zero conditional width prevented calculation. <a href="./d02-bearing-propagation.html">D02 results</a>.</p>
 <p>The integration uses the full bearing density from any of the six measurement families. <a href="./orientation-densities.html#measurement-families">Measurement families</a>.</p>
 <p><a href="function-index.html#idx-coordtrans">Function index</a></p>
 <p>A sightline has a distribution of possible bearings, and each bearing samples a
@@ -842,7 +864,7 @@ potentially different part of the horizon. For every sampled bearing the functio
 interpolates horizon altitude and uncertainty, maps an altitude range to declination and
 approximates the conditional declination distribution by a Gaussian. It weights that
 distribution by the azimuth density and integrates the product by the trapezoidal rule.
-A shared horizon can serve several observations, or a supplied list can represent their
+For positive altitude uncertainties, near-pole cases use direct quadrature over the spherical transformation. Internal calculations retain full precision. A shared horizon can serve several observations, or a supplied list can represent their
 individual sites.
 </p>
 <p>Density values are calculated at declination spacing <code>.res</code>, then
@@ -908,7 +930,7 @@ Implementation arguments, return value and documented modes
 <tr class="odd">
 <th data-quarto-table-cell-role="th" scope="row"><code>.prec</code></th>
 <td><code>0.1</code></td>
-<td><p>Azimuth integration spacing, in degrees. Default 0.1. Previously ignored; smaller values increase integration work. Must not exceed 540.</p></td>
+<td><p>Azimuth integration spacing, in degrees. Default 0.1. Smaller values increase integration work. Must not exceed 540.</p></td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th" scope="row"><code>.output.res</code></th>

@@ -1,12 +1,13 @@
 # `randomTest()` {#fn-randomtest}
 
+Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. [D02 validation study](d02-bearing-propagation.qmd#pole-propagation).
+
 The 500-simulation Ggantija-phase workflow in W02 reproduced the bundled global probability, local intervals and adjusted probabilities. [W02 results](w02-field-to-sky.qmd).
 
-In S01, at a nominal 5 percent level the global rejection rate was 4.25 to 5.85 percent across the tested uniform-null settings with sufficient Monte Carlo resolution. Build 2.0.9007 uses the source azimuth density spacing and cutoff for simulations and matches the observed SPD spacing on the shared-horizon route. Refit earlier analyses that used different settings. [S01 results](s01-uniform-orientation.qmd).
+In S01, at a nominal 5 percent level the global rejection rate was 4.25 to 5.85 percent across the tested uniform-null settings with sufficient Monte Carlo resolution. The package uses the source azimuth density spacing and cutoff for simulations and matches the observed SPD spacing on the shared-horizon route. [S01 results](s01-uniform-orientation.qmd).
 
-**Verified on 2.0.9006.** The global score counts north once. A qualifying excess across north is reported as one interval with start greater than end. [S03 rerun](s03-scoring-checks.qmd).
+The global score counts north once. A qualifying excess across north is reported as one interval with start greater than end. [S03 checks](s03-scoring-checks.qmd).
 
-**Validation on 2.0.9005.** Independent scoring reproduced the stored linear-grid probabilities. A north-crossing azimuth excess can split into two clusters; including both 0 and 360 degrees can also affect the global rank. [S03 results](s03-scoring-checks.qmd).
 
 The null draw relocates each observation’s full measurement model, including triangular asymmetry, taper and independent survey error. [Measurement families](orientation-densities.qmd#measurement-families).
 

@@ -1,5 +1,7 @@
 # `nMjLX()` {#fn-nmjlx}
 
+A06 examines geocentric lunar and planetary limits against independent extrema. [A06 study and results](celestial-targets.html#a06-scientific).
+
 [Function index](function-index.html#idx-nmjlx)
 
 ```{=html}

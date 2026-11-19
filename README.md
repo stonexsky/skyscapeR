@@ -52,6 +52,8 @@ For changes by version, see [NEWS](NEWS.md). For bundled dataset credits and ter
 
 ## Migrating from skyscapeR 1.2 to 2.0
 
+Recompute declination densities for steep skylines and sightlines near a celestial pole, including cases that stopped with a zero-width error. Rebuild dependent SPDs, plots and `randomTest()` or `modelTest()` fits from the original bearings and horizons. Full internal precision can also slightly change ordinary transformations. [D02 validation](https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#pole-propagation).
+
 Start at the **earliest affected step** below and rerun everything that used its output. For example, if a west longitude changed sign, repeat the field reduction before rebuilding the declination curves. If only a compass grid was drawn incorrectly, redraw the figure from the existing bearings. Keep the old results alongside the rerun and record the original inputs, package and ephemeris versions, calendar, timezone, refraction settings, uncertainty model, grid spacings and simulation seed.
 
 If you used the experimental 2.0.9001–2.0.9003 builds, omit `light.model` from `sketchSky()` calls. Natural sketches now use the calibrated renderer automatically.

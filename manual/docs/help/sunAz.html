@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>sunAz | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-sunaz.html">sunAz() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Calculate the solar bearing for a field observation</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>sunAz | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-sunaz.html">sunAz() method</a></nav><h2 id='sunAz'>Calculate the solar bearing for a field observation</h2><span id='topic+sunAz'></span>
 
 <h3>Description</h3>
 
@@ -15,27 +15,27 @@ field survey.
 
 <h3>Arguments</h3>
 
-<table>
-<tr><td><code>loc</code></td>
+<table role = "presentation">
+<tr><td><code id="sunAz_+3A_loc">loc</code></td>
 <td>
 <p>Location, either a <em>skyscapeR.horizon</em> or a vector
 containing the latitude, longitude and elevation of location, in this order.</p>
 </td></tr>
-<tr><td><code>time</code></td>
+<tr><td><code id="sunAz_+3A_time">time</code></td>
 <td>
 <p>String containing the date and time in the following format:
 &quot;YYYY-MM-DD HH:MM:SS&quot;</p>
 </td></tr>
-<tr><td><code>timezone</code></td>
+<tr><td><code id="sunAz_+3A_timezone">timezone</code></td>
 <td>
 <p>Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See <code>time2jd</code> for named zones and offsets.</p>
 </td></tr>
-<tr><td><code>limb</code></td>
+<tr><td><code id="sunAz_+3A_limb">limb</code></td>
 <td>
 <p>Measured limb of the sun. Options are <em>left</em>, <em>right</em>.
 If missing the center of the sun will be output.</p>
 </td></tr>
-<tr><td><code>alt</code></td>
+<tr><td><code id="sunAz_+3A_alt">alt</code></td>
 <td>
 <p>Logical that triggers output of altitude of the sun at exact time.
 Default is FALSE.</p>
@@ -90,4 +90,4 @@ the default numeric output is unchanged.
 }
 </code></pre>
 
-<p><a href="../fn-sunaz.html">sunAz() method</a></p></body></html>
+<h3>Scientific validation</h3><p>F01 examines magnetic and solar reductions against independent references. <a href="../field-reduction.html#f01-scientific">F01 study and results</a>.</p></body></html>

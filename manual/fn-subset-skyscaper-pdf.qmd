@@ -1,8 +1,7 @@
 # `subset.skyscapeR.pdf()` {#fn-subset-skyscaper-pdf}
 
-**Verified on 2.0.9006.** Selecting, reordering, duplicating or dropping all declination PDFs now retains matching centre metadata. [D01 rerun](d01-density-checks.qmd).
+Selecting, reordering, duplicating or dropping all declination PDFs retains matching centre metadata. [D01 checks](d01-density-checks.qmd).
 
-**Validation on 2.0.9005.** Declination PDF subsets retained the original centre metadata in four tests, although curve order and labels followed the selection. [D01 results](d01-density-checks.qmd).
 
 [Function index](function-index.html#idx-subset-skyscaper-pdf)
 

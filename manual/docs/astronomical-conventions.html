@@ -97,7 +97,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -762,12 +762,22 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -778,6 +788,11 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -818,6 +833,11 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -896,8 +916,8 @@ div.csl-indent {
 </header>
 
 
-<p><strong>Implementation.</strong> skyscapeR 2.0.9004, <code>R/dates.R</code>, <code>R/mechanics.R</code>, <code>R/stars.R</code>, <code>R/ephemeris.R</code> and <code>R/misc.R</code>. To reproduce a position, specify the instant, the origin of the coordinate frame, the axes and the observer. A calendar agreement does not guarantee that two programs return the same coordinate. This chapter follows those choices from a dated record to a local sightline. The <a href="./ephemeris.html">ephemeris chapter</a> covers file selection and the supplier’s accuracy claim.</p>
-<p>See the <a href="./a01-calendar-checks.html">independent checks on build 2.0.9005</a> for results and limitations.</p>
+<p><strong>Implementation.</strong> skyscapeR, <code>R/dates.R</code>, <code>R/mechanics.R</code>, <code>R/stars.R</code>, <code>R/ephemeris.R</code> and <code>R/misc.R</code>. To reproduce a position, specify the instant, the origin of the coordinate frame, the axes and the observer. A calendar agreement does not guarantee that two programs return the same coordinate. This chapter follows those choices from a dated record to a local sightline. The <a href="./ephemeris.html">ephemeris chapter</a> covers file selection and the supplier’s accuracy claim.</p>
+<p>See the <a href="./a01-calendar-checks.html">independent checks</a> for results and limitations.</p>
 <section id="conventions-time" class="level2">
 <h2 class="anchored" data-anchor-id="conventions-time">From a year label to an instant</h2>
 <p><a href="fn-astroyear.html"><code>astroYear()</code></a> and <a href="fn-bc-ad.html"><code>BC.AD()</code></a> translate between historical labels and astronomical year numbers. Astronomical year 0 is 1 BCE, −1 is 2 BCE and −3499 is 3500 BCE. This conversion addresses the year numbering only. The Gregorian and Julian calendars in <a href="fn-time2jd.html"><code>time2jd()</code></a> are proleptic: the analyst selects a rule for the whole calculation, without an automatic reform date. A Julian <strong>day number</strong> can represent an instant specified in <strong>either</strong> calendar.</p>

@@ -182,6 +182,11 @@
 #' Save the DEM provenance, observer location and datum, constructor arguments,
 #' feature objects, returned horizon and external PNG. Rebuilding from the same
 #' source is distinct from merely replotting the saved horizon.
+#' @section Validation studies:
+#' Intervals estimated from other observing groups covered 91.0 and 88.8 percent of bearings in two terrain-radius selections. \href{https://stonexsky.github.io/skyscapeR/manual/h01-field-validation.html#withheld-stations}{H01 validation study}.
+#' Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. \href{https://stonexsky.github.io/skyscapeR/manual/h04-feature-resolution.html#h04-feature-resolution}{H04 validation study}.
+#' @section Scientific validation:
+#' H03 examines DEM sampling against an analytic ridge and a level spherical surface. \href{https://stonexsky.github.io/skyscapeR/manual/horizons.html#h03-scientific}{H03 scientific validation}.
 createHor <- function(az, alt, loc, dem=NULL, loc.crs=NULL, name='', alt.unc=0.5, smooth=F,
                       .scale=1000, eye.height=1.6, max.distance=10000, az.step=.25,
                       distance.step=NULL, features=NULL, curvature=TRUE, refraction.k=NULL,
@@ -580,6 +585,9 @@ createHWT <- function(lat, lon, name, elevation=1.6, src='skyscapeR', max.wait=6
 #' hor2alt(hor, 90)
 #' hor2alt(hor, 90, return.unc=TRUE)
 #' hor2alt(hor, c(90,180,270), return.unc=TRUE)
+#' @section Validation studies:
+#' Intervals estimated from other observing groups covered 91.0 and 88.8 percent of bearings in two terrain-radius selections. \href{https://stonexsky.github.io/skyscapeR/manual/h01-field-validation.html#withheld-stations}{H01 validation study}.
+#' Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. \href{https://stonexsky.github.io/skyscapeR/manual/h04-feature-resolution.html#h04-feature-resolution}{H04 validation study}.
 hor2alt = function(hor, az, return.unc=F) {
   if (identical(hor$metadata$source$provider,"Panorama")) {
     limits <- hor$metadata$source$coverage

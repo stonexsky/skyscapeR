@@ -27,6 +27,11 @@ an error. The calendar date is converted to a decimal year using the actual
 length of that year at midnight UTC. Supported dates run from 1 January 1900
 through 1 January 2030 inclusive. Site elevation is ignored by this model call.
 }
+\section{Scientific validation}{
+
+F01 examines magnetic and solar reductions against independent references. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 scientific validation}.
+}
+
 \examples{
 # Magnetic Declination for London on April 1st 2016:
 loc <- c( 51.5074, -0.1278 )

@@ -2,7 +2,7 @@
 
 [A05](a05-solar-limits.qmd) tests civil dates, solstitial branches and independent east and west solutions for spatial equinoxes.
 
-**Implementation.** skyscapeR 2.0.9004, `R/horizon-events.R`, `R/mechanics.R`, `R/events.R` and `R/misc.R`. A point on a track, a terrain crossing, a midpoint bearing, a date and a sampled extreme are five different outputs. Their numerical precision and their archaeological interpretation depend on different assumptions.
+**Implementation.** skyscapeR, `R/horizon-events.R`, `R/mechanics.R`, `R/events.R` and `R/misc.R`. A point on a track, a terrain crossing, a midpoint bearing, a date and a sampled extreme are five different outputs. Their numerical precision and their archaeological interpretation depend on different assumptions.
 
 | Function | Quantity calculated | Search domain |
 |---|---|---|
@@ -74,7 +74,7 @@ For Venus at epoch 2026 the window is 1 January 2020 through 1 January 2032. The
 
 A terrain solver can resolve multiple skyline encounters on the same ascending track; the constant-altitude solver answers a simpler question. Neither supersedes a field survey of the ridge or an explicit decision about whether the archaeological event concerns a centre, a limb or an observable star. For date and extremum searches, distinguish errors due to the ephemeris from those introduced by the chosen event definition or temporal sampling. Useful future checks include known short crossing pairs, nearly tangent tracks, solstitial targets close to the annual limit and extrema bracketed by daily planetary samples.
 
-[Download the scripts, example outputs and ephemeris identifiers](archives/doorway-and-ridge-examples.zip). All three event examples were executed with skyscapeR 2.0.9004 and swephR 0.3.2. The paired modern Swiss data files used for these examples identify DE441 in their headers. Their checksums are in the example archive. They illustrate implementation behaviour; the [study register](study-register.qmd) retains the independent field and model-comparison evidence.
+[Download the scripts, example outputs and ephemeris identifiers](archives/doorway-and-ridge-examples.zip). All three event examples were executed with skyscapeR and swephR 0.3.2. The paired modern Swiss data files used for these examples identify DE441 in their headers. Their checksums are in the example archive. They illustrate implementation behaviour; the [study register](study-register.qmd) retains the independent field and model-comparison evidence.
 
 
 **Related function entries**

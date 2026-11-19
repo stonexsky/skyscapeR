@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>hor2alt | skyscapeR 2.0.9008</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-hor2alt.html">hor2alt() method</a></nav><h2 id='hor2alt'>Interpolate horizon altitude at a bearing</h2><span id='topic+hor2alt'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>hor2alt | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-hor2alt.html">hor2alt() method</a></nav><h2 id='hor2alt'>Interpolate horizon altitude at a bearing</h2><span id='topic+hor2alt'></span>
 
 <h3>Description</h3>
 
@@ -15,16 +15,16 @@ more true bearings.
 
 <h3>Arguments</h3>
 
-<table>
-<tr><td><code id="hor2alt_:_hor">hor</code></td>
+<table role = "presentation">
+<tr><td><code id="hor2alt_+3A_hor">hor</code></td>
 <td>
 <p>A <em>skyscapeR.horizon</em> object from which to retrieve horizon altitude.</p>
 </td></tr>
-<tr><td><code id="hor2alt_:_az">az</code></td>
+<tr><td><code id="hor2alt_+3A_az">az</code></td>
 <td>
 <p>Array of azimuth(s) for which to retrieve horizon altitude(s).</p>
 </td></tr>
-<tr><td><code id="hor2alt_:_return.unc">return.unc</code></td>
+<tr><td><code id="hor2alt_+3A_return.unc">return.unc</code></td>
 <td>
 <p>Logical controlling whether to return altitude uncertainty.
 Default is <em>FALSE</em>.</p>
@@ -54,7 +54,7 @@ input azimuth in the supplied order. Values are rounded to two decimal places.
 
 <h3>Validation</h3>
 
-<p>In H07, lookup at each edge of a north-crossing panorama returned its measured altitude and lookup beyond either edge returned NA. See the <a href="../h07-panorama-coverage.html">H07 check in the technical manual</a>.
+<p>In H07, lookup at each edge of a north-crossing panorama returned its measured altitude and lookup beyond either edge returned NA. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage">H07 check in the technical manual</a>.
 </p>
 
 
@@ -73,4 +73,4 @@ hor2alt(hor, 90, return.unc=TRUE)
 hor2alt(hor, c(90,180,270), return.unc=TRUE)
 </code></pre>
 
-</body></html>
+<h3>Validation studies</h3><p>Intervals estimated from other observing groups covered 91.0 and 88.8 percent of bearings in two terrain-radius selections. <a href="../h01-field-validation.html#withheld-stations">H01 validation study</a>.</p><p>Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. <a href="../h04-feature-resolution.html#h04-feature-resolution">H04 validation study</a>.</p></body></html>

@@ -60,6 +60,11 @@ A supplied correction can likewise be shared or paired with each bearing.
 W02 checked north-crossing magnetic readings against the supplied corrections before passing true bearings into a skyline analysis. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
 }
 
+\section{Scientific validation}{
+
+F01 examines magnetic and solar reductions against independent references. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 scientific validation}.
+}
+
 \examples{
 loc <- c(35,-7, 100)
 mag.az <- c(89.5, 105, 109.5)

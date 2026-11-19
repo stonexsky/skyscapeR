@@ -2,7 +2,7 @@
 
 [Coverage of bearing densities on partial photographs](h07-panorama-coverage.qmd).
 
-**Implementation.** skyscapeR 2.0.9011, `R/measurement-density.R`, `R/statistics.R`, `R/dec-pdf.R`, `R/mechanics.R` and `R/misc.R`. A doorway admits a range of sightlines; each can meet a different altitude on the skyline. @silva2020 [§§2–3, figs. 1–5] represents uncertainty in the orientation as a probability density and transforms that density using the local horizon. The worked example follows one doorway from its measured angular opening to three distinct regions in declination.
+**Implementation.** skyscapeR, `R/measurement-density.R`, `R/statistics.R`, `R/dec-pdf.R`, `R/mechanics.R` and `R/misc.R`. A doorway admits a range of sightlines; each can meet a different altitude on the skyline. @silva2020 [§§2–3, figs. 1–5] represents uncertainty in the orientation as a probability density and transforms that density using the local horizon. The worked example follows one doorway from its measured angular opening to three distinct regions in declination.
 
 [D01](d01-density-checks.qmd) checks the input densities. [D02](d02-bearing-propagation.qmd) compares the propagated density with independent integration and direct simulation on sloping, asymmetric and surveyed skylines. It documents grid-sensitive highest-density regions and the limits of the conditional Gaussian near the celestial pole.
 
@@ -43,7 +43,7 @@ $$\sin\delta=\sin\phi\sin h+\cos\phi\cos h\cos A.$$
 
 $$f_\delta(d)=\int f_A(a)\,g(d\mid a)\,da.$$
 
-For each sampled bearing, 2.0.9004 interpolates the profile height $H(a)$ and its altitude uncertainty $s_h(a)$. It transforms the two endpoint heights $H(a)\pm4s_h(a)$ to declinations $d_-$ and $d_+$. The conditional density $g$ is approximated by a normal with mean $(d_-+d_+)/2$ and standard deviation $|d_+-d_-|/8$. This preserves endpoint order reversals and allows the width to vary with the skyline. It is an endpoint-based approximation to a nonlinear mapping; the conditional mean need not equal the transform of $H(a)$. A zero transformed width raises an error because a Gaussian density with zero standard deviation is undefined in this computation. Artificially inflating the reported horizon error changes the model.
+For each sampled bearing, the algorithm interpolates the profile height $H(a)$ and its altitude uncertainty $s_h(a)$. It transforms the two endpoint heights $H(a)\pm4s_h(a)$ to declinations $d_-$ and $d_+$. The conditional density $g$ is approximated by a normal with mean $(d_-+d_+)/2$ and standard deviation $|d_+-d_-|/8$. This preserves endpoint order reversals and allows the width to vary with the skyline. It is an endpoint-based approximation to a nonlinear mapping; the conditional mean need not equal the transform of $H(a)$. With positive altitude uncertainty, an endpoint at absolute declination 80° or above, or coincident endpoints, invokes direct quadrature over the spherical transform. This preserves the fold in declination at a celestial pole. See [D02](d02-bearing-propagation.qmd#pole-propagation) for the grid and quantile checks.
 
 ![Silva’s conditional-density construction applied to the doorway example below. Blue intensity gives the conditional density at each bearing. Integrating with uniform bearing weights produces the three maxima in the recorded package output on the right.](figures/conditional-density.png){fig-alt="A narrow conditional density follows a notch as bearing changes. Its integral has three declination modes."}
 
@@ -57,7 +57,7 @@ The implementation interpolates the conditional density values and azimuth weigh
 | `.res` | 0.1° | Declination spacing at which the mixture is calculated. The upper calculation bound is added explicitly if necessary. |
 | `.output.res` | 0.01° | Spacing of the returned declination curve, obtained by linear interpolation. More output coordinates alone cannot resolve a missed peak. |
 
-Version 2.0.9004 uses linear interpolation, avoiding negative overshoot that could occur with a spline. It also explicitly treats distributions split across north. Each individual transformed PDF is normalised by its trapezoidal area on the returned grid. Transforming an already summed SPD does not perform that individual normalisation. In ideal continuous arithmetic, integration and summation commute for a common kernel. Site-specific skylines imply different kernels, while truncation and per-curve normalisation can also change finite-grid results. Supply horizons in observation order. Preserve the original azimuth curves and horizons for any later declination significance test.
+The package uses linear interpolation, avoiding negative overshoot that could occur with a spline. It also explicitly treats distributions split across north. Each individual transformed PDF is normalised by its trapezoidal area on the returned grid. Transforming an already summed SPD does not perform that individual normalisation. In ideal continuous arithmetic, integration and summation commute for a common kernel. Site-specific skylines imply different kernels, while truncation and per-curve normalisation can also change finite-grid results. Supply horizons in observation order. Preserve the original azimuth curves and horizons for any later declination significance test.
 
 ## Worked example: a doorway across a notch {#density-notch}
 
@@ -87,7 +87,7 @@ The central portion of the doorway faces the low notch. Its two flanks face high
 
 ## Summation, highest-density regions and inference {#density-summary}
 
-[`spd()`](fn-spd.html) linearly interpolates each retained curve onto a common angular grid, assigns zero outside its support and sums the heights. With an automatically determined range, it zeroes summed heights below the cutoff. An explicit range retains the calculated heights within that range. With `normalise = TRUE`, it divides by the trapezoidal area over the *returned interval*. A narrow explicit range therefore conditions the displayed mass on the selected interval. Earlier builds normalised using a sum of sampled heights: on a regular grid with zero endpoint heights, the new heights are the old ones divided by grid spacing. Record normalisation when comparing figure ordinates across versions (see the versioned function help and package NEWS).
+[`spd()`](fn-spd.html) linearly interpolates each retained curve onto a common angular grid, assigns zero outside its support and sums the heights. With an automatically determined range, it zeroes summed heights below the cutoff. An explicit range retains the calculated heights within that range. With `normalise = TRUE`, it divides by the trapezoidal area over the *returned interval*. A narrow explicit range therefore conditions the displayed mass on the selected interval. Report the grid spacing and normalisation when comparing ordinates.
 
 [`hpdi()`](fn-hpdi.html) implements a discrete highest-density region [@hyndman1996]. On an equally spaced grid it sorts density heights and finds the level whose cumulative sum reaches the requested mass fraction, then includes all cells tied at that level. The result can include more than the nominal fraction. Separate connected runs give separate intervals; endpoints are grid coordinates. Gaps representing omitted cells are treated as zero mass, and regions spanning north are returned as two linear intervals. This is a description of concentration under the assumed measurement model. It does not test intentionality or reject a null hypothesis.
 
@@ -108,7 +108,7 @@ The linked view of [`plot.skyscapeR.pdf()`](fn-plot-skyscaper-pdf.html) requires
 
 ### Subsetting a directly constructed declination PDF {#subset-dec-centres}
 
-Build 2.0.9006 retains the centre vector in the selected order, including empty and repeated selections. The [D01 rerun](d01-density-checks.qmd) verifies the correction. For a [`dec.pdf()`](fn-dec-pdf.html) object, 2.0.9004's [`subset.skyscapeR.pdf()`](fn-subset-skyscaper-pdf.html) selects the requested curves, names and uncertainties but leaves `metadata$dec` unchanged. Given centres of −10° and +20° named A and B, `subset(x, 2)` returns B’s curve and uncertainty but retains both centres in the metadata. A reader who pairs the first retained curve with the first stored centre would assign it −10°. To retain a consistent centre vector, apply the selection to the input records and construct their PDF, or explicitly index the original centres with the same selection. The worked check is in `object-coverage.R` in the [photographic horizon examples](photographic-horizons.html#partial-photo-consumers).
+
 
 **Related function entries**
 

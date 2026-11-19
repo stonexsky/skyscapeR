@@ -8,7 +8,7 @@
 
 Each residual combines the effects of the terrain model, observer position and height, numerical skyline calculation and field measurement. The surveys sample particular directions at each setup. Accuracy between those directions, including narrow peaks or notches, remains unmeasured. The station and terrain summaries below show how far the pooled result transfers across the tested conditions.
 
-The [horizon methods chapter](horizons.qmd#sec-horizon) describes the ray geometry, curvature and terrestrial refraction used by the tested build, **2.0.9004**. The screened field dataset contains 775 distinct bearings from 36 observing setups in six countries. Digitised measurements from Artegna form an additional comparison.
+The [horizon methods chapter](horizons.qmd#sec-horizon) describes the ray geometry, curvature and terrestrial refraction used by the terrain model. The screened field dataset contains 775 distinct bearings from 36 observing setups in six countries. Digitised measurements from Artegna form an additional comparison.
 
 **Field and numerical protocol.** Each observation retains the survey, observing position, target description, original table or figure, true azimuth and measured altitude. The analysis counts an exact repeated angular pair once within a setup. Where two distinct altitude readings have the same published bearing at the same setup, their mean contributes one residual. Coordinate provenance distinguishes an instrument fix, an adopted site coordinate and a shared coordinate for nearby setups. The run manifests record any assumed instrument height. No location or height was selected by minimising the field residuals.
 
@@ -32,3 +32,17 @@ The longer-radius working sample includes 29 setups, compared with 31 at the sho
 **Records and reproduction.** The report gives the signed residual distribution, error statistics and histograms for the pooled sample, each DEM source and resolution, and each observing setup. The archive contains the original row locators, coverage decisions, per-bearing predictions, R code, download recipes and terrain checksums. [Detailed H01 validation report](archives/H01-validation-results.html) · [Download the H01 study and code](archives/H01-field-comparison.zip)
 
 Field sources include [Wilson’s horizon surveys](https://mega-what.com/), [Humble’s Rectory Farm tables](https://archaeologydataservice.ac.uk/library/browse/issue.xhtml?recordId=1255708), [Reijs’s Orkney survey](https://www.archaeocosmology.org/eng/VictorReijs-ReappearingSun-014-web.pdf), [Esteban and Delgado Cabrera’s Tenerife measurements](https://riull.ull.es/xmlui/handle/915/18640), [Ocharan Ibarra and Esteban’s La Nariz tables](https://www.astrosafor.net/Huygens/2023/151/huygens-151-10-19.pdf), [Lomsdalen’s Maltese total-station readings](https://www.um.edu.mt/library/oar/handle/123456789/104296), [Munro’s Chaco field sheets](https://npshistory.com/publications/chcu/munro-2011.pdf), and [Leibowicz and colleagues’ Cachi survey](https://wuw.pl/data/include/cms/La_vida_bajo_Iwaniszewski_S_Moyano_Vasconcellos_R_Gilewski_M_red_2021.pdf). The image-derived Italian comparison uses [Patat’s Figure 3](https://www.eso.org/~fpatat/science/arcaeo/doc/ast11570d-1c_743-749.pdf).
+
+## Uncertainty at withheld observing stations {#withheld-stations}
+
+We withheld every bearing in an observing group together, pooling adjacent Gors Fawr and Ushnagh setups to reduce geographic leakage. From other groups using the same DEM product, we took the upper empirical 95th percentile of absolute altitude error as a candidate symmetric half-width. Where a product had no training group, we used the pooled training sample. All intervals were then evaluated at the withheld group. The two H01 terrain-radius selections overlap.
+
+| H01 selection | Held-out groups | Bearings | Within ±0.5° | Within estimated 95% interval |
+|---|---:|---:|---:|---:|
+| Shorter-radius selection | 22 | 334 | 307 (91.9%) | 304 (91.0%) |
+| Longer-radius selection | 21 | 215 | 190 (88.4%) | 191 (88.8%) |
+
+The estimated intervals undercovered in both samples. These folds inherit the original survey coordinates, instrument-height assumptions, coverage screening and mix of sightlines. A universal 95% accuracy claim for the default altitude uncertainty would exceed this evidence. In a Gaussian propagation model the default 0.5° is a standard deviation. Its nominal 95% half-width of 0.98° covered 326/334 and 207/215 bearings respectively. Neither aggregate proportion guarantees coverage at an individual station.
+
+
+[Reproduction scripts, inputs and results](archives/five-package-tests.zip).

@@ -2,7 +2,7 @@
 
 In D02 the default transformation grid split the middle 80 percent highest-density region of a three-mode ridge case; a finer grid recovered the three reference regions. [D02 results](d02-bearing-propagation.qmd).
 
-**Validation on 2.0.9005.** Known tied, truncated and disjoint test distributions returned the expected interval endpoints and achieved the requested minimum discrete mass. [D01 results](d01-density-checks.qmd).
+Known tied, truncated and disjoint test distributions returned the expected interval endpoints and achieved the requested minimum discrete mass. [D01 results](d01-density-checks.qmd).
 
 [Function index](function-index.html#idx-hpdi)
 

@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>modelTest | skyscapeR 2.0.9011</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}img{max-width:100%;height:auto}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-modeltest.html">modelTest() method</a></nav><h2 id='modelTest'>Test orientations against a specified null model</h2><span id='topic+modelTest'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>modelTest | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}img{max-width:100%;height:auto}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-modeltest.html">modelTest() method</a></nav><h2 id='modelTest'>Test orientations against a specified null model</h2><span id='topic+modelTest'></span>
 
 <h3>Description</h3>
 
@@ -20,51 +20,71 @@ specific to each site.
   normalise = FALSE,
   .res = 0.01,
   ncores = NULL,
-  verbose = TRUE
+  verbose = TRUE,
+  hor = NULL,
+  .transform.res = 0.1,
+  .prec = 0.1,
+  .output.res = 0.01
 )
 </code></pre>
 
 
 <h3>Arguments</h3>
 
-<table>
-<tr><td><code id="modelTest_:_pdf">pdf</code></td>
+<table role = "presentation">
+<tr><td><code id="modelTest_+3A_pdf">pdf</code></td>
 <td>
-<p>Empirical skyscapeR.pdf from <code>az.pdf</code>, <code>dec.pdf</code> or <code>coordtrans</code>. Its coordinate selects the simulation path.</p>
+<p>Empirical skyscapeR.pdf from <code>az.pdf</code>, <code>dec.pdf</code> or <code>coordtrans</code>. Its coordinate and the optional hor select the simulation path.</p>
 </td></tr>
-<tr><td><code id="modelTest_:_model">model</code></td>
+<tr><td><code id="modelTest_+3A_hor">hor</code></td>
+<td>
+<p>Optional shared skyscapeR.horizon or an ordered list matching the empirical observations. With azimuth inputs, selects a declination test using individual coordinate transformations. Omit for routes 1 and 2.</p>
+</td></tr>
+<tr><td><code id="modelTest_+3A_.transform.res">.transform.res</code></td>
+<td>
+<p>Internal declination transformation spacing, as .res in coordtrans. Default 0.1 degrees.</p>
+</td></tr>
+<tr><td><code id="modelTest_+3A_.prec">.prec</code></td>
+<td>
+<p>Azimuth integration spacing for route 3, as in coordtrans. Default 0.1 degrees.</p>
+</td></tr>
+<tr><td><code id="modelTest_+3A_.output.res">.output.res</code></td>
+<td>
+<p>Stored declination PDF spacing for route 3, as in coordtrans. Default 0.01 degrees.</p>
+</td></tr>
+<tr><td><code id="modelTest_+3A_model">model</code></td>
 <td>
 <p>One shared data frame or an ordered list with one table per observation. The first column contains candidate coordinates in degrees and the second contains nonnegative discrete sampling weights, with at least one positive weight. On equally spaced grids, density heights can serve as weights.</p>
 </td></tr>
-<tr><td><code id="modelTest_:_unc">unc</code></td>
+<tr><td><code id="modelTest_+3A_unc">unc</code></td>
 <td>
-<p>Optional replacement width in degrees of the tested coordinate. Use a standard deviation for normal, half the total span for triangular, or the family-specific half-width documented in <code>az.pdf</code>. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.</p>
+<p>Optional replacement width in degrees of the input coordinate (azimuth on route 3). Use a standard deviation for normal, half the total span for triangular, or the family-specific half-width documented in <code>az.pdf</code>. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.</p>
 </td></tr>
-<tr><td><code id="modelTest_:_nsims">nsims</code></td>
+<tr><td><code id="modelTest_+3A_nsims">nsims</code></td>
 <td>
 <p>Number of simulations, at least two. Default is 1000.</p>
 </td></tr>
-<tr><td><code id="modelTest_:_conf">conf</code></td>
+<tr><td><code id="modelTest_+3A_conf">conf</code></td>
 <td>
 <p>Confidence level as a fraction.</p>
 </td></tr>
-<tr><td><code id="modelTest_:_tails">tails</code></td>
+<tr><td><code id="modelTest_+3A_tails">tails</code></td>
 <td>
 <p>1 for upper excesses, 2 for excesses and deficits.</p>
 </td></tr>
-<tr><td><code id="modelTest_:_normalise">normalise</code></td>
+<tr><td><code id="modelTest_+3A_normalise">normalise</code></td>
 <td>
 <p>Scale each summed density to unit area before comparison.</p>
 </td></tr>
-<tr><td><code id="modelTest_:_.res">.res</code></td>
+<tr><td><code id="modelTest_+3A_.res">.res</code></td>
 <td>
 <p>Spacing of the empirical and simulated comparison grids in degrees. Default 0.01.</p>
 </td></tr>
-<tr><td><code id="modelTest_:_ncores">ncores</code></td>
+<tr><td><code id="modelTest_+3A_ncores">ncores</code></td>
 <td>
 <p>Worker count. By default use half the detected available logical cores, rounded down with a minimum of one. Set ncores=1 for serial execution. The simulation count and memory batch size can further limit workers. Verbose output reports the effective count.</p>
 </td></tr>
-<tr><td><code id="modelTest_:_verbose">verbose</code></td>
+<tr><td><code id="modelTest_+3A_verbose">verbose</code></td>
 <td>
 <p>Display simulation progress.</p>
 </td></tr>
@@ -82,8 +102,38 @@ to test specific hypotheses about temple orientations in Malta, including topogr
 astronomical explanations. Here the hypothesis specifies the relative probability of each
 candidate orientation. A small global p-value is evidence against that particular model.
 </p>
-<p>The input PDF determines the coordinate of the test. Express the model coordinates and
-uncertainties in that same coordinate. Each simulation draws one centre per observation
+<p><strong>Input routes.</strong> There are three routes:
+</p>
+
+<ol>
+<li> <p><code>modelTest(Az, az.model)</code> compares azimuth inputs in azimuth.
+</p>
+</li>
+<li> <p><code>modelTest(Dec, dec.model)</code> compares declination inputs in declination.
+</p>
+</li>
+<li> <p><code>modelTest(Az, az.model, hor=hor)</code> compares azimuth inputs in declination.
+A shared horizon or an ordered list of one horizon per observation is accepted.
+Each observed azimuth density is transformed individually with <code>coordtrans</code>.
+Each simulation draws azimuth centres, reconstructs their measurement densities,
+and transforms each density through its corresponding horizon before summing.
+This propagates changes in width, asymmetry and peaks with azimuth, latitude and skyline.
+The function never shifts a fixed declination template on this route and does not
+transform the summed azimuth density as a shortcut.
+</p>
+</li></ol>
+
+<p>Express model coordinates and uncertainties in the input coordinate. Supplying
+<code>hor</code> selects route 3 and requires azimuth empirical and model inputs.
+Transformation spacings are controlled by <code>.transform.res</code>, <code>.prec</code>
+and <code>.output.res</code>; <code>.res</code> controls only the final comparison grid.
+Atmospheric settings come from <code>skyscapeR.vars</code> and are recorded in the result.
+A uniform azimuth null matches the individual-transformation route of
+<code>randomTest</code> when candidate grids, measurement families, horizons,
+transformation settings and simulated draws match. Uniform declination weights
+generally describe a different null hypothesis.
+</p>
+<p>Each simulation draws one centre per observation
 according to the weights in its model table. The function constructs an azimuth or declination
 density around each centre and sums these densities on the same comparison grid as the
 observed SPD. The observed measurement curves are used as supplied.
@@ -94,7 +144,7 @@ taper, survey error and triangular asymmetry. A direct triangular model is
 positioned by its mode. Overriding <code>unc</code> rescales its two sides in
 proportion; for the two softened uniform families the taper or survey-error
 SD stays fixed in degrees.
-For declinations from <code>coordtrans</code>, omit <code>unc</code> to use each observation's own density as a template.
+On route 2, for declinations from <code>coordtrans</code>, omit <code>unc</code> to use each observation's own density as a template.
 A model draw represents the expected mean declination for that observation. The function calculates the
 density-weighted mean of its piecewise-linear curve and adds (draw minus mean) to every declination.
 For example, a curve with mean -17.6 degrees shifts by -4.4 degrees for a draw of -22 degrees.
@@ -127,9 +177,9 @@ disk space per simulation per grid point. Temporary files are removed on return 
 
 <h3>Validation</h3>
 
-<p>In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See <a href="https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks">S03 validation in the technical manual</a>.
+<p>In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. The package counts north once and reports one interval for a qualifying excess across north.  See <a href="https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks">S03 validation in the technical manual</a>.
 </p>
-<p>In S02, identical candidate bearings produced identical directly constructed observed and simulated densities on build 2.0.9008. Global rejection at the 5 percent level ranged from 4.35 to 5.50 percent under the six matched null designs. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#s02-specified-models">S02 check in the technical manual</a>.
+<p>In S02, identical candidate bearings produced identical directly constructed observed and simulated densities. Global rejection at the 5 percent level ranged from 4.35 to 5.50 percent under the six matched null designs. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#s02-specified-models">S02 check in the technical manual</a>.
 </p>
 
 
@@ -168,13 +218,14 @@ See <code>randomTest</code> for study-design and Monte Carlo limitations.
 
 <h3>See Also</h3>
 
-<p><a href="../help/az.pdf.html"><code>az.pdf</code></a>, <a href="../help/dec.pdf.html"><code>dec.pdf</code></a>, <a href="../help/coordtrans.html"><code>coordtrans</code></a>, <a href="../help/spd.html"><code>spd</code></a>, <a href="../help/randomTest.html"><code>randomTest</code></a>, <a href="../help/plot.skyscapeR.sigTest.html"><code>plot.skyscapeR.sigTest</code></a>
+<p><code>az.pdf</code>, <code>dec.pdf</code>, <code>coordtrans</code>, <code>spd</code>, <code>randomTest</code>, <code>plot.skyscapeR.sigTest</code>
 </p>
 
 
 <h3>Examples</h3>
 
-<pre><code class='language-R'>d &lt;- dec.pdf(dec = c(-18, 12), unc = c(0.8, 1.4))
+<pre><code class='language-R'>
+d &lt;- dec.pdf(dec = c(-18, 12), unc = c(0.8, 1.4))
 m &lt;- list(data.frame(x = -20:-16, w = 1), data.frame(x = 10:14, w = 1))
 set.seed(42)
 fit &lt;- modelTest(d, m, nsims = 10, .res = 0.5,
@@ -186,10 +237,14 @@ fit &lt;- modelTest(d, m, nsims = 5000, ncores = 2)
 # For transformed observations, model coordinates specify mean declinations.
 Az &lt;- az.pdf(az = c(87, 110), unc = 2)
 hor &lt;- createHor(az = c(0, 360), alt = c(0, 0), alt.unc = 0.1, loc = c(35, -8))
+# Route 3: both inputs in azimuth, test in declination.
+az.model &lt;- data.frame(x = seq(0, 359.9, by = 0.1), w = 1)
+fit &lt;- modelTest(Az, az.model, hor = hor, nsims = 100, ncores = 1)
+# Route 2: both inputs in declination, shift the transformed templates.
 Dec &lt;- coordtrans(Az, hor)
 fit &lt;- modelTest(Dec, data.frame(x = c(-22, 18), w = c(1, 1)))
 
 ## End(Not run)
 </code></pre>
 
-</body></html>
+<h3>Validation studies</h3><p>The transformed-bearing null was tested with steep skylines, three measurement families and shared or site-specific candidate weights. <a href="../s02-specified-models.html#steep-null">S02 validation study</a>.</p><p>Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. <a href="../d02-bearing-propagation.html#pole-propagation">D02 validation study</a>.</p></body></html>

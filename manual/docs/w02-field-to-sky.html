@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -707,12 +707,22 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -723,6 +733,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -763,6 +778,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -833,7 +853,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>W02 replayed the Malta workflows on the archived 2.0.9004 build and on the final build, with intermediate tables for field reduction, sightlines, transformed densities, inference, screening, seasonal dates, crossings and reconstructed sky position. The Maltese entrances are published <strong>true bearings</strong>. The raw compass and solar-circle observations in this study are separately constructed controls. They do not reconstruct the original instrument notebooks.</p>
+<p>The field-to-sky workflow records intermediate field reductions, transformed densities, significance results and sky positions. The Maltese entrances are published <strong>true bearings</strong>. The raw compass and solar-circle observations in this study are separately constructed controls. They do not reconstruct the original instrument notebooks.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -848,15 +868,15 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Raw field controls</td>
-<td style="text-align: left;">A target circle of 2.25° and solar circle of 358.75° give 161.23° at the Malta control site. The archived matrix call returned −558.77°, equivalent modulo 360°, and its single-vector call failed. In a two-site fixture the old matrix reshaping also changed the actual assigned coordinates. The corrected paired bearings were 161.23° and 141.72°, each matching the independent circle-difference calculation.</td>
+<td style="text-align: left;">A target circle of 2.25° and solar circle of 358.75° give 161.23° at the Malta control site. The paired bearings were 161.23° and 141.72°, each matching the independent circle-difference calculation.</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Mnajdra South</td>
-<td style="text-align: left;">The edges 90.94° and 99.14° sampled skyline heights of 4.40° and 3.45°. The corresponding declinations were +1.71° and −5.48° on both builds. The first divergence along the published-bearing route was in the azimuth PDFs. The final 68% declination HDR comprised −4.75° to −1.95° and −0.90° to +1.00°.</td>
+<td style="text-align: left;">The edges 90.94° and 99.14° sampled skyline heights of 4.40° and 3.45°. The corresponding declinations were +1.71° and −5.48°. The 68% declination HDR comprised −4.75° to −1.95° and −0.90° to +1.00°.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Group inference</td>
-<td style="text-align: left;">The replay preserved entrance/profile order for all 17 Ġgantija-phase entrances. The 39-simulation controls exercised both significance routes with fixed inputs and seeds. Separately, the full vignette replay used 500 random-orientation simulations and recovered the bundled global p = 2/501, the excess at −33.7° to −28.6° (adjusted p = 2/501), and the excess at −49.4° to −48.2° (adjusted p = 279/501).</td>
+<td style="text-align: left;">The replay preserved entrance/profile order for all 17 Ġgantija-phase entrances. The 39-simulation controls exercised both significance routes with fixed inputs and seeds. The package stores the seeded 500-simulation fit. The global p-value is 0.004. The excess from −49.4° to −48.2° has adjusted p = 0.557. The excess from −33.7° to −28.6° has adjusted p = 0.004.</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Skorba West</td>
@@ -864,9 +884,8 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p><strong>Sensitivity.</strong> Swapping the Mnajdra South and Skorba West profiles changed only the corresponding two mean declinations, by 2.219° and 1.448°. The numeric calculation followed the supplied order, so correct site pairing remains the analyst’s responsibility. Rebuilding the PDFs with refraction off shifted their means by 0.146° on average. The seeded random test on the original stored PDFs retained its original results when the session setting changed. A north-crossing density integrated to one. An out-of-sector photographic transformation returned a finite curve on the archived build and an explicit coverage error on the final build.</p>
-<p>All 26 workflow assertions passed, alongside the site-row and terminal-position controls. Agreement across this workflow establishes numerical continuity of its inputs and outputs. It provides neither a measurement of ancient naked-eye visibility nor evidence of intentional alignment. <a href="archives/W02-9009.zip">Download W02 scripts, per-stage tables and version comparisons</a>.</p>
-<p>These three studies use the <a href="archives/skyscapeR_2.0.9009.tar.gz">installable 2.0.9009 source</a>, SHA-256 <code>1c5b347aabb1c8d3bdd3bc27d1d9d11c1cb12b550424df4dc22d6bcaff91b0a9</code>.</p>
+<p><strong>Sensitivity.</strong> Swapping the Mnajdra South and Skorba West profiles changed only the corresponding two mean declinations, by 2.219° and 1.448°. The numeric calculation followed the supplied order, so correct site pairing remains the analyst’s responsibility. Rebuilding the PDFs with refraction off shifted their means by 0.146° on average. The seeded random test on the original stored PDFs retained its original results when the session setting changed. A north-crossing density integrated to one. A transformation outside the photographed sector raises a coverage error.</p>
+<p>The bundled group result was regenerated from the 17 ordered entrances and their measured widths. Agreement across this workflow establishes numerical continuity of its inputs and outputs. It provides neither a measurement of ancient naked-eye visibility nor evidence of intentional alignment. <a href="archives/W02.zip">Download W02 scripts, per-stage tables</a>.</p>
 
 
 

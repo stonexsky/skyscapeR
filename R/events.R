@@ -87,6 +87,8 @@ events <- function(name) {
 #' transformations may discard attributes; save the original result for reference.
 #' It does not identify ephemeris files, catalogue revisions or a development
 #' commit. Retain those and the analysis script separately for exact reproduction.
+#' @section Validation studies:
+#' Six stellar positions were compared with independently propagated catalogue directions from 3500 BCE to 2000 CE. \href{https://stonexsky.github.io/skyscapeR/manual/a03-stellar-positions.html#a03-stellar-positions}{A03 validation study}.
 skyObject = function(names, year, loc=FALSE, col = '#A9542E', lty = 1, lwd = 1, epoch) {
   if (!missing(epoch)) {
     if (!missing(year)) stop("Supply year only once.",call.=FALSE)
@@ -559,6 +561,8 @@ spatial.equinox = function(hor, parallax = 0.00224,
 #'
 #' # Topocentric declination for same year and latitude of 50 degrees N:
 #' nmnLX(-2500, loc=50)
+#' @section Scientific validation:
+#' A06 examines geocentric lunar and planetary limits against independent extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 scientific validation}.
 nmnLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, altitude = 0, verbose = TRUE) {
   if (is.character(year)) year <- astroYear(year)
   aux <- obliquity(year) - (5.145+0.145)
@@ -600,6 +604,8 @@ nmnLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, alt
 #'
 #' # Topocentric declination for same year and latitude of 50 degrees N:
 #' smnLX(-2500, loc=50)
+#' @section Scientific validation:
+#' A06 examines geocentric lunar and planetary limits against independent extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 scientific validation}.
 smnLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, altitude = 0, verbose = TRUE) {
   if (is.character(year)) year <- astroYear(year)
   aux <- -(obliquity(year) - (5.145+0.145))
@@ -641,6 +647,8 @@ smnLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, alt
 #'
 #' # Topocentric declination for same year and latitude of 50 degrees N:
 #' nMjLX(-2500, loc=50)
+#' @section Scientific validation:
+#' A06 examines geocentric lunar and planetary limits against independent extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 scientific validation}.
 nMjLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, altitude = 0, verbose = TRUE) {
   if (is.character(year)) year <- astroYear(year)
   aux <- obliquity(year) + (5.145+0.145)
@@ -682,6 +690,8 @@ nMjLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, alt
 #'
 #' # Topocentric declination for same year and latitude of 50 degrees N:
 #' sMjLX(-2500, loc=50)
+#' @section Scientific validation:
+#' A06 examines geocentric lunar and planetary limits against independent extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 scientific validation}.
 sMjLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, altitude = 0, verbose = TRUE) {
   if (is.character(year)) year <- astroYear(year)
   aux <- -(obliquity(year) + (5.145+0.145))
@@ -787,6 +797,8 @@ sMjLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, alt
 #' transformations may discard attributes; save the original result for reference.
 #' It does not identify ephemeris files, catalogue revisions or a development
 #' commit. Retain those and the analysis script separately for exact reproduction.
+#' @section Scientific validation:
+#' A07 examines independent crossover selection and sensitivity to the illumination cutoff. \href{https://stonexsky.github.io/skyscapeR/manual/lunar-crossovers.html#a07-scientific}{A07 scientific validation}.
 EFM <- function(year, loc, season='spring', rise=TRUE, min.phase=.99, timezone, calendar,
                 refraction, atm, temp) {
   if (is.character(year)) year <- astroYear(year)
@@ -925,6 +937,8 @@ EFM <- function(year, loc, season='spring', rise=TRUE, min.phase=.99, timezone, 
 #' transformations may discard attributes; save the original result for reference.
 #' It does not identify ephemeris files, catalogue revisions or a development
 #' commit. Retain those and the analysis script separately for exact reproduction.
+#' @section Scientific validation:
+#' A06 examines geocentric lunar and planetary limits against independent extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 scientific validation}.
 planet.extremes <- function(obj, year, loc = NULL, epoch) {
   if (!missing(epoch)) {
     if (!missing(year)) stop("Supply year only once.",call.=FALSE)

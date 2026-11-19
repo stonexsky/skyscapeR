@@ -73,6 +73,11 @@ recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for s
 W02 recovered both independent circle-difference control bearings and retained each site row in a multi-site solar reduction. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
 }
 
+\section{Scientific validation}{
+
+F01 examines magnetic and solar reductions against independent references. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 scientific validation}.
+}
+
 \examples{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
   lat <- ten(35,50,37.8)

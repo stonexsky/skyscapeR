@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>sketchSky | skyscapeR 2.0.9009</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-sketchsky.html">sketchSky() method</a></nav><h2 id='sketchSky'>Prepare a reusable sky sketch for a horizon plot</h2><span id='topic+sketchSky'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>sketchSky | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-sketchsky.html">sketchSky() method</a></nav><h2 id='sketchSky'>Prepare a reusable sky sketch for a horizon plot</h2><span id='topic+sketchSky'></span>
 
 <h3>Description</h3>
 
@@ -20,36 +20,37 @@ without brightness-dependent visibility filtering.
   display = list(),
   style = c("natural", "publication-colour", "publication-mono"),
   max.mag = 6,
-  k = skyscapeR.vars()$k
+  k = skyscapeR.vars()$k,
+  band.extinction = TRUE
 )
 </code></pre>
 
 
 <h3>Arguments</h3>
 
-<table>
-<tr><td><code id="sketchSky_:_hor">hor</code></td>
+<table role = "presentation">
+<tr><td><code id="sketchSky_+3A_hor">hor</code></td>
 <td>
 <p>A <code>skyscapeR.horizon</code> with finite latitude, longitude and observer
 elevation in metres in <code>metadata$georef</code>. The numerical profile supplies the
 foreground when plotted. A panorama image is optional.</p>
 </td></tr>
-<tr><td><code id="sketchSky_:_jd">jd</code></td>
+<tr><td><code id="sketchSky_+3A_jd">jd</code></td>
 <td>
 <p>One finite UT Julian day. Supply exactly one of <code>jd</code> and <code>time</code>.</p>
 </td></tr>
-<tr><td><code id="sketchSky_:_time">time</code></td>
+<tr><td><code id="sketchSky_+3A_time">time</code></td>
 <td>
 <p>A civil timestamp accepted by <code>time2jd</code>, or a POSIXt instant.</p>
 </td></tr>
-<tr><td><code id="sketchSky_:_timezone">timezone</code>, <code id="sketchSky_:_calendar">calendar</code></td>
+<tr><td><code id="sketchSky_+3A_timezone">timezone</code>, <code id="sketchSky_+3A_calendar">calendar</code></td>
 <td>
 <p>Civil timezone and calendar for character <code>time</code>, as
 in <code>time2jd</code>. Defaults are the session settings. A POSIXt value already
 identifies an instant; these arguments do not reinterpret it. Use UTC or a fixed
 offset for ancient civil dates.</p>
 </td></tr>
-<tr><td><code id="sketchSky_:_display">display</code></td>
+<tr><td><code id="sketchSky_+3A_display">display</code></td>
 <td>
 <p>A named list of logical switches: <code>sun</code>, <code>moon</code>,
 <code>planets</code>, <code>stars</code>, <code>constellation.lines</code>, <code>milky.way</code>,
@@ -60,21 +61,25 @@ The additional <code>constellations</code> entry accepts names or an imported da
 frame, rather than a logical value. See Constellations below. A named logical
 vector is sufficient when supplying only switches.</p>
 </td></tr>
-<tr><td><code id="sketchSky_:_style">style</code></td>
+<tr><td><code id="sketchSky_+3A_style">style</code></td>
 <td>
 <p>One of <code>"natural"</code>, <code>"publication-colour"</code> or
 <code>"publication-mono"</code>. Publication styles have a white background and dark
 guides. Colour uses muted stellar and planetary colours and a warm solar disc;
 mono uses black and white. Neither publication style predicts visibility.</p>
 </td></tr>
-<tr><td><code id="sketchSky_:_max.mag">max.mag</code></td>
+<tr><td><code id="sketchSky_+3A_max.mag">max.mag</code></td>
 <td>
 <p>Finite catalogue magnitude cutoff, default 6. Applied before
 extinction to star symbols and the integrated magnitudes of supported clusters.
 It does not limit constellation endpoints, the Sun, Moon or planets. Raising
 the cutoff includes additional stars only where the catalogue supplies them.</p>
 </td></tr>
-<tr><td><code id="sketchSky_:_k">k</code></td>
+<tr><td><code id="sketchSky_+3A_band.extinction">band.extinction</code></td>
+<td>
+<p>Logical. Defaults to TRUE. Set to FALSE to disable Milky Way extinction in publication styles. Natural style already applies it.</p>
+</td></tr>
+<tr><td><code id="sketchSky_+3A_k">k</code></td>
 <td>
 <p>Non-negative visual extinction coefficient in magnitudes per airmass
 for natural style. Defaults to <code>skyscapeR.vars()$k</code>, initially 0.2.
@@ -168,13 +173,15 @@ on lunar phase, altitude and angular separation.
 lengthens. The coefficient <code>k</code> sets the loss per airmass. The model
 uses Rozenberg's airmass approximation (Krisciunas and Schaefer 1991);
 uncertainty is greatest close to the skyline. The twilight colours are
-illustrative (Lee 1994, 2015).
+illustrative (Lee 1994, 2015). Above the geometric horizon, the display blends
+gradually into a clear daylight blue, reaching its full daytime palette and
+exposure at a solar altitude of 15 degrees.
 </p>
 
 
 <h3>Milky Way and clusters</h3>
 
-<p>The Milky Way is traced from the diffuse light in Deep Star Maps 2020.
+<p>The Milky Way is traced on a 0.1-degree Galactic grid from the 4096-pixel diffuse-light map in Deep Star Maps 2020.
 Within the smoothed envelope, retained dark patches have at least 10 percent
 local contrast; two bright tiers begin at 1.10 and 1.75 times the mean band
 tone after the dark patches are excluded. Retained patches cover at least
@@ -220,7 +227,7 @@ commit. Retain those and the analysis script separately for exact reproduction.
 
 <h3>Validation</h3>
 
-<p>W02 verified the reconstructed Gacrux bearing and altitude at the same instant and viewpoint using direct equatorial coordinates and spherical geometry. See the <a href="../w02-field-to-sky.html">W02 check in the technical manual</a>.
+<p>W02 verified the reconstructed Gacrux bearing and altitude at the same instant and viewpoint using direct equatorial coordinates and spherical geometry. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky">W02 check in the technical manual</a>.
 </p>
 
 
@@ -298,4 +305,4 @@ plot(hor, sky = mono, xrange = sector)
 ## End(Not run)
 </code></pre>
 
-</body></html>
+<h3>Validation studies</h3><p>Diffuse V-band brightness was compared with six fields outside the Carina calibration aperture. <a href="../v04-diffuse-photometry.html#v04-diffuse-photometry">V04 validation study</a>.</p></body></html>

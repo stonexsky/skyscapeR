@@ -50,7 +50,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./a01-calendar-checks.html" rel="next">
+<link href="./v04-diffuse-photometry.html" rel="next">
 <link href="./numerical-validation.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -62,7 +62,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -727,12 +727,22 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -743,6 +753,11 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -783,6 +798,11 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -872,7 +892,7 @@ div.csl-indent {
 <section id="comparator-and-shared-inputs" class="level2">
 <h2 class="anchored" data-anchor-id="comparator-and-shared-inputs">Comparator and shared inputs</h2>
 <p>The reference date comes from <a href="fn-star-phases.html"><code>star.phases()</code></a>. The comparator searches mornings around that date on a one-minute grid. It evaluates extinction-adjusted point-source flux against the local background radiance, applying the point-source contrast threshold of <span class="citation" data-cites="crumey2014">Crumey (<a href="references.html#ref-crumey2014" role="doc-biblioref">2014</a>, eqs. 32–33)</span>. A minute above threshold qualifies. The search covered 24 days on either side of the reference date, extended to 64 days where necessary. The experiment therefore checks agreement near the selected event.</p>
-<p>The two calculations share the site, ephemeris and stellar catalogue. The assumed central dark-sky limit was magnitude 6, extinction was 0.20 magnitudes per airmass, refraction was disabled and the Moon was hidden. The benchmark used the twilight and sky-brightness model in development build 2.0.9003. Its threshold is applied to radiance before display compression. It is a criterion used by this study.</p>
+<p>The two calculations share the site, ephemeris and stellar catalogue. The assumed central dark-sky limit was magnitude 6, extinction was 0.20 magnitudes per airmass, refraction was disabled and the Moon was hidden. The benchmark evaluated the package twilight and diffuse-light models. The threshold is applied to radiance before display compression. It is a criterion used by this study.</p>
 </section>
 <section id="results-and-their-scope" class="level2">
 <h2 class="anchored" data-anchor-id="results-and-their-scope">Results and their scope</h2>
@@ -918,11 +938,9 @@ div.csl-indent {
 <section id="reproduce-the-comparison" class="level2">
 <h2 class="anchored" data-anchor-id="reproduce-the-comparison">Reproduce the comparison</h2>
 <ul>
-<li><a href="study/results.csv">Download the per-case results</a>. Positive <code>calibrated_days</code> means that the comparator’s first qualifying morning fell later than the phase date. The table carries the main/follow-up label, the event dates and the alternative model outputs.</li>
-<li><a href="archives/heliacal-rising-test.zip">Download the archived test</a>. It contains the original R scripts, the Python export script, daily margins, checks through the public renderer and the study README.</li>
-<li><a href="archives/skyscapeR_2.0.9003.tar.gz">Download the package source used in the test</a>. Reproduction also requires the fixed-star catalogue and Swiss Ephemeris files covering the epochs, the package’s R dependencies and Python with pandas, NumPy and Matplotlib.</li>
+<li><a href="study/results.csv">Download the per-case results</a>. Positive <code>calibrated_days</code> means that the comparator’s first qualifying morning fell later than the phase date. The table carries the main/follow-up label, the event dates and the sensitivity results.</li>
+<li><a href="archives/visibility.zip">Download the calculation and outputs</a>. Run <code>phases.R</code>, <code>scan.R</code>, <code>refine.R</code> and <code>export.py</code> in that order. The archive includes daily margins and checks of marginal cases through the public renderer.</li>
 </ul>
-<p>For a full rerun, install the archived build in a separate R library. Unpack the test, change to its directory and follow the README, running <code>phases.R</code>, <code>scan.R</code>, <code>verify.R</code>, <code>refine.R</code>, <code>symbol-check.R</code> and then <code>export.py</code>. On Windows, set <code>mc.cores = 1</code> in the fork-based calls. For a quick check using the saved outputs, the manual’s <code>scripts/prepare.R</code> recalculates the summary from the CSV every time the book renders. The figure comes from the archived study. The full astronomical search has not been rerun for this edition.</p>
 <p><a href="./stellar-phases.html">Return to the method</a>.</p>
 <p><strong>Related function entries</strong></p>
 <p><a href="fn-star-phases.html"><code>star.phases()</code></a>.</p>
@@ -1343,8 +1361,8 @@ Crumey, Andrew. 2014. <span>‘Human Contrast Threshold and Astronomical Visibil
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./a01-calendar-checks.html" class="pagination-link" aria-label="A01 · Calendar, clock and angular conventions">
-        <span class="nav-page-text"><span class="chapter-title">A01 · Calendar, clock and angular conventions</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./v04-diffuse-photometry.html" class="pagination-link" aria-label="V04 · Milky Way surface brightness outside Carina">
+        <span class="nav-page-text"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

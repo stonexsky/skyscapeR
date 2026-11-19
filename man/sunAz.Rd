@@ -52,6 +52,11 @@ Only the table returned with \code{alt = TRUE} carries this attribute;
 the default numeric output is unchanged.
 }
 
+\section{Scientific validation}{
+
+F01 examines magnetic and solar reductions against independent references. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 scientific validation}.
+}
+
 \examples{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
   sunAz(c(52,-3,100), '2017-10-04 12:32:14', 'Europe/London')

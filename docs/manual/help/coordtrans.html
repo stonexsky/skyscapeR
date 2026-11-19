@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>coordtrans | skyscapeR 2.0.9011</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}img{max-width:100%;height:auto}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-coordtrans.html">coordtrans() method</a></nav><h2 id='coordtrans'>Transform azimuth densities into declination densities</h2><span id='topic+coordtrans'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>coordtrans | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}img{max-width:100%;height:auto}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-coordtrans.html">coordtrans() method</a></nav><h2 id='coordtrans'>Transform azimuth densities into declination densities</h2><span id='topic+coordtrans'></span>
 
 <h3>Description</h3>
 
@@ -23,35 +23,35 @@ uncertainty in both direction and horizon altitude.
 
 <h3>Arguments</h3>
 
-<table>
-<tr><td><code id="coordtrans_:_pdf">pdf</code></td>
+<table role = "presentation">
+<tr><td><code id="coordtrans_+3A_pdf">pdf</code></td>
 <td>
 <p>A <em>skyscapeR.pdf</em> object created with <code>az.pdf</code> or a <em>skyscapeR.spd</em> object created with <code>spd</code></p>
 </td></tr>
-<tr><td><code id="coordtrans_:_hor">hor</code></td>
+<tr><td><code id="coordtrans_+3A_hor">hor</code></td>
 <td>
 <p>A shared <code>skyscapeR.horizon</code> or, for individual azimuth PDFs, a list of horizons in measurement order.</p>
 </td></tr>
-<tr><td><code id="coordtrans_:_xrange">xrange</code></td>
+<tr><td><code id="coordtrans_+3A_xrange">xrange</code></td>
 <td>
 <p>Array of values (min and max) for SPD when transforming a <em>skyscapeR.spd</em> object.</p>
 </td></tr>
-<tr><td><code id="coordtrans_:_.res">.res</code></td>
+<tr><td><code id="coordtrans_+3A_.res">.res</code></td>
 <td>
 <p>Spacing of the declination calculation grid, in degrees. Default 0.1.</p>
 </td></tr>
-<tr><td><code id="coordtrans_:_.prec">.prec</code></td>
+<tr><td><code id="coordtrans_+3A_.prec">.prec</code></td>
 <td>
 <p>Azimuth integration spacing, in degrees. Default 0.1.
-Previously ignored; smaller values increase integration work. Must not exceed 540.</p>
+Smaller values increase integration work. Must not exceed 540.</p>
 </td></tr>
-<tr><td><code id="coordtrans_:_.output.res">.output.res</code></td>
+<tr><td><code id="coordtrans_+3A_.output.res">.output.res</code></td>
 <td>
 <p>Spacing of the returned declination grid, in degrees.
 Default 0.01. Coarser spacing reduces output size. All spacings must be
 positive finite scalars, and the returned grid must contain at least two points.</p>
 </td></tr>
-<tr><td><code id="coordtrans_:_verbose">verbose</code></td>
+<tr><td><code id="coordtrans_+3A_verbose">verbose</code></td>
 <td>
 <p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p>
 </td></tr>
@@ -86,15 +86,14 @@ at the lower bound and ends at the last full step within the upper bound.
 Refine the calculation grid to check that narrow features are resolved.
 Set atmospheric refraction, pressure and temperature with <code>skyscapeR.vars</code> before transforming. The values used are recorded in the returned PDF or SPD.
 All three spacings are stored in <code>metadata$param</code>.
+For a specified azimuth null tested in declination, use <code>modelTest</code> with azimuth inputs and <code>hor</code>. It repeats this individual transformation for each observed and simulated density; a direct declination model instead shifts or reconstructs declination densities.
 </p>
 <p>The Gaussian uncertainty approximation uses the midpoint of declinations
 obtained at horizon altitude plus/minus four altitude standard deviations,
 with standard deviation equal to the absolute endpoint separation divided
 by eight. Reversed bounds are supported. Horizon uncertainties must be
 finite and nonnegative, and the profile must cover all input azimuths.
-Zero transformed widths (including zero altitude uncertainty or coincident
-endpoint declinations) are unsupported and produce an error. Do not add
-arbitrary uncertainty to bypass it: these cases need a different treatment.
+For positive altitude uncertainties, direct quadrature is used if either transformed four-sigma endpoint reaches an absolute declination of 80 degrees or the endpoints coincide. It integrates the spherical transformation at 256 normal altitude quantiles. Bearing spacing is at most 0.025 degrees on this route and on skyline sections steeper than one degree of height per degree of bearing. The transform uses unrounded declinations internally. A zero altitude uncertainty remains unsupported.
 Nonfinite transformed bounds/densities and PDF outputs with no positive
 finite area also error. Positive but very narrow widths still require
 convergence checks; no minimum uncertainty is imposed.
@@ -119,7 +118,7 @@ transformation settings, format version and descriptive source labels.
 
 <h3>Validation</h3>
 
-<p>In D02, declination quantiles agreed with direct propagation within 0.008 degrees across nine terrain and observer cases. Near the celestial pole the discrepancy reached 0.17 degrees on the fine grid; at the pole a zero conditional width prevented calculation. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#d02-bearing-propagation">D02 check in the technical manual</a>.
+<p>See the direct-propagation study below.
 </p>
 <p>For a partial photograph the stored positive bearing density must lie within its photographed sector. H07 verified agreement with a complete skyline on the covered north-crossing cases and rejection of uncovered densities. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage">H07 check in the technical manual</a>.
 </p>
@@ -134,7 +133,7 @@ in skyscape archaeology <em>Journal of Archaeological Science</em> 118, 105138. 
 
 <h3>See Also</h3>
 
-<p><a href="../help/az.pdf.html"><code>az.pdf</code></a>, <a href="../help/spd.html"><code>spd</code></a>, <a href="../help/hpdi.html"><code>hpdi</code></a>, <a href="../help/randomTest.html"><code>randomTest</code></a>, <a href="../help/dec.pdf.html"><code>dec.pdf</code></a>, <a href="../help/modelTest.html"><code>modelTest</code></a>
+<p><code>az.pdf</code>, <code>spd</code>, <code>hpdi</code>, <code>randomTest</code>, <code>dec.pdf</code>, <code>modelTest</code>
 </p>
 
 
@@ -150,4 +149,4 @@ Dec.coarse &lt;- coordtrans(Az, hor, .output.res=0.1)
 Dec.coarse$metadata$param
 </code></pre>
 
-</body></html>
+<h3>Validation studies</h3><p>Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. <a href="../d02-bearing-propagation.html#pole-propagation">D02 validation study</a>.</p><p>The transformed-bearing null was tested with steep skylines, three measurement families and shared or site-specific candidate weights. <a href="../s02-specified-models.html#steep-null">S02 validation study</a>.</p></body></html>

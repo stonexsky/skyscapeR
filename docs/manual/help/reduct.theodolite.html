@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>reduct.theodolite | skyscapeR 2.0.9009</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-reduct-theodolite.html">reduct.theodolite() method</a></nav><h2 id='reduct.theodolite'>Reduce theodolite readings using a solar sight</h2><span id='topic+reduct.theodolite'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>reduct.theodolite | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-reduct-theodolite.html">reduct.theodolite() method</a></nav><h2 id='reduct.theodolite'>Reduce theodolite readings using a solar sight</h2><span id='topic+reduct.theodolite'></span>
 
 <h3>Description</h3>
 
@@ -27,54 +27,54 @@ true bearing of a structural axis.
 
 <h3>Arguments</h3>
 
-<table>
-<tr><td><code id="reduct.theodolite_:_loc">loc</code></td>
+<table role = "presentation">
+<tr><td><code id="reduct.theodolite_+3A_loc">loc</code></td>
 <td>
 <p>Location, either a <em>skyscapeR.horizon</em> or a vector
 containing the latitude, longitude and elevation of location, in this order.</p>
 </td></tr>
-<tr><td><code id="reduct.theodolite_:_az">az</code></td>
+<tr><td><code id="reduct.theodolite_+3A_az">az</code></td>
 <td>
 <p>Array of azimuths. Use <code>ten</code> to convert to
 decimal degrees if necessary.</p>
 </td></tr>
-<tr><td><code id="reduct.theodolite_:_date">date</code></td>
+<tr><td><code id="reduct.theodolite_+3A_date">date</code></td>
 <td>
 <p>Date of measurements as a string in the format: 'YYYY/MM/DD'</p>
 </td></tr>
-<tr><td><code id="reduct.theodolite_:_time">time</code></td>
+<tr><td><code id="reduct.theodolite_+3A_time">time</code></td>
 <td>
 <p>Time of sun-sight measurement in the format: 'HH:MM:SS'</p>
 </td></tr>
-<tr><td><code id="reduct.theodolite_:_tz">tz</code></td>
+<tr><td><code id="reduct.theodolite_+3A_tz">tz</code></td>
 <td>
 <p>Timezone of input either as a known acronym (e.g. &quot;GMT&quot;, &quot;CET&quot;) or
 a string with continent followed by country capital (e.g. &quot;Europe/London&quot;).</p>
 </td></tr>
-<tr><td><code id="reduct.theodolite_:_az.sun">az.sun</code></td>
+<tr><td><code id="reduct.theodolite_+3A_az.sun">az.sun</code></td>
 <td>
 <p>Measured azimuth of the sun. Defaults to zero.</p>
 </td></tr>
-<tr><td><code id="reduct.theodolite_:_limb">limb</code></td>
+<tr><td><code id="reduct.theodolite_+3A_limb">limb</code></td>
 <td>
 <p>Measured limb of the sun. Options are <em>left</em>, <em>right</em>.
 If missing the center of the sun will be used for calculations.</p>
 </td></tr>
-<tr><td><code id="reduct.theodolite_:_alt">alt</code></td>
+<tr><td><code id="reduct.theodolite_+3A_alt">alt</code></td>
 <td>
 <p>Altitude, necessary for automatic declination calculation.
 If missing and <em>loc</em> is a <em>skyscapeR.horizon</em> object then the altitude
 will be automatically read from the horizon profile.</p>
 </td></tr>
-<tr><td><code id="reduct.theodolite_:_name">name</code></td>
+<tr><td><code id="reduct.theodolite_+3A_name">name</code></td>
 <td>
 <p>Names or labels to identify each measurement.</p>
 </td></tr>
-<tr><td><code id="reduct.theodolite_:_ID">ID</code></td>
+<tr><td><code id="reduct.theodolite_+3A_id">ID</code></td>
 <td>
 <p>IDs or codes to identify each measurement.</p>
 </td></tr>
-<tr><td><code id="reduct.theodolite_:_HWT.ID">HWT.ID</code></td>
+<tr><td><code id="reduct.theodolite_+3A_hwt.id">HWT.ID</code></td>
 <td>
 <p>HeyWhatsThat IDs relating to a previously generated
 horizon profile for measurement.</p>
@@ -106,7 +106,7 @@ recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-pa
 
 <h3>Validation</h3>
 
-<p>W02 recovered both independent circle-difference control bearings and retained each site row in a multi-site solar reduction. See the <a href="../w02-field-to-sky.html">W02 check in the technical manual</a>.
+<p>W02 recovered both independent circle-difference control bearings and retained each site row in a multi-site solar reduction. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky">W02 check in the technical manual</a>.
 </p>
 
 
@@ -146,4 +146,4 @@ Yale University Press.
 }
 </code></pre>
 
-</body></html>
+<h3>Scientific validation</h3><p>F01 examines magnetic and solar reductions against independent references. <a href="../field-reduction.html#f01-scientific">F01 study and results</a>.</p></body></html>

@@ -57,6 +57,8 @@
 #'   hor <- malta_horizons[[1]]
 #'   data <- reduct.theodolite(hor, az, date, time, tz= "Europe/Malta", az.sun)
 #' }
+#' @section Scientific validation:
+#' F01 examines magnetic and solar reductions against independent references. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 scientific validation}.
 reduct.theodolite = function(loc, az, date, time, tz, az.sun = 0, limb, alt, name, ID, HWT.ID) {
   if (class(loc)[1]=='skyscapeR.horizon') { hor <- loc; loc <- loc$metadata$georef } else { hor <- NULL }
 
@@ -164,6 +166,8 @@ reduct.theodolite = function(loc, az, date, time, tz, az.sun = 0, limb, alt, nam
 #' # A varying horizon supplies an altitude for each corrected azimuth.
 #' hor <- createHor(c(0,90,180,270,360), c(0,2,6,1,0), loc=c(35,-7,100))
 #' reduct.compass(hor, c(89.5,105,109.5), magdec=-2)
+#' @section Scientific validation:
+#' F01 examines magnetic and solar reductions against independent references. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 scientific validation}.
 reduct.compass = function(loc, mag.az, date, magdec, alt, name, ID, HWT.ID) {
   if (missing(date) && missing(magdec)) {
     stop("Supply either date (to calculate magnetic declination) or magdec.")

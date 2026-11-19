@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EFM | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-efm.html">EFM() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Find equinoctial full moonrises and moonsets</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EFM | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-efm.html">EFM() method</a></nav><h2 id='EFM'>Find equinoctial full moonrises and moonsets</h2><span id='topic+EFM'></span>
 
 <h3>Description</h3>
 
@@ -26,47 +26,47 @@ around the spring or autumn equinox.
 
 <h3>Arguments</h3>
 
-<table>
-<tr><td><code>year</code></td>
+<table role = "presentation">
+<tr><td><code id="EFM_+3A_year">year</code></td>
 <td>
 <p>Astronomical year or years. Can be either a single value (the year), Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.
 two values (range of years), or a vector of years.</p>
 </td></tr>
-<tr><td><code>loc</code></td>
+<tr><td><code id="EFM_+3A_loc">loc</code></td>
 <td>
 <p>This can be either a <em>skyscapeR.horizon</em> object, or a vector with the
 latitude, longitude and elevation of the site, in this order.</p>
 </td></tr>
-<tr><td><code>season</code></td>
+<tr><td><code id="EFM_+3A_season">season</code></td>
 <td>
 <p>Either 'spring' or 'autumn'. Default is 'spring'.</p>
 </td></tr>
-<tr><td><code>rise</code></td>
+<tr><td><code id="EFM_+3A_rise">rise</code></td>
 <td>
 <p>Logical to choose whether to calculate Equinoctial Full
 Moon rises or sets. Defaults to <em>TRUE</em>.</p>
 </td></tr>
-<tr><td><code>min.phase</code></td>
+<tr><td><code id="EFM_+3A_min.phase">min.phase</code></td>
 <td>
 <p>Minimum illuminated fraction of the Moon, from 0 to 1. The default 0.99 means 99 percent illumination.</p>
 </td></tr>
-<tr><td><code>timezone</code></td>
+<tr><td><code id="EFM_+3A_timezone">timezone</code></td>
 <td>
 <p>Timezone for civil timestamps. Use UTC or a fixed offset for dates before 1900. See <code>time2jd</code> for named zones and offsets.</p>
 </td></tr>
-<tr><td><code>calendar</code></td>
+<tr><td><code id="EFM_+3A_calendar">calendar</code></td>
 <td>
 <p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p>
 </td></tr>
-<tr><td><code>refraction</code></td>
+<tr><td><code id="EFM_+3A_refraction">refraction</code></td>
 <td>
 <p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
 </td></tr>
-<tr><td><code>atm</code></td>
+<tr><td><code id="EFM_+3A_atm">atm</code></td>
 <td>
 <p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
 </td></tr>
-<tr><td><code>temp</code></td>
+<tr><td><code id="EFM_+3A_temp">temp</code></td>
 <td>
 <p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
 </td></tr>
@@ -184,4 +184,4 @@ commit. Retain those and the analysis script separately for exact reproduction.
 }
 </code></pre>
 
-<p><a href="../fn-efm.html">EFM() method</a></p></body></html>
+<h3>Scientific validation</h3><p>A07 examines independent crossover selection and sensitivity to the illumination cutoff. <a href="../lunar-crossovers.html#a07-scientific">A07 study and results</a>.</p></body></html>

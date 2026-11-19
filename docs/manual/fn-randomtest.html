@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -707,12 +707,22 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -723,6 +733,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -763,6 +778,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -833,10 +853,10 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. <a href="./d02-bearing-propagation.html#pole-propagation">D02 validation study</a>.</p>
 <p>The 500-simulation Ggantija-phase workflow in W02 reproduced the bundled global probability, local intervals and adjusted probabilities. <a href="./w02-field-to-sky.html">W02 results</a>.</p>
-<p>In S01, at a nominal 5 percent level the global rejection rate was 4.25 to 5.85 percent across the tested uniform-null settings with sufficient Monte Carlo resolution. Build 2.0.9007 uses the source azimuth density spacing and cutoff for simulations and matches the observed SPD spacing on the shared-horizon route. Refit earlier analyses that used different settings. <a href="./s01-uniform-orientation.html">S01 results</a>.</p>
-<p><strong>Verified on 2.0.9006.</strong> The global score counts north once. A qualifying excess across north is reported as one interval with start greater than end. <a href="./s03-scoring-checks.html">S03 rerun</a>.</p>
-<p><strong>Validation on 2.0.9005.</strong> Independent scoring reproduced the stored linear-grid probabilities. A north-crossing azimuth excess can split into two clusters; including both 0 and 360 degrees can also affect the global rank. <a href="./s03-scoring-checks.html">S03 results</a>.</p>
+<p>In S01, at a nominal 5 percent level the global rejection rate was 4.25 to 5.85 percent across the tested uniform-null settings with sufficient Monte Carlo resolution. The package uses the source azimuth density spacing and cutoff for simulations and matches the observed SPD spacing on the shared-horizon route. <a href="./s01-uniform-orientation.html">S01 results</a>.</p>
+<p>The global score counts north once. A qualifying excess across north is reported as one interval with start greater than end. <a href="./s03-scoring-checks.html">S03 checks</a>.</p>
 <p>The null draw relocates each observation’s full measurement model, including triangular asymmetry, taper and independent survey error. <a href="./orientation-densities.html#measurement-families">Measurement families</a>.</p>
 <p><a href="function-index.html#idx-randomtest">Function index</a></p>
 <p>Following Silva (2020), the test combines the observed measurement densities into a summed probability density (SPD).
@@ -1369,8 +1389,8 @@ No original PDFs or horizon objects are attached.
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./study-register.html" class="pagination-link" aria-label="Studies by question and package build">
-        <span class="nav-page-text"><span class="chapter-title">Studies by question and package build</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./study-register.html" class="pagination-link" aria-label="Validation studies by question">
+        <span class="nav-page-text"><span class="chapter-title">Validation studies by question</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

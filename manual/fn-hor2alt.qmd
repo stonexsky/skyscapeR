@@ -1,5 +1,9 @@
 # `hor2alt()` {#fn-hor2alt}
 
+Intervals estimated from other observing groups covered 91.0 and 88.8 percent of bearings in two terrain-radius selections. [H01 validation study](h01-field-validation.qmd#withheld-stations).
+
+Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. [H04 validation study](h04-feature-resolution.qmd#h04-feature-resolution).
+
 In H07, lookup at each edge of a north-crossing panorama returned its measured altitude and lookup beyond either edge returned NA. [H07 results](h07-panorama-coverage.qmd).
 
 [Function index](function-index.html#idx-hor2alt)

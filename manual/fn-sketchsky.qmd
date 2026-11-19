@@ -1,5 +1,9 @@
 # `sketchSky()` {#fn-sketchsky}
 
+Diffuse V-band brightness was compared with six fields outside the Carina calibration aperture. [V04 validation study](v04-diffuse-photometry.qmd#v04-diffuse-photometry).
+
+Publication-colour and publication-mono sketches attenuate the Milky Way towards the horizon using `k` by default. Set `band.extinction = FALSE` to display its intrinsic structure in those styles. Natural skies apply atmospheric transmission to the band. A native `skyStep()` carries the stored setting into the next frame.
+
 W02 verified the reconstructed Gacrux bearing and altitude at the same instant and viewpoint using direct equatorial coordinates and spherical geometry. [W02 results](w02-field-to-sky.qmd).
 
 [Function index](function-index.html#idx-sketchsky)
@@ -96,7 +100,7 @@ the cutoff includes additional stars only where the catalogue supplies them.</p>
 for natural style. Defaults to <code>skyscapeR.vars()$k</code>, initially 0.2.
 This clear-sky baseline is an assumption, not an estimate of the site's weather.
 Zero removes extinction and the modelled lunar scattering. Publication styles
-do not apply extinction to symbols.</p></td></tr></tbody></table><h5>Return value</h5><p>An object of classes <code>skyscapeR.sketch</code> and <code>skyscapeR.sky</code>.
+do not apply extinction to symbols.</p></td></tr><tr><th scope="row"><code>band.extinction</code></th><td><code>TRUE</code></td><td><p>Logical. Defaults to TRUE. Set to FALSE to disable Milky Way extinction in publication styles. Natural style already applies it.</p></td></tr></tbody></table><h5>Return value</h5><p>An object of classes <code>skyscapeR.sketch</code> and <code>skyscapeR.sky</code>.
 It stores <code>jd</code>, <code>loc</code>, <code>style</code>, <code>display</code>, <code>settings</code>
 (calendar, magnitude cutoff and extinction), and <code>atmosphere</code>.
 <code>stars</code> and <code>coords</code> contain azimuth, altitude and symbol size;

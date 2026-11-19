@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./s01-uniform-orientation.html" rel="next">
-<link href="./h02-skyline-comparison.html" rel="prev">
+<link href="./h04-feature-resolution.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -707,12 +707,22 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -723,6 +733,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -763,6 +778,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -833,8 +853,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>A photograph covering 330° through north to 30° supplies no terrain height at 180°. In the archived manual example, 2.0.9007 returned a finite declination distribution spanning −39.302° to −35.032° for a uniform bearing of 180° ± 1°, and a sunrise at 92.481° on 20 March 2026. Direct altitude lookup already returned a missing value at 180°. The shifted profile rows intended to support interpolation at north also allowed other consumers to interpolate across the missing sector.</p>
-<p>Build 2.0.9008 checks coverage at the point of use. In the archived example both the unsupported transformation and the sunrise search now give explicit coverage errors. The complete test suite also supplied an independent level mask with known edges.</p>
+<p>A photograph covering 330° through north to 30° supplies no horizon altitude at 180°. Coverage is checked before transforming positive density or searching for events.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -865,7 +884,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p>All 33 assertions and the archived replay passed. The results concern the recorded azimuth sector of an imported panorama. They do not calibrate the photograph’s angular accuracy. <a href="archives/H07-9008.zip">Download H07 fixtures, scripts and results</a>.</p>
+<p>All 33 assertions passed. The results concern the recorded azimuth sector of an imported panorama. They do not calibrate the photograph’s angular accuracy. <a href="archives/H07.zip">Download H07 fixtures, scripts and results</a>.</p>
 
 
 
@@ -1272,8 +1291,8 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./h02-skyline-comparison.html" class="pagination-link" aria-label="H02. How well does `createHor()` reproduce terrain skylines?">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></span>
+      <a href="./h04-feature-resolution.html" class="pagination-link" aria-label="H04 · Thin features and partial occlusion">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">H04 · Thin features and partial occlusion</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

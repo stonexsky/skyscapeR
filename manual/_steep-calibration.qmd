@@ -1,0 +1,9 @@
+Across 240,000 fits, the following ranges give the smallest and largest observed rejection proportions across four skyline/weight designs and both requested spacings at nominal 5%. Each individual estimate uses 10,000 datasets.
+
+| Bearing family | Global rejection | Any adjusted local rejection |
+|---|---:|---:|
+| Normal | 4.68%–5.19% | 4.65%–5.12% |
+| Epanechnikov | 4.60%–5.20% | 4.76%–5.06% |
+| Triangular | 4.59%–5.12% | 4.59%–5.28% |
+
+The ranges describe the specific matched-null fixtures. Simulations and observations use the same numerical propagation. The archive gives each rejection count, denominator and pointwise 95% Wilson interval. Correlated observations or estimated model weights require a separate calibration.

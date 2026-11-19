@@ -1,6 +1,6 @@
 # Calendar, density and significance checks {#numerical-validation}
 
-A01, D01 and S03 tested the unmodified skyscapeR **2.0.9005** source archive, SHA-256 `0446c0a57afe16274e7ef033113ac8d9f251b4f812b1a2d2ea22eac145bb3bbe`. [Download the exact tested package](archives/skyscapeR_2.0.9005.tar.gz). D01 and S03 were subsequently rerun on [build 2.0.9006](archives/skyscapeR_2.0.9006.tar.gz), SHA-256 `0a97b65385bb253b75b287f160b6e79da63a0ddae29b6be31c5ad6902c6cd6d2`. Each study uses a numerical reference independent of the implementation under test. Each archive contains the scripts, expected and observed quantities and reproduction instructions. The previous chapters identify the builds used for their own examples.
+The studies below give the reference calculation, test conditions and interpretation for each result.
 
 - [A01 · Calendar, clock and angular conventions](a01-calendar-checks.qmd)
 - [D01 · Measurement densities, sums and highest-density regions](d01-density-checks.qmd)

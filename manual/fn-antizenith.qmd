@@ -6,7 +6,7 @@ A05 verified the geometric anti-zenith declination and tropical-boundary eligibi
 
 ```{=html}
 <p>The direction opposite the zenith corresponds geometrically to minus the site latitude.
-Build 2.0.9009 tests the site against the obliquity at the requested epoch. At the geometric anti-zenith, parallax vanishes. It
+The function tests the site against the obliquity at the requested epoch. At the geometric anti-zenith, parallax vanishes. It
 returns NULL outside that band. This is a target declination for comparison with
 orientations, not an observable solar transit below ground.
 </p>

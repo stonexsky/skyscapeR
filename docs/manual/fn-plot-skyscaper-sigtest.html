@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -707,12 +707,22 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -723,6 +733,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -763,6 +778,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -833,18 +853,17 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Labelled angular ticks and shorter minor ticks adapt to the displayed range and physical plot width in both the main and local-significance layouts. The plotted intervals and probabilities come from the stored fit.</p>
 <p>W01 checked clipped local intervals, the pointwise envelope and the global probability label against the stored fit. <a href="./w01-plot-geometry.html">W01 results</a>.</p>
-<p><strong>Verified on 2.0.9006.</strong> On a full-turn panel, a cluster crossing north can have two visible segments with one shared probability. <a href="./s03-scoring-checks.html">S03 rerun</a>.</p>
-<p><strong>Validation on 2.0.9005.</strong> The tested public fits plotted the stored local interval midpoints and significance symbols. North-crossing intervals can appear separately. <a href="./s03-scoring-checks.html">S03 results</a>.</p>
+<p>On a full-turn panel, a cluster crossing north can have two visible segments with one shared probability. <a href="./s03-scoring-checks.html">S03 checks</a>.</p>
 <p><a href="function-index.html#idx-plot-skyscaper-sigtest">Function index</a></p>
 <p>The observed curve and envelope use the azimuth or declination grid stored in the test
 result. The two-tailed display shades between its lower and upper pointwise bounds; the
 one-tailed display shades up to the upper bound from zero. Optional annotations show the
 stored global p-value and the local intervals, coloured by deficit or excess and
-labelled by p-value symbols. The observed and envelope curves jointly set the visible vertical range. The lower panel identifies adjusted and legacy unadjusted local results. The plot reads the fitted result without repeating the
+labelled by p-value symbols. The observed and envelope curves jointly set the visible vertical range. The lower panel identifies adjusted local results. The plot reads the fitted result without repeating the
 simulations. New local values use maximum-cluster adjustment under the complete null;
-cluster endpoints remain descriptive, not confidence limits. Legacy fits retain their
-original unadjusted values. Interpret local regions alongside the whole-curve test.
+cluster endpoints remain descriptive, not confidence limits.  Interpret local regions alongside the whole-curve test.
 </p>
 <p><strong>Interpretation and limits.</strong> Keep the numerical global and adjusted local p-values with the output. Symbol thresholds and the placement of a band on the plot do not supply extra precision about its endpoints.</p>
 <details>

@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>findTargets | skyscapeR 2.0.9009</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-findtargets.html">findTargets() method</a></nav><h2 id='findTargets'>Find celestial targets within declination and time ranges</h2><span id='topic+findTargets'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>findTargets | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-findtargets.html">findTargets() method</a></nav><h2 id='findTargets'>Find celestial targets within declination and time ranges</h2><span id='topic+findTargets'></span>
 
 <h3>Description</h3>
 
@@ -23,33 +23,33 @@ orientation range during a proposed period of use.
 
 <h3>Arguments</h3>
 
-<table>
-<tr><td><code id="findTargets_:_decrange">decrange</code></td>
+<table role = "presentation">
+<tr><td><code id="findTargets_+3A_decrange">decrange</code></td>
 <td>
 <p>Range of declination to consider.</p>
 </td></tr>
-<tr><td><code id="findTargets_:_year">year</code></td>
+<tr><td><code id="findTargets_+3A_year">year</code></td>
 <td>
 <p>Temporal range to consider. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p>
 </td></tr>
-<tr><td><code id="findTargets_:_loc">loc</code></td>
+<tr><td><code id="findTargets_+3A_loc">loc</code></td>
 <td>
 <p>FALSE for geocentric declinations, a vector of latitude, longitude and elevation, or a skyscapeR.horizon to also evaluate the local horizon.</p>
 </td></tr>
-<tr><td><code id="findTargets_:_max.mag">max.mag</code></td>
+<tr><td><code id="findTargets_+3A_max.mag">max.mag</code></td>
 <td>
 <p>Maximum magnitude of stars to consider. Defaults to 2.5</p>
 </td></tr>
-<tr><td><code id="findTargets_:_dates">dates</code></td>
+<tr><td><code id="findTargets_+3A_dates">dates</code></td>
 <td>
 <p>Whether to display time period when identified celestial targets
 occur within declination range. Default is FALSE.</p>
 </td></tr>
-<tr><td><code id="findTargets_:_calendar">calendar</code></td>
+<tr><td><code id="findTargets_+3A_calendar">calendar</code></td>
 <td>
 <p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p>
 </td></tr>
-<tr><td><code id="findTargets_:_timerange">timerange</code></td>
+<tr><td><code id="findTargets_+3A_timerange">timerange</code></td>
 <td>
 <p>Earlier argument name for <code>year</code>, retained for existing scripts.</p>
 </td></tr>
@@ -90,6 +90,12 @@ recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-pa
 </p>
 
 
+<h3>Validation</h3>
+
+<p>A08 verified closed-band membership, separate stellar passages, sampled contact, magnitude filtering and comparisons before display rounding. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#a08-target-ranges">A08 check in the technical manual</a>.
+</p>
+
+
 <h3>Candidate selection and visibility</h3>
 
 <p>A match is a declination overlap, not evidence that a celestial object was
@@ -127,12 +133,6 @@ This attribute adds no list entries or table columns. Ordinary subsetting or
 transformations may discard attributes; save the original result for reference.
 It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
-</p>
-
-
-<h3>Validation</h3>
-
-<p>A08 verified closed-band membership, separate stellar passages, sampled contact, magnitude filtering and comparisons before display rounding. See the <a href="../a08-target-ranges.html">A08 check in the technical manual</a>.
 </p>
 
 

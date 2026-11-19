@@ -2,9 +2,8 @@
 
 For two bearings on a shared slope, the D02 comparison of summing before and after transformation gave an integrated absolute density difference of 0.00159 after normalisation. [D02 results](d02-bearing-propagation.qmd).
 
-**Verified on 2.0.9006.** Broad azimuth SPDs were continuous at north and correctly interpolated across the final grid segment. [D01 rerun](d01-density-checks.qmd).
+Broad azimuth SPDs were continuous at north and correctly interpolated across the final grid segment. [D01 checks](d01-density-checks.qmd).
 
-**Validation on 2.0.9005.** The tested sums agreed with independently constructed density sums, and the normalised curves had unit trapezoidal area. [D01 results](d01-density-checks.qmd).
 
 [Function index](function-index.html#idx-spd)
 
@@ -19,10 +18,7 @@ range it retains the calculated heights across that range.
 the returned grid. An explicit restricted <code>xrange</code> therefore normalises
 the retained portion only. Zero-area, nonfinite or negative densities and
 grids with fewer than two points cannot be normalised and produce an error.
-Earlier versions divided by the sum of sampled heights. Normalised outputs
-now have a different scale; on a regular grid with zero endpoint densities,
-new heights equal old heights divided by <code>.res</code>. Existing saved objects
-are not converted. Changing resolution can still affect interpolation and
+Changing resolution can still affect interpolation and
 truncation accuracy, but the returned trapezoidal area is one.
 </p>
 ```

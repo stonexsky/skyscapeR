@@ -1,8 +1,9 @@
 # `az.pdf()` {#fn-az-pdf}
 
-**Verified on 2.0.9006.** Periodic azimuth densities passed the fine-grid and wide-width D01 checks. [D01 rerun](d01-density-checks.qmd).
+Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. [D02 validation study](d02-bearing-propagation.qmd#pole-propagation).
 
-**Validation on 2.0.9005.** The analytic density checks in D01 found a folding error near north at 0.005-degree spacing and omitted periodic tails in the two 100-degree-width cases. [D01 results](d01-density-checks.qmd).
+Periodic azimuth densities passed the fine-grid and wide-width D01 checks. [D01 checks](d01-density-checks.qmd).
+
 
 [Function index](function-index.html#idx-az-pdf)
 

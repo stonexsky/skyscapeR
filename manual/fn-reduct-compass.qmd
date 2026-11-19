@@ -1,5 +1,7 @@
 # `reduct.compass()` {#fn-reduct-compass}
 
+F01 examines magnetic and solar reductions against independent references. [F01 study and results](field-reduction.html#f01-scientific).
+
 W02 checked north-crossing magnetic readings against the supplied corrections before passing true bearings into a skyline analysis. [W02 results](w02-field-to-sky.qmd).
 
 [Function index](function-index.html#idx-reduct-compass)

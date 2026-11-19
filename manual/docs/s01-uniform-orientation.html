@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -707,12 +707,22 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -723,6 +733,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -763,6 +778,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -834,7 +854,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>How frequently does <a href="help/randomTest.html"><code>randomTest()</code></a> reject when orientations have been independently drawn from its stated uniform-bearing model? How frequently does it detect a cluster of known strength and width? We fixed the survey geometry, measurement widths, sample size and bearing support before drawing each dataset.</p>
-<p><strong>Implementation check.</strong> In 2.0.9006 the simulated PDFs used the constructor’s default spacing and cutoff. The shared-horizon simulation also summed the bearings at the default SPD spacing, whereas the observed sum used the requested spacing. With identical centres of 30° and 120°, widths of 22° and 32°, a 30° source grid, a 0.0001 source cutoff and a 2° test spacing, maximum absolute observed–simulated density differences were 0.00203 for azimuth, 0.02020 for the shared skyline and 0.17537 for site-paired declinations. On 2.0.9007 all three differences were zero. The correction can affect probabilities calculated with non-default source settings and the shared-horizon route whenever its selected SPD spacing differed from the simulation default. Refit affected analyses from their original inputs. The 2.0.9007 socket worker setup also resolves the parent library path on each worker. In a two-library installation, the corrected serial and two-worker results agreed exactly on all three routes.</p>
+<p><strong>Implementation check.</strong> The simulated measurements reuse each observation’s family, width, grid spacing and cutoff. The shared-horizon route sums observed and simulated bearings at the requested spacing. The public-interface fixtures test curve reconstruction and Monte Carlo ranks with fixed inputs and seeds.</p>
 <p><strong>Design.</strong> We ran 2,000 independent outer datasets in each of 13 null settings and four cluster alternatives. Every outer dataset had fresh Monte Carlo reference draws. Normal and uniform measurement families, sample sizes of 2 to 24, one and two tails, different grid widths and 9, 19, 39 or 99 simulations were represented. For each outer fit we recorded the global probability and the smallest maximum-cluster-adjusted probability across the reported intervals, assigning one when there was no interval. The preselected thresholds were 1%, 5% and 10%. Finite ranks have spacing <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>B</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">1/(B+1)</annotation></semantics></math>, with inclusive ranking for ties.</p>
 <p>To make repeated calculations feasible we reused deterministic package-generated densities for each permitted bearing, width and site. For the shared route we tabulated the entire transform for every ordered input pair. A separate implementation scored the pooled observed and simulated curves. In 16 public-interface replays, all reconstructed curves agreed within <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8</mn><mo>×</mo><msup><mn>10</mn><mrow><mi>−</mi><mn>15</mn></mrow></msup></mrow><annotation encoding="application/x-tex">8\times10^{-15}</annotation></semantics></math> in density and all global and minimum local probabilities agreed exactly. The shared-route design uses two observations and six or twelve possible directions. Its calibration applies to those designs.</p>
 <p><strong>Null results.</strong> Entries give the rejection percentage at the nominal 5% level, with pointwise 95% Wilson intervals over datasets. A local rejection means at least one adjusted interval crossed the threshold.</p>
@@ -870,7 +890,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Two bearings, shared rough skyline</td>
 <td style="text-align: right;">5.50% (4.58–6.59)</td>
-<td style="text-align: right;">5.70% (4.77–6.80)</td>
+<td style="text-align: right;">5.65% (4.72–6.75)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Two bearings, shared rough skyline, 12 directions</td>
@@ -886,7 +906,7 @@ ul.task-list li input[type="checkbox"] {
 </table>
 <p>Across all null settings in which a 5% rejection was attainable, global rates ranged from 4.25% to 5.85% and any-local rates from 4.25% to 5.85%. With nine simulations the smallest possible probability was 0.10, so no dataset could reject at 0.05. Results at 0.01 and 0.10, counts, confidence intervals, and every individual rank are in the reproduction archive.</p>
 <p><strong>Power.</strong> With twelve measurements and 39 simulations, injecting three bearings from a 24° standard-deviation cluster centred at north gave 9.30% global rejection. Injecting six at that width gave 30.35%. Narrowing the six-bearing cluster to 6° raised global rejection to 92.40% and any-local rejection to 93.70%. With site-paired transformations the same narrow injection gave 63.20% global rejection and 69.75% any-local rejection. These estimates describe the specified support, widths, horizons and alternatives. Each null result assumes independent orientations with the stated measurement model.</p>
-<p><a href="archives/S01-reproduction.zip">Download the S01 reproduction scripts and all results</a>. <a href="archives/skyscapeR_2.0.9007.tar.gz">Installable source tested in S01</a>, SHA-256 <code>5bfe20d6a5a440da8b732700d19eb2e7741032f1923622bfc0abdf999b366767</code>.</p>
+<p><a href="archives/S01-reproduction.zip">Download the S01 reproduction scripts and all results</a>.</p>
 
 
 

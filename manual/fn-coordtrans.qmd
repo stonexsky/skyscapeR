@@ -1,8 +1,13 @@
 # `coordtrans()` {#fn-coordtrans}
 
+Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. [D02 validation study](d02-bearing-propagation.qmd#pole-propagation).
+
+The transformed-bearing null was tested with steep skylines, three measurement families and shared or site-specific candidate weights. [S02 validation study](s02-specified-models.qmd#steep-null).
+
+When a null predicts bearings and the analysis compares declinations, [the third modelTest route](significance.qmd#meth-model) applies this transformation separately to every observed and simulated measurement.
+
 For a partial photograph the stored positive bearing density must lie within its photographed sector. H07 verified agreement with a complete skyline on the covered north-crossing cases and rejection of uncovered densities. [H07 results](h07-panorama-coverage.qmd).
 
-In D02, declination quantiles agreed with direct propagation within 0.008 degrees across nine terrain and observer cases. Near the celestial pole the discrepancy reached 0.17 degrees on the fine grid; at the pole a zero conditional width prevented calculation. [D02 results](d02-bearing-propagation.qmd).
 
 The integration uses the full bearing density from any of the six measurement families. [Measurement families](orientation-densities.qmd#measurement-families).
 
@@ -14,7 +19,7 @@ potentially different part of the horizon. For every sampled bearing the functio
 interpolates horizon altitude and uncertainty, maps an altitude range to declination and
 approximates the conditional declination distribution by a Gaussian. It weights that
 distribution by the azimuth density and integrates the product by the trapezoidal rule.
-A shared horizon can serve several observations, or a supplied list can represent their
+For positive altitude uncertainties, near-pole cases use direct quadrature over the spherical transformation. Internal calculations retain full precision. A shared horizon can serve several observations, or a supplied list can represent their
 individual sites.
 </p>
 <p>Density values are calculated at declination spacing <code>.res</code>, then
@@ -54,7 +59,7 @@ in skyscape archaeology <em>Journal of Archaeological Science</em> 118, 105138. 
 
 ```{=html}
 <table><thead><tr><th>Argument</th><th>Formal default</th><th>Behaviour in this interface</th></tr></thead><tbody><tr><th scope="row"><code>pdf</code></th><td>—</td><td><p>A <em>skyscapeR.pdf</em> object created with <code>az.pdf</code> or a <em>skyscapeR.spd</em> object created with <code>spd</code></p></td></tr><tr><th scope="row"><code>hor</code></th><td>—</td><td><p>A shared <code>skyscapeR.horizon</code> or, for individual azimuth PDFs, a list of horizons in measurement order.</p></td></tr><tr><th scope="row"><code>xrange</code></th><td>—</td><td><p>Array of values (min and max) for SPD when transforming a <em>skyscapeR.spd</em> object.</p></td></tr><tr><th scope="row"><code>.res</code></th><td><code>0.1</code></td><td><p>Spacing of the declination calculation grid, in degrees. Default 0.1.</p></td></tr><tr><th scope="row"><code>.prec</code></th><td><code>0.1</code></td><td><p>Azimuth integration spacing, in degrees. Default 0.1.
-Previously ignored; smaller values increase integration work. Must not exceed 540.</p></td></tr><tr><th scope="row"><code>.output.res</code></th><td><code>0.01</code></td><td><p>Spacing of the returned declination grid, in degrees.
+Smaller values increase integration work. Must not exceed 540.</p></td></tr><tr><th scope="row"><code>.output.res</code></th><td><code>0.01</code></td><td><p>Spacing of the returned declination grid, in degrees.
 Default 0.01. Coarser spacing reduces output size. All spacings must be
 positive finite scalars, and the returned grid must contain at least two points.</p></td></tr><tr><th scope="row"><code>verbose</code></th><td><code>TRUE</code></td><td><p>Logical. Display progress or informational messages. Default <code>TRUE</code>.</p></td></tr></tbody></table><h5>Return value</h5><p>A <code>skyscapeR.pdf</code> object for PDF input, or a <code>skyscapeR.spd</code>
 object for SPD input. Both contain <code>metadata</code> and <code>data</code>. PDF data

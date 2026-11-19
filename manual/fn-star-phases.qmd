@@ -1,5 +1,7 @@
 # `star.phases()` {#fn-star-phases}
 
+Six stellar positions were compared with independently propagated catalogue directions from 3500 BCE to 2000 CE. [A03 validation study](a03-stellar-positions.qmd#a03-stellar-positions).
+
 W02 replayed the Gacrux heliacal-rising date at Skorba West and passed it to the crossing and sky-reconstruction calculations. [W02 results](w02-field-to-sky.qmd).
 
 Seasonal searches require full skyline coverage. H07 checked rejection of a partial photograph and successful calculation with the full profile. [H07 results](h07-panorama-coverage.qmd).
@@ -134,7 +136,7 @@ versions; an unavailable version is NA, for example when sourcing functions
 outside a package namespace. Version strings do not uniquely identify
 development builds. Retain the original script, code revision and ephemeris
 files as well: the saved metadata do not identify or archive those files.
-Earlier saved results do not acquire these fields automatically.
+
 </p>
 ```
 

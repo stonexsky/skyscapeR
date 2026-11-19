@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>stellariumSky | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-skystep.html">skyStep() method</a> · <a href="../fn-stellariumsky.html">stellariumSky() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Capture and step through the Stellarium sky above a horizon</h2><span></span><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>stellariumSky | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-skystep.html">skyStep() method</a> · <a href="../fn-stellariumsky.html">stellariumSky() method</a></nav><h2 id='stellariumSky'>Capture and step through the Stellarium sky above a horizon</h2><span id='topic+stellariumSky'></span><span id='topic+skyStep'></span>
 
 <h3>Description</h3>
 
@@ -27,56 +27,56 @@ skyStep(hor, sky, minutes = 1, ...)
 
 <h3>Arguments</h3>
 
-<table>
-<tr><td><code>hor</code></td>
+<table role = "presentation">
+<tr><td><code id="stellariumSky_+3A_hor">hor</code></td>
 <td>
 <p>Site horizon with latitude, longitude and elevation in metres.</p>
 </td></tr>
-<tr><td><code>jd</code></td>
+<tr><td><code id="stellariumSky_+3A_jd">jd</code></td>
 <td>
 <p>Numeric UT Julian day. Supply either jd or time.</p>
 </td></tr>
-<tr><td><code>screenshot.dir</code></td>
+<tr><td><code id="stellariumSky_+3A_screenshot.dir">screenshot.dir</code></td>
 <td>
 <p>Existing local directory where Stellarium writes screenshots.</p>
 </td></tr>
-<tr><td><code>port</code></td>
+<tr><td><code id="stellariumSky_+3A_port">port</code></td>
 <td>
 <p>Local Remote Control server port.</p>
 </td></tr>
-<tr><td><code>timeout</code></td>
+<tr><td><code id="stellariumSky_+3A_timeout">timeout</code></td>
 <td>
 <p>Maximum wait for the capture in seconds.</p>
 </td></tr>
-<tr><td><code>time</code></td>
+<tr><td><code id="stellariumSky_+3A_time">time</code></td>
 <td>
 <p>A date and clock time such as &quot;2026/12/21 16:00&quot;, or a POSIXct or POSIXlt instant.</p>
 </td></tr>
-<tr><td><code>timezone</code></td>
+<tr><td><code id="stellariumSky_+3A_timezone">timezone</code></td>
 <td>
 <p>For character time, a zone name or fixed UTC offset as in time2jd(). Defaults to the package setting.</p>
 </td></tr>
-<tr><td><code>calendar</code></td>
+<tr><td><code id="stellariumSky_+3A_calendar">calendar</code></td>
 <td>
 <p>For character time, the Gregorian or Julian calendar as in time2jd(). Defaults to the package setting.</p>
 </td></tr>
-<tr><td><code>display</code></td>
+<tr><td><code id="stellariumSky_+3A_display">display</code></td>
 <td>
 <p>Named logical switches: atmosphere, landscape, fog, cardinals, compass.marks (numbered horizon bearings), azimuthal.grid, equatorial.grid, constellation.lines, constellation.labels (names) and constellation.art. Use galactic.equator to toggle the Galactic equator independently of the equatorial grid. Use ecliptic and equator for the lines of date, poles for the celestial poles and zenith for the Stellarium zenith/nadir markers. Older Stellarium versions may require the Compass Marks plugin to be loaded to show the bearings. Landscape and fog default to FALSE so the site horizon supplies the foreground. Other omitted switches use the current Stellarium setting.</p>
 </td></tr>
-<tr><td><code>width</code></td>
+<tr><td><code id="stellariumSky_+3A_width">width</code></td>
 <td>
 <p>Even screenshot width in pixels, up to 8192. The default <code>NULL</code> uses the size configured in Stellarium. Try 4096 if a larger capture fails. For a narrow sector, <code>sketchSky</code> gives scalable vector detail.</p>
 </td></tr>
-<tr><td><code>sky</code></td>
+<tr><td><code id="stellariumSky_+3A_sky">sky</code></td>
 <td>
 <p>A background returned by sketchSky(), stellariumSky() or skyStep().</p>
 </td></tr>
-<tr><td><code>minutes</code></td>
+<tr><td><code id="stellariumSky_+3A_minutes">minutes</code></td>
 <td>
 <p>Signed elapsed minutes from the captured instant. Fractions are allowed.</p>
 </td></tr>
-<tr><td><code>...</code></td>
+<tr><td><code id="stellariumSky_+3A_...">...</code></td>
 <td>
 <p>Arguments passed to plot(hor, sky=...), such as xrange.</p>
 </td></tr>
@@ -162,4 +162,4 @@ sky &lt;- skyStep(hor, sky, minutes = -0.5, xrange = sector)
 ## End(Not run)
 </code></pre>
 
-<p><a href="../fn-skystep.html">skyStep() method</a> · <a href="../fn-stellariumsky.html">stellariumSky() method</a></p></body></html>
+<h3>Validation studies</h3><p>Diffuse V-band brightness was compared with six fields outside the Carina calibration aperture. <a href="../v04-diffuse-photometry.html#v04-diffuse-photometry">V04 validation study</a>.</p></body></html>

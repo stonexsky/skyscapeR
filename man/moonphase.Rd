@@ -35,6 +35,11 @@ recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for s
 In A02, all 108 illuminated fractions agreed with the direct Swiss Ephemeris calculation across 54 epochs and two file generations. This checks the R interface. Observed lunar photometry was outside the study. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
 }
 
+\section{Scientific validation}{
+
+A07 examines independent crossover selection and sensitivity to the illumination cutoff. \href{https://stonexsky.github.io/skyscapeR/manual/lunar-crossovers.html#a07-scientific}{A07 scientific validation}.
+}
+
 \examples{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
   # Moonphase at noon GMT on Christmas day 2018:

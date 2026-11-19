@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>timestring | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-timestring.html">timestring() method</a></nav><p><strong>Validation on 2.0.9005.</strong> Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. <a href="../a01-calendar-checks.html">A01 study</a>.</p><p>skyscapeR 2.0.9004</p><h2>Assemble a timestamp from calendar and clock fields</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>timestring | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-timestring.html">timestring() method</a></nav><h2 id='timestring'>Assemble a timestamp from calendar and clock fields</h2><span id='topic+timestring'></span>
 
 <h3>Description</h3>
 
@@ -15,28 +15,28 @@ package's ephemeris routines.
 
 <h3>Arguments</h3>
 
-<table>
-<tr><td><code>year</code></td>
+<table role = "presentation">
+<tr><td><code id="timestring_+3A_year">year</code></td>
 <td>
 <p>Year. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p>
 </td></tr>
-<tr><td><code>month</code></td>
+<tr><td><code id="timestring_+3A_month">month</code></td>
 <td>
 <p>Month</p>
 </td></tr>
-<tr><td><code>day</code></td>
+<tr><td><code id="timestring_+3A_day">day</code></td>
 <td>
 <p>Day</p>
 </td></tr>
-<tr><td><code>hour</code></td>
+<tr><td><code id="timestring_+3A_hour">hour</code></td>
 <td>
 <p>Hour</p>
 </td></tr>
-<tr><td><code>minute</code></td>
+<tr><td><code id="timestring_+3A_minute">minute</code></td>
 <td>
 <p>Minute</p>
 </td></tr>
-<tr><td><code>second</code></td>
+<tr><td><code id="timestring_+3A_second">second</code></td>
 <td>
 <p>Second</p>
 </td></tr>
@@ -59,6 +59,12 @@ it.
 </p>
 
 
+<h3>Validation</h3>
+
+<p>A01 verified all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See <a href="https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks">A01 validation in the technical manual</a>.
+</p>
+
+
 <h3>See Also</h3>
 
 <p><code>time2jd</code>, <code>jd2time</code>, <code>BC.AD</code>, <code>long.date</code>
@@ -70,4 +76,4 @@ it.
 <pre><code class='language-R'>timestring(2018, 12, 25, 2, 34)
 </code></pre>
 
-<p><a href="../fn-timestring.html">timestring() method</a></p></body></html>
+</body></html>

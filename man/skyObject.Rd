@@ -87,6 +87,11 @@ It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
 }
 
+\section{Validation studies}{
+
+Six stellar positions were compared with independently propagated catalogue directions from 3500 BCE to 2000 CE. \href{https://stonexsky.github.io/skyscapeR/manual/a03-stellar-positions.html#a03-stellar-positions}{A03 validation study}.
+}
+
 \examples{
 # Create an object with solar targets for epoch range 4001-2001 BC:
 tt <- skyObject('solar extremes', c("4001 BC", "2001 BC"))

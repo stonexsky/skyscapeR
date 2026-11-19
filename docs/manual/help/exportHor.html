@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>exportHor | skyscapeR 2.0.9008</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-exporthor.html">exportHor() method</a> · <a href="../fn-exportstellarium.html">exportStellarium() method</a></nav><h2 id='exportHor'>Export a site horizon as a Stellarium landscape</h2><span id='topic+exportHor'></span><span id='topic+exportStellarium'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>exportHor | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-exporthor.html">exportHor() method</a> · <a href="../fn-exportstellarium.html">exportStellarium() method</a></nav><h2 id='exportHor'>Export a site horizon as a Stellarium landscape</h2><span id='topic+exportHor'></span><span id='topic+exportStellarium'></span>
 
 <h3>Description</h3>
 
@@ -37,42 +37,42 @@ exportStellarium(
 
 <h3>Arguments</h3>
 
-<table>
-<tr><td><code id="exportHor_:_hor">hor</code></td>
+<table role = "presentation">
+<tr><td><code id="exportHor_+3A_hor">hor</code></td>
 <td>
 <p>Horizon data in <em>skyscapeR.horizon</em> format.</p>
 </td></tr>
-<tr><td><code id="exportHor_:_name">name</code></td>
+<tr><td><code id="exportHor_+3A_name">name</code></td>
 <td>
 <p>Horizon name to be displayed in <em>Stellarium</em>, if different
 from one in <em>skyscapeR.horizon</em> object.</p>
 </td></tr>
-<tr><td><code id="exportHor_:_author">author</code></td>
+<tr><td><code id="exportHor_+3A_author">author</code></td>
 <td>
 <p>Author, to be included in <em>landscape.ini</em> file.</p>
 </td></tr>
-<tr><td><code id="exportHor_:_description">description</code></td>
+<tr><td><code id="exportHor_+3A_description">description</code></td>
 <td>
 <p>Description, to be included in <em>landscape.ini</em> file.</p>
 </td></tr>
-<tr><td><code id="exportHor_:_use.image">use.image</code></td>
+<tr><td><code id="exportHor_+3A_use.image">use.image</code></td>
 <td>
 <p>Include a valid external panorama PNG when available. Default TRUE.
 Missing or changed files warn and use a polygonal horizon instead.</p>
 </td></tr>
-<tr><td><code id="exportHor_:_peakfinder.layout">peakfinder.layout</code></td>
+<tr><td><code id="exportHor_+3A_peakfinder.layout">peakfinder.layout</code></td>
 <td>
 <p>Single spherical PNG (default) or original native tiles. Textured DEM and PeakFinder exports use their PNG silhouette.</p>
 </td></tr>
-<tr><td><code id="exportHor_:_max.texture.width">max.texture.width</code></td>
+<tr><td><code id="exportHor_+3A_max.texture.width">max.texture.width</code></td>
 <td>
 <p>Maximum exported DEM or photographic panorama width in pixels. The default is 4096. Use max.texture.width=2048 for a smaller texture, or Inf to keep the original dimensions. Stellarium supports textures only up to the graphics hardware limit. PNG compression does not reduce the decoded texture dimensions. Larger exports are at your own risk and may fail to load or crash Stellarium. This setting does not resize PeakFinder textures.</p>
 </td></tr>
-<tr><td><code id="exportHor_:_ground_col">ground_col</code></td>
+<tr><td><code id="exportHor_+3A_ground_col">ground_col</code></td>
 <td>
 <p>Color of ground. Defaults to <em>Stellarium</em>'s default.</p>
 </td></tr>
-<tr><td><code id="exportHor_:_hor_col">hor_col</code></td>
+<tr><td><code id="exportHor_+3A_hor_col">hor_col</code></td>
 <td>
 <p>Colour of a polygonal horizon line. Textured DEM and PeakFinder landscapes omit this line.</p>
 </td></tr>
@@ -109,7 +109,7 @@ Export requires a working system ZIP command.
 
 <h3>Validation</h3>
 
-<p>H07 checked that a partial photograph is rejected for both image and numerical landscape export. See the <a href="../h07-panorama-coverage.html">H07 check in the technical manual</a>.
+<p>H07 checked that a partial photograph is rejected for both image and numerical landscape export. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage">H07 check in the technical manual</a>.
 </p>
 
 

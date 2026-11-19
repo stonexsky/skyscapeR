@@ -1,5 +1,7 @@
 # `star()` {#fn-star}
 
+Six stellar positions were compared with independently propagated catalogue directions from 3500 BCE to 2000 CE. [A03 validation study](a03-stellar-positions.qmd#a03-stellar-positions).
+
 [Function index](function-index.html#idx-star)
 
 ```{=html}

@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -707,12 +707,22 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -723,6 +733,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -763,6 +778,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -875,11 +895,11 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p>The prescribed track exercised the internal crossing solver. The named-star cases exercised <a href="help/riseset.html"><code>riseset()</code></a> on 1 January 2000 UTC. Mintaka’s reference used its noon declination from the same ephemeris and an independent spherical calculation. Polaris returned missing rise and set records on the eastern-ridge profile. All 14 event checks passed on 2.0.9006. The maximum absolute azimuth discrepancy was below 0.000001° for the prescribed track and below 0.000022° for Mintaka, against a tolerance of 0.001°. The extended study added 137 assertions, all of which passed.</p>
+<p>The prescribed track exercised the internal crossing solver. The named-star cases exercised <a href="help/riseset.html"><code>riseset()</code></a> on 1 January 2000 UTC. Mintaka’s reference used its noon declination from the same ephemeris and an independent spherical calculation. Polaris returned missing rise and set records on the eastern-ridge profile. All 14 event checks passed. The maximum absolute azimuth discrepancy was below 0.000001° for the prescribed track and below 0.000022° for Mintaka, against a tolerance of 0.001°. The extended study added 137 assertions, all of which passed.</p>
 <p>At latitudes 50° N and 35° S, we compared event counts, direction, order, times and bearings with a one-second scan and independently bisected roots on flat, uniformly raised, notched, ridge and step-like skylines. All 28 reference crossings were recovered with no extras. The maximum timing discrepancy was 0.00038 s against a tolerance of 0.02 s. Flat and raised times also agreed with the closed-form hour-angle solution. A constructed touch without a sign change produced no event; a two-second emergence produced both roots.</p>
 <p>On 2 January 2000, a ridge at 50° N, 100° E produced rise, set and re-emergence for Mintaka. The public function selected the first rise and first set independently with refraction both on and off. Independent five-second ephemeris scans located the same events within the 1.1 s allowance for whole-second output. Polaris returned no events at either 50° N (always above) or 50° S (always below). A lunar rise after the next local midnight returned the following date in UTC−02:30.</p>
 <p>At 35.90083° N, 14.34° E, we compared geometric centre crossings for the Sun and Moon with <a href="https://ssd.jpl.nasa.gov/horizons/">JPL Horizons</a>. The reference interpolates airless topocentric direction vectors and solves for clearance above the skyline. We tested both scalar and profile representations of a flat skyline and an asymmetric profile. The largest discrepancies were 0.842 s and 0.00410°, within the 3 s and 0.015° comparison tolerances. Doubling the reference sampling interval from 10 to 20 minutes moved the reference times by less than 0.001 s. The tolerances allow for whole-second timestamps and differing ephemeris conventions. These are tests of centre crossings. First limb contact and naked-eye visibility require different definitions.</p>
-<p><a href="archives/skyscapeR-9006-A04-D02-validation.zip">Download the reproduction scripts, input checksums and results for A04 and D02</a>.</p>
+<p><a href="archives/A04-D02.zip">Download the reproduction scripts, input checksums and results for A04 and D02</a>.</p>
 
 
 

@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -707,12 +707,22 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -723,6 +733,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -763,6 +778,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -833,9 +853,42 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>In S02, identical candidate bearings produced identical directly constructed observed and simulated densities on build 2.0.9008. Global rejection at the 5 percent level ranged from 4.35 to 5.50 percent under the six matched null designs. <a href="./s02-specified-models.html">S02 results</a>.</p>
-<p><strong>Verified on 2.0.9006.</strong> The observed and simulated azimuth curves use the same circular cluster search. The original test matrix gave one interval from 346° to 15°. <a href="./s03-scoring-checks.html">S03 rerun</a>.</p>
-<p><strong>Validation on 2.0.9005.</strong> Independent scoring reproduced the stored linear-grid probabilities. A north-crossing azimuth excess can split into two clusters; including both 0 and 360 degrees can also affect the global rank. <a href="./s03-scoring-checks.html">S03 results</a>.</p>
+<p>The transformed-bearing null was tested with steep skylines, three measurement families and shared or site-specific candidate weights. <a href="./s02-specified-models.html#steep-null">S02 validation study</a>.</p>
+<p>Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. <a href="./d02-bearing-propagation.html#pole-propagation">D02 validation study</a>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Empirical input and call</th>
+<th>Model angles</th>
+<th>Comparison</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>modelTest(Az, az.model)</code></td>
+<td>Azimuth</td>
+<td>Sum bearing densities on the circular azimuth grid.</td>
+</tr>
+<tr class="even">
+<td><code>modelTest(Dec, dec.model)</code></td>
+<td>Declination</td>
+<td>Sum declination densities. For transformed input, each candidate gives the mean to which its stored template is translated when <code>unc</code> is omitted.</td>
+</tr>
+<tr class="odd">
+<td><code>modelTest(Az, az.model, hor = horizons)</code></td>
+<td>Azimuth</td>
+<td>Transform each measured bearing density through its horizon, then sum in declination. Each simulation draws a bearing for each observation and repeats the individual transformations.</td>
+</tr>
+</tbody>
+</table>
+<p>For the third route, supply one shared horizon or a list in measurement order. A ridge can give a simulated bearing a different declination width or shape from the observed bearing. Model angles and replacement widths remain in azimuth degrees. The internal declination step (<code>.transform.res</code>, 0.1°), azimuth integration step (<code>.prec</code>, 0.1°) and output PDF spacing (<code>.output.res</code>, 0.01°) govern the transformation. The final comparison grid uses <code>.res</code> (0.01°). Record the atmospheric settings and the measurement-to-horizon mapping.</p>
+<p>In S02, identical candidate bearings produced identical directly constructed observed and simulated densities. Global rejection at the 5 percent level ranged from 4.35 to 5.50 percent under the six matched null designs. <a href="./s02-specified-models.html">S02 results</a>.</p>
+<p>The observed and simulated azimuth curves use the same circular cluster search. The original test matrix gave one interval from 346° to 15°. <a href="./s03-scoring-checks.html">S03 checks</a>.</p>
 <p>A directly measured triangular density follows the sampled mode, retaining its left/right proportions. Both softened uniform families preserve their second width in degrees. <a href="./orientation-densities.html#measurement-families">Measurement families</a>.</p>
 <p><a href="function-index.html#idx-modeltest">Function index</a></p>
 <p>A proposed topographical or astronomical explanation can predict some orientations more
@@ -901,7 +954,7 @@ Implementation arguments, return value and documented modes
 <tr class="odd">
 <th data-quarto-table-cell-role="th" scope="row"><code>pdf</code></th>
 <td>—</td>
-<td><p>Empirical skyscapeR.pdf from <code>az.pdf</code>, <code>dec.pdf</code> or <code>coordtrans</code>. Its coordinate selects the simulation path.</p></td>
+<td><p>Empirical skyscapeR.pdf from <code>az.pdf</code>, <code>dec.pdf</code> or <code>coordtrans</code>. Its coordinate and the optional hor select the simulation path.</p></td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th" scope="row"><code>model</code></th>
@@ -911,7 +964,7 @@ Implementation arguments, return value and documented modes
 <tr class="odd">
 <th data-quarto-table-cell-role="th" scope="row"><code>unc</code></th>
 <td><code>NULL</code></td>
-<td><p>Optional replacement width in degrees of the tested coordinate. Use a standard deviation for normal, half the total span for triangular, or the family-specific half-width documented in <code>az.pdf</code>. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.</p></td>
+<td><p>Optional replacement width in degrees of the input coordinate (azimuth on route 3). Use a standard deviation for normal, half the total span for triangular, or the family-specific half-width documented in <code>az.pdf</code>. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.</p></td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th" scope="row"><code>nsims</code></th>
@@ -948,12 +1001,33 @@ Implementation arguments, return value and documented modes
 <td><code>TRUE</code></td>
 <td><p>Display simulation progress.</p></td>
 </tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row"><code>hor</code></th>
+<td><code>NULL</code></td>
+<td><p>Optional shared skyscapeR.horizon or an ordered list matching the empirical observations. With azimuth inputs, selects a declination test using individual coordinate transformations. Omit for routes 1 and 2.</p></td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th" scope="row"><code>.transform.res</code></th>
+<td><code>0.1</code></td>
+<td><p>Internal declination transformation spacing, as .res in coordtrans. Default 0.1 degrees.</p></td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row"><code>.prec</code></th>
+<td><code>0.1</code></td>
+<td><p>Azimuth integration spacing for route 3, as in coordtrans. Default 0.1 degrees.</p></td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th" scope="row"><code>.output.res</code></th>
+<td><code>0.01</code></td>
+<td><p>Stored declination PDF spacing for route 3, as in coordtrans. Default 0.01 degrees.</p></td>
+</tr>
 </tbody>
 </table>
 <h5 class="anchored">Return value</h5><p>A skyscapeR.sigTest list with settings and global/local results in metadata, empirical density and null envelope in data.
 </p>
 </details>
 <p><strong>Implementation.</strong> <code>R/statistics.R</code>. <a href="help/modelTest.html">Full function help</a> · <a href="significance.html#meth-model">Specified orientation models</a> · <a href="contents-plan.html#plan-null">Null models and significance outline</a> · <a href="orientation-densities.html#density-summary">From a measured orientation to a declination distribution</a> · <a href="vignette-guide.html#workflow-exploring-celestial-candidates">Exploring celestial candidates</a></p>
+<p>The <a href="./s02-specified-models.html#route-calibration">matched-null calibration</a> reports global and adjusted local rejection rates for individually transformed measurements.</p>
 
 
 

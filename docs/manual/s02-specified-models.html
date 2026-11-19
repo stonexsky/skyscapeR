@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -707,12 +707,22 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -723,6 +733,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -763,6 +778,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -808,8 +828,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Chapter contents</h2>
+   
+  <ul>
+  <li><a href="#route-calibration" id="toc-route-calibration" class="nav-link active" data-scroll-target="#route-calibration">Azimuth models tested in declination</a></li>
+  <li><a href="#steep-null" id="toc-steep-null" class="nav-link" data-scroll-target="#steep-null">Matched-null calibration on steep skylines</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -834,7 +861,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>Can <a href="help/modelTest.html"><code>modelTest()</code></a> recover the expected false-positive rate when the proposed model gives different weights to candidate directions at different sites? The study used five unequally spaced candidate directions, weights interpreted as probability masses, eight observations and 39 fresh reference draws per fit. We tested azimuth densities, directly constructed declination densities and asymmetric templates shifted to candidate means.</p>
-<p><strong>Same-input comparison.</strong> In 2.0.9007, simulated azimuth and declination PDFs used constructor defaults even when the input PDF had been constructed on a different grid or with a different cutoff. With a 0.5° source grid and 0.002 cutoff the largest observed–simulated density discrepancy was 0.0015831 in both fixtures. The same draws on 2.0.9008 gave zero discrepancy. Public fits agreed with independent assembly of their observed and simulated curves and with independently scored global and local ranks. An independent first-moment calculation also checked asymmetric template shifting, explicit replacement uncertainties and the pole-boundary error. Two actual horizon-transformed PDFs agreed with independent shifts to within floating-point precision.</p>
+<p><strong>Same-input comparison.</strong> When the candidate directions are fixed at the observations, observed and simulated sums agree for directly constructed azimuth and declination densities. Separate fixtures check shifted declination templates, replacement widths and rejection at the pole boundary.</p>
 <p><strong>Calibration.</strong> Twelve conditions each used 2,000 independent outer datasets. The six matched null conditions give the following rejection rates at the 5% threshold; parentheses contain pointwise 95% Wilson intervals. Local rejection means that at least one adjusted cluster probability crossed the threshold.</p>
 <table class="caption-top table">
 <colgroup>
@@ -890,7 +917,53 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p>Concentrating four of eight observations on the fourth candidate increased global rejection to 48.0–57.8% across the three routes. Pairing the random quantiles of two observations while retaining the site’s marginal model increased global rejection to 5.70–6.95% and any-local rejection to 6.25–7.85%. These dependent-site results measure sensitivity to a violated independence assumption. The minimum attainable p-value with 39 simulations is 0.025. The archive includes counts and uncertainty intervals at thresholds of 1%, 5% and 10%.</p>
+<p>Concentrating four of eight observations on the fourth candidate increased global rejection to 48.0–57.8% across the three direct-input designs. Pairing the random quantiles of two observations while retaining the site’s marginal model increased global rejection to 5.70–6.95% and any-local rejection to 6.25–7.85%. These dependent-site results measure sensitivity to a violated independence assumption. The minimum attainable p-value with 39 simulations is 0.025. The archive includes counts and uncertainty intervals at thresholds of 1%, 5% and 10%.</p>
+<section id="route-calibration" class="level2">
+<h2 class="anchored" data-anchor-id="route-calibration">Azimuth models tested in declination</h2>
+<p>Four designs crossed a shared or observation-specific skyline with common or observation-specific candidate weights. Eight independent normal bearing measurements alternated between widths of 1° and 2°. Five candidate bearings had unequal probability masses. Each dataset used 39 fresh null draws, a 1° final declination grid and a two-tailed test at 5%. Each of two independently seeded batches used 2,000 datasets per design.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 28%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Skyline</th>
+<th>Weights</th>
+<th style="text-align: right;">Global rejections (95% interval)</th>
+<th style="text-align: right;">Datasets with any local rejection (95% interval)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Shared</td>
+<td>Common</td>
+<td style="text-align: right;">190/4000 · 4.75% (4.13%–5.45%)</td>
+<td style="text-align: right;">187/4000 · 4.67% (4.06%–5.37%)</td>
+</tr>
+<tr class="even">
+<td>Shared</td>
+<td>Site-specific</td>
+<td style="text-align: right;">184/4000 · 4.60% (3.99%–5.29%)</td>
+<td style="text-align: right;">190/4000 · 4.75% (4.13%–5.45%)</td>
+</tr>
+<tr class="odd">
+<td>Paired</td>
+<td>Common</td>
+<td style="text-align: right;">196/4000 · 4.90% (4.27%–5.61%)</td>
+<td style="text-align: right;">198/4000 · 4.95% (4.32%–5.67%)</td>
+</tr>
+<tr class="even">
+<td>Paired</td>
+<td>Site-specific</td>
+<td style="text-align: right;">189/4000 · 4.72% (4.11%–5.43%)</td>
+<td style="text-align: right;">185/4000 · 4.62% (4.02%–5.32%)</td>
+</tr>
+</tbody>
+</table>
+<p>Each simulation reused package-generated transformed densities for the sampled bearing, width and assigned horizon. A seeded call through the public interface checked the observed curve and both ranks against the independent scorer. In these four designs every pooled pointwise Wilson interval includes 5%. The denominators count independent datasets. Global and local outcomes from the same dataset are correlated. Tests using dependent structures, fitted model weights or other uncertainty families require their own calibration. <a href="archives/route-calibration.zip">Scripts and batch results</a>.</p>
 <p><strong>Maltese application.</strong> We reconstructed the landscape hypotheses of Silva &amp; Lomsdalen (2025) using the packaged observations for all 32 structures. All 64 entrance endpoints agreed with supplementary Table S1. We used normal measurement densities centred on the frame midpoints, with standard deviations equal to one quarter of the opening width. The terrain-aspect reconstruction uses the available 5 m Malta DTM, an eight-neighbour slope calculation and cell aspects within 30 m of each entrance. The wind reconstruction digitises the 12 frequency sectors in Galdies (2011), distributes each sector’s mass uniformly within its bounds and rotates directions by 180°. The winter sunlight reconstruction samples apparent solar-centre azimuths at one-minute intervals between the autumn and spring equinoxes of 3000 BCE at the mean temple location. Each model used a 0.5° candidate grid.</p>
 <table class="caption-top table">
 <thead>
@@ -915,9 +988,43 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 <p>These values belong to the reconstructed inputs and current scoring convention. The original simulation draws and exact historical model tables were unavailable in the retrieved supplement. The raster operator, wind digitisation, solar viewpoint and discretisation can affect the comparison. The archive contains the inputs, local intervals, and a 499-simulation public-interface replay verifying the longer run. <a href="https://doi.org/10.1007/s12520-025-02208-4">Published study and supplement</a>. <a href="https://nso.gov.mt/wp-content/uploads/The_Climate_of_Malta.pdf">Source wind rose, Figure 19</a>.</p>
-<p><a href="archives/S02-9008.zip">Download S02 scripts and results</a>.</p>
+<p><a href="archives/S02.zip">Download S02 scripts and results</a>.</p>
+</section>
+<section id="steep-null" class="level2">
+<h2 class="anchored" data-anchor-id="steep-null">Matched-null calibration on steep skylines</h2>
+<p>The calibration crosses a shared skyline or two observation-specific skylines with shared or site-specific candidate weights. Five bearings span north. Eight observations alternate between two widths. Normal, compact Epanechnikov and asymmetric triangular models each use two requested integration spacings. Each of 24 configurations has five independently seeded batches of 2,000 datasets, each with 39 fresh reference draws. Across families and spacings the experiment reuses random draws. The public-interface checks compare the empirical curve and both ranks to an independent scorer. <a href="./d02-bearing-propagation.html#pole-propagation">D02</a> assesses the propagated densities against an independent geometric reference.</p>
+<p>Across 240,000 fits, the following ranges give the smallest and largest observed rejection proportions across four skyline/weight designs and both requested spacings at nominal 5%. Each individual estimate uses 10,000 datasets.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Bearing family</th>
+<th style="text-align: right;">Global rejection</th>
+<th style="text-align: right;">Any adjusted local rejection</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Normal</td>
+<td style="text-align: right;">4.68%–5.19%</td>
+<td style="text-align: right;">4.65%–5.12%</td>
+</tr>
+<tr class="even">
+<td>Epanechnikov</td>
+<td style="text-align: right;">4.60%–5.20%</td>
+<td style="text-align: right;">4.76%–5.06%</td>
+</tr>
+<tr class="odd">
+<td>Triangular</td>
+<td style="text-align: right;">4.59%–5.12%</td>
+<td style="text-align: right;">4.59%–5.28%</td>
+</tr>
+</tbody>
+</table>
+<p>The ranges describe the specific matched-null fixtures. Simulations and observations use the same numerical propagation. The archive gives each rejection count, denominator and pointwise 95% Wilson interval. Correlated observations or estimated model weights require a separate calibration.</p>
+<p><a href="archives/five-package-tests.zip">Download the reproduction archive</a>.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

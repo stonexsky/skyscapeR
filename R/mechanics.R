@@ -32,10 +32,15 @@
 #'
 #' # Can also be used for an array of azimuths:
 #' decs <- az2dec(az=c(87,92,110), loc=hor)
+#' @section Validation studies:
+#' Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#pole-propagation}{D02 validation study}.
 az2dec = function(az, loc, alt, refraction=skyscapeR.env$refraction, atm=skyscapeR.env$atm, temp=skyscapeR.env$temp){
-  jd <- swephR::swe_julday(2000,1,1,12,1)
-  prec <- max(nchar(sub('.*\\.', '', as.character(az))))
+  digits <- max(nchar(sub('.*\\.', '', as.character(az))))
+  round(.az2dec_position(az, loc, alt, refraction, atm, temp), digits)
+}
 
+.az2dec_position <- function(az, loc, alt, refraction, atm, temp) {
+  jd <- swephR::swe_julday(2000,1,1,12,1)
   az[which(az < 0)] <- 360 + az[which(az < 0)]
   az[which(az > 360)] <- az[which(az > 360)] - 360
 
@@ -78,7 +83,7 @@ az2dec = function(az, loc, alt, refraction=skyscapeR.env$refraction, atm=skyscap
     if (refraction) {
       alt[i] <- alt[i] - (swephR::swe_refrac_extended(alt[i], georef[3], atm, temp, 0, 0)$return - alt[i])
     }
-    dec[i] <- round( swephR::swe_azalt_rev(jd, 1, c(georef[2],georef[1],georef[3]), c(az[i]-180, alt[i]))$xout[2], prec)
+    dec[i] <- swephR::swe_azalt_rev(jd, 1, c(georef[2],georef[1],georef[3]), c(az[i]-180, alt[i]))$xout[2]
   }
 
   return(dec)
@@ -281,6 +286,8 @@ body.position <- function(time, obj='sun', loc=NULL, timezone, calendar, dec, re
 #'   # Moonphase at noon GMT on Christmas day 2018:
 #'   moonphase('2018/12/25 12:00:00', 'GMT')
 #' }
+#' @section Scientific validation:
+#' A07 examines independent crossover selection and sensitivity to the illumination cutoff. \href{https://stonexsky.github.io/skyscapeR/manual/lunar-crossovers.html#a07-scientific}{A07 scientific validation}.
 moonphase <- function(time, timezone, calendar) {
   if (missing(timezone)) { timezone <- skyscapeR.env$timezone }
   if (missing(calendar)) { calendar <- skyscapeR.env$calendar }
@@ -640,6 +647,8 @@ orbit = function(dec, loc, refraction, atm, temp, res=0.25) {
 #' commit. Retain those and the analysis script separately for exact reproduction.
 #' Only the table returned with \code{alt = TRUE} carries this attribute;
 #' the default numeric output is unchanged.
+#' @section Scientific validation:
+#' F01 examines magnetic and solar reductions against independent references. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 scientific validation}.
 sunAz = function(loc, time, timezone, limb, alt=FALSE) {
   if (missing(timezone)) { timezone <- skyscapeR.env$timezone }
 

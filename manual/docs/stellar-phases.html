@@ -62,7 +62,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -727,12 +727,22 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -743,6 +753,11 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -783,6 +798,11 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -866,7 +886,7 @@ div.csl-indent {
 </header>
 
 
-<p><strong>Function</strong> <a href="fn-star-phases.html"><code>star.phases()</code></a> · <strong>Package</strong> skyscapeR 2.0.9004</p>
+<p><strong>Function</strong> <a href="fn-star-phases.html"><code>star.phases()</code></a> · <strong>Package</strong> skyscapeR</p>
 <p>At an archaeological site, a star can rise above a ridge while the sky is still too bright to see it. <a href="fn-star-phases.html"><code>star.phases()</code></a> asks on which mornings or evenings the terrain, darkness and stellar brightness allow an opportunity to observe it. Its heliacal-rising date is the return of such an opportunity after a season of invisibility.</p>
 <p>A seasonal search needs the skyline across the stellar track. See <a href="photographic-horizons.html#partial-photo-consumers">partial photographic horizons</a> before supplying a sector image.</p>
 <section id="how-a-date-is-assigned" class="level2">
@@ -929,7 +949,7 @@ div.csl-indent {
 </section>
 <section id="changes-that-matter-for-earlier-analyses" class="level2">
 <h2 class="anchored" data-anchor-id="changes-that-matter-for-earlier-analyses">Changes that matter for earlier analyses</h2>
-<p>The 2.0 development NEWS records changes to handling southern, circumpolar and obstructed tracks. A completely obstructed star now returns an all-invisible result. An always-clear star can still enter different seasonal phases. The separate <code>metadata$horizon.status</code> field lets the analyst distinguish these cases. An earlier analysis involving a star close to the circumpolar limit or a raised skyline is a priority for recalculation.</p>
+<p>A completely obstructed star returns an all-invisible result. An always-clear star can still enter different seasonal phases. The separate <code>metadata$horizon.status</code> field lets the analyst distinguish these cases. An earlier analysis involving a star close to the circumpolar limit or a raised skyline is a priority for recalculation.</p>
 <p>The output also distinguishes the schematic day of the seasonal cycle from <code>metadata$events$date.julian</code>. Use the latter when passing an event to <a href="fn-riseset.html"><code>riseset()</code></a> for a terrain crossing. The crossing gives a starting time from which to examine the changing dawn sky.</p>
 <p><strong>Evidence for the date.</strong> The <a href="./heliacal-rising.html">heliacal-rising comparison</a> quantifies agreement for this event under a specified set of observing assumptions. Other phase transitions require their own evidence.</p>
 <p>See the <a href="./event-searches.html">event-search chapter</a> for the crossing solver and an example of reoccultation on a rising track.</p>
@@ -940,7 +960,7 @@ div.csl-indent {
 </section>
 <section id="full-package-help" class="level2">
 <h2 class="anchored" data-anchor-id="full-package-help">Full package help</h2>
-<p>The following help page is generated from the archived 2.0.9004 package documentation.</p>
+<p>The following help page is generated from the package documentation.</p>
 <details>
 <summary>
 Read the complete <code>star.phases()</code> help page
@@ -976,54 +996,54 @@ an archaeological site.
 <h3 class="anchored">Arguments</h3>
 
 
-<table class="caption-top table">
+<table class="caption-top table" role="presentation">
 <tbody>
 <tr class="odd">
-<td><code id="star.phases_:_star">star</code></td>
+<td><code id="star.phases_+3A_star">star</code></td>
 <td><p>Either the star name or a <em>skyscapeR.star</em> object.</p></td>
 </tr>
 <tr class="even">
-<td><code id="star.phases_:_year">year</code></td>
+<td><code id="star.phases_+3A_year">year</code></td>
 <td><p>The year of interest. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p></td>
 </tr>
 <tr class="odd">
-<td><code id="star.phases_:_loc">loc</code></td>
+<td><code id="star.phases_+3A_loc">loc</code></td>
 <td><p>Location, either a <em>skyscapeR.horizon</em> or a vector containing the latitude, longitude and elevation of location, in this order.</p></td>
 </tr>
 <tr class="even">
-<td><code id="star.phases_:_alt.hor">alt.hor</code></td>
+<td><code id="star.phases_+3A_alt.hor">alt.hor</code></td>
 <td><p>The altitude of the horizon to consider. Defaults to zero degrees.</p></td>
 </tr>
 <tr class="odd">
-<td><code id="star.phases_:_alt.rs">alt.rs</code></td>
+<td><code id="star.phases_+3A_alt.rs">alt.rs</code></td>
 <td><p>The maximum altitude of a star's first or last visibility for it to still be considered to be as rising or setting. Defaults to ten degrees.</p></td>
 </tr>
 <tr class="even">
-<td><code id="star.phases_:_solar.alt">solar.alt</code></td>
+<td><code id="star.phases_+3A_solar.alt">solar.alt</code></td>
 <td><p>Solar altitude threshold in degrees. NULL uses -6 for a horizon, or alt.hor - 6 for coordinate input.</p></td>
 </tr>
 <tr class="odd">
-<td><code id="star.phases_:_k">k</code></td>
+<td><code id="star.phases_+3A_k">k</code></td>
 <td><p>Visual extinction in magnitudes per airmass (Schaefer 1986, p. S33). The package adopts 0.2 as a clear-sky baseline. Extinction varies with site and atmospheric conditions (Schaefer 1986, 1993). Defaults to the session value from skyscapeR.vars().</p></td>
 </tr>
 <tr class="even">
-<td><code id="star.phases_:_limit">limit</code></td>
+<td><code id="star.phases_+3A_limit">limit</code></td>
 <td><p>The maximum magnitude of a star that can be visible with the naked eye. Defaults to 6.</p></td>
 </tr>
 <tr class="odd">
-<td><code id="star.phases_:_refraction">refraction</code></td>
+<td><code id="star.phases_+3A_refraction">refraction</code></td>
 <td><p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td>
 </tr>
 <tr class="even">
-<td><code id="star.phases_:_atm">atm</code></td>
+<td><code id="star.phases_+3A_atm">atm</code></td>
 <td><p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td>
 </tr>
 <tr class="odd">
-<td><code id="star.phases_:_temp">temp</code></td>
+<td><code id="star.phases_+3A_temp">temp</code></td>
 <td><p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p></td>
 </tr>
 <tr class="even">
-<td><code id="star.phases_:_res">res</code></td>
+<td><code id="star.phases_+3A_res">res</code></td>
 <td><p>Spacing of solar altitude samples in days, greater than zero and at most one. Default 1/144 day (ten minutes). Terrain crossings are refined separately.</p></td>
 </tr>
 </tbody>
@@ -1174,7 +1194,6 @@ versions; an unavailable version is NA, for example when sourcing functions
 outside a package namespace. Version strings do not uniquely identify
 development builds. Retain the original script, code revision and ephemeris
 files as well: the saved metadata do not identify or archive those files.
-Earlier saved results do not acquire these fields automatically.
 </p>
 
 
@@ -1196,6 +1215,12 @@ The same record remains available in <code>metadata$provenance</code>.
 <p>Seasonal searches require full skyline coverage. H07 checked rejection of a partial photograph and successful calculation with the full profile. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage">H07 check in the technical manual</a>.
 </p>
 <p>W02 replayed the Gacrux heliacal-rising date at Skorba West and passed it to the crossing and sky-reconstruction calculations. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky">W02 check in the technical manual</a>.
+</p>
+
+
+<h3 class="anchored">Validation studies</h3>
+
+<p>Six stellar positions were compared with independently propagated catalogue directions from 3500 BCE to 2000 CE. <a href="https://stonexsky.github.io/skyscapeR/manual/a03-stellar-positions.html#a03-stellar-positions">A03 validation study</a>.
 </p>
 
 

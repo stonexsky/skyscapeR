@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>planisphere | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-planisphere.html">planisphere() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Draw a planisphere for a site and epoch</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>planisphere | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-planisphere.html">planisphere() method</a></nav><h2 id='planisphere'>Draw a planisphere for a site and epoch</h2><span id='topic+planisphere'></span>
 
 <h3>Description</h3>
 
@@ -31,68 +31,68 @@ and ecliptic as optional references.
 
 <h3>Arguments</h3>
 
-<table>
-<tr><td><code>year</code></td>
+<table role = "presentation">
+<tr><td><code id="planisphere_+3A_year">year</code></td>
 <td>
 <p>The epoch (year) for which the planisphere is calculated. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p>
 </td></tr>
-<tr><td><code>lat</code></td>
+<tr><td><code id="planisphere_+3A_lat">lat</code></td>
 <td>
 <p>Observer latitude in degrees north, between -90 and 90.</p>
 </td></tr>
-<tr><td><code>max.mag</code></td>
+<tr><td><code id="planisphere_+3A_max.mag">max.mag</code></td>
 <td>
 <p>Faintest catalogue magnitude drawn as a star symbol (default 6). This does not filter constellation line endpoints.</p>
 </td></tr>
-<tr><td><code>show.ecliptic</code></td>
+<tr><td><code id="planisphere_+3A_show.ecliptic">show.ecliptic</code></td>
 <td>
 <p>Whether to display the ecliptic (TRUE or FALSE).</p>
 </td></tr>
-<tr><td><code>col.ecliptic</code></td>
+<tr><td><code id="planisphere_+3A_col.ecliptic">col.ecliptic</code></td>
 <td>
 <p>Colour of the ecliptic line (default ochre).</p>
 </td></tr>
-<tr><td><code>show.equator</code></td>
+<tr><td><code id="planisphere_+3A_show.equator">show.equator</code></td>
 <td>
 <p>Whether to display the celestial equator (TRUE or FALSE).</p>
 </td></tr>
-<tr><td><code>col.equator</code></td>
+<tr><td><code id="planisphere_+3A_col.equator">col.equator</code></td>
 <td>
 <p>Colour of the celestial equator (default muted grey-green).</p>
 </td></tr>
-<tr><td><code>star.col</code></td>
+<tr><td><code id="planisphere_+3A_star.col">star.col</code></td>
 <td>
 <p>Colour of the star symbols (default dark grey-green).</p>
 </td></tr>
-<tr><td><code>epoch</code></td>
+<tr><td><code id="planisphere_+3A_epoch">epoch</code></td>
 <td>
 <p>Earlier argument name for <code>year</code>, retained for existing scripts.</p>
 </td></tr>
-<tr><td><code>show.milky.way</code></td>
+<tr><td><code id="planisphere_+3A_show.milky.way">show.milky.way</code></td>
 <td>
 <p>Draw the Milky Way behind the stars (default TRUE). Set to FALSE for a chart without the band.</p>
 </td></tr>
-<tr><td><code>show.galactic.equator</code></td>
+<tr><td><code id="planisphere_+3A_show.galactic.equator">show.galactic.equator</code></td>
 <td>
 <p>Draw the Galactic equator as a dash-dot line. Default FALSE.</p>
 </td></tr>
-<tr><td><code>constellations</code></td>
+<tr><td><code id="planisphere_+3A_constellations">constellations</code></td>
 <td>
 <p>Optional constellation selection: a bundled set such as
 <code>"modern"</code>, <code>"chinese"</code> or <code>"chinese_mansions"</code>, figure names
 or identifiers, or a table from <code>importConstellations</code>.
 The default <code>NULL</code> draws no constellation lines.</p>
 </td></tr>
-<tr><td><code>col.constellations</code></td>
+<tr><td><code id="planisphere_+3A_col.constellations">col.constellations</code></td>
 <td>
 <p>Colour of the constellation lines (default muted teal).</p>
 </td></tr>
-<tr><td><code>show.legend</code></td>
+<tr><td><code id="planisphere_+3A_show.legend">show.legend</code></td>
 <td>
 <p>Show chart pole, latitude, epoch, magnitude limit and the enabled layer key.
 FALSE centres the bare chart, keeping its data and right-ascension ticks.</p>
 </td></tr>
-<tr><td><code>style</code></td>
+<tr><td><code id="planisphere_+3A_style">style</code></td>
 <td>
 <p>Analytical display style, either <code>"publication-colour"</code> (default) or
 <code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p>
@@ -186,4 +186,4 @@ if (requireNamespace("swephRdata", quietly = TRUE)) {
 ## End(Not run)
 </code></pre>
 
-<p><a href="../fn-planisphere.html">planisphere() method</a></p></body></html>
+<h3>Validation studies</h3><p>Diffuse V-band brightness was compared with six fields outside the Carina calibration aperture. <a href="../v04-diffuse-photometry.html#v04-diffuse-photometry">V04 validation study</a>.</p><p>Six stellar positions were compared with independently propagated catalogue directions from 3500 BCE to 2000 CE. <a href="../a03-stellar-positions.html#a03-stellar-positions">A03 validation study</a>.</p></body></html>

@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>horFeature | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-horfeature.html">horFeature() method</a></nav><p>skyscapeR 2.0.9004</p><h2>Reconstruct or highlight archaeological structures in a DEM horizon</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>horFeature | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-horfeature.html">horFeature() method</a></nav><h2 id='horFeature'>Reconstruct or highlight archaeological structures in a DEM horizon</h2><span id='topic+horFeature'></span>
 
 <h3>Description</h3>
 
@@ -32,57 +32,57 @@ layer of structures, then pass one or several layers to <code>createHor</code>.
 
 <h3>Arguments</h3>
 
-<table>
-<tr><td><code>geometry</code></td>
+<table role = "presentation">
+<tr><td><code id="horFeature_+3A_geometry">geometry</code></td>
 <td>
 <p>A vector filename (including a shapefile or GeoPackage), a
 terra SpatVector, or an object accepted by terra::vect, with a known CRS.
 A layer must contain one geometry family: points, lines or polygons.</p>
 </td></tr>
-<tr><td><code>type</code></td>
+<tr><td><code id="horFeature_+3A_type">type</code></td>
 <td>
 <p>Structure type: stone, pole, bank, ditch, mound, platform or wall.
 Stones and poles accept points or polygons; mounds and platforms require
 polygons; banks, ditches and walls accept lines or polygons.</p>
 </td></tr>
-<tr><td><code>height</code></td>
+<tr><td><code id="horFeature_+3A_height">height</code></td>
 <td>
 <p>Additional height in metres, nonnegative. Default 0. Ignored
 for ditches, which use depth. Positive height and depth cannot be combined.</p>
 </td></tr>
-<tr><td><code>height_field</code>, <code>depth_field</code>, <code>width_field</code>, <code>diameter_field</code>, <code>colour_field</code></td>
+<tr><td><code id="horFeature_+3A_height_field">height_field</code>, <code id="horFeature_+3A_depth_field">depth_field</code>, <code id="horFeature_+3A_width_field">width_field</code>, <code id="horFeature_+3A_diameter_field">diameter_field</code>, <code id="horFeature_+3A_colour_field">colour_field</code></td>
 <td>
 <p>Optional
 attribute column names supplying per-row settings. Do not also supply the
 corresponding common value. Numeric fields must be numeric, finite and meet
 the same bounds as common values. Colour fields must contain valid colours.</p>
 </td></tr>
-<tr><td><code>depth</code></td>
+<tr><td><code id="horFeature_+3A_depth">depth</code></td>
 <td>
 <p>Nonnegative ditch depth in metres. Default 0; only for ditches.</p>
 </td></tr>
-<tr><td><code>width</code></td>
+<tr><td><code id="horFeature_+3A_width">width</code></td>
 <td>
 <p>Total width in metres for lines or polygon boundaries.</p>
 </td></tr>
-<tr><td><code>diameter</code></td>
+<tr><td><code id="horFeature_+3A_diameter">diameter</code></td>
 <td>
 <p>Diameter in metres for point footprints.</p>
 </td></tr>
-<tr><td><code>profile</code></td>
+<tr><td><code id="horFeature_+3A_profile">profile</code></td>
 <td>
 <p>Either bell or flat. Defaults to bell for banks, ditches and
 mounds, and flat for stones, poles, platforms and walls.</p>
 </td></tr>
-<tr><td><code>use</code></td>
+<tr><td><code id="horFeature_+3A_use">use</code></td>
 <td>
 <p>For polygons, area or boundary. NULL chooses the type's default.</p>
 </td></tr>
-<tr><td><code>colour</code></td>
+<tr><td><code id="horFeature_+3A_colour">colour</code></td>
 <td>
 <p>One opaque R colour, or NULL for the terrain palette.</p>
 </td></tr>
-<tr><td><code>name</code></td>
+<tr><td><code id="horFeature_+3A_name">name</code></td>
 <td>
 <p>Descriptive label for the layer. Defaults to the structure type.</p>
 </td></tr>
@@ -171,4 +171,4 @@ plot(hor)
 ## End(Not run)
 </code></pre>
 
-<p><a href="../fn-horfeature.html">horFeature() method</a></p></body></html>
+<h3>Validation studies</h3><p>Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. <a href="../h04-feature-resolution.html#h04-feature-resolution">H04 validation study</a>.</p></body></html>

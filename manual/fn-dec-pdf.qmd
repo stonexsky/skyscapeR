@@ -1,8 +1,7 @@
 # `dec.pdf()` {#fn-dec-pdf}
 
-**Verified on 2.0.9006.** Declination subsets retained the selected centres in all four cases. [D01 rerun](d01-density-checks.qmd).
+Declination subsets retained the selected centres in all four cases. [D01 checks](d01-density-checks.qmd).
 
-**Validation on 2.0.9005.** The sampled declination densities agreed with analytic references at the tested bounds and cutoffs. Subsetting curves can leave stale input centres in metadata$dec. [D01 results](d01-density-checks.qmd).
 
 [Function index](function-index.html#idx-dec-pdf)
 

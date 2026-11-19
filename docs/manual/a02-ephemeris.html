@@ -50,8 +50,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./numerical-validation.html" rel="next">
-<link href="./study-register.html" rel="prev">
+<link href="./a03-stellar-positions.html" rel="next">
+<link href="./package-stress-tests.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -62,7 +62,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -727,12 +727,22 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -743,6 +753,11 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -783,6 +798,11 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -863,10 +883,10 @@ div.csl-indent {
 
 
 <p><strong>Research question.</strong> How closely do skyscapeR’s planetary and lunar positions reproduce their reference ephemerides, and how much does the choice of convention change a prehistoric lunar alignment?</p>
-<p><strong>Outcome.</strong> In build 2.0.9004 the largest geocentric angular separation from the matching JPL parent was <strong>0.0065″</strong> across 1,080 positions. For 177 prehistoric lunar skyline crossings, default skyscapeR azimuths differed from JPL Horizons by a median <strong>0.059°</strong>, with a maximum of <strong>0.322°</strong>. Matching ΔT reduced that maximum to <strong>0.027°</strong>. With the clocks and apparent-position conventions matched, the remaining difference chiefly affected the crossing time, by up to <strong>3.03 minutes</strong>. These are differences between reconstructions over the sampled dates. Observations of the prehistoric sky would be needed to establish absolute accuracy.</p>
+<p><strong>Outcome.</strong> The largest geocentric angular separation from the matching JPL parent was <strong>0.0065″</strong> across 1,080 positions. For 177 prehistoric lunar skyline crossings, default skyscapeR azimuths differed from JPL Horizons by a median <strong>0.059°</strong>, with a maximum of <strong>0.322°</strong>. Matching ΔT reduced that maximum to <strong>0.027°</strong>. With the clocks and apparent-position conventions matched, the remaining difference chiefly affected the crossing time, by up to <strong>3.03 minutes</strong>. These are differences between reconstructions over the sampled dates. Observations of the prehistoric sky would be needed to establish absolute accuracy.</p>
 <section id="geocentric-positions-and-the-r-interface" class="level2">
 <h2 class="anchored" data-anchor-id="geocentric-positions-and-the-r-interface">Geocentric positions and the R interface</h2>
-<p>The run used R 4.3.3, skyscapeR 2.0.9004, swephR 0.3.2 and Swiss Ephemeris 2.10.03. We evaluated the Sun, Moon and eight planets from Mercury through Pluto (excluding Earth) at 54 dynamical-time arguments. Eight instants in each of 3500, 2500 and 1000 BCE and 1900, 2000 and 2025 CE sampled different orbital configurations. Six further instants fell on either side of, or exactly at, two 600-year file boundaries. The archive identifies each Swiss file’s parent generation and SHA-256 hash.</p>
+<p>The run used R 4.3.3, skyscapeR, swephR 0.3.2 and Swiss Ephemeris 2.10.03. We evaluated the Sun, Moon and eight planets from Mercury through Pluto (excluding Earth) at 54 dynamical-time arguments. Eight instants in each of 3500, 2500 and 1000 BCE and 1900, 2000 and 2025 CE sampled different orbital configurations. Six further instants fell on either side of, or exactly at, two 600-year file boundaries. The archive identifies each Swiss file’s parent generation and SHA-256 hash.</p>
 <p>For each of DE431 and DE441, we independently evaluated JPL’s ASCII Chebyshev coefficients, deriving the Earth’s position from the Earth–Moon barycentre and the geocentric Moon. We compared geometric geocentric Cartesian directions in equatorial J2000 ICRS at the same numerical dynamical-time argument. Separation was computed by the two-argument arctangent of the cross-product magnitude and dot product of the unit vectors. The evaluator reproduced 46 JPL test components per generation within 7.2 × 10⁻¹⁵ AU for position or AU/day for velocity. The archive also retains signed right ascension, declination and range residuals <span class="citation" data-cites="astrodienst horizonsmanual">(<a href="references.html#ref-astrodienst" role="doc-biblioref">Astrodienst, n.d.b</a>; <a href="references.html#ref-horizonsmanual" role="doc-biblioref">Jet Propulsion Laboratory, n.d.</a>)</span>.</p>
 <table class="caption-top table">
 <colgroup>
@@ -1423,13 +1443,13 @@ Jet Propulsion Laboratory. n.d. <span>‘Horizons System Manual’</span>. <a hr
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./study-register.html" class="pagination-link" aria-label="Studies by question and package build">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Studies by question and package build</span></span>
+      <a href="./package-stress-tests.html" class="pagination-link" aria-label="Guide to the five validation studies">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Guide to the five validation studies</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./numerical-validation.html" class="pagination-link" aria-label="Calendar, density and significance checks">
-        <span class="nav-page-text"><span class="chapter-title">Calendar, density and significance checks</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./a03-stellar-positions.html" class="pagination-link" aria-label="A03 · Stellar positions at archaeological epochs">
+        <span class="nav-page-text"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -41,6 +41,11 @@ defines a target limit; it does not search a time series for an actual lunar eve
 Sprajc (2016) describes the limits set by obliquity and the mean lunar
 inclination. This package also includes the fixed 0.145-degree term above.
 }
+\section{Scientific validation}{
+
+A06 examines geocentric lunar and planetary limits against independent extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 scientific validation}.
+}
+
 \examples{
 # Southern major Lunar Extreme geocentric declination for year 2501 BC:
 sMjLX(-2500)

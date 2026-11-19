@@ -152,6 +152,11 @@ It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
 }
 
+\section{Scientific validation}{
+
+A07 examines independent crossover selection and sensitivity to the illumination cutoff. \href{https://stonexsky.github.io/skyscapeR/manual/lunar-crossovers.html#a07-scientific}{A07 scientific validation}.
+}
+
 \examples{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
   CC(year=2026, loc=c(40, 0, 400), timezone="UTC")

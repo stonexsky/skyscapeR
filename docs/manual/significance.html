@@ -62,7 +62,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -727,12 +727,22 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -743,6 +753,11 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -783,6 +798,11 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -866,13 +886,13 @@ div.csl-indent {
 
 
 <p><a href="./s02-specified-models.html">Specified-model calibration and Maltese reconstructions</a>.</p>
-<p><strong>Implementation.</strong> skyscapeR 2.0.9004, <code>R/statistics.R</code> and <code>R/model-simulation.R</code>. The procedures below operate on a summed probability density (SPD) of measured orientations. <span class="citation" data-cites="silva2020">Silva (<a href="references.html#ref-silva2020" role="doc-biblioref">2020, sec. 4</a>)</span> introduced the random-orientation test. <span class="citation" data-cites="silvaloms2025">Silva and Lomsdalen (<a href="references.html#ref-silvaloms2025" role="doc-biblioref">2025</a>, “Methodology” and “Landscape tests”)</span> extended the framework to specified landscape and astronomical hypotheses, including models particular to individual sites. The two functions answer different questions even when they score exactly the same observed curve.</p>
+<p><strong>Implementation.</strong> skyscapeR 2.0, <code>R/statistics.R</code> and <code>R/model-simulation.R</code>. The procedures below operate on a summed probability density (SPD) of measured orientations. <span class="citation" data-cites="silva2020">Silva (<a href="references.html#ref-silva2020" role="doc-biblioref">2020, sec. 4</a>)</span> introduced the random-orientation test. <span class="citation" data-cites="silvaloms2025">Silva and Lomsdalen (<a href="references.html#ref-silvaloms2025" role="doc-biblioref">2025</a>, “Methodology” and “Landscape tests”)</span> extended the framework to specified landscape and astronomical hypotheses, including models particular to individual sites. The two functions answer different questions even when they score exactly the same observed curve.</p>
 <p>For the construction of the empirical and transformed measurement curves, see the <a href="./orientation-densities.html">density chapter</a>.</p>
-<p>See the <a href="./s03-scoring-checks.html">independent checks on build 2.0.9005</a> for results and limitations.</p>
+<p>See the <a href="./s03-scoring-checks.html">independent checks</a> for results and limitations.</p>
 <section id="meth-random" class="level2">
 <h2 class="anchored" data-anchor-id="meth-random">Random orientations</h2>
 <p><a href="fn-randomtest.html"><code>randomTest()</code></a> asks whether independent draws of structural bearings, with the observed sample size, measurement errors and site geometry, could produce departures at least as large as those observed. Randomness is specified in <strong>azimuth</strong>. A uniform distribution of bearings generally induces a non-uniform distribution of declinations. Even on a level horizon, the mapping from bearing to declination has turning points; terrain relief changes the mapping further <span class="citation" data-cites="silva2020">(<a href="references.html#ref-silva2020" role="doc-biblioref">Silva 2020, secs 3–4</a>)</span>.</p>
-<p>Each replicate samples one centre per measurement, uniformly with replacement on the source bearing grid in [0°, 360°). Build 2.0.9007 reconstructs each density with its source width, family, grid spacing and cutoff. On the shared-horizon route the observed and simulated azimuth sums use the same <code>.res</code> before transformation. <a href="./s01-uniform-orientation.html">S01</a> reports false positives, power and the consequences for earlier fits.</p>
+<p>Each replicate samples one centre per measurement, uniformly with replacement on the source bearing grid in [0°, 360°). The package reconstructs each density with its source width, family, grid spacing and cutoff. On the shared-horizon route the observed and simulated azimuth sums use the same <code>.res</code> before transformation. <a href="./s01-uniform-orientation.html">S01</a> reports false positives, power and the corresponding rejection rates.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -904,8 +924,40 @@ div.csl-indent {
 <section id="meth-model" class="level2">
 <h2 class="anchored" data-anchor-id="meth-model">Specified orientation models</h2>
 <p><a href="fn-modeltest.html"><code>modelTest()</code></a> asks whether the observed curve is compatible with a proposed distribution. <span class="citation" data-cites="silvaloms2025">Silva and Lomsdalen (<a href="references.html#ref-silvaloms2025" role="doc-biblioref">2025</a>)</span> constructed site-specific slope-aspect models from terrain around the Maltese temples and a shared wind model from reversed wind-direction frequencies. The innovation of that paper was the capacity to test <strong>specified alternatives to uniform bearings</strong>, including site-specific ones. The general function accepts the resulting distributions; generating and justifying the landscape or astronomical model remains the analyst’s responsibility.</p>
-<p>The empirical PDF sets the coordinate system. Supply one table for a common model or one table per observation in matching order. A row gives a candidate angle and a nonnegative weight. Sampling probabilities are proportional to the weights. For a continuous density tabulated on an uneven grid, a cell’s weight should approximate its <em>integrated mass</em>, for example density times represented cell width. Using its ordinate alone can favour a densely sampled sector for purely numerical reasons.</p>
-<p>Each replicate draws a centre for each observation. Build 2.0.9008 also reuses the source grid and cutoff for directly constructed densities. Directly constructed PDFs retain any of the <a href="./orientation-densities.html#measurement-families">six measurement families</a>. Both tests preserve each observation’s taper, Gaussian survey error or triangular asymmetry in simulations. For a direct triangle each candidate is a mode. Overriding <code>unc</code> in <code>modelTest()</code> rescales both sides of the triangle in proportion. For the softened uniform families the taper or survey-error SD remains fixed in degrees. For a declination PDF from <a href="fn-coordtrans.html"><code>coordtrans()</code></a>, the default instead translates each piecewise-linear measurement curve. If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mi>i</mi></msub><annotation encoding="application/x-tex">f_i</annotation></semantics></math> is the stored density and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>i</mi></msub><mo>=</mo><mo>∫</mo><mi>x</mi><msub><mi>f</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><mi>d</mi><mi>x</mi><mi>/</mi><mo>∫</mo><msub><mi>f</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><mi>d</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">m_i=\int x f_i(x)\,dx/\int f_i(x)\,dx</annotation></semantics></math>, a candidate <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mi>i</mi></msub><annotation encoding="application/x-tex">c_i</annotation></semantics></math> produces the template <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>−</mo><msub><mi>c</mi><mi>i</mi></msub><mo>+</mo><msub><mi>m</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f_i(x-c_i+m_i)</annotation></semantics></math>. Its width, asymmetry and multiple peaks survive translation before grid interpolation. A positive-weight candidate that would push density outside ±90° causes an error. An explicit <code>unc</code> for transformed input selects a normal simulation density. A translated template assumes that the original shape applies at the new mean; a different skyline sector may produce a different shape. This is a modelling choice worth testing when the result depends on it.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Empirical input and call</th>
+<th>Model angles</th>
+<th>Comparison</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>modelTest(Az, az.model)</code></td>
+<td>Azimuth</td>
+<td>Sum bearing densities on the circular azimuth grid.</td>
+</tr>
+<tr class="even">
+<td><code>modelTest(Dec, dec.model)</code></td>
+<td>Declination</td>
+<td>Sum declination densities. For transformed input, each candidate gives the mean to which its stored template is translated when <code>unc</code> is omitted.</td>
+</tr>
+<tr class="odd">
+<td><code>modelTest(Az, az.model, hor = horizons)</code></td>
+<td>Azimuth</td>
+<td>Transform each measured bearing density through its horizon, then sum in declination. Each simulation draws a bearing for each observation and repeats the individual transformations.</td>
+</tr>
+</tbody>
+</table>
+<p>For the third route, supply one shared horizon or a list in measurement order. A ridge can give a simulated bearing a different declination width or shape from the observed bearing. Model angles and replacement widths remain in azimuth degrees. The internal declination step (<code>.transform.res</code>, 0.1°), azimuth integration step (<code>.prec</code>, 0.1°) and output PDF spacing (<code>.output.res</code>, 0.01°) govern the transformation. The final comparison grid uses <code>.res</code> (0.01°). Record the atmospheric settings and the measurement-to-horizon mapping.</p>
+<p>The empirical PDF sets the input coordinate system. Supply one table for a common model or one table per observation in matching order. A row gives a candidate angle and a nonnegative weight. Sampling probabilities are proportional to the weights. For a continuous density tabulated on an uneven grid, a cell’s weight should approximate its <em>integrated mass</em>, for example density times represented cell width. Using its ordinate alone can favour a densely sampled sector for purely numerical reasons.</p>
+<p>Each replicate draws a centre for each observation. The package also reuses the source grid and cutoff for directly constructed densities. Directly constructed PDFs retain any of the <a href="./orientation-densities.html#measurement-families">six measurement families</a>. Both tests preserve each observation’s taper, Gaussian survey error or triangular asymmetry in simulations. For a direct triangle each candidate is a mode. Overriding <code>unc</code> in <code>modelTest()</code> rescales both sides of the triangle in proportion. For the softened uniform families the taper or survey-error SD remains fixed in degrees. For a declination PDF from <a href="fn-coordtrans.html"><code>coordtrans()</code></a>, the default instead translates each piecewise-linear measurement curve. If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mi>i</mi></msub><annotation encoding="application/x-tex">f_i</annotation></semantics></math> is the stored density and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>i</mi></msub><mo>=</mo><mo>∫</mo><mi>x</mi><msub><mi>f</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><mi>d</mi><mi>x</mi><mi>/</mi><mo>∫</mo><msub><mi>f</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><mi>d</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">m_i=\int x f_i(x)\,dx/\int f_i(x)\,dx</annotation></semantics></math>, a candidate <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mi>i</mi></msub><annotation encoding="application/x-tex">c_i</annotation></semantics></math> produces the template <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>−</mo><msub><mi>c</mi><mi>i</mi></msub><mo>+</mo><msub><mi>m</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f_i(x-c_i+m_i)</annotation></semantics></math>. Its width, asymmetry and multiple peaks survive translation before grid interpolation. A positive-weight candidate that would push density outside ±90° causes an error. An explicit <code>unc</code> for transformed input selects a normal simulation density. A translated template assumes that the original shape applies at the new mean; a different skyline sector may produce a different shape. This is a modelling choice worth testing when the result depends on it.</p>
 </section>
 <section id="score-tests" class="level2">
 <h2 class="anchored" data-anchor-id="score-tests">Shared scoring algorithm</h2>
@@ -913,7 +965,7 @@ div.csl-indent {
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mi>j</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>Y</mi><mi>j</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>U</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>L</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><msub><mi>Y</mi><mi>j</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mi>s</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">d_j(x)=\frac{\max(Y_j(x)-U(x),0)+\max(L(x)-Y_j(x),0)}{s(x)}.</annotation></semantics></math></p>
 <p>Set the contribution to zero where all curves agree; omit the lower term in an upper-tail test. Only strict crossings contribute. If the simulations agree but the observation differs, pooling keeps the observed departure eligible and the fit records that angle in <code>constant.departures</code>. The global score is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mi>j</mi></msub><mo>=</mo><msub><mo>∑</mo><mi>x</mi></msub><msub><mi>d</mi><mi>j</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">T_j=\sum_x d_j(x)</annotation></semantics></math>. It is a grid sum: keep grid spacing fixed across curves. The defaults are 0.1° for <a href="fn-randomtest.html"><code>randomTest()</code></a> and 0.01° for <a href="fn-modeltest.html"><code>modelTest()</code></a>. Both default to 1,000 simulations, two tails, 95% pointwise coverage and no final normalisation.</p>
 <p>For the global test let <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math> be the number of simulated scores greater than or equal to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mn>0</mn></msub><annotation encoding="application/x-tex">T_0</annotation></semantics></math>. The returned value is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>b</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>B</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">(b+1)/(B+1)</annotation></semantics></math> <span class="citation" data-cites="north2002 dufour2006">(<a href="references.html#ref-north2002" role="doc-biblioref">North, Curtis, and Sham 2002</a>; <a href="references.html#ref-dufour2006" role="doc-biblioref">Dufour 2006</a>)</span>. At <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mo>=</mo><mn>1000</mn></mrow><annotation encoding="application/x-tex">B=1000</annotation></semantics></math>, zero exceedances gives <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>1001</mn></mrow><annotation encoding="application/x-tex">1/1001</annotation></semantics></math>; complete ties give 1. Exchangeability requires that the observed and simulated datasets be processed comparably under the specified null. More simulations improve rank resolution. They cannot repair a null that ignores dependence among structures.</p>
-<p>For a local result, find contiguous crossings of the same bound with at least two grid points spanning at least 0.5°. Sum the departures within each observed cluster. Repeat the cluster search in every simulation and retain its <strong>largest</strong> cluster score, or zero if none qualifies. Compare each observed cluster with these simulated maxima using the same inclusive rank. A two-tailed search includes both signs. The global test uses all departures, including those too narrow for local reporting. The local correction accounts for searching this grid under the complete null; it does not locate an individual significant endpoint or adjust for comparing many archaeological subsets <span class="citation" data-cites="maris2007 sassen2019">(<a href="references.html#ref-maris2007" role="doc-biblioref">Maris and Oostenveld 2007</a>; <a href="references.html#ref-sassen2019" role="doc-biblioref">Sassenhagen and Draschkow 2019</a>)</span>. Through 2.0.9005, north-crossing clusters were split at the stored seam. Build 2.0.9006 joins adjacent excesses or deficits across north in both the observations and simulations, and excludes a duplicate north direction from the global score. A reported interval with start greater than end crosses north clockwise. See the <a href="./s03-scoring-checks.html">fixed-input S03 replay</a>.</p>
+<p>For a local result, find contiguous crossings of the same bound with at least two grid points spanning at least 0.5°. Sum the departures within each observed cluster. Repeat the cluster search in every simulation and retain its <strong>largest</strong> cluster score, or zero if none qualifies. Compare each observed cluster with these simulated maxima using the same inclusive rank. A two-tailed search includes both signs. The global test uses all departures, including those too narrow for local reporting. The local correction accounts for searching this grid under the complete null; it does not locate an individual significant endpoint or adjust for comparing many archaeological subsets <span class="citation" data-cites="maris2007 sassen2019">(<a href="references.html#ref-maris2007" role="doc-biblioref">Maris and Oostenveld 2007</a>; <a href="references.html#ref-sassen2019" role="doc-biblioref">Sassenhagen and Draschkow 2019</a>)</span>. A reported interval with start greater than end crosses north clockwise. See the <a href="./s03-scoring-checks.html">fixed-input S03 replay</a>.</p>
 </section>
 <section id="sig-history" class="level2">
 <h2 class="anchored" data-anchor-id="sig-history">What changed since the publications?</h2>
@@ -927,7 +979,7 @@ div.csl-indent {
 <tr class="header">
 <th>Decision</th>
 <th>Published baseline</th>
-<th>Version 2.0.9004 and consequence</th>
+<th>Package method and consequence</th>
 </tr>
 </thead>
 <tbody>
@@ -944,7 +996,7 @@ div.csl-indent {
 <tr class="odd">
 <td>Local selection</td>
 <td>Silva (2020, §4) compares the observed region with simulations scored over that same observed interval. Silva &amp; Lomsdalen (2025) report local results within this framework.</td>
-<td>Each simulation now undergoes its own interval search. Its maximum cluster supplies the comparator, which accounts for choosing the region after viewing the curve. Earlier and current local p-values answer different questions.</td>
+<td>Each simulation undergoes its own interval search. Its maximum cluster supplies the comparator, which accounts for choosing the region after viewing the curve. Earlier and current local p-values answer different questions.</td>
 </tr>
 <tr class="even">
 <td>Non-uniform nulls and uncertainty</td>
@@ -953,7 +1005,7 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<p>The accompanying 2020 code also permuted the measurement uncertainties in the random draws and excluded observed intervals of width at most five times its declination-grid spacing. Version 2.0.9004 retains the observation-to-uncertainty pairing and applies a fixed angular minimum to both observed and simulated clusters. Standardisation itself was already present in 2020; symmetric pooling and searching each simulated curve are the substantive changes. The source comparison uses the <a href="https://github.com/stonexsky/probSkyscapeArch/blob/07d9b84a43cdd2641f9557b704ef4b5927366254/src.R#L300">archived 2020 implementation, lines 300–382</a>. These comparisons concern the published algorithms and the archived current source. They do not establish that the conclusions of either paper change. That would require replaying the corresponding data, models and historical implementation. The build’s NEWS instructs users to refit when seeking current local and global inference <span class="citation" data-cites="silva2020 silvaloms2025">(<a href="references.html#ref-silva2020" role="doc-biblioref">Silva 2020</a>; <a href="references.html#ref-silvaloms2025" role="doc-biblioref">Silva and Lomsdalen 2025</a>)</span>.</p>
+<p>The accompanying 2020 code also permuted the measurement uncertainties in the random draws and excluded observed intervals of width at most five times its declination-grid spacing. The package retains the observation-to-uncertainty pairing and applies a fixed angular minimum to both observed and simulated clusters. Standardisation itself was already present in 2020; symmetric pooling and searching each simulated curve are the substantive changes. The source comparison uses the <a href="https://github.com/stonexsky/probSkyscapeArch/blob/07d9b84a43cdd2641f9557b704ef4b5927366254/src.R#L300">archived 2020 implementation, lines 300–382</a>. These comparisons concern the published algorithms and the archived current source. They do not establish that the conclusions of either paper change. That would require replaying the corresponding data, models and historical implementation. The build’s NEWS instructs users to refit when seeking current local and global inference <span class="citation" data-cites="silva2020 silvaloms2025">(<a href="references.html#ref-silva2020" role="doc-biblioref">Silva 2020</a>; <a href="references.html#ref-silvaloms2025" role="doc-biblioref">Silva and Lomsdalen 2025</a>)</span>.</p>
 </section>
 <section id="reading-a-fit" class="level2">
 <h2 class="anchored" data-anchor-id="reading-a-fit">Reading a fit</h2>
@@ -962,10 +1014,10 @@ div.csl-indent {
 </section>
 <section id="sig-output" class="level2">
 <h2 class="anchored" data-anchor-id="sig-output">Reading the Ġgantija worked fit</h2>
-<p>The vignette loads a saved <a href="fn-randomtest.html"><code>randomTest()</code></a> fit with 500 simulations, then uses <a href="fn-plot-skyscaper-sigtest.html"><code>plot.skyscapeR.sigTest()</code></a> with <code>show.local=TRUE</code>. Its global p-value is 0.004. In the local table the excess from −33.7° to −28.6° has adjusted p = 0.004, the smaller excess near −49° has adjusted p = 0.557, and the deficit row contains no cluster. The plotted excess and deficit rows share the angular axis with the observed curve; <code>show.pval</code> independently controls display of the global value. <a href="fn-print-skyscaper-sigtest.html"><code>print.skyscapeR.sigTest()</code></a> and <a href="fn-pval2stars.html"><code>pval2stars()</code></a> summarise these stored probabilities. The open circle marks the larger p-value. Overlaying a Gacrux band or selecting the significant positive interval for <a href="fn-findtargets.html"><code>findTargets()</code></a> does not recompute the test or assign a probability to Gacrux as the intended target <span class="citation" data-cites="silva2020 silvaloms2025">(<a href="references.html#ref-silva2020" role="doc-biblioref">Silva 2020</a>; <a href="references.html#ref-silvaloms2025" role="doc-biblioref">Silva and Lomsdalen 2025</a>)</span>.</p>
+<p>The vignette loads a saved <a href="fn-randomtest.html"><code>randomTest()</code></a> fit with 500 simulations, then uses <a href="fn-plot-skyscaper-sigtest.html"><code>plot.skyscapeR.sigTest()</code></a> with <code>show.local=TRUE</code>. The global p-value is 0.004. The excess from −49.4° to −48.2° has adjusted p = 0.557. The excess from −33.7° to −28.6° has adjusted p = 0.004. The plotted excess and deficit rows share the angular axis with the observed curve; <code>show.pval</code> independently controls display of the global value. <a href="fn-print-skyscaper-sigtest.html"><code>print.skyscapeR.sigTest()</code></a> and <a href="fn-pval2stars.html"><code>pval2stars()</code></a> summarise these stored probabilities. The open circle marks the larger p-value. Overlaying a Gacrux band or selecting the significant positive interval for <a href="fn-findtargets.html"><code>findTargets()</code></a> does not recompute the test or assign a probability to Gacrux as the intended target <span class="citation" data-cites="silva2020 silvaloms2025">(<a href="references.html#ref-silva2020" role="doc-biblioref">Silva 2020</a>; <a href="references.html#ref-silvaloms2025" role="doc-biblioref">Silva and Lomsdalen 2025</a>)</span>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="figures/significance-clusters.png" class="img-fluid figure-img" alt="The observed curve crosses the upper envelope twice. The smaller excess has adjusted p 0.557 and the larger one p 0.004."></p>
+<p><img src="figures/significance-clusters.png" class="img-fluid figure-img" alt="The observed curve crosses the upper envelope twice. Local probabilities appear below the corresponding excursions."></p>
 <figcaption>The saved Ġgantija fit over the declination sector containing both upper excursions. Each local p-value uses the largest cluster score in each simulated curve. Crossing the pointwise envelope at −49° gives little evidence once the search across declinations is included.</figcaption>
 </figure>
 </div>
@@ -977,6 +1029,7 @@ div.csl-indent {
 <p>The archived package audit checks a saved Ġgantija result and the plotting of local findings. It checks reproducibility of a recorded result, not the family-wise rejection rate over independent datasets. The outstanding validation is to measure rejection rates under known generating models, varying sample size, horizon heterogeneity, the north seam and grid spacing. No historical or new significance fits were run for this manual revision.</p>
 <p><strong>Related function entries</strong></p>
 <p><a href="fn-az-pdf.html"><code>az.pdf()</code></a>, <a href="fn-coordtrans.html"><code>coordtrans()</code></a>, <a href="fn-dec-pdf.html"><code>dec.pdf()</code></a>, <a href="fn-modeltest.html"><code>modelTest()</code></a>, <a href="fn-plot-skyscaper-sigtest.html"><code>plot.skyscapeR.sigTest()</code></a>, <a href="fn-print-skyscaper-sigtest.html"><code>print.skyscapeR.sigTest()</code></a>, <a href="fn-pval2stars.html"><code>pval2stars()</code></a>, <a href="fn-randomtest.html"><code>randomTest()</code></a>, <a href="fn-spd.html"><code>spd()</code></a>.</p>
+<p>The <a href="./s02-specified-models.html#route-calibration">matched-null calibration</a> reports global and adjusted local rejection rates for individually transformed measurements.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">

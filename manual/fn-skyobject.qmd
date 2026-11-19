@@ -1,5 +1,7 @@
 # `skyObject()` {#fn-skyobject}
 
+Six stellar positions were compared with independently propagated catalogue directions from 3500 BCE to 2000 CE. [A03 validation study](a03-stellar-positions.qmd#a03-stellar-positions).
+
 A08 checked annual stellar, solar and lunar range endpoints, local corrections, identifier aliases and retention of target labels and line styles. [A08 results](a08-target-ranges.qmd).
 
 [Function index](function-index.html#idx-skyobject)
@@ -8,7 +10,7 @@ A08 checked annual stellar, solar and lunar range endpoints, local corrections, 
 <p>An overlay identifies which targets to compare before inspecting a distribution. Names
 may denote stars, solar or lunar limits, or fixed custom declinations. Group names
 expand into the individual limits. At one epoch, the function evaluates each target; for
-two endpoints it uses annual January stellar declinations. Solar and lunar limits in 2.0.9009 use annual samples at the supplied site, including both endpoints. Styles and epoch travel with the object. Treat range endpoints as
+two endpoints it uses annual January stellar declinations. Solar and lunar limits use annual samples at the supplied site, including both endpoints. Styles and epoch travel with the object. Treat range endpoints as
 model estimates and verify narrow or rapidly changing windows separately.
 A single object can contain several related targets. Pass a list of objects
 to plot(hor), plotBars or plotAzimuth to combine groups with independent
@@ -18,7 +20,7 @@ plots use each group's stored location and a level horizon, drawing both
 declination boundaries for a year-range group. Declination plots need no
 location. No common epoch range is imposed and no astronomical positions
 are recomputed merely by combining objects. The output class remains
-skyscapeR.object, so previously saved objects remain usable.
+skyscapeR.object, so the object can be replotted.
 sky.objects is a silent compatibility alias for skyObject.
 </p>
 ```

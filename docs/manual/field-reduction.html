@@ -97,7 +97,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -762,12 +762,22 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -778,6 +788,11 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -818,6 +833,11 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -871,6 +891,7 @@ div.csl-indent {
   <li><a href="#field-compass" id="toc-field-compass" class="nav-link active" data-scroll-target="#field-compass">Magnetic reference and observation date</a></li>
   <li><a href="#field-solar" id="toc-field-solar" class="nav-link" data-scroll-target="#field-solar">Solar-reference reduction</a></li>
   <li><a href="#field-example" id="toc-field-example" class="nav-link" data-scroll-target="#field-example">Worked circle reading</a></li>
+  <li><a href="#f01-scientific" id="toc-f01-scientific" class="nav-link" data-scroll-target="#f01-scientific">F01 · Independent bearings and a recorded solar survey</a></li>
   </ul>
 </nav>
     </div>
@@ -896,8 +917,8 @@ div.csl-indent {
 </header>
 
 
-<p>Build 2.0.9009 accepts a single site or a site per theodolite observation and reduces the final bearing modulo 360°. The earlier −558.77° control returns 161.23°. <a href="./w02-field-to-sky.html">W02 field controls</a>.</p>
-<p><strong>Implementation.</strong> skyscapeR 2.0.9004, <code>R/data-reduction.R</code>, <code>R/misc.R</code> and <code>R/mechanics.R</code>. A compass gives a direction relative to magnetic north. A theodolite gives an angle on an instrument circle whose zero may be arbitrary. Reduction places each observation on a true-bearing scale before the skyline or celestial declination is evaluated. Retain the original readings; two corrected numbers alone cannot reveal an erroneous correction sign, solar limb or time convention <span class="citation" data-cites="ruggles1999">(<a href="references.html#ref-ruggles1999" role="doc-biblioref">Ruggles 1999</a>)</span>.</p>
+<p>The package accepts a single site or a site per theodolite observation and reduces the final bearing modulo 360°. The control returns 161.23°. <a href="./w02-field-to-sky.html">W02 field controls</a>.</p>
+<p><strong>Implementation.</strong> skyscapeR, <code>R/data-reduction.R</code>, <code>R/misc.R</code> and <code>R/mechanics.R</code>. A compass gives a direction relative to magnetic north. A theodolite gives an angle on an instrument circle whose zero may be arbitrary. Reduction places each observation on a true-bearing scale before the skyline or celestial declination is evaluated. Retain the original readings; two corrected numbers alone cannot reveal an erroneous correction sign, solar limb or time convention <span class="citation" data-cites="ruggles1999">(<a href="references.html#ref-ruggles1999" role="doc-biblioref">Ruggles 1999</a>)</span>.</p>
 <section id="field-compass" class="level2">
 <h2 class="anchored" data-anchor-id="field-compass">Magnetic reference and observation date</h2>
 <p><a href="fn-mag-dec.html"><code>mag.dec()</code></a> evaluates IGRF-14 through <code>oce::magneticField()</code> at sea level for the survey latitude, longitude and date. The date is converted to a decimal year by dividing elapsed days since 1 January by the actual number of days in the year. This implementation accepts 1 January 1900 through 1 January 2030 inclusive. Supply one site and many dates, one date and several sites, or matched rows. The date is that of the instrument reading, even for a monument built millennia earlier <span class="citation" data-cites="igrf ocefield">(<a href="references.html#ref-igrf" role="doc-biblioref">NOAA National Centers for Environmental Information, n.d.</a>; <a href="references.html#ref-ocefield" role="doc-biblioref">Kelley and Richards, n.d.</a>)</span>.</p>
@@ -944,7 +965,7 @@ div.csl-indent {
 <p>Let <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mi>T</mi></msub><annotation encoding="application/x-tex">r_T</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mi>S</mi></msub><annotation encoding="application/x-tex">r_S</annotation></semantics></math> be instrument-circle readings to the target and the observed solar point. If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>S</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">A_S(t)</annotation></semantics></math> is the predicted true bearing of that same solar point, the reduced bearing modulo one turn is</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>T</mi></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><msub><mi>A</mi><mi>S</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><msub><mi>r</mi><mi>T</mi></msub><mo>−</mo><msub><mi>r</mi><mi>S</mi></msub><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mspace width="0.222em"></mspace><mo>mod</mo><mspace width="0.222em"></mspace><mn>360</mn></mrow><mi>°</mi><mi>.</mi></mrow><annotation encoding="application/x-tex"> A_T = [ A_S(t) + r_T-r_S ]\bmod 360°.</annotation></semantics></math></p>
 <p><a href="fn-sunaz.html"><code>sunAz()</code></a> parses the survey clock with R’s civil-time machinery, converts it to UTC, forms a Gregorian Julian date and calculates a topocentric solar direction. Its horizontal calculation uses 1013.25 mbar and 15 °C. The centre is used if no limb is given. Left and right limbs subtract or add a fixed <strong>16 arcminutes in azimuth</strong>. Optional altitude is the geometric centre altitude. The fixed limb offset is an approximation; it does not vary with the apparent solar diameter or project a changing semidiameter onto azimuth at each altitude. This timestamp route is distinct from the proleptic ancient-date conversion in the <a href="./astronomical-conventions.html">conventions chapter</a>.</p>
-<p><a href="fn-reduct-theodolite.html"><code>reduct.theodolite()</code></a> adds the observed circle difference to the computed solar reference, rounded according to the input readings. For <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>r</mi><mi>T</mi></msub><mo>−</mo><msub><mi>r</mi><mi>S</mi></msub><mo stretchy="true" form="postfix">|</mo></mrow><mo>&gt;</mo><mn>180</mn><mi>°</mi></mrow><annotation encoding="application/x-tex">|r_T-r_S|&gt;180°</annotation></semantics></math> this build subtracts a full turn from the difference, including when it is already negative. It does not wrap the final sum. The resulting number represents the correct direction modulo 360° but can be far outside the normal horizon lookup range. For a crossing of north, retain the raw result and compute <code>True.Azimuth %% 360</code> before matching a profile; for that case one can reduce the bearing first and then pass the wrapped value and measured altitude to <a href="fn-az2dec.html"><code>az2dec()</code></a>. With one observation, a one-row, three-column location matrix works in this build; a plain three-element vector can fail in the internal matrix indexing.</p>
+<p><a href="fn-reduct-theodolite.html"><code>reduct.theodolite()</code></a> adds the observed circle difference to the computed solar reference, rounded according to the input readings. The function wraps the final bearing into the interval from 0° inclusive to 360° exclusive. A single location vector can be shared by all readings, or a location matrix can specify one site per observation.</p>
 <p>The optional <code>name</code>, <code>ID</code> and <code>HWT.ID</code> fields identify output records. Supplying a HeyWhatsThat ID in these reduction functions records it in the table. To use the external skyline, retrieve the horizon with <a href="fn-downloadhwt.html"><code>downloadHWT()</code></a> and supply the resulting object as the location; an explicit measured altitude takes precedence.</p>
 </section>
 <section id="field-example" class="level2">
@@ -953,16 +974,53 @@ div.csl-indent {
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>site <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">35.84</span>, <span class="fl">14.57</span>, <span class="dv">100</span>), <span class="at">nrow =</span> <span class="dv">1</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">reduct.theodolite</span>(site, <span class="at">az =</span> <span class="fl">2.25</span>, <span class="at">az.sun =</span> <span class="fl">358.75</span>,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">date =</span> <span class="st">"2026/02/20"</span>, <span class="at">time =</span> <span class="st">"11:07:17"</span>, <span class="at">tz =</span> <span class="st">"Europe/Malta"</span>, <span class="at">alt =</span> <span class="dv">2</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>r<span class="sc">$</span>True.Azimuth</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>r<span class="sc">$</span>True.Azimuth <span class="sc">%%</span> <span class="dv">360</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The instrument crossed north by <strong>+3.50°</strong> between the solar and target readings. The rounded solar reference is 157.73°. The routine returns <strong>−558.77°</strong>, equivalent to <strong>161.23°</strong>, the direction obtained by adding 3.50° to the solar reference. The companion script also includes a non-wrapping reading and a compass reduction. These examples show why retaining the solar reading, limb, timestamp, timezone and original circle values matters when recovering a field result.</p>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>r<span class="sc">$</span>True.Azimuth</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The instrument crossed north by <strong>+3.50°</strong> between the solar and target readings. The rounded solar reference is 157.73°. The routine returns <strong>161.23°</strong>, the direction obtained by adding 3.50° to the solar reference. The companion script also includes a non-wrapping reading and a compass reduction. These examples show why retaining the solar reading, limb, timestamp, timezone and original circle values matters when recovering a field result.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="figures/survey-reference.png" class="img-fluid figure-img" alt="The instrument turn crosses north. The same turn takes the true bearing from 157.73 to 161.23 degrees."></p>
 <figcaption>A clockwise turn from 358.75° to 2.25° adds 3.50° to the solar reference. The two scales show the same turn in instrument and true coordinates.</figcaption>
 </figure>
 </div>
-<p>The international <a href="./h01-field-validation.html">H01</a> field comparison evaluates DEM skylines against already reduced bearings. Independent validation of the two reduction functions requires a different reference. The relevant future check is a repeat solar or magnetic orientation of a baseline with independently established endpoints, accompanied by instrument readings, timestamps, atmospheric conditions and positional uncertainties. <a href="archives/conventions-field-panorama.zip">Download the synthetic field records and reduction scripts</a>.</p>
+<p>The international <a href="./h01-field-validation.html">H01</a> field comparison evaluates DEM skylines against already reduced bearings. F01 below uses a separately established terrestrial bearing. <a href="archives/conventions-field-panorama.zip">Download the synthetic field records and reduction scripts</a>.</p>
+</section>
+<section id="f01-scientific" class="level2">
+<h2 class="anchored" data-anchor-id="f01-scientific">F01 · Independent bearings and a recorded solar survey</h2>
+<p>Three synthetic baselines used WGS84 inverse-geodesic bearings. The solar circle readings were constructed from independent centre bearings, including Reda and Andreas’s Golden, Colorado example (194.34024°). The Malta and southern-hemisphere controls used Astronomy Engine. The largest wrapped errors were <strong>0.00035°</strong> for solar reduction and below <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>10</mn><mrow><mi>−</mi><mn>10</mn></mrow></msup><annotation encoding="application/x-tex">10^{-10}</annotation></semantics></math> degrees for compass readings with supplied magnetic corrections. A separate comparison of <code>mag.dec()</code> with the independent ppigrf implementation of IGRF-14 covered five sites on five dates from 1900 to 2029. The maximum difference was <strong>0.000070°</strong>. Both implementations use the same geomagnetic field coefficients. Local magnetic disturbance and instrument bias require field measurements.</p>
+<p>Hugh B. Crawford’s survey at Waldo, Kansas, on 13 October 1944 provides an observational test. The independent Polaris bearing to the west edge of the post was 1′07″ east of north. The measured angle between edges was 1′35″, giving <strong>0.045°</strong> to the east edge sighted in the solar series. The three pairs used opposite solar limbs and both telescope faces. The test uses each pair’s mean circle deflection as a centre sight, converts its recorded local apparent solar time to UTC, and uses the southward prolongation of the line to interpret the deflection.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 36%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Recorded apparent time</th>
+<th style="text-align: right;">Recovered true bearing</th>
+<th style="text-align: right;">Signed error against Polaris</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>08:40</td>
+<td style="text-align: right;">359.656°</td>
+<td style="text-align: right;">−0.389°</td>
+</tr>
+<tr class="even">
+<td>08:45</td>
+<td style="text-align: right;">0.144°</td>
+<td style="text-align: right;">+0.099°</td>
+</tr>
+<tr class="odd">
+<td>08:50</td>
+<td style="text-align: right;">0.574°</td>
+<td style="text-align: right;">+0.529°</td>
+</tr>
+</tbody>
+</table>
+<p>The equal-weight mean signed error was +0.080°. Crawford’s own altitude-based reduction gave 0.051° for the post. The notebook gives one time per pair at five-minute spacing and lacks individual timestamps. All three pairs share one baseline. These differences therefore cannot establish a time correction, an instrument calibration or general field accuracy. A timed compass traverse tied to surveyed endpoints remains open. <a href="https://archive.org/details/examplesofgoodpr00unit">General Land Office field records, printed pp.&nbsp;41 and 62–63</a>. <a href="https://doi.org/10.1016/j.solener.2003.12.003">Solar Position Algorithm</a>. <a href="https://github.com/IAGA-VMOD/ppigrf">Independent geomagnetic reference</a>.</p>
+<p><a href="archives/scientific-studies.zip">Download the study scripts, reference inputs and numerical results</a>.</p>
 <p><strong>Related function entries</strong></p>
 <p><a href="fn-mag-dec.html"><code>mag.dec()</code></a>, <a href="fn-reduct-compass.html"><code>reduct.compass()</code></a>, <a href="fn-hor2alt.html"><code>hor2alt()</code></a>, <a href="fn-sunaz.html"><code>sunAz()</code></a>, <a href="fn-reduct-theodolite.html"><code>reduct.theodolite()</code></a>, <a href="fn-az2dec.html"><code>az2dec()</code></a>.</p>
 

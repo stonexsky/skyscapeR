@@ -1,5 +1,7 @@
 # `skyRadiance()` {#fn-skyradiance}
 
+Diffuse V-band brightness was compared with six fields outside the Carina calibration aperture. [V04 validation study](v04-diffuse-photometry.qmd#v04-diffuse-photometry).
+
 [Function index](function-index.html#idx-skyradiance)
 
 ```{=html}

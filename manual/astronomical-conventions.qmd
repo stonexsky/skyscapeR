@@ -1,8 +1,8 @@
 # Astronomical conventions and stellar positions {#sec-conventions}
 
-**Implementation.** skyscapeR 2.0.9004, `R/dates.R`, `R/mechanics.R`, `R/stars.R`, `R/ephemeris.R` and `R/misc.R`. To reproduce a position, specify the instant, the origin of the coordinate frame, the axes and the observer. A calendar agreement does not guarantee that two programs return the same coordinate. This chapter follows those choices from a dated record to a local sightline. The [ephemeris chapter](ephemeris.qmd) covers file selection and the supplier's accuracy claim.
+**Implementation.** skyscapeR, `R/dates.R`, `R/mechanics.R`, `R/stars.R`, `R/ephemeris.R` and `R/misc.R`. To reproduce a position, specify the instant, the origin of the coordinate frame, the axes and the observer. A calendar agreement does not guarantee that two programs return the same coordinate. This chapter follows those choices from a dated record to a local sightline. The [ephemeris chapter](ephemeris.qmd) covers file selection and the supplier's accuracy claim.
 
-See the [independent checks on build 2.0.9005](a01-calendar-checks.qmd) for results and limitations.
+See the [independent checks](a01-calendar-checks.qmd) for results and limitations.
 
 ## From a year label to an instant {#conventions-time}
 

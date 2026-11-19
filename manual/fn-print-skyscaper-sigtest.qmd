@@ -2,9 +2,8 @@
 
 W01 checked the reported wrapped interval endpoints and adjusted probabilities against a known fit. [W01 results](w01-plot-geometry.qmd).
 
-**Verified on 2.0.9006.** A single adjusted probability is printed for a range crossing north. [S03 rerun](s03-scoring-checks.qmd).
+A single adjusted probability is printed for a range crossing north. [S03 checks](s03-scoring-checks.qmd).
 
-**Validation on 2.0.9005.** The tested public fits printed the stored global probability and local interval endpoints. North-crossing intervals can appear separately. [S03 results](s03-scoring-checks.qmd).
 
 [Function index](function-index.html#idx-print-skyscaper-sigtest)
 

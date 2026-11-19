@@ -1,88 +1,49 @@
-# Studies by question and package build {#sec-register}
-
-A result belongs to the build, inputs and settings that produced it. The tables give the latest verified run **for the stated question and sample** in these archives. The function chapters describe build 2.0.9004. An older build in the table means that the reported result has not been established here for the newer implementation.
-
-- [H01. Horizon altitude at surveyed bearings](h01-field-validation.qmd)
-
-- [H02. How well does `createHor()` reproduce terrain skylines?](h02-skyline-comparison.qmd)
-
-## Ephemeris accuracy and lunar skyline crossings
-
-[A02](a02-ephemeris.qmd) reports the geocentric, local sky and lunar crossing comparisons for build 2.0.9004, with both reproducible archives.
+# Validation studies by question {#sec-register}
 
 ## Validation programme {#validation-programme}
 
-Status refers to the agreed protocol for this programme. Earlier studies and worked examples remain available for several planned checks. Each completed ID links to the result for its tested build.
+Each entry describes the quantity actually tested. H01/H02 and A02 retain the independent field and ephemeris benchmarks. The terrain lighting and Milky Way display changes were checked separately from those benchmarks. The package checks in this edition used the package source identified in each study.
 
 | ID | Question or quantity | Functions in scope | Status |
 |---|---|---|---|
 | [H01](h01-field-validation.qmd) | How closely do DEM skylines agree with field theodolite readings? | `createHor()`, `hor2alt()` | Complete |
 | [H02](h02-skyline-comparison.qmd) | How does createHor() compare with other skyline methods and field bearings? | `createHor()`, `createHWT()`, `importPeakFinder()` | Complete |
-| H03 | DEM ray tracing, curvature and convergence | `createHor()`, `hor2alt()` | Planned |
-| H04 | Reconstructed earthworks and synthetic panoramas | `horFeature()`, `createHor()`, `demPalettes()`, `plot.skyscapeR.horizon()` | Planned |
-| H05 | Calibrating a photographic horizon | `importPanorama()`, `hor2alt()`, `createHor()` | Planned |
+| [H03](horizons.html#h03-scientific) | DEM ray tracing, curvature and convergence | `createHor()`, `hor2alt()` | Analytic convergence and two curvature controls complete |
+| [H04](h04-feature-resolution.qmd) | Reconstructed earthworks and synthetic panoramas | `horFeature()`, `createHor()`, `demPalettes()`, `plot.skyscapeR.horizon()` | LiDAR bank control and thin-wall occlusion tests complete |
+| [H05](photographic-horizons.html#h05-scientific) | Calibrating a photographic horizon | `importPanorama()`, `hor2alt()`, `createHor()` | Synthetic holdout complete. Surveyed photographic controls open |
 | H06 | Horizon providers, PNGs and Stellarium landscapes | `createHWT()`, `downloadHWT()`, `importPeakFinder()`, `importPanorama()`, `exportHor()`, `exportStellarium()`, `exportPanorama()`, `relinkHor()`, `plot.skyscapeR.horizon()` | Planned |
-| [H07](h07-panorama-coverage.qmd) | Passing incomplete horizons between functions | `importPanorama()`, `hor2alt()`, `coordtrans()`, `riseset()`, `star.phases()`, `spatial.equinox()`, `exportHor()` | Complete · verified on 2.0.9008 |
-| F01 | Compass and solar-sight reduction | `mag.dec()`, `reduct.compass()`, `reduct.theodolite()`, `sunAz()`, `ten()`, `az2dec()` | Planned |
+| [H07](h07-panorama-coverage.qmd) | Passing incomplete horizons between functions | `importPanorama()`, `hor2alt()`, `coordtrans()`, `riseset()`, `star.phases()`, `spatial.equinox()`, `exportHor()` | Complete · verified |
+| [F01](field-reduction.html#f01-scientific) | Compass and solar-sight reduction | `mag.dec()`, `reduct.compass()`, `reduct.theodolite()`, `sunAz()`, `ten()`, `az2dec()` | Reference reductions and archival solar survey complete. Field compass calibration open |
 | [A01](a01-calendar-checks.qmd) | Calendar, clock, angle and session conventions | `BC.AD()`, `astroYear()`, `time2jd()`, `jd2time()`, `timestring()`, `long.date()`, `ten()`, `skyscapeR.vars()` | Complete |
 | [A02](a02-ephemeris.qmd) | How closely do planetary positions and lunar skyline bearings agree with their JPL references? Includes a crossing sensitivity study relevant to riseset(). | `body.position()`, `moonphase()` | Complete |
-| A03 | Stellar propagation and reference frames | `star()`, `body.position()`, `obliquity()`, `parallax.corr()`, `orbit()` | Planned |
-| [A04](a04-stellar-crossings.qmd) | Crossings on flat and irregular skylines | `riseset()`, `orbit()`, `body.position()`, `hor2alt()`, `star.phases()` | Complete · synthetic and JPL centre-crossing comparisons on 2.0.9006 |
-| [A05](a05-solar-limits.qmd) | Solar dates and limiting declinations | `solar.date()`, `eq()`, `jS()`, `dS()`, `zenith()`, `antizenith()`, `obliquity()`, `parallax.corr()`, `spatial.equinox()`, `hor2max.dec()`, `hor2min.dec()`, `az2dec()` | Complete · verified on 2.0.9009 |
-| A06 | Moon, planets and extrema across an epoch | `moonphase()`, `nMjLX()`, `nmnLX()`, `sMjLX()`, `smnLX()`, `planet.extremes()`, `body.position()`, `skyObject()` | Planned |
-| A07 | Equinoctial full Moons and crescent crossovers | `EFM()`, `CC()`, `moonphase()`, `riseset()`, `body.position()` | Planned |
-| [A08](a08-target-ranges.qmd) | Target screening, dated bands and returned tracks | `findTargets()`, `skyObject()`, `sky.objects()`, `star()`, `solar.date()`, `hor2max.dec()`, `hor2min.dec()`, `orbit()` | Complete · verified on 2.0.9009 |
-| V01 | Stellar phases and dated visibility | `star.phases()`, `star()`, `riseset()`, `sketchSky()`, `skyRadiance()`, `plot.skyscapeR.starphases()` | Planned |
-| V02 | Milky Way outer boundary and internal structure | `sketchSky()`, `skyRadiance()`, `planisphere()` | Planned |
-| V03 | Twilight gradients and moonlight | `sketchSky()`, `skyRadiance()`, `body.position()` | Planned |
-| V04 | Flux, cluster glow and the Pleiades | `sketchSky()`, `skyRadiance()`, `skyStep()` | Planned |
-| V05 | Atmospheric extinction by altitude | `sketchSky()`, `skyRadiance()`, `star.phases()`, `skyscapeR.vars()` | Planned |
+| [A03](a03-stellar-positions.qmd) | Stellar propagation and reference frames | `star()`, `body.position()`, `obliquity()`, `parallax.corr()`, `orbit()` | Six-star space-motion comparison complete. Further frame and parallax checks open |
+| [A04](a04-stellar-crossings.qmd) | Crossings on flat and irregular skylines | `riseset()`, `orbit()`, `body.position()`, `hor2alt()`, `star.phases()` | Complete · synthetic and JPL centre-crossing comparisons |
+| [A05](a05-solar-limits.qmd) | Solar dates and limiting declinations | `solar.date()`, `eq()`, `jS()`, `dS()`, `zenith()`, `antizenith()`, `obliquity()`, `parallax.corr()`, `spatial.equinox()`, `hor2max.dec()`, `hor2min.dec()`, `az2dec()` | Complete · verified |
+| [A06](celestial-targets.html#a06-scientific) | Moon, planets and extrema across an epoch | `moonphase()`, `nMjLX()`, `nmnLX()`, `sMjLX()`, `smnLX()`, `planet.extremes()`, `body.position()`, `skyObject()` | Four standstill limits and five planetary windows compared |
+| [A07](lunar-crossovers.html#a07-scientific) | Equinoctial full Moons and crescent crossovers | `EFM()`, `CC()`, `moonphase()`, `riseset()`, `body.position()` | 32 independent selections compared. One EFM threshold discrepancy |
+| [A08](a08-target-ranges.qmd) | Target screening, dated bands and returned tracks | `findTargets()`, `skyObject()`, `sky.objects()`, `star()`, `solar.date()`, `hor2max.dec()`, `hor2min.dec()`, `orbit()` | Complete · verified |
+| V01 | Stellar phases and dated visibility | `star.phases()`, `star()`, `riseset()`, `sketchSky()`, `skyRadiance()`, `plot.skyscapeR.starphases()` | Model-to-model comparison complete. Independent observation study open |
+| V02 | Milky Way outer boundary and internal structure | `sketchSky()`, `skyRadiance()`, `planisphere()` | Grid lookup and seam verified. Independent outline tracing pending |
+| V03 | Twilight gradients and moonlight | `sketchSky()`, `skyRadiance()`, `body.position()` | Twilight checked against 22 held-out measurements. Moonlight field comparison open |
+| [V04](v04-diffuse-photometry.qmd) | Flux, cluster glow and the Pleiades | `sketchSky()`, `skyRadiance()`, `skyStep()` | Flux recovery and Carina normalisation checked. Six independent fields compared |
+| V05 | Atmospheric extinction by altitude | `sketchSky()`, `skyRadiance()`, `star.phases()`, `skyscapeR.vars()` | Transmission and publication switches checked. Atmospheric field calibration open |
 | V06 | Planisphere, sky cultures and constellation geometry | `planisphere()`, `importConstellations()`, `sketchSky()`, `star()` | Planned |
-| V07 | Sky state, Stellarium capture and time stepping | `stellariumSky()`, `sketchSky()`, `skyStep()`, `skyscapeR.vars()`, `plot.skyscapeR.horizon()`, `time2jd()` | Planned |
-| [D01](d01-density-checks.qmd) | Measurement PDFs, circular support and highest-density regions | `az.pdf()`, `dec.pdf()`, `hpdi()`, `spd()`, `subset.skyscapeR.pdf()` | Complete. Original checks repeated and four additional families verified on 2.0.9011 |
-| [D02](d02-bearing-propagation.qmd) | Azimuth-to-declination propagation | `az2dec()`, `coordtrans()`, `hor2alt()`, `az.pdf()`, `dec.pdf()`, `spd()`, `hpdi()` | Complete · grid sensitivity and celestial-pole limits quantified on 2.0.9006 |
-| [S01](s01-uniform-orientation.qmd) | Uniform-orientation null model | `randomTest()`, `coordtrans()`, `az.pdf()`, `spd()`, `pval2stars()` | Complete · calibrated on 2.0.9007 |
-| [S02](s02-specified-models.qmd) | Specified and site-specific nulls | `modelTest()`, `dec.pdf()`, `az.pdf()`, `spd()`, `coordtrans()` | Complete · verified on 2.0.9008 |
-| [S03](s03-scoring-checks.qmd) | Shared scoring, local clusters and analytic probability helpers | `randomTest()`, `modelTest()`, `bernoulli.trial()`, `pval2stars()`, `print.skyscapeR.sigTest()`, `plot.skyscapeR.sigTest()` | Complete; corrected and verified on 2.0.9006 |
-| [W01](w01-plot-geometry.qmd) | Graphical outputs encode the underlying data | `plotAzimuth()`, `plotBars()`, `plot.skyscapeR.horizon()`, `plot.skyscapeR.pdf()`, `plot.skyscapeR.spd()`, `plot.skyscapeR.sigTest()`, `plot.skyscapeR.starphases()`, `print.skyscapeR.sigTest()` | Complete · verified on 2.0.9008 |
-| [W02](w02-field-to-sky.qmd) | End-to-end field-to-sky and group workflows | `reduct.compass()`, `reduct.theodolite()`, `createHor()`, `hor2alt()`, `az2dec()`, `az.pdf()`, `coordtrans()`, `spd()`, `randomTest()`, `modelTest()`, `findTargets()`, `skyObject()`, `star.phases()`, `riseset()`, `sketchSky()` | Complete · verified on 2.0.9009 |
+| V07 | Sky state, Stellarium capture and time stepping | `stellariumSky()`, `sketchSky()`, `skyStep()`, `skyscapeR.vars()`, `plot.skyscapeR.horizon()`, `time2jd()` | Native time-step extinction setting verified. External capture study open |
+| [D01](d01-density-checks.qmd) | Measurement PDFs, circular support and highest-density regions | `az.pdf()`, `dec.pdf()`, `hpdi()`, `spd()`, `subset.skyscapeR.pdf()` | Complete. Six measurement families checked |
+| [D02](d02-bearing-propagation.qmd) | Azimuth-to-declination propagation | `az2dec()`, `coordtrans()`, `hor2alt()`, `az.pdf()`, `dec.pdf()`, `spd()`, `hpdi()` | Complete · grid sensitivity and celestial-pole limits quantified |
+| [S01](s01-uniform-orientation.qmd) | Uniform-orientation null model | `randomTest()`, `coordtrans()`, `az.pdf()`, `spd()`, `pval2stars()` | Complete · calibrated |
+| [S02](s02-specified-models.qmd) | Specified and site-specific nulls | `modelTest()`, `dec.pdf()`, `az.pdf()`, `spd()`, `coordtrans()` | Matched-null designs and individual azimuth-to-declination calibration complete |
+| [S03](s03-scoring-checks.qmd) | Shared scoring, local clusters and analytic probability helpers | `randomTest()`, `modelTest()`, `bernoulli.trial()`, `pval2stars()`, `print.skyscapeR.sigTest()`, `plot.skyscapeR.sigTest()` | Complete |
+| [W01](w01-plot-geometry.qmd) | Graphical outputs encode the underlying data | `plotAzimuth()`, `plotBars()`, `plot.skyscapeR.horizon()`, `plot.skyscapeR.pdf()`, `plot.skyscapeR.spd()`, `plot.skyscapeR.sigTest()`, `plot.skyscapeR.starphases()`, `print.skyscapeR.sigTest()` | Complete · verified |
+| [W02](w02-field-to-sky.qmd) | End-to-end field-to-sky and group workflows | `reduct.compass()`, `reduct.theodolite()`, `createHor()`, `hor2alt()`, `az2dec()`, `az.pdf()`, `coordtrans()`, `spd()`, `randomTest()`, `modelTest()`, `findTargets()`, `skyObject()`, `star.phases()`, `riseset()`, `sketchSky()` | Complete · verified |
 
-## Lunar event selection
-
-The [historical crossover comparison](lunar-crossovers.html#crossover-archive) checks annual selections against the Silva & Pimenta (2012) simulation workbooks. It reports moonset pairing changes, SIM1 residuals and the separate unresolved 40° N series. The new worked examples use 2.0.9004 and do not replace the archived runs.
 
 ## Sky rendering
 
-A plausible image can conceal errors in its outline, brightness or response to altitude. Each row concerns one quantity. A change to the outline can require repeating one study while leaving a recorded twilight comparison relevant.
+A full grid sweep recovered all 4,323,600 stored Milky Way classes. The Carina calibration field recovered 20.700 V mag arcsec⁻². The publication-colour and publication-mono checks exercised the default, explicit switches, zero extinction and a one-minute time step. For an extinction coefficient of 0.2 mag per airmass the transmission was 0.149 at 5° and 0.832 at 90°. The natural-renderer flux suite recovered the Sirius flux at three field widths and checked the Pleiades, Moon and five visible planets. The mean absolute residual against 22 held-out twilight measurements from Koomen et al. was 0.481 mag. [Reproduction files](archives/sky-checks.zip).
 
-| Question | Evidence, tested implementation and scope |
-|---|---|
-| **Milky Way shape. Where are the outer boundary and internal lanes?** | The 2.0 development archive retains the diffuse-light source map, candidate thresholds, traced boundaries and bright and dark masks. These document how the depiction was derived and how sensitive its shape was to the tracing choices. The later photometric field comparisons concern brightness in selected patches. They do not independently establish the position of an outer edge. For alignment work the outer outline includes the enclosed dark regions. If a later release revises the anticentre outline, its boundary comparison needs a new run. |
-| **Twilight. Does the sky brighten by the observed amount in different directions?** | In 2.0.9003 the study compared the calibrated curve with Koomen's Maryland observations held outside the fit. Across 22 directions/solar-altitude combinations the mean absolute difference, expressed in magnitudes, was 0.48 for the revised curve and 2.28 for the earlier curve on the same observations. This checks the observed configurations at solar altitudes −3° and −6°. |
-| **Flux. Does a point source retain its integrated light when the field of view changes?** | The 2.0.9004 release check recovered the modelled Sirius flux at 90°, 45° and 5° field widths (reported ratio 1 at each width). Additional checks compare Sirius, the cluster and a Carina field. Recovery of the input flux verifies the calculation. It does not by itself calibrate the absolute brightness of the night sky. |
-| **Extinction. Does the Milky Way dim by the specified altitude-dependent factor?** | The 2.0.9002 test compared the same skies with the band extinction coefficient set to 0 and 0.2. The script checked the band radiance against the expected multiplier. Model transmission at 0.2 was 0.149 at 5° altitude and 0.832 at 90°. This verifies application of the extinction law. It is not a set of atmospheric transmission measurements. |
+The [heliacal-rising study](heliacal-rising.qmd) gives the full comparison between the phase solver and the radiance threshold. The [S02 study](s02-specified-models.qmd#route-calibration) gives the false-positive rates for azimuth-defined nulls tested in declination.
 
-[Download the five archived sky-rendering scripts](archives/sky-rendering-validation-scripts.zip) for twilight, colour, zoom and shared lighting.
+## Results and priorities {#next-tests}
 
-The [heliacal-rising comparison](heliacal-rising.qmd) draws on the rendering model for a separate question about the timing of an event.
-
-## Study records
-
-[Download the sky-check outputs and code](archives/study-register-evidence.zip). The H01 report and reproducible field archive are linked in the H01 section above.
-
-* [Sky-rendering development studies and code](https://chatgpt.com/library?file_id=libfile_95fe5213a7ec8191bda3065faa73ff1a&account_id=personal)
-
-## When a test changes the package
-
-| What changed? | How the manual reports it |
-|---|---|
-| Implementation changes, but the question, data, settings and metric stay the same | Add a run to the same study. Show the latest tested build first, with the old and new values, the reason for the code change, and links to both records. Until a rerun exists, identify the last build actually tested. |
-| A new station, dataset, phenomenon or accuracy claim is introduced | Add a linked study alongside the existing one. If extending a cohort, retain results for the original common sample and give the expanded sample its own denominator. |
-| An error in the reference data, selection or scoring invalidates a result | Mark the affected result as superseded and explain why. Put the corrected result in the main text. Retain the original record and the correction together in the history. |
-| A discrepancy was used to tune the model | Label the repeated comparison as calibration or a regression check. Report an independent validation separately when observations unused in tuning are available. |
-
-Each study should have a stable link. Each run should identify the exact source revision or package archive checksum, the data and protocol versions, settings, metric, sample and dated outputs. The main text carries the conclusion a reader can use for the documented release. Earlier runs remain accessible in that study's history.
-
-## Worked checks for the final methods chapters
-
-[Calendar and position calculations](astronomical-conventions.qmd), [synthetic instrument reductions](field-reduction.qmd) and the [known photographic skyline](photographic-horizons.qmd) have reproducible worked examples for 2.0.9004. [A02](a02-ephemeris.qmd) now provides independent planetary and lunar position comparisons. Stellar reference-frame checks, a surveyed baseline and photographic check bearings remain outstanding.
+The [five package validation studies](package-stress-tests.qmd) report completed tests of near-pole transformations, off-Carina photometry, withheld-station horizon errors, partly occluded features and stellar astrometry. D02 evaluates direct propagation near the celestial pole. The next empirical priority is fitting and testing diffuse brightness on independent, consistently masked V-band fields. For terrain uncertainty, the withheld-station coverage provides a baseline for models using station and survey characteristics.

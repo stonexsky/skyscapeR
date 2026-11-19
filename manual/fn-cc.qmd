@@ -1,5 +1,7 @@
 # `CC()` {#fn-cc}
 
+A07 examines independent crossover selection and sensitivity to the illumination cutoff. [A07 study and results](lunar-crossovers.html#a07-scientific).
+
 [Function index](function-index.html#idx-cc)
 
 ```{=html}

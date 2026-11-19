@@ -1,6 +1,6 @@
 # Constructing a site horizon {#sec-horizon}
 
-**Function** [`createHor()`](fn-createhor.html) · **Package** skyscapeR 2.0.9004
+**Function** [`createHor()`](fn-createhor.html) · **Package** skyscapeR 2.0
 
 A skyline is the altitude of the obstruction at each bearing from a particular viewpoint. [`createHor()`](fn-createhor.html) builds this profile from observations or predicts it from a digital elevation model (DEM). Both routes return the same kind of horizon object. The evidence between adjacent bearings is quite different.
 
@@ -70,7 +70,11 @@ The output is a 2:1 equirectangular RGBA PNG covering 0–360° clockwise from n
 | `width` | The number of panorama columns. Height is half the width. The default 4096 × 2048 has an angular pixel width of about 5.27 arcminutes. |
 | `panorama.distance.step`, `panorama.acuity` | The radial spacing for the image. With the default adaptive rule, the effective angle is the larger of one PNG pixel and the requested acuity (default one arcminute). At distance $d$, the proposed step is the larger of the near step (normally one local DEM cell) and $d\tan\theta$, with $\theta$ the effective angle. A narrow ridge can fall between samples. Supply a fixed step in metres to check a critical feature, or `NULL` to reuse the numerical ray spacing. |
 | `terrain.palette`, `land_cols`, `sea_cols`, `sea_level` | Colour the surface by elevation. Inspect the available ramps with [`demPalettes()`](fn-dempalettes.html). A sea-level threshold can colour low-lying dry ground as water. Use `sea_level=NULL` where that interpretation is inappropriate. |
-| `lighting`, `light.azimuth`, `light.altitude`, `ambient`, `haze` | Relief mode blends observer-facing and directional illumination. Directional mode uses the selected light direction. The hillshade has no cast shadows. For an inspection of the palette alone, set `ambient=1, haze=0`. The default illumination is illustrative and does not reconstruct illumination at a dated solar event. |
+| `lighting`, `light.azimuth`, `light.altitude`, `ambient`, `contrast`, `haze` | Relief mode blends observer-facing and directional illumination. Directional mode uses the selected light direction. The hillshade has no cast shadows. For an inspection of the palette alone, set `ambient=1, haze=0`. The default illumination is illustrative and does not reconstruct illumination at a dated solar event. |
+
+Relief lighting blends 75% observer-facing and 25% directional illumination. With the blended illumination floored at 0.15, the relief brightness multiplier is `min(1, ambient + contrast * illumination)`, with defaults 0.40 and 0.70. Terrain and visible reconstructed features receive the same shading. Directional mode uses `ambient + (1 - ambient) * illumination`. The selected lighting is applied when the PNG is generated. The numerical skyline is calculated separately.
+
+In a 400 m square of 1 m LiDAR terrain, a synthetic 6 m bank 50 m north of the station raised the numerical skyline from −1.83° to 4.52°. The relief, directional and unshaded runs returned identical numerical profiles and distinct PNGs. This checks the separation between numerical ray tracing and display lighting. [LiDAR fixture and reproduction](archives/relief.zip).
 
 The example wrote a 1024 × 512 PNG. Its adaptive grid used 100 radial samples, with an effective angular target of 21.09 arcminutes. Inspect `h$metadata$image$sampling` for the values used on another DEM. Increasing image width alone leaves the numerical bearing grid unchanged. When a narrow bank or notch matters, check both grids.
 
@@ -122,7 +126,7 @@ vapply(list(bare = bare, raised = raised), function(h) {
 
 To model a chalk-coloured cursus enclosure, a zero-height polygon in area mode can supply the interior colour, with a raised boundary bank later in the list. This lets the interior and bank have different colours while only the bank adds relief. Save the feature objects with the DEM provenance, viewpoint and settings. The returned `metadata$features` summarises the layers and records checksums; rebuilding the geometry requires the saved features. Save the external PNG as well when a panorama was requested.
 
-The rules above follow the 2.0.9004 implementation in `R/horizon-features.R` and `R/dem-horizon.R`. The example illustrates the geometry of an assumed bank. [H01](h01-field-validation.qmd) tests terrain skylines. Reconstructed earthworks need independent measurements of their geometry.
+The rules above follow the implementation in `R/horizon-features.R` and `R/dem-horizon.R`. The example illustrates the geometry of an assumed bank. [H01](h01-field-validation.qmd) tests terrain skylines. Reconstructed earthworks need independent measurements of their geometry.
 
 ## Choices that affect a sightline
 
@@ -149,6 +153,26 @@ The [H01 field comparison](h01-field-validation.qmd) quantifies error at surveye
 
 </details>
 
+
+
+## H03 · DEM sampling against an analytic skyline {#h03-scientific}
+
+A synthetic ridge has its highest elevation angle at 1,167 m on every bearing. Its slope there varies with bearing as $0.12+0.05\cos(6A)$. Away from the crest the slope falls by $[(r-1167)/2500]^2$, with $r$ in metres. Sampling this surface at raster cell centres and passing it to `createHor()` gives a skyline that can be compared with the continuous solution at 1,440 bearings. The observer is at the origin of a local azimuthal equidistant projection, with eye and ground both at zero for this test.
+
+| Change from the baseline | RMS altitude error | Largest absolute error |
+|---|---:|---:|
+| Baseline, 10 m cells, 10 m radial step, 1° bearings, 2 km range | 0.0023° | 0.0047° |
+| 50 m cells | 0.0121° | 0.0241° |
+| 250 m radial step | 0.0624° | 0.0661° |
+| 5° bearings | 0.0500° | 0.0944° |
+| 15° bearings | 0.4265° | 0.5956° |
+| Range shortened to 900 m | 0.0026° | 0.0052° |
+
+The final row compares with the analytic solution **inside 900 m**. Its highest returned altitude was 9.012°, against 9.648° with the crest in range. Finer sampling within the shorter radius cannot recover the missing crest. The angular errors depend on the shape of this ridge.
+
+For a separate level surface with a 0.12 m eye height, the geometric dip is $-\arccos[R/(R+h)]$. With 5 m radial sampling the geometric and effective-radius cases ($k=0$ and $0.13$) each agreed within $9\times10^{-9}$ degrees. For the atmospheric-gradient option, a separate small-angle tangent calculation agreed within 0.000000002° at both −10 and 0 °C/km (1013.25 mbar, 15 °C). These level-surface tests verify numerical behaviour under specified atmospheres. Field accuracy also depends on the actual terrain, observer height and atmospheric profile.
+
+[Download the study scripts, reference inputs and numerical results](archives/scientific-studies.zip).
 
 **Related function entries**
 

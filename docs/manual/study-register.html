@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Studies by question and package build – skyscapeR technical manual</title>
+<title>Validation studies by question – skyscapeR technical manual</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./a02-ephemeris.html" rel="next">
+<link href="./package-stress-tests.html" rel="next">
 <link href="./fn-randomtest.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -89,7 +89,7 @@ follow(); window.addEventListener('hashchange', follow);})();
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./study-register.html">Validation</a></li><li class="breadcrumb-item"><a href="./study-register.html"><span class="chapter-title">Studies by question and package build</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./study-register.html">Validation</a></li><li class="breadcrumb-item"><a href="./study-register.html"><span class="chapter-title">Validation studies by question</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -712,12 +712,22 @@ follow(); window.addEventListener('hashchange', follow);})();
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -728,6 +738,11 @@ follow(); window.addEventListener('hashchange', follow);})();
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -768,6 +783,11 @@ follow(); window.addEventListener('hashchange', follow);})();
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -818,22 +838,18 @@ follow(); window.addEventListener('hashchange', follow);})();
     <h2 id="toc-title">Chapter contents</h2>
    
   <ul>
-  <li><a href="#ephemeris-accuracy-and-lunar-skyline-crossings" id="toc-ephemeris-accuracy-and-lunar-skyline-crossings" class="nav-link active" data-scroll-target="#ephemeris-accuracy-and-lunar-skyline-crossings">Ephemeris accuracy and lunar skyline crossings</a></li>
-  <li><a href="#validation-programme" id="toc-validation-programme" class="nav-link" data-scroll-target="#validation-programme">Validation programme</a></li>
-  <li><a href="#lunar-event-selection" id="toc-lunar-event-selection" class="nav-link" data-scroll-target="#lunar-event-selection">Lunar event selection</a></li>
+  <li><a href="#validation-programme" id="toc-validation-programme" class="nav-link active" data-scroll-target="#validation-programme">Validation programme</a></li>
   <li><a href="#sky-rendering" id="toc-sky-rendering" class="nav-link" data-scroll-target="#sky-rendering">Sky rendering</a></li>
-  <li><a href="#study-records" id="toc-study-records" class="nav-link" data-scroll-target="#study-records">Study records</a></li>
-  <li><a href="#when-a-test-changes-the-package" id="toc-when-a-test-changes-the-package" class="nav-link" data-scroll-target="#when-a-test-changes-the-package">When a test changes the package</a></li>
-  <li><a href="#worked-checks-for-the-final-methods-chapters" id="toc-worked-checks-for-the-final-methods-chapters" class="nav-link" data-scroll-target="#worked-checks-for-the-final-methods-chapters">Worked checks for the final methods chapters</a></li>
+  <li><a href="#next-tests" id="toc-next-tests" class="nav-link" data-scroll-target="#next-tests">Results and priorities</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./study-register.html">Validation</a></li><li class="breadcrumb-item"><a href="./study-register.html"><span class="chapter-title">Studies by question and package build</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./study-register.html">Validation</a></li><li class="breadcrumb-item"><a href="./study-register.html"><span class="chapter-title">Validation studies by question</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-register" class="quarto-section-identifier"><span class="chapter-title">Studies by question and package build</span></span></h1>
+<h1 class="title"><span id="sec-register" class="quarto-section-identifier"><span class="chapter-title">Validation studies by question</span></span></h1>
 </div>
 
 
@@ -850,18 +866,9 @@ follow(); window.addEventListener('hashchange', follow);})();
 </header>
 
 
-<p>A result belongs to the build, inputs and settings that produced it. The tables give the latest verified run <strong>for the stated question and sample</strong> in these archives. The function chapters describe build 2.0.9004. An older build in the table means that the reported result has not been established here for the newer implementation.</p>
-<ul>
-<li><p><a href="./h01-field-validation.html">H01. Horizon altitude at surveyed bearings</a></p></li>
-<li><p><a href="./h02-skyline-comparison.html">H02. How well does <code>createHor()</code> reproduce terrain skylines?</a></p></li>
-</ul>
-<section id="ephemeris-accuracy-and-lunar-skyline-crossings" class="level2">
-<h2 class="anchored" data-anchor-id="ephemeris-accuracy-and-lunar-skyline-crossings">Ephemeris accuracy and lunar skyline crossings</h2>
-<p><a href="./a02-ephemeris.html">A02</a> reports the geocentric, local sky and lunar crossing comparisons for build 2.0.9004, with both reproducible archives.</p>
-</section>
 <section id="validation-programme" class="level2">
 <h2 class="anchored" data-anchor-id="validation-programme">Validation programme</h2>
-<p>Status refers to the agreed protocol for this programme. Earlier studies and worked examples remain available for several planned checks. Each completed ID links to the result for its tested build.</p>
+<p>Each entry describes the quantity actually tested. H01/H02 and A02 retain the independent field and ephemeris benchmarks. The terrain lighting and Milky Way display changes were checked separately from those benchmarks. The package checks in this edition used the package source identified in each study.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -885,22 +892,22 @@ follow(); window.addEventListener('hashchange', follow);})();
 <td>Complete</td>
 </tr>
 <tr class="odd">
-<td>H03</td>
+<td><a href="horizons.html#h03-scientific">H03</a></td>
 <td>DEM ray tracing, curvature and convergence</td>
 <td><code>createHor()</code>, <code>hor2alt()</code></td>
-<td>Planned</td>
+<td>Analytic convergence and two curvature controls complete</td>
 </tr>
 <tr class="even">
-<td>H04</td>
+<td><a href="./h04-feature-resolution.html">H04</a></td>
 <td>Reconstructed earthworks and synthetic panoramas</td>
 <td><code>horFeature()</code>, <code>createHor()</code>, <code>demPalettes()</code>, <code>plot.skyscapeR.horizon()</code></td>
-<td>Planned</td>
+<td>LiDAR bank control and thin-wall occlusion tests complete</td>
 </tr>
 <tr class="odd">
-<td>H05</td>
+<td><a href="photographic-horizons.html#h05-scientific">H05</a></td>
 <td>Calibrating a photographic horizon</td>
 <td><code>importPanorama()</code>, <code>hor2alt()</code>, <code>createHor()</code></td>
-<td>Planned</td>
+<td>Synthetic holdout complete. Surveyed photographic controls open</td>
 </tr>
 <tr class="even">
 <td>H06</td>
@@ -912,13 +919,13 @@ follow(); window.addEventListener('hashchange', follow);})();
 <td><a href="./h07-panorama-coverage.html">H07</a></td>
 <td>Passing incomplete horizons between functions</td>
 <td><code>importPanorama()</code>, <code>hor2alt()</code>, <code>coordtrans()</code>, <code>riseset()</code>, <code>star.phases()</code>, <code>spatial.equinox()</code>, <code>exportHor()</code></td>
-<td>Complete · verified on 2.0.9008</td>
+<td>Complete · verified</td>
 </tr>
 <tr class="even">
-<td>F01</td>
+<td><a href="field-reduction.html#f01-scientific">F01</a></td>
 <td>Compass and solar-sight reduction</td>
 <td><code>mag.dec()</code>, <code>reduct.compass()</code>, <code>reduct.theodolite()</code>, <code>sunAz()</code>, <code>ten()</code>, <code>az2dec()</code></td>
-<td>Planned</td>
+<td>Reference reductions and archival solar survey complete. Field compass calibration open</td>
 </tr>
 <tr class="odd">
 <td><a href="./a01-calendar-checks.html">A01</a></td>
@@ -933,70 +940,70 @@ follow(); window.addEventListener('hashchange', follow);})();
 <td>Complete</td>
 </tr>
 <tr class="odd">
-<td>A03</td>
+<td><a href="./a03-stellar-positions.html">A03</a></td>
 <td>Stellar propagation and reference frames</td>
 <td><code>star()</code>, <code>body.position()</code>, <code>obliquity()</code>, <code>parallax.corr()</code>, <code>orbit()</code></td>
-<td>Planned</td>
+<td>Six-star space-motion comparison complete. Further frame and parallax checks open</td>
 </tr>
 <tr class="even">
 <td><a href="./a04-stellar-crossings.html">A04</a></td>
 <td>Crossings on flat and irregular skylines</td>
 <td><code>riseset()</code>, <code>orbit()</code>, <code>body.position()</code>, <code>hor2alt()</code>, <code>star.phases()</code></td>
-<td>Complete · synthetic and JPL centre-crossing comparisons on 2.0.9006</td>
+<td>Complete · synthetic and JPL centre-crossing comparisons</td>
 </tr>
 <tr class="odd">
 <td><a href="./a05-solar-limits.html">A05</a></td>
 <td>Solar dates and limiting declinations</td>
 <td><code>solar.date()</code>, <code>eq()</code>, <code>jS()</code>, <code>dS()</code>, <code>zenith()</code>, <code>antizenith()</code>, <code>obliquity()</code>, <code>parallax.corr()</code>, <code>spatial.equinox()</code>, <code>hor2max.dec()</code>, <code>hor2min.dec()</code>, <code>az2dec()</code></td>
-<td>Complete · verified on 2.0.9009</td>
+<td>Complete · verified</td>
 </tr>
 <tr class="even">
-<td>A06</td>
+<td><a href="celestial-targets.html#a06-scientific">A06</a></td>
 <td>Moon, planets and extrema across an epoch</td>
 <td><code>moonphase()</code>, <code>nMjLX()</code>, <code>nmnLX()</code>, <code>sMjLX()</code>, <code>smnLX()</code>, <code>planet.extremes()</code>, <code>body.position()</code>, <code>skyObject()</code></td>
-<td>Planned</td>
+<td>Four standstill limits and five planetary windows compared</td>
 </tr>
 <tr class="odd">
-<td>A07</td>
+<td><a href="lunar-crossovers.html#a07-scientific">A07</a></td>
 <td>Equinoctial full Moons and crescent crossovers</td>
 <td><code>EFM()</code>, <code>CC()</code>, <code>moonphase()</code>, <code>riseset()</code>, <code>body.position()</code></td>
-<td>Planned</td>
+<td>32 independent selections compared. One EFM threshold discrepancy</td>
 </tr>
 <tr class="even">
 <td><a href="./a08-target-ranges.html">A08</a></td>
 <td>Target screening, dated bands and returned tracks</td>
 <td><code>findTargets()</code>, <code>skyObject()</code>, <code>sky.objects()</code>, <code>star()</code>, <code>solar.date()</code>, <code>hor2max.dec()</code>, <code>hor2min.dec()</code>, <code>orbit()</code></td>
-<td>Complete · verified on 2.0.9009</td>
+<td>Complete · verified</td>
 </tr>
 <tr class="odd">
 <td>V01</td>
 <td>Stellar phases and dated visibility</td>
 <td><code>star.phases()</code>, <code>star()</code>, <code>riseset()</code>, <code>sketchSky()</code>, <code>skyRadiance()</code>, <code>plot.skyscapeR.starphases()</code></td>
-<td>Planned</td>
+<td>Model-to-model comparison complete. Independent observation study open</td>
 </tr>
 <tr class="even">
 <td>V02</td>
 <td>Milky Way outer boundary and internal structure</td>
 <td><code>sketchSky()</code>, <code>skyRadiance()</code>, <code>planisphere()</code></td>
-<td>Planned</td>
+<td>Grid lookup and seam verified. Independent outline tracing pending</td>
 </tr>
 <tr class="odd">
 <td>V03</td>
 <td>Twilight gradients and moonlight</td>
 <td><code>sketchSky()</code>, <code>skyRadiance()</code>, <code>body.position()</code></td>
-<td>Planned</td>
+<td>Twilight checked against 22 held-out measurements. Moonlight field comparison open</td>
 </tr>
 <tr class="even">
-<td>V04</td>
+<td><a href="./v04-diffuse-photometry.html">V04</a></td>
 <td>Flux, cluster glow and the Pleiades</td>
 <td><code>sketchSky()</code>, <code>skyRadiance()</code>, <code>skyStep()</code></td>
-<td>Planned</td>
+<td>Flux recovery and Carina normalisation checked. Six independent fields compared</td>
 </tr>
 <tr class="odd">
 <td>V05</td>
 <td>Atmospheric extinction by altitude</td>
 <td><code>sketchSky()</code>, <code>skyRadiance()</code>, <code>star.phases()</code>, <code>skyscapeR.vars()</code></td>
-<td>Planned</td>
+<td>Transmission and publication switches checked. Atmospheric field calibration open</td>
 </tr>
 <tr class="even">
 <td>V06</td>
@@ -1008,137 +1015,61 @@ follow(); window.addEventListener('hashchange', follow);})();
 <td>V07</td>
 <td>Sky state, Stellarium capture and time stepping</td>
 <td><code>stellariumSky()</code>, <code>sketchSky()</code>, <code>skyStep()</code>, <code>skyscapeR.vars()</code>, <code>plot.skyscapeR.horizon()</code>, <code>time2jd()</code></td>
-<td>Planned</td>
+<td>Native time-step extinction setting verified. External capture study open</td>
 </tr>
 <tr class="even">
 <td><a href="./d01-density-checks.html">D01</a></td>
 <td>Measurement PDFs, circular support and highest-density regions</td>
 <td><code>az.pdf()</code>, <code>dec.pdf()</code>, <code>hpdi()</code>, <code>spd()</code>, <code>subset.skyscapeR.pdf()</code></td>
-<td>Complete. Original checks repeated and four additional families verified on 2.0.9011</td>
+<td>Complete. Six measurement families checked</td>
 </tr>
 <tr class="odd">
 <td><a href="./d02-bearing-propagation.html">D02</a></td>
 <td>Azimuth-to-declination propagation</td>
 <td><code>az2dec()</code>, <code>coordtrans()</code>, <code>hor2alt()</code>, <code>az.pdf()</code>, <code>dec.pdf()</code>, <code>spd()</code>, <code>hpdi()</code></td>
-<td>Complete · grid sensitivity and celestial-pole limits quantified on 2.0.9006</td>
+<td>Complete · grid sensitivity and celestial-pole limits quantified</td>
 </tr>
 <tr class="even">
 <td><a href="./s01-uniform-orientation.html">S01</a></td>
 <td>Uniform-orientation null model</td>
 <td><code>randomTest()</code>, <code>coordtrans()</code>, <code>az.pdf()</code>, <code>spd()</code>, <code>pval2stars()</code></td>
-<td>Complete · calibrated on 2.0.9007</td>
+<td>Complete · calibrated</td>
 </tr>
 <tr class="odd">
 <td><a href="./s02-specified-models.html">S02</a></td>
 <td>Specified and site-specific nulls</td>
 <td><code>modelTest()</code>, <code>dec.pdf()</code>, <code>az.pdf()</code>, <code>spd()</code>, <code>coordtrans()</code></td>
-<td>Complete · verified on 2.0.9008</td>
+<td>Matched-null designs and individual azimuth-to-declination calibration complete</td>
 </tr>
 <tr class="even">
 <td><a href="./s03-scoring-checks.html">S03</a></td>
 <td>Shared scoring, local clusters and analytic probability helpers</td>
 <td><code>randomTest()</code>, <code>modelTest()</code>, <code>bernoulli.trial()</code>, <code>pval2stars()</code>, <code>print.skyscapeR.sigTest()</code>, <code>plot.skyscapeR.sigTest()</code></td>
-<td>Complete; corrected and verified on 2.0.9006</td>
+<td>Complete</td>
 </tr>
 <tr class="odd">
 <td><a href="./w01-plot-geometry.html">W01</a></td>
 <td>Graphical outputs encode the underlying data</td>
 <td><code>plotAzimuth()</code>, <code>plotBars()</code>, <code>plot.skyscapeR.horizon()</code>, <code>plot.skyscapeR.pdf()</code>, <code>plot.skyscapeR.spd()</code>, <code>plot.skyscapeR.sigTest()</code>, <code>plot.skyscapeR.starphases()</code>, <code>print.skyscapeR.sigTest()</code></td>
-<td>Complete · verified on 2.0.9008</td>
+<td>Complete · verified</td>
 </tr>
 <tr class="even">
 <td><a href="./w02-field-to-sky.html">W02</a></td>
 <td>End-to-end field-to-sky and group workflows</td>
 <td><code>reduct.compass()</code>, <code>reduct.theodolite()</code>, <code>createHor()</code>, <code>hor2alt()</code>, <code>az2dec()</code>, <code>az.pdf()</code>, <code>coordtrans()</code>, <code>spd()</code>, <code>randomTest()</code>, <code>modelTest()</code>, <code>findTargets()</code>, <code>skyObject()</code>, <code>star.phases()</code>, <code>riseset()</code>, <code>sketchSky()</code></td>
-<td>Complete · verified on 2.0.9009</td>
+<td>Complete · verified</td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="lunar-event-selection" class="level2">
-<h2 class="anchored" data-anchor-id="lunar-event-selection">Lunar event selection</h2>
-<p>The <a href="lunar-crossovers.html#crossover-archive">historical crossover comparison</a> checks annual selections against the Silva &amp; Pimenta (2012) simulation workbooks. It reports moonset pairing changes, SIM1 residuals and the separate unresolved 40° N series. The new worked examples use 2.0.9004 and do not replace the archived runs.</p>
 </section>
 <section id="sky-rendering" class="level2">
 <h2 class="anchored" data-anchor-id="sky-rendering">Sky rendering</h2>
-<p>A plausible image can conceal errors in its outline, brightness or response to altitude. Each row concerns one quantity. A change to the outline can require repeating one study while leaving a recorded twilight comparison relevant.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Question</th>
-<th>Evidence, tested implementation and scope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Milky Way shape. Where are the outer boundary and internal lanes?</strong></td>
-<td>The 2.0 development archive retains the diffuse-light source map, candidate thresholds, traced boundaries and bright and dark masks. These document how the depiction was derived and how sensitive its shape was to the tracing choices. The later photometric field comparisons concern brightness in selected patches. They do not independently establish the position of an outer edge. For alignment work the outer outline includes the enclosed dark regions. If a later release revises the anticentre outline, its boundary comparison needs a new run.</td>
-</tr>
-<tr class="even">
-<td><strong>Twilight. Does the sky brighten by the observed amount in different directions?</strong></td>
-<td>In 2.0.9003 the study compared the calibrated curve with Koomen’s Maryland observations held outside the fit. Across 22 directions/solar-altitude combinations the mean absolute difference, expressed in magnitudes, was 0.48 for the revised curve and 2.28 for the earlier curve on the same observations. This checks the observed configurations at solar altitudes −3° and −6°.</td>
-</tr>
-<tr class="odd">
-<td><strong>Flux. Does a point source retain its integrated light when the field of view changes?</strong></td>
-<td>The 2.0.9004 release check recovered the modelled Sirius flux at 90°, 45° and 5° field widths (reported ratio 1 at each width). Additional checks compare Sirius, the cluster and a Carina field. Recovery of the input flux verifies the calculation. It does not by itself calibrate the absolute brightness of the night sky.</td>
-</tr>
-<tr class="even">
-<td><strong>Extinction. Does the Milky Way dim by the specified altitude-dependent factor?</strong></td>
-<td>The 2.0.9002 test compared the same skies with the band extinction coefficient set to 0 and 0.2. The script checked the band radiance against the expected multiplier. Model transmission at 0.2 was 0.149 at 5° altitude and 0.832 at 90°. This verifies application of the extinction law. It is not a set of atmospheric transmission measurements.</td>
-</tr>
-</tbody>
-</table>
-<p><a href="archives/sky-rendering-validation-scripts.zip">Download the five archived sky-rendering scripts</a> for twilight, colour, zoom and shared lighting.</p>
-<p>The <a href="./heliacal-rising.html">heliacal-rising comparison</a> draws on the rendering model for a separate question about the timing of an event.</p>
+<p>A full grid sweep recovered all 4,323,600 stored Milky Way classes. The Carina calibration field recovered 20.700 V mag arcsec⁻². The publication-colour and publication-mono checks exercised the default, explicit switches, zero extinction and a one-minute time step. For an extinction coefficient of 0.2 mag per airmass the transmission was 0.149 at 5° and 0.832 at 90°. The natural-renderer flux suite recovered the Sirius flux at three field widths and checked the Pleiades, Moon and five visible planets. The mean absolute residual against 22 held-out twilight measurements from Koomen et al.&nbsp;was 0.481 mag. <a href="archives/sky-checks.zip">Reproduction files</a>.</p>
+<p>The <a href="./heliacal-rising.html">heliacal-rising study</a> gives the full comparison between the phase solver and the radiance threshold. The <a href="./s02-specified-models.html#route-calibration">S02 study</a> gives the false-positive rates for azimuth-defined nulls tested in declination.</p>
 </section>
-<section id="study-records" class="level2">
-<h2 class="anchored" data-anchor-id="study-records">Study records</h2>
-<p><a href="archives/study-register-evidence.zip">Download the sky-check outputs and code</a>. The H01 report and reproducible field archive are linked in the H01 section above.</p>
-<ul>
-<li><a href="https://chatgpt.com/library?file_id=libfile_95fe5213a7ec8191bda3065faa73ff1a&amp;account_id=personal">Sky-rendering development studies and code</a></li>
-</ul>
-</section>
-<section id="when-a-test-changes-the-package" class="level2">
-<h2 class="anchored" data-anchor-id="when-a-test-changes-the-package">When a test changes the package</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>What changed?</th>
-<th>How the manual reports it</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Implementation changes, but the question, data, settings and metric stay the same</td>
-<td>Add a run to the same study. Show the latest tested build first, with the old and new values, the reason for the code change, and links to both records. Until a rerun exists, identify the last build actually tested.</td>
-</tr>
-<tr class="even">
-<td>A new station, dataset, phenomenon or accuracy claim is introduced</td>
-<td>Add a linked study alongside the existing one. If extending a cohort, retain results for the original common sample and give the expanded sample its own denominator.</td>
-</tr>
-<tr class="odd">
-<td>An error in the reference data, selection or scoring invalidates a result</td>
-<td>Mark the affected result as superseded and explain why. Put the corrected result in the main text. Retain the original record and the correction together in the history.</td>
-</tr>
-<tr class="even">
-<td>A discrepancy was used to tune the model</td>
-<td>Label the repeated comparison as calibration or a regression check. Report an independent validation separately when observations unused in tuning are available.</td>
-</tr>
-</tbody>
-</table>
-<p>Each study should have a stable link. Each run should identify the exact source revision or package archive checksum, the data and protocol versions, settings, metric, sample and dated outputs. The main text carries the conclusion a reader can use for the documented release. Earlier runs remain accessible in that study’s history.</p>
-</section>
-<section id="worked-checks-for-the-final-methods-chapters" class="level2">
-<h2 class="anchored" data-anchor-id="worked-checks-for-the-final-methods-chapters">Worked checks for the final methods chapters</h2>
-<p><a href="./astronomical-conventions.html">Calendar and position calculations</a>, <a href="./field-reduction.html">synthetic instrument reductions</a> and the <a href="./photographic-horizons.html">known photographic skyline</a> have reproducible worked examples for 2.0.9004. <a href="./a02-ephemeris.html">A02</a> now provides independent planetary and lunar position comparisons. Stellar reference-frame checks, a surveyed baseline and photographic check bearings remain outstanding.</p>
+<section id="next-tests" class="level2">
+<h2 class="anchored" data-anchor-id="next-tests">Results and priorities</h2>
+<p>The <a href="./package-stress-tests.html">five package validation studies</a> report completed tests of near-pole transformations, off-Carina photometry, withheld-station horizon errors, partly occluded features and stellar astrometry. D02 evaluates direct propagation near the celestial pole. The next empirical priority is fitting and testing diffuse brightness on independent, consistently masked V-band fields. For terrain uncertainty, the withheld-station coverage provides a baseline for models using station and survey characteristics.</p>
 
 
 </section>
@@ -1551,8 +1482,8 @@ follow(); window.addEventListener('hashchange', follow);})();
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./a02-ephemeris.html" class="pagination-link" aria-label="A02 · Ephemeris accuracy and lunar skyline crossings">
-        <span class="nav-page-text"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./package-stress-tests.html" class="pagination-link" aria-label="Guide to the five validation studies">
+        <span class="nav-page-text"><span class="chapter-title">Guide to the five validation studies</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

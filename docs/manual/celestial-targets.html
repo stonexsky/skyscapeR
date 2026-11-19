@@ -97,7 +97,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -762,12 +762,22 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -778,6 +788,11 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -818,6 +833,11 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -872,6 +892,7 @@ div.csl-indent {
   <li><a href="#target-limits" id="toc-target-limits" class="nav-link" data-scroll-target="#target-limits">Solar and lunar reference limits</a></li>
   <li><a href="#target-screen" id="toc-target-screen" class="nav-link" data-scroll-target="#target-screen">Candidate screening by family</a></li>
   <li><a href="#target-overlay" id="toc-target-overlay" class="nav-link" data-scroll-target="#target-overlay">Overlays, fixed tracks and version-specific limits</a></li>
+  <li><a href="#a06-scientific" id="toc-a06-scientific" class="nav-link" data-scroll-target="#a06-scientific">A06 · Lunar standstill limits and the planetary sampling interval</a></li>
   </ul>
 </nav>
     </div>
@@ -897,8 +918,8 @@ div.csl-indent {
 </header>
 
 
-<p>Build 2.0.9009 uses annual local solar and lunar limits for dated overlays and compares target ranges before rounding. <a href="./a08-target-ranges.html">A08</a> reproduces the earlier range discrepancy and checks the correction.</p>
-<p><strong>Implementation.</strong> skyscapeR 2.0.9004, <code>R/data-analysis.R</code>, <code>R/events.R</code>, <code>R/horizon.R</code>, <code>R/mechanics.R</code>, <code>R/misc.R</code> and <code>R/stars.R</code>. A field sightline defines a range of possible declinations. The relevant question is which celestial targets enter that band during the archaeological date range, and which could actually have been seen from that viewpoint. The first question can be computed before tackling the second. Silva &amp; Lomsdalen (2025, table 5) illustrate this distinction when screening stellar candidates for the Maltese temples <span class="citation" data-cites="silvaloms2025">(<a href="references.html#ref-silvaloms2025" role="doc-biblioref">Silva and Lomsdalen 2025</a>)</span>.</p>
+<p>The package uses annual local solar and lunar limits for dated overlays and compares target ranges before rounding. <a href="./a08-target-ranges.html">A08</a> tests the annual local bounds.</p>
+<p><strong>Implementation.</strong> skyscapeR, <code>R/data-analysis.R</code>, <code>R/events.R</code>, <code>R/horizon.R</code>, <code>R/mechanics.R</code>, <code>R/misc.R</code> and <code>R/stars.R</code>. A field sightline defines a range of possible declinations. The relevant question is which celestial targets enter that band during the archaeological date range, and which could actually have been seen from that viewpoint. The first question can be computed before tackling the second. Silva &amp; Lomsdalen (2025, table 5) illustrate this distinction when screening stellar candidates for the Maltese temples <span class="citation" data-cites="silvaloms2025">(<a href="references.html#ref-silvaloms2025" role="doc-biblioref">Silva and Lomsdalen 2025</a>)</span>.</p>
 <section id="target-band" class="level2">
 <h2 class="anchored" data-anchor-id="target-band">Construct the search band</h2>
 <p>For geometric altitude <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math> above the astronomical horizontal, true bearing <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> and latitude <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ϕ</mi><annotation encoding="application/x-tex">\phi</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>sin</mo><mi>δ</mi><mo>=</mo><mo>sin</mo><mi>ϕ</mi><mo>sin</mo><mi>h</mi><mo>+</mo><mo>cos</mo><mi>ϕ</mi><mo>cos</mo><mi>h</mi><mo>cos</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\sin\delta=\sin\phi\sin h+\cos\phi\cos h\cos A</annotation></semantics></math> <span class="citation" data-cites="silva2020">(<a href="references.html#ref-silva2020" role="doc-biblioref">Silva 2020</a>, eq. 1)</span>. Use the <a href="./orientation-densities.html">density chapter</a> when uncertainty across bearings or skyline heights changes the resulting distribution. Decide whether the search interval is an architectural opening, a highest-density region, or a cluster identified in a significance test. These represent different quantities. If several high-density regions are disjoint, search them separately; taking only the smallest and largest endpoints would admit targets in the intervening gaps. A declination band also loses the distinction between the eastern and western branches of a track.</p>
@@ -964,8 +985,50 @@ div.csl-indent {
 <section id="target-overlay" class="level2">
 <h2 class="anchored" data-anchor-id="target-overlay">Overlays, fixed tracks and version-specific limits</h2>
 <p><a href="fn-skyobject.html"><code>skyObject()</code></a> prepares named targets or numerical declinations for a plot. <a href="fn-sky-objects.html"><code>sky.objects()</code></a> is its compatibility alias. It can expand “solar extremes” and “lunar extremes”, retain graphic styles and carry different epochs for different groups. The horizon plot supplies the site for its tracks; the compass plot uses the object’s stored location and a level horizon. A declination plot needs no location. A plotted track keeps its declination fixed through a diurnal rotation. For an instant-specific comparison use <a href="fn-body-position.html"><code>body.position()</code></a> in the desired frame and pass its numerical declination to the overlay.</p>
-<p>There is a consequential difference between the range algorithms. A stellar overlay takes the range of annual January samples. For a varying solar or lunar limit the 2.0.9004 range helper samples from the first year in 100-year steps, fits a spline and evaluates it across the requested interval. A short interval can therefore have just one source sample. For <code>skyObject("June Solstice", c(2020, 2026))</code> the returned bounds are both <strong>23.43621°</strong>, whereas the direct 2026 geocentric value is <strong>23.43813°</strong>. The range helper also defaults to geocentric evaluation for these named limits when called from the two-epoch overlay. This is a reason to compute the underlying limits directly for the required sites and years before using a narrow overlay to classify a borderline match. The choice of a finer plotted grid cannot supply missing input epochs.</p>
+<p>Solar and lunar bands use the annual limiting declinations for the stated location and epoch range. Stellar overlays use annual samples. <a href="./a08-target-ranges.html">Dated band checks</a>.</p>
 <p>The strength of this workflow is traceability from an archaeological band through candidate dates to a site-specific reconstruction. Its output is a set of compatible geometries; it supplies neither a probability of target identity nor a correction for searching many stars, time ranges or subsections of the data. Matched comparisons of range envelopes against direct calculations and independent evidence of observational visibility remain separate tasks. <a href="archives/crossovers-and-targets.zip">Reproduce the target and crossover examples</a>.</p>
+</section>
+<section id="a06-scientific" class="level2">
+<h2 class="anchored" data-anchor-id="a06-scientific">A06 · Lunar standstill limits and the planetary sampling interval</h2>
+<p>The lunar functions estimate geocentric limiting declinations. For the minor standstill we compared the northern and southern monthly turns closest to the equator in 2015. For the major standstill we used the farthest turns in 2025. The two hemispheres can reach their limits on different dates. <a href="https://astropixels.com/ephemeris/moon/lunarstandstill2001.html">Fred Espenak’s monthly lunar standstill tables</a>.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Limit</th>
+<th style="text-align: right;">Package</th>
+<th style="text-align: right;">Tabulated</th>
+<th style="text-align: right;">Package minus table</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2015 northern minor</td>
+<td style="text-align: right;">+18.1447°</td>
+<td style="text-align: right;">+18.140°</td>
+<td style="text-align: right;">+0.0047°</td>
+</tr>
+<tr class="even">
+<td>2015 southern minor</td>
+<td style="text-align: right;">−18.1447°</td>
+<td style="text-align: right;">−18.134°</td>
+<td style="text-align: right;">−0.0107°</td>
+</tr>
+<tr class="odd">
+<td>2025 northern major</td>
+<td style="text-align: right;">+28.7284°</td>
+<td style="text-align: right;">+28.710°</td>
+<td style="text-align: right;">+0.0184°</td>
+</tr>
+<tr class="even">
+<td>2025 southern major</td>
+<td style="text-align: right;">−28.7284°</td>
+<td style="text-align: right;">−28.719°</td>
+<td style="text-align: right;">−0.0094°</td>
+</tr>
+</tbody>
+</table>
+<p>For <code>planet.extremes()</code>, each planet’s search window was centred on 2025 using the package’s rounded year endpoints. An independent calculation transformed apparent geocentric vectors to the equator of date, sampled at noon UT and refined every bracketed local extremum while retaining both endpoints. Across the northern and southern limits for Mercury, Venus, Mars, Jupiter and Saturn, the largest absolute difference from the refined reference was <strong>0.00242°</strong> (Saturn’s northern limit). In the independent calculation alone, daily sampling missed the continuous extremum by at most <strong>0.00149°</strong> (Mercury’s southern limit). These quantities distinguish differences between ephemerides from the effect of sample spacing. Results concern these specific windows and geocentric limits. <a href="https://github.com/cosinekitty/astronomy">Independent position calculation</a>.</p>
+<p><a href="archives/scientific-studies.zip">Download the study scripts, reference inputs and numerical results</a>.</p>
 <p><strong>Related function entries</strong></p>
 <p><a href="fn-findtargets.html"><code>findTargets()</code></a>, <a href="fn-skyobject.html"><code>skyObject()</code></a>, <a href="fn-sky-objects.html"><code>sky.objects()</code></a>, <a href="fn-hor2min-dec.html"><code>hor2min.dec()</code></a>, <a href="fn-hor2max-dec.html"><code>hor2max.dec()</code></a>, <a href="fn-az2dec.html"><code>az2dec()</code></a>, <a href="fn-createhor.html"><code>createHor()</code></a>, <a href="fn-obliquity.html"><code>obliquity()</code></a>, <a href="fn-js.html"><code>jS()</code></a>, <a href="fn-ds.html"><code>dS()</code></a>, <a href="fn-eq.html"><code>eq()</code></a>, <a href="fn-parallax-corr.html"><code>parallax.corr()</code></a>, <a href="fn-nmjlx.html"><code>nMjLX()</code></a>, <a href="fn-nmnlx.html"><code>nmnLX()</code></a>, <a href="fn-smjlx.html"><code>sMjLX()</code></a>, <a href="fn-smnlx.html"><code>smnLX()</code></a>, <a href="fn-zenith.html"><code>zenith()</code></a>, <a href="fn-antizenith.html"><code>antizenith()</code></a>, <a href="fn-spatial-equinox.html"><code>spatial.equinox()</code></a>, <a href="fn-solar-date.html"><code>solar.date()</code></a>, <a href="fn-star.html"><code>star()</code></a>, <a href="fn-star-phases.html"><code>star.phases()</code></a>, <a href="fn-riseset.html"><code>riseset()</code></a>, <a href="fn-sketchsky.html"><code>sketchSky()</code></a>, <a href="fn-body-position.html"><code>body.position()</code></a>, <a href="fn-efm.html"><code>EFM()</code></a>, <a href="fn-cc.html"><code>CC()</code></a>.</p>
 

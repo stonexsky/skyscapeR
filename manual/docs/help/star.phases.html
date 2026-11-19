@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>star.phases | skyscapeR 2.0.9009</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-star-phases.html">star.phases() method</a></nav><h2 id='star.phases'>Model seasonal changes in stellar visibility</h2><span id='topic+star.phases'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>star.phases | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-star-phases.html">star.phases() method</a></nav><h2 id='star.phases'>Model seasonal changes in stellar visibility</h2><span id='topic+star.phases'></span>
 
 <h3>Description</h3>
 
@@ -28,58 +28,58 @@ an archaeological site.
 
 <h3>Arguments</h3>
 
-<table>
-<tr><td><code id="star.phases_:_star">star</code></td>
+<table role = "presentation">
+<tr><td><code id="star.phases_+3A_star">star</code></td>
 <td>
 <p>Either the star name or a <em>skyscapeR.star</em> object.</p>
 </td></tr>
-<tr><td><code id="star.phases_:_year">year</code></td>
+<tr><td><code id="star.phases_+3A_year">year</code></td>
 <td>
 <p>The year of interest. Historical labels such as <code>"3700 BC"</code> are accepted by <code>astroYear</code>.</p>
 </td></tr>
-<tr><td><code id="star.phases_:_loc">loc</code></td>
+<tr><td><code id="star.phases_+3A_loc">loc</code></td>
 <td>
 <p>Location, either a <em>skyscapeR.horizon</em> or a vector
 containing the latitude, longitude and elevation of location, in this order.</p>
 </td></tr>
-<tr><td><code id="star.phases_:_alt.hor">alt.hor</code></td>
+<tr><td><code id="star.phases_+3A_alt.hor">alt.hor</code></td>
 <td>
 <p>The altitude of the horizon to consider.
 Defaults to zero degrees.</p>
 </td></tr>
-<tr><td><code id="star.phases_:_alt.rs">alt.rs</code></td>
+<tr><td><code id="star.phases_+3A_alt.rs">alt.rs</code></td>
 <td>
 <p>The maximum altitude of a star's first or last
 visibility for it to still be considered to be as rising or setting.
 Defaults to ten degrees.</p>
 </td></tr>
-<tr><td><code id="star.phases_:_solar.alt">solar.alt</code></td>
+<tr><td><code id="star.phases_+3A_solar.alt">solar.alt</code></td>
 <td>
 <p>Solar altitude threshold in degrees. NULL uses
 -6 for a horizon, or alt.hor - 6 for coordinate input.</p>
 </td></tr>
-<tr><td><code id="star.phases_:_k">k</code></td>
+<tr><td><code id="star.phases_+3A_k">k</code></td>
 <td>
 <p>Visual extinction in magnitudes per airmass (Schaefer 1986, p. S33). The package adopts 0.2 as a clear-sky baseline. Extinction varies with site and atmospheric conditions (Schaefer 1986, 1993). Defaults to the session value from skyscapeR.vars().</p>
 </td></tr>
-<tr><td><code id="star.phases_:_limit">limit</code></td>
+<tr><td><code id="star.phases_+3A_limit">limit</code></td>
 <td>
 <p>The maximum magnitude of a star that can be
 visible with the naked eye. Defaults to 6.</p>
 </td></tr>
-<tr><td><code id="star.phases_:_refraction">refraction</code></td>
+<tr><td><code id="star.phases_+3A_refraction">refraction</code></td>
 <td>
 <p>Logical. Apply atmospheric refraction. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
 </td></tr>
-<tr><td><code id="star.phases_:_atm">atm</code></td>
+<tr><td><code id="star.phases_+3A_atm">atm</code></td>
 <td>
 <p>Atmospheric pressure in mbar. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
 </td></tr>
-<tr><td><code id="star.phases_:_temp">temp</code></td>
+<tr><td><code id="star.phases_+3A_temp">temp</code></td>
 <td>
 <p>Air temperature in degrees Celsius. Defaults to the session setting in <code>skyscapeR.vars</code>.</p>
 </td></tr>
-<tr><td><code id="star.phases_:_res">res</code></td>
+<tr><td><code id="star.phases_+3A_res">res</code></td>
 <td>
 <p>Spacing of solar altitude samples in days, greater than zero and at
 most one. Default 1/144 day (ten minutes). Terrain crossings are refined separately.</p>
@@ -143,10 +143,18 @@ recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-pa
 </p>
 
 
+<h3>Validation</h3>
+
+<p>Seasonal searches require full skyline coverage. H07 checked rejection of a partial photograph and successful calculation with the full profile. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage">H07 check in the technical manual</a>.
+</p>
+<p>W02 replayed the Gacrux heliacal-rising date at Skorba West and passed it to the crossing and sky-reconstruction calculations. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky">W02 check in the technical manual</a>.
+</p>
+
+
 <h3>Extinction and model scope</h3>
 
 <p>The implementation uses Rozenberg's airmass approximation,
-<code class="reqn">X(h)=1/(\sin h+0.025\exp(-11\sin h))</code>, multiplying it by <code>k</code>
+<i>X(h)=1/(\sin h+0.025\exp(-11\sin h))</i>, multiplying it by <code>k</code>
 and adding the result to the fixed catalogue magnitude. Here <code>h</code> is the
 stellar altitude selected by <code>refraction</code>, above the astronomical
 horizontal. This is distinct from the height above a ridge. The star-Sun
@@ -230,7 +238,7 @@ versions; an unavailable version is NA, for example when sourcing functions
 outside a package namespace. Version strings do not uniquely identify
 development builds. Retain the original script, code revision and ephemeris
 files as well: the saved metadata do not identify or archive those files.
-Earlier saved results do not acquire these fields automatically.
+
 </p>
 
 
@@ -244,14 +252,6 @@ transformations may discard attributes; save the original result for reference.
 It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
 The same record remains available in <code>metadata$provenance</code>.
-</p>
-
-
-<h3>Validation</h3>
-
-<p>Seasonal searches require full skyline coverage. H07 checked rejection of a partial photograph and successful calculation with the full profile. See the <a href="../h07-panorama-coverage.html">H07 check in the technical manual</a>.
-</p>
-<p>W02 replayed the Gacrux heliacal-rising date at Skorba West and passed it to the crossing and sky-reconstruction calculations. See the <a href="../w02-field-to-sky.html">W02 check in the technical manual</a>.
 </p>
 
 
@@ -308,4 +308,4 @@ if (requireNamespace("swephRdata", quietly = TRUE)) {
 ## End(Not run)
 </code></pre>
 
-</body></html>
+<h3>Validation studies</h3><p>Six stellar positions were compared with independently propagated catalogue directions from 3500 BCE to 2000 CE. <a href="../a03-stellar-positions.html#a03-stellar-positions">A03 validation study</a>.</p></body></html>

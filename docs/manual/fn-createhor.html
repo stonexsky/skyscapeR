@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -707,12 +707,22 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -723,6 +733,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -763,6 +778,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -833,6 +853,10 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>H03 examines DEM sampling against an analytic ridge and a level spherical surface. <a href="horizons.html#h03-scientific">H03 study and results</a>.</p>
+<p>Intervals estimated from other observing groups covered 91.0 and 88.8 percent of bearings in two terrain-radius selections. <a href="./h01-field-validation.html#withheld-stations">H01 validation study</a>.</p>
+<p>Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. <a href="./h04-feature-resolution.html#h04-feature-resolution">H04 validation study</a>.</p>
+<p>Relief lighting blends 75% observer-facing and 25% directional illumination. With the blended illumination floored at 0.15, the relief brightness multiplier is <code>min(1, ambient + contrast * illumination)</code>, with defaults 0.40 and 0.70. Terrain and visible reconstructed features receive the same shading. Directional mode uses <code>ambient + (1 - ambient) * illumination</code>. The selected lighting is applied when the PNG is generated. The numerical skyline is calculated separately.</p>
 <p><a href="function-index.html#idx-createhor">Function index</a> · <a href="./h01-field-validation.html">H01 field validation</a> · <a href="./h02-skyline-comparison.html">H02 skyline comparison</a></p>
 <p><strong>Measured bearings.</strong> To evaluate sightlines between measured bearings, the constructor repeats the azimuths
 one turn in each direction, removes duplicate azimuth entries and linearly interpolates
@@ -1052,7 +1076,7 @@ Implementation arguments, return value and documented modes
 <tr class="even">
 <th data-quarto-table-cell-role="th" scope="row"><code>lighting</code></th>
 <td><code>c("relief", "directional")</code></td>
-<td><p>Relief lighting (default) blends a light at the observer (75 percent) with the directional source (25 percent). It shades both sides of a slope and lifts deep shadows. Choose "directional" for one-sided hillshade. Lighting affects the PNG only.</p></td>
+<td><p>Relief lighting (default) blends a light at the observer (75 percent) with the directional source (25 percent). It shades both sides of a slope and lifts deep shadows. The standalone renderer brightness response is min(1, ambient + contrast * illumination), with illumination floored at 0.15. Terrain and visible horFeature surfaces use the same lighting. Choose "directional" for one-sided hillshade. Lighting affects the PNG only.</p></td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th" scope="row"><code>light.azimuth</code></th>
@@ -1066,8 +1090,8 @@ Implementation arguments, return value and documented modes
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th" scope="row"><code>ambient</code></th>
-<td><code>0.38</code></td>
-<td><p>Fraction of illumination retained on slopes facing away from the light (0 to 1). Default 0.38. Use 1 for unshaded palette colours.</p></td>
+<td><code>0.4</code></td>
+<td><p>Fraction of illumination retained on slopes facing away from the light (0 to 1). Default 0.40. Use 1 for unshaded palette colours.</p></td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th" scope="row"><code>haze</code></th>
@@ -1103,6 +1127,11 @@ Implementation arguments, return value and documented modes
 <th data-quarto-table-cell-role="th" scope="row"><code>progress</code></th>
 <td><code>interactive() &amp;&amp; verbose</code></td>
 <td><p>Show a progress bar for each tracing stage. Default on in interactive verbose sessions.</p></td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row"><code>contrast</code></th>
+<td><code>0.7</code></td>
+<td><p>Relief-light contrast (0 to 1), default 0.70, following the standalone renderer. It controls slope detail independently of ambient brightness. Ignored for directional lighting, which retains ambient + (1 - ambient) * illumination. Regenerate existing panoramas to apply new settings.</p></td>
 </tr>
 </tbody>
 </table>

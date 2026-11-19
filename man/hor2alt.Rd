@@ -37,6 +37,12 @@ interpolation used inside coordtrans.
 In H07, lookup at each edge of a north-crossing panorama returned its measured altitude and lookup beyond either edge returned NA. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
 }
 
+\section{Validation studies}{
+
+Intervals estimated from other observing groups covered 91.0 and 88.8 percent of bearings in two terrain-radius selections. \href{https://stonexsky.github.io/skyscapeR/manual/h01-field-validation.html#withheld-stations}{H01 validation study}.
+Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. \href{https://stonexsky.github.io/skyscapeR/manual/h04-feature-resolution.html#h04-feature-resolution}{H04 validation study}.
+}
+
 \examples{
 hor <- createHor(c(0,90,180,270,360), c(0,5,3,1,0),
                  alt.unc=c(0.1,0.2,0.3,0.2,0.1), loc=c(40,-8,100))

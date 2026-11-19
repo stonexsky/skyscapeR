@@ -1,5 +1,7 @@
 # `reduct.theodolite()` {#fn-reduct-theodolite}
 
+F01 examines magnetic and solar reductions against independent references. [F01 study and results](field-reduction.html#f01-scientific).
+
 W02 recovered both independent circle-difference control bearings and retained each site row in a multi-site solar reduction. [W02 results](w02-field-to-sky.qmd).
 
 [Function index](function-index.html#idx-reduct-theodolite)

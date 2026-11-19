@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>skyscapeR.vars | skyscapeR 2.0.9004</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-skyscaper-vars.html">skyscapeR.vars() method</a></nav><p><strong>Validation on 2.0.9005.</strong> Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. <a href="../a01-calendar-checks.html">A01 study</a>.</p><p>skyscapeR 2.0.9004</p><h2>Inspect or set session defaults for skyscapeR</h2><span></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>skyscapeR.vars | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-skyscaper-vars.html">skyscapeR.vars() method</a></nav><h2 id='skyscapeR.vars'>Inspect or set session defaults for skyscapeR</h2><span id='topic+skyscapeR.vars'></span>
 
 <h3>Description</h3>
 
@@ -15,35 +15,35 @@ retrieve them for a reproducible methods record.
 
 <h3>Arguments</h3>
 
-<table>
-<tr><td><code>timezone</code></td>
+<table role = "presentation">
+<tr><td><code id="skyscapeR.vars_+3A_timezone">timezone</code></td>
 <td>
 <p>Timezone name (for example &quot;Europe/London&quot;) or fixed offset in hours east of UTC,
 or a string such as &quot;UTC+02:00&quot;. Initially &quot;Europe/London&quot;. Use UTC or a fixed
 offset for dates before 1900. See <code>time2jd</code> for details.</p>
 </td></tr>
-<tr><td><code>calendar</code></td>
+<tr><td><code id="skyscapeR.vars_+3A_calendar">calendar</code></td>
 <td>
 <p>Calendar for civil dates. Use <code>"G"</code> for Gregorian or <code>"J"</code> for Julian.</p>
 </td></tr>
-<tr><td><code>refraction</code></td>
+<tr><td><code id="skyscapeR.vars_+3A_refraction">refraction</code></td>
 <td>
 <p>Whether atmospheric refraction is to be taken into account. Default is TRUE.</p>
 </td></tr>
-<tr><td><code>atm</code></td>
+<tr><td><code id="skyscapeR.vars_+3A_atm">atm</code></td>
 <td>
 <p>Air pressure in mbar for the refraction calculation. Default is 1013.25 mbar.</p>
 </td></tr>
-<tr><td><code>temp</code></td>
+<tr><td><code id="skyscapeR.vars_+3A_temp">temp</code></td>
 <td>
 <p>Air temperature in degrees Celsius for the refraction calculation. Default is 15 degrees Celsius.</p>
 </td></tr>
-<tr><td><code>dec</code></td>
+<tr><td><code id="skyscapeR.vars_+3A_dec">dec</code></td>
 <td>
 <p>Output declination: <em>geo</em> for the geocentric, or <em>topo</em> for the topocentric
 frame of reference. Defaults to topocentric.</p>
 </td></tr>
-<tr><td><code>k</code></td>
+<tr><td><code id="skyscapeR.vars_+3A_k">k</code></td>
 <td>
 <p>Visual extinction in magnitudes per airmass, shared by natural sky sketches and stellar phase calculations. The initial value of 0.2 is a clear-sky baseline, consistent with the approximate V-band coefficient for Kitt Peak in the UC Davis Physics 157 Observing Guide. Extinction varies with site and atmospheric conditions (Schaefer 1986, 1993). Use zero to disable extinction.</p>
 </td></tr>
@@ -64,6 +64,12 @@ the survey data.
 <h3>Value</h3>
 
 <p>A named list of the current session settings, including the current year. Supplying an argument updates that setting for subsequent package calls in this R session.
+</p>
+
+
+<h3>Validation</h3>
+
+<p>A01 verified all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See <a href="https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks">A01 validation in the technical manual</a>.
 </p>
 
 
@@ -89,4 +95,4 @@ the survey data.
 settings$timezone
 </code></pre>
 
-<p><a href="../fn-skyscaper-vars.html">skyscapeR.vars() method</a></p></body></html>
+</body></html>

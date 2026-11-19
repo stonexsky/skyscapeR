@@ -45,6 +45,11 @@ It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
 }
 
+\section{Scientific validation}{
+
+A06 examines geocentric lunar and planetary limits against independent extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 scientific validation}.
+}
+
 \examples{
 \dontrun{
 # Searches across multiple planetary cycles; may take more than five seconds.

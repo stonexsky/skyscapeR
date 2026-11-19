@@ -15,32 +15,6 @@ ink='#243a49';teal='#00766e';ochre='#a14f1d';gray='#dce5e7'
 def save(fig,name):fig.savefig(out/(name+'.png'),dpi=170,bbox_inches='tight',pad_inches=.12,facecolor='white');plt.close(fig)
 def csv(z,f):
  with zipfile.ZipFile('archives/'+z) as a:return pd.read_csv(a.open(f))
-# Reprojection uses the rotation and pixel convention of the archived tracing script.
-G=np.array([[-.0548755604,-.8734370902,-.4838350155],[.4941094279,-.4448296300,.7469822445],[-.8676661490,-.1980763734,.4559837762]])
-im=np.asarray(Image.open(source/'diffuse-map.png').convert('RGB'));H,W=im.shape[:2]
-grid=np.fromfile(source/'classes.bin',dtype=np.uint8).reshape(481,1440)
-colors=['#101722','#879a9e','#233d50','#d3ab6c','#fff0c3']
-fig,axs=plt.subplots(4,2,figsize=(9.2,8.2),sharey=True,layout='constrained')
-for col,centre in enumerate([0.,180.]):
- lon=np.arange(centre+90,centre-90-.01,-.25);lat=np.arange(-36,36.01,.25);L,B=np.meshgrid(lon,lat)
- l,b=np.deg2rad(L),np.deg2rad(B)
- xyz=np.stack([np.cos(l)*np.cos(b),np.sin(l)*np.cos(b),np.sin(b)],axis=-1)@G
- ra=np.arctan2(xyz[...,1],xyz[...,0]);dc=np.arcsin(xyz[...,2]);px=(.5-ra/(2*np.pi))*W-.5;py=(.5-dc/np.pi)*H-.5
- rgb=np.stack([map_coordinates(np.pad(im[:,:,k].astype(float),((0,0),(1,1)),mode='wrap'),[py,(px%W)+1],order=1,mode='nearest') for k in range(3)],axis=-1).clip(0,255).astype('uint8')
- layers=grid[np.rint((B+60)*4).astype(int),np.rint((L+180)*4).astype(int)%1440]
- for row,ax in enumerate(axs[:,col]):
-  extent=[lon[0]+.125,lon[-1]-.125,lat[0]-.125,lat[-1]+.125]
-  if row<2:ax.imshow(rgb,extent=extent,origin='lower',aspect='auto')
-  elif row==2:ax.imshow(layers,extent=extent,origin='lower',aspect='auto',interpolation='nearest',cmap=ListedColormap(colors),vmin=-.5,vmax=4.5)
-  else:ax.imshow(np.take([0.,1.,0.,1.35,2.1],layers),extent=extent,origin='lower',aspect='auto',interpolation='nearest',cmap='gray',vmin=0,vmax=2.1)
-  if row==1:ax.contour(L,B,layers>0,levels=[.5],colors=['#61efdd'],linewidths=.95)
-  ax.set_yticks([-30,0,30]);ax.set_xlim(lon[0],lon[-1]);ax.set_xticks([centre+90,centre+45,centre,centre-45,centre-90],[f'{v%360:.0f}°' for v in [centre+90,centre+45,centre,centre-45,centre-90]])
-  if row<3:ax.tick_params(labelbottom=False)
-  if col==0:ax.set_ylabel('Latitude (°)')
-  if row==3:ax.set_xlabel('Galactic longitude')
-  ax.set_title((['Source','Adopted outer edge','Reconstruction classes','Intrinsic diffuse radiance'][row])+(' · centre' if col==0 else ' · anticentre'),fontsize=10)
-fig.legend([Patch(color=c) for c in colors],['Outside','Ordinary band','Dark lane','Bright','Brightest'],loc='outside lower center',ncol=5,frameon=False)
-save(fig,'milky-way-reconstruction')
 # Same synthetic surface as the DEM panorama example, sampled along due east.
 d=np.arange(2.5,500.1,2.5);z=100+15*np.exp(-((d-80)/35)**2-(30/90)**2)+88*np.exp(-((d-270)/70)**2-(40/200)**2);eye=100+15*np.exp(-(80/35)**2-(30/90)**2)+88*np.exp(-(270/70)**2-(40/200)**2)+1.6
 a=np.degrees(np.arctan2(z-eye,d));j=a.argmax()

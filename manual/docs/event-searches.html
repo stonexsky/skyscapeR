@@ -97,7 +97,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -762,12 +762,22 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -778,6 +788,11 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -818,6 +833,11 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -900,7 +920,7 @@ div.csl-indent {
 
 
 <p><a href="./a05-solar-limits.html">A05</a> tests civil dates, solstitial branches and independent east and west solutions for spatial equinoxes.</p>
-<p><strong>Implementation.</strong> skyscapeR 2.0.9004, <code>R/horizon-events.R</code>, <code>R/mechanics.R</code>, <code>R/events.R</code> and <code>R/misc.R</code>. A point on a track, a terrain crossing, a midpoint bearing, a date and a sampled extreme are five different outputs. Their numerical precision and their archaeological interpretation depend on different assumptions.</p>
+<p><strong>Implementation.</strong> skyscapeR, <code>R/horizon-events.R</code>, <code>R/mechanics.R</code>, <code>R/events.R</code> and <code>R/misc.R</code>. A point on a track, a terrain crossing, a midpoint bearing, a date and a sampled extreme are five different outputs. Their numerical precision and their archaeological interpretation depend on different assumptions.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -1013,7 +1033,7 @@ div.csl-indent {
 <section id="interpretation-limits-and-reproduction" class="level2">
 <h2 class="anchored" data-anchor-id="interpretation-limits-and-reproduction">Interpretation, limits and reproduction</h2>
 <p>A terrain solver can resolve multiple skyline encounters on the same ascending track; the constant-altitude solver answers a simpler question. Neither supersedes a field survey of the ridge or an explicit decision about whether the archaeological event concerns a centre, a limb or an observable star. For date and extremum searches, distinguish errors due to the ephemeris from those introduced by the chosen event definition or temporal sampling. Useful future checks include known short crossing pairs, nearly tangent tracks, solstitial targets close to the annual limit and extrema bracketed by daily planetary samples.</p>
-<p><a href="archives/doorway-and-ridge-examples.zip">Download the scripts, example outputs and ephemeris identifiers</a>. All three event examples were executed with skyscapeR 2.0.9004 and swephR 0.3.2. The paired modern Swiss data files used for these examples identify DE441 in their headers. Their checksums are in the example archive. They illustrate implementation behaviour; the <a href="./study-register.html">study register</a> retains the independent field and model-comparison evidence.</p>
+<p><a href="archives/doorway-and-ridge-examples.zip">Download the scripts, example outputs and ephemeris identifiers</a>. All three event examples were executed with skyscapeR and swephR 0.3.2. The paired modern Swiss data files used for these examples identify DE441 in their headers. Their checksums are in the example archive. They illustrate implementation behaviour; the <a href="./study-register.html">study register</a> retains the independent field and model-comparison evidence.</p>
 <p><strong>Related function entries</strong></p>
 <p><a href="fn-orbit.html"><code>orbit()</code></a>, <a href="fn-riseset.html"><code>riseset()</code></a>, <a href="fn-spatial-equinox.html"><code>spatial.equinox()</code></a>, <a href="fn-solar-date.html"><code>solar.date()</code></a>, <a href="fn-planet-extremes.html"><code>planet.extremes()</code></a>, <a href="fn-createhor.html"><code>createHor()</code></a>, <a href="fn-body-position.html"><code>body.position()</code></a>, <a href="fn-star-phases.html"><code>star.phases()</code></a>, <a href="fn-skystep.html"><code>skyStep()</code></a>, <a href="fn-sketchsky.html"><code>sketchSky()</code></a>.</p>
 

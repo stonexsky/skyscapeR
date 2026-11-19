@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>reduct.compass | skyscapeR 2.0.9009</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-reduct-compass.html">reduct.compass() method</a></nav><h2 id='reduct.compass'>Reduce magnetic compass bearings to true bearings</h2><span id='topic+reduct.compass'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>reduct.compass | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-reduct-compass.html">reduct.compass() method</a></nav><h2 id='reduct.compass'>Reduce magnetic compass bearings to true bearings</h2><span id='topic+reduct.compass'></span>
 
 <h3>Description</h3>
 
@@ -15,41 +15,41 @@ known, estimate the indicated declinations.
 
 <h3>Arguments</h3>
 
-<table>
-<tr><td><code id="reduct.compass_:_loc">loc</code></td>
+<table role = "presentation">
+<tr><td><code id="reduct.compass_+3A_loc">loc</code></td>
 <td>
 <p>Location, either a <em>skyscapeR.horizon</em> or a vector
 containing the latitude, longitude and elevation of location, in this order.</p>
 </td></tr>
-<tr><td><code id="reduct.compass_:_mag.az">mag.az</code></td>
+<tr><td><code id="reduct.compass_+3A_mag.az">mag.az</code></td>
 <td>
 <p>Array of magnetic azimuth measurements.</p>
 </td></tr>
-<tr><td><code id="reduct.compass_:_date">date</code></td>
+<tr><td><code id="reduct.compass_+3A_date">date</code></td>
 <td>
 <p>Date of measurements as a string in the format: 'YYYY/MM/DD'.
 Only necessary if <em>magdec</em> is not given. When omitted, the output
 Date column contains missing values (NA).</p>
 </td></tr>
-<tr><td><code id="reduct.compass_:_magdec">magdec</code></td>
+<tr><td><code id="reduct.compass_+3A_magdec">magdec</code></td>
 <td>
 <p>Magnetic declination, if known.</p>
 </td></tr>
-<tr><td><code id="reduct.compass_:_alt">alt</code></td>
+<tr><td><code id="reduct.compass_+3A_alt">alt</code></td>
 <td>
 <p>Altitude, necessary for automatic declination calculation.
 If missing and <em>loc</em> is a <em>skyscapeR.horizon</em> object then the altitude
 will be automatically read from the horizon profile.</p>
 </td></tr>
-<tr><td><code id="reduct.compass_:_name">name</code></td>
+<tr><td><code id="reduct.compass_+3A_name">name</code></td>
 <td>
 <p>Names or labels to identify each measurement.</p>
 </td></tr>
-<tr><td><code id="reduct.compass_:_ID">ID</code></td>
+<tr><td><code id="reduct.compass_+3A_id">ID</code></td>
 <td>
 <p>IDs or codes to identify each measurement.</p>
 </td></tr>
-<tr><td><code id="reduct.compass_:_HWT.ID">HWT.ID</code></td>
+<tr><td><code id="reduct.compass_+3A_hwt.id">HWT.ID</code></td>
 <td>
 <p>HeyWhatsThat IDs relating to a previously generated
 horizon profile for measurement.</p>
@@ -87,7 +87,7 @@ is available. Optional identification columns are retained.
 
 <h3>Validation</h3>
 
-<p>W02 checked north-crossing magnetic readings against the supplied corrections before passing true bearings into a skyline analysis. See the <a href="../w02-field-to-sky.html">W02 check in the technical manual</a>.
+<p>W02 checked north-crossing magnetic readings against the supplied corrections before passing true bearings into a skyline analysis. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky">W02 check in the technical manual</a>.
 </p>
 
 
@@ -118,4 +118,4 @@ hor &lt;- createHor(c(0,90,180,270,360), c(0,2,6,1,0), loc=c(35,-7,100))
 reduct.compass(hor, c(89.5,105,109.5), magdec=-2)
 </code></pre>
 
-</body></html>
+<h3>Scientific validation</h3><p>F01 examines magnetic and solar reductions against independent references. <a href="../field-reduction.html#f01-scientific">F01 study and results</a>.</p></body></html>

@@ -189,7 +189,7 @@ versions; an unavailable version is NA, for example when sourcing functions
 outside a package namespace. Version strings do not uniquely identify
 development builds. Retain the original script, code revision and ephemeris
 files as well: the saved metadata do not identify or archive those files.
-Earlier saved results do not acquire these fields automatically.
+
 }
 
 \section{Provenance}{
@@ -253,4 +253,8 @@ of moonlight. PASP 103, 1033-1039 (equation 14 for extinction airmass).
 }
 \seealso{
 \code{\link{plot.skyscapeR.starphases}}, \code{\link{riseset}}, \code{\link{sketchSky}}, \code{\link{skyStep}}, \code{\link{star}}
+}
+
+\section{Validation studies}{
+Six stellar positions were compared with independently propagated catalogue directions from 3500 BCE to 2000 CE. \href{https://stonexsky.github.io/skyscapeR/manual/a03-stellar-positions.html#a03-stellar-positions}{A03 validation study}.
 }

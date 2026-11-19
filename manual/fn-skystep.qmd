@@ -1,5 +1,9 @@
 # `skyStep()` {#fn-skystep}
 
+For native sky frames, see [V04 · Milky Way surface brightness](v04-diffuse-photometry.qmd).
+
+Publication-colour and publication-mono sketches attenuate the Milky Way towards the horizon using `k` by default. Set `band.extinction = FALSE` to display its intrinsic structure in those styles. Natural skies apply atmospheric transmission to the band. New sketches store this choice for subsequent steps.
+
 [Function index](function-index.html#idx-skystep)
 
 ```{=html}

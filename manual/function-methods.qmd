@@ -1,6 +1,6 @@
 # Function methods and implementation notes {#sec-methods}
 
-Use these entries to check the implementation file, formal arguments, return value and documented modes for skyscapeR 2.0.9012. Each entry links to its complete help page and to the relevant methods chapter. In the argument tables, a dash marks a formal argument without a default expression. The implementation may resolve an omitted value internally. [Download the documented source build](archives/skyscapeR_2.0.9012.tar.gz).
+Use these entries to check the implementation file, formal arguments, return value and documented modes for skyscapeR 2.0. Each entry links to its complete help page and to the relevant methods chapter. In the argument tables, a dash marks a formal argument without a default expression. The implementation may resolve an omitted value internally. [Download the documented source build](archives/skyscapeR_2.0.9016.tar.gz).
 
 ## Time, coordinates and ephemerides {#group-time}
 

@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>plot.skyscapeR.pdf | skyscapeR 2.0.9008</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-plot-skyscaper-pdf.html">plot.skyscapeR.pdf() method</a></nav><h2 id='plot.skyscapeR.pdf'>Plot orientation probability distributions</h2><span id='topic+plot.skyscapeR.pdf'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>plot.skyscapeR.pdf | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-plot-skyscaper-pdf.html">plot.skyscapeR.pdf() method</a></nav><h2 id='plot.skyscapeR.pdf'>Plot orientation probability distributions</h2><span id='topic+plot.skyscapeR.pdf'></span>
 
 <h3>Description</h3>
 
@@ -29,57 +29,57 @@ plot(
 
 <h3>Arguments</h3>
 
-<table>
-<tr><td><code id="plot.skyscapeR.pdf_:_x">x</code></td>
+<table role = "presentation">
+<tr><td><code id="plot.skyscapeR.pdf_+3A_x">x</code></td>
 <td>
 <p>A <em>skyscapeR.pdf</em> object created with either <code>az.pdf</code> or <code>coordtrans</code></p>
 </td></tr>
-<tr><td><code id="plot.skyscapeR.pdf_:_index">index</code></td>
+<tr><td><code id="plot.skyscapeR.pdf_+3A_index">index</code></td>
 <td>
 <p>A value to indicate which distribution to plot, when only one is desired.</p>
 </td></tr>
-<tr><td><code id="plot.skyscapeR.pdf_:_hdr">hdr</code></td>
+<tr><td><code id="plot.skyscapeR.pdf_+3A_hdr">hdr</code></td>
 <td>
 <p>High density region to highlight. Defaults to 0.954</p>
 </td></tr>
-<tr><td><code id="plot.skyscapeR.pdf_:_show.az">show.az</code></td>
+<tr><td><code id="plot.skyscapeR.pdf_+3A_show.az">show.az</code></td>
 <td>
 <p>Deprecated and ignored, with a warning when supplied. Provide both
 <code>az</code> and <code>hor</code> for the combined panels, or omit both for distributions alone.</p>
 </td></tr>
-<tr><td><code id="plot.skyscapeR.pdf_:_xrange">xrange</code></td>
+<tr><td><code id="plot.skyscapeR.pdf_+3A_xrange">xrange</code></td>
 <td>
 <p>Range of x-axis to plot.</p>
 </td></tr>
-<tr><td><code id="plot.skyscapeR.pdf_:_col">col</code></td>
+<tr><td><code id="plot.skyscapeR.pdf_+3A_col">col</code></td>
 <td>
 <p>Fill colour for highest-density regions. NULL uses the current style.</p>
 </td></tr>
-<tr><td><code id="plot.skyscapeR.pdf_:_...">...</code></td>
+<tr><td><code id="plot.skyscapeR.pdf_+3A_...">...</code></td>
 <td>
 <p>Additional arguments to be passed to <em>plot</em>.</p>
 </td></tr>
-<tr><td><code id="plot.skyscapeR.pdf_:_az">az</code></td>
+<tr><td><code id="plot.skyscapeR.pdf_+3A_az">az</code></td>
 <td>
 <p>Original azimuth <em>skyscapeR.pdf</em>, in the same order and with
 the same number of distributions as <code>x</code>. Supply together with <code>hor</code>
 to show combined panels for a single declination distribution.</p>
 </td></tr>
-<tr><td><code id="plot.skyscapeR.pdf_:_hor">hor</code></td>
+<tr><td><code id="plot.skyscapeR.pdf_+3A_hor">hor</code></td>
 <td>
 <p>Original horizon object, or a list of horizons in the same order
 and with the same length as the distributions in <code>x</code>. Supply with <code>az</code>.</p>
 </td></tr>
-<tr><td><code id="plot.skyscapeR.pdf_:_xlim">xlim</code></td>
+<tr><td><code id="plot.skyscapeR.pdf_+3A_xlim">xlim</code></td>
 <td>
 <p>Earlier name for xrange.</p>
 </td></tr>
-<tr><td><code id="plot.skyscapeR.pdf_:_show.legend">show.legend</code></td>
+<tr><td><code id="plot.skyscapeR.pdf_+3A_show.legend">show.legend</code></td>
 <td>
 <p>Show the HDR mass above stacked densities. The linked diagnostic always identifies
 its component panels and reports the numerical interval or intervals.</p>
 </td></tr>
-<tr><td><code id="plot.skyscapeR.pdf_:_style">style</code></td>
+<tr><td><code id="plot.skyscapeR.pdf_+3A_style">style</code></td>
 <td>
 <p>Analytical display style, either <code>"publication-colour"</code> (default) or
 <code>"publication-mono"</code>. Monochrome uses grayscale and preserves line styles.</p>
@@ -118,7 +118,7 @@ refraction, pressure and temperature recorded with the result.
 
 <h3>Validation</h3>
 
-<p>In W01 the shaded components matched the two intervals returned by hpdi() for a bimodal density. See the <a href="../w01-plot-geometry.html">W01 check in the technical manual</a>.
+<p>In W01 the shaded components matched the two intervals returned by hpdi() for a bimodal density. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry">W01 check in the technical manual</a>.
 </p>
 
 

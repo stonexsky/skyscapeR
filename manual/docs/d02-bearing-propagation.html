@@ -20,27 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -62,7 +42,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -727,12 +707,22 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -743,6 +733,11 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -783,6 +778,11 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -828,8 +828,14 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Chapter contents</h2>
+   
+  <ul>
+  <li><a href="#pole-propagation" id="toc-pole-propagation" class="nav-link active" data-scroll-target="#pole-propagation">Steep skylines and pole crossings</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -854,64 +860,73 @@ div.csl-indent {
 
 
 <p>We tested <a href="help/coordtrans.html"><code>coordtrans()</code></a> at 50° N with a constant 2° skyline and refraction disabled. Bearings had a Gaussian standard deviation of 2° about centres of 90°, 359° and 0°. Independent Gaussian altitude errors had a standard deviation of 0.5°. For each centre, we transformed one million paired draws through the spherical altitude equation and compared the median and both endpoints of the equal-tailed 95% interval with the package density. We used the same seeded draws at each centre.</p>
-<p>At calculation and azimuth integration spacings of 0.1° and 0.05°, all 18 quantile comparisons fell within the specified 0.02° tolerance. The largest absolute discrepancy was 0.00505°, at the upper endpoint for a bearing centred on north on the coarser grid. All six returned densities integrated to one within 0.000001. The discrepancy includes Monte Carlo sampling variation. The extended study varied each numerical spacing separately. Ten configurations returned densities on five grids, and an eleventh tested the documented zero-width limit. The references were (1) direct spherical propagation of 524,288 scrambled Sobol draws and (2) independent quadrature over 8,192 bearing strata using the package’s endpoint-Gaussian implementation of the conditional-density method <span class="citation" data-cites="silva2020">(<a href="references.html#ref-silva2020" role="doc-biblioref">Silva 2020</a>)</span>. The refracted case shared the Swiss altitude correction to isolate propagation. The archive reports mass error, maximum CDF distance, quantiles, prominent modes and 80% highest-density regions.</p>
+<p>All 18 quantile comparisons on the level horizon met the 0.02° tolerance. In the extended design, all 11 configurations returned densities on each of five numerical grids. The independent reference used 524,288 scrambled Sobol draws per configuration. The refracted case shares the Swiss altitude correction to isolate the density calculation. The archive includes individual quantiles, CDF distances, modes and 80% highest-density regions.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
+<col style="width: 42%">
+<col style="width: 57%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Configuration</th>
+<th>Configuration</th>
 <th style="text-align: right;">Largest fine-grid quantile difference from direct propagation</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Eastern slope rising / falling clockwise</td>
-<td style="text-align: right;">0.00152° / 0.00241°</td>
+<td>Rising eastern slope</td>
+<td style="text-align: right;">0.00164°</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Sloping skyline crossing north</td>
+<td>Falling eastern slope</td>
+<td style="text-align: right;">0.00256°</td>
+</tr>
+<tr class="odd">
+<td>Sloping skyline crossing north</td>
 <td style="text-align: right;">0.00089°</td>
 </tr>
+<tr class="even">
+<td>Asymmetric ridge</td>
+<td style="text-align: right;">0.00022°</td>
+</tr>
 <tr class="odd">
-<td style="text-align: left;">Asymmetric ridge with multiple modes</td>
-<td style="text-align: right;">0.00082°</td>
+<td>Kunċizzjoni terrain model</td>
+<td style="text-align: right;">0.00168°</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Archived Kunċizzjoni terrain model</td>
-<td style="text-align: right;">0.00131°</td>
+<td>Refracted slope</td>
+<td style="text-align: right;">0.00757°</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Surveyed Canrooska skyline</td>
-<td style="text-align: right;">0.00023°</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Refracted slope / doubled altitude uncertainty</td>
-<td style="text-align: right;">0.00754° / 0.00568°</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Observer at geographic north pole</td>
+<td>Observer at the geographic pole</td>
 <td style="text-align: right;">0.00057°</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Sightline near celestial pole</td>
-<td style="text-align: right;">0.17149°</td>
+<td>Sightline through the celestial pole</td>
+<td style="text-align: right;">0.00081°</td>
+</tr>
+<tr class="odd">
+<td>Doubled altitude uncertainty</td>
+<td style="text-align: right;">0.00577°</td>
+</tr>
+<tr class="even">
+<td>Canrooska survey</td>
+<td style="text-align: right;">0.00023°</td>
+</tr>
+<tr class="odd">
+<td>Sightline near the celestial pole</td>
+<td style="text-align: right;">0.00274°</td>
 </tr>
 </tbody>
 </table>
-<p>The Canrooska input linearly interpolates <a href="https://mega-what.com/sites/Canrooska/sitedata.htm">surveyed bearings and altitudes</a> at the stone row. The Kunċizzjoni input uses Tore Lomsdalen’s archived Horizon terrain model. Across nine configurations away from the celestial-pole limit, all three quantiles on all five grids agreed with direct propagation within 0.008°. The maximum CDF distance was 0.00411. For the summed-density check, transforming a normalised sum of two bearing PDFs gave area 0.99999947. The integrated absolute difference from summing the two individually transformed PDFs was 0.00159 after normalisation.</p>
-<p><strong>Grid sensitivity.</strong> The ridge had three prominent modes near −0.77°, 3.87° and 9.89°. On the default grid, the 80% highest-density region split the middle band and returned four intervals. Reducing the calculation and azimuth integration steps to 0.05° and the output step to 0.005° recovered the three reference intervals. For this ridge, refining only the integration spacing reduced the largest quantile discrepancy from 0.00645° to 0.00245°. Refining only the calculation spacing reduced it to 0.00485°; refining only the output spacing gave 0.00642°.</p>
-<p><strong>Celestial-pole limit.</strong> At latitude 50° N with a 47° northern skyline, the fine-grid result differed from direct propagation by up to 0.1715° in quantiles and 0.0589 in cumulative probability. Agreement with independent integration of the conditional Gaussian was within 0.00070° in quantiles. The discrepancy is therefore primarily in that approximation. At a 50° northern skyline, the transformed endpoints coincide for the central bearing. The function raised its documented zero-width error on every grid even though direct propagation had a central 95% interval of 87.071°–89.819°. These cases distinguish the celestial-pole geometry from a geographic-pole observer, for which a density was recovered.</p>
-<p><a href="archives/skyscapeR-9006-A04-D02-validation.zip">Download the reproduction scripts, input checksums and results for A04 and D02</a>.</p>
+<p>The largest quantile discrepancy across all 55 combinations was 0.00757°. Transforming a normalised sum of two bearing densities produced area 0.99999947. Its integrated absolute difference from the sum of the individually transformed densities was 0.00145 after normalisation. <a href="archives/A04-D02.zip">Download A04 and D02 reproduction material</a>.</p>
+<section id="pole-propagation" class="level2">
+<h2 class="anchored" data-anchor-id="pole-propagation">Steep skylines and pole crossings</h2>
+<p>At latitude 45° N, a constructed skyline changed by 31° over 4° of bearing. We propagated nine combinations of centre (0°, 3°, 7°) and measurement family (normal, compact Epanechnikov and asymmetric triangular). We compared the 2.5th, 50th and 97.5th percentiles with direct spherical calculations from 500,000 independent bearing–altitude pairs per combination, using a 0.5° altitude standard deviation. All 36 combinations of input density and requested integration spacing (0.05°, 0.1°, 0.25°, 1°) produced finite densities. The largest absolute discrepancies over the tested quantiles were 0.0282° for normal, 0.0121° for Epanechnikov and 0.0309° for triangular measurements. These differences include Monte Carlo sampling variation.</p>
+<p>For positive altitude uncertainties, a four-standard-deviation endpoint at absolute declination 80° or above, or coincident endpoints, selects direct spherical quadrature. It integrates 256 equiprobable normal-altitude strata at each bearing. The bearing spacing is capped at 0.025° for this calculation and for profiles locally steeper than one degree of height per degree of bearing. At a 2.02° bearing, where the two endpoint declinations differ by only 0.00357°, internal calculations retain full precision. The exact-pole regression independently checks both ends of the resulting 95% interval. The separate <a href="./s02-specified-models.html#steep-null">S02 calibration</a> tests the statistical consequences under matched null models. <a href="archives/five-package-tests.zip">Scripts, inputs and quantiles</a>.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-silva2020" class="csl-entry" role="listitem">
-Silva, Fabio. 2020. <span>‘A Probabilistic Framework and Significance Test for the Analysis of Structural Orientations in Skyscape Archaeology’</span>. <em>Journal of Archaeological Science</em> 118: 105138. <a href="https://doi.org/10.1016/j.jas.2020.105138">https://doi.org/10.1016/j.jas.2020.105138</a>.
-</div>
-</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

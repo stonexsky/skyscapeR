@@ -24,14 +24,6 @@ modelTest(
 \arguments{
 \item{pdf}{Empirical skyscapeR.pdf from \code{\link{az.pdf}}, \code{\link{dec.pdf}} or \code{\link{coordtrans}}. Its coordinate and the optional hor select the simulation path.}
 
-\item{hor}{Optional shared skyscapeR.horizon or an ordered list matching the empirical observations. With azimuth inputs, selects a declination test using individual coordinate transformations. Omit for routes 1 and 2.}
-
-\item{.transform.res}{Internal declination transformation spacing, as .res in coordtrans. Default 0.1 degrees.}
-
-\item{.prec}{Azimuth integration spacing for route 3, as in coordtrans. Default 0.1 degrees.}
-
-\item{.output.res}{Stored declination PDF spacing for route 3, as in coordtrans. Default 0.01 degrees.}
-
 \item{model}{One shared data frame or an ordered list with one table per observation. The first column contains candidate coordinates in degrees and the second contains nonnegative discrete sampling weights, with at least one positive weight. On equally spaced grids, density heights can serve as weights.}
 
 \item{unc}{Optional replacement width in degrees of the input coordinate (azimuth on route 3). Use a standard deviation for normal, half the total span for triangular, or the family-specific half-width documented in \code{\link{az.pdf}}. Supply a scalar or one per observation. Omit to reuse stored measurement uncertainties or mean-shift transformed declination curves. See Details.}
@@ -49,6 +41,14 @@ modelTest(
 \item{ncores}{Worker count. By default use half the detected available logical cores, rounded down with a minimum of one. Set ncores=1 for serial execution. The simulation count and memory batch size can further limit workers. Verbose output reports the effective count.}
 
 \item{verbose}{Display simulation progress.}
+
+\item{hor}{Optional shared skyscapeR.horizon or an ordered list matching the empirical observations. With azimuth inputs, selects a declination test using individual coordinate transformations. Omit for routes 1 and 2.}
+
+\item{.transform.res}{Internal declination transformation spacing, as .res in coordtrans. Default 0.1 degrees.}
+
+\item{.prec}{Azimuth integration spacing for route 3, as in coordtrans. Default 0.1 degrees.}
+
+\item{.output.res}{Stored declination PDF spacing for route 3, as in coordtrans. Default 0.01 degrees.}
 }
 \value{
 A skyscapeR.sigTest list with settings and global/local results in metadata, empirical density and null envelope in data.
@@ -125,7 +125,6 @@ fitted to the same observations, its fitting procedure must be accounted for sep
 counts. For grids larger than 16 MiB, allow about eight bytes of temporary
 disk space per simulation per grid point. Temporary files are removed on return or error.
 }
-
 \section{Validation}{
 
 In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
@@ -150,7 +149,6 @@ See \code{\link{randomTest}} for study-design and Monte Carlo limitations.
 }
 
 \examples{
-
 d <- dec.pdf(dec = c(-18, 12), unc = c(0.8, 1.4))
 m <- list(data.frame(x = -20:-16, w = 1), data.frame(x = 10:14, w = 1))
 set.seed(42)
@@ -171,7 +169,6 @@ Dec <- coordtrans(Az, hor)
 fit <- modelTest(Dec, data.frame(x = c(-22, 18), w = c(1, 1)))
 }
 }
-
 \references{
 Silva, F. (2020). A probabilistic framework and significance test for the analysis of structural orientations in skyscape archaeology. \emph{Journal of Archaeological Science}, 118, 105138. \doi{10.1016/j.jas.2020.105138}.
 

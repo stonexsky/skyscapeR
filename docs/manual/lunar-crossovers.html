@@ -97,7 +97,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-899a454fef6dc05dd6a507a76e72437b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cc23d32240cbaf34ab1f66774c52bb80.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -762,12 +762,22 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Studies by question and package build</span></a>
+  <a href="./study-register.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Validation studies by question</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-stress-tests.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Guide to the five validation studies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a02-ephemeris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A02 · Ephemeris accuracy and lunar skyline crossings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a03-stellar-positions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A03 · Stellar positions at archaeological epochs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -778,6 +788,11 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heliacal-rising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checking the date of heliacal rising</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./v04-diffuse-photometry.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">V04 · Milky Way surface brightness outside Carina</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -818,6 +833,11 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./h02-skyline-comparison.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H02. How well does <code>createHor()</code> reproduce terrain skylines?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h04-feature-resolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">H04 · Thin features and partial occlusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -872,6 +892,7 @@ div.csl-indent {
   <li><a href="#crossover-cc" id="toc-crossover-cc" class="nav-link" data-scroll-target="#crossover-cc">First and last crescents</a></li>
   <li><a href="#crossover-example" id="toc-crossover-example" class="nav-link" data-scroll-target="#crossover-example">When a second evening changes the lunation</a></li>
   <li><a href="#crossover-archive" id="toc-crossover-archive" class="nav-link" data-scroll-target="#crossover-archive">Comparison with the 2012 simulations</a></li>
+  <li><a href="#a07-scientific" id="toc-a07-scientific" class="nav-link" data-scroll-target="#a07-scientific">A07 · Independent selection of equinoctial and crescent crossovers</a></li>
   </ul>
 </nav>
     </div>
@@ -897,10 +918,10 @@ div.csl-indent {
 </header>
 
 
-<p><strong>Implementation.</strong> skyscapeR 2.0.9004, <code>R/events.R</code> and <code>R/crescent-crossovers.R</code>. Silva &amp; Pimenta (2012, §§2.1–2.2, figs. 3–4) defined families of observable events by comparing where the Moon and Sun rise or set across successive days and lunations. Their Alcyone Ephemeris 2.8 scripts recorded the first qualifying event for each year. skyscapeR implements the searches with Swiss Ephemeris, exposes the observing conventions, and can use a measured skyline <span class="citation" data-cites="silvapimenta2012 sweprog">(<a href="references.html#ref-silvapimenta2012" role="doc-biblioref">Silva and Pimenta 2012</a>; <a href="references.html#ref-sweprog" role="doc-biblioref">Astrodienst, n.d.</a>)</span>. A crossover is selected by the order of two <strong>horizon bearings at their respective events</strong>. The bodies need not be on the horizon together.</p>
+<p><strong>Implementation.</strong> skyscapeR, <code>R/events.R</code> and <code>R/crescent-crossovers.R</code>. Silva &amp; Pimenta (2012, §§2.1–2.2, figs. 3–4) defined families of observable events by comparing where the Moon and Sun rise or set across successive days and lunations. Their Alcyone Ephemeris 2.8 scripts recorded the first qualifying event for each year. skyscapeR implements the searches with Swiss Ephemeris, exposes the observing conventions, and can use a measured skyline <span class="citation" data-cites="silvapimenta2012 sweprog">(<a href="references.html#ref-silvapimenta2012" role="doc-biblioref">Silva and Pimenta 2012</a>; <a href="references.html#ref-sweprog" role="doc-biblioref">Astrodienst, n.d.</a>)</span>. A crossover is selected by the order of two <strong>horizon bearings at their respective events</strong>. The bodies need not be on the horizon together.</p>
 <section id="crossover-efm" class="level2">
 <h2 class="anchored" data-anchor-id="crossover-efm">Equinoctial full Moons</h2>
-<p><a href="fn-efm.html"><code>EFM()</code></a> searches chronological local civil dates from 60 days before to 65 days after the astronomical March or September equinox. It evaluates the illuminated fraction at the lunar centre crossing and requires at least <code>min.phase</code> (default 0.99). Let <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mo>=</mo><msub><mi>A</mi><mrow><mi mathvariant="normal">M</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">n</mi></mrow></msub><mo>−</mo><msub><mi>A</mi><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">D=A_{\mathrm{Moon}}-A_{\mathrm{Sun}}</annotation></semantics></math>, using topocentric bearings clockwise from true north. The 2.0.9004 EFM implementation applies the strict comparisons below to the two bearings directly.</p>
+<p><a href="fn-efm.html"><code>EFM()</code></a> searches chronological local civil dates from 60 days before to 65 days after the astronomical March or September equinox. It evaluates the illuminated fraction at the lunar centre crossing and requires at least <code>min.phase</code> (default 0.99). Let <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mo>=</mo><msub><mi>A</mi><mrow><mi mathvariant="normal">M</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">n</mi></mrow></msub><mo>−</mo><msub><mi>A</mi><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">D=A_{\mathrm{Moon}}-A_{\mathrm{Sun}}</annotation></semantics></math>, using topocentric bearings clockwise from true north. EFM applies the strict comparisons below to the two bearings directly.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -985,7 +1006,7 @@ div.csl-indent {
 </section>
 <section id="crossover-archive" class="level2">
 <h2 class="anchored" data-anchor-id="crossover-archive">Comparison with the 2012 simulations</h2>
-<p>The historical workbooks give annual solar and lunar declinations rather than event timestamps. Their coordinates can identify a likely neighbouring date or lunation, but cannot recover every setting in the original scripts. The comparison below concerns the archival 2.0 development analysis, 1620–2047, with a level horizon, longitude 0°, elevation 400 m, UTC, Gregorian dates, geocentric reported declinations, refraction on, 1013.25 mbar and 15 °C. These are the <strong>reproduction settings</strong>, not verified meteorological parameters of the original simulations.</p>
+<p>The historical workbooks give annual solar and lunar declinations rather than event timestamps. Their coordinates can identify a likely neighbouring date or lunation, but cannot recover every setting in the original scripts. The comparison below concerns the historical comparison, 1620–2047, with a level horizon, longitude 0°, elevation 400 m, UTC, Gregorian dates, geocentric reported declinations, refraction on, 1013.25 mbar and 15 °C. These are the <strong>reproduction settings</strong>, not verified meteorological parameters of the original simulations.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -1020,6 +1041,39 @@ div.csl-indent {
 <p>Two individual records show how to read these comparisons. At the equator in autumn 1913, the archived EFM reconstruction selected a moonset with illumination <strong>0.990003</strong> and lunar declination <strong>4.7246°</strong>. The next morning’s declination was <strong>10.4302°</strong>, matching the historical table’s <strong>10.43°</strong>. The reproduced search accepts the earlier morning by about three millionths in illuminated fraction. The table supports the following-morning interpretation but does not tell us why the earlier date was skipped.</p>
 <p>For the winter first crescent labelled 1708 at 60° N, the archived SIM1 run selected <strong>12 January 1709</strong>, whereas the source’s pair of declinations matched <strong>13 January</strong>. The reconstructed base evening cleared the visibility threshold by only <strong>0.019°</strong>. The later date is inferred from both coordinates. Across the wider diagnostic sample, alternative search windows and solar-limb definitions recovered some discrepant cases but also changed previously matching controls. There is no established universal adjustment. Replay materials and archived diagnostics are provided separately: <a href="archives/crossovers-and-targets.zip">worked examples</a> · <a href="archives/crossover-validation-record.zip">historical comparison and source-run records</a>.</p>
 <p>The strength of the package implementation is access to the selected event pair, inputs, terrain and diagnostic margins. Agreement with historical simulation tables measures implementation agreement. Estimating the probability of real crescent detection requires observations independent of the rule used to select it.</p>
+</section>
+<section id="a07-scientific" class="level2">
+<h2 class="anchored" data-anchor-id="a07-scientific">A07 · Independent selection of equinoctial and crescent crossovers</h2>
+<p>An independent search in Astronomy Engine selected UTC dates at 0°, 40° N, 60° N and 60° S, at longitude 0°, elevation 400 m, for 1913 and 2022. It searched a level horizon for spring and autumn EFM moonsets and summer first crescents under SIM1 and SIM2. The comparison used a geometric altitude of −0.56° for the setting centre as an approximation to the refracted horizon, independently calculated solar and lunar positions, and the documented illumination, visibility and bearing rules. Both searches started from the season, with no package event date supplied to the comparator.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Selection</th>
+<th style="text-align: right;">Same lunar date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Spring EFM moonset</td>
+<td style="text-align: right;">8/8</td>
+</tr>
+<tr class="even">
+<td>Autumn EFM moonset</td>
+<td style="text-align: right;">7/8</td>
+</tr>
+<tr class="odd">
+<td>Summer first crescent, SIM1</td>
+<td style="text-align: right;">8/8</td>
+</tr>
+<tr class="even">
+<td>Summer first crescent, SIM2</td>
+<td style="text-align: right;">8/8</td>
+</tr>
+</tbody>
+</table>
+<p>At the equator in autumn 1913, the package selected <strong>14 October</strong>. Its illumination fraction of <strong>0.990003</strong> just exceeded the 0.99 cutoff. At that same moonset the independent calculation gave <strong>0.989993</strong>, and selected <strong>15 October</strong>, consistent with the lunar declination in the historical table. Across all 64 body positions evaluated at the package times, the largest absolute differences were <strong>0.00207° in azimuth</strong> and <strong>0.00045° in geocentric declination</strong>. For the 31 matching event pairs, setting times agreed within one second under the specified horizon conventions.</p>
+<p>Both engines selected the same dates at 40° N in this sample. That agreement does not resolve the original simulation settings. For example, in autumn 2022 the reproduced geocentric lunar declination was +0.245°, while the historical table gives −0.11°. The historical summer first-crescent coordinates for 2022 are much closer to the SIM2 selection than to SIM1. A single correction to all years or latitudes is unsupported. No threshold was fitted to these cases. Winter crescents, last crescents and eye-witness visibility lie outside this independent sample. <a href="https://github.com/cosinekitty/astronomy">Independent ephemeris</a>.</p>
+<p><a href="archives/scientific-studies.zip">Download the study scripts, reference inputs and numerical results</a>.</p>
 <p><strong>Related function entries</strong></p>
 <p><a href="fn-efm.html"><code>EFM()</code></a>, <a href="fn-cc.html"><code>CC()</code></a>, <a href="fn-moonphase.html"><code>moonphase()</code></a>, <a href="fn-riseset.html"><code>riseset()</code></a>, <a href="fn-time2jd.html"><code>time2jd()</code></a>, <a href="fn-jd2time.html"><code>jd2time()</code></a>, <a href="fn-skyscaper-vars.html"><code>skyscapeR.vars()</code></a>.</p>
 
