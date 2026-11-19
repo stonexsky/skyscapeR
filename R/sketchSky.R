@@ -92,11 +92,16 @@
 #' gradually into a clear daylight blue, reaching its full daytime palette and
 #' exposure at a solar altitude of 15 degrees.
 #' @section Milky Way and clusters:
-#' The Milky Way is traced on a 0.1-degree Galactic grid from the 4096-pixel diffuse-light map in Deep Star Maps 2020.
-#' Within the smoothed envelope, retained dark patches have at least 10 percent
-#' local contrast; two bright tiers begin at 1.10 and 1.75 times the mean band
-#' tone after the dark patches are excluded. Retained patches cover at least
-#' 10 square degrees. Natural sketches anchor the mean surface brightness
+#' The Milky Way uses a 0.1-degree Galactic grid classified from the reviewed
+#' 1024-pixel diffuse-light image in Deep Star Maps 2020. A smoothed image-tone
+#' threshold defines its outer envelope. Dark patches are more than 8 percent
+#' below an 8-degree local reference and cover at least 7 square degrees.
+#' Two brighter classes use fixed image-tone cutoffs and a 10-square-degree
+#' minimum area. These settings, including the 7-square-degree cutoff, were
+#' chosen by visual comparison and remain illustrative, not visibility thresholds.
+#' Dark patches remain within the outer envelope for alignment purposes.
+#' See the technical manual and bundled milky-way-source.txt for reproduction.
+#' Natural sketches anchor the mean surface brightness
 #' of a four-degree field in Carina to 20.7 V magnitudes per square arcsecond
 #' (van der Kruit 2024). Brightness elsewhere is approximate. Atmospheric
 #' extinction can make the band difficult to follow down to its calculated

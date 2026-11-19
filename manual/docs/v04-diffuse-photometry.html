@@ -868,62 +868,9 @@ div.csl-indent {
 </header>
 
 
-<p>We averaged intrinsic diffuse flux from the Galactic class map, weighted each cell by its solid angle, then converted the mean to V magnitudes per square arcsecond. The field definitions and observed values come from van der Kruit <span class="citation" data-cites="kruit2024">(<a href="references.html#ref-kruit2024" role="doc-biblioref">Kruit 2024</a>, table 3 and accompanying text)</span>. Bochum provides photographic V photometry. Pannekoek’s calibrated visual values approximate V. Predictions below are for the diffuse component before atmospheric attenuation. Positive residuals mean a fainter prediction.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 20%">
-<col style="width: 26%">
-<col style="width: 26%">
-<col style="width: 26%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Independent field</th>
-<th style="text-align: right;">Observed</th>
-<th style="text-align: right;">Predicted</th>
-<th style="text-align: right;">Predicted − observed</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Coalsack, Bochum, 2° radius</td>
-<td style="text-align: right;">21.4</td>
-<td style="text-align: right;">21.42</td>
-<td style="text-align: right;">+0.02</td>
-</tr>
-<tr class="even">
-<td>Southern strip at Galactic latitude −12°, Bochum</td>
-<td style="text-align: right;">22.0</td>
-<td style="text-align: right;">21.06</td>
-<td style="text-align: right;">−0.94</td>
-</tr>
-<tr class="odd">
-<td>Southern strip at −15°, Bochum</td>
-<td style="text-align: right;">22.1</td>
-<td style="text-align: right;">21.38</td>
-<td style="text-align: right;">−0.72</td>
-</tr>
-<tr class="even">
-<td>Southern strip at −18°, Bochum</td>
-<td style="text-align: right;">22.2</td>
-<td style="text-align: right;">22.13</td>
-<td style="text-align: right;">−0.07</td>
-</tr>
-<tr class="odd">
-<td>Cygnus Cloud, Pannekoek visual</td>
-<td style="text-align: right;">20.1</td>
-<td style="text-align: right;">21.06</td>
-<td style="text-align: right;">+0.96</td>
-</tr>
-<tr class="even">
-<td>Scutum Cloud, Pannekoek visual</td>
-<td style="text-align: right;">20.3</td>
-<td style="text-align: right;">20.81</td>
-<td style="text-align: right;">+0.51</td>
-</tr>
-</tbody>
-</table>
-<p>The Coalsack prediction ranged from 21.31 to 21.42 across aperture radii of 1°, 2° and 3°. For the southern strips we adopted a 1° width in latitude across longitudes 320°–340°. Cygnus used the published rectangle and Scutum a 3° radius. Carina served only as the normalisation control. The sampled regions show spatially varying residuals of opposite signs. A single zero-point adjustment cannot reconcile them all. Fitting new class weights requires matched angular resolution, stellar masking and uncertainties for the observed maps. Fitting atmospheric extinction additionally requires measurements at known airmasses.</p>
+<p>Recomputed for the simplified model in version 2.0.9018. We averaged intrinsic diffuse flux from the Galactic class map, weighted each cell by its solid angle, then converted the mean to V magnitudes per square arcsecond. The field definitions and observed values come from van der Kruit <span class="citation" data-cites="kruit2024">(<a href="references.html#ref-kruit2024" role="doc-biblioref">Kruit 2024</a>, table 3 and accompanying text)</span>. Bochum provides photographic V photometry. Pannekoek’s calibrated visual values approximate V. Predictions below are for the diffuse component before atmospheric attenuation. Positive residuals mean a fainter prediction.</p>
+<table class="caption-top table"><thead><tr><th>Independent field</th><th>Observed</th><th>Predicted</th><th>Predicted − observed</th></tr></thead><tbody><tr><td>Coalsack, Bochum, 2° radius</td><td>21.4</td><td>21.04</td><td>-0.36</td></tr><tr><td>Southern strip at Galactic latitude −12°, Bochum</td><td>22.0</td><td>21.08</td><td>-0.92</td></tr><tr><td>Southern strip at −15°, Bochum</td><td>22.1</td><td>21.41</td><td>-0.69</td></tr><tr><td>Southern strip at −18°, Bochum</td><td>22.2</td><td>21.41</td><td>-0.79</td></tr><tr><td>Cygnus Cloud, Pannekoek visual</td><td>20.1</td><td>21.01</td><td>+0.91</td></tr><tr><td>Scutum Cloud, Pannekoek visual</td><td>20.3</td><td>20.70</td><td>+0.40</td></tr></tbody></table>
+<p>The Coalsack prediction ranged from 20.81 to 21.13 across aperture radii of 1°, 2° and 3°. For the southern strips we adopted a 1° width in latitude across longitudes 320°–340°. Cygnus used the published rectangle and Scutum a 3° radius. Carina served only as the normalisation control. The sampled regions show spatially varying residuals of opposite signs. A single zero-point adjustment cannot reconcile them all. Fitting new class weights requires matched angular resolution, stellar masking and uncertainties for the observed maps. Fitting atmospheric extinction additionally requires measurements at known airmasses.</p>
 <p><a href="archives/five-package-tests.zip">Reproduction scripts, inputs and results</a>.</p>
 
 

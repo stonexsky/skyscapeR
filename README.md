@@ -252,3 +252,7 @@ package version numbers alone do not fully identify a calculation. For Stellariu
 captures, record the external application's version and settings separately.
 
 DEM panorama relief lighting uses the standalone renderer’s 75% observer / 25% directional blend, with `ambient = 0.40` and `contrast = 0.70`. Terrain and `horFeature()` surfaces share the shading. Regenerate existing panoramas to apply the new brightness response. For the earlier relief response, use `ambient = 0.38, contrast = 0.62`.
+
+### Milky Way outline update (2.0.9018)
+
+The simplified, visually reviewed Milky Way model replaces the previous outline and internal regions. Analyses that depend on the old boundary should be rerun. Dark patches remain inside the outer envelope for alignment purposes. The 7-square-degree minimum dark-patch area was chosen visually and is illustrative; it is not a detection threshold. The technical manual explains the model and its limitations, with exact reproduction inputs in `data-raw/milky-way`.

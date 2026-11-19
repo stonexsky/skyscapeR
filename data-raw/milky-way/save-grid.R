@@ -1,0 +1,5 @@
+x <- readBin('data-raw/milky-way/grid.bin', 'raw', n=3600L*1201L)
+stopifnot(length(x)==3600L*1201L, all(as.integer(x) %in% 0:4))
+dim(x) <- c(3600L,1201L)
+saveRDS(x, 'inst/extdata/milky-way-layers.rds', version=2, compress='xz')
+stopifnot(identical(x,readRDS('inst/extdata/milky-way-layers.rds')))

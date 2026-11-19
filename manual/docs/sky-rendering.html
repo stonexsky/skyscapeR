@@ -853,7 +853,7 @@ div.csl-indent {
   <li><a href="#twilight-and-moonlight" id="toc-twilight-and-moonlight" class="nav-link" data-scroll-target="#twilight-and-moonlight">Twilight and moonlight</a></li>
   <li><a href="#milky-way-boundary-internal-structure-and-calibration" id="toc-milky-way-boundary-internal-structure-and-calibration" class="nav-link" data-scroll-target="#milky-way-boundary-internal-structure-and-calibration">Milky Way boundary, internal structure and calibration</a>
   <ul class="collapse">
-  <li><a href="#reading-the-traced-boundary" id="toc-reading-the-traced-boundary" class="nav-link" data-scroll-target="#reading-the-traced-boundary">Reading the traced boundary</a></li>
+  <li><a href="#reading-the-traced-boundary" id="toc-reading-the-traced-boundary" class="nav-link" data-scroll-target="#reading-the-traced-boundary">Reproducing the illustrative boundary</a></li>
   <li><a href="#how-the-carina-field-fixes-the-intensity-scale" id="toc-how-the-carina-field-fixes-the-intensity-scale" class="nav-link" data-scroll-target="#how-the-carina-field-fixes-the-intensity-scale">How the Carina field fixes the intensity scale</a></li>
   </ul></li>
   <li><a href="#sky-constellations" id="toc-sky-constellations" class="nav-link" data-scroll-target="#sky-constellations">Constellation selection and planisphere geometry</a></li>
@@ -904,37 +904,12 @@ div.csl-indent {
 </section>
 <section id="milky-way-boundary-internal-structure-and-calibration" class="level2">
 <h2 class="anchored" data-anchor-id="milky-way-boundary-internal-structure-and-calibration">Milky Way boundary, internal structure and calibration</h2>
-<p>The outer envelope comes from a tracing of diffuse light in <em>Deep Star Maps 2020</em> <span class="citation" data-cites="deepstars">(<a href="references.html#ref-deepstars" role="doc-biblioref">Wright 2020</a>)</span>. Within it the package retains dark patches with at least 10% local contrast and uses brightness tiers at 1.10 and 1.75 times mean band tone after exclusion of dark patches. Retained patches cover at least 10 square degrees. These thresholds classify an image; they are not physiological visibility thresholds. For an alignment defined by the <strong>outer boundary</strong>, an enclosed dark patch remains inside the band. For visual reconstruction, the internal dark and bright structure matters and is displayed.</p>
+<p>The outer envelope and internal regions are classified from the diffuse-light component of *Deep Star Maps 2020* (Wright, 2020). An 8° local reference identifies dark regions more than 8% below their surroundings; connected dark regions smaller than 7 square degrees are omitted. Two brighter classes retain the reviewed image-tone cutoffs. These settings were chosen visually and remain illustrative. In particular, 7 square degrees is not a physiological visibility threshold or an independently established angular scale. For alignments defined by the outer envelope, enclosed dark regions remain within the Milky Way.</p>
 <p>The implemented relative intensities are 0 outside the band, 1 for ordinary band, 0 for the dark class, and 1.35 and 2.1 for the two bright classes. These are provisional rendering weights. Atmospheric background can still contribute light in a dark-class pixel. The surface-brightness scale is anchored to a four-degree Carina field at 20.7 V mag arcsec⁻² <span class="citation" data-cites="kruit2024">(<a href="references.html#ref-kruit2024" role="doc-biblioref">Kruit 2024</a>)</span>. Normalisation in that field constrains the adopted scale, not every direction around the Galaxy. The direct atmospheric transmission is evaluated separately for the displayed altitude, so a geometrically predicted crossing can be difficult to follow near the skyline. A plotted Galactic equator and an outer Milky Way edge represent different sightlines.</p>
 <p>Publication-colour and publication-mono sketches attenuate the Milky Way towards the horizon using <code>k</code> by default. Set <code>band.extinction = FALSE</code> to display its intrinsic structure in those styles. Natural skies apply atmospheric transmission to the band. A native <code>skyStep()</code> carries the stored setting into the next frame.</p>
 <section id="reading-the-traced-boundary" class="level3">
-<h3 class="anchored" data-anchor-id="reading-the-traced-boundary">Reading the traced boundary</h3>
-<p>The tracing starts from the celestial-coordinate diffuse-light image in <em>Deep Star Maps 2020</em>, with bright foreground stars omitted <span class="citation" data-cites="deepstars">(<a href="references.html#ref-deepstars" role="doc-biblioref">Wright 2020</a>)</span>. The grid samples the 4096 × 2048 EXR map at 0.1° in Galactic longitude and latitude. On the Galactic grid, the tracing script smooths image tone to 1° FWHM. At each longitude it estimates background tone from latitudes 35°–50° on either side of the plane and bright-band tone from the 90th percentile within 12° of the plane. Both longitude series are median-filtered over approximately 5°. For background <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math> and bright-band tone <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>, the selected contour level is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mo>+</mo><mn>0.35</mn><mrow><mo stretchy="true" form="prefix">(</mo><mi>P</mi><mo>−</mo><mi>B</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">B+0.35(P-B)</annotation></semantics></math>. The algorithm keeps the main connected body across the longitude seam, fills enclosed holes, then smooths the envelope mask at 4° FWHM.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/milky-way-classes.png" class="img-fluid figure-img" alt="Map of the ordinary, dark, bright and brightest classes in Galactic longitude and latitude."></p>
-<figcaption>Diffuse-light classes on the package grid. Galactic longitude wraps at the left and right edges. Dark lanes lie inside the outer envelope.</figcaption>
-</figure>
-</div>
-<p>The grid has 3,600 longitude samples and 1,201 latitude samples from −60° to +60°. A lookup at each of its 4,323,600 cell centres recovered the stored class. Longitudes separated by a full turn agreed at the seam. These checks establish how the renderer reads the adopted outline. Independently traced sky images are needed to quantify the uncertainty in the outline itself.</p>
-<p>The anticentre band narrows at higher contrast cuts, but the same change also removes much of the extended bulge on the centre side. The adopted 35% cut preserves that structure using one rule around the full circumference. The 45% and 55% candidates below document the trade-off. The source image used to choose the edge cannot independently validate it.</p>
-<details>
-<summary>
-Original centre and anticentre contrast comparisons
-</summary>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/mw-centre-review.jpg" class="img-fluid figure-img" alt="Original centre comparison with the source map and three progressively tighter contours."></p>
-<figcaption>Galactic centre. The 35%, 45% and 55% contours are shown on the same source image and exposure.</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/mw-anticentre-review.jpg" class="img-fluid figure-img" alt="Original anticentre comparison with the source map and the same three contrast cuts."></p>
-<figcaption>Galactic anticentre. Compare the contraction of the band at higher cuts with the loss of the extended centre bulge in the preceding figure.</figcaption>
-</figure>
-</div>
-</details>
+<h3 class="anchored" data-anchor-id="reading-the-traced-boundary">Reproducing the illustrative boundary</h3>
+<p>The exact 1024 × 512 RGB source image used during visual selection is retained with the reproduction script in `data-raw/milky-way`. Its weighted image tone (RGB weights 0.2126, 0.7152 and 0.0722, on a 0–255 scale) is resampled onto a 0.1° Galactic grid and smoothed at 1° FWHM. Further 4° smoothing and a tone threshold of 40 define the main connected region around the Galactic plane; enclosed holes are filled. Longitude wraps continuously.</p><p>Dark patches fall more than 8% below an 8° Gaussian local reference in the presmoothed image. Their minimum connected area is 7 square degrees. Brighter regions exceed fixed tones of 72.4751 and 115.3013 and cover at least 10 square degrees. The bright thresholds preserve the reviewed 1.10 and 1.75 multiples of the pilot reference mean, 65.8865; they are held fixed when the dark mask changes. Areas account for spherical cell size. All smoothing widths are FWHM.</p><p><img src="figures/milky-way-classes.png" alt="Reviewed source and simplified classification" style="max-width:100%"></p><p>The stored grid has 3,600 longitude and 1,201 latitude samples from −60° to +60°. Fine sampling supports smooth projection but does not create independent detail beyond the source resolution. The script, source checksum, chosen thresholds and grid checks are retained for reproduction. The source used for visual selection cannot independently validate the resulting boundary; this revision changes the adopted geometry, so analyses dependent on the previous outline should be rerun.</p>
 </section>
 <section id="how-the-carina-field-fixes-the-intensity-scale" class="level3">
 <h3 class="anchored" data-anchor-id="how-the-carina-field-fixes-the-intensity-scale">How the Carina field fixes the intensity scale</h3>

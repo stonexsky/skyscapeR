@@ -50,13 +50,13 @@ extinction to star symbols and the integrated magnitudes of supported clusters.
 It does not limit constellation endpoints, the Sun, Moon or planets. Raising
 the cutoff includes additional stars only where the catalogue supplies them.}
 
-\item{band.extinction}{Logical. Defaults to TRUE. Set to FALSE to disable Milky Way extinction in publication styles. Natural style already applies it.}
-
 \item{k}{Non-negative visual extinction coefficient in magnitudes per airmass
 for natural style. Defaults to \code{\link{skyscapeR.vars}()$k}, initially 0.2.
 This clear-sky baseline is an assumption, not an estimate of the site's weather.
 Zero removes extinction and the modelled lunar scattering. Publication styles
 do not apply extinction to symbols.}
+
+\item{band.extinction}{Logical. Defaults to TRUE. Set to FALSE to disable Milky Way extinction in publication styles. Natural style already applies it.}
 }
 \value{
 An object of classes \code{skyscapeR.sketch} and \code{skyscapeR.sky}.
@@ -69,9 +69,6 @@ sketches draw from \code{light.budget}. \code{bodies}, \code{diameters},
 \code{clusters} holds supported cluster footprints and opacity when applicable. The natural view uses the integrated Pleiades magnitude as the light budget within its projected footprint. When the plotted stars exceed that budget, their fluxes are scaled together to preserve their relative brightness. Any residual light uses a broad, tapered profile;
 \code{guides}, \code{light}, \code{background} and twilight fields support drawing.
 Components can be empty when a layer is disabled. No image file is written.
-}
-\section{Validation studies}{
-Diffuse V-band brightness was compared with six fields outside the Carina calibration aperture. \href{https://stonexsky.github.io/skyscapeR/manual/v04-diffuse-photometry.html#v04-diffuse-photometry}{V04 validation study}.
 }
 \description{
 Calculate the sky above one observing site at one instant, then reuse it
@@ -149,11 +146,16 @@ exposure at a solar altitude of 15 degrees.
 
 \section{Milky Way and clusters}{
 
-The Milky Way is traced on a 0.1-degree Galactic grid from the 4096-pixel diffuse-light map in Deep Star Maps 2020.
-Within the smoothed envelope, retained dark patches have at least 10 percent
-local contrast; two bright tiers begin at 1.10 and 1.75 times the mean band
-tone after the dark patches are excluded. Retained patches cover at least
-10 square degrees. Natural sketches anchor the mean surface brightness
+The Milky Way uses a 0.1-degree Galactic grid classified from the reviewed
+1024-pixel diffuse-light image in Deep Star Maps 2020. A smoothed image-tone
+threshold defines its outer envelope. Dark patches are more than 8 percent
+below an 8-degree local reference and cover at least 7 square degrees.
+Two brighter classes use fixed image-tone cutoffs and a 10-square-degree
+minimum area. These settings, including the 7-square-degree cutoff, were
+chosen by visual comparison and remain illustrative, not visibility thresholds.
+Dark patches remain within the outer envelope for alignment purposes.
+See the technical manual and bundled milky-way-source.txt for reproduction.
+Natural sketches anchor the mean surface brightness
 of a four-degree field in Carina to 20.7 V magnitudes per square arcsecond
 (van der Kruit 2024). Brightness elsewhere is approximate. Atmospheric
 extinction can make the band difficult to follow down to its calculated
@@ -167,7 +169,13 @@ alone is insufficient to predict first detection (Crumey 2014).
 }
 
 \section{Using a sketch with a stellar phase date}{
+
 Use \code{\link{riseset}} to locate the terrain crossing and \code{\link{skyStep}} to follow the star through twilight. For first morning or last evening, inspect adjacent dates as well. A rendered symbol alone cannot establish naked-eye detection.
+}
+
+\section{Validation}{
+
+W02 verified the reconstructed Gacrux bearing and altitude at the same instant and viewpoint using direct equatorial coordinates and spherical geometry. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
 }
 
 \section{Provenance}{
@@ -181,8 +189,14 @@ It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
 }
 
-\section{Validation}{
-W02 verified the reconstructed Gacrux bearing and altitude at the same instant and viewpoint using direct equatorial coordinates and spherical geometry. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
+\section{Validation studies}{
+
+Diffuse V-band brightness was compared with six fields outside the Carina calibration aperture. \href{https://stonexsky.github.io/skyscapeR/manual/v04-diffuse-photometry.html#v04-diffuse-photometry}{V04 validation study}.
+}
+
+\section{Observational validation}{
+
+Across 56 recorded dates, heliacal rising fell within seven days of 22 of 23 first morning sightings. The median prediction was two days early. Acronycal setting fell within seven days of 21 of 33 last evening sightings. The median prediction was five days late. A week is a practical search window. Larger discrepancies occur, especially at dusk. These results apply to the two tested events. \href{https://stonexsky.github.io/skyscapeR/manual/heliacal-rising.html#v01-observations}{V01 observed dates and scientific checks}.
 }
 
 \examples{
@@ -249,8 +263,4 @@ horizontal coordinates and planetary phenomena.
 \code{\link{findTargets}}, \code{\link{skyStep}},
 \code{\link{stellariumSky}}, \code{\link{plot.skyscapeR.horizon}},
 \code{\link{importConstellations}}, \code{\link{skyscapeR.vars}}
-}
-
-\section{Observational validation}{
-Across 56 recorded dates, heliacal rising fell within seven days of 22 of 23 first morning sightings. The median prediction was two days early. Acronycal setting fell within seven days of 21 of 33 last evening sightings. The median prediction was five days late. A week is a practical search window. Larger discrepancies occur, especially at dusk. These results apply to the two tested events. \href{https://stonexsky.github.io/skyscapeR/manual/heliacal-rising.html#v01-observations}{V01 observed dates and scientific checks}.
 }

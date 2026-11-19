@@ -1,3 +1,9 @@
+# skyscapeR 2.0.9018
+
+* Replaced the illustrative Milky Way envelope and internal regions with the simplified, visually reviewed extraction. Dark regions use an 8-degree local reference, 8% deficit and a 7-square-degree minimum area. Bright thresholds retain their reviewed values. The complete derivation and exact source image are included under `data-raw/milky-way`.
+* Retained 0.1-degree grid sampling and updated the legacy outline paths. Rendering, extinction and stellar-visibility calculations are unchanged. Recalculate analyses that depend on the previous Milky Way boundary.
+* Clarified that the image thresholds and patch-size cutoff are illustrative visual choices, not naked-eye detection criteria.
+
 # skyscapeR 2.0.9017
 
 * `star.phases()` uses Schaefer for heliacal rising and acronycal setting. The event table records the method and plotted day.

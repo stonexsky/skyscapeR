@@ -1,0 +1,26 @@
+{
+  "step": 0.1,
+  "shape": [
+    1201,
+    3600
+  ],
+  "source_sha256": "9b298778e054dce5d7a9c58c4539fa301c953ce2dc4b6754933cb1c80767b289",
+  "source_dimensions": [
+    1024,
+    512
+  ],
+  "class_areas_sqdeg": [
+    22212.64299961937,
+    8745.68208744602,
+    1182.2734928324307,
+    3067.9336079035056,
+    535.5666297512704
+  ],
+  "target_dark_patch_retained": true,
+  "target_patch_area_sqdeg": 8.048685645742374,
+  "dark_patch_count": 37,
+  "brightness_cutoffs": [
+    72.47510740164273,
+    115.30130722988615
+  ]
+}
