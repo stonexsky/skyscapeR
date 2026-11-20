@@ -1,5 +1,7 @@
 # `plot.skyscapeR.pdf()` {#fn-plot-skyscaper-pdf}
 
+[Scientific results for this function](help/plot.skyscapeR.pdf.html#scientific-checks).
+
 In W01 the shaded components matched the two intervals returned by hpdi() for a bimodal density. [W01 results](w01-plot-geometry.qmd).
 
 [Function index](function-index.html#idx-plot-skyscaper-pdf)

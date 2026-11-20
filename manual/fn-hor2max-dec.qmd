@@ -1,5 +1,7 @@
 # `hor2max.dec()` {#fn-hor2max-dec}
 
+[Scientific results for this function](help/hor2max.dec.html#scientific-checks).
+
 A05 recovered a limiting sightline within the northern search sector on a synthetic skyline with an interior crest. [A05 results](a05-solar-limits.qmd).
 
 [Function index](function-index.html#idx-hor2max-dec)

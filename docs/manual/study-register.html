@@ -834,8 +834,7 @@ follow(); window.addEventListener('hashchange', follow);})();
    
   <ul>
   <li><a href="#validation-programme" id="toc-validation-programme" class="nav-link active" data-scroll-target="#validation-programme">Validation programme</a></li>
-  <li><a href="#sky-rendering" id="toc-sky-rendering" class="nav-link" data-scroll-target="#sky-rendering">Sky rendering</a></li>
-  <li><a href="#next-tests" id="toc-next-tests" class="nav-link" data-scroll-target="#next-tests">Results and priorities</a></li>
+  <li><a href="#next-tests" id="toc-next-tests" class="nav-link" data-scroll-target="#next-tests">Scientific questions still open</a></li>
   </ul>
 </nav>
     </div>
@@ -863,7 +862,7 @@ follow(); window.addEventListener('hashchange', follow);})();
 
 <section id="validation-programme" class="level2">
 <h2 class="anchored" data-anchor-id="validation-programme">Validation programme</h2>
-<p>Each entry describes the quantity actually tested. H01/H02 and A02 retain the independent field and ephemeris benchmarks. The terrain lighting and Milky Way display changes were checked separately from those benchmarks. The package checks in this edition used the package source identified in each study.</p>
+<p>Use the study ID to open the evidence and the function name to open its method entry. The status column identifies the part of each question tested. Planned studies have no results yet.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -875,196 +874,192 @@ follow(); window.addEventListener('hashchange', follow);})();
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="./h01-field-validation.html#withheld-stations">H01</a></td>
+<td><a href="./h01-field-validation.html">H01</a></td>
 <td>How closely do DEM skylines agree with field theodolite readings?</td>
-<td><code>createHor()</code>, <code>hor2alt()</code></td>
+<td><a href="./fn-createhor.html"><code>createHor()</code></a>, <a href="./fn-hor2alt.html"><code>hor2alt()</code></a></td>
 <td>Complete</td>
 </tr>
 <tr class="even">
 <td><a href="./h02-skyline-comparison.html">H02</a></td>
 <td>How does createHor() compare with other skyline methods and field bearings?</td>
-<td><code>createHor()</code>, <code>createHWT()</code>, <code>importPeakFinder()</code></td>
+<td><a href="./fn-createhor.html"><code>createHor()</code></a>, <a href="./fn-createhwt.html"><code>createHWT()</code></a>, <a href="./fn-importpeakfinder.html"><code>importPeakFinder()</code></a></td>
 <td>Complete</td>
 </tr>
 <tr class="odd">
 <td><a href="horizons.html#h03-scientific">H03</a></td>
 <td>DEM ray tracing, curvature and convergence</td>
-<td><code>createHor()</code>, <code>hor2alt()</code></td>
+<td><a href="./fn-createhor.html"><code>createHor()</code></a>, <a href="./fn-hor2alt.html"><code>hor2alt()</code></a></td>
 <td>Analytic convergence and two curvature controls complete</td>
 </tr>
 <tr class="even">
 <td><a href="./h04-feature-resolution.html">H04</a></td>
 <td>Reconstructed earthworks and synthetic panoramas</td>
-<td><code>horFeature()</code>, <code>createHor()</code>, <code>demPalettes()</code>, <code>plot.skyscapeR.horizon()</code></td>
+<td><a href="./fn-horfeature.html"><code>horFeature()</code></a>, <a href="./fn-createhor.html"><code>createHor()</code></a>, <a href="./fn-dempalettes.html"><code>demPalettes()</code></a>, <a href="./fn-plot-skyscaper-horizon.html"><code>plot.skyscapeR.horizon()</code></a></td>
 <td>LiDAR bank control and thin-wall occlusion tests complete</td>
 </tr>
 <tr class="odd">
 <td><a href="photographic-horizons.html#h05-scientific">H05</a></td>
 <td>Calibrating a photographic horizon</td>
-<td><code>importPanorama()</code>, <code>hor2alt()</code>, <code>createHor()</code></td>
+<td><a href="./fn-importpanorama.html"><code>importPanorama()</code></a>, <a href="./fn-hor2alt.html"><code>hor2alt()</code></a>, <a href="./fn-createhor.html"><code>createHor()</code></a></td>
 <td>Synthetic holdout complete. Surveyed photographic controls open</td>
 </tr>
 <tr class="even">
 <td>H06</td>
 <td>Horizon providers, PNGs and Stellarium landscapes</td>
-<td><code>createHWT()</code>, <code>downloadHWT()</code>, <code>importPeakFinder()</code>, <code>importPanorama()</code>, <code>exportHor()</code>, <code>exportStellarium()</code>, <code>exportPanorama()</code>, <code>relinkHor()</code>, <code>plot.skyscapeR.horizon()</code></td>
+<td><a href="./fn-createhwt.html"><code>createHWT()</code></a>, <a href="./fn-downloadhwt.html"><code>downloadHWT()</code></a>, <a href="./fn-importpeakfinder.html"><code>importPeakFinder()</code></a>, <a href="./fn-importpanorama.html"><code>importPanorama()</code></a>, <a href="./fn-exporthor.html"><code>exportHor()</code></a>, <a href="./fn-exportstellarium.html"><code>exportStellarium()</code></a>, <a href="./fn-exportpanorama.html"><code>exportPanorama()</code></a>, <a href="./fn-relinkhor.html"><code>relinkHor()</code></a>, <a href="./fn-plot-skyscaper-horizon.html"><code>plot.skyscapeR.horizon()</code></a></td>
 <td>Planned</td>
 </tr>
 <tr class="odd">
 <td><a href="./h07-panorama-coverage.html">H07</a></td>
 <td>Passing incomplete horizons between functions</td>
-<td><code>importPanorama()</code>, <code>hor2alt()</code>, <code>coordtrans()</code>, <code>riseset()</code>, <code>star.phases()</code>, <code>spatial.equinox()</code>, <code>exportHor()</code></td>
+<td><a href="./fn-importpanorama.html"><code>importPanorama()</code></a>, <a href="./fn-hor2alt.html"><code>hor2alt()</code></a>, <a href="./fn-coordtrans.html"><code>coordtrans()</code></a>, <a href="./fn-riseset.html"><code>riseset()</code></a>, <a href="./fn-star-phases.html"><code>star.phases()</code></a>, <a href="./fn-spatial-equinox.html"><code>spatial.equinox()</code></a>, <a href="./fn-exporthor.html"><code>exportHor()</code></a></td>
 <td>Complete · verified</td>
 </tr>
 <tr class="even">
 <td><a href="field-reduction.html#f01-scientific">F01</a></td>
 <td>Compass and solar-sight reduction</td>
-<td><code>mag.dec()</code>, <code>reduct.compass()</code>, <code>reduct.theodolite()</code>, <code>sunAz()</code>, <code>ten()</code>, <code>az2dec()</code></td>
+<td><a href="./fn-mag-dec.html"><code>mag.dec()</code></a>, <a href="./fn-reduct-compass.html"><code>reduct.compass()</code></a>, <a href="./fn-reduct-theodolite.html"><code>reduct.theodolite()</code></a>, <a href="./fn-sunaz.html"><code>sunAz()</code></a>, <a href="./fn-ten.html"><code>ten()</code></a>, <a href="./fn-az2dec.html"><code>az2dec()</code></a></td>
 <td>Reference reductions and archival solar survey complete. Field compass calibration open</td>
 </tr>
 <tr class="odd">
 <td><a href="./a01-calendar-checks.html">A01</a></td>
 <td>Calendar, clock, angle and session conventions</td>
-<td><code>BC.AD()</code>, <code>astroYear()</code>, <code>time2jd()</code>, <code>jd2time()</code>, <code>timestring()</code>, <code>long.date()</code>, <code>ten()</code>, <code>skyscapeR.vars()</code></td>
+<td><a href="./fn-bc-ad.html"><code>BC.AD()</code></a>, <a href="./fn-astroyear.html"><code>astroYear()</code></a>, <a href="./fn-time2jd.html"><code>time2jd()</code></a>, <a href="./fn-jd2time.html"><code>jd2time()</code></a>, <a href="./fn-timestring.html"><code>timestring()</code></a>, <a href="./fn-long-date.html"><code>long.date()</code></a>, <a href="./fn-ten.html"><code>ten()</code></a>, <a href="./fn-skyscaper-vars.html"><code>skyscapeR.vars()</code></a></td>
 <td>Complete</td>
 </tr>
 <tr class="even">
 <td><a href="./a02-ephemeris.html">A02</a></td>
 <td>How closely do planetary positions and lunar skyline bearings agree with their JPL references? Includes a crossing sensitivity study relevant to riseset().</td>
-<td><code>body.position()</code>, <code>moonphase()</code></td>
+<td><a href="./fn-body-position.html"><code>body.position()</code></a>, <a href="./fn-moonphase.html"><code>moonphase()</code></a></td>
 <td>Complete</td>
 </tr>
 <tr class="odd">
 <td><a href="./a03-stellar-positions.html">A03</a></td>
 <td>Stellar propagation and reference frames</td>
-<td><code>star()</code>, <code>body.position()</code>, <code>obliquity()</code>, <code>parallax.corr()</code>, <code>orbit()</code></td>
+<td><a href="./fn-star.html"><code>star()</code></a>, <a href="./fn-body-position.html"><code>body.position()</code></a>, <a href="./fn-obliquity.html"><code>obliquity()</code></a>, <a href="./fn-parallax-corr.html"><code>parallax.corr()</code></a>, <a href="./fn-orbit.html"><code>orbit()</code></a></td>
 <td>Six-star space-motion comparison complete. Further frame and parallax checks open</td>
 </tr>
 <tr class="even">
 <td><a href="./a04-stellar-crossings.html">A04</a></td>
 <td>Crossings on flat and irregular skylines</td>
-<td><code>riseset()</code>, <code>orbit()</code>, <code>body.position()</code>, <code>hor2alt()</code>, <code>star.phases()</code></td>
+<td><a href="./fn-riseset.html"><code>riseset()</code></a>, <a href="./fn-orbit.html"><code>orbit()</code></a>, <a href="./fn-body-position.html"><code>body.position()</code></a>, <a href="./fn-hor2alt.html"><code>hor2alt()</code></a>, <a href="./fn-star-phases.html"><code>star.phases()</code></a></td>
 <td>Complete · synthetic and JPL centre-crossing comparisons</td>
 </tr>
 <tr class="odd">
 <td><a href="./a05-solar-limits.html">A05</a></td>
 <td>Solar dates and limiting declinations</td>
-<td><code>solar.date()</code>, <code>eq()</code>, <code>jS()</code>, <code>dS()</code>, <code>zenith()</code>, <code>antizenith()</code>, <code>obliquity()</code>, <code>parallax.corr()</code>, <code>spatial.equinox()</code>, <code>hor2max.dec()</code>, <code>hor2min.dec()</code>, <code>az2dec()</code></td>
+<td><a href="./fn-solar-date.html"><code>solar.date()</code></a>, <a href="./fn-eq.html"><code>eq()</code></a>, <a href="./fn-js.html"><code>jS()</code></a>, <a href="./fn-ds.html"><code>dS()</code></a>, <a href="./fn-zenith.html"><code>zenith()</code></a>, <a href="./fn-antizenith.html"><code>antizenith()</code></a>, <a href="./fn-obliquity.html"><code>obliquity()</code></a>, <a href="./fn-parallax-corr.html"><code>parallax.corr()</code></a>, <a href="./fn-spatial-equinox.html"><code>spatial.equinox()</code></a>, <a href="./fn-hor2max-dec.html"><code>hor2max.dec()</code></a>, <a href="./fn-hor2min-dec.html"><code>hor2min.dec()</code></a>, <a href="./fn-az2dec.html"><code>az2dec()</code></a></td>
 <td>Complete · verified</td>
 </tr>
 <tr class="even">
 <td><a href="celestial-targets.html#a06-scientific">A06</a></td>
 <td>Moon, planets and extrema across an epoch</td>
-<td><code>moonphase()</code>, <code>nMjLX()</code>, <code>nmnLX()</code>, <code>sMjLX()</code>, <code>smnLX()</code>, <code>planet.extremes()</code>, <code>body.position()</code>, <code>skyObject()</code></td>
+<td><a href="./fn-moonphase.html"><code>moonphase()</code></a>, <a href="./fn-nmjlx.html"><code>nMjLX()</code></a>, <a href="./fn-nmnlx.html"><code>nmnLX()</code></a>, <a href="./fn-smjlx.html"><code>sMjLX()</code></a>, <a href="./fn-smnlx.html"><code>smnLX()</code></a>, <a href="./fn-planet-extremes.html"><code>planet.extremes()</code></a>, <a href="./fn-body-position.html"><code>body.position()</code></a>, <a href="./fn-skyobject.html"><code>skyObject()</code></a></td>
 <td>Four standstill limits and five planetary windows compared</td>
 </tr>
 <tr class="odd">
 <td><a href="lunar-crossovers.html#a07-scientific">A07</a></td>
 <td>Equinoctial full Moons and crescent crossovers</td>
-<td><code>EFM()</code>, <code>CC()</code>, <code>moonphase()</code>, <code>riseset()</code>, <code>body.position()</code></td>
+<td><a href="./fn-efm.html"><code>EFM()</code></a>, <a href="./fn-cc.html"><code>CC()</code></a>, <a href="./fn-moonphase.html"><code>moonphase()</code></a>, <a href="./fn-riseset.html"><code>riseset()</code></a>, <a href="./fn-body-position.html"><code>body.position()</code></a></td>
 <td>32 independent selections compared. One EFM threshold discrepancy</td>
 </tr>
 <tr class="even">
 <td><a href="./a08-target-ranges.html">A08</a></td>
 <td>Target screening, dated bands and returned tracks</td>
-<td><code>findTargets()</code>, <code>skyObject()</code>, <code>sky.objects()</code>, <code>star()</code>, <code>solar.date()</code>, <code>hor2max.dec()</code>, <code>hor2min.dec()</code>, <code>orbit()</code></td>
+<td><a href="./fn-findtargets.html"><code>findTargets()</code></a>, <a href="./fn-skyobject.html"><code>skyObject()</code></a>, <a href="./fn-sky-objects.html"><code>sky.objects()</code></a>, <a href="./fn-star.html"><code>star()</code></a>, <a href="./fn-solar-date.html"><code>solar.date()</code></a>, <a href="./fn-hor2max-dec.html"><code>hor2max.dec()</code></a>, <a href="./fn-hor2min-dec.html"><code>hor2min.dec()</code></a>, <a href="./fn-orbit.html"><code>orbit()</code></a></td>
 <td>Complete · verified</td>
 </tr>
 <tr class="odd">
 <td><a href="heliacal-rising.html#v01-observations">V01</a></td>
 <td>Stellar phases and dated visibility</td>
-<td><code>star.phases()</code>, <code>star()</code>, <code>riseset()</code>, <code>sketchSky()</code>, <code>skyRadiance()</code>, <code>plot.skyscapeR.starphases()</code></td>
+<td><a href="./fn-star-phases.html"><code>star.phases()</code></a>, <a href="./fn-star.html"><code>star()</code></a>, <a href="./fn-riseset.html"><code>riseset()</code></a>, <a href="./fn-sketchsky.html"><code>sketchSky()</code></a>, <a href="./fn-skyradiance.html"><code>skyRadiance()</code></a>, <a href="./fn-plot-skyscaper-starphases.html"><code>plot.skyscapeR.starphases()</code></a></td>
 <td>56 seasonal dates, 45 observing sessions, 6 Sirius sightings and 28 published reference calculations.</td>
 </tr>
 <tr class="even">
-<td>V02</td>
+<td><a href="sky-rendering.html#mw-grid-check">V02</a></td>
 <td>Milky Way outer boundary and internal structure</td>
-<td><code>sketchSky()</code>, <code>skyRadiance()</code>, <code>planisphere()</code></td>
+<td><a href="./fn-sketchsky.html"><code>sketchSky()</code></a>, <a href="./fn-skyradiance.html"><code>skyRadiance()</code></a>, <a href="./fn-planisphere.html"><code>planisphere()</code></a></td>
 <td>Grid lookup and seam verified. Independent outline tracing pending</td>
 </tr>
 <tr class="odd">
-<td>V03</td>
+<td><a href="sky-rendering.html#twilight-check">V03</a></td>
 <td>Twilight gradients and moonlight</td>
-<td><code>sketchSky()</code>, <code>skyRadiance()</code>, <code>body.position()</code></td>
+<td><a href="./fn-sketchsky.html"><code>sketchSky()</code></a>, <a href="./fn-skyradiance.html"><code>skyRadiance()</code></a>, <a href="./fn-body-position.html"><code>body.position()</code></a></td>
 <td>Twilight checked against 22 held-out measurements. Moonlight field comparison open</td>
 </tr>
 <tr class="even">
 <td><a href="./v04-diffuse-photometry.html">V04</a></td>
 <td>Flux, cluster glow and the Pleiades</td>
-<td><code>sketchSky()</code>, <code>skyRadiance()</code>, <code>skyStep()</code></td>
+<td><a href="./fn-sketchsky.html"><code>sketchSky()</code></a>, <a href="./fn-skyradiance.html"><code>skyRadiance()</code></a>, <a href="./fn-skystep.html"><code>skyStep()</code></a></td>
 <td>Flux recovery and Carina normalisation checked. Six independent fields compared</td>
 </tr>
 <tr class="odd">
-<td>V05</td>
+<td><a href="sky-rendering.html#extinction-check">V05</a></td>
 <td>Atmospheric extinction by altitude</td>
-<td><code>sketchSky()</code>, <code>skyRadiance()</code>, <code>star.phases()</code>, <code>skyscapeR.vars()</code></td>
+<td><a href="./fn-sketchsky.html"><code>sketchSky()</code></a>, <a href="./fn-skyradiance.html"><code>skyRadiance()</code></a>, <a href="./fn-star-phases.html"><code>star.phases()</code></a>, <a href="./fn-skyscaper-vars.html"><code>skyscapeR.vars()</code></a></td>
 <td>Transmission and publication switches checked. Atmospheric field calibration open</td>
 </tr>
 <tr class="even">
 <td>V06</td>
 <td>Planisphere, sky cultures and constellation geometry</td>
-<td><code>planisphere()</code>, <code>importConstellations()</code>, <code>sketchSky()</code>, <code>star()</code></td>
+<td><a href="./fn-planisphere.html"><code>planisphere()</code></a>, <a href="./fn-importconstellations.html"><code>importConstellations()</code></a>, <a href="./fn-sketchsky.html"><code>sketchSky()</code></a>, <a href="./fn-star.html"><code>star()</code></a></td>
 <td>Planned</td>
 </tr>
 <tr class="odd">
-<td>V07</td>
+<td><a href="sky-rendering.html#step-check">V07</a></td>
 <td>Sky state, Stellarium capture and time stepping</td>
-<td><code>stellariumSky()</code>, <code>sketchSky()</code>, <code>skyStep()</code>, <code>skyscapeR.vars()</code>, <code>plot.skyscapeR.horizon()</code>, <code>time2jd()</code></td>
+<td><a href="./fn-stellariumsky.html"><code>stellariumSky()</code></a>, <a href="./fn-sketchsky.html"><code>sketchSky()</code></a>, <a href="./fn-skystep.html"><code>skyStep()</code></a>, <a href="./fn-skyscaper-vars.html"><code>skyscapeR.vars()</code></a>, <a href="./fn-plot-skyscaper-horizon.html"><code>plot.skyscapeR.horizon()</code></a>, <a href="./fn-time2jd.html"><code>time2jd()</code></a></td>
 <td>Native time-step extinction setting verified. External capture study open</td>
 </tr>
 <tr class="even">
 <td><a href="./d01-density-checks.html">D01</a></td>
 <td>Measurement PDFs, circular support and highest-density regions</td>
-<td><code>az.pdf()</code>, <code>dec.pdf()</code>, <code>hpdi()</code>, <code>spd()</code>, <code>subset.skyscapeR.pdf()</code></td>
+<td><a href="./fn-az-pdf.html"><code>az.pdf()</code></a>, <a href="./fn-dec-pdf.html"><code>dec.pdf()</code></a>, <a href="./fn-hpdi.html"><code>hpdi()</code></a>, <a href="./fn-spd.html"><code>spd()</code></a>, <a href="./fn-subset-skyscaper-pdf.html"><code>subset.skyscapeR.pdf()</code></a></td>
 <td>Complete. Six measurement families checked</td>
 </tr>
 <tr class="odd">
-<td><a href="./d02-bearing-propagation.html#pole-propagation">D02</a></td>
+<td><a href="./d02-bearing-propagation.html">D02</a></td>
 <td>Azimuth-to-declination propagation</td>
-<td><code>az2dec()</code>, <code>coordtrans()</code>, <code>hor2alt()</code>, <code>az.pdf()</code>, <code>dec.pdf()</code>, <code>spd()</code>, <code>hpdi()</code></td>
+<td><a href="./fn-az2dec.html"><code>az2dec()</code></a>, <a href="./fn-coordtrans.html"><code>coordtrans()</code></a>, <a href="./fn-hor2alt.html"><code>hor2alt()</code></a>, <a href="./fn-az-pdf.html"><code>az.pdf()</code></a>, <a href="./fn-dec-pdf.html"><code>dec.pdf()</code></a>, <a href="./fn-spd.html"><code>spd()</code></a>, <a href="./fn-hpdi.html"><code>hpdi()</code></a></td>
 <td>Complete · grid sensitivity and celestial-pole limits quantified</td>
 </tr>
 <tr class="even">
 <td><a href="./s01-uniform-orientation.html">S01</a></td>
 <td>Uniform-orientation null model</td>
-<td><code>randomTest()</code>, <code>coordtrans()</code>, <code>az.pdf()</code>, <code>spd()</code>, <code>pval2stars()</code></td>
+<td><a href="./fn-randomtest.html"><code>randomTest()</code></a>, <a href="./fn-coordtrans.html"><code>coordtrans()</code></a>, <a href="./fn-az-pdf.html"><code>az.pdf()</code></a>, <a href="./fn-spd.html"><code>spd()</code></a>, <a href="./fn-pval2stars.html"><code>pval2stars()</code></a></td>
 <td>Complete · calibrated</td>
 </tr>
 <tr class="odd">
-<td><a href="./s02-specified-models.html#steep-null">S02</a></td>
+<td><a href="./s02-specified-models.html">S02</a></td>
 <td>Specified and site-specific nulls</td>
-<td><code>modelTest()</code>, <code>dec.pdf()</code>, <code>az.pdf()</code>, <code>spd()</code>, <code>coordtrans()</code></td>
+<td><a href="./fn-modeltest.html"><code>modelTest()</code></a>, <a href="./fn-dec-pdf.html"><code>dec.pdf()</code></a>, <a href="./fn-az-pdf.html"><code>az.pdf()</code></a>, <a href="./fn-spd.html"><code>spd()</code></a>, <a href="./fn-coordtrans.html"><code>coordtrans()</code></a></td>
 <td>Matched-null designs and individual azimuth-to-declination calibration complete</td>
 </tr>
 <tr class="even">
 <td><a href="./s03-scoring-checks.html">S03</a></td>
 <td>Shared scoring, local clusters and analytic probability helpers</td>
-<td><code>randomTest()</code>, <code>modelTest()</code>, <code>bernoulli.trial()</code>, <code>pval2stars()</code>, <code>print.skyscapeR.sigTest()</code>, <code>plot.skyscapeR.sigTest()</code></td>
+<td><a href="./fn-randomtest.html"><code>randomTest()</code></a>, <a href="./fn-modeltest.html"><code>modelTest()</code></a>, <a href="./fn-bernoulli-trial.html"><code>bernoulli.trial()</code></a>, <a href="./fn-pval2stars.html"><code>pval2stars()</code></a>, <a href="./fn-print-skyscaper-sigtest.html"><code>print.skyscapeR.sigTest()</code></a>, <a href="./fn-plot-skyscaper-sigtest.html"><code>plot.skyscapeR.sigTest()</code></a></td>
 <td>Complete</td>
 </tr>
 <tr class="odd">
 <td><a href="./w01-plot-geometry.html">W01</a></td>
 <td>Graphical outputs encode the underlying data</td>
-<td><code>plotAzimuth()</code>, <code>plotBars()</code>, <code>plot.skyscapeR.horizon()</code>, <code>plot.skyscapeR.pdf()</code>, <code>plot.skyscapeR.spd()</code>, <code>plot.skyscapeR.sigTest()</code>, <code>plot.skyscapeR.starphases()</code>, <code>print.skyscapeR.sigTest()</code></td>
+<td><a href="./fn-plotazimuth.html"><code>plotAzimuth()</code></a>, <a href="./fn-plotbars.html"><code>plotBars()</code></a>, <a href="./fn-plot-skyscaper-horizon.html"><code>plot.skyscapeR.horizon()</code></a>, <a href="./fn-plot-skyscaper-pdf.html"><code>plot.skyscapeR.pdf()</code></a>, <a href="./fn-plot-skyscaper-spd.html"><code>plot.skyscapeR.spd()</code></a>, <a href="./fn-plot-skyscaper-sigtest.html"><code>plot.skyscapeR.sigTest()</code></a>, <a href="./fn-plot-skyscaper-starphases.html"><code>plot.skyscapeR.starphases()</code></a>, <a href="./fn-print-skyscaper-sigtest.html"><code>print.skyscapeR.sigTest()</code></a></td>
 <td>Complete · verified</td>
 </tr>
 <tr class="even">
 <td><a href="./w02-field-to-sky.html">W02</a></td>
 <td>End-to-end field-to-sky and group workflows</td>
-<td><code>reduct.compass()</code>, <code>reduct.theodolite()</code>, <code>createHor()</code>, <code>hor2alt()</code>, <code>az2dec()</code>, <code>az.pdf()</code>, <code>coordtrans()</code>, <code>spd()</code>, <code>randomTest()</code>, <code>modelTest()</code>, <code>findTargets()</code>, <code>skyObject()</code>, <code>star.phases()</code>, <code>riseset()</code>, <code>sketchSky()</code></td>
+<td><a href="./fn-reduct-compass.html"><code>reduct.compass()</code></a>, <a href="./fn-reduct-theodolite.html"><code>reduct.theodolite()</code></a>, <a href="./fn-createhor.html"><code>createHor()</code></a>, <a href="./fn-hor2alt.html"><code>hor2alt()</code></a>, <a href="./fn-az2dec.html"><code>az2dec()</code></a>, <a href="./fn-az-pdf.html"><code>az.pdf()</code></a>, <a href="./fn-coordtrans.html"><code>coordtrans()</code></a>, <a href="./fn-spd.html"><code>spd()</code></a>, <a href="./fn-randomtest.html"><code>randomTest()</code></a>, <a href="./fn-modeltest.html"><code>modelTest()</code></a>, <a href="./fn-findtargets.html"><code>findTargets()</code></a>, <a href="./fn-skyobject.html"><code>skyObject()</code></a>, <a href="./fn-star-phases.html"><code>star.phases()</code></a>, <a href="./fn-riseset.html"><code>riseset()</code></a>, <a href="./fn-sketchsky.html"><code>sketchSky()</code></a></td>
 <td>Complete · verified</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="sky-rendering" class="level2">
-<h2 class="anchored" data-anchor-id="sky-rendering">Sky rendering</h2>
-<p>A full grid sweep recovered all 4,323,600 stored Milky Way classes. The Carina calibration field recovered 20.700 V mag arcsec⁻². The publication-colour and publication-mono checks exercised the default, explicit switches, zero extinction and a one-minute time step. For an extinction coefficient of 0.2 mag per airmass the transmission was 0.149 at 5° and 0.832 at 90°. The natural-renderer flux suite recovered the Sirius flux at three field widths and checked the Pleiades, Moon and five visible planets. The mean absolute residual against 22 held-out twilight measurements from Koomen et al.&nbsp;was 0.481 mag. <a href="archives/sky-checks.zip">Reproduction files</a>.</p>
-<p>The <a href="./heliacal-rising.html">heliacal-rising study</a> gives the full comparison between the phase solver and the radiance threshold. The <a href="./s02-specified-models.html#route-calibration">S02 study</a> gives the false-positive rates for azimuth-defined nulls tested in declination.</p>
-</section>
 <section id="next-tests" class="level2">
-<h2 class="anchored" data-anchor-id="next-tests">Results and priorities</h2>
-<p>The next empirical priority is fitting and testing diffuse brightness on independent, consistently masked V-band fields. For terrain uncertainty, the withheld-station coverage provides a baseline for models using station and survey characteristics.</p>
+<h2 class="anchored" data-anchor-id="next-tests">Scientific questions still open</h2>
+<p>The most immediate computational check for stellar visibility is Izar at 60° N. Trace the high-latitude evening visibility boundary against the published inputs and investigate the treatment of shallow twilight. The discrepancy is about five days. <a href="./heliacal-rising.html#published-reference-calculations">Published-reference comparison</a>.</p>
+<p>Other checks that can use existing reference material include frame and parallax conventions in A03, independent projection and constellation geometry in V06, and sky brightness against archival imagery or photometry in V02–V04. The current sky-step result applies to native frames. A comparison with Stellarium would need a controlled external capture. The observational extensions of H05 and F01 require independently surveyed controls.</p>
 
 
 </section>

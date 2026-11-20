@@ -5,3 +5,7 @@ Do sampled measurement densities retain the expected shape, mass and circular su
 For each coordinate we evaluated Gaussian and uniform densities directly from their analytic definitions. Azimuth distances were taken around the circle, while declination was confined to [−90°, 90°]. The matrix comprised four azimuth centres and five declination centres, uncertainty 2°, four grid spacings and two density cutoffs. We compared every retained value, total grid mass and the first two moments about the centre. An independent numerical integral checked the retained Gaussian mass at three spacings. The summed and unit-area normalised SPDs agreed in the tested cases. Known highest-density regions, including disconnected supports and ties at threshold, returned the expected endpoints and reached the requested mass. For equal-height modes, retaining the full tied set can exceed the target mass. These are discrete-grid checks of the PDFs in the framework of @silva2020.
 
 Periodic Gaussian and uniform densities were checked across north, including a 0.005° grid and 100° widths. The four additional measurement families were checked against their analytic forms. Subset, reorder, repeated-index and empty-index controls verify that the reported centres follow the retained curves. [Reproduction files](archives/D01.zip).
+
+**Function entries**
+
+[`az.pdf()`](fn-az-pdf.qmd), [`dec.pdf()`](fn-dec-pdf.qmd), [`hpdi()`](fn-hpdi.qmd), [`spd()`](fn-spd.qmd), [`subset.skyscapeR.pdf()`](fn-subset-skyscaper-pdf.qmd).

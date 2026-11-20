@@ -93,7 +93,7 @@
 #' @return A numeric vector of UT Julian dates, in the same order as time.
 #' @import swephR
 #' @section Validation:
-#' Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks}{A01 validation in the technical manual}.
+#' Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html#a01-calendar-checks}{A01 validation in the technical manual}.
 #' @export
 #' @seealso \code{\link{jd2time}}, \code{\link{timestring}}, \code{\link{BC.AD}}, \code{\link{skyscapeR.vars}}
 #' @examples
@@ -105,6 +105,11 @@
 #' time2jd("-4000/06/21 06:00:00", "UTC+02", calendar="J")
 #' # A modern date uses that year's timezone rules:
 #' time2jd("2007/03/15 12:00:00", "America/New_York")
+#' @section Scientific checks:
+#' \itemize{
+#' \item All 499 calendar, clock and angle checks passed. The largest error across 240 absolute Julian dates was 0.000021 seconds. \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html}{A01 study}.
+#' \item A one-minute native sky step retained the publication extinction setting. External Stellarium capture requires a separate comparison. \href{https://stonexsky.github.io/skyscapeR/manual/sky-rendering.html#step-check}{V07 study}.
+#' }
 time2jd <- function(time, timezone, calendar, verbose=F) {
   if (missing(timezone)) timezone <- skyscapeR.env$timezone
   if (missing(calendar)) calendar <- skyscapeR.env$calendar
@@ -170,7 +175,7 @@ time2jd <- function(time, timezone, calendar, verbose=F) {
 #' @return A character vector in YYYY/MM/DD HH:MM:SS format. Years are signed as needed and are not padded to four digits.
 #' @import swephR
 #' @section Validation:
-#' Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks}{A01 validation in the technical manual}.
+#' Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html#a01-calendar-checks}{A01 validation in the technical manual}.
 #' @export
 #' @seealso \code{\link{time2jd}}, \code{\link{timestring}}, \code{\link{skyscapeR.vars}}
 #' @examples
@@ -179,6 +184,10 @@ time2jd <- function(time, timezone, calendar, verbose=F) {
 #' jd2time(jd, "Europe/Paris")
 #' jd <- time2jd("-1/12/31 23:30:00", "UTC", calendar="J")
 #' jd2time(jd, "UTC+02", calendar="J") # 0/01/01 01:30:00
+#' @section Scientific checks:
+#' \itemize{
+#' \item All 499 calendar, clock and angle checks passed. The largest error across 240 absolute Julian dates was 0.000021 seconds. \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html}{A01 study}.
+#' }
 jd2time <- function(jd, timezone, calendar, verbose=F) {
   if (missing(timezone)) timezone <- skyscapeR.env$timezone
   if (missing(calendar)) calendar <- skyscapeR.env$calendar
@@ -219,10 +228,14 @@ jd2time <- function(jd, timezone, calendar, verbose=F) {
 #' @param minute Minute
 #' @param second Second
 #' @section Validation:
-#' Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks}{A01 validation in the technical manual}.
+#' Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html#a01-calendar-checks}{A01 validation in the technical manual}.
 #' @export
 #' @examples
 #' timestring(2018, 12, 25, 2, 34)
+#' @section Scientific checks:
+#' \itemize{
+#' \item All 499 calendar, clock and angle checks passed. The largest error across 240 absolute Julian dates was 0.000021 seconds. \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html}{A01 study}.
+#' }
 timestring <- function(year, month, day, hour=12, minute=0, second=0) {
   if (is.character(year)) year <- astroYear(year)
   month <- as.character(month); if (nchar(month) < 2) { month <- paste0('0', month) }
@@ -248,11 +261,15 @@ timestring <- function(year, month, day, hour=12, minute=0, second=0) {
 #' @return Character month-and-day labels such as "21 Jun", derived from the supplied month and day.
 #' @param date date in 'MM-DD' format
 #' @section Validation:
-#' Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks}{A01 validation in the technical manual}.
+#' Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html#a01-calendar-checks}{A01 validation in the technical manual}.
 #' @export
 #' @examples
 #' long.date('01-01')
 #' long.date('08-23')
+#' @section Scientific checks:
+#' \itemize{
+#' \item All 499 calendar, clock and angle checks passed. The largest error across 240 absolute Julian dates was 0.000021 seconds. \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html}{A01 study}.
+#' }
 long.date <- function(date){
   day <- as.numeric(substr(date,4,5))
   month <- month.abb[as.numeric(substr(date,1,2))]
@@ -333,7 +350,7 @@ dd.to.DD <- Vectorize(dd.to.DD_unvec, 'day')
 #' @return Character labels for astronomical years. Year 0 is 1 BC and year -1 is 2 BC.
 #' @param year Numeric astronomical year or vector of years. Year zero is 1 BC. Historical labels such as \code{"3700 BC"} are accepted by \code{\link{astroYear}}.
 #' @section Validation:
-#' Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks}{A01 validation in the technical manual}.
+#' Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html#a01-calendar-checks}{A01 validation in the technical manual}.
 #' @export
 #' @examples
 #' BC.AD(100)
@@ -341,6 +358,10 @@ dd.to.DD <- Vectorize(dd.to.DD_unvec, 'day')
 #' BC.AD(-1)
 #' BC.AD(-99)
 #' BC.AD(-100)
+#' @section Scientific checks:
+#' \itemize{
+#' \item All 499 calendar, clock and angle checks passed. The largest error across 240 absolute Julian dates was 0.000021 seconds. \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html}{A01 study}.
+#' }
 BC.AD <- function(year) {
   if (is.character(year)) year <- astroYear(year)
   out <- year
@@ -389,8 +410,12 @@ year <- function(date, as.char=F) {
 #' @examples
 #' astroYear(c("3700 BC", "1 BCE", "1 AD", "2026 CE"))
 #' @section Validation:
-#' Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks}{A01 validation in the technical manual}.
+#' Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html#a01-calendar-checks}{A01 validation in the technical manual}.
 #' @export
+#' @section Scientific checks:
+#' \itemize{
+#' \item All 499 calendar, clock and angle checks passed. The largest error across 240 absolute Julian dates was 0.000021 seconds. \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html}{A01 study}.
+#' }
 astroYear <- function(x) {
   if (is.numeric(x) && all(is.finite(x))) return(x)
   if (!is.character(x) || anyNA(x)) stop("Supply finite years or historical year labels.",call.=FALSE)

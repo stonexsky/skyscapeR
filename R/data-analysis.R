@@ -38,7 +38,7 @@
 #' occur within declination range. Default is FALSE.
 #' @param calendar Calendar for civil dates. Use \code{"G"} for Gregorian or \code{"J"} for Julian.
 #' @section Validation:
-#' A08 verified closed-band membership, separate stellar passages, sampled contact, magnitude filtering and comparisons before display rounding. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a08-target-ranges}{A08 check in the technical manual}.
+#' A08 verified closed-band membership, separate stellar passages, sampled contact, magnitude filtering and comparisons before display rounding. See the \href{https://stonexsky.github.io/skyscapeR/manual/a08-target-ranges.html#a08-target-ranges}{A08 check in the technical manual}.
 #' @export
 #' @examples
 #' if (requireNamespace("swephRdata", quietly = TRUE)) {
@@ -81,6 +81,11 @@
 #' transformations may discard attributes; save the original result for reference.
 #' It does not identify ephemeris files, catalogue revisions or a development
 #' commit. Retain those and the analysis script separately for exact reproduction.
+#' @section Scientific checks:
+#' \itemize{
+#' \item The Sirius target screen recovered two disjoint intervals in the test band and a single contact at the annual maximum in 36 CE. \href{https://stonexsky.github.io/skyscapeR/manual/a08-target-ranges.html}{A08 study}.
+#' \item The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html}{W02 study}.
+#' }
 findTargets <- function(decrange, year, loc=FALSE, max.mag=2.5, dates=FALSE,
                         calendar=skyscapeR.env$calendar, timerange) {
   if (!missing(timerange)) {

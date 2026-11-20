@@ -1,6 +1,6 @@
 # skyscapeR 2.0 (in development)
 
-## Updating existing analyses
+## Migrating from 1.2 to 2.0
 
 * Refit orientation tests after upgrading. The treatment of circular bearings,
   simulation grids, Monte Carlo ranks and local significance has changed.
@@ -10,16 +10,15 @@
   declinations.
 * Recalculate skyline crossings, spatial-equinox targets and stellar first-
   and last-visibility dates used in earlier interpretations. Regenerate
-  southern-hemisphere planispheres. Analyses based on a development version
-  of the Milky Way outline should use the revised boundary.
+  southern-hemisphere planispheres.
 * Replace `sky.sketch()` with `sketchSky()` followed by `plot(hor, sky = sky)`.
   Replace `sigTest()` with `randomTest()` or `modelTest()` according to the
   null hypothesis. For uncertain measurements use `spd()` in place of
   `curvigram()`. Remove `swapStars()` calls.
 * Pass source azimuths and horizons explicitly when working with transformed
   densities. The [README migration guide](https://github.com/stonexsky/skyscapeR/blob/development-2.0/README.md#migrating-from-skyscaper-12-to-20)
-  lists reordered arguments, retired functions and changes affecting earlier
-  development builds.
+  lists reordered arguments, retired functions and numerical changes
+  affecting analyses made with version 1.2.
 
 ## Field measurements and orientation tests
 

@@ -19,6 +19,10 @@
 #' names(demPalettes())
 #' demPalettes("coastal")$sea_cols
 #' @export
+#' @section Scientific checks:
+#' \itemize{
+#' \item Across 32 synthetic wall panoramas, the largest numerical skyline discrepancy was 0.0261 degrees. Pixel width affected the displayed width of the opening. \href{https://stonexsky.github.io/skyscapeR/manual/h04-feature-resolution.html}{H04 study}.
+#' }
 demPalettes <- function(name=NULL) {
   presets <- list(
     standalone=list(land_cols=c("#2e5d3a","#6b8f5a","#b6b08a","#9a7b5c",

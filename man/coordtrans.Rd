@@ -92,13 +92,18 @@ reconstruct them. See \code{\link{plot.skyscapeR.pdf}} and \code{\link{randomTes
 
 See the study of spherical propagation below.
 
-For a partial photograph the stored positive bearing density must lie within its photographed sector. H07 verified agreement with a complete skyline on the covered north-crossing cases and rejection of uncovered densities. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
+For a partial photograph the stored positive bearing density must lie within its photographed sector. H07 verified agreement with a complete skyline on the covered north-crossing cases and rejection of uncovered densities. See the \href{https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html#h07-panorama-coverage}{H07 check in the technical manual}.
 }
 
-\section{Validation studies}{
+\section{Scientific checks}{
 
-Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#pole-propagation}{D02 validation study}.
-The transformed-bearing null was tested with steep skylines, three measurement families and shared or site-specific candidate weights. \href{https://stonexsky.github.io/skyscapeR/manual/s02-specified-models.html#steep-null}{S02 validation study}.
+\itemize{
+\item A partial photographic horizon returned missing altitudes outside its sector. Full-sky event searches rejected it and accepted the complete profile. \href{https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html}{H07 study}.
+\item All 18 flat-horizon quantile comparisons met the 0.02-degree tolerance. Additional fixtures quantify errors on steep skylines and near a celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html}{D02 study}.
+\item At nominal 5 percent, global rejection across tested uniform nulls with attainable ranks ranged from 4.25 to 5.85 percent. \href{https://stonexsky.github.io/skyscapeR/manual/s01-uniform-orientation.html}{S01 study}.
+\item In six direct-input matched nulls, global rejection at nominal 5 percent ranged from 4.35 to 5.50 percent. The study separately quantifies effects of dependence and skyline transformation. \href{https://stonexsky.github.io/skyscapeR/manual/s02-specified-models.html}{S02 study}.
+\item The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html}{W02 study}.
+}
 }
 
 \examples{

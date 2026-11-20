@@ -18,7 +18,7 @@
 #' @param .res Grid spacing in degrees. Default 0.01.
 #' @return A skyscapeR.pdf list with one x/y data frame per observation. Metadata record coord = "dec", the input measurements, family, uncertainties, labels and numerical settings.
 #' @section Validation:
-#' In D01, sampled declination densities agreed with analytic references. Build 2.0.9006 retained the corresponding declination centres in all four subset checks. See \href{https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks}{D01 validation in the technical manual}.
+#' In D01, sampled declination densities agreed with analytic references. Build 2.0.9006 retained the corresponding declination centres in all four subset checks. See \href{https://stonexsky.github.io/skyscapeR/manual/d01-density-checks.html#d01-density-checks}{D01 validation in the technical manual}.
 #' @export
 #' @references Silva, F. (2020). A probabilistic framework and significance test for the analysis of structural orientations in skyscape archaeology. Journal of Archaeological Science 118, 105138. \doi{10.1016/j.jas.2020.105138}.
 #' @seealso \code{\link{az.pdf}}, \code{\link{coordtrans}}, \code{\link{spd}}, \code{\link{modelTest}}
@@ -27,6 +27,12 @@
 #' head(d$data[[1]])
 #' dec.pdf(-18, pdf="triangular", lower=-19, upper=-15)
 #' dec.pdf(-18, 2, pdf="uniform_normal", survey.sd=0.2)
+#' @section Scientific checks:
+#' \itemize{
+#' \item The six measurement families matched their analytic controls. Tests of disconnected highest-density regions recovered the expected endpoints. \href{https://stonexsky.github.io/skyscapeR/manual/d01-density-checks.html}{D01 study}.
+#' \item All 18 flat-horizon quantile comparisons met the 0.02-degree tolerance. Additional fixtures quantify errors on steep skylines and near a celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html}{D02 study}.
+#' \item In six direct-input matched nulls, global rejection at nominal 5 percent ranged from 4.35 to 5.50 percent. The study separately quantifies effects of dependence and skyline transformation. \href{https://stonexsky.github.io/skyscapeR/manual/s02-specified-models.html}{S02 study}.
+#' }
 dec.pdf <- function(dec, unc=NULL, pdf="normal", name, .res=0.01, .cutoff=1e-4, verbose=TRUE,
                     taper=NULL, survey.sd=0.5, lower=NULL, upper=NULL) {
   if (!is.numeric(dec) || !length(dec) || any(!is.finite(dec) | abs(dec) > 90))

@@ -100,9 +100,12 @@ Stellarium engine version. Record that version and its settings separately.
 A stepped sky carries the package versions from the new calculation or capture.
 }
 
-\section{Validation studies}{
+\section{Scientific checks}{
 
-Diffuse V-band brightness was compared with six fields outside the Carina calibration aperture. \href{https://stonexsky.github.io/skyscapeR/manual/v04-diffuse-photometry.html#v04-diffuse-photometry}{V04 validation study}.
+\itemize{
+\item Across six independent diffuse-light fields the residuals had both signs. The Carina normalisation alone could not account for the spatial differences. \href{https://stonexsky.github.io/skyscapeR/manual/v04-diffuse-photometry.html}{V04 study}.
+\item A one-minute native sky step retained the publication extinction setting. External Stellarium capture requires a separate comparison. \href{https://stonexsky.github.io/skyscapeR/manual/sky-rendering.html#step-check}{V07 study}.
+}
 }
 
 \examples{

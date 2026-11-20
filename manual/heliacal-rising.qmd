@@ -23,7 +23,7 @@ We replayed 12 timed records through the package, scanning each minute from 40 m
 
 ## Published reference calculations
 
-We ran the public function on all 28 entries of Schaefer’s Table 3 using the specified stellar positions, extinction, zenith limiting magnitude and latitude, with geometric stellar altitudes. The package returns an integer civil date. We compared its midpoint with the published fractional number of days after the March equinox. Twenty entries agreed within one day. The largest discrepancy was Izar at 60° N, 289.31 days after the equinox against the published 284.3. The high-latitude difference remains unresolved. [Schaefer (1987), Table 3](https://doi.org/10.1177/002182868701801103).
+We ran the public function on all 28 entries of Schaefer’s Table 3 using the specified stellar positions, extinction, zenith limiting magnitude and latitude, with geometric stellar altitudes. The package returns an integer civil date. We compared its midpoint with the published fractional number of days after the March equinox. Twenty entries agreed within one day. The largest discrepancy was Izar at 60° N, 289.31 days after the equinox against the published 284.3. For Izar we also interpolated the evening detection boundary between consecutive days, sampling the star every two minutes and then every minute, 30 seconds, 15 seconds and 7.5 seconds. The fractional estimate moved from 289.580 to 289.598 days after the equinox. The finest grid still placed the event 5.30 days later than the published value. Civil-day rounding and sampling at these intervals cannot account for that discrepancy. The high-latitude difference remains unresolved. [Schaefer (1987), Table 3](https://doi.org/10.1177/002182868701801103).
 
 ## Comparison with a dawn sky reconstruction
 
@@ -34,3 +34,7 @@ Both calculations returned dates for all 80 combinations. The sketch threshold f
 ![Difference in days between the first qualifying sketch and the seasonal date. Positive values mean the sketch qualified later.](figures/stellar-morning-differences.png)
 
 [Download the observing records, Table 3 inputs, scripts and per-record predictions](archives/stellar-visibility-observations.zip). [Download the dawn-sky scans and refinements](archives/visibility.zip). [Read the stellar phase method](stellar-phases.qmd).
+
+**Function entries**
+
+[`star.phases()`](fn-star-phases.qmd), [`star()`](fn-star.qmd), [`riseset()`](fn-riseset.qmd), [`sketchSky()`](fn-sketchsky.qmd), [`skyRadiance()`](fn-skyradiance.qmd), [`plot.skyscapeR.starphases()`](fn-plot-skyscaper-starphases.qmd).

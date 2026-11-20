@@ -47,7 +47,7 @@ events <- function(name) {
 #' @param lwd Line width (see \code{\link{par}}) used for differentiation.
 #' Used for single-year tracks and year-range boundaries.
 #' @section Validation:
-#' A08 checked annual stellar, solar and lunar range endpoints, local corrections, identifier aliases and retention of target labels and line styles. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a08-target-ranges}{A08 check in the technical manual}.
+#' A08 checked annual stellar, solar and lunar range endpoints, local corrections, identifier aliases and retention of target labels and line styles. See the \href{https://stonexsky.github.io/skyscapeR/manual/a08-target-ranges.html#a08-target-ranges}{A08 check in the technical manual}.
 #' @export
 #' @examples
 #' # Create an object with solar targets for epoch range 4001-2001 BC:
@@ -87,8 +87,12 @@ events <- function(name) {
 #' transformations may discard attributes; save the original result for reference.
 #' It does not identify ephemeris files, catalogue revisions or a development
 #' commit. Retain those and the analysis script separately for exact reproduction.
-#' @section Validation studies:
-#' Six stellar positions were compared with independently propagated catalogue directions from 3500 BCE to 2000 CE. \href{https://stonexsky.github.io/skyscapeR/manual/a03-stellar-positions.html#a03-stellar-positions}{A03 validation study}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item Four lunar standstill limits agreed with the monthly reference tables to within 0.019 degrees. The study also examines sampling of planetary extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 study}.
+#' \item The Sirius target screen recovered two disjoint intervals in the test band and a single contact at the annual maximum in 36 CE. \href{https://stonexsky.github.io/skyscapeR/manual/a08-target-ranges.html}{A08 study}.
+#' \item The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html}{W02 study}.
+#' }
 skyObject = function(names, year, loc=FALSE, col = '#A9542E', lty = 1, lwd = 1, epoch) {
   if (!missing(epoch)) {
     if (!missing(year)) stop("Supply year only once.",call.=FALSE)
@@ -215,7 +219,7 @@ sky.objects <- skyObject
 #' @param verbose Logical to control output of warnings and messages.
 #' Defaults to TRUE.
 #' @section Validation:
-#' A05 checked the local December solar limit against annual obliquity and the specified parallax correction. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+#' A05 checked the local December solar limit against annual obliquity and the specified parallax correction. See the \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{obliquity}}, \code{\link{jS}}, \code{\link{eq}},
 #' \code{\link{zenith}}, \code{\link{antizenith}}, \code{\link{spatial.equinox}},
@@ -226,6 +230,10 @@ sky.objects <- skyObject
 #'
 #' # Topocentric declination for same year and latitude of 50 degrees N:
 #' dS(-4000, loc=50)
+#' @section Scientific checks:
+#' \itemize{
+#' \item All 121 checks of solar dates, seasonal instants and limiting declinations passed against their respective references. \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html}{A05 study}.
+#' }
 dS = function(year = skyscapeR.env$cur.year, loc = FALSE, parallax = 0.00224, altitude = 0, verbose=TRUE) {
   if (is.character(year)) year <- astroYear(year)
   aux <- -obliquity(year)
@@ -254,7 +262,7 @@ dS = function(year = skyscapeR.env$cur.year, loc = FALSE, parallax = 0.00224, al
 #' @param verbose Logical to control output of warnings and messages.
 #' Defaults to TRUE.
 #' @section Validation:
-#' A05 checked the local June solar limit against annual obliquity and the specified parallax correction. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+#' A05 checked the local June solar limit against annual obliquity and the specified parallax correction. See the \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{obliquity}}, \code{\link{dS}}, \code{\link{eq}},
 #' \code{\link{zenith}}, \code{\link{antizenith}}, \code{\link{spatial.equinox}},
@@ -265,6 +273,10 @@ dS = function(year = skyscapeR.env$cur.year, loc = FALSE, parallax = 0.00224, al
 #'
 #' # Topocentric declination for same year and latitude of 50 degres N:
 #' jS(-4000, loc=50)
+#' @section Scientific checks:
+#' \itemize{
+#' \item All 121 checks of solar dates, seasonal instants and limiting declinations passed against their respective references. \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html}{A05 study}.
+#' }
 jS = function(year = skyscapeR.env$cur.year, loc = FALSE, parallax = 0.00224, altitude = 0, verbose=TRUE) {
   if (is.character(year)) year <- astroYear(year)
   aux <- obliquity(year)
@@ -291,7 +303,7 @@ jS = function(year = skyscapeR.env$cur.year, loc = FALSE, parallax = 0.00224, al
 #' @param verbose Logical to control output of warnings and messages.
 #' Defaults to TRUE. This affects messages only, not the calculated declination.
 #' @section Validation:
-#' A05 checked the equinoctial declination reference separately from the dates of the astronomical equinoxes. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+#' A05 checked the equinoctial declination reference separately from the dates of the astronomical equinoxes. See the \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{obliquity}}, \code{\link{jS}}, \code{\link{zenith}}, \code{\link{antizenith}}, \code{\link{spatial.equinox}}, \code{\link{parallax.corr}}, \code{\link{dS}}
 #' @examples
@@ -303,6 +315,10 @@ jS = function(year = skyscapeR.env$cur.year, loc = FALSE, parallax = 0.00224, al
 #'
 #' # Topocentric declination at latitude 50 degrees N:
 #' eq(loc=50)
+#' @section Scientific checks:
+#' \itemize{
+#' \item All 121 checks of solar dates, seasonal instants and limiting declinations passed against their respective references. \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html}{A05 study}.
+#' }
 eq = function(loc=FALSE, parallax = 0.00224, altitude = 0, verbose=TRUE) {
   aux <- 0
 
@@ -330,7 +346,7 @@ eq = function(loc=FALSE, parallax = 0.00224, altitude = 0, verbose=TRUE) {
 #' @param altitude Altitude used in the approximate parallax correction. Defaults to 90 degrees.
 #' @param year Astronomical year used to determine the tropical latitude limit.
 #' @section Validation:
-#' A05 verified the geometric zenith declination and tropical-boundary eligibility at two epochs. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+#' A05 verified the geometric zenith declination and tropical-boundary eligibility at two epochs. See the \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{jS}}, \code{\link{dS}}, \code{\link{eq}},
 #' \code{\link{antizenith}}, \code{\link{spatial.equinox}}, \code{\link{parallax.corr}}
@@ -340,6 +356,10 @@ eq = function(loc=FALSE, parallax = 0.00224, altitude = 0, verbose=TRUE) {
 #'
 #' # There is no zenith sun phenomenon in London:
 #' zenith(51.507)
+#' @section Scientific checks:
+#' \itemize{
+#' \item All 121 checks of solar dates, seasonal instants and limiting declinations passed against their respective references. \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html}{A05 study}.
+#' }
 zenith = function(loc, parallax = 0.00224, altitude = 90, year = skyscapeR.env$cur.year) {
   lat <- extractLatitude(loc)
   if (length(year)!=1L) stop("Supply one epoch for the solar latitude limit.")
@@ -363,7 +383,7 @@ zenith = function(loc, parallax = 0.00224, altitude = 90, year = skyscapeR.env$c
 #' @param altitude Altitude used in the approximate parallax correction. Defaults to -90 degrees.
 #' @param year Astronomical year used to determine the tropical latitude limit.
 #' @section Validation:
-#' A05 verified the geometric anti-zenith declination and tropical-boundary eligibility at two epochs. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+#' A05 verified the geometric anti-zenith declination and tropical-boundary eligibility at two epochs. See the \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{jS}}, \code{\link{dS}}, \code{\link{eq}},
 #' \code{\link{zenith}}, \code{\link{spatial.equinox}}, \code{\link{parallax.corr}}
@@ -378,6 +398,10 @@ zenith = function(loc, parallax = 0.00224, altitude = 90, year = skyscapeR.env$c
 #'
 #' # There is no anti-zenith solar phenomenon in London:
 #' antizenith(51.507)
+#' @section Scientific checks:
+#' \itemize{
+#' \item All 121 checks of solar dates, seasonal instants and limiting declinations passed against their respective references. \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html}{A05 study}.
+#' }
 antizenith = function(loc, parallax = 0.00224, altitude = -90, year = skyscapeR.env$cur.year) {
   lat <- extractLatitude(loc)
   if (length(year)!=1L) stop("Supply one epoch for the solar latitude limit.")
@@ -418,9 +442,9 @@ antizenith = function(loc, parallax = 0.00224, altitude = -90, year = skyscapeR.
 #' Zero requests an estimate from site elevation.
 #' @param temp Air temperature in degrees Celsius. Defaults to the package setting.
 #' @section Validation:
-#' H07 checked that partial photographs are rejected and that a full photographic profile can be used. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
+#' H07 checked that partial photographs are rejected and that a full photographic profile can be used. See the \href{https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html#h07-panorama-coverage}{H07 check in the technical manual}.
 #'
-#' In A05, rising and setting midpoints matched independent track intersections on flat, eastern-ridge and western-ridge skylines; missing polar crossings were identified. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+#' In A05, rising and setting midpoints matched independent track intersections on flat, eastern-ridge and western-ridge skylines; missing polar crossings were identified. See the \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @references Ruggles, C. L. N. (1997). Whose Equinox? Journal for the History of Astronomy 28, S45-S96. \doi{10.1177/002182869702802205}.
 #' @seealso \code{\link{jS}}, \code{\link{dS}}, \code{\link{eq}},
@@ -458,6 +482,11 @@ antizenith = function(loc, parallax = 0.00224, altitude = -90, year = skyscapeR.
 #' transformations may discard attributes; save the original result for reference.
 #' It does not identify ephemeris files, catalogue revisions or a development
 #' commit. Retain those and the analysis script separately for exact reproduction.
+#' @section Scientific checks:
+#' \itemize{
+#' \item A partial photographic horizon returned missing altitudes outside its sector. Full-sky event searches rejected it and accepted the complete profile. \href{https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html}{H07 study}.
+#' \item All 121 checks of solar dates, seasonal instants and limiting declinations passed against their respective references. \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html}{A05 study}.
+#' }
 spatial.equinox = function(hor, parallax = 0.00224,
                           year = skyscapeR.env$cur.year,
                           refraction = skyscapeR.env$refraction,
@@ -563,6 +592,10 @@ spatial.equinox = function(hor, parallax = 0.00224,
 #' nmnLX(-2500, loc=50)
 #' @section Scientific validation:
 #' A06 examines geocentric lunar and planetary limits against independent extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 scientific validation}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item Four lunar standstill limits agreed with the monthly reference tables to within 0.019 degrees. The study also examines sampling of planetary extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 study}.
+#' }
 nmnLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, altitude = 0, verbose = TRUE) {
   if (is.character(year)) year <- astroYear(year)
   aux <- obliquity(year) - (5.145+0.145)
@@ -606,6 +639,10 @@ nmnLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, alt
 #' smnLX(-2500, loc=50)
 #' @section Scientific validation:
 #' A06 examines geocentric lunar and planetary limits against independent extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 scientific validation}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item Four lunar standstill limits agreed with the monthly reference tables to within 0.019 degrees. The study also examines sampling of planetary extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 study}.
+#' }
 smnLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, altitude = 0, verbose = TRUE) {
   if (is.character(year)) year <- astroYear(year)
   aux <- -(obliquity(year) - (5.145+0.145))
@@ -649,6 +686,10 @@ smnLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, alt
 #' nMjLX(-2500, loc=50)
 #' @section Scientific validation:
 #' A06 examines geocentric lunar and planetary limits against independent extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 scientific validation}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item Four lunar standstill limits agreed with the monthly reference tables to within 0.019 degrees. The study also examines sampling of planetary extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 study}.
+#' }
 nMjLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, altitude = 0, verbose = TRUE) {
   if (is.character(year)) year <- astroYear(year)
   aux <- obliquity(year) + (5.145+0.145)
@@ -692,6 +733,10 @@ nMjLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, alt
 #' sMjLX(-2500, loc=50)
 #' @section Scientific validation:
 #' A06 examines geocentric lunar and planetary limits against independent extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 scientific validation}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item Four lunar standstill limits agreed with the monthly reference tables to within 0.019 degrees. The study also examines sampling of planetary extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 study}.
+#' }
 sMjLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, altitude = 0, verbose = TRUE) {
   if (is.character(year)) year <- astroYear(year)
   aux <- -(obliquity(year) + (5.145+0.145))
@@ -799,6 +844,10 @@ sMjLX = function(year = skyscapeR.env$cur.year, loc=FALSE, parallax = 0.952, alt
 #' commit. Retain those and the analysis script separately for exact reproduction.
 #' @section Scientific validation:
 #' A07 examines independent crossover selection and sensitivity to the illumination cutoff. \href{https://stonexsky.github.io/skyscapeR/manual/lunar-crossovers.html#a07-scientific}{A07 scientific validation}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item Independent selection agreed in 31 of 32 lunar event cases. At the equator in autumn 1913 the two illumination estimates straddled the EFM cutoff. \href{https://stonexsky.github.io/skyscapeR/manual/lunar-crossovers.html#a07-scientific}{A07 study}.
+#' }
 EFM <- function(year, loc, season='spring', rise=TRUE, min.phase=.99, timezone, calendar,
                 refraction, atm, temp) {
   if (is.character(year)) year <- astroYear(year)
@@ -939,6 +988,10 @@ EFM <- function(year, loc, season='spring', rise=TRUE, min.phase=.99, timezone, 
 #' commit. Retain those and the analysis script separately for exact reproduction.
 #' @section Scientific validation:
 #' A06 examines geocentric lunar and planetary limits against independent extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 scientific validation}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item Four lunar standstill limits agreed with the monthly reference tables to within 0.019 degrees. The study also examines sampling of planetary extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 study}.
+#' }
 planet.extremes <- function(obj, year, loc = NULL, epoch) {
   if (!missing(epoch)) {
     if (!missing(year)) stop("Supply year only once.",call.=FALSE)

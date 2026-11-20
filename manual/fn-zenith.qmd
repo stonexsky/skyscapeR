@@ -1,5 +1,7 @@
 # `zenith()` {#fn-zenith}
 
+[Scientific results for this function](help/zenith.html#scientific-checks).
+
 A05 verified the geometric zenith declination and tropical-boundary eligibility at two epochs. [A05 results](a05-solar-limits.qmd).
 
 [Function index](function-index.html#idx-zenith)

@@ -1,5 +1,7 @@
 # `jS()` {#fn-js}
 
+[Scientific results for this function](help/jS.html#scientific-checks).
+
 A05 checked the local June solar limit against annual obliquity and the specified parallax correction. [A05 results](a05-solar-limits.qmd).
 
 [Function index](function-index.html#idx-js)

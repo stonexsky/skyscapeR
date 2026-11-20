@@ -1,4 +1,5 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>parallax.corr | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-parallax-corr.html">parallax.corr() method</a></nav><h2 id='parallax.corr'>Estimate the parallax correction to declination</h2><span id='topic+parallax.corr'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>parallax.corr | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-parallax-corr.html">parallax.corr() method</a></nav>
+<h2 id='parallax.corr'>Estimate the parallax correction to declination</h2><span id='topic+parallax.corr'></span>
 
 <h3>Description</h3>
 
@@ -52,8 +53,21 @@ declination calculator.
 
 <h3>Validation</h3>
 
-<p>A05 compared the returned correction with the signed spherical approximation in both hemispheres. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits">A05 check in the technical manual</a>.
+<p>A05 compared the returned correction with the signed spherical approximation in both hemispheres. See the <a href="../a05-solar-limits.html#a05-solar-limits">A05 check in the technical manual</a>.
 </p>
+
+
+<h3 id="scientific-checks">Scientific checks</h3>
+
+
+<ul>
+<li><p> For six stars compared with independently propagated catalogue directions, the largest separation was 0.0165 degrees, for Sirius in 3500 BCE. <a href="../a03-stellar-positions.html">A03 study</a>.
+</p>
+</li>
+<li><p> All 121 checks of solar dates, seasonal instants and limiting declinations passed against their respective references. <a href="../a05-solar-limits.html">A05 study</a>.
+</p>
+</li></ul>
+
 
 
 <h3>References</h3>

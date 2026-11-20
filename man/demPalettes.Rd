@@ -29,6 +29,13 @@ Land stops are ordered low to high and water stops deep to shallow.
 An inland depression below that threshold also receives the water tint.
 sea_level=NULL uses the land ramp for all elevations.
 }
+\section{Scientific checks}{
+
+\itemize{
+\item Across 32 synthetic wall panoramas, the largest numerical skyline discrepancy was 0.0261 degrees. Pixel width affected the displayed width of the opening. \href{https://stonexsky.github.io/skyscapeR/manual/h04-feature-resolution.html}{H04 study}.
+}
+}
+
 \examples{
 names(demPalettes())
 demPalettes("coastal")$sea_cols

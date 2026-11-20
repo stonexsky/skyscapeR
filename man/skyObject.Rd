@@ -56,7 +56,7 @@ sky.objects is a silent compatibility alias for skyObject.
 }
 \section{Validation}{
 
-A08 checked annual stellar, solar and lunar range endpoints, local corrections, identifier aliases and retention of target labels and line styles. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a08-target-ranges}{A08 check in the technical manual}.
+A08 checked annual stellar, solar and lunar range endpoints, local corrections, identifier aliases and retention of target labels and line styles. See the \href{https://stonexsky.github.io/skyscapeR/manual/a08-target-ranges.html#a08-target-ranges}{A08 check in the technical manual}.
 }
 
 \section{A reference track is not a dated orbit}{
@@ -87,9 +87,13 @@ It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
 }
 
-\section{Validation studies}{
+\section{Scientific checks}{
 
-Six stellar positions were compared with independently propagated catalogue directions from 3500 BCE to 2000 CE. \href{https://stonexsky.github.io/skyscapeR/manual/a03-stellar-positions.html#a03-stellar-positions}{A03 validation study}.
+\itemize{
+\item Four lunar standstill limits agreed with the monthly reference tables to within 0.019 degrees. The study also examines sampling of planetary extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 study}.
+\item The Sirius target screen recovered two disjoint intervals in the test band and a single contact at the annual maximum in 36 CE. \href{https://stonexsky.github.io/skyscapeR/manual/a08-target-ranges.html}{A08 study}.
+\item The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html}{W02 study}.
+}
 }
 
 \examples{

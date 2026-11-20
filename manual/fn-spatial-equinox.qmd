@@ -1,5 +1,7 @@
 # `spatial.equinox()` {#fn-spatial-equinox}
 
+[Scientific results for this function](help/spatial.equinox.html#scientific-checks).
+
 In A05, rising and setting midpoints matched independent track intersections on flat, eastern-ridge and western-ridge skylines; missing polar crossings were identified. [A05 results](a05-solar-limits.qmd).
 
 H07 checked that partial photographs are rejected and that a full photographic profile can be used. [H07 results](h07-panorama-coverage.qmd).

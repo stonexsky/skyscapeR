@@ -1,5 +1,7 @@
 # `star.phases()` {#fn-star-phases}
 
+[Scientific results for this function](help/star.phases.html#scientific-checks).
+
 [Observational accuracy and validation](heliacal-rising.qmd#v01-observations).
 
 [Function index](function-index.html#idx-star-phases)

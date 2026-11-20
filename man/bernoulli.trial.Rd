@@ -37,7 +37,14 @@ probability 1 for either type. Inputs are scalar; invalid inputs error.
 }
 \section{Validation}{
 
-Exact and upper-tail probabilities agreed with independent binomial calculations for the tested counts up to 1,000, including zero hits. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+Exact and upper-tail probabilities agreed with independent binomial calculations for the tested counts up to 1,000, including zero hits. See \href{https://stonexsky.github.io/skyscapeR/manual/s03-scoring-checks.html#s03-scoring-checks}{S03 validation in the technical manual}.
+}
+
+\section{Scientific checks}{
+
+\itemize{
+\item The fixed uniform-null example returned a global probability of 0.4375 and an adjusted probability of 0.1875 for its cluster crossing north. \href{https://stonexsky.github.io/skyscapeR/manual/s03-scoring-checks.html}{S03 study}.
+}
 }
 
 \examples{

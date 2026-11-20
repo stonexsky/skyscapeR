@@ -1,4 +1,5 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>coordtrans | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}img{max-width:100%;height:auto}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-coordtrans.html">coordtrans() method</a></nav><h2 id='coordtrans'>Transform azimuth densities into declination densities</h2><span id='topic+coordtrans'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>coordtrans | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}img{max-width:100%;height:auto}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-coordtrans.html">coordtrans() method</a></nav>
+<h2 id='coordtrans'>Transform azimuth densities into declination densities</h2><span id='topic+coordtrans'></span>
 
 <h3>Description</h3>
 
@@ -43,7 +44,7 @@ uncertainty in both direction and horizon altitude.
 <tr><td><code id="coordtrans_+3A_.prec">.prec</code></td>
 <td>
 <p>Azimuth integration spacing, in degrees. Default 0.1.
-Smaller values increase integration work. Must not exceed 540.</p>
+Previously ignored; smaller values increase integration work. Must not exceed 540.</p>
 </td></tr>
 <tr><td><code id="coordtrans_+3A_.output.res">.output.res</code></td>
 <td>
@@ -118,16 +119,38 @@ transformation settings, format version and descriptive source labels.
 
 <h3>Validation</h3>
 
-<p>See the direct-propagation study below.
+<p>See the study of spherical propagation below.
 </p>
-<p>For a partial photograph the stored positive bearing density must lie within its photographed sector. H07 verified agreement with a complete skyline on the covered north-crossing cases and rejection of uncovered densities. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage">H07 check in the technical manual</a>.
+<p>For a partial photograph the stored positive bearing density must lie within its photographed sector. H07 verified agreement with a complete skyline on the covered north-crossing cases and rejection of uncovered densities. See the <a href="../h07-panorama-coverage.html#h07-panorama-coverage">H07 check in the technical manual</a>.
 </p>
+
+
+<h3 id="scientific-checks">Scientific checks</h3>
+
+
+<ul>
+<li><p> A partial photographic horizon returned missing altitudes outside its sector. Full-sky event searches rejected it and accepted the complete profile. <a href="../h07-panorama-coverage.html">H07 study</a>.
+</p>
+</li>
+<li><p> All 18 flat-horizon quantile comparisons met the 0.02-degree tolerance. Additional fixtures quantify errors on steep skylines and near a celestial pole. <a href="../d02-bearing-propagation.html">D02 study</a>.
+</p>
+</li>
+<li><p> At nominal 5 percent, global rejection across tested uniform nulls with attainable ranks ranged from 4.25 to 5.85 percent. <a href="../s01-uniform-orientation.html">S01 study</a>.
+</p>
+</li>
+<li><p> In six direct-input matched nulls, global rejection at nominal 5 percent ranged from 4.35 to 5.50 percent. The study separately quantifies effects of dependence and skyline transformation. <a href="../s02-specified-models.html">S02 study</a>.
+</p>
+</li>
+<li><p> The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. <a href="../w02-field-to-sky.html">W02 study</a>.
+</p>
+</li></ul>
+
 
 
 <h3>References</h3>
 
 <p>Silva, F (2020) A probabilistic framework and significance test for the analysis of structural orientations
-in skyscape archaeology <em>Journal of Archaeological Science</em> 118, 105138. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/j.jas.2020.105138")}
+in skyscape archaeology <em>Journal of Archaeological Science</em> 118, 105138. <a href="https://doi.org/10.1016/j.jas.2020.105138">doi:10.1016/j.jas.2020.105138</a>
 </p>
 
 
@@ -149,4 +172,4 @@ Dec.coarse &lt;- coordtrans(Az, hor, .output.res=0.1)
 Dec.coarse$metadata$param
 </code></pre>
 
-<h3>Validation studies</h3><p>Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. <a href="../d02-bearing-propagation.html#pole-propagation">D02 validation study</a>.</p><p>The transformed-bearing null was tested with steep skylines, three measurement families and shared or site-specific candidate weights. <a href="../s02-specified-models.html#steep-null">S02 validation study</a>.</p></body></html>
+</body></html>

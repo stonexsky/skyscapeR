@@ -9,3 +9,7 @@ We computed the Julian day number by integer Gregorian or Julian calendar arithm
 The London checks included the missing and repeated 01:30 local times on the 2024 clock-change dates; both produced errors, as documented. Year zero, Julian leap-year behaviour, a negative sub-degree angle, a date rounded across midnight, argument overrides and restoration of session timezone were also exercised. These checks cover civil-time conversion; they provide no constraint on prehistoric ΔT or the accuracy of every historical timezone database entry.
 
 [Download A01 code, fixtures and all 499 results](archives/A01-verification.zip). [Calendar and angle methods](astronomical-conventions.qmd) · [Validation programme](study-register.qmd#validation-programme).
+
+**Function entries**
+
+[`BC.AD()`](fn-bc-ad.qmd), [`astroYear()`](fn-astroyear.qmd), [`time2jd()`](fn-time2jd.qmd), [`jd2time()`](fn-jd2time.qmd), [`timestring()`](fn-timestring.qmd), [`long.date()`](fn-long-date.qmd), [`ten()`](fn-ten.qmd), [`skyscapeR.vars()`](fn-skyscaper-vars.qmd).

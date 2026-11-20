@@ -49,3 +49,7 @@ The calibration crosses a shared skyline or two observation-specific skylines wi
 {{< include _steep-calibration.qmd >}}
 
 [Download the reproduction archive](archives/five-package-tests.zip).
+
+**Function entries**
+
+[`modelTest()`](fn-modeltest.qmd), [`dec.pdf()`](fn-dec-pdf.qmd), [`az.pdf()`](fn-az-pdf.qmd), [`spd()`](fn-spd.qmd), [`coordtrans()`](fn-coordtrans.qmd).

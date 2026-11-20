@@ -1,5 +1,7 @@
 # `orbit()` {#fn-orbit}
 
+[Scientific results for this function](help/orbit.html#scientific-checks).
+
 In A08, coordinates on the two plotted solar-limit tracks recovered their source declinations by spherical inversion. [A08 results](a08-target-ranges.qmd).
 
 [Function index](function-index.html#idx-orbit)

@@ -1,4 +1,5 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>skyscapeR.vars | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-skyscaper-vars.html">skyscapeR.vars() method</a></nav><h2 id='skyscapeR.vars'>Inspect or set session defaults for skyscapeR</h2><span id='topic+skyscapeR.vars'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>skyscapeR.vars | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-skyscaper-vars.html">skyscapeR.vars() method</a></nav>
+<h2 id='skyscapeR.vars'>Inspect or set session defaults for skyscapeR</h2><span id='topic+skyscapeR.vars'></span>
 
 <h3>Description</h3>
 
@@ -69,15 +70,31 @@ the survey data.
 
 <h3>Validation</h3>
 
-<p>A01 verified all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See <a href="https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks">A01 validation in the technical manual</a>.
+<p>Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See <a href="../a01-calendar-checks.html#a01-calendar-checks">A01 validation in the technical manual</a>.
 </p>
+
+
+<h3 id="scientific-checks">Scientific checks</h3>
+
+
+<ul>
+<li><p> All 499 calendar, clock and angle checks passed. The largest error across 240 absolute Julian dates was 0.000021 seconds. <a href="../a01-calendar-checks.html">A01 study</a>.
+</p>
+</li>
+<li><p> With extinction of 0.2 magnitudes per airmass, transmission was 0.149 at 5 degrees and 0.832 at the zenith under the adopted law. <a href="../sky-rendering.html#extinction-check">V05 study</a>.
+</p>
+</li>
+<li><p> A one-minute native sky step retained the publication extinction setting. External Stellarium capture requires a separate comparison. <a href="../sky-rendering.html#step-check">V07 study</a>.
+</p>
+</li></ul>
+
 
 
 <h3>References</h3>
 
-<p>Schaefer, B. E. (1986). Atmospheric Extinction Effects on Stellar Alignments. Journal for the History of Astronomy 17, S32-S42. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1177/002182868601701003")}.
+<p>Schaefer, B. E. (1986). Atmospheric Extinction Effects on Stellar Alignments. Journal for the History of Astronomy 17, S32-S42. <a href="https://doi.org/10.1177/002182868601701003">doi:10.1177/002182868601701003</a>.
 </p>
-<p>Schaefer, B. E. (1993). Astronomy and the Limits of Vision. Vistas in Astronomy 36, 311-361. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/0083-6656(93)90113-X")}.
+<p>Schaefer, B. E. (1993). Astronomy and the Limits of Vision. Vistas in Astronomy 36, 311-361. <a href="https://doi.org/10.1016/0083-6656%2893%2990113-X">doi:10.1016/0083-6656(93)90113-X</a>.
 </p>
 <p>University of California, Davis. <em>Physics 157 Observing Guide</em>, Spring 2022, discussion of extinction coefficients.
 </p>

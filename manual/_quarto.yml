@@ -10,7 +10,7 @@ project:
   - .nojekyll
 book:
   title: skyscapeR technical manual
-  subtitle: 19 November 2026
+  subtitle: 20 November 2026
   chapters:
   - index.qmd
   - contents-plan.qmd

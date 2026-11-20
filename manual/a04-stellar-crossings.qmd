@@ -17,3 +17,7 @@ On 2 January 2000, a ridge at 50° N, 100° E produced rise, set and re-emergenc
 At 35.90083° N, 14.34° E, we compared geometric centre crossings for the Sun and Moon with [JPL Horizons](https://ssd.jpl.nasa.gov/horizons/). The reference interpolates airless topocentric direction vectors and solves for clearance above the skyline. We tested both scalar and profile representations of a flat skyline and an asymmetric profile. The largest discrepancies were 0.842 s and 0.00410°, within the 3 s and 0.015° comparison tolerances. Doubling the reference sampling interval from 10 to 20 minutes moved the reference times by less than 0.001 s. The tolerances allow for whole-second timestamps and differing ephemeris conventions. These are tests of centre crossings. First limb contact and naked-eye visibility require different definitions.
 
 [Download the reproduction scripts, input checksums and results for A04 and D02](archives/A04-D02.zip).
+
+**Function entries**
+
+[`riseset()`](fn-riseset.qmd), [`orbit()`](fn-orbit.qmd), [`body.position()`](fn-body-position.qmd), [`hor2alt()`](fn-hor2alt.qmd), [`star.phases()`](fn-star-phases.qmd).

@@ -25,7 +25,15 @@ comparisons.
 }
 \section{Validation}{
 
-All tested symbol thresholds, their equality cases and the legacy printed bound agreed with their stated probability ranges. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+All tested symbol thresholds, their equality cases and the legacy printed bound agreed with their stated probability ranges. See \href{https://stonexsky.github.io/skyscapeR/manual/s03-scoring-checks.html#s03-scoring-checks}{S03 validation in the technical manual}.
+}
+
+\section{Scientific checks}{
+
+\itemize{
+\item At nominal 5 percent, global rejection across tested uniform nulls with attainable ranks ranged from 4.25 to 5.85 percent. \href{https://stonexsky.github.io/skyscapeR/manual/s01-uniform-orientation.html}{S01 study}.
+\item The fixed uniform-null example returned a global probability of 0.4375 and an adjusted probability of 0.1875 for its cluster crossing north. \href{https://stonexsky.github.io/skyscapeR/manual/s03-scoring-checks.html}{S03 study}.
+}
 }
 
 \examples{

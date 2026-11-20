@@ -24,6 +24,14 @@ for (name in api) {
   entry <- entries[[name]]
   rows <- regmatches(entry,gregexpr('<th scope="row"><code>[^<]+</code></th>',entry))[[1]]
   found <- sub('</code></th>','',sub('<th scope="row"><code>','',rows,fixed=TRUE),fixed=TRUE)
+  if (!length(found) && grepl("include source/", entry, fixed=TRUE)) {
+    inc <- sub("(?s).*?include (source/[^ ]+).*", "\\1", entry, perl=TRUE)
+    fragment <- read_text(inc)
+    labels <- regmatches(fragment,gregexpr('<code id="[^"]+">[^<]+</code>',fragment))[[1]]
+    documented <- sub('</code>$','',sub('^<code[^>]*>','',labels))
+    if (!all(args %in% documented)) stop("Included help lacks arguments for ",name)
+    next
+  }
   if (!identical(found,args)) stop("Argument coverage changed for ",name)
 }
 vignette <- readLines(file.path(w,"skyscapeR","vignettes","skyscapeR.Rmd"))

@@ -1,5 +1,7 @@
 # `pval2stars()` {#fn-pval2stars}
 
+[Scientific results for this function](help/pval2stars.html#scientific-checks).
+
 All tested symbol thresholds, their equality cases and the legacy printed bound agreed with their stated probability ranges. [S03 results](s03-scoring-checks.qmd).
 
 [Function index](function-index.html#idx-pval2stars)

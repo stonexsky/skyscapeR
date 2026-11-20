@@ -159,9 +159,9 @@
 #' @section Accuracy, uncertainty and reproducibility:
 #' H01 compared 334 bearings at 31 observing setups.
 #' At the surveyed bearings, \code{createHor()} reproduced the observed terrain skyline to within half a degree in 91.9\% of cases.
-#' See the \href{https://stonexsky.github.io/skyscapeR/manual/#h01-field-validation}{H01 field validation in the skyscapeR technical manual} for the survey protocol, station results and limitations.
+#' See the \href{https://stonexsky.github.io/skyscapeR/manual/h01-field-validation.html#h01-field-validation}{H01 field validation in the skyscapeR technical manual} for the survey protocol, station results and limitations.
 #'
-#' With the same 1 m terrain, \code{createHor()} reproduced Horizon’s skylines to a mean absolute difference of 0.004 degrees at each of two English sites. Against field measurements at 344 Irish bearings, \code{createHor()} using SRTM had a mean absolute error of 0.328 degrees, lower than either HeyWhatsThat or PeakFinder on that sample. Field accuracy varied by site. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h02-skyline-comparison}{H02 comparison in the skyscapeR technical manual}.
+#' With the same 1 m terrain, \code{createHor()} reproduced Horizon’s skylines to a mean absolute difference of 0.004 degrees at each of two English sites. Against field measurements at 344 Irish bearings, \code{createHor()} using SRTM had a mean absolute error of 0.328 degrees, lower than either HeyWhatsThat or PeakFinder on that sample. Field accuracy varied by site. See the \href{https://stonexsky.github.io/skyscapeR/manual/h02-skyline-comparison.html#h02-skyline-comparison}{H02 comparison in the skyscapeR technical manual}.
 #'
 #' The numerical skyline is a maximum over sampled terrain, not an accuracy
 #' certificate for the DEM. Horizontal and vertical datum differences, observer
@@ -182,11 +182,17 @@
 #' Save the DEM provenance, observer location and datum, constructor arguments,
 #' feature objects, returned horizon and external PNG. Rebuilding from the same
 #' source is distinct from merely replotting the saved horizon.
-#' @section Validation studies:
-#' Intervals estimated from other observing groups covered 91.0 and 88.8 percent of bearings in two terrain-radius selections. \href{https://stonexsky.github.io/skyscapeR/manual/h01-field-validation.html#withheld-stations}{H01 validation study}.
-#' Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. \href{https://stonexsky.github.io/skyscapeR/manual/h04-feature-resolution.html#h04-feature-resolution}{H04 validation study}.
 #' @section Scientific validation:
 #' H03 examines DEM sampling against an analytic ridge and a level spherical surface. \href{https://stonexsky.github.io/skyscapeR/manual/horizons.html#h03-scientific}{H03 scientific validation}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item At 334 surveyed bearings, the median absolute skyline error was 0.036 degrees and 91.9 percent of predictions were within half a degree. \href{https://stonexsky.github.io/skyscapeR/manual/h01-field-validation.html}{H01 study}.
+#' \item On matched 1 m terrain at two English sites, the mean absolute skyline difference from Horizon was 0.004 degrees. Agreement with surveyed bearings varied by site. \href{https://stonexsky.github.io/skyscapeR/manual/h02-skyline-comparison.html}{H02 study}.
+#' \item On a level surface with 5 m radial sampling, geometric and effective-radius horizon dips agreed with the analytic values to within 0.000000009 degrees. \href{https://stonexsky.github.io/skyscapeR/manual/horizons.html#h03-scientific}{H03 study}.
+#' \item Across 32 synthetic wall panoramas, the largest numerical skyline discrepancy was 0.0261 degrees. Pixel width affected the displayed width of the opening. \href{https://stonexsky.github.io/skyscapeR/manual/h04-feature-resolution.html}{H04 study}.
+#' \item At eight withheld landmarks in a tilted synthetic panorama, both bearing and skyline altitude were recovered to within one image pixel. \href{https://stonexsky.github.io/skyscapeR/manual/photographic-horizons.html#h05-scientific}{H05 study}.
+#' \item The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html}{W02 study}.
+#' }
 createHor <- function(az, alt, loc, dem=NULL, loc.crs=NULL, name='', alt.unc=0.5, smooth=F,
                       .scale=1000, eye.height=1.6, max.distance=10000, az.step=.25,
                       distance.step=NULL, features=NULL, curvature=TRUE, refraction.k=NULL,
@@ -270,7 +276,7 @@ createHor <- function(az, alt, loc, dem=NULL, loc.crs=NULL, name='', alt.unc=0.5
 #' @seealso \code{\link{createHor}}, \code{\link{downloadHWT}}, \code{\link{plot.skyscapeR.horizon}}
 #' @references \href{https://stellarium.org/guide/}{Stellarium User Guide}, chapter on landscapes and texture sizes.
 #' @section Validation:
-#' H07 checked that a partial photograph is rejected for both image and numerical landscape export. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
+#' H07 checked that a partial photograph is rejected for both image and numerical landscape export. See the \href{https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html#h07-panorama-coverage}{H07 check in the technical manual}.
 #' @export
 #' @import utils
 #' @examples
@@ -281,6 +287,10 @@ createHor <- function(az, alt, loc, dem=NULL, loc.crs=NULL, name='', alt.unc=0.5
 #' # For a DEM panorama, reduce the texture width on a memory-limited machine.
 #' terrain <- createHor(dem = "terrain.tif", loc = c(51.19, -1.75))
 #' exportStellarium(terrain, name = "Survey terrain", max.texture.width = 2048)
+#' }
+#' @section Scientific checks:
+#' \itemize{
+#' \item A partial photographic horizon returned missing altitudes outside its sector. Full-sky event searches rejected it and accepted the complete profile. \href{https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html}{H07 study}.
 #' }
 exportHor = function(hor, name, author="skyscapeR", description, use.image=TRUE,
                       peakfinder.layout=c("single","native"), max.texture.width=4096, ground_col,
@@ -523,6 +533,10 @@ downloadHWT <- function(HWTID) {
 #' # Create and retrieve horizon data for the London Mithraeum:
 #' hor <- createHWT(lat=ten(51,30,45), lon=ten("-0:5:26.1"), name='London Mithraeum')
 #' }
+#' @section Scientific checks:
+#' \itemize{
+#' \item On matched 1 m terrain at two English sites, the mean absolute skyline difference from Horizon was 0.004 degrees. Agreement with surveyed bearings varied by site. \href{https://stonexsky.github.io/skyscapeR/manual/h02-skyline-comparison.html}{H02 study}.
+#' }
 createHWT <- function(lat, lon, name, elevation=1.6, src='skyscapeR', max.wait=600, verbose=TRUE) {
   if (length(max.wait)!=1L || !is.numeric(max.wait) || !is.finite(max.wait) || max.wait<=0)
     stop("max.wait must be a positive number of seconds.")
@@ -575,7 +589,7 @@ createHWT <- function(lat, lon, name, elevation=1.6, src='skyscapeR', max.wait=6
 #' numeric matrix with columns \code{alt} and \code{alt.unc}, one row per
 #' input azimuth in the supplied order. Values are rounded to two decimal places.
 #' @section Validation:
-#' In H07, lookup at each edge of a north-crossing panorama returned its measured altitude and lookup beyond either edge returned NA. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
+#' In H07, lookup at each edge of a north-crossing panorama returned its measured altitude and lookup beyond either edge returned NA. See the \href{https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html#h07-panorama-coverage}{H07 check in the technical manual}.
 #' @export
 #' @import stats
 #' @seealso \code{\link{createHor}}, \code{\link{downloadHWT}}
@@ -585,9 +599,16 @@ createHWT <- function(lat, lon, name, elevation=1.6, src='skyscapeR', max.wait=6
 #' hor2alt(hor, 90)
 #' hor2alt(hor, 90, return.unc=TRUE)
 #' hor2alt(hor, c(90,180,270), return.unc=TRUE)
-#' @section Validation studies:
-#' Intervals estimated from other observing groups covered 91.0 and 88.8 percent of bearings in two terrain-radius selections. \href{https://stonexsky.github.io/skyscapeR/manual/h01-field-validation.html#withheld-stations}{H01 validation study}.
-#' Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. \href{https://stonexsky.github.io/skyscapeR/manual/h04-feature-resolution.html#h04-feature-resolution}{H04 validation study}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item At 334 surveyed bearings, the median absolute skyline error was 0.036 degrees and 91.9 percent of predictions were within half a degree. \href{https://stonexsky.github.io/skyscapeR/manual/h01-field-validation.html}{H01 study}.
+#' \item On a level surface with 5 m radial sampling, geometric and effective-radius horizon dips agreed with the analytic values to within 0.000000009 degrees. \href{https://stonexsky.github.io/skyscapeR/manual/horizons.html#h03-scientific}{H03 study}.
+#' \item At eight withheld landmarks in a tilted synthetic panorama, both bearing and skyline altitude were recovered to within one image pixel. \href{https://stonexsky.github.io/skyscapeR/manual/photographic-horizons.html#h05-scientific}{H05 study}.
+#' \item A partial photographic horizon returned missing altitudes outside its sector. Full-sky event searches rejected it and accepted the complete profile. \href{https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html}{H07 study}.
+#' \item The zero-declination track crossed a level skyline at 90 and 270 degrees at 50 degrees north. The study also checks irregular skylines and JPL crossings. \href{https://stonexsky.github.io/skyscapeR/manual/a04-stellar-crossings.html}{A04 study}.
+#' \item All 18 flat-horizon quantile comparisons met the 0.02-degree tolerance. Additional fixtures quantify errors on steep skylines and near a celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html}{D02 study}.
+#' \item The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html}{W02 study}.
+#' }
 hor2alt = function(hor, az, return.unc=F) {
   if (identical(hor$metadata$source$provider,"Panorama")) {
     limits <- hor$metadata$source$coverage
@@ -628,11 +649,16 @@ hor2alt = function(hor, az, return.unc=F) {
 #' @param range Range of azimuths to check for minimum declination. Default is 25
 #' degrees either side of North.
 #' @section Validation:
-#' A05 recovered a limiting sightline within the northern search sector on a synthetic skyline with an interior crest. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+#' A05 recovered a limiting sightline within the northern search sector on a synthetic skyline with an interior crest. See the \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @examples
 #' hor <- malta_horizons[[1]]
 #' hor2max.dec(hor)
+#' @section Scientific checks:
+#' \itemize{
+#' \item All 121 checks of solar dates, seasonal instants and limiting declinations passed against their respective references. \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html}{A05 study}.
+#' \item The Sirius target screen recovered two disjoint intervals in the test band and a single contact at the annual maximum in 36 CE. \href{https://stonexsky.github.io/skyscapeR/manual/a08-target-ranges.html}{A08 study}.
+#' }
 hor2max.dec = function(hor, alt=0, range=25) {
   xx <- seq(-range, range, 0.01)
   if (is(hor,'skyscapeR.horizon')) { decs <- az2dec(xx, hor) } else { decs <- az2dec(xx, hor[1], alt) }
@@ -654,11 +680,16 @@ hor2max.dec = function(hor, alt=0, range=25) {
 #' @param range Range of azimuths to check for minimum declination. Default is 25
 #' degrees either side of South
 #' @section Validation:
-#' A05 recovered a limiting sightline within the southern search sector on a synthetic skyline with an interior trough. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+#' A05 recovered a limiting sightline within the southern search sector on a synthetic skyline with an interior trough. See the \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @examples
 #' hor <- malta_horizons[[1]]
 #' hor2min.dec(hor)
+#' @section Scientific checks:
+#' \itemize{
+#' \item All 121 checks of solar dates, seasonal instants and limiting declinations passed against their respective references. \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html}{A05 study}.
+#' \item The Sirius target screen recovered two disjoint intervals in the test band and a single contact at the annual maximum in 36 CE. \href{https://stonexsky.github.io/skyscapeR/manual/a08-target-ranges.html}{A08 study}.
+#' }
 hor2min.dec = function(hor, alt=0, range=25) {
   xx <- seq(-range, range, 0.01)+180
   if (is(hor,'skyscapeR.horizon')) { decs <- az2dec(xx, hor) } else { decs <- az2dec(xx, hor[1], alt) }

@@ -36,7 +36,7 @@ test of terrain obstruction or event times.
 }
 \section{Validation}{
 
-In A08, coordinates on the two plotted solar-limit tracks recovered their source declinations by spherical inversion. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a08-target-ranges}{A08 check in the technical manual}.
+In A08, coordinates on the two plotted solar-limit tracks recovered their source declinations by spherical inversion. See the \href{https://stonexsky.github.io/skyscapeR/manual/a08-target-ranges.html#a08-target-ranges}{A08 check in the technical manual}.
 }
 
 \section{Provenance}{
@@ -48,6 +48,15 @@ This attribute adds no list entries or table columns. Ordinary subsetting or
 transformations may discard attributes; save the original result for reference.
 It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
+}
+
+\section{Scientific checks}{
+
+\itemize{
+\item For six stars compared with independently propagated catalogue directions, the largest separation was 0.0165 degrees, for Sirius in 3500 BCE. \href{https://stonexsky.github.io/skyscapeR/manual/a03-stellar-positions.html}{A03 study}.
+\item The zero-declination track crossed a level skyline at 90 and 270 degrees at 50 degrees north. The study also checks irregular skylines and JPL crossings. \href{https://stonexsky.github.io/skyscapeR/manual/a04-stellar-crossings.html}{A04 study}.
+\item The Sirius target screen recovered two disjoint intervals in the test band and a single contact at the annual maximum in 36 CE. \href{https://stonexsky.github.io/skyscapeR/manual/a08-target-ranges.html}{A08 study}.
+}
 }
 
 \examples{

@@ -66,7 +66,7 @@ display does not recalculate the visibility thresholds. Use \code{plot(first, li
 }
 \section{Validation}{
 
-W01 checked season boundaries, event positions, quarterly landmarks and star, site and epoch labels in linear and circular layouts. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
+W01 checked season boundaries, event positions, quarterly landmarks and star, site and epoch labels in linear and circular layouts. See the \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html#w01-plot-geometry}{W01 check in the technical manual}.
 }
 
 \section{Seasonal axis and comparison}{
@@ -95,6 +95,14 @@ sit close above a single strip and setting-event labels close below it, leaving
 room for the seasonal scale where needed. Both layouts use the same
 sequence and colours; the circular layout makes the cycle boundary explicit.
 Labels wrap and shrink to fit; crowded comparisons need a larger device.
+}
+
+\section{Scientific checks}{
+
+\itemize{
+\item First-morning dates fell within seven days of 22 of 23 sightings and last-evening dates within seven days of 21 of 33. The respective median predictions were two days early and five days late. \href{https://stonexsky.github.io/skyscapeR/manual/heliacal-rising.html#v01-observations}{V01 study}.
+\item All 192 drawing checks passed for the tested layouts, including seasonal markers, axis positions and identification labels. \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html}{W01 study}.
+}
 }
 
 \examples{

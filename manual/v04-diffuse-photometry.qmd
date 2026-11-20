@@ -1,6 +1,6 @@
 # V04 · Milky Way surface brightness outside Carina {#v04-diffuse-photometry}
 
-Recomputed for the simplified model in version 2.0.9018. We averaged intrinsic diffuse flux from the Galactic class map, weighted each cell by its solid angle, then converted the mean to V magnitudes per square arcsecond. The field definitions and observed values come from van der Kruit [@kruit2024, table 3 and accompanying text]. Bochum provides photographic V photometry. Pannekoek's calibrated visual values approximate V. Predictions below are for the diffuse component before atmospheric attenuation. Positive residuals mean a fainter prediction.
+We averaged intrinsic diffuse flux from the Galactic class map, weighted each cell by its solid angle, then converted the mean to V magnitudes per square arcsecond. The field definitions and observed values come from van der Kruit [@kruit2024, table 3 and accompanying text]. Bochum provides photographic V photometry. Pannekoek's calibrated visual values approximate V. Predictions below are for the diffuse component before atmospheric attenuation. Positive residuals mean a fainter prediction.
 
 | Independent field | Observed | Predicted | Predicted − observed |
 |---|---:|---:|---:|
@@ -14,4 +14,8 @@ Recomputed for the simplified model in version 2.0.9018. We averaged intrinsic d
 The Coalsack prediction ranged from 20.81 to 21.13 across aperture radii of 1°, 2° and 3°. For the southern strips we adopted a 1° width in latitude across longitudes 320°–340°. Cygnus used the published rectangle and Scutum a 3° radius. Carina served only as the normalisation control. The sampled regions show spatially varying residuals of opposite signs. A single zero-point adjustment cannot reconcile them all. Fitting new class weights requires matched angular resolution, stellar masking and uncertainties for the observed maps. Fitting atmospheric extinction additionally requires measurements at known airmasses.
 
 
-[Reproduction scripts, inputs and results](archives/five-package-tests.zip).
+[Grid reconstruction and field results](archives/milky-way-grid.zip).
+
+**Function entries**
+
+[`sketchSky()`](fn-sketchsky.qmd), [`skyRadiance()`](fn-skyradiance.qmd), [`skyStep()`](fn-skystep.qmd).

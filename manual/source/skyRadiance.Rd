@@ -25,9 +25,6 @@ by area (square degrees per pixel by row) and sum to obtain flux. The
 difference between total and the two source matrices is the atmospheric
 background. The Sun contributes to the background; its disc is a plot overlay.
 }
-\section{Validation studies}{
-Diffuse V-band brightness was compared with six fields outside the Carina calibration aperture. \href{https://stonexsky.github.io/skyscapeR/manual/v04-diffuse-photometry.html#v04-diffuse-photometry}{V04 validation study}.
-}
 \description{
 Samples a natural sketch before display compression or masking by local
 terrain. One integrated flux unit is a magnitude-zero V-band source.
@@ -42,4 +39,14 @@ and interpretation.
 
 \section{Observational validation}{
 Across 56 recorded dates, heliacal rising fell within seven days of 22 of 23 first morning sightings. The median prediction was two days early. Acronycal setting fell within seven days of 21 of 33 last evening sightings. The median prediction was five days late. A week is a practical search window. Larger discrepancies occur, especially at dusk. These results apply to the two tested events. \href{https://stonexsky.github.io/skyscapeR/manual/heliacal-rising.html#v01-observations}{V01 observed dates and scientific checks}.
+}
+
+\section{Scientific checks}{
+\itemize{
+\item First-morning dates fell within seven days of 22 of 23 sightings and last-evening dates within seven days of 21 of 33. The respective median predictions were two days early and five days late. \href{https://stonexsky.github.io/skyscapeR/manual/heliacal-rising.html#v01-observations}{V01 study}.
+\item The Milky Way lookup recovered all 4,323,600 stored classes and agreed across the longitude seam. Independent tracing of the outline remains open. \href{https://stonexsky.github.io/skyscapeR/manual/sky-rendering.html#mw-grid-check}{V02 study}.
+\item Twilight brightness had a mean absolute residual of 0.481 magnitudes against 22 held-out measurements. This benchmark covers twilight only. \href{https://stonexsky.github.io/skyscapeR/manual/sky-rendering.html#twilight-check}{V03 study}.
+\item Across six independent diffuse-light fields the residuals had both signs. The Carina normalisation alone could not account for the spatial differences. \href{https://stonexsky.github.io/skyscapeR/manual/v04-diffuse-photometry.html}{V04 study}.
+\item With extinction of 0.2 magnitudes per airmass, transmission was 0.149 at 5 degrees and 0.832 at the zenith under the adopted law. \href{https://stonexsky.github.io/skyscapeR/manual/sky-rendering.html#extinction-check}{V05 study}.
+}
 }

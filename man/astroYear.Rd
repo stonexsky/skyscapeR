@@ -22,7 +22,14 @@ Era labels are case-insensitive and follow a positive whole year.
 }
 \section{Validation}{
 
-Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks}{A01 validation in the technical manual}.
+Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html#a01-calendar-checks}{A01 validation in the technical manual}.
+}
+
+\section{Scientific checks}{
+
+\itemize{
+\item All 499 calendar, clock and angle checks passed. The largest error across 240 absolute Julian dates was 0.000021 seconds. \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html}{A01 study}.
+}
 }
 
 \examples{

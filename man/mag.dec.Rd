@@ -32,6 +32,13 @@ through 1 January 2030 inclusive. Site elevation is ignored by this model call.
 F01 examines magnetic and solar reductions against independent references. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 scientific validation}.
 }
 
+\section{Scientific checks}{
+
+\itemize{
+\item Three archived solar-sight pairs on one baseline gave bearing errors from -0.389 to +0.529 degrees against the Polaris reference. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 study}.
+}
+}
+
 \examples{
 # Magnetic Declination for London on April 1st 2016:
 loc <- c( 51.5074, -0.1278 )

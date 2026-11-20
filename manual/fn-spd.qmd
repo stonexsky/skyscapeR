@@ -1,5 +1,7 @@
 # `spd()` {#fn-spd}
 
+[Scientific results for this function](help/spd.html#scientific-checks).
+
 For two bearings on a shared slope, the D02 comparison of summing before and after transformation gave an integrated absolute density difference of 0.00159 after normalisation. [D02 results](d02-bearing-propagation.qmd).
 
 Broad azimuth SPDs were continuous at north and correctly interpolated across the final grid segment. [D01 checks](d01-density-checks.qmd).

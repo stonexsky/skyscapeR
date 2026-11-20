@@ -32,8 +32,13 @@
 #'
 #' # Can also be used for an array of azimuths:
 #' decs <- az2dec(az=c(87,92,110), loc=hor)
-#' @section Validation studies:
-#' Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#pole-propagation}{D02 validation study}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item Three archived solar-sight pairs on one baseline gave bearing errors from -0.389 to +0.529 degrees against the Polaris reference. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 study}.
+#' \item All 121 checks of solar dates, seasonal instants and limiting declinations passed against their respective references. \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html}{A05 study}.
+#' \item All 18 flat-horizon quantile comparisons met the 0.02-degree tolerance. Additional fixtures quantify errors on steep skylines and near a celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html}{D02 study}.
+#' \item The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html}{W02 study}.
+#' }
 az2dec = function(az, loc, alt, refraction=skyscapeR.env$refraction, atm=skyscapeR.env$atm, temp=skyscapeR.env$temp){
   digits <- max(nchar(sub('.*\\.', '', as.character(az))))
   round(.az2dec_position(az, loc, alt, refraction, atm, temp), digits)
@@ -104,7 +109,7 @@ az2dec = function(az, loc, alt, refraction=skyscapeR.env$refraction, atm=skyscap
 #' Defaults to present year as given by \emph{Sys.Date}
 #' @import swephR
 #' @section Validation:
-#' A05 checked the January true obliquity at modern and prehistoric test epochs against direct engine values. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+#' A05 checked the January true obliquity at modern and prehistoric test epochs against direct engine values. See the \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @references Laskar, J. et al. (2004), A long-term numerical
 #' solution for the insolation quantities of the Earth, \emph{Astron.
@@ -113,6 +118,11 @@ az2dec = function(az, loc, alt, refraction=skyscapeR.env$refraction, atm=skyscap
 #' @examples
 #' # Obliquity for year 4001 BC:
 #' obliquity("4001 BC")
+#' @section Scientific checks:
+#' \itemize{
+#' \item For six stars compared with independently propagated catalogue directions, the largest separation was 0.0165 degrees, for Sirius in 3500 BCE. \href{https://stonexsky.github.io/skyscapeR/manual/a03-stellar-positions.html}{A03 study}.
+#' \item All 121 checks of solar dates, seasonal instants and limiting declinations passed against their respective references. \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html}{A05 study}.
+#' }
 obliquity = function(year = skyscapeR.env$cur.year) {
   if (is.character(year)) year <- astroYear(year)
   aux <- c()
@@ -215,7 +225,7 @@ body.position.vec <- Vectorize(body.position.unvec, 'time', SIMPLIFY = FALSE)
 #' \code{alt}, in degrees. Each data frame has one row per input time.
 #' @import swephR
 #' @section Validation:
-#' In A02, file-backed geocentric directions for ten bodies agreed with their matching JPL parent to within 0.0065 arcseconds across 1,080 comparisons. At the sampled prehistoric epochs the public topocentric convention differed from JPL Horizons by up to 0.70 degrees in local sky direction at a specified instant. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
+#' In A02, file-backed geocentric directions for ten bodies agreed with their matching JPL parent to within 0.0065 arcseconds across 1,080 comparisons. At the sampled prehistoric epochs the public topocentric convention differed from JPL Horizons by up to 0.70 degrees in local sky direction at a specified instant. See the \href{https://stonexsky.github.io/skyscapeR/manual/a02-ephemeris.html#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
 #' @export
 #' @references Astrodienst. Swiss Ephemeris programmer's manual. \url{https://www.astro.com/swisseph/swephprg.htm}.
 #' @seealso \code{\link[swephR]{swe_calc_ut}}, \code{\link{timestring}}, \code{\link{time2jd}}
@@ -240,6 +250,15 @@ body.position.vec <- Vectorize(body.position.unvec, 'time', SIMPLIFY = FALSE)
 #' transformations may discard attributes; save the original result for reference.
 #' It does not identify ephemeris files, catalogue revisions or a development
 #' commit. Retain those and the analysis script separately for exact reproduction.
+#' @section Scientific checks:
+#' \itemize{
+#' \item Across 1,080 geocentric positions, the largest separation from the matching JPL parent was 0.0065 arcseconds. Across 177 lunar skyline crossings the median default bearing difference was 0.059 degrees. \href{https://stonexsky.github.io/skyscapeR/manual/a02-ephemeris.html}{A02 study}.
+#' \item For six stars compared with independently propagated catalogue directions, the largest separation was 0.0165 degrees, for Sirius in 3500 BCE. \href{https://stonexsky.github.io/skyscapeR/manual/a03-stellar-positions.html}{A03 study}.
+#' \item The zero-declination track crossed a level skyline at 90 and 270 degrees at 50 degrees north. The study also checks irregular skylines and JPL crossings. \href{https://stonexsky.github.io/skyscapeR/manual/a04-stellar-crossings.html}{A04 study}.
+#' \item Four lunar standstill limits agreed with the monthly reference tables to within 0.019 degrees. The study also examines sampling of planetary extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 study}.
+#' \item Independent selection agreed in 31 of 32 lunar event cases. At the equator in autumn 1913 the two illumination estimates straddled the EFM cutoff. \href{https://stonexsky.github.io/skyscapeR/manual/lunar-crossovers.html#a07-scientific}{A07 study}.
+#' \item Twilight brightness had a mean absolute residual of 0.481 magnitudes against 22 held-out measurements. This benchmark covers twilight only. \href{https://stonexsky.github.io/skyscapeR/manual/sky-rendering.html#twilight-check}{V03 study}.
+#' }
 body.position <- function(time, obj='sun', loc=NULL, timezone, calendar, dec, refraction, atm, temp, verbose=T) {
   if (missing(timezone)) { timezone <- skyscapeR.env$timezone }
   if (missing(calendar)) { calendar <- skyscapeR.env$calendar }
@@ -278,7 +297,7 @@ body.position <- function(time, obj='sun', loc=NULL, timezone, calendar, dec, re
 #' @param calendar Calendar for civil dates. Use \code{"G"} for Gregorian or \code{"J"} for Julian.
 #' @import swephR
 #' @section Validation:
-#' In A02, all 108 illuminated fractions agreed with the direct Swiss Ephemeris calculation across 54 epochs and two file generations. This checks the R interface. Observed lunar photometry was outside the study. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
+#' In A02, all 108 illuminated fractions agreed with the direct Swiss Ephemeris calculation across 54 epochs and two file generations. This checks the R interface. Observed lunar photometry was outside the study. See the \href{https://stonexsky.github.io/skyscapeR/manual/a02-ephemeris.html#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
 #' @export
 #' @seealso \code{\link[swephR]{swe_pheno_ut}}, \code{\link{EFM}}
 #' @examples
@@ -288,6 +307,12 @@ body.position <- function(time, obj='sun', loc=NULL, timezone, calendar, dec, re
 #' }
 #' @section Scientific validation:
 #' A07 examines independent crossover selection and sensitivity to the illumination cutoff. \href{https://stonexsky.github.io/skyscapeR/manual/lunar-crossovers.html#a07-scientific}{A07 scientific validation}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item Across 1,080 geocentric positions, the largest separation from the matching JPL parent was 0.0065 arcseconds. Across 177 lunar skyline crossings the median default bearing difference was 0.059 degrees. \href{https://stonexsky.github.io/skyscapeR/manual/a02-ephemeris.html}{A02 study}.
+#' \item Four lunar standstill limits agreed with the monthly reference tables to within 0.019 degrees. The study also examines sampling of planetary extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 study}.
+#' \item Independent selection agreed in 31 of 32 lunar event cases. At the equator in autumn 1913 the two illumination estimates straddled the EFM cutoff. \href{https://stonexsky.github.io/skyscapeR/manual/lunar-crossovers.html#a07-scientific}{A07 study}.
+#' }
 moonphase <- function(time, timezone, calendar) {
   if (missing(timezone)) { timezone <- skyscapeR.env$timezone }
   if (missing(calendar)) { calendar <- skyscapeR.env$calendar }
@@ -361,11 +386,11 @@ moonphase <- function(time, timezone, calendar) {
 #' @return A list containing object, rise and set; rise/set are data frames
 #' with date, time, azimuth and declination columns. Missing events have NA fields.
 #' @section Validation:
-#' A02 tested sensitivity to ephemeris conventions using a separate solver on airless lunar-centre trajectories. Across 177 prehistoric skyline crossings, default azimuths differed from JPL Horizons by a median of 0.059 degrees and a maximum of 0.322 degrees. Matching delta T reduced the maximum to 0.027 degrees. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
+#' A02 tested sensitivity to ephemeris conventions using a separate solver on airless lunar-centre trajectories. Across 177 prehistoric skyline crossings, default azimuths differed from JPL Horizons by a median of 0.059 degrees and a maximum of 0.322 degrees. Matching delta T reduced the maximum to 0.027 degrees. See the \href{https://stonexsky.github.io/skyscapeR/manual/a02-ephemeris.html#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
 #'
-#' A04 recovered the expected crossing counts and order on synthetic ridges, notches and grazing tracks; solar and lunar centre crossings at the Malta test site agreed with JPL Horizons within 0.85 seconds and 0.0041 degrees. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a04-stellar-crossings}{A04 check in the technical manual}.
+#' A04 recovered the expected crossing counts and order on synthetic ridges, notches and grazing tracks; solar and lunar centre crossings at the Malta test site agreed with JPL Horizons within 0.85 seconds and 0.0041 degrees. See the \href{https://stonexsky.github.io/skyscapeR/manual/a04-stellar-crossings.html#a04-stellar-crossings}{A04 check in the technical manual}.
 #'
-#' H07 verified that a partial panorama is rejected before searching for solar or stellar crossings on an unobserved skyline. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
+#' H07 verified that a partial panorama is rejected before searching for solar or stellar crossings on an unobserved skyline. See the \href{https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html#h07-panorama-coverage}{H07 check in the technical manual}.
 #' @export
 #' @references Astrodienst. Swiss Ephemeris programmer's manual. \url{https://www.astro.com/swisseph/swephprg.htm}.
 #' @seealso \code{\link[swephR]{swe_calc_ut}}, \code{\link[swephR]{swe_azalt}}, \code{\link{body.position}}, \code{\link{star.phases}}
@@ -409,6 +434,14 @@ moonphase <- function(time, timezone, calendar) {
 #' transformations may discard attributes; save the original result for reference.
 #' It does not identify ephemeris files, catalogue revisions or a development
 #' commit. Retain those and the analysis script separately for exact reproduction.
+#' @section Scientific checks:
+#' \itemize{
+#' \item A partial photographic horizon returned missing altitudes outside its sector. Full-sky event searches rejected it and accepted the complete profile. \href{https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html}{H07 study}.
+#' \item The zero-declination track crossed a level skyline at 90 and 270 degrees at 50 degrees north. The study also checks irregular skylines and JPL crossings. \href{https://stonexsky.github.io/skyscapeR/manual/a04-stellar-crossings.html}{A04 study}.
+#' \item Independent selection agreed in 31 of 32 lunar event cases. At the equator in autumn 1913 the two illumination estimates straddled the EFM cutoff. \href{https://stonexsky.github.io/skyscapeR/manual/lunar-crossovers.html#a07-scientific}{A07 study}.
+#' \item First-morning dates fell within seven days of 22 of 23 sightings and last-evening dates within seven days of 21 of 33. The respective median predictions were two days early and five days late. \href{https://stonexsky.github.io/skyscapeR/manual/heliacal-rising.html#v01-observations}{V01 study}.
+#' \item The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html}{W02 study}.
+#' }
 riseset <- function(loc, date, jd, obj = 'sun', alt=0, timezone, calendar, dec, refraction, atm,
                     temp, verbose=TRUE) {
   if (missing(timezone)) { timezone <- skyscapeR.env$timezone }
@@ -555,7 +588,7 @@ riseset <- function(loc, date, jd, obj = 'sun', alt=0, timezone, calendar, dec, 
 #' @param temp Air temperature in degrees Celsius. Defaults to the session setting in \code{\link{skyscapeR.vars}}.
 #' @import swephR
 #' @section Validation:
-#' In A08, coordinates on the two plotted solar-limit tracks recovered their source declinations by spherical inversion. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a08-target-ranges}{A08 check in the technical manual}.
+#' In A08, coordinates on the two plotted solar-limit tracks recovered their source declinations by spherical inversion. See the \href{https://stonexsky.github.io/skyscapeR/manual/a08-target-ranges.html#a08-target-ranges}{A08 check in the technical manual}.
 #' @export
 #' @examples
 #' # Visible path of sun on june solstice on year 4001 BC from London:
@@ -573,6 +606,12 @@ riseset <- function(loc, date, jd, obj = 'sun', alt=0, timezone, calendar, dec, 
 #' transformations may discard attributes; save the original result for reference.
 #' It does not identify ephemeris files, catalogue revisions or a development
 #' commit. Retain those and the analysis script separately for exact reproduction.
+#' @section Scientific checks:
+#' \itemize{
+#' \item For six stars compared with independently propagated catalogue directions, the largest separation was 0.0165 degrees, for Sirius in 3500 BCE. \href{https://stonexsky.github.io/skyscapeR/manual/a03-stellar-positions.html}{A03 study}.
+#' \item The zero-declination track crossed a level skyline at 90 and 270 degrees at 50 degrees north. The study also checks irregular skylines and JPL crossings. \href{https://stonexsky.github.io/skyscapeR/manual/a04-stellar-crossings.html}{A04 study}.
+#' \item The Sirius target screen recovered two disjoint intervals in the test band and a single contact at the annual maximum in 36 CE. \href{https://stonexsky.github.io/skyscapeR/manual/a08-target-ranges.html}{A08 study}.
+#' }
 orbit = function(dec, loc, refraction, atm, temp, res=0.25) {
   if (missing(refraction)) { refraction <- skyscapeR.env$refraction }
   if (missing(atm)) { atm <- skyscapeR.env$atm }
@@ -649,6 +688,10 @@ orbit = function(dec, loc, refraction, atm, temp, res=0.25) {
 #' the default numeric output is unchanged.
 #' @section Scientific validation:
 #' F01 examines magnetic and solar reductions against independent references. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 scientific validation}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item Three archived solar-sight pairs on one baseline gave bearing errors from -0.389 to +0.529 degrees against the Polaris reference. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 study}.
+#' }
 sunAz = function(loc, time, timezone, limb, alt=FALSE) {
   if (missing(timezone)) { timezone <- skyscapeR.env$timezone }
 
@@ -708,7 +751,7 @@ sunAz = function(loc, time, timezone, limb, alt=FALSE) {
 #' @param verbose Logical. Display progress or informational messages. Default \code{TRUE}.
 #' @import swephR
 #' @section Validation:
-#' The JPL comparison in A05 matched all tested civil-day passages, including paired dates near a solstice. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+#' The JPL comparison in A05 matched all tested civil-day passages, including paired dates near a solstice. See the \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @examples
 #' if (requireNamespace("swephRdata", quietly = TRUE)) {
@@ -725,6 +768,11 @@ sunAz = function(loc, time, timezone, limb, alt=FALSE) {
 #' transformations may discard attributes; save the original result for reference.
 #' It does not identify ephemeris files, catalogue revisions or a development
 #' commit. Retain those and the analysis script separately for exact reproduction.
+#' @section Scientific checks:
+#' \itemize{
+#' \item All 121 checks of solar dates, seasonal instants and limiting declinations passed against their respective references. \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html}{A05 study}.
+#' \item The Sirius target screen recovered two disjoint intervals in the test band and a single contact at the annual maximum in 36 CE. \href{https://stonexsky.github.io/skyscapeR/manual/a08-target-ranges.html}{A08 study}.
+#' }
 solar.date <- function(dec, year, calendar, verbose=TRUE){
   if (is.character(year)) year <- astroYear(year)
   checkYear(year)
@@ -819,11 +867,16 @@ solar.date <- function(dec, year, calendar, verbose=TRUE){
 #' @param altitude Altitude of the celestial object. Defaults to 0 degrees.
 #' @import swephR
 #' @section Validation:
-#' A05 compared the returned correction with the signed spherical approximation in both hemispheres. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+#' A05 compared the returned correction with the signed spherical approximation in both hemispheres. See the \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html#a05-solar-limits}{A05 check in the technical manual}.
 #' @export
 #' @examples
 #' # Parallax correction for the moon, as seen from latitude 50ºN and at 0º altitude
 #' parallax.corr(0.952, 50, 0)
+#' @section Scientific checks:
+#' \itemize{
+#' \item For six stars compared with independently propagated catalogue directions, the largest separation was 0.0165 degrees, for Sirius in 3500 BCE. \href{https://stonexsky.github.io/skyscapeR/manual/a03-stellar-positions.html}{A03 study}.
+#' \item All 121 checks of solar dates, seasonal instants and limiting declinations passed against their respective references. \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html}{A05 study}.
+#' }
 parallax.corr <- function(parallax, loc, altitude=0) {
   latitude <- extractLatitude(loc)
   return(parallax*cos(altitude/180*pi)*sin(latitude/180*pi)) # V Reijs/SE formula

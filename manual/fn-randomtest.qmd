@@ -1,5 +1,7 @@
 # `randomTest()` {#fn-randomtest}
 
+[Scientific results for this function](help/randomTest.html#scientific-checks).
+
 Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. [D02 validation study](d02-bearing-propagation.qmd#pole-propagation).
 
 The 500-simulation Ggantija-phase workflow in W02 reproduced the bundled global probability, local intervals and adjusted probabilities. [W02 results](w02-field-to-sky.qmd).

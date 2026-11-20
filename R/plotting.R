@@ -48,7 +48,7 @@
 #' @param show.obj.labels Logical to control whether to display celestial objects names.
 #' Defaults to TRUE.
 #' @section Validation:
-#' W01 checked compass bearings and the inner and outer edges of celestial year-range sectors against their spherical reference bearings. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
+#' W01 checked compass bearings and the inner and outer edges of celestial year-range sectors against their spherical reference bearings. See the \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html#w01-plot-geometry}{W01 check in the technical manual}.
 #' @export
 #' @import utils stats
 #' @examples
@@ -62,6 +62,10 @@
 #'
 #' # To display only celestial objects
 #' plotAzimuth(obj=tt)
+#' @section Scientific checks:
+#' \itemize{
+#' \item All 192 drawing checks passed for the tested layouts, including seasonal markers, axis positions and identification labels. \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html}{W01 study}.
+#' }
 plotAzimuth <- function(az, obj, show.obj.labels=TRUE, col=NULL, lty=1, lwd=1.5,
                         marks=c("spokes","rim"), obj.position=c("inside","outside"),
                         show.legend=TRUE, style="publication-colour") {
@@ -225,7 +229,7 @@ plotAzimuth <- function(az, obj, show.obj.labels=TRUE, col=NULL, lty=1, lwd=1.5,
 #' for displaying the declination values of celestial objects.
 #' @param show.obj.label Logical. Label celestial overlays on the declination plot. Defaults to TRUE.
 #' @section Validation:
-#' W01 checked the endpoints and row labels of an azimuth interval spanning north. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
+#' W01 checked the endpoints and row labels of an azimuth interval spanning north. See the \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html#w01-plot-geometry}{W01 check in the technical manual}.
 #' @export
 #' @import utils stats graphics
 #' @seealso \code{\link{skyObject}}
@@ -248,6 +252,10 @@ plotAzimuth <- function(az, obj, show.obj.labels=TRUE, col=NULL, lty=1, lwd=1.5,
 #' site and horizon. Bars show the supplied symmetric angular bounds, not fitted
 #' confidence intervals. Use \code{\link{az.pdf}}, \code{\link{coordtrans}} and
 #' \code{\link{spd}} when the full measurement distributions are needed.
+#' @section Scientific checks:
+#' \itemize{
+#' \item All 192 drawing checks passed for the tested layouts, including seasonal markers, axis positions and identification labels. \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html}{W01 study}.
+#' }
 plotBars <- function(val, unc, names, unit="Declination", obj, show.obj.label=TRUE,
                      xrange, yrange, sort=FALSE, shade=TRUE, mark=TRUE, col=NULL,
                      geometry=if (missing(shade)) "interval" else "bar",
@@ -332,7 +340,7 @@ plotBars <- function(val, unc, names, unit="Declination", obj, show.obj.label=TR
 #' @param ... Additional arguments to be passed to \emph{plot}.
 #' @rdname plot.skyscapeR.horizon
 #' @section Validation:
-#' W01 checked the skyline ordinate and azimuth viewport on flat and raised profiles, including natural and publication sky overlays. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
+#' W01 checked the skyline ordinate and azimuth viewport on flat and raised profiles, including natural and publication sky overlays. See the \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html#w01-plot-geometry}{W01 check in the technical manual}.
 #' @export
 #' @import utils stats graphics grDevices
 #' @seealso \code{\link{downloadHWT}}, \code{\link{skyObject}}
@@ -363,8 +371,12 @@ plotBars <- function(val, unc, names, unit="Declination", obj, show.obj.label=TR
 #' source. Azimuth-altitude plotting is a cylindrical display, with increasing
 #' horizontal distortion towards the zenith. Retain consistent ranges when
 #' comparing styles, epochs or constellation traditions.
-#' @section Validation studies:
-#' Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. \href{https://stonexsky.github.io/skyscapeR/manual/h04-feature-resolution.html#h04-feature-resolution}{H04 validation study}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item Across 32 synthetic wall panoramas, the largest numerical skyline discrepancy was 0.0261 degrees. Pixel width affected the displayed width of the opening. \href{https://stonexsky.github.io/skyscapeR/manual/h04-feature-resolution.html}{H04 study}.
+#' \item A one-minute native sky step retained the publication extinction setting. External Stellarium capture requires a separate comparison. \href{https://stonexsky.github.io/skyscapeR/manual/sky-rendering.html#step-check}{V07 study}.
+#' \item All 192 drawing checks passed for the tested layouts, including seasonal markers, axis positions and identification labels. \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html}{W01 study}.
+#' }
 plot.skyscapeR.horizon <- function(x, show.az=(!missing(xrange) || !missing(xlim)), xrange, yrange, obj, col.ground=NULL, col.sky, use.image=TRUE, ..., show.skyline=NULL, sky=NULL, xlim, ylim, fastLoad=FALSE, show.legend=TRUE, style=NULL) {
   if (!missing(xlim)) {
     if (!missing(xrange)) stop("Supply only one of xrange and xlim.")
@@ -536,8 +548,12 @@ plot.skyscapeR.horizon <- function(x, show.az=(!missing(xrange) || !missing(xlim
 #' plot(Dec, index=1, az=Az, hor=hor)
 #' @rdname plot.skyscapeR.pdf
 #' @section Validation:
-#' In W01 the shaded components matched the two intervals returned by hpdi() for a bimodal density. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
+#' In W01 the shaded components matched the two intervals returned by hpdi() for a bimodal density. See the \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html#w01-plot-geometry}{W01 check in the technical manual}.
 #' @export
+#' @section Scientific checks:
+#' \itemize{
+#' \item All 192 drawing checks passed for the tested layouts, including seasonal markers, axis positions and identification labels. \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html}{W01 study}.
+#' }
 plot.skyscapeR.pdf <- function(x, index, hdr=0.954, show.az, xrange, col=NULL, ..., az, hor, xlim, show.legend=TRUE, style="publication-colour") {
   if (!missing(xlim)) {
     if (!missing(xrange)) stop("Supply only one of xrange and xlim.")
@@ -718,8 +734,12 @@ plot.skyscapeR.pdf <- function(x, index, hdr=0.954, show.az, xrange, col=NULL, .
 #' @param obj A skyObject or list of target groups for a density or significance plot. Declination plots show single epochs as lines and epoch ranges as bands. Azimuth plots use each group's site latitude to mark rising and setting boundary bearings at a geometric level horizon.
 #' @rdname plot.skyscapeR.spd
 #' @section Validation:
-#' In W01 the drawn line matched the stored coordinates and heights of the summed density. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
+#' In W01 the drawn line matched the stored coordinates and heights of the summed density. See the \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html#w01-plot-geometry}{W01 check in the technical manual}.
 #' @export
+#' @section Scientific checks:
+#' \itemize{
+#' \item All 192 drawing checks passed for the tested layouts, including seasonal markers, axis positions and identification labels. \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html}{W01 study}.
+#' }
 plot.skyscapeR.spd <- function(x, xrange, yrange, title=NULL, col=NULL, shading=TRUE, ..., obj=NULL, xlim, ylim,
                                show.legend=TRUE, style="publication-colour") {
   if (!missing(xlim)) {
@@ -875,9 +895,9 @@ plot.skyscapeR.spd <- function(x, xrange, yrange, title=NULL, col=NULL, shading=
 #' @inheritParams plot.skyscapeR.spd
 #' @rdname plot.skyscapeR.sigTest
 #' @section Validation:
-#' The tested public fits plotted the stored local interval midpoints and significance symbols. A wrapped interval has start greater than end. A plot spanning the full turn displays its two visible segments with the same adjusted probability. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+#' The tested public fits plotted the stored local interval midpoints and significance symbols. A wrapped interval has start greater than end. A plot spanning the full turn displays its two visible segments with the same adjusted probability. See \href{https://stonexsky.github.io/skyscapeR/manual/s03-scoring-checks.html#s03-scoring-checks}{S03 validation in the technical manual}.
 #'
-#' W01 checked clipped local intervals, the pointwise envelope and the global probability label against the stored fit. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
+#' W01 checked clipped local intervals, the pointwise envelope and the global probability label against the stored fit. See the \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html#w01-plot-geometry}{W01 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{randomTest}}, \code{\link{modelTest}}, \code{\link{print.skyscapeR.sigTest}}
 #' @examples
@@ -885,6 +905,11 @@ plot.skyscapeR.spd <- function(x, xrange, yrange, title=NULL, col=NULL, shading=
 #' set.seed(42)
 #' fit <- randomTest(az, nsims = 10, ncores = 1, .res = 2, verbose = FALSE)
 #' plot(fit)
+#' @section Scientific checks:
+#' \itemize{
+#' \item The fixed uniform-null example returned a global probability of 0.4375 and an adjusted probability of 0.1875 for its cluster crossing north. \href{https://stonexsky.github.io/skyscapeR/manual/s03-scoring-checks.html}{S03 study}.
+#' \item All 192 drawing checks passed for the tested layouts, including seasonal markers, axis positions and identification labels. \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html}{W01 study}.
+#' }
 plot.skyscapeR.sigTest <- function(x, xrange, title=NULL, col=NULL, show.pval=TRUE, show.local=FALSE,
                                    pal=NULL, ..., obj=NULL, xlim, show.legend=TRUE, style="publication-colour") {
   if (!missing(xlim)) {
@@ -1032,7 +1057,7 @@ plot.skyscapeR.sigTest <- function(x, xrange, title=NULL, col=NULL, show.pval=TR
 #' placed last; omission retains input order.
 #' @rdname plot.skyscapeR.starphases
 #' @section Validation:
-#' W01 checked season boundaries, event positions, quarterly landmarks and star, site and epoch labels in linear and circular layouts. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
+#' W01 checked season boundaries, event positions, quarterly landmarks and star, site and epoch labels in linear and circular layouts. See the \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html#w01-plot-geometry}{W01 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{star.phases}}
 #' @examples
@@ -1075,6 +1100,11 @@ plot.skyscapeR.sigTest <- function(x, xrange, title=NULL, col=NULL, show.pval=TR
 #' room for the seasonal scale where needed. Both layouts use the same
 #' sequence and colours; the circular layout makes the cycle boundary explicit.
 #' Labels wrap and shrink to fit; crowded comparisons need a larger device.
+#' @section Scientific checks:
+#' \itemize{
+#' \item First-morning dates fell within seven days of 22 of 23 sightings and last-evening dates within seven days of 21 of 33. The respective median predictions were two days early and five days late. \href{https://stonexsky.github.io/skyscapeR/manual/heliacal-rising.html#v01-observations}{V01 study}.
+#' \item All 192 drawing checks passed for the tested layouts, including seasonal markers, axis positions and identification labels. \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html}{W01 study}.
+#' }
 plot.skyscapeR.starphases <- function(x, y, show.labels=TRUE, show.legend=TRUE, show.grid=TRUE, sort.by, pal, ..., layout = c("auto", "linear", "circular"), style="publication-colour") {
   layout <- match.arg(layout)
   if (inherits(x, "skyscapeR.starphases")) x <- list(x)
@@ -1369,9 +1399,9 @@ plot.skyscapeR.starphases <- function(x, y, show.labels=TRUE, show.legend=TRUE, 
 #' @param x Object of \emph{skyscapeR.sigTest} format.
 #' @param ... Additional arguments to be passed to \emph{print}.
 #' @section Validation:
-#' The tested public fits printed the stored global probability and local interval endpoints. A wrapped interval has start greater than end. A plot spanning the full turn displays its two visible segments with the same adjusted probability. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+#' The tested public fits printed the stored global probability and local interval endpoints. A wrapped interval has start greater than end. A plot spanning the full turn displays its two visible segments with the same adjusted probability. See \href{https://stonexsky.github.io/skyscapeR/manual/s03-scoring-checks.html#s03-scoring-checks}{S03 validation in the technical manual}.
 #'
-#' W01 checked the reported wrapped interval endpoints and adjusted probabilities against a known fit. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
+#' W01 checked the reported wrapped interval endpoints and adjusted probabilities against a known fit. See the \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html#w01-plot-geometry}{W01 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{randomTest}}, \code{\link{modelTest}}, \code{\link{plot.skyscapeR.sigTest}}
 #' @examples
@@ -1379,6 +1409,11 @@ plot.skyscapeR.starphases <- function(x, y, show.labels=TRUE, show.legend=TRUE, 
 #' set.seed(42)
 #' fit <- randomTest(az, nsims = 10, ncores = 1, .res = 2, verbose = FALSE)
 #' print(fit)
+#' @section Scientific checks:
+#' \itemize{
+#' \item The fixed uniform-null example returned a global probability of 0.4375 and an adjusted probability of 0.1875 for its cluster crossing north. \href{https://stonexsky.github.io/skyscapeR/manual/s03-scoring-checks.html}{S03 study}.
+#' \item All 192 drawing checks passed for the tested layouts, including seasonal markers, axis positions and identification labels. \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html}{W01 study}.
+#' }
 print.skyscapeR.sigTest <- function (x, ...) {
   cat("\n*** Results of Significance Test ***\n\n")
   cat(paste0(x$metadata$tails,'-tailed test at ',x$metadata$conf*100,'% confidence, based on ', x$metadata$nsims, ' simulations.\n'))

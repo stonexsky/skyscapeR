@@ -64,7 +64,14 @@ horizon and shows the part of each declination interval that reaches it.
 }
 \section{Validation}{
 
-W01 checked compass bearings and the inner and outer edges of celestial year-range sectors against their spherical reference bearings. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
+W01 checked compass bearings and the inner and outer edges of celestial year-range sectors against their spherical reference bearings. See the \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html#w01-plot-geometry}{W01 check in the technical manual}.
+}
+
+\section{Scientific checks}{
+
+\itemize{
+\item All 192 drawing checks passed for the tested layouts, including seasonal markers, axis positions and identification labels. \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html}{W01 study}.
+}
 }
 
 \examples{

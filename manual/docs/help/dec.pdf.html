@@ -1,4 +1,5 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>dec.pdf | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}img{max-width:100%;height:auto}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-dec-pdf.html">dec.pdf() method</a></nav><h2 id='dec.pdf'>Represent measured declinations as probability densities</h2><span id='topic+dec.pdf'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>dec.pdf | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}img{max-width:100%;height:auto}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-dec-pdf.html">dec.pdf() method</a></nav>
+<h2 id='dec.pdf'>Represent measured declinations as probability densities</h2><span id='topic+dec.pdf'></span>
 
 <h3>Description</h3>
 
@@ -102,7 +103,7 @@ and trimmed at <code>.cutoff</code>. The retained area can consequently be less 
 
 <h3>Validation</h3>
 
-<p>In D01, sampled declination densities agreed with analytic references. The package retained the corresponding declination centres in all four subset checks. See <a href="https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks">D01 validation in the technical manual</a>.
+<p>In D01, sampled declination densities agreed with analytic references. Build 2.0.9006 retained the corresponding declination centres in all four subset checks. See <a href="../d01-density-checks.html#d01-density-checks">D01 validation in the technical manual</a>.
 </p>
 
 
@@ -164,9 +165,25 @@ standard deviations from 90.
 </p>
 
 
+<h3 id="scientific-checks">Scientific checks</h3>
+
+
+<ul>
+<li><p> The six measurement families matched their analytic controls. Tests of disconnected highest-density regions recovered the expected endpoints. <a href="../d01-density-checks.html">D01 study</a>.
+</p>
+</li>
+<li><p> All 18 flat-horizon quantile comparisons met the 0.02-degree tolerance. Additional fixtures quantify errors on steep skylines and near a celestial pole. <a href="../d02-bearing-propagation.html">D02 study</a>.
+</p>
+</li>
+<li><p> In six direct-input matched nulls, global rejection at nominal 5 percent ranged from 4.35 to 5.50 percent. The study separately quantifies effects of dependence and skyline transformation. <a href="../s02-specified-models.html">S02 study</a>.
+</p>
+</li></ul>
+
+
+
 <h3>References</h3>
 
-<p>Silva, F. (2020). A probabilistic framework and significance test for the analysis of structural orientations in skyscape archaeology. Journal of Archaeological Science 118, 105138. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/j.jas.2020.105138")}.
+<p>Silva, F. (2020). A probabilistic framework and significance test for the analysis of structural orientations in skyscape archaeology. Journal of Archaeological Science 118, 105138. <a href="https://doi.org/10.1016/j.jas.2020.105138">doi:10.1016/j.jas.2020.105138</a>.
 </p>
 
 

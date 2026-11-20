@@ -6,9 +6,9 @@ Use this guide to move from a research question to its methods chapter, principa
 
 The [astronomical conventions chapter](astronomical-conventions.qmd) traces a BCE date across two calendars, compares lunar positions from two origins and follows the fixed-star calculation across epochs.
 
-**Existing evidence.** The ephemeris chapter identifies the inspected data generation and the supplier’s precision claim.
+**Evidence.** The [calendar checks](a01-calendar-checks.qmd) passed all 499 assertions. The [JPL comparison](a02-ephemeris.qmd) separates positional differences from the timing conventions that affect ancient lunar crossings.
 
-**Open question.** What positional differences remain against the matching JPL solution when epoch, time scale, origin and reference frame are held fixed?
+**Open question.** How closely do the remaining stellar frame and parallax conventions agree with independent transformations?
 
 **Entry points.** [`BC.AD()`](fn-bc-ad.html), [`astroYear()`](fn-astroyear.html), [`jd2time()`](fn-jd2time.html), [`time2jd()`](fn-time2jd.html), [`long.date()`](fn-long-date.html), [`timestring()`](fn-timestring.html), [`ten()`](fn-ten.html), [`skyscapeR.vars()`](fn-skyscaper-vars.html), [`obliquity()`](fn-obliquity.html), [`parallax.corr()`](fn-parallax-corr.html), [`body.position()`](fn-body-position.html).
 
@@ -18,9 +18,9 @@ The [astronomical conventions chapter](astronomical-conventions.qmd) traces a BC
 
 The [field reduction chapter](field-reduction.qmd) follows a compass reading and a timed solar sight from instrument readings to true bearing, including a circle reading that crosses north.
 
-**Existing evidence.** The horizon studies use published survey bearings. Their residuals do not isolate the reduction step.
+**Evidence.** The [field-reduction study](field-reduction.qmd#f01-scientific) compares independent reference bearings and three solar sights on an archived Polaris baseline.
 
-**Open question.** Can an independently oriented baseline be recovered from repeat compass and solar-reference observations, including the transition across north?
+**Open question.** How well does a timed compass traverse recover bearings between independently surveyed endpoints?
 
 **Entry points.** [`mag.dec()`](fn-mag-dec.html), [`reduct.compass()`](fn-reduct-compass.html), [`reduct.theodolite()`](fn-reduct-theodolite.html), [`sunAz()`](fn-sunaz.html).
 
@@ -28,9 +28,9 @@ The [field reduction chapter](field-reduction.qmd) follows a compass reading and
 
 The [terrain methods](horizons.qmd) explain how measured profiles, DEM skylines and reconstructed features enter a horizon object. The [photographic calibration and interchange chapter](photographic-horizons.qmd) traces a mask through control-point fitting, angular sampling and landscape export.
 
-**Existing evidence.** The [international H01 study](h01-field-validation.qmd) reports field agreement for DEM-derived skyline altitudes by observing setup and terrain product, including the effect of search distance. [H02](h02-skyline-comparison.qmd) compares independently computed skylines at matched viewpoints.
+**Evidence.** The [field study](h01-field-validation.qmd) quantifies skyline residuals at measured bearings. [H02](h02-skyline-comparison.qmd) compares terrain providers, [H04](h04-feature-resolution.qmd) tests narrow features and [H05](photographic-horizons.qmd#h05-scientific) tests withheld photographic controls.
 
-**Open question.** How well are narrow features recovered between sampled bearings? How closely does a calibrated photographic skyline match surveyed points from the same viewpoint?
+**Open question.** How closely does a real photographic skyline reproduce surveyed points withheld from its calibration?
 
 **Entry points.** [`createHor()`](fn-createhor.html), [`horFeature()`](fn-horfeature.html), [`hor2alt()`](fn-hor2alt.html), [`importPanorama()`](fn-importpanorama.html), [`importPeakFinder()`](fn-importpeakfinder.html), [`createHWT()`](fn-createhwt.html), [`downloadHWT()`](fn-downloadhwt.html), [`exportHor()`](fn-exporthor.html), [`exportStellarium()`](fn-exportstellarium.html), [`exportPanorama()`](fn-exportpanorama.html), [`demPalettes()`](fn-dempalettes.html), [`relinkHor()`](fn-relinkhor.html), [`plot.skyscapeR.horizon()`](fn-plot-skyscaper-horizon.html).
 
@@ -39,9 +39,7 @@ The [terrain methods](horizons.qmd) explain how measured profiles, DEM skylines 
 
 The [candidate-screening chapter](celestial-targets.qmd) takes a measured bearing and skyline altitude through the declination calculation to candidate targets. It explains how the spatial equinox convention and the search dates affect the candidates returned.
 
-**Existing evidence.** The horizon comparisons constrain one input. The worked stellar study checks a different output, a seasonal date.
-
-**Open question.** Where do high or asymmetric skylines change candidate membership, and how closely do the declination limits agree with independently calculated sightlines?
+**Evidence.** The [target study](a08-target-ranges.qmd) checks candidate membership, contacts and annual bounds. The [solar limits study](a05-solar-limits.qmd) compares site-dependent limiting directions with reference geometry.
 
 **Entry points.** [`az2dec()`](fn-az2dec.html), [`hor2max.dec()`](fn-hor2max-dec.html), [`hor2min.dec()`](fn-hor2min-dec.html), [`findTargets()`](fn-findtargets.html), [`skyObject()`](fn-skyobject.html), [`sky.objects()`](fn-sky-objects.html), [`zenith()`](fn-zenith.html), [`antizenith()`](fn-antizenith.html), [`orbit()`](fn-orbit.html), [`spatial.equinox()`](fn-spatial-equinox.html).
 
@@ -49,9 +47,9 @@ The [candidate-screening chapter](celestial-targets.qmd) takes a measured bearin
 
 The [event-search chapter](event-searches.qmd) distinguishes the first and last crossing of an irregular skyline. The [lunar crossover chapter](lunar-crossovers.qmd) explains how the observing calendar and event definition determine which lunation is selected.
 
-**Existing evidence.** The EFM and CC help pages record comparisons with published simulations and remaining discrepancies. The ephemeris chapter identifies the upstream assumptions.
+**Evidence.** The [crossing study](a04-stellar-crossings.qmd) checks brief and repeated terrain crossings. The [lunar selection study](lunar-crossovers.qmd#a07-scientific) reproduces 31 of 32 selections and identifies the illumination threshold responsible for the exception.
 
-**Open question.** Which discrepancies survive matching observing geometry, event definition and calendar? Can a reference calculation recover brief or repeated crossings of an uneven skyline?
+**Open question.** How do winter and last-crescent selections compare with an independent calculation?
 
 **Entry points.** [`riseset()`](fn-riseset.html), [`dS()`](fn-ds.html), [`jS()`](fn-js.html), [`eq()`](fn-eq.html), [`nMjLX()`](fn-nmjlx.html), [`nmnLX()`](fn-nmnlx.html), [`sMjLX()`](fn-smjlx.html), [`smnLX()`](fn-smnlx.html), [`solar.date()`](fn-solar-date.html), [`moonphase()`](fn-moonphase.html), [`planet.extremes()`](fn-planet-extremes.html), [`EFM()`](fn-efm.html), [`CC()`](fn-cc.html).
 
@@ -76,15 +74,13 @@ The [sky reconstruction chapter](sky-rendering.qmd) follows the direct, diffuse 
 
 **Entry points.** [`sketchSky()`](fn-sketchsky.html), [`skyRadiance()`](fn-skyradiance.html), [`planisphere()`](fn-planisphere.html), [`importConstellations()`](fn-importconstellations.html), [`stellariumSky()`](fn-stellariumsky.html), [`skyStep()`](fn-skystep.html).
 
-[Sky-rendering evidence](study-register.qmd#sky-rendering).
+[Sky-rendering evidence](sky-rendering.qmd#twilight-check).
 
 ## Uncertainty and orientation distributions {#plan-density}
 
 The [orientation-density chapter](orientation-densities.qmd) shows how a measured opening becomes a bearing distribution, how the local skyline changes its declination distribution, and what is lost when disjoint highest-density intervals are reduced to a single range.
 
-**Existing evidence.** The doorway example records the transformed densities for the same measured opening against a level skyline and a notch.
-
-**Open question.** Does the transformation preserve probability mass at north and near declination limits? Can multimodal examples recover the expected disjoint intervals?
+**Evidence.** The [density study](d01-density-checks.qmd) checks north-wrapping densities and disjoint highest-density regions. The [propagation study](d02-bearing-propagation.qmd) quantifies grid sensitivity on steep horizons and near a celestial pole.
 
 **Entry points.** [`az.pdf()`](fn-az-pdf.html), [`dec.pdf()`](fn-dec-pdf.html), [`coordtrans()`](fn-coordtrans.html), [`spd()`](fn-spd.html), [`hpdi()`](fn-hpdi.html), [`subset.skyscapeR.pdf()`](fn-subset-skyscaper-pdf.html), [`plot.skyscapeR.pdf()`](fn-plot-skyscaper-pdf.html), [`plot.skyscapeR.spd()`](fn-plot-skyscaper-spd.html), [`plotAzimuth()`](fn-plotazimuth.html), [`plotBars()`](fn-plotbars.html).
 
@@ -92,8 +88,6 @@ The [orientation-density chapter](orientation-densities.qmd) shows how a measure
 
 The [significance chapter](significance.qmd) documents the scientific hypothesis represented by each null, what counts as a trial, the handling of repeated sites, simulation size, and how global and local results should be read.
 
-**Existing evidence.** Existing package checks include stored significance outputs. Those checks address numerical reproducibility; calibration of false-positive rates is a separate question.
-
-**Open question.** Under data generated by each specified null, how often does the test reject at its stated threshold? How does that rate change with sample size and repeated measurements?
+**Evidence.** The [uniform-null](s01-uniform-orientation.qmd) and [specified-null](s02-specified-models.qmd) studies report rejection rates at nominal thresholds. They cover sample size, simulation count and the effect of dependence between observations. The [scoring study](s03-scoring-checks.qmd) independently checks ranks and adjusted cluster probabilities.
 
 **Entry points.** [`randomTest()`](fn-randomtest.html), [`modelTest()`](fn-modeltest.html), [`bernoulli.trial()`](fn-bernoulli-trial.html), [`pval2stars()`](fn-pval2stars.html), [`plot.skyscapeR.sigTest()`](fn-plot-skyscaper-sigtest.html), [`print.skyscapeR.sigTest()`](fn-print-skyscaper-sigtest.html).

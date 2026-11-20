@@ -29,7 +29,7 @@
 #' }
 #' @seealso \code{\link{hor2alt}}, \code{\link{exportPanorama}}
 #' @section Validation:
-#' H07 verified lookup inside the photographed sector, including across north. Seasonal and event searches requiring a complete skyline reject partial photographs. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
+#' H07 verified lookup inside the photographed sector, including across north. Seasonal and event searches requiring a complete skyline reject partial photographs. See the \href{https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html#h07-panorama-coverage}{H07 check in the technical manual}.
 #' @export
 #' @section Extraction method and limitations:
 #' Sky detection uses the PNG alpha channel. In each image column the first pixel
@@ -52,6 +52,11 @@
 #' using functions, such as \code{\link{sketchSky}}, that require it.
 #' @section Scientific validation:
 #' H05 examines bearing and altitude errors at withheld synthetic landmarks. \href{https://stonexsky.github.io/skyscapeR/manual/photographic-horizons.html#h05-scientific}{H05 scientific validation}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item At eight withheld landmarks in a tilted synthetic panorama, both bearing and skyline altitude were recovered to within one image pixel. \href{https://stonexsky.github.io/skyscapeR/manual/photographic-horizons.html#h05-scientific}{H05 study}.
+#' \item A partial photographic horizon returned missing altitudes outside its sector. Full-sky event searches rejected it and accepted the complete profile. \href{https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html}{H07 study}.
+#' }
 importPanorama <- function(file, loc, az.lim=c(0,360), alt.lim=c(-90,90),
                            name=tools::file_path_sans_ext(basename(file)), calibrate=FALSE,
                            points=NULL, alpha.threshold=0.5, alt.unc=0.5) {

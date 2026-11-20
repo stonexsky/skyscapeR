@@ -1,5 +1,7 @@
 # `exportHor()` {#fn-exporthor}
 
+[Scientific results for this function](help/exportHor.html#scientific-checks).
+
 H07 checked that a partial photograph is rejected for both image and numerical landscape export. [H07 results](h07-panorama-coverage.qmd).
 
 [Function index](function-index.html#idx-exporthor)

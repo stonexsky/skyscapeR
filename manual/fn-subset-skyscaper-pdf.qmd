@@ -1,12 +1,14 @@
 # `subset.skyscapeR.pdf()` {#fn-subset-skyscaper-pdf}
 
+[Scientific results for this function](help/subset.skyscapeR.pdf.html#scientific-checks).
+
 Selecting, reordering, duplicating or dropping all declination PDFs retains matching centre metadata. [D01 checks](d01-density-checks.qmd).
 
 
 [Function index](function-index.html#idx-subset-skyscaper-pdf)
 
 ```{=html}
-<p>This registered S3 method has no separate package help topic. The implementation subsets the name, azimuth, uncertainty and horizon metadata and the corresponding entries in the list of measurement curves using the same index. It returns the modified object.</p>
+<p>The implementation subsets the name, azimuth, uncertainty and horizon metadata and the corresponding entries in the list of measurement curves using the same index. It returns the modified object.</p>
 ```
 
 [Subsetting and normalising densities](fn-hpdi.qmd).

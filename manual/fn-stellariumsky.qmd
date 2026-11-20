@@ -1,5 +1,7 @@
 # `stellariumSky()` {#fn-stellariumsky}
 
+[Scientific results for this function](help/stellariumSky.html#scientific-checks).
+
 Diffuse V-band brightness was compared with six fields outside the Carina calibration aperture. [V04 validation study](v04-diffuse-photometry.qmd#v04-diffuse-photometry).
 
 [Function index](function-index.html#idx-stellariumsky)

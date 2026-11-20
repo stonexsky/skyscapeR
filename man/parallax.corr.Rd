@@ -32,7 +32,15 @@ declination calculator.
 }
 \section{Validation}{
 
-A05 compared the returned correction with the signed spherical approximation in both hemispheres. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+A05 compared the returned correction with the signed spherical approximation in both hemispheres. See the \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html#a05-solar-limits}{A05 check in the technical manual}.
+}
+
+\section{Scientific checks}{
+
+\itemize{
+\item For six stars compared with independently propagated catalogue directions, the largest separation was 0.0165 degrees, for Sirius in 3500 BCE. \href{https://stonexsky.github.io/skyscapeR/manual/a03-stellar-positions.html}{A03 study}.
+\item All 121 checks of solar dates, seasonal instants and limiting declinations passed against their respective references. \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html}{A05 study}.
+}
 }
 
 \examples{

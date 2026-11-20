@@ -1,5 +1,7 @@
 # `plot.skyscapeR.sigTest()` {#fn-plot-skyscaper-sigtest}
 
+[Scientific results for this function](help/plot.skyscapeR.sigTest.html#scientific-checks).
+
 Labelled angular ticks and shorter minor ticks adapt to the displayed range and physical plot width in both the main and local-significance layouts. The plotted intervals and probabilities come from the stored fit.
 
 W01 checked clipped local intervals, the pointwise envelope and the global probability label against the stored fit. [W01 results](w01-plot-geometry.qmd).

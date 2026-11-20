@@ -1,5 +1,7 @@
 # `riseset()` {#fn-riseset}
 
+[Scientific results for this function](help/riseset.html#scientific-checks).
+
 H07 verified that a partial panorama is rejected before searching for solar or stellar crossings on an unobserved skyline. [H07 results](h07-panorama-coverage.qmd).
 
 A04 recovered the expected crossing counts and order on synthetic ridges, notches and grazing tracks; solar and lunar centre crossings at the Malta test site agreed with JPL Horizons within 0.85 seconds and 0.0041 degrees. [A04 results](a04-stellar-crossings.qmd).

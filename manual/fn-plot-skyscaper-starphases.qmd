@@ -1,5 +1,7 @@
 # `plot.skyscapeR.starphases()` {#fn-plot-skyscaper-starphases}
 
+[Scientific results for this function](help/plot.skyscapeR.starphases.html#scientific-checks).
+
 [Observational accuracy and validation](heliacal-rising.qmd#v01-observations).
 
 [Function index](function-index.html#idx-plot-skyscaper-starphases)

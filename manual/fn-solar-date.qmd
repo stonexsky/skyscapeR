@@ -1,5 +1,7 @@
 # `solar.date()` {#fn-solar-date}
 
+[Scientific results for this function](help/solar.date.html#scientific-checks).
+
 The JPL comparison in A05 matched all tested civil-day passages, including paired dates near a solstice. [A05 results](a05-solar-limits.qmd).
 
 [Function index](function-index.html#idx-solar-date)

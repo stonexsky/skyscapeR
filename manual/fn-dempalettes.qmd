@@ -1,5 +1,7 @@
 # `demPalettes()` {#fn-dempalettes}
 
+[Scientific results for this function](help/demPalettes.html#scientific-checks).
+
 [Function index](function-index.html#idx-dempalettes)
 
 ```{=html}

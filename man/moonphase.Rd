@@ -32,12 +32,21 @@ recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for s
 }
 \section{Validation}{
 
-In A02, all 108 illuminated fractions agreed with the direct Swiss Ephemeris calculation across 54 epochs and two file generations. This checks the R interface. Observed lunar photometry was outside the study. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
+In A02, all 108 illuminated fractions agreed with the direct Swiss Ephemeris calculation across 54 epochs and two file generations. This checks the R interface. Observed lunar photometry was outside the study. See the \href{https://stonexsky.github.io/skyscapeR/manual/a02-ephemeris.html#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
 }
 
 \section{Scientific validation}{
 
 A07 examines independent crossover selection and sensitivity to the illumination cutoff. \href{https://stonexsky.github.io/skyscapeR/manual/lunar-crossovers.html#a07-scientific}{A07 scientific validation}.
+}
+
+\section{Scientific checks}{
+
+\itemize{
+\item Across 1,080 geocentric positions, the largest separation from the matching JPL parent was 0.0065 arcseconds. Across 177 lunar skyline crossings the median default bearing difference was 0.059 degrees. \href{https://stonexsky.github.io/skyscapeR/manual/a02-ephemeris.html}{A02 study}.
+\item Four lunar standstill limits agreed with the monthly reference tables to within 0.019 degrees. The study also examines sampling of planetary extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 study}.
+\item Independent selection agreed in 31 of 32 lunar event cases. At the equator in autumn 1913 the two illumination estimates straddled the EFM cutoff. \href{https://stonexsky.github.io/skyscapeR/manual/lunar-crossovers.html#a07-scientific}{A07 study}.
+}
 }
 
 \examples{

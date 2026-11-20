@@ -1,5 +1,7 @@
 # `findTargets()` {#fn-findtargets}
 
+[Scientific results for this function](help/findTargets.html#scientific-checks).
+
 A08 verified closed-band membership, separate stellar passages, sampled contact, magnitude filtering and comparisons before display rounding. [A08 results](a08-target-ranges.qmd).
 
 [Function index](function-index.html#idx-findtargets)

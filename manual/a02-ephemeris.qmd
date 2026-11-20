@@ -58,3 +58,7 @@ The Atacama Moon crossed the next 0° skyline 70.5 s earlier and 0.192° lower i
 * [Ephemeris comparison archive](archives/A02-reproduction.zip) · R wrapper and coverage tests, Swiss file hashes, JPL coefficients and evaluator, Horizons queries, signed residuals and report.
 * [Lunar crossing archive](archives/A02-lunar-crossings-reproduction.zip) · R and Python code, archived skyline, Horizons replies, paired event times and azimuths, and numerical checks.
 * [Swiss Ephemeris dependency and accuracy claims](ephemeris.qmd) · [Astronomical conventions](astronomical-conventions.qmd) · [Event searches](event-searches.qmd) · [Validation programme](study-register.qmd#validation-programme).
+
+**Function entries**
+
+[`body.position()`](fn-body-position.qmd), [`moonphase()`](fn-moonphase.qmd).

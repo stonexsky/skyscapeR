@@ -30,7 +30,15 @@ A string such as "-0:30" preserves the negative sign even when degrees are zero.
 }
 \section{Validation}{
 
-Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks}{A01 validation in the technical manual}.
+Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html#a01-calendar-checks}{A01 validation in the technical manual}.
+}
+
+\section{Scientific checks}{
+
+\itemize{
+\item Three archived solar-sight pairs on one baseline gave bearing errors from -0.389 to +0.529 degrees against the Polaris reference. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 study}.
+\item All 499 calendar, clock and angle checks passed. The largest error across 240 absolute Julian dates was 0.000021 seconds. \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html}{A01 study}.
+}
 }
 
 \examples{

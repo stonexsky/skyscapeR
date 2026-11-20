@@ -78,7 +78,14 @@ Export requires a working system ZIP command.
 }
 \section{Validation}{
 
-H07 checked that a partial photograph is rejected for both image and numerical landscape export. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
+H07 checked that a partial photograph is rejected for both image and numerical landscape export. See the \href{https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html#h07-panorama-coverage}{H07 check in the technical manual}.
+}
+
+\section{Scientific checks}{
+
+\itemize{
+\item A partial photographic horizon returned missing altitudes outside its sector. Full-sky event searches rejected it and accepted the complete profile. \href{https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html}{H07 study}.
+}
 }
 
 \examples{

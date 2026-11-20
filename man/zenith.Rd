@@ -33,7 +33,14 @@ a declination criterion rather than the dates of the passages.
 }
 \section{Validation}{
 
-A05 verified the geometric zenith declination and tropical-boundary eligibility at two epochs. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+A05 verified the geometric zenith declination and tropical-boundary eligibility at two epochs. See the \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html#a05-solar-limits}{A05 check in the technical manual}.
+}
+
+\section{Scientific checks}{
+
+\itemize{
+\item All 121 checks of solar dates, seasonal instants and limiting declinations passed against their respective references. \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html}{A05 study}.
+}
 }
 
 \examples{

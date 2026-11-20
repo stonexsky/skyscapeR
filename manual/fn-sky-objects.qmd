@@ -1,5 +1,7 @@
 # `sky.objects()` {#fn-sky-objects}
 
+[Scientific results for this function](help/skyObject.html#scientific-checks).
+
 [Function index](function-index.html#idx-sky-objects)
 
 ```{=html}

@@ -46,8 +46,14 @@ skyscapeR.env$cur.year <- as.numeric(format(Sys.Date(), "%Y"))
 #' frame of reference. Defaults to topocentric.
 #' @param k Visual extinction in magnitudes per airmass, shared by natural sky sketches and stellar phase calculations. The initial value of 0.2 is a clear-sky baseline, consistent with the approximate V-band coefficient for Kitt Peak in the UC Davis Physics 157 Observing Guide. Extinction varies with site and atmospheric conditions (Schaefer 1986, 1993). Use zero to disable extinction.
 #' @section Validation:
-#' Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks}{A01 validation in the technical manual}.
+#' Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html#a01-calendar-checks}{A01 validation in the technical manual}.
 #' @export
+#' @section Scientific checks:
+#' \itemize{
+#' \item All 499 calendar, clock and angle checks passed. The largest error across 240 absolute Julian dates was 0.000021 seconds. \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html}{A01 study}.
+#' \item With extinction of 0.2 magnitudes per airmass, transmission was 0.149 at 5 degrees and 0.832 at the zenith under the adopted law. \href{https://stonexsky.github.io/skyscapeR/manual/sky-rendering.html#extinction-check}{V05 study}.
+#' \item A one-minute native sky step retained the publication extinction setting. External Stellarium capture requires a separate comparison. \href{https://stonexsky.github.io/skyscapeR/manual/sky-rendering.html#step-check}{V07 study}.
+#' }
 skyscapeR.vars = function(timezone, calendar, refraction, atm, temp, dec, k) {
   if (!missing(k)) {
     if (!is.numeric(k) || length(k)!=1L || !is.finite(k) || k<0) stop("Supply a non-negative extinction coefficient k.")

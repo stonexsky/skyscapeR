@@ -57,8 +57,12 @@
 #' transformations may discard attributes; save the original result for reference.
 #' It does not identify ephemeris files, catalogue revisions or a development
 #' commit. Retain those and the analysis script separately for exact reproduction.
-#' @section Validation studies:
-#' Six stellar positions were compared with independently propagated catalogue directions from 3500 BCE to 2000 CE. \href{https://stonexsky.github.io/skyscapeR/manual/a03-stellar-positions.html#a03-stellar-positions}{A03 validation study}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item For six stars compared with independently propagated catalogue directions, the largest separation was 0.0165 degrees, for Sirius in 3500 BCE. \href{https://stonexsky.github.io/skyscapeR/manual/a03-stellar-positions.html}{A03 study}.
+#' \item The Sirius target screen recovered two disjoint intervals in the test band and a single contact at the annual maximum in 36 CE. \href{https://stonexsky.github.io/skyscapeR/manual/a08-target-ranges.html}{A08 study}.
+#' \item First-morning dates fell within seven days of 22 of 23 sightings and last-evening dates within seven days of 21 of 33. The respective median predictions were two days early and five days late. \href{https://stonexsky.github.io/skyscapeR/manual/heliacal-rising.html#v01-observations}{V01 study}.
+#' }
 star <- function(string, year=skyscapeR.env$cur.year) {
   if (is.character(year)) year <- astroYear(year)
   star.names <- skyscapeR::star.names
@@ -302,6 +306,14 @@ calc.phase <- function(year, day, sun.coord, star, loc, arcus_visionis, alt.hor,
 #'   ss1 <- star.phases('Aldebaran',-4000, c(35,-8,200), alt.hor=2, alt.rs=5)
 #'   plot(ss1)
 #' }
+#' }
+#' @section Scientific checks:
+#' \itemize{
+#' \item A partial photographic horizon returned missing altitudes outside its sector. Full-sky event searches rejected it and accepted the complete profile. \href{https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html}{H07 study}.
+#' \item The zero-declination track crossed a level skyline at 90 and 270 degrees at 50 degrees north. The study also checks irregular skylines and JPL crossings. \href{https://stonexsky.github.io/skyscapeR/manual/a04-stellar-crossings.html}{A04 study}.
+#' \item First-morning dates fell within seven days of 22 of 23 sightings and last-evening dates within seven days of 21 of 33. The respective median predictions were two days early and five days late. \href{https://stonexsky.github.io/skyscapeR/manual/heliacal-rising.html#v01-observations}{V01 study}.
+#' \item With extinction of 0.2 magnitudes per airmass, transmission was 0.149 at 5 degrees and 0.832 at the zenith under the adopted law. \href{https://stonexsky.github.io/skyscapeR/manual/sky-rendering.html#extinction-check}{V05 study}.
+#' \item The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html}{W02 study}.
 #' }
 star.phases <- function(star, year, loc, alt.hor = 0, alt.rs = 10, solar.alt=NULL, k = skyscapeR.vars()$k, limit =
                         6, refraction, atm, temp, res = 1/24/6, method = c("schaefer", "purrington")) {

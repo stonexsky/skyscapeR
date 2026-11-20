@@ -1,5 +1,7 @@
 # `sunAz()` {#fn-sunaz}
 
+[Scientific results for this function](help/sunAz.html#scientific-checks).
+
 F01 examines magnetic and solar reductions against independent references. [F01 study and results](field-reduction.html#f01-scientific).
 
 [Function index](function-index.html#idx-sunaz)

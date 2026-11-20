@@ -866,37 +866,36 @@ ul.task-list li input[type="checkbox"] {
 <section id="plan-time" class="level2">
 <h2 class="anchored" data-anchor-id="plan-time">Time, coordinates and ephemerides</h2>
 <p>The <a href="./astronomical-conventions.html">astronomical conventions chapter</a> traces a BCE date across two calendars, compares lunar positions from two origins and follows the fixed-star calculation across epochs.</p>
-<p><strong>Existing evidence.</strong> The ephemeris chapter identifies the inspected data generation and the supplier’s precision claim.</p>
-<p><strong>Open question.</strong> What positional differences remain against the matching JPL solution when epoch, time scale, origin and reference frame are held fixed?</p>
+<p><strong>Evidence.</strong> The <a href="./a01-calendar-checks.html">calendar checks</a> passed all 499 assertions. The <a href="./a02-ephemeris.html">JPL comparison</a> separates positional differences from the timing conventions that affect ancient lunar crossings.</p>
+<p><strong>Open question.</strong> How closely do the remaining stellar frame and parallax conventions agree with independent transformations?</p>
 <p><strong>Entry points.</strong> <a href="fn-bc-ad.html"><code>BC.AD()</code></a>, <a href="fn-astroyear.html"><code>astroYear()</code></a>, <a href="fn-jd2time.html"><code>jd2time()</code></a>, <a href="fn-time2jd.html"><code>time2jd()</code></a>, <a href="fn-long-date.html"><code>long.date()</code></a>, <a href="fn-timestring.html"><code>timestring()</code></a>, <a href="fn-ten.html"><code>ten()</code></a>, <a href="fn-skyscaper-vars.html"><code>skyscapeR.vars()</code></a>, <a href="fn-obliquity.html"><code>obliquity()</code></a>, <a href="fn-parallax-corr.html"><code>parallax.corr()</code></a>, <a href="fn-body-position.html"><code>body.position()</code></a>.</p>
 <p><a href="./ephemeris.html">Ephemeris background</a>.</p>
 </section>
 <section id="plan-survey" class="level2">
 <h2 class="anchored" data-anchor-id="plan-survey">Reducing field observations</h2>
 <p>The <a href="./field-reduction.html">field reduction chapter</a> follows a compass reading and a timed solar sight from instrument readings to true bearing, including a circle reading that crosses north.</p>
-<p><strong>Existing evidence.</strong> The horizon studies use published survey bearings. Their residuals do not isolate the reduction step.</p>
-<p><strong>Open question.</strong> Can an independently oriented baseline be recovered from repeat compass and solar-reference observations, including the transition across north?</p>
+<p><strong>Evidence.</strong> The <a href="./field-reduction.html#f01-scientific">field-reduction study</a> compares independent reference bearings and three solar sights on an archived Polaris baseline.</p>
+<p><strong>Open question.</strong> How well does a timed compass traverse recover bearings between independently surveyed endpoints?</p>
 <p><strong>Entry points.</strong> <a href="fn-mag-dec.html"><code>mag.dec()</code></a>, <a href="fn-reduct-compass.html"><code>reduct.compass()</code></a>, <a href="fn-reduct-theodolite.html"><code>reduct.theodolite()</code></a>, <a href="fn-sunaz.html"><code>sunAz()</code></a>.</p>
 </section>
 <section id="plan-terrain" class="level2">
 <h2 class="anchored" data-anchor-id="plan-terrain">Terrain horizons and panoramas</h2>
 <p>The <a href="./horizons.html">terrain methods</a> explain how measured profiles, DEM skylines and reconstructed features enter a horizon object. The <a href="./photographic-horizons.html">photographic calibration and interchange chapter</a> traces a mask through control-point fitting, angular sampling and landscape export.</p>
-<p><strong>Existing evidence.</strong> The <a href="./h01-field-validation.html">international H01 study</a> reports field agreement for DEM-derived skyline altitudes by observing setup and terrain product, including the effect of search distance. <a href="./h02-skyline-comparison.html">H02</a> compares independently computed skylines at matched viewpoints.</p>
-<p><strong>Open question.</strong> How well are narrow features recovered between sampled bearings? How closely does a calibrated photographic skyline match surveyed points from the same viewpoint?</p>
+<p><strong>Evidence.</strong> The <a href="./h01-field-validation.html">field study</a> quantifies skyline residuals at measured bearings. <a href="./h02-skyline-comparison.html">H02</a> compares terrain providers, <a href="./h04-feature-resolution.html">H04</a> tests narrow features and <a href="./photographic-horizons.html#h05-scientific">H05</a> tests withheld photographic controls.</p>
+<p><strong>Open question.</strong> How closely does a real photographic skyline reproduce surveyed points withheld from its calibration?</p>
 <p><strong>Entry points.</strong> <a href="fn-createhor.html"><code>createHor()</code></a>, <a href="fn-horfeature.html"><code>horFeature()</code></a>, <a href="fn-hor2alt.html"><code>hor2alt()</code></a>, <a href="fn-importpanorama.html"><code>importPanorama()</code></a>, <a href="fn-importpeakfinder.html"><code>importPeakFinder()</code></a>, <a href="fn-createhwt.html"><code>createHWT()</code></a>, <a href="fn-downloadhwt.html"><code>downloadHWT()</code></a>, <a href="fn-exporthor.html"><code>exportHor()</code></a>, <a href="fn-exportstellarium.html"><code>exportStellarium()</code></a>, <a href="fn-exportpanorama.html"><code>exportPanorama()</code></a>, <a href="fn-dempalettes.html"><code>demPalettes()</code></a>, <a href="fn-relinkhor.html"><code>relinkHor()</code></a>, <a href="fn-plot-skyscaper-horizon.html"><code>plot.skyscapeR.horizon()</code></a>.</p>
 </section>
 <section id="plan-targets" class="level2">
 <h2 class="anchored" data-anchor-id="plan-targets">From bearings to celestial targets</h2>
 <p>The <a href="./celestial-targets.html">candidate-screening chapter</a> takes a measured bearing and skyline altitude through the declination calculation to candidate targets. It explains how the spatial equinox convention and the search dates affect the candidates returned.</p>
-<p><strong>Existing evidence.</strong> The horizon comparisons constrain one input. The worked stellar study checks a different output, a seasonal date.</p>
-<p><strong>Open question.</strong> Where do high or asymmetric skylines change candidate membership, and how closely do the declination limits agree with independently calculated sightlines?</p>
+<p><strong>Evidence.</strong> The <a href="./a08-target-ranges.html">target study</a> checks candidate membership, contacts and annual bounds. The <a href="./a05-solar-limits.html">solar limits study</a> compares site-dependent limiting directions with reference geometry.</p>
 <p><strong>Entry points.</strong> <a href="fn-az2dec.html"><code>az2dec()</code></a>, <a href="fn-hor2max-dec.html"><code>hor2max.dec()</code></a>, <a href="fn-hor2min-dec.html"><code>hor2min.dec()</code></a>, <a href="fn-findtargets.html"><code>findTargets()</code></a>, <a href="fn-skyobject.html"><code>skyObject()</code></a>, <a href="fn-sky-objects.html"><code>sky.objects()</code></a>, <a href="fn-zenith.html"><code>zenith()</code></a>, <a href="fn-antizenith.html"><code>antizenith()</code></a>, <a href="fn-orbit.html"><code>orbit()</code></a>, <a href="fn-spatial-equinox.html"><code>spatial.equinox()</code></a>.</p>
 </section>
 <section id="plan-events" class="level2">
 <h2 class="anchored" data-anchor-id="plan-events">Solar, lunar and planetary events</h2>
 <p>The <a href="./event-searches.html">event-search chapter</a> distinguishes the first and last crossing of an irregular skyline. The <a href="./lunar-crossovers.html">lunar crossover chapter</a> explains how the observing calendar and event definition determine which lunation is selected.</p>
-<p><strong>Existing evidence.</strong> The EFM and CC help pages record comparisons with published simulations and remaining discrepancies. The ephemeris chapter identifies the upstream assumptions.</p>
-<p><strong>Open question.</strong> Which discrepancies survive matching observing geometry, event definition and calendar? Can a reference calculation recover brief or repeated crossings of an uneven skyline?</p>
+<p><strong>Evidence.</strong> The <a href="./a04-stellar-crossings.html">crossing study</a> checks brief and repeated terrain crossings. The <a href="./lunar-crossovers.html#a07-scientific">lunar selection study</a> reproduces 31 of 32 selections and identifies the illumination threshold responsible for the exception.</p>
+<p><strong>Open question.</strong> How do winter and last-crescent selections compare with an independent calculation?</p>
 <p><strong>Entry points.</strong> <a href="fn-riseset.html"><code>riseset()</code></a>, <a href="fn-ds.html"><code>dS()</code></a>, <a href="fn-js.html"><code>jS()</code></a>, <a href="fn-eq.html"><code>eq()</code></a>, <a href="fn-nmjlx.html"><code>nMjLX()</code></a>, <a href="fn-nmnlx.html"><code>nmnLX()</code></a>, <a href="fn-smjlx.html"><code>sMjLX()</code></a>, <a href="fn-smnlx.html"><code>smnLX()</code></a>, <a href="fn-solar-date.html"><code>solar.date()</code></a>, <a href="fn-moonphase.html"><code>moonphase()</code></a>, <a href="fn-planet-extremes.html"><code>planet.extremes()</code></a>, <a href="fn-efm.html"><code>EFM()</code></a>, <a href="fn-cc.html"><code>CC()</code></a>.</p>
 </section>
 <section id="plan-stars" class="level2">
@@ -912,20 +911,18 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Existing evidence.</strong> The register distinguishes outline derivation, held-out twilight measurements, conservation of flux across zoom levels and an extinction implementation check.</p>
 <p><strong>Open question.</strong> Which independent observations constrain the outer Milky Way boundary and low-altitude surface brightness? How does performance change outside the twilight geometries already tested?</p>
 <p><strong>Entry points.</strong> <a href="fn-sketchsky.html"><code>sketchSky()</code></a>, <a href="fn-skyradiance.html"><code>skyRadiance()</code></a>, <a href="fn-planisphere.html"><code>planisphere()</code></a>, <a href="fn-importconstellations.html"><code>importConstellations()</code></a>, <a href="fn-stellariumsky.html"><code>stellariumSky()</code></a>, <a href="fn-skystep.html"><code>skyStep()</code></a>.</p>
-<p><a href="./study-register.html#sky-rendering">Sky-rendering evidence</a>.</p>
+<p><a href="./sky-rendering.html#twilight-check">Sky-rendering evidence</a>.</p>
 </section>
 <section id="plan-density" class="level2">
 <h2 class="anchored" data-anchor-id="plan-density">Uncertainty and orientation distributions</h2>
 <p>The <a href="./orientation-densities.html">orientation-density chapter</a> shows how a measured opening becomes a bearing distribution, how the local skyline changes its declination distribution, and what is lost when disjoint highest-density intervals are reduced to a single range.</p>
-<p><strong>Existing evidence.</strong> The doorway example records the transformed densities for the same measured opening against a level skyline and a notch.</p>
-<p><strong>Open question.</strong> Does the transformation preserve probability mass at north and near declination limits? Can multimodal examples recover the expected disjoint intervals?</p>
+<p><strong>Evidence.</strong> The <a href="./d01-density-checks.html">density study</a> checks north-wrapping densities and disjoint highest-density regions. The <a href="./d02-bearing-propagation.html">propagation study</a> quantifies grid sensitivity on steep horizons and near a celestial pole.</p>
 <p><strong>Entry points.</strong> <a href="fn-az-pdf.html"><code>az.pdf()</code></a>, <a href="fn-dec-pdf.html"><code>dec.pdf()</code></a>, <a href="fn-coordtrans.html"><code>coordtrans()</code></a>, <a href="fn-spd.html"><code>spd()</code></a>, <a href="fn-hpdi.html"><code>hpdi()</code></a>, <a href="fn-subset-skyscaper-pdf.html"><code>subset.skyscapeR.pdf()</code></a>, <a href="fn-plot-skyscaper-pdf.html"><code>plot.skyscapeR.pdf()</code></a>, <a href="fn-plot-skyscaper-spd.html"><code>plot.skyscapeR.spd()</code></a>, <a href="fn-plotazimuth.html"><code>plotAzimuth()</code></a>, <a href="fn-plotbars.html"><code>plotBars()</code></a>.</p>
 </section>
 <section id="plan-null" class="level2">
 <h2 class="anchored" data-anchor-id="plan-null">Null models and significance</h2>
 <p>The <a href="./significance.html">significance chapter</a> documents the scientific hypothesis represented by each null, what counts as a trial, the handling of repeated sites, simulation size, and how global and local results should be read.</p>
-<p><strong>Existing evidence.</strong> Existing package checks include stored significance outputs. Those checks address numerical reproducibility; calibration of false-positive rates is a separate question.</p>
-<p><strong>Open question.</strong> Under data generated by each specified null, how often does the test reject at its stated threshold? How does that rate change with sample size and repeated measurements?</p>
+<p><strong>Evidence.</strong> The <a href="./s01-uniform-orientation.html">uniform-null</a> and <a href="./s02-specified-models.html">specified-null</a> studies report rejection rates at nominal thresholds. They cover sample size, simulation count and the effect of dependence between observations. The <a href="./s03-scoring-checks.html">scoring study</a> independently checks ranks and adjusted cluster probabilities.</p>
 <p><strong>Entry points.</strong> <a href="fn-randomtest.html"><code>randomTest()</code></a>, <a href="fn-modeltest.html"><code>modelTest()</code></a>, <a href="fn-bernoulli-trial.html"><code>bernoulli.trial()</code></a>, <a href="fn-pval2stars.html"><code>pval2stars()</code></a>, <a href="fn-plot-skyscaper-sigtest.html"><code>plot.skyscapeR.sigTest()</code></a>, <a href="fn-print-skyscaper-sigtest.html"><code>print.skyscapeR.sigTest()</code></a>.</p>
 
 

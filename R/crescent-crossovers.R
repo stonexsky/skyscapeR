@@ -132,6 +132,10 @@
 #' commit. Retain those and the analysis script separately for exact reproduction.
 #' @section Scientific validation:
 #' A07 examines independent crossover selection and sensitivity to the illumination cutoff. \href{https://stonexsky.github.io/skyscapeR/manual/lunar-crossovers.html#a07-scientific}{A07 scientific validation}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item Independent selection agreed in 31 of 32 lunar event cases. At the equator in autumn 1913 the two illumination estimates straddled the EFM cutoff. \href{https://stonexsky.github.io/skyscapeR/manual/lunar-crossovers.html#a07-scientific}{A07 study}.
+#' }
 CC <- function(year, loc, season="winter", crescent="first", simulation="SIM1",
                timezone=skyscapeR.env$timezone, calendar=skyscapeR.env$calendar,
                refraction=skyscapeR.env$refraction, atm=skyscapeR.env$atm, temp=skyscapeR.env$temp) {

@@ -39,7 +39,7 @@ recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for s
 }
 \section{Validation}{
 
-The JPL comparison in A05 matched all tested civil-day passages, including paired dates near a solstice. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+The JPL comparison in A05 matched all tested civil-day passages, including paired dates near a solstice. See the \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html#a05-solar-limits}{A05 check in the technical manual}.
 }
 
 \section{Provenance}{
@@ -51,6 +51,14 @@ This attribute adds no list entries or table columns. Ordinary subsetting or
 transformations may discard attributes; save the original result for reference.
 It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
+}
+
+\section{Scientific checks}{
+
+\itemize{
+\item All 121 checks of solar dates, seasonal instants and limiting declinations passed against their respective references. \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html}{A05 study}.
+\item The Sirius target screen recovered two disjoint intervals in the test band and a single contact at the annual maximum in 36 CE. \href{https://stonexsky.github.io/skyscapeR/manual/a08-target-ranges.html}{A08 study}.
+}
 }
 
 \examples{

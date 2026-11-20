@@ -24,3 +24,7 @@ Across all null settings in which a 5% rejection was attainable, global rates ra
 **Power.** With twelve measurements and 39 simulations, injecting three bearings from a 24° standard-deviation cluster centred at north gave 9.30% global rejection. Injecting six at that width gave 30.35%. Narrowing the six-bearing cluster to 6° raised global rejection to 92.40% and any-local rejection to 93.70%. With site-paired transformations the same narrow injection gave 63.20% global rejection and 69.75% any-local rejection. These estimates describe the specified support, widths, horizons and alternatives. Each null result assumes independent orientations with the stated measurement model.
 
 [Download the S01 reproduction scripts and all results](archives/S01-reproduction.zip).
+
+**Function entries**
+
+[`randomTest()`](fn-randomtest.qmd), [`coordtrans()`](fn-coordtrans.qmd), [`az.pdf()`](fn-az-pdf.qmd), [`spd()`](fn-spd.qmd), [`pval2stars()`](fn-pval2stars.qmd).

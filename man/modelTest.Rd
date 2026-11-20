@@ -127,9 +127,9 @@ disk space per simulation per grid point. Temporary files are removed on return 
 }
 \section{Validation}{
 
-In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See \href{https://stonexsky.github.io/skyscapeR/manual/s03-scoring-checks.html#s03-scoring-checks}{S03 validation in the technical manual}.
 
-In S02, identical candidate bearings produced identical directly constructed observed and simulated densities on build 2.0.9008. Global rejection at the 5 percent level ranged from 4.35 to 5.50 percent under the six matched null designs. See the \href{https://stonexsky.github.io/skyscapeR/manual/#s02-specified-models}{S02 check in the technical manual}.
+In S02, identical candidate bearings produced identical directly constructed observed and simulated densities on build 2.0.9008. Global rejection at the 5 percent level ranged from 4.35 to 5.50 percent under the six matched null designs. See the \href{https://stonexsky.github.io/skyscapeR/manual/s02-specified-models.html#s02-specified-models}{S02 check in the technical manual}.
 }
 
 \section{Model weights and interpretation}{
@@ -148,10 +148,13 @@ selection after viewing the data, or uncertainty in fitted model parameters.
 See \code{\link{randomTest}} for study-design and Monte Carlo limitations.
 }
 
-\section{Validation studies}{
+\section{Scientific checks}{
 
-The transformed-bearing null was tested with steep skylines, three measurement families and shared or site-specific candidate weights. \href{https://stonexsky.github.io/skyscapeR/manual/s02-specified-models.html#steep-null}{S02 validation study}.
-Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#pole-propagation}{D02 validation study}.
+\itemize{
+\item In six direct-input matched nulls, global rejection at nominal 5 percent ranged from 4.35 to 5.50 percent. The study separately quantifies effects of dependence and skyline transformation. \href{https://stonexsky.github.io/skyscapeR/manual/s02-specified-models.html}{S02 study}.
+\item The fixed uniform-null example returned a global probability of 0.4375 and an adjusted probability of 0.1875 for its cluster crossing north. \href{https://stonexsky.github.io/skyscapeR/manual/s03-scoring-checks.html}{S03 study}.
+\item The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html}{W02 study}.
+}
 }
 
 \examples{

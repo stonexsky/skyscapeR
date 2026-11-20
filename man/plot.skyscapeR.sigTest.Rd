@@ -66,9 +66,17 @@ The x axis uses more closely spaced labelled angular ticks and shorter unlabelle
 }
 \section{Validation}{
 
-The tested public fits plotted the stored local interval midpoints and significance symbols. A wrapped interval has start greater than end. A plot spanning the full turn displays its two visible segments with the same adjusted probability. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+The tested public fits plotted the stored local interval midpoints and significance symbols. A wrapped interval has start greater than end. A plot spanning the full turn displays its two visible segments with the same adjusted probability. See \href{https://stonexsky.github.io/skyscapeR/manual/s03-scoring-checks.html#s03-scoring-checks}{S03 validation in the technical manual}.
 
-W01 checked clipped local intervals, the pointwise envelope and the global probability label against the stored fit. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
+W01 checked clipped local intervals, the pointwise envelope and the global probability label against the stored fit. See the \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html#w01-plot-geometry}{W01 check in the technical manual}.
+}
+
+\section{Scientific checks}{
+
+\itemize{
+\item The fixed uniform-null example returned a global probability of 0.4375 and an adjusted probability of 0.1875 for its cluster crossing north. \href{https://stonexsky.github.io/skyscapeR/manual/s03-scoring-checks.html}{S03 study}.
+\item All 192 drawing checks passed for the tested layouts, including seasonal markers, axis positions and identification labels. \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html}{W01 study}.
+}
 }
 
 \examples{

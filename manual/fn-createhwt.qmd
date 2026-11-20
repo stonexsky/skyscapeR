@@ -1,5 +1,7 @@
 # `createHWT()` {#fn-createhwt}
 
+[Scientific results for this function](help/createHWT.html#scientific-checks).
+
 [Function index](function-index.html#idx-createhwt)
 
 ```{=html}

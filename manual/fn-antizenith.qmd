@@ -1,5 +1,7 @@
 # `antizenith()` {#fn-antizenith}
 
+[Scientific results for this function](help/antizenith.html#scientific-checks).
+
 A05 verified the geometric anti-zenith declination and tropical-boundary eligibility at two epochs. [A05 results](a05-solar-limits.qmd).
 
 [Function index](function-index.html#idx-antizenith)

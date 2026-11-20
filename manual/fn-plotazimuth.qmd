@@ -1,5 +1,7 @@
 # `plotAzimuth()` {#fn-plotazimuth}
 
+[Scientific results for this function](help/plotAzimuth.html#scientific-checks).
+
 W01 checked compass bearings and the inner and outer edges of celestial year-range sectors against their spherical reference bearings. [W01 results](w01-plot-geometry.qmd).
 
 [Function index](function-index.html#idx-plotazimuth)

@@ -1,5 +1,7 @@
 # `plot.skyscapeR.spd()` {#fn-plot-skyscaper-spd}
 
+[Scientific results for this function](help/plot.skyscapeR.spd.html#scientific-checks).
+
 In W01 the drawn line matched the stored coordinates and heights of the summed density. [W01 results](w01-plot-geometry.qmd).
 
 [Function index](function-index.html#idx-plot-skyscaper-spd)

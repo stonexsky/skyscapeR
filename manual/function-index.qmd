@@ -2,7 +2,7 @@
 
 For a workflow from the package vignette, use the [vignette guide](vignette-guide.qmd).
 
-Choose the function name for its methodological entry, the chapter for its scientific context, or **Help** to open its versioned help page. The index includes 69 exported functions and seven registered S3 methods. Aliases share their canonical help page. The registered subset method has a source note because it has no dedicated package help page.
+Choose the function name for its methodological entry, the chapter for its scientific context, or **Help** to open its versioned help page. The index includes 69 exported functions and seven registered S3 methods. Aliases share their canonical help page.
 
 | Entry point | Purpose | Chapter or outline | R help topic |
 |---|---|---|---|
@@ -76,7 +76,7 @@ Choose the function name for its methodological entry, the chapter for its scien
 | <span id="idx-star"></span>[`star()`](fn-star.html) | Calculate a fixed star's coordinates for an epoch | [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-star) | [Help](help/star.html) |
 | <span id="idx-star-phases"></span>[`star.phases()`](fn-star-phases.html) | Model seasonal changes in stellar visibility | [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-star) | [Help](help/star.phases.html) |
 | <span id="idx-stellariumsky"></span>[`stellariumSky()`](fn-stellariumsky.html) | Capture and step through the Stellarium sky above a horizon | [Sky brightness and visualisation](contents-plan.html#plan-light) | [Help](help/stellariumSky.html) |
-| <span id="idx-subset-skyscaper-pdf"></span>[`subset.skyscapeR.pdf()`](fn-subset-skyscaper-pdf.html) · S3 | Subset an orientation density object | [Uncertainty and orientation distributions](contents-plan.html#plan-density) · [D01](d01-density-checks.qmd) | [Method note](help/subset.skyscapeR.pdf.html) |
+| <span id="idx-subset-skyscaper-pdf"></span>[`subset.skyscapeR.pdf()`](fn-subset-skyscaper-pdf.html) · S3 | Subset an orientation density object | [Uncertainty and orientation distributions](contents-plan.html#plan-density) · [D01](d01-density-checks.qmd) | [Help](help/subset.skyscapeR.pdf.html) |
 | <span id="idx-sunaz"></span>[`sunAz()`](fn-sunaz.html) | Calculate the solar bearing for a field observation | [Reducing field observations](field-reduction.html#field-solar) | [Help](help/sunAz.html) |
 | <span id="idx-ten"></span>[`ten()`](fn-ten.html) | Convert degrees, arcminutes and arcseconds to decimal degrees | [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-time) · [A01](a01-calendar-checks.qmd) | [Help](help/ten.html) |
 | <span id="idx-time2jd"></span>[`time2jd()`](fn-time2jd.html) | Convert local calendar date and time to a UT Julian date | [Astronomical conventions and stellar positions](astronomical-conventions.html#conventions-time) · [A01](a01-calendar-checks.qmd) | [Help](help/time2jd.html) |
@@ -87,4 +87,4 @@ Choose the function name for its methodological entry, the chapter for its scien
 
 The package also documents `constellations`, `star.names`, `malta_entrances` and `malta_horizons`. These are data topics. Package-level help is available at `?skyscapeR`.
 
-The [package source archive](archives/skyscapeR_2.0.9017.tar.gz) supplies the namespace and vignette for the inventory check.
+The [package source archive](archives/skyscapeR_2.0.9018.tar.gz) supplies the namespace and vignette for the inventory check.

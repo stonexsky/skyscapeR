@@ -1,5 +1,7 @@
 # `body.position()` {#fn-body-position}
 
+[Scientific results for this function](help/body.position.html#scientific-checks).
+
 **A02 validation.** In A02, file-backed geocentric directions for ten bodies agreed with their matching JPL parent to within 0.0065 arcseconds across 1,080 comparisons. At the sampled prehistoric epochs the public topocentric convention differed from JPL Horizons by up to 0.70 degrees in local sky direction at a specified instant. [Geocentric and local position results](a02-ephemeris.qmd).
 
 [Function index](function-index.html#idx-body-position)

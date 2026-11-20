@@ -1,4 +1,5 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>createHor | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-createhor.html">createHor() method</a></nav><h2 id='createHor'>Construct a site horizon from measurements or an elevation model</h2><span id='topic+createHor'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>createHor | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-createhor.html">createHor() method</a></nav>
+<h2 id='createHor'>Construct a site horizon from measurements or an elevation model</h2><span id='topic+createHor'></span>
 
 <h3>Description</h3>
 
@@ -323,9 +324,9 @@ Plotting also falls back to the numerical horizon if the image is missing or has
 
 <p>H01 compared 334 bearings at 31 observing setups.
 At the surveyed bearings, <code>createHor()</code> reproduced the observed terrain skyline to within half a degree in 91.9% of cases.
-See the <a href="https://stonexsky.github.io/skyscapeR/manual/#h01-field-validation">H01 field validation in the skyscapeR technical manual</a> for the survey protocol, station results and limitations.
+See the <a href="../h01-field-validation.html#h01-field-validation">H01 field validation in the skyscapeR technical manual</a> for the survey protocol, station results and limitations.
 </p>
-<p>With the same 1 m terrain, <code>createHor()</code> reproduced Horizon’s skylines to a mean absolute difference of 0.004 degrees at each of two English sites. Against field measurements at 344 Irish bearings, <code>createHor()</code> using SRTM had a mean absolute error of 0.328 degrees, lower than either HeyWhatsThat or PeakFinder on that sample. Field accuracy varied by site. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#h02-skyline-comparison">H02 comparison in the skyscapeR technical manual</a>.
+<p>With the same 1 m terrain, <code>createHor()</code> reproduced Horizon’s skylines to a mean absolute difference of 0.004 degrees at each of two English sites. Against field measurements at 344 Irish bearings, <code>createHor()</code> using SRTM had a mean absolute error of 0.328 degrees, lower than either HeyWhatsThat or PeakFinder on that sample. Field accuracy varied by site. See the <a href="../h02-skyline-comparison.html#h02-skyline-comparison">H02 comparison in the skyscapeR technical manual</a>.
 </p>
 <p>The numerical skyline is a maximum over sampled terrain, not an accuracy
 certificate for the DEM. Horizontal and vertical datum differences, observer
@@ -349,9 +350,40 @@ source is distinct from merely replotting the saved horizon.
 </p>
 
 
+<h3>Scientific validation</h3>
+
+<p>H03 examines DEM sampling against an analytic ridge and a level spherical surface. <a href="../horizons.html#h03-scientific">H03 scientific validation</a>.
+</p>
+
+
+<h3 id="scientific-checks">Scientific checks</h3>
+
+
+<ul>
+<li><p> At 334 surveyed bearings, the median absolute skyline error was 0.036 degrees and 91.9 percent of predictions were within half a degree. <a href="../h01-field-validation.html">H01 study</a>.
+</p>
+</li>
+<li><p> On matched 1 m terrain at two English sites, the mean absolute skyline difference from Horizon was 0.004 degrees. Agreement with surveyed bearings varied by site. <a href="../h02-skyline-comparison.html">H02 study</a>.
+</p>
+</li>
+<li><p> On a level surface with 5 m radial sampling, geometric and effective-radius horizon dips agreed with the analytic values to within 0.000000009 degrees. <a href="../horizons.html#h03-scientific">H03 study</a>.
+</p>
+</li>
+<li><p> Across 32 synthetic wall panoramas, the largest numerical skyline discrepancy was 0.0261 degrees. Pixel width affected the displayed width of the opening. <a href="../h04-feature-resolution.html">H04 study</a>.
+</p>
+</li>
+<li><p> At eight withheld landmarks in a tilted synthetic panorama, both bearing and skyline altitude were recovered to within one image pixel. <a href="../photographic-horizons.html#h05-scientific">H05 study</a>.
+</p>
+</li>
+<li><p> The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. <a href="../w02-field-to-sky.html">W02 study</a>.
+</p>
+</li></ul>
+
+
+
 <h3>References</h3>
 
-<p>Patat, F. (2011). Horizon synthesis for archaeo-astronomical purposes. Astronomische Nachrichten 332, 743-749. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1002/asna.201111570")}.
+<p>Patat, F. (2011). Horizon synthesis for archaeo-astronomical purposes. Astronomische Nachrichten 332, 743-749. <a href="https://doi.org/10.1002/asna.201111570">doi:10.1002/asna.201111570</a>.
 </p>
 
 
@@ -386,4 +418,4 @@ exportStellarium(terrain, name="Survey site")
 ## End(Not run)
 </code></pre>
 
-<h3>Validation studies</h3><p>Intervals estimated from other observing groups covered 91.0 and 88.8 percent of bearings in two terrain-radius selections. <a href="../h01-field-validation.html#withheld-stations">H01 validation study</a>.</p><p>Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. <a href="../h04-feature-resolution.html#h04-feature-resolution">H04 validation study</a>.</p><h3>Scientific validation</h3><p>H03 examines DEM sampling against an analytic ridge and a level spherical surface. <a href="../horizons.html#h03-scientific">H03 study and results</a>.</p></body></html>
+</body></html>

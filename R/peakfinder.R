@@ -66,6 +66,10 @@
 #' plot(hor)
 #' exportStellarium(hor, name="PeakFinder example")
 #' }
+#' @section Scientific checks:
+#' \itemize{
+#' \item On matched 1 m terrain at two English sites, the mean absolute skyline difference from Horizon was 0.004 degrees. Agreement with surveyed bearings varied by site. \href{https://stonexsky.github.io/skyscapeR/manual/h02-skyline-comparison.html}{H02 study}.
+#' }
 importPeakFinder <- function(file, svg=NULL, elevation=NULL, alt.unc=0.5, width=4096, image.dir=getwd()) {
   scalar <- function(x) is.numeric(x) && length(x)==1L && is.finite(x)
   if (!scalar(alt.unc) || alt.unc<0) stop("alt.unc must be a nonnegative number.")

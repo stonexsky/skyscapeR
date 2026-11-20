@@ -1,4 +1,5 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>randomTest | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}img{max-width:100%;height:auto}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-randomtest.html">randomTest() method</a></nav><h2 id='randomTest'>Test orientations against the null hypothesis of random azimuths</h2><span id='topic+randomTest'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>randomTest | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}img{max-width:100%;height:auto}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-randomtest.html">randomTest() method</a></nav>
+<h2 id='randomTest'>Test orientations against the null hypothesis of random azimuths</h2><span id='topic+randomTest'></span>
 
 <h3>Description</h3>
 
@@ -95,7 +96,7 @@ shared horizon, the function sums the azimuth densities before transforming the 
 With a transformed declination PDF, supply its original <code>az</code> and <code>hor</code> in measurement
 order. Simulated measurements are then transformed individually before summation, using the
 stored refraction and atmosphere settings. Newer PDFs store the
-transformation grid spacings; PDFs without stored spacings use the defaults. The comparison grid uses
+transformation grid spacings; older PDFs use the legacy defaults. The comparison grid uses
 <code>.res</code>. The two transformation routes can give different results.
 If <code>normalise=TRUE</code>, each final curve has unit trapezoidal area. Each parallel worker
 receives its own copy of the required horizons.
@@ -153,11 +154,11 @@ No original PDFs or horizon objects are attached.
 
 <h3>Validation</h3>
 
-<p>In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. The package counts north once and reports one interval for a qualifying excess across north.  See <a href="https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks">S03 validation in the technical manual</a>.
+<p>In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See <a href="../s03-scoring-checks.html#s03-scoring-checks">S03 validation in the technical manual</a>.
 </p>
-<p>In S01, at a nominal 5 percent level the global rejection rate was 4.25 to 5.85 percent across the tested uniform-null settings with sufficient Monte Carlo resolution. The package uses the source azimuth density spacing and cutoff for simulations and matches the observed SPD spacing on the shared-horizon route.  See the <a href="https://stonexsky.github.io/skyscapeR/manual/#s01-uniform-orientation">S01 calibration in the technical manual</a>.
+<p>In S01, at a nominal 5 percent level the global rejection rate was 4.25 to 5.85 percent across the tested uniform-null settings with sufficient Monte Carlo resolution. Build 2.0.9007 uses the source azimuth density spacing and cutoff for simulations and matches the observed SPD spacing on the shared-horizon route. Refit earlier analyses that used different settings. See the <a href="../s01-uniform-orientation.html#s01-uniform-orientation">S01 calibration in the technical manual</a>.
 </p>
-<p>The 500-simulation Ggantija-phase workflow in W02 reproduced the bundled global probability, local intervals and adjusted probabilities. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky">W02 check in the technical manual</a>.
+<p>The 500-simulation Ggantija-phase workflow in W02 reproduced the bundled global probability, local intervals and adjusted probabilities. See the <a href="../w02-field-to-sky.html#w02-field-to-sky">W02 check in the technical manual</a>.
 </p>
 
 
@@ -179,19 +180,35 @@ models are not included in the within-fit local-cluster adjustment.
 </p>
 
 
+<h3 id="scientific-checks">Scientific checks</h3>
+
+
+<ul>
+<li><p> At nominal 5 percent, global rejection across tested uniform nulls with attainable ranks ranged from 4.25 to 5.85 percent. <a href="../s01-uniform-orientation.html">S01 study</a>.
+</p>
+</li>
+<li><p> The fixed uniform-null example returned a global probability of 0.4375 and an adjusted probability of 0.1875 for its cluster crossing north. <a href="../s03-scoring-checks.html">S03 study</a>.
+</p>
+</li>
+<li><p> The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. <a href="../w02-field-to-sky.html">W02 study</a>.
+</p>
+</li></ul>
+
+
+
 <h3>References</h3>
 
-<p>Silva, F. (2020). A probabilistic framework and significance test for the analysis of structural orientations in skyscape archaeology. <em>Journal of Archaeological Science</em>, 118, 105138. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/j.jas.2020.105138")}.
+<p>Silva, F. (2020). A probabilistic framework and significance test for the analysis of structural orientations in skyscape archaeology. <em>Journal of Archaeological Science</em>, 118, 105138. <a href="https://doi.org/10.1016/j.jas.2020.105138">doi:10.1016/j.jas.2020.105138</a>.
 </p>
-<p>Silva, F. and Lomsdalen, T. (2025). ‘No easy way from the earth to the stars’: a new statistical approach to the orientation of the Maltese temples. <em>Archaeological and Anthropological Sciences</em>, 17, 96. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1007/s12520-025-02208-4")}.
+<p>Silva, F. and Lomsdalen, T. (2025). ‘No easy way from the earth to the stars’: a new statistical approach to the orientation of the Maltese temples. <em>Archaeological and Anthropological Sciences</em>, 17, 96. <a href="https://doi.org/10.1007/s12520-025-02208-4">doi:10.1007/s12520-025-02208-4</a>.
 </p>
-<p>Maris, E. and Oostenveld, R. (2007). Nonparametric statistical testing of EEG- and MEG-data. <em>Journal of Neuroscience Methods</em>. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/j.jneumeth.2007.03.024")}.
+<p>Maris, E. and Oostenveld, R. (2007). Nonparametric statistical testing of EEG- and MEG-data. <em>Journal of Neuroscience Methods</em>. <a href="https://doi.org/10.1016/j.jneumeth.2007.03.024">doi:10.1016/j.jneumeth.2007.03.024</a>.
 </p>
-<p>Sassenhagen, J. and Draschkow, D. (2019). Cluster-based permutation tests of MEG/EEG data do not establish significance of effect latency or location. <em>Psychophysiology</em>. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1111/psyp.13335")}.
+<p>Sassenhagen, J. and Draschkow, D. (2019). Cluster-based permutation tests of MEG/EEG data do not establish significance of effect latency or location. <em>Psychophysiology</em>. <a href="https://doi.org/10.1111/psyp.13335">doi:10.1111/psyp.13335</a>.
 </p>
-<p>Dufour, J.-M. (2006). Monte Carlo tests with nuisance parameters: A general approach to finite-sample inference and nonstandard asymptotics. <em>Journal of Econometrics</em>, 133, 443-477. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/j.jeconom.2005.06.007")}.
+<p>Dufour, J.-M. (2006). Monte Carlo tests with nuisance parameters: A general approach to finite-sample inference and nonstandard asymptotics. <em>Journal of Econometrics</em>, 133, 443-477. <a href="https://doi.org/10.1016/j.jeconom.2005.06.007">doi:10.1016/j.jeconom.2005.06.007</a>.
 </p>
-<p>North, B. V., Curtis, D. and Sham, P. C. (2002). A note on the calculation of empirical P values from Monte Carlo procedures. <em>American Journal of Human Genetics</em>, 71, 439-441. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1086/341527")}.
+<p>North, B. V., Curtis, D. and Sham, P. C. (2002). A note on the calculation of empirical P values from Monte Carlo procedures. <em>American Journal of Human Genetics</em>, 71, 439-441. <a href="https://doi.org/10.1086/341527">doi:10.1086/341527</a>.
 </p>
 
 
@@ -218,4 +235,4 @@ plot(st2)
 ## End(Not run)
 </code></pre>
 
-<h3>Validation studies</h3><p>Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. <a href="../d02-bearing-propagation.html#pole-propagation">D02 validation study</a>.</p></body></html>
+</body></html>

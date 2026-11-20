@@ -126,6 +126,13 @@ commit. Retain those and the analysis script separately for exact reproduction.
 A07 examines independent crossover selection and sensitivity to the illumination cutoff. \href{https://stonexsky.github.io/skyscapeR/manual/lunar-crossovers.html#a07-scientific}{A07 scientific validation}.
 }
 
+\section{Scientific checks}{
+
+\itemize{
+\item Independent selection agreed in 31 of 32 lunar event cases. At the equator in autumn 1913 the two illumination estimates straddled the EFM cutoff. \href{https://stonexsky.github.io/skyscapeR/manual/lunar-crossovers.html#a07-scientific}{A07 study}.
+}
+}
+
 \examples{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
   # Spring Full Moon at latitude 35 degrees north in the year 2018

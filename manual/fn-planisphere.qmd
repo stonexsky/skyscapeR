@@ -1,5 +1,7 @@
 # `planisphere()` {#fn-planisphere}
 
+[Scientific results for this function](help/planisphere.html#scientific-checks).
+
 Diffuse V-band brightness was compared with six fields outside the Carina calibration aperture. [V04 validation study](v04-diffuse-photometry.qmd#v04-diffuse-photometry).
 
 Six stellar positions were compared with independently propagated catalogue directions from 3500 BCE to 2000 CE. [A03 validation study](a03-stellar-positions.qmd#a03-stellar-positions).

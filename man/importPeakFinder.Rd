@@ -79,6 +79,13 @@ observer elevation. This override does not recalculate the downloaded horizon.
 The default altitude uncertainty of 0.5 degrees is an explicit working assumption,
 not a measured PeakFinder error estimate. Supply an appropriate value for research.
 }
+\section{Scientific checks}{
+
+\itemize{
+\item On matched 1 m terrain at two English sites, the mean absolute skyline difference from Horizon was 0.004 degrees. Agreement with surveyed bearings varied by site. \href{https://stonexsky.github.io/skyscapeR/manual/h02-skyline-comparison.html}{H02 study}.
+}
+}
+
 \examples{
 \dontrun{
 hor <- importPeakFinder("landscape.zip") # warns that no PNG was created

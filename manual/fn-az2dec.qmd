@@ -1,5 +1,7 @@
 # `az2dec()` {#fn-az2dec}
 
+[Scientific results for this function](help/az2dec.html#scientific-checks).
+
 Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. [D02 validation study](d02-bearing-propagation.qmd#pole-propagation).
 
 [Function index](function-index.html#idx-az2dec)

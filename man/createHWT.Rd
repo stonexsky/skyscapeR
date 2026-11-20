@@ -50,6 +50,13 @@ and final download are separate from the polling time allowance. Once ready,
 the profile is downloaded and assigned the supplied name. Terrain-derived
 profiles need field verification where vegetation or structures affect visibility.
 }
+\section{Scientific checks}{
+
+\itemize{
+\item On matched 1 m terrain at two English sites, the mean absolute skyline difference from Horizon was 0.004 degrees. Agreement with surveyed bearings varied by site. \href{https://stonexsky.github.io/skyscapeR/manual/h02-skyline-comparison.html}{H02 study}.
+}
+}
+
 \examples{
 \dontrun{
 # Create and retrieve horizon data for the London Mithraeum:

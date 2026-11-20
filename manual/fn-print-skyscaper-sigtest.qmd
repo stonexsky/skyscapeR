@@ -1,5 +1,7 @@
 # `print.skyscapeR.sigTest()` {#fn-print-skyscaper-sigtest}
 
+[Scientific results for this function](help/print.skyscapeR.sigTest.html#scientific-checks).
+
 W01 checked the reported wrapped interval endpoints and adjusted probabilities against a known fit. [W01 results](w01-plot-geometry.qmd).
 
 A single adjusted probability is printed for a range crossing north. [S03 checks](s03-scoring-checks.qmd).

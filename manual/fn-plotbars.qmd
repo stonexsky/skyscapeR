@@ -1,5 +1,7 @@
 # `plotBars()` {#fn-plotbars}
 
+[Scientific results for this function](help/plotBars.html#scientific-checks).
+
 W01 checked the endpoints and row labels of an azimuth interval spanning north. [W01 results](w01-plot-geometry.qmd).
 
 [Function index](function-index.html#idx-plotbars)

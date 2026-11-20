@@ -46,6 +46,13 @@ inclination. This package also includes the fixed 0.145-degree term above.
 A06 examines geocentric lunar and planetary limits against independent extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 scientific validation}.
 }
 
+\section{Scientific checks}{
+
+\itemize{
+\item Four lunar standstill limits agreed with the monthly reference tables to within 0.019 degrees. The study also examines sampling of planetary extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 study}.
+}
+}
+
 \examples{
 # Northern major Lunar Extreme geocentric declination for year 2501 BC:
 nMjLX(-2500)

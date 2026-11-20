@@ -1,5 +1,7 @@
 # `coordtrans()` {#fn-coordtrans}
 
+[Scientific results for this function](help/coordtrans.html#scientific-checks).
+
 Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. [D02 validation study](d02-bearing-propagation.qmd#pole-propagation).
 
 The transformed-bearing null was tested with steep skylines, three measurement families and shared or site-specific candidate weights. [S02 validation study](s02-specified-models.qmd#steep-null).

@@ -7,3 +7,7 @@
 The Python reference pooled the observed and simulated values at each coordinate, computed sample standard deviations and interpolated quantiles, and ranked the sum of standardised excursions. One-tail tests used upper excursions and two-tail tests also included lower excursions. For each simulated curve the reference selected its own largest qualifying cluster before ranking the observed local score. The discrete reference included ties, all-identical curves, an isolated excursion, clusters on both sides, and spans at and just below 0.5°. For public calls, the R harness recorded the actual simulation matrix passed to inference; Python then scored it independently. This isolates the scoring stage from the null-generation and power studies scheduled under S01 and S02.
 
 [Reproduction files](archives/S03.zip). [Significance methods](significance.qmd) · [Validation programme](study-register.qmd#validation-programme).
+
+**Function entries**
+
+[`randomTest()`](fn-randomtest.qmd), [`modelTest()`](fn-modeltest.qmd), [`bernoulli.trial()`](fn-bernoulli-trial.qmd), [`pval2stars()`](fn-pval2stars.qmd), [`print.skyscapeR.sigTest()`](fn-print-skyscaper-sigtest.qmd), [`plot.skyscapeR.sigTest()`](fn-plot-skyscaper-sigtest.qmd).

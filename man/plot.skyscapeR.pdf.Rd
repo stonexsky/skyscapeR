@@ -79,7 +79,14 @@ refraction, pressure and temperature recorded with the result.
 }
 \section{Validation}{
 
-In W01 the shaded components matched the two intervals returned by hpdi() for a bimodal density. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
+In W01 the shaded components matched the two intervals returned by hpdi() for a bimodal density. See the \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html#w01-plot-geometry}{W01 check in the technical manual}.
+}
+
+\section{Scientific checks}{
+
+\itemize{
+\item All 192 drawing checks passed for the tested layouts, including seasonal markers, axis positions and identification labels. \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html}{W01 study}.
+}
 }
 
 \examples{

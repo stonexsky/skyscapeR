@@ -1,4 +1,5 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>plotBars | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-plotbars.html">plotBars() method</a></nav><h2 id='plotBars'>Plot orientation intervals in declination</h2><span id='topic+plotBars'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>plotBars | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-plotbars.html">plotBars() method</a></nav>
+<h2 id='plotBars'>Plot orientation intervals in declination</h2><span id='topic+plotBars'></span>
 
 <h3>Description</h3>
 
@@ -88,7 +89,7 @@ to <em>TRUE</em></p>
 <tr><td><code id="plotBars_+3A_geometry">geometry</code></td>
 <td>
 <p>Use <code>"interval"</code> for sightline intervals with a centre point, or
-<code>"bar"</code> for filled or outlined rectangles. Explicitly supplying the <code>shade</code>
+<code>"bar"</code> for filled or outlined rectangles. Explicitly supplying the older <code>shade</code>
 setting selects rectangles unless <code>geometry</code> is supplied.</p>
 </td></tr>
 <tr><td><code id="plotBars_+3A_show.legend">show.legend</code></td>
@@ -125,7 +126,7 @@ height. Single-year targets are displayed as lines.
 
 <h3>Validation</h3>
 
-<p>W01 checked the endpoints and row labels of an azimuth interval spanning north. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry">W01 check in the technical manual</a>.
+<p>W01 checked the endpoints and row labels of an azimuth interval spanning north. See the <a href="../w01-plot-geometry.html#w01-plot-geometry">W01 check in the technical manual</a>.
 </p>
 
 
@@ -138,6 +139,16 @@ site and horizon. Bars show the supplied symmetric angular bounds, not fitted
 confidence intervals. Use <code>az.pdf</code>, <code>coordtrans</code> and
 <code>spd</code> when the full measurement distributions are needed.
 </p>
+
+
+<h3 id="scientific-checks">Scientific checks</h3>
+
+
+<ul>
+<li><p> All 192 drawing checks passed for the tested layouts, including seasonal markers, axis positions and identification labels. <a href="../w01-plot-geometry.html">W01 study</a>.
+</p>
+</li></ul>
+
 
 
 <h3>See Also</h3>

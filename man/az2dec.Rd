@@ -45,9 +45,14 @@ Ephemeris horizontal transformation. Bearings are clockwise from north; the rout
 shifts them to the engine convention and rounds the returned declinations using the
 input bearing representation.
 }
-\section{Validation studies}{
+\section{Scientific checks}{
 
-Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#pole-propagation}{D02 validation study}.
+\itemize{
+\item Three archived solar-sight pairs on one baseline gave bearing errors from -0.389 to +0.529 degrees against the Polaris reference. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 study}.
+\item All 121 checks of solar dates, seasonal instants and limiting declinations passed against their respective references. \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html}{A05 study}.
+\item All 18 flat-horizon quantile comparisons met the 0.02-degree tolerance. Additional fixtures quantify errors on steep skylines and near a celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html}{D02 study}.
+\item The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html}{W02 study}.
+}
 }
 
 \examples{

@@ -1,5 +1,7 @@
 # `obliquity()` {#fn-obliquity}
 
+[Scientific results for this function](help/obliquity.html#scientific-checks).
+
 A05 checked the January true obliquity at modern and prehistoric test epochs against direct engine values. [A05 results](a05-solar-limits.qmd).
 
 [Function index](function-index.html#idx-obliquity)

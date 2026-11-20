@@ -46,3 +46,7 @@ The estimated intervals undercovered in both samples. These folds inherit the or
 
 
 [Reproduction scripts, inputs and results](archives/five-package-tests.zip).
+
+**Function entries**
+
+[`createHor()`](fn-createhor.qmd), [`hor2alt()`](fn-hor2alt.qmd).

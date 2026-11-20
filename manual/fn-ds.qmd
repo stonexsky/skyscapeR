@@ -1,5 +1,7 @@
 # `dS()` {#fn-ds}
 
+[Scientific results for this function](help/dS.html#scientific-checks).
+
 A05 checked the local December solar limit against annual obliquity and the specified parallax correction. [A05 results](a05-solar-limits.qmd).
 
 [Function index](function-index.html#idx-ds)

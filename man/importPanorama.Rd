@@ -54,7 +54,7 @@ The picker samples the overview. Choose Zoom and click two corners to display th
 }
 \section{Validation}{
 
-H07 verified lookup inside the photographed sector, including across north. Seasonal and event searches requiring a complete skyline reject partial photographs. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
+H07 verified lookup inside the photographed sector, including across north. Seasonal and event searches requiring a complete skyline reject partial photographs. See the \href{https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html#h07-panorama-coverage}{H07 check in the technical manual}.
 }
 
 \section{Extraction method and limitations}{
@@ -82,6 +82,14 @@ using functions, such as \code{\link{sketchSky}}, that require it.
 \section{Scientific validation}{
 
 H05 examines bearing and altitude errors at withheld synthetic landmarks. \href{https://stonexsky.github.io/skyscapeR/manual/photographic-horizons.html#h05-scientific}{H05 scientific validation}.
+}
+
+\section{Scientific checks}{
+
+\itemize{
+\item At eight withheld landmarks in a tilted synthetic panorama, both bearing and skyline altitude were recovered to within one image pixel. \href{https://stonexsky.github.io/skyscapeR/manual/photographic-horizons.html#h05-scientific}{H05 study}.
+\item A partial photographic horizon returned missing altitudes outside its sector. Full-sky event searches rejected it and accepted the complete profile. \href{https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html}{H07 study}.
+}
 }
 
 \examples{

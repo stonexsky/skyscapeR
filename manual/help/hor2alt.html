@@ -1,4 +1,5 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>hor2alt | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-hor2alt.html">hor2alt() method</a></nav><h2 id='hor2alt'>Interpolate horizon altitude at a bearing</h2><span id='topic+hor2alt'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>hor2alt | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-hor2alt.html">hor2alt() method</a></nav>
+<h2 id='hor2alt'>Interpolate horizon altitude at a bearing</h2><span id='topic+hor2alt'></span>
 
 <h3>Description</h3>
 
@@ -54,8 +55,36 @@ input azimuth in the supplied order. Values are rounded to two decimal places.
 
 <h3>Validation</h3>
 
-<p>In H07, lookup at each edge of a north-crossing panorama returned its measured altitude and lookup beyond either edge returned NA. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage">H07 check in the technical manual</a>.
+<p>In H07, lookup at each edge of a north-crossing panorama returned its measured altitude and lookup beyond either edge returned NA. See the <a href="../h07-panorama-coverage.html#h07-panorama-coverage">H07 check in the technical manual</a>.
 </p>
+
+
+<h3 id="scientific-checks">Scientific checks</h3>
+
+
+<ul>
+<li><p> At 334 surveyed bearings, the median absolute skyline error was 0.036 degrees and 91.9 percent of predictions were within half a degree. <a href="../h01-field-validation.html">H01 study</a>.
+</p>
+</li>
+<li><p> On a level surface with 5 m radial sampling, geometric and effective-radius horizon dips agreed with the analytic values to within 0.000000009 degrees. <a href="../horizons.html#h03-scientific">H03 study</a>.
+</p>
+</li>
+<li><p> At eight withheld landmarks in a tilted synthetic panorama, both bearing and skyline altitude were recovered to within one image pixel. <a href="../photographic-horizons.html#h05-scientific">H05 study</a>.
+</p>
+</li>
+<li><p> A partial photographic horizon returned missing altitudes outside its sector. Full-sky event searches rejected it and accepted the complete profile. <a href="../h07-panorama-coverage.html">H07 study</a>.
+</p>
+</li>
+<li><p> The zero-declination track crossed a level skyline at 90 and 270 degrees at 50 degrees north. The study also checks irregular skylines and JPL crossings. <a href="../a04-stellar-crossings.html">A04 study</a>.
+</p>
+</li>
+<li><p> All 18 flat-horizon quantile comparisons met the 0.02-degree tolerance. Additional fixtures quantify errors on steep skylines and near a celestial pole. <a href="../d02-bearing-propagation.html">D02 study</a>.
+</p>
+</li>
+<li><p> The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. <a href="../w02-field-to-sky.html">W02 study</a>.
+</p>
+</li></ul>
+
 
 
 <h3>See Also</h3>
@@ -73,4 +102,4 @@ hor2alt(hor, 90, return.unc=TRUE)
 hor2alt(hor, c(90,180,270), return.unc=TRUE)
 </code></pre>
 
-<h3>Validation studies</h3><p>Intervals estimated from other observing groups covered 91.0 and 88.8 percent of bearings in two terrain-radius selections. <a href="../h01-field-validation.html#withheld-stations">H01 validation study</a>.</p><p>Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. <a href="../h04-feature-resolution.html#h04-feature-resolution">H04 validation study</a>.</p></body></html>
+</body></html>

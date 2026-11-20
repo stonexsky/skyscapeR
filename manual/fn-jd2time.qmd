@@ -1,5 +1,7 @@
 # `jd2time()` {#fn-jd2time}
 
+[Scientific results for this function](help/jd2time.html#scientific-checks).
+
 All 499 calendar, clock, era, angle and setting checks in A01 passed. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. [A01 results](a01-calendar-checks.qmd).
 
 [Function index](function-index.html#idx-jd2time)

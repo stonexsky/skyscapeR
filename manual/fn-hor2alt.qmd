@@ -1,5 +1,7 @@
 # `hor2alt()` {#fn-hor2alt}
 
+[Scientific results for this function](help/hor2alt.html#scientific-checks).
+
 Intervals estimated from other observing groups covered 91.0 and 88.8 percent of bearings in two terrain-radius selections. [H01 validation study](h01-field-validation.qmd#withheld-stations).
 
 Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. [H04 validation study](h04-feature-resolution.qmd#h04-feature-resolution).

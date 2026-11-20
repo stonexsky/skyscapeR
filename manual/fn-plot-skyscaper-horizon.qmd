@@ -1,5 +1,7 @@
 # `plot.skyscapeR.horizon()` {#fn-plot-skyscaper-horizon}
 
+[Scientific results for this function](help/plot.skyscapeR.horizon.html#scientific-checks).
+
 Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. [H04 validation study](h04-feature-resolution.qmd#h04-feature-resolution).
 
 W01 checked the skyline ordinate and azimuth viewport on flat and raised profiles, including natural and publication sky overlays. [W01 results](w01-plot-geometry.qmd).

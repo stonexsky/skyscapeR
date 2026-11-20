@@ -41,7 +41,16 @@ the survey data.
 }
 \section{Validation}{
 
-Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks}{A01 validation in the technical manual}.
+Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html#a01-calendar-checks}{A01 validation in the technical manual}.
+}
+
+\section{Scientific checks}{
+
+\itemize{
+\item All 499 calendar, clock and angle checks passed. The largest error across 240 absolute Julian dates was 0.000021 seconds. \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html}{A01 study}.
+\item With extinction of 0.2 magnitudes per airmass, transmission was 0.149 at 5 degrees and 0.832 at the zenith under the adopted law. \href{https://stonexsky.github.io/skyscapeR/manual/sky-rendering.html#extinction-check}{V05 study}.
+\item A one-minute native sky step retained the publication extinction setting. External Stellarium capture requires a separate comparison. \href{https://stonexsky.github.io/skyscapeR/manual/sky-rendering.html#step-check}{V07 study}.
+}
 }
 
 \examples{

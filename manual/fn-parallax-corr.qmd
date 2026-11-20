@@ -1,5 +1,7 @@
 # `parallax.corr()` {#fn-parallax-corr}
 
+[Scientific results for this function](help/parallax.corr.html#scientific-checks).
+
 A05 compared the returned correction with the signed spherical approximation in both hemispheres. [A05 results](a05-solar-limits.qmd).
 
 [Function index](function-index.html#idx-parallax-corr)

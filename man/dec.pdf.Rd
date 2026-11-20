@@ -68,7 +68,16 @@ and trimmed at \code{.cutoff}. The retained area can consequently be less than o
 }
 \section{Validation}{
 
-In D01, sampled declination densities agreed with analytic references. Build 2.0.9006 retained the corresponding declination centres in all four subset checks. See \href{https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks}{D01 validation in the technical manual}.
+In D01, sampled declination densities agreed with analytic references. Build 2.0.9006 retained the corresponding declination centres in all four subset checks. See \href{https://stonexsky.github.io/skyscapeR/manual/d01-density-checks.html#d01-density-checks}{D01 validation in the technical manual}.
+}
+
+\section{Scientific checks}{
+
+\itemize{
+\item The six measurement families matched their analytic controls. Tests of disconnected highest-density regions recovered the expected endpoints. \href{https://stonexsky.github.io/skyscapeR/manual/d01-density-checks.html}{D01 study}.
+\item All 18 flat-horizon quantile comparisons met the 0.02-degree tolerance. Additional fixtures quantify errors on steep skylines and near a celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html}{D02 study}.
+\item In six direct-input matched nulls, global rejection at nominal 5 percent ranged from 4.35 to 5.50 percent. The study separately quantifies effects of dependence and skyline transformation. \href{https://stonexsky.github.io/skyscapeR/manual/s02-specified-models.html}{S02 study}.
+}
 }
 
 \section{Choosing a measurement model}{

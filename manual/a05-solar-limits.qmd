@@ -12,3 +12,7 @@ A05 distinguishes the civil day on which the Sun reaches a declination, the inst
 | Zenith and anti-zenith | At geometric overhead and underfoot the parallax correction vanishes. The package uses the obliquity of the supplied year for tropical eligibility. The fixtures include both tropical boundaries, modern and prehistoric epochs, and an unreachable polar site. |
 
 The prehistoric date checks use an independent root search with the same Swiss ephemeris. The JPL and USNO comparisons apply to the modern cases tested. [Download the A05 scripts, reference data and results](archives/A05.zip).
+
+**Function entries**
+
+[`solar.date()`](fn-solar-date.qmd), [`eq()`](fn-eq.qmd), [`jS()`](fn-js.qmd), [`dS()`](fn-ds.qmd), [`zenith()`](fn-zenith.qmd), [`antizenith()`](fn-antizenith.qmd), [`obliquity()`](fn-obliquity.qmd), [`parallax.corr()`](fn-parallax-corr.qmd), [`spatial.equinox()`](fn-spatial-equinox.qmd), [`hor2max.dec()`](fn-hor2max-dec.qmd), [`hor2min.dec()`](fn-hor2min-dec.qmd), [`az2dec()`](fn-az2dec.qmd).

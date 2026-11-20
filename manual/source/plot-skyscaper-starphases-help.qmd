@@ -102,7 +102,7 @@ display does not recalculate the visibility thresholds. Use <code>plot(first, li
 
 <h3>Validation</h3>
 
-<p>W01 checked season boundaries, event positions, quarterly landmarks and star, site and epoch labels in linear and circular layouts. See the <a href="#w01-plot-geometry">W01 check in the technical manual</a>.
+<p>W01 checked season boundaries, event positions, quarterly landmarks and star, site and epoch labels in linear and circular layouts. See the <a href="w01-plot-geometry.html#w01-plot-geometry">W01 check in the technical manual</a>.
 </p>
 
 
@@ -133,6 +133,19 @@ room for the seasonal scale where needed. Both layouts use the same
 sequence and colours; the circular layout makes the cycle boundary explicit.
 Labels wrap and shrink to fit; crowded comparisons need a larger device.
 </p>
+
+
+<h3>Scientific checks</h3>
+
+
+<ul>
+<li><p> First-morning dates fell within seven days of 22 of 23 sightings and last-evening dates within seven days of 21 of 33. The respective median predictions were two days early and five days late. <a href="heliacal-rising.html#v01-observations">V01 study</a>.
+</p>
+</li>
+<li><p> All 192 drawing checks passed for the tested layouts, including seasonal markers, axis positions and identification labels. <a href="w01-plot-geometry.html">W01 study</a>.
+</p>
+</li></ul>
+
 
 
 <h3>See Also</h3>

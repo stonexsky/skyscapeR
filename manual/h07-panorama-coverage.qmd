@@ -10,3 +10,7 @@ A photograph covering 330° through north to 30° supplies no horizon altitude a
 | `exportHor()` | Partial photographs are rejected for both textured and numerical landscape export. Both modes accept the full photograph. |
 
 All 33 assertions passed. The results concern the recorded azimuth sector of an imported panorama. They do not calibrate the photograph's angular accuracy. [Download H07 fixtures, scripts and results](archives/H07.zip).
+
+**Function entries**
+
+[`importPanorama()`](fn-importpanorama.qmd), [`hor2alt()`](fn-hor2alt.qmd), [`coordtrans()`](fn-coordtrans.qmd), [`riseset()`](fn-riseset.qmd), [`star.phases()`](fn-star-phases.qmd), [`spatial.equinox()`](fn-spatial-equinox.qmd), [`exportHor()`](fn-exporthor.qmd).

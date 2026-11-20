@@ -14,3 +14,7 @@ We compared the public `star()` coordinates for six bright stars with an indepen
 The largest separation was 0.0165° for Sirius in 3500 BCE. Arcturus has the largest proper motion in this sample and a much smaller residual. These comparisons constrain agreement between two astrometric reconstructions. They cannot establish where an ancient observer saw a star to arcsecond accuracy.
 
 [Reproduction scripts, inputs and results](archives/five-package-tests.zip).
+
+**Function entries**
+
+[`star()`](fn-star.qmd), [`body.position()`](fn-body-position.qmd), [`obliquity()`](fn-obliquity.qmd), [`parallax.corr()`](fn-parallax-corr.qmd), [`orbit()`](fn-orbit.qmd).

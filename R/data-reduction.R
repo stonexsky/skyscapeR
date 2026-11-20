@@ -32,7 +32,7 @@
 #' @param HWT.ID HeyWhatsThat IDs relating to a previously generated
 #' horizon profile for measurement.
 #' @section Validation:
-#' W02 recovered both independent circle-difference control bearings and retained each site row in a multi-site solar reduction. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
+#' W02 recovered both independent circle-difference control bearings and retained each site row in a multi-site solar reduction. See the \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html#w02-field-to-sky}{W02 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{sunAz}}, \code{\link{ten}}
 #' @references Ruggles, C.L.N. (1999). \emph{Astronomy in Prehistoric Britain and Ireland}.
@@ -59,6 +59,11 @@
 #' }
 #' @section Scientific validation:
 #' F01 examines magnetic and solar reductions against independent references. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 scientific validation}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item Three archived solar-sight pairs on one baseline gave bearing errors from -0.389 to +0.529 degrees against the Polaris reference. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 study}.
+#' \item The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html}{W02 study}.
+#' }
 reduct.theodolite = function(loc, az, date, time, tz, az.sun = 0, limb, alt, name, ID, HWT.ID) {
   if (class(loc)[1]=='skyscapeR.horizon') { hor <- loc; loc <- loc$metadata$georef } else { hor <- NULL }
 
@@ -145,7 +150,7 @@ reduct.theodolite = function(loc, az, date, time, tz, az.sun = 0, limb, alt, nam
 #' celestial declination are included when altitudes are supplied or a horizon
 #' is available. Optional identification columns are retained.
 #' @section Validation:
-#' W02 checked north-crossing magnetic readings against the supplied corrections before passing true bearings into a skyline analysis. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
+#' W02 checked north-crossing magnetic readings against the supplied corrections before passing true bearings into a skyline analysis. See the \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html#w02-field-to-sky}{W02 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{mag.dec}}, \code{\link{az2dec}}, \code{\link{hor2alt}}
 #' @examples
@@ -168,6 +173,11 @@ reduct.theodolite = function(loc, az, date, time, tz, az.sun = 0, limb, alt, nam
 #' reduct.compass(hor, c(89.5,105,109.5), magdec=-2)
 #' @section Scientific validation:
 #' F01 examines magnetic and solar reductions against independent references. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 scientific validation}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item Three archived solar-sight pairs on one baseline gave bearing errors from -0.389 to +0.529 degrees against the Polaris reference. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 study}.
+#' \item The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html}{W02 study}.
+#' }
 reduct.compass = function(loc, mag.az, date, magdec, alt, name, ID, HWT.ID) {
   if (missing(date) && missing(magdec)) {
     stop("Supply either date (to calculate magnetic declination) or magdec.")

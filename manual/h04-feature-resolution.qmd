@@ -8,3 +8,7 @@ A separate eight-image experiment coloured the two walls differently and counted
 
 
 [Reproduction scripts, inputs and results](archives/five-package-tests.zip).
+
+**Function entries**
+
+[`horFeature()`](fn-horfeature.qmd), [`createHor()`](fn-createhor.qmd), [`demPalettes()`](fn-dempalettes.qmd), [`plot.skyscapeR.horizon()`](fn-plot-skyscaper-horizon.qmd).

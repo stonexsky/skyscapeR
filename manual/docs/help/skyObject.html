@@ -1,4 +1,5 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>skyObject | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-sky-objects.html">sky.objects() method</a> · <a href="../fn-skyobject.html">skyObject() method</a></nav><h2 id='skyObject'>Prepare celestial targets for orientation plots</h2><span id='topic+skyObject'></span><span id='topic+sky.objects'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>skyObject | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-sky-objects.html">sky.objects() method</a> · <a href="../fn-skyobject.html">skyObject() method</a></nav>
+<h2 id='skyObject'>Prepare celestial targets for orientation plots</h2><span id='topic+skyObject'></span><span id='topic+sky.objects'></span>
 
 <h3>Description</h3>
 
@@ -70,7 +71,7 @@ plots use each group's stored location and a level horizon, shading the azimuth 
 declination boundaries for a year-range group. Declination plots need no
 location. No common epoch range is imposed and no astronomical positions
 are recomputed merely by combining objects. The output class remains
-skyscapeR.object, so the object can be replotted.
+skyscapeR.object, so previously saved objects remain usable.
 sky.objects is a silent compatibility alias for skyObject.
 </p>
 
@@ -83,7 +84,7 @@ sky.objects is a silent compatibility alias for skyObject.
 
 <h3>Validation</h3>
 
-<p>A08 checked annual stellar, solar and lunar range endpoints, local corrections, identifier aliases and retention of target labels and line styles. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#a08-target-ranges">A08 check in the technical manual</a>.
+<p>A08 checked annual stellar, solar and lunar range endpoints, local corrections, identifier aliases and retention of target labels and line styles. See the <a href="../a08-target-ranges.html#a08-target-ranges">A08 check in the technical manual</a>.
 </p>
 
 
@@ -117,6 +118,22 @@ commit. Retain those and the analysis script separately for exact reproduction.
 </p>
 
 
+<h3 id="scientific-checks">Scientific checks</h3>
+
+
+<ul>
+<li><p> Four lunar standstill limits agreed with the monthly reference tables to within 0.019 degrees. The study also examines sampling of planetary extrema. <a href="../celestial-targets.html#a06-scientific">A06 study</a>.
+</p>
+</li>
+<li><p> The Sirius target screen recovered two disjoint intervals in the test band and a single contact at the annual maximum in 36 CE. <a href="../a08-target-ranges.html">A08 study</a>.
+</p>
+</li>
+<li><p> The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. <a href="../w02-field-to-sky.html">W02 study</a>.
+</p>
+</li></ul>
+
+
+
 <h3>See Also</h3>
 
 <p><code>plot.skyscapeR.horizon</code>, <code>plotBars</code>,
@@ -143,4 +160,4 @@ groups &lt;- list(skyObject(12, "2001 BC", col="blue"),
 plotBars(c(-24,12,24), unc=1, obj=groups)
 </code></pre>
 
-<h3>Validation studies</h3><p>Six stellar positions were compared with independently propagated catalogue directions from 3500 BCE to 2000 CE. <a href="../a03-stellar-positions.html#a03-stellar-positions">A03 validation study</a>.</p></body></html>
+</body></html>

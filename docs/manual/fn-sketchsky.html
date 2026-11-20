@@ -848,6 +848,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p><a href="help/sketchSky.html#scientific-checks">Scientific results for this function</a>.</p>
 <p><a href="./heliacal-rising.html#v01-observations">Observational accuracy and validation</a>.</p>
 <p><a href="function-index.html#idx-sketchsky">Function index</a></p>
 <h2 id="sketchSky" class="anchored">Prepare a reusable sky sketch for a horizon plot</h2><span id="topic+sketchSky"></span>
@@ -950,12 +951,6 @@ Components can be empty when a layer is disabled. No image file is written.
 </p>
 
 
-<h3 class="anchored">Validation studies</h3>
-
-<p>Diffuse V-band brightness was compared with six fields outside the Carina calibration aperture. <a href="v04-diffuse-photometry.html#v04-diffuse-photometry">V04 validation study</a>.
-</p>
-
-
 <h3 class="anchored">Reading a natural sketch</h3>
 
 <p>The sky is calculated for the specified instant. Stars, clusters, planets and
@@ -1021,11 +1016,16 @@ exposure at a solar altitude of 15 degrees.
 
 <h3 class="anchored">Milky Way and clusters</h3>
 
-<p>The Milky Way is traced on a 0.1-degree Galactic grid from the 4096-pixel diffuse-light map in Deep Star Maps 2020.
-Within the smoothed envelope, retained dark patches have at least 10 percent
-local contrast; two bright tiers begin at 1.10 and 1.75 times the mean band
-tone after the dark patches are excluded. Retained patches cover at least
-10 square degrees. Natural sketches anchor the mean surface brightness
+<p>The Milky Way uses a 0.1-degree Galactic grid classified from the reviewed
+1024-pixel diffuse-light image in Deep Star Maps 2020. A smoothed image-tone
+threshold defines its outer envelope. Dark patches are more than 8 percent
+below an 8-degree local reference and cover at least 7 square degrees.
+Two brighter classes use fixed image-tone cutoffs and a 10-square-degree
+minimum area. These settings, including the 7-square-degree cutoff, were
+chosen by visual comparison and remain illustrative, not visibility thresholds.
+Dark patches remain within the outer envelope for alignment purposes.
+See the technical manual and bundled milky-way-source.txt for reproduction.
+Natural sketches anchor the mean surface brightness
 of a four-degree field in Carina to 20.7 V magnitudes per square arcsecond
 (van der Kruit 2024). Brightness elsewhere is approximate. Atmospheric
 extinction can make the band difficult to follow down to its calculated
@@ -1059,7 +1059,7 @@ commit. Retain those and the analysis script separately for exact reproduction.
 
 <h3 class="anchored">Validation</h3>
 
-<p>W02 verified the reconstructed Gacrux bearing and altitude at the same instant and viewpoint using direct equatorial coordinates and spherical geometry. See the <a href="w02-field-to-sky.html">W02 check in the technical manual</a>.
+<p>W02 verified the reconstructed Gacrux bearing and altitude at the same instant and viewpoint using direct equatorial coordinates and spherical geometry. See the <a href="w02-field-to-sky.html#w02-field-to-sky">W02 check in the technical manual</a>.
 </p>
 
 
@@ -1067,6 +1067,34 @@ commit. Retain those and the analysis script separately for exact reproduction.
 
 <p>Across 56 recorded dates, heliacal rising fell within seven days of 22 of 23 first morning sightings. The median prediction was two days early. Acronycal setting fell within seven days of 21 of 33 last evening sightings. The median prediction was five days late. A week is a practical search window. Larger discrepancies occur, especially at dusk. These results apply to the two tested events. <a href="heliacal-rising.html#v01-observations">V01 observed dates and scientific checks</a>.
 </p>
+
+
+<h3 class="anchored">Scientific checks</h3>
+
+
+<ul>
+<li><p> First-morning dates fell within seven days of 22 of 23 sightings and last-evening dates within seven days of 21 of 33. The respective median predictions were two days early and five days late. <a href="heliacal-rising.html#v01-observations">V01 study</a>.
+</p>
+</li>
+<li><p> The Milky Way lookup recovered all 4,323,600 stored classes and agreed across the longitude seam. Independent tracing of the outline remains open. <a href="sky-rendering.html#mw-grid-check">V02 study</a>.
+</p>
+</li>
+<li><p> Twilight brightness had a mean absolute residual of 0.481 magnitudes against 22 held-out measurements. This benchmark covers twilight only. <a href="sky-rendering.html#twilight-check">V03 study</a>.
+</p>
+</li>
+<li><p> Across six independent diffuse-light fields the residuals had both signs. The Carina normalisation alone could not account for the spatial differences. <a href="v04-diffuse-photometry.html">V04 study</a>.
+</p>
+</li>
+<li><p> With extinction of 0.2 magnitudes per airmass, transmission was 0.149 at 5 degrees and 0.832 at the zenith under the adopted law. <a href="sky-rendering.html#extinction-check">V05 study</a>.
+</p>
+</li>
+<li><p> A one-minute native sky step retained the publication extinction setting. External Stellarium capture requires a separate comparison. <a href="sky-rendering.html#step-check">V07 study</a>.
+</p>
+</li>
+<li><p> The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. <a href="w02-field-to-sky.html">W02 study</a>.
+</p>
+</li></ul>
+
 
 
 <h3 class="anchored">References</h3>

@@ -1,4 +1,5 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>orbit | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-orbit.html">orbit() method</a></nav><h2 id='orbit'>Trace the path of a celestial body at a site</h2><span id='topic+orbit'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>orbit | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-orbit.html">orbit() method</a></nav>
+<h2 id='orbit'>Trace the path of a celestial body at a site</h2><span id='topic+orbit'></span>
 
 <h3>Description</h3>
 
@@ -62,7 +63,7 @@ test of terrain obstruction or event times.
 
 <h3>Validation</h3>
 
-<p>In A08, coordinates on the two plotted solar-limit tracks recovered their source declinations by spherical inversion. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#a08-target-ranges">A08 check in the technical manual</a>.
+<p>In A08, coordinates on the two plotted solar-limit tracks recovered their source declinations by spherical inversion. See the <a href="../a08-target-ranges.html#a08-target-ranges">A08 check in the technical manual</a>.
 </p>
 
 
@@ -76,6 +77,22 @@ transformations may discard attributes; save the original result for reference.
 It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
 </p>
+
+
+<h3 id="scientific-checks">Scientific checks</h3>
+
+
+<ul>
+<li><p> For six stars compared with independently propagated catalogue directions, the largest separation was 0.0165 degrees, for Sirius in 3500 BCE. <a href="../a03-stellar-positions.html">A03 study</a>.
+</p>
+</li>
+<li><p> The zero-declination track crossed a level skyline at 90 and 270 degrees at 50 degrees north. The study also checks irregular skylines and JPL crossings. <a href="../a04-stellar-crossings.html">A04 study</a>.
+</p>
+</li>
+<li><p> The Sirius target screen recovered two disjoint intervals in the test band and a single contact at the annual maximum in 36 CE. <a href="../a08-target-ranges.html">A08 study</a>.
+</p>
+</li></ul>
+
 
 
 <h3>See Also</h3>

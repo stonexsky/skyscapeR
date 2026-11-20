@@ -13,3 +13,6 @@ The field-to-sky workflow records intermediate field reductions, transformed den
 
 The bundled group result was regenerated from the 17 ordered entrances and their measured widths. Agreement across this workflow establishes numerical continuity of its inputs and outputs. It provides neither a measurement of ancient naked-eye visibility nor evidence of intentional alignment. [Download W02 scripts, per-stage tables](archives/W02.zip).
 
+**Function entries**
+
+[`reduct.compass()`](fn-reduct-compass.qmd), [`reduct.theodolite()`](fn-reduct-theodolite.qmd), [`createHor()`](fn-createhor.qmd), [`hor2alt()`](fn-hor2alt.qmd), [`az2dec()`](fn-az2dec.qmd), [`az.pdf()`](fn-az-pdf.qmd), [`coordtrans()`](fn-coordtrans.qmd), [`spd()`](fn-spd.qmd), [`randomTest()`](fn-randomtest.qmd), [`modelTest()`](fn-modeltest.qmd), [`findTargets()`](fn-findtargets.qmd), [`skyObject()`](fn-skyobject.qmd), [`star.phases()`](fn-star-phases.qmd), [`riseset()`](fn-riseset.qmd), [`sketchSky()`](fn-sketchsky.qmd).

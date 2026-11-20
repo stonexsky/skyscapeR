@@ -1,5 +1,7 @@
 # `eq()` {#fn-eq}
 
+[Scientific results for this function](help/eq.html#scientific-checks).
+
 A05 checked the equinoctial declination reference separately from the dates of the astronomical equinoxes. [A05 results](a05-solar-limits.qmd).
 
 [Function index](function-index.html#idx-eq)

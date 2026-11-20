@@ -1,5 +1,7 @@
 # `az.pdf()` {#fn-az-pdf}
 
+[Scientific results for this function](help/az.pdf.html#scientific-checks).
+
 Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. [D02 validation study](d02-bearing-propagation.qmd#pole-propagation).
 
 Periodic azimuth densities passed the fine-grid and wide-width D01 checks. [D01 checks](d01-density-checks.qmd).

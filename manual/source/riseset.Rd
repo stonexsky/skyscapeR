@@ -24,9 +24,9 @@ riseset(
 containing the latitude, longitude and elevation of location, in this order.}
 
 \item{date}{Either a string containing the date in the format "YYYY/MM/DD"
- (see \code{\link{timestring}}), or a numeric containing the julian date (see \code{\link{time2jd}}).
- Can also be a single year ("YYYY") or a month ("YYYY/MM") to calculate risings and settings for every day in the
- year or month, respectively. Not necessary if \emph{jd} is given.}
+(see \code{\link{timestring}}), or a numeric containing the julian date (see \code{\link{time2jd}}).
+Can also be a single year ("YYYY") or a month ("YYYY/MM") to calculate risings and settings for every day in the
+year or month, respectively. Not necessary if \emph{jd} is given.}
 
 \item{jd}{A numeric containing the julian date (see \code{\link{time2jd}}) for which to
 calculate rising and settings. Only needed if \emph{date} is not given.}
@@ -89,8 +89,17 @@ The Swiss Ephemeris manual documents the fixed-altitude rise/set calculation.
 Astronomical positions require Swiss Ephemeris files covering the epoch. We
 recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for setup.
 }
+\section{Validation}{
+
+A02 tested sensitivity to ephemeris conventions using a separate solver on airless lunar-centre trajectories. Across 177 prehistoric skyline crossings, default azimuths differed from JPL Horizons by a median of 0.059 degrees and a maximum of 0.322 degrees. Matching delta T reduced the maximum to 0.027 degrees. See the \href{https://stonexsky.github.io/skyscapeR/manual/a02-ephemeris.html#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
+
+A04 recovered the expected crossing counts and order on synthetic ridges, notches and grazing tracks; solar and lunar centre crossings at the Malta test site agreed with JPL Horizons within 0.85 seconds and 0.0041 degrees. See the \href{https://stonexsky.github.io/skyscapeR/manual/a04-stellar-crossings.html#a04-stellar-crossings}{A04 check in the technical manual}.
+
+H07 verified that a partial panorama is rejected before searching for solar or stellar crossings on an unobserved skyline. See the \href{https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html#h07-panorama-coverage}{H07 check in the technical manual}.
+}
 
 \section{Crossing is not first visibility}{
+
 The result supplies geometry and time. It applies neither atmospheric extinction
 nor a twilight detection threshold and does not test whether the star can be
 seen. A centre exactly at the skyline can remain obscured in a plot or too faint
@@ -107,6 +116,7 @@ original call and convert date/time back with matching calendar and timezone.
 }
 
 \section{Provenance}{
+
 Structured results carry a \code{provenance} attribute. Read it with
 \code{attr(result, "provenance")}; its \code{packages} entry records the loaded
 skyscapeR and swephR versions, with NA when a namespace version is unavailable.
@@ -115,13 +125,7 @@ transformations may discard attributes; save the original result for reference.
 It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
 }
-\section{Validation}{
-A02 tested sensitivity to ephemeris conventions using a separate solver on airless lunar-centre trajectories. Across 177 prehistoric skyline crossings, default azimuths differed from JPL Horizons by a median of 0.059 degrees and a maximum of 0.322 degrees. Matching delta T reduced the maximum to 0.027 degrees. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
 
-A04 recovered the expected crossing counts and order on synthetic ridges, notches and grazing tracks; solar and lunar centre crossings at the Malta test site agreed with JPL Horizons within 0.85 seconds and 0.0041 degrees. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a04-stellar-crossings}{A04 check in the technical manual}.
-
-H07 verified that a partial panorama is rejected before searching for solar or stellar crossings on an unobserved skyline. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
-}
 \examples{
 if (requireNamespace("swephRdata", quietly = TRUE)) {
   # Rising and setting of the sun on june solstice 2018, from the location of London
@@ -146,4 +150,14 @@ Astrodienst. Swiss Ephemeris programmer's manual. \url{https://www.astro.com/swi
 }
 \seealso{
 \code{\link[swephR]{swe_calc_ut}}, \code{\link[swephR]{swe_azalt}}, \code{\link{body.position}}, \code{\link{star.phases}}
+}
+
+\section{Scientific checks}{
+\itemize{
+\item A partial photographic horizon returned missing altitudes outside its sector. Full-sky event searches rejected it and accepted the complete profile. \href{https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html}{H07 study}.
+\item The zero-declination track crossed a level skyline at 90 and 270 degrees at 50 degrees north. The study also checks irregular skylines and JPL crossings. \href{https://stonexsky.github.io/skyscapeR/manual/a04-stellar-crossings.html}{A04 study}.
+\item Independent selection agreed in 31 of 32 lunar event cases. At the equator in autumn 1913 the two illumination estimates straddled the EFM cutoff. \href{https://stonexsky.github.io/skyscapeR/manual/lunar-crossovers.html#a07-scientific}{A07 study}.
+\item First-morning dates fell within seven days of 22 of 23 sightings and last-evening dates within seven days of 21 of 33. The respective median predictions were two days early and five days late. \href{https://stonexsky.github.io/skyscapeR/manual/heliacal-rising.html#v01-observations}{V01 study}.
+\item The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html}{W02 study}.
+}
 }

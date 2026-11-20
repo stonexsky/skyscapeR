@@ -1,4 +1,5 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>az2dec | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-az2dec.html">az2dec() method</a></nav><h2 id='az2dec'>Convert azimuth and altitude to declination</h2><span id='topic+az2dec'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>az2dec | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-az2dec.html">az2dec() method</a></nav>
+<h2 id='az2dec'>Convert azimuth and altitude to declination</h2><span id='topic+az2dec'></span>
 
 <h3>Description</h3>
 
@@ -71,6 +72,25 @@ input bearing representation.
 </p>
 
 
+<h3 id="scientific-checks">Scientific checks</h3>
+
+
+<ul>
+<li><p> Three archived solar-sight pairs on one baseline gave bearing errors from -0.389 to +0.529 degrees against the Polaris reference. <a href="../field-reduction.html#f01-scientific">F01 study</a>.
+</p>
+</li>
+<li><p> All 121 checks of solar dates, seasonal instants and limiting declinations passed against their respective references. <a href="../a05-solar-limits.html">A05 study</a>.
+</p>
+</li>
+<li><p> All 18 flat-horizon quantile comparisons met the 0.02-degree tolerance. Additional fixtures quantify errors on steep skylines and near a celestial pole. <a href="../d02-bearing-propagation.html">D02 study</a>.
+</p>
+</li>
+<li><p> The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. <a href="../w02-field-to-sky.html">W02 study</a>.
+</p>
+</li></ul>
+
+
+
 <h3>See Also</h3>
 
 <p><code>swe_azalt_rev</code>, <code>hor2alt</code>
@@ -91,4 +111,4 @@ dec &lt;- az2dec(92, loc=hor)
 decs &lt;- az2dec(az=c(87,92,110), loc=hor)
 </code></pre>
 
-<h3>Validation studies</h3><p>Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. <a href="../d02-bearing-propagation.html#pole-propagation">D02 validation study</a>.</p></body></html>
+</body></html>

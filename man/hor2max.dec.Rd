@@ -30,7 +30,15 @@ search sector may miss a more extreme sightline elsewhere.
 }
 \section{Validation}{
 
-A05 recovered a limiting sightline within the northern search sector on a synthetic skyline with an interior crest. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits}{A05 check in the technical manual}.
+A05 recovered a limiting sightline within the northern search sector on a synthetic skyline with an interior crest. See the \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html#a05-solar-limits}{A05 check in the technical manual}.
+}
+
+\section{Scientific checks}{
+
+\itemize{
+\item All 121 checks of solar dates, seasonal instants and limiting declinations passed against their respective references. \href{https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html}{A05 study}.
+\item The Sirius target screen recovered two disjoint intervals in the test band and a single contact at the annual maximum in 36 CE. \href{https://stonexsky.github.io/skyscapeR/manual/a08-target-ranges.html}{A08 study}.
+}
 }
 
 \examples{

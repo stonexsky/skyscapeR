@@ -1,5 +1,7 @@
 # `dec.pdf()` {#fn-dec-pdf}
 
+[Scientific results for this function](help/dec.pdf.html#scientific-checks).
+
 Declination subsets retained the selected centres in all four cases. [D01 checks](d01-density-checks.qmd).
 
 

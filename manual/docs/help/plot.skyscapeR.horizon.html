@@ -1,4 +1,5 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>plot.skyscapeR.horizon | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-plot-skyscaper-horizon.html">plot.skyscapeR.horizon() method</a></nav><h2 id='plot.skyscapeR.horizon'>Plot a site horizon and celestial targets</h2><span id='topic+plot.skyscapeR.horizon'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>plot.skyscapeR.horizon | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-plot-skyscaper-horizon.html">plot.skyscapeR.horizon() method</a></nav>
+<h2 id='plot.skyscapeR.horizon'>Plot a site horizon and celestial targets</h2><span id='topic+plot.skyscapeR.horizon'></span>
 
 <h3>Description</h3>
 
@@ -117,7 +118,7 @@ Rescaling the display or changing its colours does not change the underlying hor
 </p>
 <p>For a two-year epoch range, draw tracks for the stored minimum and maximum
 declinations, using the session refraction setting for both tracks. Line
-styles are taken from the target object; objects without stored styles use
+styles are taken from the target object; older objects without them use
 solid lines of width 1.
 </p>
 <p>A horizon with an attached DEM, PeakFinder or photographic PNG displays the image by default. Add show.skyline = TRUE to inspect its numerical profile, or use.image = FALSE to draw the silhouette alone. With xrange supplied, azimuth labels default to degrees. A partial photograph initially opens on its recorded sector. An image-backed horizon or a supplied sky uses a 2:1 plot box. Copy the PNG with the saved horizon and use relinkHor() after moving it. With automatic altitude limits, a 30-degree azimuth sector shows 15 degrees of altitude.
@@ -132,7 +133,7 @@ solid lines of width 1.
 
 <h3>Validation</h3>
 
-<p>W01 checked the skyline ordinate and azimuth viewport on flat and raised profiles, including natural and publication sky overlays. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry">W01 check in the technical manual</a>.
+<p>W01 checked the skyline ordinate and azimuth viewport on flat and raised profiles, including natural and publication sky overlays. See the <a href="../w01-plot-geometry.html#w01-plot-geometry">W01 check in the technical manual</a>.
 </p>
 
 
@@ -152,6 +153,22 @@ source. Azimuth-altitude plotting is a cylindrical display, with increasing
 horizontal distortion towards the zenith. Retain consistent ranges when
 comparing styles, epochs or constellation traditions.
 </p>
+
+
+<h3 id="scientific-checks">Scientific checks</h3>
+
+
+<ul>
+<li><p> Across 32 synthetic wall panoramas, the largest numerical skyline discrepancy was 0.0261 degrees. Pixel width affected the displayed width of the opening. <a href="../h04-feature-resolution.html">H04 study</a>.
+</p>
+</li>
+<li><p> A one-minute native sky step retained the publication extinction setting. External Stellarium capture requires a separate comparison. <a href="../sky-rendering.html#step-check">V07 study</a>.
+</p>
+</li>
+<li><p> All 192 drawing checks passed for the tested layouts, including seasonal markers, axis positions and identification labels. <a href="../w01-plot-geometry.html">W01 study</a>.
+</p>
+</li></ul>
+
 
 
 <h3>See Also</h3>
@@ -175,4 +192,4 @@ targets &lt;- skyObject('solar extremes', epoch=c("4001 BC", "2001 BC"), col='re
 plot(hor, obj=targets)
 </code></pre>
 
-<h3>Validation studies</h3><p>Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. <a href="../h04-feature-resolution.html#h04-feature-resolution">H04 validation study</a>.</p></body></html>
+</body></html>

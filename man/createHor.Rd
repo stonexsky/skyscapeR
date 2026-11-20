@@ -231,9 +231,9 @@ Plotting also falls back to the numerical horizon if the image is missing or has
 
 H01 compared 334 bearings at 31 observing setups.
 At the surveyed bearings, \code{createHor()} reproduced the observed terrain skyline to within half a degree in 91.9\% of cases.
-See the \href{https://stonexsky.github.io/skyscapeR/manual/#h01-field-validation}{H01 field validation in the skyscapeR technical manual} for the survey protocol, station results and limitations.
+See the \href{https://stonexsky.github.io/skyscapeR/manual/h01-field-validation.html#h01-field-validation}{H01 field validation in the skyscapeR technical manual} for the survey protocol, station results and limitations.
 
-With the same 1 m terrain, \code{createHor()} reproduced Horizon’s skylines to a mean absolute difference of 0.004 degrees at each of two English sites. Against field measurements at 344 Irish bearings, \code{createHor()} using SRTM had a mean absolute error of 0.328 degrees, lower than either HeyWhatsThat or PeakFinder on that sample. Field accuracy varied by site. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h02-skyline-comparison}{H02 comparison in the skyscapeR technical manual}.
+With the same 1 m terrain, \code{createHor()} reproduced Horizon’s skylines to a mean absolute difference of 0.004 degrees at each of two English sites. Against field measurements at 344 Irish bearings, \code{createHor()} using SRTM had a mean absolute error of 0.328 degrees, lower than either HeyWhatsThat or PeakFinder on that sample. Field accuracy varied by site. See the \href{https://stonexsky.github.io/skyscapeR/manual/h02-skyline-comparison.html#h02-skyline-comparison}{H02 comparison in the skyscapeR technical manual}.
 
 The numerical skyline is a maximum over sampled terrain, not an accuracy
 certificate for the DEM. Horizontal and vertical datum differences, observer
@@ -256,15 +256,21 @@ feature objects, returned horizon and external PNG. Rebuilding from the same
 source is distinct from merely replotting the saved horizon.
 }
 
-\section{Validation studies}{
-
-Intervals estimated from other observing groups covered 91.0 and 88.8 percent of bearings in two terrain-radius selections. \href{https://stonexsky.github.io/skyscapeR/manual/h01-field-validation.html#withheld-stations}{H01 validation study}.
-Thin-wall and partial-occlusion fixtures distinguish numerical altitude error from the visible width in a panorama. \href{https://stonexsky.github.io/skyscapeR/manual/h04-feature-resolution.html#h04-feature-resolution}{H04 validation study}.
-}
-
 \section{Scientific validation}{
 
 H03 examines DEM sampling against an analytic ridge and a level spherical surface. \href{https://stonexsky.github.io/skyscapeR/manual/horizons.html#h03-scientific}{H03 scientific validation}.
+}
+
+\section{Scientific checks}{
+
+\itemize{
+\item At 334 surveyed bearings, the median absolute skyline error was 0.036 degrees and 91.9 percent of predictions were within half a degree. \href{https://stonexsky.github.io/skyscapeR/manual/h01-field-validation.html}{H01 study}.
+\item On matched 1 m terrain at two English sites, the mean absolute skyline difference from Horizon was 0.004 degrees. Agreement with surveyed bearings varied by site. \href{https://stonexsky.github.io/skyscapeR/manual/h02-skyline-comparison.html}{H02 study}.
+\item On a level surface with 5 m radial sampling, geometric and effective-radius horizon dips agreed with the analytic values to within 0.000000009 degrees. \href{https://stonexsky.github.io/skyscapeR/manual/horizons.html#h03-scientific}{H03 study}.
+\item Across 32 synthetic wall panoramas, the largest numerical skyline discrepancy was 0.0261 degrees. Pixel width affected the displayed width of the opening. \href{https://stonexsky.github.io/skyscapeR/manual/h04-feature-resolution.html}{H04 study}.
+\item At eight withheld landmarks in a tilted synthetic panorama, both bearing and skyline altitude were recovered to within one image pixel. \href{https://stonexsky.github.io/skyscapeR/manual/photographic-horizons.html#h05-scientific}{H05 study}.
+\item The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html}{W02 study}.
+}
 }
 
 \examples{

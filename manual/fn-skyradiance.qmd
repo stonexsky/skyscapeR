@@ -1,5 +1,7 @@
 # `skyRadiance()` {#fn-skyradiance}
 
+[Scientific results for this function](help/skyRadiance.html#scientific-checks).
+
 [Observational accuracy and validation](heliacal-rising.qmd#v01-observations).
 
 [Function index](function-index.html#idx-skyradiance)

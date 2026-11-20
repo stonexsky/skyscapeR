@@ -7,3 +7,7 @@ A measured band can intersect a target briefly, more than once, or exactly at a 
 **Solar and lunar bounds.** At 50° N over astronomical years −3400 to −3100 the southern major lunar limits span approximately −30.08° to −30.05°. Annual local bounds include both endpoints for one-year, short, modern and prehistoric ranges. Spherical inversion of the returned orbit coordinates recovered their input declinations.
 
 Candidate selection uses unrounded declinations. Two-decimal limits are display values. Solar zenith/anti-zenith screening uses the archaeological period and requires a reachable passage. The spatial-equinox candidate uses the rising and setting solutions from the endpoint epochs; this particular candidate does not claim to enclose every intermediate year's terrain midpoint. [Download the A08 scripts and results](archives/A08.zip).
+
+**Function entries**
+
+[`findTargets()`](fn-findtargets.qmd), [`skyObject()`](fn-skyobject.qmd), [`sky.objects()`](fn-sky-objects.qmd), [`star()`](fn-star.qmd), [`solar.date()`](fn-solar-date.qmd), [`hor2max.dec()`](fn-hor2max-dec.qmd), [`hor2min.dec()`](fn-hor2min-dec.qmd), [`orbit()`](fn-orbit.qmd).

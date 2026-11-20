@@ -100,7 +100,7 @@ minmaxdec = function(name, from, to, loc=FALSE) {
 #' @param ss Arcseconds as a finite numeric scalar. Defaults to zero.
 #' @return A numeric scalar giving the angle in signed decimal degrees.
 #' @section Validation:
-#' Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/#a01-calendar-checks}{A01 validation in the technical manual}.
+#' Build 2.0.9005 passed all 499 calendar, clock, era, angle and setting checks in A01. The largest discrepancy across 240 absolute Julian dates was 0.000021 seconds. See \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html#a01-calendar-checks}{A01 validation in the technical manual}.
 #' @export
 #' @examples
 #' ten(24, 52, 16)
@@ -109,6 +109,11 @@ minmaxdec = function(name, from, to, loc=FALSE) {
 #' ten(0, 0, -30)     # -1/120 degrees
 #' ten("-8:30:00")    # -8.5 degrees
 #' ten("-0:30:00")    # Preserve the minus sign when degrees are zero
+#' @section Scientific checks:
+#' \itemize{
+#' \item Three archived solar-sight pairs on one baseline gave bearing errors from -0.389 to +0.529 degrees against the Polaris reference. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 study}.
+#' \item All 499 calendar, clock and angle checks passed. The largest error across 240 absolute Julian dates was 0.000021 seconds. \href{https://stonexsky.github.io/skyscapeR/manual/a01-calendar-checks.html}{A01 study}.
+#' }
 ten <- function(dd, mm=0, ss=0) {
   if (is.character(dd)) {
     if (!missing(mm) || !missing(ss)) {
@@ -209,6 +214,10 @@ mag2size <- function(mag) {
 #' mag.dec(c(40, -8), c("2010/01/01", "2026/01/01"))
 #' @section Scientific validation:
 #' F01 examines magnetic and solar reductions against independent references. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 scientific validation}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item Three archived solar-sight pairs on one baseline gave bearing errors from -0.389 to +0.529 degrees against the Polaris reference. \href{https://stonexsky.github.io/skyscapeR/manual/field-reduction.html#f01-scientific}{F01 study}.
+#' }
 mag.dec = function(loc, date) {
   if (inherits(loc, "skyscapeR.horizon")) loc <- loc$metadata$georef
   loc <- if (is.null(dim(loc))) matrix(loc,nrow=1L) else as.matrix(loc)
@@ -233,8 +242,17 @@ mag.dec = function(loc, date) {
                      rep(epoch,length.out=n),version=14)$declination
 }
 
-#' @noRd
+#' Select measurement densities
+#' @description Select measurement curves and their corresponding metadata in the requested order.
+#' @param x An object of class skyscapeR.pdf.
+#' @param subset An integer or logical index identifying the curves to retain.
+#' @param ... Additional arguments accepted by the generic.
+#' @return A skyscapeR.pdf object containing the selected curves.
 #' @export
+#' @section Scientific checks:
+#' \itemize{
+#' \item The six measurement families matched their analytic controls. Tests of disconnected highest-density regions recovered the expected endpoints. \href{https://stonexsky.github.io/skyscapeR/manual/d01-density-checks.html}{D01 study}.
+#' }
 subset.skyscapeR.pdf <- function(x, subset, ...) {
   if (!is.null(x$metadata$dec)) x$metadata$dec <- x$metadata$dec[subset]
   x$metadata$name <- x$metadata$name[subset]
@@ -291,9 +309,9 @@ sampleList <- function(ll) {
 #' Each matrix has columns \code{start} and \code{end}, with ordered endpoints
 #' and one row per contiguous region, sorted by start.
 #' @section Validation:
-#' Known tied, truncated and disjoint test distributions returned the expected interval endpoints and achieved the requested minimum discrete mass. See \href{https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks}{D01 validation in the technical manual}.
+#' Known tied, truncated and disjoint test distributions returned the expected interval endpoints and achieved the requested minimum discrete mass. See \href{https://stonexsky.github.io/skyscapeR/manual/d01-density-checks.html#d01-density-checks}{D01 validation in the technical manual}.
 #'
-#' In D02 the default transformation grid split the middle 80 percent highest-density region of a three-mode ridge case; a finer grid recovered the three reference regions. See the \href{https://stonexsky.github.io/skyscapeR/manual/#d02-bearing-propagation}{D02 check in the technical manual}.
+#' In D02 the default transformation grid split the middle 80 percent highest-density region of a three-mode ridge case; a finer grid recovered the three reference regions. See the \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#d02-bearing-propagation}{D02 check in the technical manual}.
 #' @export
 #' @references Hyndman, R. J. (1996). Computing and Graphing Highest Density Regions. The American Statistician 50, 120-126. \doi{10.1080/00031305.1996.10474359}.
 #' @seealso \code{\link{az.pdf}}, \code{\link{dec.pdf}}, \code{\link{spd}}, \code{\link{plot.skyscapeR.pdf}}
@@ -308,6 +326,11 @@ sampleList <- function(ll) {
 #' # PDF objects always return a list:
 #' Az <- az.pdf(az=c(90,120), unc=2, verbose=FALSE)
 #' hpdi(Az)
+#' @section Scientific checks:
+#' \itemize{
+#' \item The six measurement families matched their analytic controls. Tests of disconnected highest-density regions recovered the expected endpoints. \href{https://stonexsky.github.io/skyscapeR/manual/d01-density-checks.html}{D01 study}.
+#' \item All 18 flat-horizon quantile comparisons met the 0.02-degree tolerance. Additional fixtures quantify errors on steep skylines and near a celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html}{D02 study}.
+#' }
 hpdi <- function(x, mass=0.954) {
   if (!is.numeric(mass) || length(mass) != 1L || !is.finite(mass) ||
       mass <= 0 || mass > 1) {
@@ -369,8 +392,13 @@ hpdi <- function(x, mass=0.954) {
 #' @return A character vector of significance symbols: ***, **, *, + or an open circle, using cut points 0.001, 0.01, 0.05 and 0.1.
 #' @param p.value p-value
 #' @section Validation:
-#' All tested symbol thresholds, their equality cases and the legacy printed bound agreed with their stated probability ranges. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+#' All tested symbol thresholds, their equality cases and the legacy printed bound agreed with their stated probability ranges. See \href{https://stonexsky.github.io/skyscapeR/manual/s03-scoring-checks.html#s03-scoring-checks}{S03 validation in the technical manual}.
 #' @export
+#' @section Scientific checks:
+#' \itemize{
+#' \item At nominal 5 percent, global rejection across tested uniform nulls with attainable ranks ranged from 4.25 to 5.85 percent. \href{https://stonexsky.github.io/skyscapeR/manual/s01-uniform-orientation.html}{S01 study}.
+#' \item The fixed uniform-null example returned a global probability of 0.4375 and an adjusted probability of 0.1875 for its cluster crossing north. \href{https://stonexsky.github.io/skyscapeR/manual/s03-scoring-checks.html}{S03 study}.
+#' }
 pval2stars <- function(p.value) {
   if (is(p.value,'character')) { p.value <- as.numeric(substr(p.value, 3,nchar(p.value))) }
   out <- symnum(p.value, corr = FALSE, na = FALSE,

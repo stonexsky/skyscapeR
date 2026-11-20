@@ -75,7 +75,7 @@ recommend installing \pkg{swephRdata}; see \code{\link{skyscapeR-package}} for s
 }
 \section{Validation}{
 
-In A02, file-backed geocentric directions for ten bodies agreed with their matching JPL parent to within 0.0065 arcseconds across 1,080 comparisons. At the sampled prehistoric epochs the public topocentric convention differed from JPL Horizons by up to 0.70 degrees in local sky direction at a specified instant. See the \href{https://stonexsky.github.io/skyscapeR/manual/#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
+In A02, file-backed geocentric directions for ten bodies agreed with their matching JPL parent to within 0.0065 arcseconds across 1,080 comparisons. At the sampled prehistoric epochs the public topocentric convention differed from JPL Horizons by up to 0.70 degrees in local sky direction at a specified instant. See the \href{https://stonexsky.github.io/skyscapeR/manual/a02-ephemeris.html#a02-ephemeris-accuracy}{A02 study in the skyscapeR technical manual}.
 }
 
 \section{Provenance}{
@@ -87,6 +87,18 @@ This attribute adds no list entries or table columns. Ordinary subsetting or
 transformations may discard attributes; save the original result for reference.
 It does not identify ephemeris files, catalogue revisions or a development
 commit. Retain those and the analysis script separately for exact reproduction.
+}
+
+\section{Scientific checks}{
+
+\itemize{
+\item Across 1,080 geocentric positions, the largest separation from the matching JPL parent was 0.0065 arcseconds. Across 177 lunar skyline crossings the median default bearing difference was 0.059 degrees. \href{https://stonexsky.github.io/skyscapeR/manual/a02-ephemeris.html}{A02 study}.
+\item For six stars compared with independently propagated catalogue directions, the largest separation was 0.0165 degrees, for Sirius in 3500 BCE. \href{https://stonexsky.github.io/skyscapeR/manual/a03-stellar-positions.html}{A03 study}.
+\item The zero-declination track crossed a level skyline at 90 and 270 degrees at 50 degrees north. The study also checks irregular skylines and JPL crossings. \href{https://stonexsky.github.io/skyscapeR/manual/a04-stellar-crossings.html}{A04 study}.
+\item Four lunar standstill limits agreed with the monthly reference tables to within 0.019 degrees. The study also examines sampling of planetary extrema. \href{https://stonexsky.github.io/skyscapeR/manual/celestial-targets.html#a06-scientific}{A06 study}.
+\item Independent selection agreed in 31 of 32 lunar event cases. At the equator in autumn 1913 the two illumination estimates straddled the EFM cutoff. \href{https://stonexsky.github.io/skyscapeR/manual/lunar-crossovers.html#a07-scientific}{A07 study}.
+\item Twilight brightness had a mean absolute residual of 0.481 magnitudes against 22 held-out measurements. This benchmark covers twilight only. \href{https://stonexsky.github.io/skyscapeR/manual/sky-rendering.html#twilight-check}{V03 study}.
+}
 }
 
 \examples{

@@ -1,4 +1,5 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>findTargets | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-findtargets.html">findTargets() method</a></nav><h2 id='findTargets'>Find celestial targets within declination and time ranges</h2><span id='topic+findTargets'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>findTargets | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-findtargets.html">findTargets() method</a></nav>
+<h2 id='findTargets'>Find celestial targets within declination and time ranges</h2><span id='topic+findTargets'></span>
 
 <h3>Description</h3>
 
@@ -92,7 +93,7 @@ recommend installing <span class="pkg">swephRdata</span>; see <code>skyscapeR-pa
 
 <h3>Validation</h3>
 
-<p>A08 verified closed-band membership, separate stellar passages, sampled contact, magnitude filtering and comparisons before display rounding. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#a08-target-ranges">A08 check in the technical manual</a>.
+<p>A08 verified closed-band membership, separate stellar passages, sampled contact, magnitude filtering and comparisons before display rounding. See the <a href="../a08-target-ranges.html#a08-target-ranges">A08 check in the technical manual</a>.
 </p>
 
 
@@ -136,9 +137,22 @@ commit. Retain those and the analysis script separately for exact reproduction.
 </p>
 
 
+<h3 id="scientific-checks">Scientific checks</h3>
+
+
+<ul>
+<li><p> The Sirius target screen recovered two disjoint intervals in the test band and a single contact at the annual maximum in 36 CE. <a href="../a08-target-ranges.html">A08 study</a>.
+</p>
+</li>
+<li><p> The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. <a href="../w02-field-to-sky.html">W02 study</a>.
+</p>
+</li></ul>
+
+
+
 <h3>References</h3>
 
-<p>Silva, F. and Lomsdalen, T. (2025). 'No easy way from the earth to the stars': a new statistical approach to the orientation of the Maltese temples. Archaeological and Anthropological Sciences 17, 96. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1007/s12520-025-02208-4")}.
+<p>Silva, F. and Lomsdalen, T. (2025). 'No easy way from the earth to the stars': a new statistical approach to the orientation of the Maltese temples. Archaeological and Anthropological Sciences 17, 96. <a href="https://doi.org/10.1007/s12520-025-02208-4">doi:10.1007/s12520-025-02208-4</a>.
 </p>
 
 

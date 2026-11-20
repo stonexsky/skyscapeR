@@ -81,7 +81,7 @@ height. Single-year targets are displayed as lines.
 }
 \section{Validation}{
 
-W01 checked the endpoints and row labels of an azimuth interval spanning north. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w01-plot-geometry}{W01 check in the technical manual}.
+W01 checked the endpoints and row labels of an azimuth interval spanning north. See the \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html#w01-plot-geometry}{W01 check in the technical manual}.
 }
 
 \section{Coordinates and interpretation}{
@@ -92,6 +92,13 @@ declination measurements, or convert measurements first using the appropriate
 site and horizon. Bars show the supplied symmetric angular bounds, not fitted
 confidence intervals. Use \code{\link{az.pdf}}, \code{\link{coordtrans}} and
 \code{\link{spd}} when the full measurement distributions are needed.
+}
+
+\section{Scientific checks}{
+
+\itemize{
+\item All 192 drawing checks passed for the tested layouts, including seasonal markers, axis positions and identification labels. \href{https://stonexsky.github.io/skyscapeR/manual/w01-plot-geometry.html}{W01 study}.
+}
 }
 
 \examples{

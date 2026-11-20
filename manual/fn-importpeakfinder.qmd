@@ -1,5 +1,7 @@
 # `importPeakFinder()` {#fn-importpeakfinder}
 
+[Scientific results for this function](help/importPeakFinder.html#scientific-checks).
+
 [Function index](function-index.html#idx-importpeakfinder)
 
 ```{=html}

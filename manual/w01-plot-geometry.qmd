@@ -14,3 +14,7 @@ All 192 geometry and label assertions passed, along with direct checks of the pr
 
 
 Sixteen additional axis fixtures cross azimuth and declination, full and restricted ranges, 4-inch and 10-inch device widths, and the local panel on and off. Major and minor ticks stayed within the plotted interval and were disjoint. Azimuth labels wrapped modulo 360°. Plotting preserved the fitted object in every fixture.
+
+**Function entries**
+
+[`plotAzimuth()`](fn-plotazimuth.qmd), [`plotBars()`](fn-plotbars.qmd), [`plot.skyscapeR.horizon()`](fn-plot-skyscaper-horizon.qmd), [`plot.skyscapeR.pdf()`](fn-plot-skyscaper-pdf.qmd), [`plot.skyscapeR.spd()`](fn-plot-skyscaper-spd.qmd), [`plot.skyscapeR.sigTest()`](fn-plot-skyscaper-sigtest.qmd), [`plot.skyscapeR.starphases()`](fn-plot-skyscaper-starphases.qmd), [`print.skyscapeR.sigTest()`](fn-print-skyscaper-sigtest.qmd).

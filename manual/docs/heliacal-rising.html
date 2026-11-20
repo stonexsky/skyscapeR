@@ -912,7 +912,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="published-reference-calculations" class="level2">
 <h2 class="anchored" data-anchor-id="published-reference-calculations">Published reference calculations</h2>
-<p>We ran the public function on all 28 entries of Schaefer’s Table 3 using the specified stellar positions, extinction, zenith limiting magnitude and latitude, with geometric stellar altitudes. The package returns an integer civil date. We compared its midpoint with the published fractional number of days after the March equinox. Twenty entries agreed within one day. The largest discrepancy was Izar at 60° N, 289.31 days after the equinox against the published 284.3. The high-latitude difference remains unresolved. <a href="https://doi.org/10.1177/002182868701801103">Schaefer (1987), Table 3</a>.</p>
+<p>We ran the public function on all 28 entries of Schaefer’s Table 3 using the specified stellar positions, extinction, zenith limiting magnitude and latitude, with geometric stellar altitudes. The package returns an integer civil date. We compared its midpoint with the published fractional number of days after the March equinox. Twenty entries agreed within one day. The largest discrepancy was Izar at 60° N, 289.31 days after the equinox against the published 284.3. For Izar we also interpolated the evening detection boundary between consecutive days, sampling the star every two minutes and then every minute, 30 seconds, 15 seconds and 7.5 seconds. The fractional estimate moved from 289.580 to 289.598 days after the equinox. The finest grid still placed the event 5.30 days later than the published value. Civil-day rounding and sampling at these intervals cannot account for that discrepancy. The high-latitude difference remains unresolved. <a href="https://doi.org/10.1177/002182868701801103">Schaefer (1987), Table 3</a>.</p>
 </section>
 <section id="comparison-with-a-dawn-sky-reconstruction" class="level2">
 <h2 class="anchored" data-anchor-id="comparison-with-a-dawn-sky-reconstruction">Comparison with a dawn sky reconstruction</h2>
@@ -925,6 +925,8 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 <p><a href="archives/stellar-visibility-observations.zip">Download the observing records, Table 3 inputs, scripts and per-record predictions</a>. <a href="archives/visibility.zip">Download the dawn-sky scans and refinements</a>. <a href="./stellar-phases.html">Read the stellar phase method</a>.</p>
+<p><strong>Function entries</strong></p>
+<p><a href="./fn-star-phases.html"><code>star.phases()</code></a>, <a href="./fn-star.html"><code>star()</code></a>, <a href="./fn-riseset.html"><code>riseset()</code></a>, <a href="./fn-sketchsky.html"><code>sketchSky()</code></a>, <a href="./fn-skyradiance.html"><code>skyRadiance()</code></a>, <a href="./fn-plot-skyscaper-starphases.html"><code>plot.skyscapeR.starphases()</code></a>.</p>
 
 
 </section>

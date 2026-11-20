@@ -25,7 +25,7 @@ bernoulli <- function(n,p,r) {
 #' for at least r hits (the default).
 #' @return A numeric probability between 0 and 1.
 #' @section Validation:
-#' Exact and upper-tail probabilities agreed with independent binomial calculations for the tested counts up to 1,000, including zero hits. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+#' Exact and upper-tail probabilities agreed with independent binomial calculations for the tested counts up to 1,000, including zero hits. See \href{https://stonexsky.github.io/skyscapeR/manual/s03-scoring-checks.html#s03-scoring-checks}{S03 validation in the technical manual}.
 #' @export
 #' @references Ruggles, C (1999) \emph{Astronomy in Prehistoric Britain and Ireland}. Yale University Press.
 #' @seealso \code{\link{randomTest}}, \code{\link{modelTest}}
@@ -36,6 +36,10 @@ bernoulli <- function(n,p,r) {
 #' bernoulli.trial(30, 0.2, 10, type="single")
 #' bernoulli.trial(30, 0.2, 0) # Always 1
 #' bernoulli.trial(1000, 0.2, 250) # No factorial overflow
+#' @section Scientific checks:
+#' \itemize{
+#' \item The fixed uniform-null example returned a global probability of 0.4375 and an adjusted probability of 0.1875 for its cluster crossing north. \href{https://stonexsky.github.io/skyscapeR/manual/s03-scoring-checks.html}{S03 study}.
+#' }
 bernoulli.trial <- function(n,p,r, type='tail') {
   valid.scalar <- function(x) {
     is.numeric(x) && length(x) == 1L && is.finite(x)
@@ -137,7 +141,7 @@ bernoulli.trial <- function(n,p,r, type='tail') {
 #' @param .cutoff Minimum density retained on the output grid. Default \code{1e-5}.
 #' @param .res Spacing of the output bearing grid in degrees. Default 0.01.
 #' @section Validation:
-#' The 2.0.9011 family checks cover analytic profiles, circular rotation, soft-edge limits and simulation reuse. Build 2.0.9006 passed all 173 original D01 assertions, including 0.005-degree samples across north and the broad-width periodic density cases. See \href{https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks}{D01 validation in the technical manual}.
+#' The 2.0.9011 family checks cover analytic profiles, circular rotation, soft-edge limits and simulation reuse. Build 2.0.9006 passed all 173 original D01 assertions, including 0.005-degree samples across north and the broad-width periodic density cases. See \href{https://stonexsky.github.io/skyscapeR/manual/d01-density-checks.html#d01-density-checks}{D01 validation in the technical manual}.
 #' @export
 #' @references Silva, F (2020) A probabilistic framework and significance test for the analysis of structural orientations
 #'  in skyscape archaeology \emph{Journal of Archaeological Science} 118, 105138. \doi{10.1016/j.jas.2020.105138}
@@ -152,8 +156,14 @@ bernoulli.trial <- function(n,p,r, type='tail') {
 #' precise <- az.pdf(90, 2, pdf="uniform_normal", survey.sd=0.2)
 #' north <- az.pdf(0, pdf="triangular", lower=358, upper=3)
 #' plot(surveyed)
-#' @section Validation studies:
-#' Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#pole-propagation}{D02 validation study}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item The six measurement families matched their analytic controls. Tests of disconnected highest-density regions recovered the expected endpoints. \href{https://stonexsky.github.io/skyscapeR/manual/d01-density-checks.html}{D01 study}.
+#' \item All 18 flat-horizon quantile comparisons met the 0.02-degree tolerance. Additional fixtures quantify errors on steep skylines and near a celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html}{D02 study}.
+#' \item At nominal 5 percent, global rejection across tested uniform nulls with attainable ranks ranged from 4.25 to 5.85 percent. \href{https://stonexsky.github.io/skyscapeR/manual/s01-uniform-orientation.html}{S01 study}.
+#' \item In six direct-input matched nulls, global rejection at nominal 5 percent ranged from 4.35 to 5.50 percent. The study separately quantifies effects of dependence and skyline transformation. \href{https://stonexsky.github.io/skyscapeR/manual/s02-specified-models.html}{S02 study}.
+#' \item The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html}{W02 study}.
+#' }
 az.pdf <- function(az, unc=NULL, pdf='normal', name, .res=0.01, .cutoff=1e-5, verbose=TRUE,
                    taper=NULL, survey.sd=0.5, lower=NULL, upper=NULL) {
   if (!is.numeric(az) || !length(az) || any(!is.finite(az)))
@@ -408,7 +418,7 @@ coordtrans_unc <- function(pdf, hor, refraction, atm, temp, xrange, .res=0.1, .p
 #' @section Validation:
 #' See the study of spherical propagation below.
 #'
-#' For a partial photograph the stored positive bearing density must lie within its photographed sector. H07 verified agreement with a complete skyline on the covered north-crossing cases and rejection of uncovered densities. See the \href{https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage}{H07 check in the technical manual}.
+#' For a partial photograph the stored positive bearing density must lie within its photographed sector. H07 verified agreement with a complete skyline on the covered north-crossing cases and rejection of uncovered densities. See the \href{https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html#h07-panorama-coverage}{H07 check in the technical manual}.
 #' @export
 #' @references Silva, F (2020) A probabilistic framework and significance test for the analysis of structural orientations
 #'  in skyscape archaeology \emph{Journal of Archaeological Science} 118, 105138. \doi{10.1016/j.jas.2020.105138}
@@ -422,9 +432,14 @@ coordtrans_unc <- function(pdf, hor, refraction, atm, temp, xrange, .res=0.1, .p
 #' # Reduce stored output size without changing the calculation spacing:
 #' Dec.coarse <- coordtrans(Az, hor, .output.res=0.1)
 #' Dec.coarse$metadata$param
-#' @section Validation studies:
-#' Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#pole-propagation}{D02 validation study}.
-#' The transformed-bearing null was tested with steep skylines, three measurement families and shared or site-specific candidate weights. \href{https://stonexsky.github.io/skyscapeR/manual/s02-specified-models.html#steep-null}{S02 validation study}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item A partial photographic horizon returned missing altitudes outside its sector. Full-sky event searches rejected it and accepted the complete profile. \href{https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html}{H07 study}.
+#' \item All 18 flat-horizon quantile comparisons met the 0.02-degree tolerance. Additional fixtures quantify errors on steep skylines and near a celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html}{D02 study}.
+#' \item At nominal 5 percent, global rejection across tested uniform nulls with attainable ranks ranged from 4.25 to 5.85 percent. \href{https://stonexsky.github.io/skyscapeR/manual/s01-uniform-orientation.html}{S01 study}.
+#' \item In six direct-input matched nulls, global rejection at nominal 5 percent ranged from 4.35 to 5.50 percent. The study separately quantifies effects of dependence and skyline transformation. \href{https://stonexsky.github.io/skyscapeR/manual/s02-specified-models.html}{S02 study}.
+#' \item The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html}{W02 study}.
+#' }
 coordtrans <- function(pdf, hor, xrange, .res=.1, .prec=.1, .output.res=.01, verbose=TRUE) {
   result <- coordtrans_unc(pdf, hor, xrange=xrange, .res=.res, .prec=.prec,
                            .output.res=.output.res, verbose=verbose)
@@ -476,9 +491,9 @@ coordtrans <- function(pdf, hor, xrange, .res=.1, .prec=.1, .output.res=.01, ver
 #' @param .cutoff When the range is chosen automatically, set summed densities below this threshold to zero. Default \code{1e-5}.
 #' @param .res Resolution with which to output SPD. Default is 0.01 degrees.
 #' @section Validation:
-#' The tested sums agreed with independently constructed density sums, and the normalised curves had unit trapezoidal area. See \href{https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks}{D01 validation in the technical manual}.
+#' The tested sums agreed with independently constructed density sums, and the normalised curves had unit trapezoidal area. See \href{https://stonexsky.github.io/skyscapeR/manual/d01-density-checks.html#d01-density-checks}{D01 validation in the technical manual}.
 #'
-#' For two bearings on a shared slope, the D02 comparison of summing before and after transformation gave an integrated absolute density difference of 0.00159 after normalisation. See the \href{https://stonexsky.github.io/skyscapeR/manual/#d02-bearing-propagation}{D02 check in the technical manual}.
+#' For two bearings on a shared slope, the D02 comparison of summing before and after transformation gave an integrated absolute density difference of 0.00159 after normalisation. See the \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#d02-bearing-propagation}{D02 check in the technical manual}.
 #' @export
 #' @references Silva, F (2020) A probabilistic framework and significance test for the analysis of structural orientations
 #'  in skyscape archaeology \emph{Journal of Archaeological Science} 118, 105138. \doi{10.1016/j.jas.2020.105138}
@@ -499,6 +514,14 @@ coordtrans <- function(pdf, hor, xrange, .res=.1, .prec=.1, .output.res=.01, ver
 #' Dec <- coordtrans(Az, hor)
 #' s2 <- spd(Dec)
 #' plot(s2)
+#' @section Scientific checks:
+#' \itemize{
+#' \item The six measurement families matched their analytic controls. Tests of disconnected highest-density regions recovered the expected endpoints. \href{https://stonexsky.github.io/skyscapeR/manual/d01-density-checks.html}{D01 study}.
+#' \item All 18 flat-horizon quantile comparisons met the 0.02-degree tolerance. Additional fixtures quantify errors on steep skylines and near a celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html}{D02 study}.
+#' \item At nominal 5 percent, global rejection across tested uniform nulls with attainable ranks ranged from 4.25 to 5.85 percent. \href{https://stonexsky.github.io/skyscapeR/manual/s01-uniform-orientation.html}{S01 study}.
+#' \item In six direct-input matched nulls, global rejection at nominal 5 percent ranged from 4.35 to 5.50 percent. The study separately quantifies effects of dependence and skyline transformation. \href{https://stonexsky.github.io/skyscapeR/manual/s02-specified-models.html}{S02 study}.
+#' \item The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html}{W02 study}.
+#' }
 spd <- function(pdf, xrange, normalise = F, .res = 0.01, .cutoff = 1e-5) {
   if (!inherits(pdf, 'skyscapeR.pdf')) { stop('Please provide a valid skyscapeR.pdf object.') }
 
@@ -778,11 +801,11 @@ randomTest_unc <- function(pdf, az, hor, nsims=1000, conf=.95, tails=2, normalis
 #' global and local p-values) and data (empirical SPD and null confidence envelope).
 #' No original PDFs or horizon objects are attached.
 #' @section Validation:
-#' In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+#' In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See \href{https://stonexsky.github.io/skyscapeR/manual/s03-scoring-checks.html#s03-scoring-checks}{S03 validation in the technical manual}.
 #'
-#' In S01, at a nominal 5 percent level the global rejection rate was 4.25 to 5.85 percent across the tested uniform-null settings with sufficient Monte Carlo resolution. Build 2.0.9007 uses the source azimuth density spacing and cutoff for simulations and matches the observed SPD spacing on the shared-horizon route. Refit earlier analyses that used different settings. See the \href{https://stonexsky.github.io/skyscapeR/manual/#s01-uniform-orientation}{S01 calibration in the technical manual}.
+#' In S01, at a nominal 5 percent level the global rejection rate was 4.25 to 5.85 percent across the tested uniform-null settings with sufficient Monte Carlo resolution. Build 2.0.9007 uses the source azimuth density spacing and cutoff for simulations and matches the observed SPD spacing on the shared-horizon route. Refit earlier analyses that used different settings. See the \href{https://stonexsky.github.io/skyscapeR/manual/s01-uniform-orientation.html#s01-uniform-orientation}{S01 calibration in the technical manual}.
 #'
-#' The 500-simulation Ggantija-phase workflow in W02 reproduced the bundled global probability, local intervals and adjusted probabilities. See the \href{https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky}{W02 check in the technical manual}.
+#' The 500-simulation Ggantija-phase workflow in W02 reproduced the bundled global probability, local intervals and adjusted probabilities. See the \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html#w02-field-to-sky}{W02 check in the technical manual}.
 #' @export
 #' @references Silva, F. (2020). A probabilistic framework and significance test for the analysis of structural orientations in skyscape archaeology. \emph{Journal of Archaeological Science}, 118, 105138. \doi{10.1016/j.jas.2020.105138}.
 #'
@@ -823,8 +846,12 @@ randomTest_unc <- function(pdf, az, hor, nsims=1000, conf=.95, tails=2, normalis
 #' More simulations improve Monte Carlo resolution, not the validity of the
 #' archaeological sampling design. Repeated searches over alternative subsets or
 #' models are not included in the within-fit local-cluster adjustment.
-#' @section Validation studies:
-#' Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#pole-propagation}{D02 validation study}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item At nominal 5 percent, global rejection across tested uniform nulls with attainable ranks ranged from 4.25 to 5.85 percent. \href{https://stonexsky.github.io/skyscapeR/manual/s01-uniform-orientation.html}{S01 study}.
+#' \item The fixed uniform-null example returned a global probability of 0.4375 and an adjusted probability of 0.1875 for its cluster crossing north. \href{https://stonexsky.github.io/skyscapeR/manual/s03-scoring-checks.html}{S03 study}.
+#' \item The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html}{W02 study}.
+#' }
 randomTest <- compiler::cmpfun(randomTest_unc, options=list(enableJIT = 3))
 
 
@@ -1048,9 +1075,9 @@ modelTest_unc <- function(pdf, model, unc=NULL, nsims=1000, conf=.95, tails=2, n
 #'
 #' North, B. V., Curtis, D. and Sham, P. C. (2002). A note on the calculation of empirical P values from Monte Carlo procedures. \emph{American Journal of Human Genetics}, 71, 439-441. \doi{10.1086/341527}.
 #' @section Validation:
-#' In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See \href{https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks}{S03 validation in the technical manual}.
+#' In S03, independent scoring reproduced the azimuth and declination ranks on their respective grids. Build 2.0.9006 counts north once and reports one interval for a qualifying excess across north. Refit earlier azimuth tests to obtain the revised probabilities. See \href{https://stonexsky.github.io/skyscapeR/manual/s03-scoring-checks.html#s03-scoring-checks}{S03 validation in the technical manual}.
 #'
-#' In S02, identical candidate bearings produced identical directly constructed observed and simulated densities on build 2.0.9008. Global rejection at the 5 percent level ranged from 4.35 to 5.50 percent under the six matched null designs. See the \href{https://stonexsky.github.io/skyscapeR/manual/#s02-specified-models}{S02 check in the technical manual}.
+#' In S02, identical candidate bearings produced identical directly constructed observed and simulated densities on build 2.0.9008. Global rejection at the 5 percent level ranged from 4.35 to 5.50 percent under the six matched null designs. See the \href{https://stonexsky.github.io/skyscapeR/manual/s02-specified-models.html#s02-specified-models}{S02 check in the technical manual}.
 #' @export
 #' @seealso \code{\link{az.pdf}}, \code{\link{dec.pdf}}, \code{\link{coordtrans}}, \code{\link{spd}}, \code{\link{randomTest}}, \code{\link{plot.skyscapeR.sigTest}}
 #' @examples
@@ -1086,9 +1113,12 @@ modelTest_unc <- function(pdf, model, unc=NULL, nsims=1000, conf=.95, tails=2, n
 #' The simulations do not automatically represent dependence between sites,
 #' selection after viewing the data, or uncertainty in fitted model parameters.
 #' See \code{\link{randomTest}} for study-design and Monte Carlo limitations.
-#' @section Validation studies:
-#' The transformed-bearing null was tested with steep skylines, three measurement families and shared or site-specific candidate weights. \href{https://stonexsky.github.io/skyscapeR/manual/s02-specified-models.html#steep-null}{S02 validation study}.
-#' Direct spherical propagation was checked on steep skylines, including a sightline through the celestial pole. \href{https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#pole-propagation}{D02 validation study}.
+#' @section Scientific checks:
+#' \itemize{
+#' \item In six direct-input matched nulls, global rejection at nominal 5 percent ranged from 4.35 to 5.50 percent. The study separately quantifies effects of dependence and skyline transformation. \href{https://stonexsky.github.io/skyscapeR/manual/s02-specified-models.html}{S02 study}.
+#' \item The fixed uniform-null example returned a global probability of 0.4375 and an adjusted probability of 0.1875 for its cluster crossing north. \href{https://stonexsky.github.io/skyscapeR/manual/s03-scoring-checks.html}{S03 study}.
+#' \item The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. \href{https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html}{W02 study}.
+#' }
 modelTest <- compiler::cmpfun(modelTest_unc, options=list(enableJIT = 3))
 
 

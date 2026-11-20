@@ -1,4 +1,5 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>spd | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-spd.html">spd() method</a></nav><h2 id='spd'>Sum orientation probability densities</h2><span id='topic+spd'></span>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>spd | skyscapeR 2.0</title><style>body{max-width:54rem;margin:2rem auto;padding:0 1rem;font:17px/1.55 system-ui;color:#182d38}a{color:#12657b}pre{overflow:auto;background:#f5f7f7;padding:.8rem}dt{font-weight:bold}h2,h3{line-height:1.2}code{overflow-wrap:anywhere}</style><body><nav><a href="../function-index.html">Function index</a> · <a href="../fn-spd.html">spd() method</a></nav>
+<h2 id='spd'>Sum orientation probability densities</h2><span id='topic+spd'></span>
 
 <h3>Description</h3>
 
@@ -53,7 +54,10 @@ range it retains the calculated heights across that range.
 the returned grid. An explicit restricted <code>xrange</code> therefore normalises
 the retained portion only. Zero-area, nonfinite or negative densities and
 grids with fewer than two points cannot be normalised and produce an error.
-Changing resolution can still affect interpolation and
+Earlier versions divided by the sum of sampled heights. Normalised outputs
+now have a different scale; on a regular grid with zero endpoint densities,
+new heights equal old heights divided by <code>.res</code>. Existing saved objects
+are not converted. Changing resolution can still affect interpolation and
 truncation accuracy, but the returned trapezoidal area is one.
 </p>
 
@@ -68,16 +72,38 @@ Normalised densities have units of inverse degrees.
 
 <h3>Validation</h3>
 
-<p>The tested sums agreed with independently constructed density sums, and the normalised curves had unit trapezoidal area. See <a href="https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks">D01 validation in the technical manual</a>.
+<p>The tested sums agreed with independently constructed density sums, and the normalised curves had unit trapezoidal area. See <a href="../d01-density-checks.html#d01-density-checks">D01 validation in the technical manual</a>.
 </p>
-<p>For two bearings on a shared slope, the D02 comparison of summing before and after transformation gave an integrated absolute density difference of 0.00159 after normalisation. See the <a href="https://stonexsky.github.io/skyscapeR/manual/#d02-bearing-propagation">D02 check in the technical manual</a>.
+<p>For two bearings on a shared slope, the D02 comparison of summing before and after transformation gave an integrated absolute density difference of 0.00159 after normalisation. See the <a href="../d02-bearing-propagation.html#d02-bearing-propagation">D02 check in the technical manual</a>.
 </p>
+
+
+<h3 id="scientific-checks">Scientific checks</h3>
+
+
+<ul>
+<li><p> The six measurement families matched their analytic controls. Tests of disconnected highest-density regions recovered the expected endpoints. <a href="../d01-density-checks.html">D01 study</a>.
+</p>
+</li>
+<li><p> All 18 flat-horizon quantile comparisons met the 0.02-degree tolerance. Additional fixtures quantify errors on steep skylines and near a celestial pole. <a href="../d02-bearing-propagation.html">D02 study</a>.
+</p>
+</li>
+<li><p> At nominal 5 percent, global rejection across tested uniform nulls with attainable ranks ranged from 4.25 to 5.85 percent. <a href="../s01-uniform-orientation.html">S01 study</a>.
+</p>
+</li>
+<li><p> In six direct-input matched nulls, global rejection at nominal 5 percent ranged from 4.35 to 5.50 percent. The study separately quantifies effects of dependence and skyline transformation. <a href="../s02-specified-models.html">S02 study</a>.
+</p>
+</li>
+<li><p> The field-to-sky replay recovered the Gacrux position between the Skorba West entrance edges, 2.41 degrees above the measured skyline at the illustrated instant. <a href="../w02-field-to-sky.html">W02 study</a>.
+</p>
+</li></ul>
+
 
 
 <h3>References</h3>
 
 <p>Silva, F (2020) A probabilistic framework and significance test for the analysis of structural orientations
-in skyscape archaeology <em>Journal of Archaeological Science</em> 118, 105138. \Sexpr[results=rd]{tools:::Rd_expr_doi("10.1016/j.jas.2020.105138")}
+in skyscape archaeology <em>Journal of Archaeological Science</em> 118, 105138. <a href="https://doi.org/10.1016/j.jas.2020.105138">doi:10.1016/j.jas.2020.105138</a>
 </p>
 
 
