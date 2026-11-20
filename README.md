@@ -2,10 +2,9 @@
 
 skyscapeR is an R package for studying the orientations of archaeological structures. Combine measured bearings, their uncertainties and local skylines to calculate declination distributions. Explore the sky above a site at a chosen epoch, or test whether orientations across sites fit a proposed explanation.
 
-Start with the [worked vignette](https://stonexsky.github.io/skyscapeR/) to analyse your own field observations. The [technical manual](https://stonexsky.github.io/skyscapeR/manual/) explains the methods behind each function and the evidence used to validate them.
+The [worked vignette](https://stonexsky.github.io/skyscapeR/) follows a field survey from raw readings to interpretation. The [technical manual](https://stonexsky.github.io/skyscapeR/manual/) documents the methods and validation studies.
 
-Version 2.0 is in development. [Report an issue with a reproducible example](https://github.com/stonexsky/skyscapeR/issues) or [read the migration guide](#migrating-from-skyscaper-12-to-20) before rerunning an earlier analysis.
-
+Version 2.0 is available for testing on GitHub. If you have existing results, start with the [migration guide](#migrating-from-skyscaper-12-to-20). [Report a reproducible issue](https://github.com/stonexsky/skyscapeR/issues).
 
 ## Install the development version
 
@@ -24,8 +23,6 @@ install.packages("swephRdata", repos = "https://rstub.r-universe.dev", type = "s
 
 ## Start with your observations
 
-The [worked vignette](https://stonexsky.github.io/skyscapeR/) starts with an Excel field survey. It follows compass and theodolite readings through reduction, declination and candidate selection, then uses Maltese temple entrances for single-site reconstruction and a multi-site significance test.
-
 This example converts three true bearings to a declination distribution for a level horizon at 35° N, 8° W.
 
 ```r
@@ -36,7 +33,7 @@ dec <- coordtrans(az, hor)
 plot(spd(dec))
 ```
 
-Here `unc = 2` is a normal standard deviation of 2°. For a doorway spanning 88°–92°, `az.pdf(90, 2, "uniform")` treats the edges as firm limits. If each edge admits a further 0.5°, `az.pdf(90, 2, "tapered_uniform", taper = 0.5)` keeps the opening equally weighted and tapers beyond it. See `?az.pdf` or the [illustrated guide to all six measurement families](https://stonexsky.github.io/skyscapeR/manual/#measurement-families).
+Here `unc = 2` is a normal standard deviation of 2°. For a doorway spanning 88°–92°, `az.pdf(90, 2, "uniform")` treats the edges as firm limits. If each edge admits a further 0.5°, `az.pdf(90, 2, "tapered_uniform", taper = 0.5)` keeps the opening equally weighted and tapers beyond it. See `?az.pdf` or the [illustrated guide to all six measurement families](https://stonexsky.github.io/skyscapeR/manual/orientation-densities.html#measurement-families).
 
 To install the illustrated vignette locally, install `knitr`, `rmarkdown` and `readxl`, then repeat the GitHub installation with `build_vignettes = TRUE, force = TRUE`. Open it with `vignette("skyscapeR", package = "skyscapeR")`. Use `?skyscapeR` for a guide to the help pages.
 
@@ -53,44 +50,16 @@ For changes by version, see [NEWS](NEWS.md). For bundled dataset credits and ter
 
 ## Migrating from skyscapeR 1.2 to 2.0
 
-Recompute declination densities for steep skylines and sightlines near a celestial pole, including cases that stopped with a zero-width error. Rebuild dependent SPDs, plots and `randomTest()` or `modelTest()` fits from the original bearings and horizons. Full internal precision can also slightly change ordinary transformations. [D02 validation](https://stonexsky.github.io/skyscapeR/manual/d02-bearing-propagation.html#pole-propagation).
+Start with the earliest change that affects your analysis. A corrected survey bearing carries through to every subsequent declination and test. A change to plot labels requires only a new figure.
 
-Start at the **earliest affected step** below and rerun everything that used its output. For example, if a west longitude changed sign, repeat the field reduction before rebuilding the declination curves. If only a compass grid was drawn incorrectly, redraw the figure from the existing bearings. Keep the old results alongside the rerun and record the original inputs, package and ephemeris versions, calendar, timezone, refraction settings, uncertainty model, grid spacings and simulation seed.
-
-If you used the experimental 2.0.9001–2.0.9003 builds, omit `light.model` from `sketchSky()` calls. Natural sketches now use the calibrated renderer automatically.
-
-### Updating analyses from earlier 2.0 development builds
-
-Recalculate first-morning and last-evening dates and any downstream sketches with `star.phases()`. The default uses Schaefer for these two events. Specify `method = "purrington"` to reproduce the passage-transition calculation.
-
-**Updating to 2.0.9009.** Start with the earliest affected step in your analysis.
-
-| Earlier result | What to rerun |
+| If you used | Where to start |
 |---|---|
-| A solar-referenced theodolite survey | Rerun `reduct.theodolite()` from the original readings, timestamps, limbs and sites if the instrument crossed north or you supplied several site rows. Corrected true bearings are in [0°, 360°). A one-site vector is now accepted for a single reading. With multiple sites, earlier builds could mix coordinates between rows and change the physical bearing. Rebuild dependent horizon lookups, declinations and tests. For a compass reduction drawing altitude from a horizon, repeat the lookup if the corrected bearing lay outside the first turn. [W02](https://stonexsky.github.io/skyscapeR/manual/#w02-field-to-sky). |
-| A dated solar or lunar overlay | Recreate `skyObject()` groups and redraw plots that used two epochs. Solar and lunar ranges now include both endpoints and the annual samples between them, with the supplied site's parallax correction. Earlier short ranges could collapse to one value, and local lunar limits could be displaced. [A08](https://stonexsky.github.io/skyscapeR/manual/#a08-target-ranges). |
-| Candidate searches near a band edge or a tropical limit | Rerun `findTargets()` for narrow solar/lunar bands, boundary contacts, spatial equinox dates and zenith/anti-zenith candidates. Selection precedes display rounding. Overhead eligibility uses the period being investigated, and dates must be reachable in an eligible year. For standalone `zenith()` or `antizenith()`, supply `year` for a historical epoch. The default geometric altitude now makes parallax vanish overhead and underfoot. [A05](https://stonexsky.github.io/skyscapeR/manual/#a05-solar-limits) · [A08](https://stonexsky.github.io/skyscapeR/manual/#a08-target-ranges). |
+| Retired functions or unnamed arguments | Check the [replacement functions](#removed-functions-and-deprecated-interfaces) and [positional argument table](#positional-arguments). |
+| Compass or theodolite readings, skyline events or stellar visibility dates | Recompute the affected quantities from your original observations and site horizons. See [field measurements and astronomical targets](#field-measurements-dates-and-astronomical-targets). |
+| Declination PDFs, summed distributions or significance tests | Rebuild affected densities, especially for steep skylines and near-polar declinations. Refit the tests before quoting probabilities. See [distributions and significance tests](#rebuilding-distributions-and-significance-tests). |
+| A development build of 2.0 | Check the [build-specific rerun advice](#updating-analyses-from-earlier-20-development-builds), including the shared-horizon random test and revised Milky Way outline. |
 
-**Updating to 2.0.9008.** Two changes affect previously saved analyses.
-
-- `modelTest(Az, az.model, hor = hor)` now supports testing azimuth inputs in declination. It transforms each observed and simulated azimuth density individually through its corresponding horizon. Supply one shared horizon or an ordered list. Model coordinates and `unc` are in azimuth; `.res` sets the comparison spacing, and `.transform.res`, `.prec`, `.output.res` set transformation spacings. Re-run earlier fits that shifted declination templates when the intended null was specified in azimuth. Route 2 (`modelTest(Dec, dec.model)`) retains its declination-shifting interpretation.
-- Refit earlier `modelTest()` analyses using directly constructed `az.pdf()` or `dec.pdf()` inputs if the source spacing differed from 0.01°, or the source cutoff differed from its constructor default (azimuth `1e-5`, declination `1e-4`). This also applies when you supplied explicit replacement uncertainties for a directly constructed PDF. Earlier simulated curves used the constructor defaults. Use the original model tables, site order, uncertainty settings and seed. Asymmetric transformed-template fits retain their existing shifting method. [S02 calibration](https://stonexsky.github.io/skyscapeR/manual/#s02-specified-models).
-- Review analyses that used a partial `importPanorama()` photograph. Rerun `coordtrans()` and its downstream tests when the bearing density reached outside the photographed sector. Supply measured terrain for all bearings carrying positive density. Recompute `riseset()`, `star.phases()` and `spatial.equinox()` results obtained from partial photos using a complete skyline. Earlier builds could interpolate across the gap and return plausible events there. For a local altitude lookup, `hor2alt()` still accepts bearings inside the photographed arc, including arcs crossing north. [H07 coverage checks](https://stonexsky.github.io/skyscapeR/manual/#h07-panorama-coverage).
-
-**If you used `randomTest()` in 2.0.9006 or earlier, refit in 2.0.9007 or later when either condition applies.** Earlier builds could construct the observed and simulated densities with different settings.
-
-| Check your original analysis | When to rerun |
-|---|---|
-| Source azimuth PDF, on any test route | Rerun if `az.pdf()` used `.res` other than `0.01` degrees **or** `.cutoff` other than `1e-5`. For a saved source object named `az`, inspect `az$metadata$param$.res` and `az$metadata$param$.cutoff`. For a declination test, check the original azimuth PDF supplied to the fit. |
-| Shared-horizon shortcut, `randomTest(az, hor = hor, ...)` | Rerun if the **test’s** `.res` differed from `0.01` degrees. **This includes calls that omitted `.res`**, because `randomTest()` defaults to `0.1` degrees. Earlier builds used `0.01` degrees for the simulated azimuth sum. This particular trigger applies only to the shared-horizon shortcut. |
-| Parallel fits with multiple installed builds | Rerun if socket workers could have loaded a different skyscapeR build from the calling session. Build 2.0.9007 propagates the session’s library search path to each worker. |
-
-Use the original inputs, route, seed, `nsims`, `conf`, `tails`, normalisation and grid settings. Compare the updated envelope, global p-value and adjusted local intervals. Printing or plotting an older fit displays its stored results. [S01 calibration and same-input checks](https://stonexsky.github.io/skyscapeR/manual/#s01-uniform-orientation).
-
-**If your results predate 2.0.9006**, start at the earliest applicable step.
-
-- Rebuild `az.pdf()` from the measured bearings and uncertainties if you used a fine grid across north or broad uncertainties whose tails wrap around the compass. Recompute dependent SPDs and declination PDFs. Recreate azimuth SPDs that used interpolation across the final grid segment at north. Regenerate subsets of declination PDFs if you used their stored centre labels after selecting, reordering or repeating observations. [D01 density checks](https://stonexsky.github.io/skyscapeR/manual/#d01-density-checks).
-- Refit earlier **azimuth** analyses with `randomTest()` or `modelTest()`. The circular score counts north once, and a qualifying local interval can cross north. In the results, `start > end` denotes a single interval running clockwise through 0°. Update any reporting code that assumes `start <= end`. The uniform-bearing draw grid in `randomTest()` also counts north once. Refit declination tests derived from those random draws if the earlier source grid included both 0° and 360°. [S03 scoring checks](https://stonexsky.github.io/skyscapeR/manual/#s03-scoring-checks).
+Keep the previous results alongside the rerun. Record the original measurements, horizon, calendar, timezone, refraction, uncertainty model, grid settings, simulation seed and software versions.
 
 ### Removed functions and deprecated interfaces
 
@@ -140,6 +109,11 @@ Use `xrange` and `yrange` for package plots. Existing `xlim` and `ylim` calls to
 For example, replace `randomTest(pdf, 0.5)` with `randomTest(pdf, .res = 0.5)`. Remove explicit atmosphere arguments to `randomTest()`, `coordtrans()` and horizon plots. Set session conditions with `skyscapeR.vars()` for a fresh transformation, or regenerate the observed declination PDF with the intended conditions. `modelTest()` no longer accepts the developer diagnostic `save.sim` or adds `data$simulated` to new fits.
 
 ### Field measurements, dates and astronomical targets
+
+For spatial-equinox analyses, pass the archaeological epoch explicitly, for
+example `spatial.equinox(hor, year = "3250 BC")`. The former fixed year 2000 and
+mixed refraction treatment have been removed. Recalculate earlier results;
+`findTargets()` now passes the endpoints of its requested period automatically.
 
 `star.phases()` now checks the stellar track against the supplied skyline in
 both hemispheres, including the selected refraction setting. Recalculate
@@ -199,48 +173,7 @@ For a HeyWhatsThat horizon, rebuild declination PDFs for north-crossing bearings
 
 The switch to built-in plotting colours and the dependency cleanup do not, by themselves, require rerunning scientific analyses. The numerical changes above and the input choices in the help pages are the relevant comparisons.
 
-### Plotting in 2.0
-
-The analytical plots use a common publication palette. Select
-`style = "publication-mono"` for grayscale figures. `plot(hor, sky = sky)` uses
-the sketch's style for the numerical foreground. A linked panorama keeps its source colours.
-
-`plotAzimuth(centre, obj = targets, marks = "rim", obj.position = "outside")`
-draws target bearings just beyond the rim. A single epoch gives a line. A year
-range gives a shaded band for each rising or setting interval. With either
-position, the two-line target labels always sit outside the circle. The
-second line identifies rise or set. Use `show.obj.labels = FALSE` for
-unlabelled references. On a compass, phase circle or planisphere,
-`show.legend = FALSE` also suppresses titles and callouts, leaving the
-circular data and coordinate scale.
-
-`plot(first, list(second, third))` uses concentric rings by default. A leader
-identifies each ring by star or epoch. `layout = "linear"` selects strips.
-Both layouts divide the solar-longitude cycle into twelve months from December
-solstice. Set `show.grid = FALSE` to hide the month lines. On a single ring,
-the star, epoch and site appear in the centre. The seasonal labels and two-line event names sit outside the rim.
-When one star is compared across epochs, its name, Bayer designation and shared site sit inside the rings, with a year beside each layer. On linear comparisons a single seasonal scale sits directly below the last strip.
-Each strip identifies the star, the epoch, or both when both vary.
-On a single strip, heliacal and acronycal risings are labelled above the strip
-and settings below it. Plots made from older phase objects can use their stored
-coordinates for the site label.
-
-`plot(fit, show.local = TRUE)` places excesses and deficits in separate rows
-under the observed curve and full pointwise envelope. The stars and `+`
-encode local p-value tiers. The open circle denotes a local p-value above 0.10.
-`show.legend` controls the keys, and `show.pval` controls the numeric global
-result. Use `print(fit)` for the exact stored values. Older unadjusted fits
-are identified in the lower panel.
-
-`plotBars()` uses a line and centre point for each measured span. Use
-`geometry = "bar"` for rectangles. Supplying `shade` explicitly also selects
-rectangles by default. In linked PDF plots, the readout lists every component
-of the selected highest-density region.
-
-For spatial-equinox analyses, pass the archaeological epoch explicitly, for
-example `spatial.equinox(hor, year = "3250 BC")`. The former fixed year 2000 and
-mixed refraction treatment have been removed. Recalculate earlier results;
-`findTargets()` now passes the endpoints of its requested period automatically.
+For plotting options and worked figures, see the [vignette](https://stonexsky.github.io/skyscapeR/).
 
 ### Recording astronomical calculations
 
@@ -251,8 +184,50 @@ unchanged. Also retain your script, development revision and ephemeris files:
 package version numbers alone do not fully identify a calculation. For Stellarium
 captures, record the external application's version and settings separately.
 
+### Updating analyses from earlier 2.0 development builds
+
+<details>
+<summary>Show changes by build and when to rerun an analysis</summary>
+
+If you used the experimental 2.0.9001–2.0.9003 builds, omit `light.model` from `sketchSky()` calls. Natural sketches now use the calibrated renderer automatically.
+
+Recalculate first-morning and last-evening dates and any downstream sketches with `star.phases()`. The default uses Schaefer for these two events. Specify `method = "purrington"` to reproduce the passage-transition calculation.
+
+**Updating to 2.0.9009.** Start with the earliest affected step in your analysis.
+
+| Earlier result | What to rerun |
+|---|---|
+| A solar-referenced theodolite survey | Rerun `reduct.theodolite()` from the original readings, timestamps, limbs and sites if the instrument crossed north or you supplied several site rows. Corrected true bearings are in [0°, 360°). A one-site vector is now accepted for a single reading. With multiple sites, earlier builds could mix coordinates between rows and change the physical bearing. Rebuild dependent horizon lookups, declinations and tests. For a compass reduction drawing altitude from a horizon, repeat the lookup if the corrected bearing lay outside the first turn. [W02](https://stonexsky.github.io/skyscapeR/manual/w02-field-to-sky.html). |
+| A dated solar or lunar overlay | Recreate `skyObject()` groups and redraw plots that used two epochs. Solar and lunar ranges now include both endpoints and the annual samples between them, with the supplied site's parallax correction. Earlier short ranges could collapse to one value, and local lunar limits could be displaced. [A08](https://stonexsky.github.io/skyscapeR/manual/a08-target-ranges.html). |
+| Candidate searches near a band edge or a tropical limit | Rerun `findTargets()` for narrow solar/lunar bands, boundary contacts, spatial equinox dates and zenith/anti-zenith candidates. Selection precedes display rounding. Overhead eligibility uses the period being investigated, and dates must be reachable in an eligible year. For standalone `zenith()` or `antizenith()`, supply `year` for a historical epoch. The default geometric altitude now makes parallax vanish overhead and underfoot. [A05](https://stonexsky.github.io/skyscapeR/manual/a05-solar-limits.html) · [A08](https://stonexsky.github.io/skyscapeR/manual/a08-target-ranges.html). |
+
+**Azimuth-defined null models (2.0.9014).** `modelTest(Az, az.model, hor = hor)` now supports testing azimuth inputs in declination. It transforms each observed and simulated azimuth density individually through its corresponding horizon. Supply one shared horizon or an ordered list. Model coordinates and `unc` are in azimuth; `.res` sets the comparison spacing, and `.transform.res`, `.prec`, `.output.res` set transformation spacings. Re-run earlier fits that shifted declination templates when the intended null was specified in azimuth. Route 2 (`modelTest(Dec, dec.model)`) retains its declination-shifting interpretation.
+
+**Updating to 2.0.9008.**
+
+- Refit earlier `modelTest()` analyses using directly constructed `az.pdf()` or `dec.pdf()` inputs if the source spacing differed from 0.01°, or the source cutoff differed from its constructor default (azimuth `1e-5`, declination `1e-4`). This also applies when you supplied explicit replacement uncertainties for a directly constructed PDF. Earlier simulated curves used the constructor defaults. Use the original model tables, site order, uncertainty settings and seed. Asymmetric transformed-template fits retain their existing shifting method. [S02 calibration](https://stonexsky.github.io/skyscapeR/manual/s02-specified-models.html).
+- Review analyses that used a partial `importPanorama()` photograph. Rerun `coordtrans()` and its downstream tests when the bearing density reached outside the photographed sector. Supply measured terrain for all bearings carrying positive density. Recompute `riseset()`, `star.phases()` and `spatial.equinox()` results obtained from partial photos using a complete skyline. Earlier builds could interpolate across the gap and return plausible events there. For a local altitude lookup, `hor2alt()` still accepts bearings inside the photographed arc, including arcs crossing north. [H07 coverage checks](https://stonexsky.github.io/skyscapeR/manual/h07-panorama-coverage.html).
+
+**If you used `randomTest()` in 2.0.9006 or earlier, refit in 2.0.9007 or later when either condition applies.** Earlier builds could construct the observed and simulated densities with different settings.
+
+| Check your original analysis | When to rerun |
+|---|---|
+| Source azimuth PDF, on any test route | Rerun if `az.pdf()` used `.res` other than `0.01` degrees **or** `.cutoff` other than `1e-5`. For a saved source object named `az`, inspect `az$metadata$param$.res` and `az$metadata$param$.cutoff`. For a declination test, check the original azimuth PDF supplied to the fit. |
+| Shared-horizon shortcut, `randomTest(az, hor = hor, ...)` | Rerun if the **test’s** `.res` differed from `0.01` degrees. **This includes calls that omitted `.res`**, because `randomTest()` defaults to `0.1` degrees. Earlier builds used `0.01` degrees for the simulated azimuth sum. This particular trigger applies only to the shared-horizon shortcut. |
+| Parallel fits with multiple installed builds | Rerun if socket workers could have loaded a different skyscapeR build from the calling session. Build 2.0.9007 propagates the session’s library search path to each worker. |
+
+Use the original inputs, route, seed, `nsims`, `conf`, `tails`, normalisation and grid settings. Compare the updated envelope, global p-value and adjusted local intervals. Printing or plotting an older fit displays its stored results. [S01 calibration and same-input checks](https://stonexsky.github.io/skyscapeR/manual/s01-uniform-orientation.html).
+
+**If your results predate 2.0.9006**, start at the earliest applicable step.
+
+- Rebuild `az.pdf()` from the measured bearings and uncertainties if you used a fine grid across north or broad uncertainties whose tails wrap around the compass. Recompute dependent SPDs and declination PDFs. Recreate azimuth SPDs that used interpolation across the final grid segment at north. Regenerate subsets of declination PDFs if you used their stored centre labels after selecting, reordering or repeating observations. [D01 density checks](https://stonexsky.github.io/skyscapeR/manual/d01-density-checks.html).
+- Refit earlier **azimuth** analyses with `randomTest()` or `modelTest()`. The circular score counts north once, and a qualifying local interval can cross north. In the results, `start > end` denotes a single interval running clockwise through 0°. Update any reporting code that assumes `start <= end`. The uniform-bearing draw grid in `randomTest()` also counts north once. Refit declination tests derived from those random draws if the earlier source grid included both 0° and 360°. [S03 scoring checks](https://stonexsky.github.io/skyscapeR/manual/s03-scoring-checks.html).
+
+
 DEM panorama relief lighting uses the standalone renderer’s 75% observer / 25% directional blend, with `ambient = 0.40` and `contrast = 0.70`. Terrain and `horFeature()` surfaces share the shading. Regenerate existing panoramas to apply the new brightness response. For the earlier relief response, use `ambient = 0.38, contrast = 0.62`.
 
-### Milky Way outline update (2.0.9018)
+**Milky Way outline (2.0.9018).**
 
 The simplified, visually reviewed Milky Way model replaces the previous outline and internal regions. Analyses that depend on the old boundary should be rerun. Dark patches remain inside the outer envelope for alignment purposes. The 7-square-degree minimum dark-patch area was chosen visually and is illustrative; it is not a detection threshold. The technical manual explains the model and its limitations, with exact reproduction inputs in `data-raw/milky-way`.
+
+</details>

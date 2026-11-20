@@ -9,7 +9,6 @@ Authors@R: c(
            role = "ctb"),
     person("Victor", "Reijs", role = "ctb"),
     person("Rita", "Gautschy", role = "ctb"))
-Maintainer: Fabio Silva <fsilva@stonexsky.com>
 Description: Investigate how archaeological sites and structures relate to
     the landscape and sky. Reduce field measurements, reconstruct local
     horizons from surveys and elevation models, and propagate measurement
@@ -36,7 +35,3 @@ Suggests: swephRdata, terra (>= 1.7-65), xml2, png, httr2 (>= 1.0.0),
 VignetteBuilder: knitr
 Config/roxygen2/version: 8.1.1
 NeedsCompilation: no
-Author: Fabio Silva [aut, cre],
-  Billy Finnimore [ctb],
-  Victor Reijs [ctb],
-  Rita Gautschy [ctb]

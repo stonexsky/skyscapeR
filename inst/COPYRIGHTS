@@ -100,10 +100,16 @@ Star-name lookup (star.names)
 Stellar proper names: International Astronomical Union Working Group on Star
 Names, IAU Catalog of Star Names.
 https://exopla.net/star-names/modern-iau-star-names/
-The 304-entry lookup also contains non-stellar object names. It is distinct
-from the astrometric catalogue. Fabio Silva manually transcribed the stellar
-names from an IAU table. The exact table version, extraction date and a separate
-licence declaration for that compilation are not recorded locally.
+Fabio Silva transcribed stellar proper names from an IAU table and paired
+them with identifiers for lookup in skyscapeR. The WGSN describes the
+approved names themselves as public-domain scientific standards. The
+304-entry package lookup also includes non-stellar objects.
+
+The header of the IAU-CSN snapshot dated 4 April 2022 gives Creative
+Commons Attribution terms for IAU-produced material and requests credit
+to the IAU. This snapshot documents the notice. The precise edition used
+for the original transcription is unknown.
+https://github.com/mirandadam/iau-starnames/blob/86fe2f8c0046ad85572c36f92049313fef5277cf/catalog_data/IAU-CSN_normalized.txt
 
 Milky Way tracing (extdata/milky-way-layers.rds; earlier outline: milky-way.csv)
 ---------------------------------------------------

@@ -28,7 +28,9 @@ same figure.
 The stellar proper names come from the IAU Catalog of Star Names, compiled by
 the International Astronomical Union Working Group on Star Names. The table also
 includes lookup entries for supernovae or their remnants, deep-sky objects,
-the Galactic Pole and the Galactic Centre.
+the Galactic Pole and the Galactic Centre. The WGSN describes the approved
+stellar names as public-domain scientific standards. See COPYRIGHTS for
+the catalogue attribution and source notice.
 }
 \examples{
 data(star.names)
